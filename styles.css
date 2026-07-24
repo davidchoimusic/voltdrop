@@ -1,0 +1,472 @@
+/* ========================================================================
+   VoltDrop — theme tokens
+   "Power tool" aesthetic: black tool-housing chrome, safety-orange
+   controls, hazard-stripe accent. Committed dark theme (it's a device,
+   not a document). Numbers: bold system type, tabular digits — no LCD
+   gimmick fonts.
+   ======================================================================== */
+:root {
+  --color-bg: #141518;         /* tool housing */
+  --color-surface: #1f2125;    /* panel face */
+  --color-surface-2: #26282d;  /* recessed wells */
+  --color-ink: #f4f5f6;        /* white text: 14.9:1 on surface */
+  --color-ink-soft: #b0b5bb;   /* hints: 7.5:1 on surface */
+  --color-line: #3a3d43;
+  --color-line-strong: #4d5158;
+
+  --color-accent: #ff7a1a;     /* safety orange */
+  --color-accent-hot: #ff8c39;
+  --color-accent-ink: #1c1002; /* near-black on orange: 9.6:1 */
+  --color-hazard: #ffc814;     /* hazard yellow */
+
+  --verdict-good-bg: #16311f;
+  --verdict-good-ink: #9fe0b3;   /* 8.9:1 on its bg */
+  --verdict-good-bar: #3dbb68;
+  --verdict-warn-bg: #362a08;
+  --verdict-warn-ink: #ffd24d;   /* 9.5:1 on its bg */
+  --verdict-warn-bar: #ffc814;
+  --verdict-bad-bg: #3a1515;
+  --verdict-bad-ink: #ffabab;    /* 8.3:1 on its bg */
+  --verdict-bad-bar: #ff5252;
+
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  --hazard-stripe: repeating-linear-gradient(
+    -45deg,
+    var(--color-hazard) 0 12px,
+    #141518 12px 24px
+  );
+}
+
+/* ========================================================================
+   Base
+   ======================================================================== */
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Big clear numbers everywhere numbers appear */
+input, select, .big-number, .result-cell .v {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* ========================================================================
+   Header — nameplate with hazard stripe
+   ======================================================================== */
+.site-header {
+  padding: var(--space-5) 0 var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 6px solid transparent;
+  border-image: var(--hazard-stripe) 1;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.brand-name { color: var(--color-ink); }
+.brand-bolt { font-size: 22px; }
+
+.tagline {
+  margin: var(--space-1) 0 0;
+  color: var(--color-ink-soft);
+  font-size: 15px;
+}
+
+/* ========================================================================
+   Mode tabs — like a tool's function selector
+   ======================================================================== */
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-5) 0 var(--space-4);
+}
+
+.mode-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+
+.mode-tab:hover { border-color: var(--color-accent); }
+.mode-tab:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.mode-tab:active { transform: translateY(1px); }
+
+.mode-tab.active {
+  border-color: var(--color-accent);
+  background: var(--color-surface-2);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.mode-tab.active .mode-title { color: var(--color-accent); }
+
+.mode-title {
+  font-weight: 750;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.mode-sub { font-size: 12.5px; color: var(--color-ink-soft); line-height: 1.35; }
+
+/* ========================================================================
+   Cards & fields
+   ======================================================================== */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.field { margin-bottom: var(--space-5); }
+.field:last-of-type { margin-bottom: var(--space-4); }
+
+.field-label {
+  display: block;
+  font-weight: 750;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.hint {
+  margin: var(--space-2) 0 0;
+  font-size: 13.5px;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+
+.highlight-hint strong { color: var(--color-hazard); }
+
+/* Segmented controls — chunky tool switches */
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.seg-btn {
+  flex: 1 1 auto;
+  min-height: 46px;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.seg-btn:hover { border-color: var(--color-accent); }
+.seg-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.seg-btn:active { transform: translateY(1px); }
+
+.seg-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-weight: 750;
+}
+
+/* Inputs — recessed wells, big clear digits */
+.input-unit {
+  display: flex;
+  align-items: stretch;
+}
+
+.input-unit input {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  border: 2px solid var(--color-line-strong);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  border-right: none;
+}
+
+.input-unit input::placeholder { color: #7a8087; font-weight: 500; }
+
+.input-unit input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.input-unit .unit {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-soft);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+select {
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  border: 2px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+/* Voltage presets */
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.preset-btn {
+  min-height: 38px;
+  padding: 2px var(--space-3);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.preset-btn:hover { border-color: var(--color-accent); }
+.preset-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.preset-btn:active { transform: translateY(1px); }
+
+.preset-btn.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* Calculate button — the trigger */
+.calc-btn {
+  width: 100%;
+  min-height: 56px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: 0 3px 0 #b34f05;
+}
+
+.calc-btn:hover { background: var(--color-accent-hot); }
+.calc-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 3px; }
+.calc-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #b34f05; }
+.calc-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+/* ========================================================================
+   Results — the verdict meter (the memorable bit)
+   ======================================================================== */
+.results { padding: 0; overflow: hidden; border-width: 2px; }
+
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-left: 8px solid transparent;
+}
+
+.verdict.good { background: var(--verdict-good-bg); color: var(--verdict-good-ink); border-left-color: var(--verdict-good-bar); }
+.verdict.warn { background: var(--verdict-warn-bg); color: var(--verdict-warn-ink); border-left-color: var(--verdict-warn-bar); }
+.verdict.bad  { background: var(--verdict-bad-bg);  color: var(--verdict-bad-ink);  border-left-color: var(--verdict-bad-bar); }
+
+.verdict-badge {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 6px;
+  border: 2.5px solid currentColor;
+  white-space: nowrap;
+}
+
+.big-number {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.big-label { font-size: 14.5px; font-weight: 600; margin-top: 2px; }
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--color-line);
+  border-top: 1px solid var(--color-line);
+}
+
+.result-cell {
+  background: var(--color-surface);
+  padding: var(--space-3) var(--space-4);
+}
+
+.result-cell .k {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-soft);
+}
+.result-cell .v { font-size: 18px; font-weight: 750; }
+
+.verdict-note {
+  margin: 0;
+  padding: var(--space-3) var(--space-5);
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  border-top: 1px solid var(--color-line);
+}
+
+/* "How we calculated this" */
+.math-details {
+  border-top: 1px solid var(--color-line);
+}
+
+.math-details summary {
+  padding: var(--space-3) var(--space-5);
+  font-weight: 750;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  color: var(--color-accent);
+}
+
+.math-details summary:hover { color: var(--color-accent-hot); text-decoration: underline; }
+.math-details summary:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: -3px; }
+
+.math-body {
+  padding: 0 var(--space-5) var(--space-4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.math-body .formula {
+  font-size: 14px;
+  font-weight: 650;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line-strong);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  margin: var(--space-2) 0;
+  overflow-x: auto;
+  white-space: pre;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ========================================================================
+   Explainer & footer
+   ======================================================================== */
+.explainer h2 {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-2);
+  color: var(--color-hazard);
+}
+.explainer h2 + p { margin-top: 0; }
+.explainer p { font-size: 14.5px; color: var(--color-ink); margin: 0 0 var(--space-4); }
+.explainer p:last-child { margin-bottom: 0; }
+.explainer strong { color: var(--color-hazard); }
+
+.site-footer {
+  border-top: 6px solid transparent;
+  border-image: var(--hazard-stripe) 1;
+  padding: var(--space-5) 0 var(--space-6);
+  background: var(--color-surface);
+}
+
+.site-footer p { margin: 0 0 var(--space-2); font-size: 14px; }
+.site-footer .fine { font-size: 12.5px; color: var(--color-ink-soft); line-height: 1.5; }
+
+/* ========================================================================
+   Mobile
+   ======================================================================== */
+@media (max-width: 480px) {
+  .mode-tabs { grid-template-columns: 1fr; }
+  .card { padding: var(--space-4); }
+  .verdict { padding: var(--space-4); flex-wrap: wrap; }
+  .big-number { font-size: 40px; }
+}

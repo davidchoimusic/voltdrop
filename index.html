@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltDrop — Voltage Drop Calculator that explains itself</title>
+<meta name="description" content="Free voltage drop calculator for copper and aluminum wire. Plain-English inputs, one-way distance (we double it for you), instant green/yellow/red verdict against the 3% and 5% guidelines, and the full math shown.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-bolt" aria-hidden="true">⚡</span>
+      <span class="brand-name">VoltDrop</span>
+    </div>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="What do you want to find?">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">Voltage drop</span>
+      <span class="mode-sub">I know my wire — how much do I lose?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">Wire size</span>
+      <span class="mode-sub">What's the smallest wire that works?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">Max distance</span>
+      <span class="mode-sub">How far can this wire run?</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">Power type</label>
+      <div class="seg" role="group" aria-label="Power type">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC single-phase</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC three-phase</button>
+      </div>
+      <p class="hint" id="system-hint">DC: batteries, solar, vehicles, LED strips.</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">Voltage at the source</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">volts</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">Current (load)</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
+        <span class="unit">amps</span>
+      </div>
+      <p class="hint">The amps your device or circuit actually draws. If a label says watts, amps = watts ÷ volts.</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">Wire material</label>
+      <div class="seg" role="group" aria-label="Wire material">
+        <button type="button" class="seg-btn active" data-material="cu">Copper</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminum</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">Wire size</label>
+      <select id="awg"></select>
+      <p class="hint">AWG = American Wire Gauge. Smaller number = thicker wire. It's printed on the wire jacket.</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">One-way distance</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 100" required>
+        <span class="unit">feet</span>
+      </div>
+      <p class="hint highlight-hint"><strong>Measure one way</strong> — from the power source to the load. Electricity makes a round trip, and <strong>we double it for you</strong>. Don't double it yourself.</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">Biggest voltage drop you'll accept</label>
+      <div class="seg" role="group" aria-label="Maximum acceptable drop">
+        <button type="button" class="seg-btn active" data-target="3">3% — recommended</button>
+        <button type="button" class="seg-btn" data-target="5">5% — upper limit</button>
+        <button type="button" class="seg-btn" data-target="custom">Custom</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">%</span>
+      </div>
+      <p class="hint">3% is the common guideline for a single circuit. 5% is the usual outer limit for the whole path.</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">Calculate</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <section class="card explainer">
+    <h2>Why 3% and 5%?</h2>
+    <p>Wire has resistance, so some voltage is lost as heat before it reaches your device. Lose too much and motors run hot, LEDs dim or flicker, chargers underperform, and breakers can trip for no obvious reason.</p>
+    <p>The widely used rule of thumb (based on a recommendation in the U.S. National Electrical Code): keep the drop on a branch circuit at or under <strong>3%</strong>, and the total from your panel to the device at or under <strong>5%</strong>. These are guidelines for good performance, not laws — low-voltage systems like 12&nbsp;V solar are often even stricter, because 3% of 12&nbsp;V hurts a lot more than 3% of 240&nbsp;V.</p>
+    <h2>Why don't other calculators agree with each other?</h2>
+    <p>Almost always one of two things: some tools want <strong>round-trip</strong> length where others want one-way (we always use one-way and double it for you), and some use slightly different resistance values for the wire. Open "How we calculated this" above and you can check our numbers against anything.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>VoltDrop</strong> · voltdrop.app · Free forever, no signup.</p>
+    <p class="fine">Estimates use standard DC resistance for stranded wire at 75°C (K = 12.9 for copper, 21.2 for aluminum, ohm·cmil/ft). Real-world results vary with temperature, conduit fill, and power factor. This is a planning aid, not a substitute for a licensed electrician or your local electrical code. Always follow ampacity (current-carrying) limits — a wire can pass the voltage-drop check and still be too small to carry the current safely.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
