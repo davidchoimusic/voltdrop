@@ -70,6 +70,32 @@ Each tool has its own URL for SEO: `/` (voltage drop), `/wire-size-calculator/`,
 **Run `node build.mjs` after ANY edit to index.html/styles.css/app.js, then commit the outputs.**
 Ampacity Check + Conduit Fill sit in the sidebar as SOON badges. sitemap.xml + robots.txt exist.
 
+## Comments system (2026-07-24, mirrors pitchchanger.io)
+`comments-app/` = separate Next.js 16 app served at **voltdrop.app/comments** (basePath
+/comments; Traefik path-routes it, static site owns all other paths). NextAuth
+(Google + Facebook, database sessions, Prisma adapter) + dedicated Postgres.
+Behavior ported from pitchchanger: privacy name picker (full/first/"First L."/Anonymous —
+server-enforced), show-photo toggle, no links, no line breaks, 2000 chars, 1 post/hour,
+admin (ADMIN_EMAILS) replies + delete, owner edit, single-level replies.
+- Coolify app `voltdrop-comments` uuid `wepme3q4txnx4ksv5m83ie6w` (dockerfile build,
+  base dir /comments-app, port 3000, domain https://voltdrop.app/comments)
+- Postgres uuid `rsoli4j54nmvwllk9eh93wrs` (db voltdrop_comments; internal URL in app env)
+- Env: NEXTAUTH_URL=https://voltdrop.app/comments/api/auth, NEXTAUTH_SECRET set,
+  ADMIN_EMAILS=davidchoimusic@gmail.com; **GOOGLE_/FACEBOOK_ CLIENT_ID/SECRET = "PENDING"**
+  until David creates the OAuth apps (redirect URIs:
+  https://voltdrop.app/comments/api/auth/callback/google and .../callback/facebook)
+- Migrations: prisma/migrations/0_init generated via `prisma migrate diff`; container
+  runs `prisma migrate deploy` on start
+- New calculators/tools stay in the STATIC site; only comments/auth live in this app
+
+## Two new calculators (2026-07-24)
+`/ampacity-check/` (NEC 310.16 + 240.4(D) small-conductor caps) and `/conduit-fill/`
+(NEC Ch9 Tables 4+5, THHN, EMT/PVC Sch40, 53/31/40% limits). ALL table data verified
+against two verbatim NEC page reproductions by a research agent (one draft value was
+wrong: 8 AWG Al @60°C is 35 A, not 30 — always verify safety tables against sources).
+Pages generated from partials/ by build.mjs; page scripts ampacity.js / conduit.js;
+shared country/chip logic in common.js.
+
 ## EDGE CASES & GOTCHAS
 - **Cloudflare caches .js/.css at the edge** — a deploy once served new HTML with stale app.js
   (sidebar highlight broke live while passing locally). Fix: build.mjs stamps `?v=<content-hash>`
