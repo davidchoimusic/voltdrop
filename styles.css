@@ -158,13 +158,15 @@ input, select, .big-number, .result-cell .v {
 
 @media (min-width: 1024px) {
   .mobile-tools { display: none !important; }
-  /* Desktop header: big brand left (aligned with the tools column),
-     Feedback + country right, tagline left underneath. */
+  /* Desktop header: big brand left, aligned with where the tool card
+     starts (sidebar 200px + 32px gap = 232px indent), controls right. */
   .site-header .wrap, .site-footer .wrap { max-width: 860px; }
+  .site-header .wrap { padding-left: calc(var(--space-4) + 232px); }
   .brand-row { justify-content: flex-start; }
   .site-header .brand { font-size: 42px; line-height: 1; gap: var(--space-3); }
   .site-header .brand-logo { width: 48px; height: 48px; }
-  .header-feedback { display: inline-flex; margin-left: auto; min-height: 44px; }
+  /* Feedback stays in the sidebar on desktop — header keeps just the country control */
+  .country-chip { margin-left: auto; }
   .tagline { text-align: left; margin-top: var(--space-2); }
 }
 
