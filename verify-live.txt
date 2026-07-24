@@ -12,5 +12,13 @@ PASS CA 3-phase presets include 600 V
 PASS /wire-size-calculator/ preselects Wire size
 PASS sidebar highlights Wire Size
 PASS /max-wire-length/ preselects Max distance
+PASS ampacity 12AWG Cu 75C limit = 20 A (240.4(D) cap)
+PASS ampacity verdict OK at 15 A
+PASS ampacity 8AWG Al 60C = 35 A
+PASS conduit 10×12 THHN EMT = 3/4"
+PASS fill % = 25.0%
+PASS logo+favicon on /
+PASS logo+favicon on /ampacity-check/
+PASS logo+favicon on /conduit-fill/
 
-14 passed, 0 failed, JS errors: 0
+22 passed, 0 failed, JS errors: 0

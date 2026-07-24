@@ -1,4 +1,7 @@
 node_modules/
 verify-shots/
 verify-output.txt
+verify-live.txt
 .DS_Store
+comments-app/.next/
+comments-app/next-env.d.ts
