@@ -1,10 +1,46 @@
 // End-to-end check: drive all three modes, assert the math, screenshot.
+// ALSO: electrical-data tripwire — the tables below are SOURCE-VERIFIED
+// safety data (people get hurt if they're wrong). Any change to them fails
+// this suite until the source-verification pass is re-run and the golden
+// hash deliberately updated. See PROJECT_CONTEXT.md "REGRESSION RISKS".
 import { chromium } from 'playwright';
+import { readFileSync } from 'fs';
+import { createHash } from 'crypto';
 
 const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
 import { mkdirSync } from 'fs';
 mkdirSync(shots, { recursive: true });
+
+// ---- Electrical data tripwire (runs before anything else) ----
+// Each entry: [file, constant name]. Golden hashes = the state that passed
+// independent source verification (NEC page reproductions, 2026-07-24).
+const DATA_TABLES = [
+  ['app.js', 'WIRE_TABLE'], ['app.js', 'K_FACTOR'],
+  ['ampacity.js', 'AMPACITY'], ['ampacity.js', 'SMALL_CAP'],
+  ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
+  ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
+];
+const GOLDEN = JSON.parse(readFileSync('data-golden.json', 'utf8'));
+let dataPass = 0, dataFail = 0;
+for (const [file, name] of DATA_TABLES) {
+  const src = readFileSync(file, 'utf8');
+  const m = src.match(new RegExp(`const ${name} = [\\s\\S]*?\\n[}\\]];`));
+  if (!m) { console.log(`FAIL data tripwire: ${name} not found in ${file}`); dataFail++; continue; }
+  const h = createHash('md5').update(m[0]).digest('hex');
+  const key = `${file}:${name}`;
+  if (GOLDEN[key] === h) { console.log(`PASS data intact: ${key}`); dataPass++; }
+  else {
+    console.log(`FAIL DATA CHANGED: ${key} — hash ${h} != golden ${GOLDEN[key]}`);
+    console.log(`  >> Electrical safety data was modified. Re-run independent source`);
+    console.log(`  >> verification, then update data-golden.json ON PURPOSE.`);
+    dataFail++;
+  }
+}
+if (dataFail > 0) {
+  console.log(`\nDATA TRIPWIRE FAILED (${dataFail}) — refusing to continue.`);
+  process.exit(1);
+}
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); // iPhone-ish
@@ -188,7 +224,7 @@ for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
 await page.goto(BASE);
 await page.screenshot({ path: `${shots}/5-desktop.png`, fullPage: true });
 
-console.log(`\n${pass} passed, ${fail} failed, JS errors: ${errors.length}`);
+console.log(`\n${pass + dataPass} passed (${dataPass} data-integrity), ${fail} failed, JS errors: ${errors.length}`);
 errors.forEach((e) => console.log('JS ERROR:', e));
 await browser.close();
 process.exit(fail || errors.length ? 1 : 0);

@@ -136,6 +136,14 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
+- **ELECTRICAL DATA TRIPWIRE (2026-07-25, David's mandate: wrong numbers can kill).**
+  verify.mjs fingerprints every electrical data table (WIRE_TABLE, K_FACTOR, AMPACITY,
+  SMALL_CAP, THHN_AREA, CONDUIT, VOL_PER_CONDUCTOR, BOXES) against `data-golden.json`
+  and HARD-FAILS on any change. Proven to fire on a single-digit edit. The ONLY correct
+  way to change a table: (1) re-run an independent source-verification agent against
+  verbatim code reproductions, (2) then regenerate data-golden.json deliberately.
+  New tools that ship electrical facts MUST add their tables to DATA_TABLES + golden.
+  Never bypass by regenerating hashes without step 1 — the hash is a seal, not a chore.
 - verify.mjs asserts exact expected values for all 3 modes — run it after ANY change to
   app.js math, WIRE_TABLE, or form wiring. Needs the local server on port 8642 first.
 - Select index for wire sizes is positional (`awgSelect.value = 3` = 12 AWG default;
