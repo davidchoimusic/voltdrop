@@ -19,7 +19,18 @@ Day-one MVP built and verified. Pure static site — 3 files, no framework, no b
   screenshots to `verify-shots/`. Run: `python3 -m http.server 8642` then `node verify.mjs`.
   7/7 passing as of initial build.
 
-NOT yet deployed. No hosting/DNS wired up yet.
+## Deployment (mirrors pitchchanger.io structure)
+- GitHub: https://github.com/davidchoimusic/voltdrop (public), branch `main`
+- Coolify on main-server 178.156.255.18: project `voltdrop.app` (uuid `d679idhqgw4z97gp7m41da1e`),
+  app `voltdrop` (uuid `x5ysasyyu676nu5pyotuqsx8`), build pack **static** (no Dockerfile —
+  deliberate deviation from pitchchanger's Node Dockerfile; nothing to build, keeps Docker
+  cache small per the disk-bloat lesson). Domains: voltdrop.app + www.voltdrop.app.
+- Deploy command: Coolify deploy endpoint with `COOLIFY_DEPLOY_TOKEN` (see coolify-deploy memory).
+  First deploy 2026-07-24: finished, serving verified via `--resolve` curl; disk 48% after.
+- DNS: voltdrop.app zone is on Cloudflare (same NS as pitchchanger.io) but records were
+  EMPTY at first deploy — David must add A @ → 178.156.255.18 (proxied) + CNAME www (proxied),
+  or drop a `CF_VOLTDROP_DNS_TOKEN` (Zone.DNS:Edit, voltdrop.app) into `~/.brain-secrets/secrets.env`.
+- Google Analytics GA4: measurement ID `G-NC7ETLY8Q1`, tag in index.html head (added 2026-07-24).
 
 ## Product decisions (from David, 2026-07-24)
 - **Start US + Canada only** (AWG, feet, NEC 3%/5% guidelines). International later.
