@@ -81,6 +81,23 @@ big = await page.textContent('#big-number');
 check('max length ft (12V 10A 10AWG 3%)', parseFloat(big), 14.48, 0.05);
 await page.screenshot({ path: `${shots}/4-length.png`, fullPage: true });
 
+// ---- Country selection + persistence
+await page.click('[data-country="ca"]');
+let chip = await page.textContent('#country-chip');
+console.log(chip.includes('Canada') ? 'PASS chip shows Canada' : `FAIL chip: "${chip}"`); chip.includes('Canada') ? pass++ : fail++;
+await page.reload();
+chip = await page.textContent('#country-chip');
+console.log(chip.includes('Canada') ? 'PASS Canada remembered after reload' : `FAIL after reload: "${chip}"`); chip.includes('Canada') ? pass++ : fail++;
+let codeName = await page.textContent('#code-name');
+console.log(codeName.includes('Canadian') ? 'PASS explainer cites CEC' : `FAIL code name: "${codeName}"`); codeName.includes('Canadian') ? pass++ : fail++;
+// Canada 3-phase presets should include 600 V
+await page.click('[data-system="ac3"]');
+const presets = await page.textContent('#voltage-presets');
+console.log(presets.includes('600') ? 'PASS CA 3-phase presets include 600 V' : `FAIL presets: "${presets}"`); presets.includes('600') ? pass++ : fail++;
+await page.screenshot({ path: `${shots}/6-canada.png`, fullPage: true });
+// back to US for the desktop shot
+await page.click('[data-country="us"]');
+
 // Desktop screenshot too
 await page.setViewportSize({ width: 1280, height: 900 });
 await page.goto(BASE);

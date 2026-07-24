@@ -11,9 +11,12 @@
 
 <header class="site-header">
   <div class="wrap">
-    <div class="brand">
-      <span class="brand-bolt" aria-hidden="true">⚡</span>
-      <span class="brand-name">VoltDrop</span>
+    <div class="brand-row">
+      <div class="brand">
+        <span class="brand-bolt" aria-hidden="true">⚡</span>
+        <span class="brand-name">VoltDrop</span>
+      </div>
+      <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
     </div>
     <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
   </div>
@@ -136,7 +139,7 @@
   <section class="card explainer">
     <h2>Why 3% and 5%?</h2>
     <p>Wire has resistance, so some voltage is lost as heat before it reaches your device. Lose too much and motors run hot, LEDs dim or flicker, chargers underperform, and breakers can trip for no obvious reason.</p>
-    <p>The widely used rule of thumb (based on a recommendation in the U.S. National Electrical Code): keep the drop on a branch circuit at or under <strong>3%</strong>, and the total from your panel to the device at or under <strong>5%</strong>. These are guidelines for good performance, not laws — low-voltage systems like 12&nbsp;V solar are often even stricter, because 3% of 12&nbsp;V hurts a lot more than 3% of 240&nbsp;V.</p>
+    <p>The widely used rule of thumb (based on a recommendation in the <span id="code-name">U.S. National Electrical Code</span>): keep the drop on a branch circuit at or under <strong>3%</strong>, and the total from your panel to the device at or under <strong>5%</strong>. These are guidelines for good performance, not laws — low-voltage systems like 12&nbsp;V solar are often even stricter, because 3% of 12&nbsp;V hurts a lot more than 3% of 240&nbsp;V.</p>
     <h2>Why don't other calculators agree with each other?</h2>
     <p>Almost always one of two things: some tools want <strong>round-trip</strong> length where others want one-way (we always use one-way and double it for you), and some use slightly different resistance values for the wire. Open "How we calculated this" above and you can check our numbers against anything.</p>
   </section>
@@ -145,6 +148,12 @@
 
 <footer class="site-footer">
   <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
     <p><strong>VoltDrop</strong> · voltdrop.app · Free forever, no signup.</p>
     <p class="fine">Estimates use standard DC resistance for stranded wire at 75°C (K = 12.9 for copper, 21.2 for aluminum, ohm·cmil/ft). Real-world results vary with temperature, conduit fill, and power factor. This is a planning aid, not a substitute for a licensed electrician or your local electrical code. Always follow ampacity (current-carrying) limits — a wire can pass the voltage-drop check and still be too small to carry the current safely.</p>
   </div>

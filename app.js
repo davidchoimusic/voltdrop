@@ -38,15 +38,33 @@ const MATERIAL_NAME = { cu: 'copper', al: 'aluminum' };
 
 const SYSTEMS = {
   dc:  { mult: 2,     multLabel: '2',  name: 'DC',
-         hint: 'DC: batteries, solar, vehicles, LED strips.',
-         presets: [12, 24, 48] },
+         hint: 'DC: batteries, solar, vehicles, LED strips.' },
   ac1: { mult: 2,     multLabel: '2',  name: 'AC single-phase',
-         hint: 'Single-phase: normal household and light commercial circuits.',
-         presets: [120, 208, 240, 277] },
+         hint: 'Single-phase: normal household and light commercial circuits.' },
   ac3: { mult: 1.732, multLabel: '√3 (1.732)', name: 'AC three-phase',
-         hint: 'Three-phase: commercial and industrial. Voltage is line-to-line.',
-         presets: [208, 240, 480, 600] },
+         hint: 'Three-phase: commercial and industrial. Voltage is line-to-line.' },
 };
+
+// Country editions — same math, different common voltages and code names.
+// Future countries (mm²/IEC) additionally swap WIRE_TABLE and units.
+const COUNTRIES = {
+  us: {
+    chip: '🇺🇸 US edition',
+    codeName: 'U.S. National Electrical Code (NEC)',
+    presets: { dc: [12, 24, 48], ac1: [120, 208, 240, 277], ac3: [208, 240, 480, 600] },
+  },
+  ca: {
+    chip: '🇨🇦 Canada edition',
+    codeName: 'Canadian Electrical Code (CEC)',
+    presets: { dc: [12, 24, 48], ac1: [120, 208, 240, 347], ac3: [208, 480, 600] },
+  },
+};
+const COUNTRY_KEY = 'voltdrop.country';
+let country = 'us';
+try {
+  const saved = localStorage.getItem(COUNTRY_KEY);
+  if (saved && COUNTRIES[saved]) country = saved;
+} catch (e) { /* private mode — default to US */ }
 
 // ---- state ----
 let mode = 'drop';        // drop | size | length
@@ -105,7 +123,7 @@ function setTarget(v) {
 function renderVoltagePresets() {
   const row = $('voltage-presets');
   row.innerHTML = '';
-  SYSTEMS[system].presets.forEach((v) => {
+  COUNTRIES[country].presets[system].forEach((v) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'preset-btn';
@@ -125,7 +143,31 @@ $('voltage').addEventListener('input', () => {
     b.classList.toggle('active', Number($('voltage').value) === parseFloat(b.textContent));
   });
 });
-renderVoltagePresets();
+
+// ---- country edition ----
+function applyCountry() {
+  $('country-chip').textContent = COUNTRIES[country].chip;
+  $('code-name').textContent = COUNTRIES[country].codeName;
+  document.querySelectorAll('.country-btn').forEach((b) => {
+    b.classList.toggle('active', b.dataset.country === country);
+  });
+  renderVoltagePresets();
+  recalcIfVisible();
+}
+
+document.querySelectorAll('.country-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    country = btn.dataset.country;
+    try { localStorage.setItem(COUNTRY_KEY, country); } catch (e) { /* private mode */ }
+    applyCountry();
+  });
+});
+
+$('country-chip').addEventListener('click', () => {
+  $('country-picker').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+applyCountry();
 
 // ---- mode tabs ----
 document.querySelectorAll('.mode-tab').forEach((tab) => {
