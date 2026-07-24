@@ -36,6 +36,15 @@ Day-one MVP built and verified. Pure static site — 3 files, no framework, no b
   `CF_VOLTDROP_DNS_TOKEN` (Zone.DNS:Edit, voltdrop.app) dropped into `~/.brain-secrets/secrets.env`.
 - Google Analytics GA4: measurement ID `G-NC7ETLY8Q1`, tag in index.html head (added 2026-07-24).
 
+## ⚠️ Country expansion — READ docs/COUNTRY_EXPANSION_METHODOLOGY.md before ANY new guide or country work (2026-07-25)
+Physics/standards/language three-layer model; NEVER translate articles — regenerate from
+templates + verified country packs; 5-stage pipeline with unskippable verification gate;
+subdirectory URLs + hreflang; rollout CA → UK/AU → EU metric. CEC difference map (verified):
+docs/research/CEC_VS_NEC.md — ampacity harmonized (reuse), VD MANDATORY in Canada (fixed in
+product 2026-07-25), box fill is a real fork (mL, marrettes count). CA edition today = honest
+NEC-based with auto note on NEC-citing pages (common.js vdCaNote) + country-aware
+recommendation/mandatory wording (code-basis span).
+
 ## Product decisions (from David, 2026-07-24)
 - **Start US + Canada only** (AWG, feet, NEC 3%/5% guidelines). International later.
 - Long-term: **country-specific calculator versions** (mm²/meters/IEC for EU, BS 7671 UK,
