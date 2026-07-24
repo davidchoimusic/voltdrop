@@ -32,6 +32,10 @@ function vdApplyCountry() {
   if (chip) chip.textContent = COUNTRIES[_country].chip;
   const codeName = document.getElementById('code-name');
   if (codeName) codeName.textContent = COUNTRIES[_country].codeName;
+  const codeBasis = document.getElementById('code-basis');
+  if (codeBasis) codeBasis.textContent = _country === 'ca'
+    ? 'a MANDATORY limit in the'   // CEC Rule 8-102 is enforceable, unlike the NEC's note
+    : 'based on a recommendation in the';
   document.querySelectorAll('.country-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.country === _country);
   });
