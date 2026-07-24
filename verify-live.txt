@@ -17,8 +17,14 @@ PASS ampacity verdict OK at 15 A
 PASS ampacity 8AWG Al 60C = 35 A
 PASS conduit 10×12 THHN EMT = 3/4"
 PASS fill % = 25.0%
+PASS power amps (240V 1500W 1φ): got 6.25, expected ~6.25
+PASS power amps (480V 10kW 3φ PF0.85): got 14.15, expected ~14.15
+PASS box fill needed cu in (6w+1d+gnd 12AWG): got 20.25, expected ~20.25
+PASS box fill verdict TOO FULL
+PASS box fill 14 AWG exact fit: got 18, expected ~18
+PASS 18.0/18.0 fits
 PASS logo+favicon on /
 PASS logo+favicon on /ampacity-check/
 PASS logo+favicon on /conduit-fill/
 
-22 passed, 0 failed, JS errors: 0
+28 passed, 0 failed, JS errors: 0
