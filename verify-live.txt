@@ -37,9 +37,15 @@ PASS guide /guides/50-amp-wire-size/ (🔌 What Size Wire for 50 Amps?…)
 PASS guide /guides/wire-ampacity-chart/ (🔥 Wire Ampacity Chart (NEC Ta…)
 PASS guide /guides/how-far-12-gauge-wire/ (📏 How Far Can You Run 12 Gaug…)
 PASS guide /guides/voltage-drop-formula/ (⚡ Voltage Drop, Explained…)
+PASS guide /ca/guides/ (🇨🇦 Canadian Electrical Guide…)
+PASS guide /ca/guides/sub-panel-wire-size/ (🏠 Wire Size for a Sub-Panel i…)
+PASS guide /ca/guides/50-amp-wire-size/ (🔌 What Size Wire for 50 Amps …)
+PASS guide /ca/guides/wire-ampacity-chart/ (🔥 Wire Ampacity Chart — Canad…)
+PASS guide /ca/guides/how-far-12-gauge-wire/ (📏 How Far Can You Run 12 Gaug…)
+PASS guide /ca/guides/voltage-drop-formula/ (⚡ Voltage Drop in Canada: Rule…)
 PASS sub-panel table present
 PASS logo+favicon on /
 PASS logo+favicon on /ampacity-check/
 PASS logo+favicon on /conduit-fill/
 
-43 passed (8 data-integrity), 0 failed, JS errors: 0
+49 passed (8 data-integrity), 0 failed, JS errors: 0

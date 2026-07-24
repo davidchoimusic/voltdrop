@@ -78,24 +78,49 @@ if (_toolsBtn && _mobileTools) {
   });
 }
 
-/* Canada edition: pages whose content cites the U.S. NEC get an honest
-   note when the CA edition is active. Injected (not baked into HTML) so
-   it always follows the current country choice. */
+/* Country-aware guides: when the CA edition is active, the Guides nav
+   points at /ca/guides/, US guides with a Canadian twin offer it
+   prominently, and NEC-citing tool pages get an honest note. */
+const GUIDE_TWINS = {
+  '/guides/': '/ca/guides/',
+  '/guides/sub-panel-wire-size/': '/ca/guides/sub-panel-wire-size/',
+  '/guides/50-amp-wire-size/': '/ca/guides/50-amp-wire-size/',
+  '/guides/wire-ampacity-chart/': '/ca/guides/wire-ampacity-chart/',
+  '/guides/how-far-12-gauge-wire/': '/ca/guides/how-far-12-gauge-wire/',
+  '/guides/voltage-drop-formula/': '/ca/guides/voltage-drop-formula/',
+};
+const GUIDE_TWINS_REV = Object.fromEntries(Object.entries(GUIDE_TWINS).map(([us, ca]) => [ca, us]));
+
 function vdCaNote() {
-  if (location.pathname.startsWith('/ca/')) return; // Canadian pages cite the CEC natively
-  const target = document.querySelector('main.guide .tool-intro, #amp-form, #bf-form, #fill-form, main.guide');
-  const existing = document.getElementById('ca-note');
   const isCA = window.VDCountry && VDCountry.get() === 'ca';
-  if (!target) return;
-  if (isCA && !existing) {
+
+  // 1. Swap the Guides nav destination (sidebar + mobile menu clones)
+  document.querySelectorAll('.tool-link[data-tool="guides"]').forEach((a) => {
+    a.href = isCA ? '/ca/guides/' : '/guides/';
+  });
+
+  const existing = document.getElementById('ca-note');
+  if (existing) existing.remove();
+  const path = location.pathname;
+  const anchor = document.querySelector('.tool-intro') || document.querySelector('#amp-form, #bf-form, #fill-form');
+  if (!anchor) return;
+
+  let html = null;
+  if (isCA && GUIDE_TWINS[path]) {
+    html = '🇨🇦 <strong>You\'re on the Canada edition</strong> — this page is the U.S. version. '
+      + '<a class="inline-link" href="' + GUIDE_TWINS[path] + '">Read the Canadian version of this guide →</a>';
+  } else if (!isCA && GUIDE_TWINS_REV[path]) {
+    html = '🇺🇸 <strong>You\'re on the US edition</strong> — this is the Canadian guide. '
+      + '<a class="inline-link" href="' + GUIDE_TWINS_REV[path] + '">Read the US version →</a>';
+  } else if (isCA && !path.startsWith('/ca/') && document.querySelector('main.guide, #amp-form, #bf-form, #fill-form')) {
+    html = '🇨🇦 <strong>Canada edition note:</strong> this page cites the U.S. NEC. The math is universal and most table values match the Canadian CEC, but rule numbers and some details differ. Treat rule citations here as U.S.-specific.';
+  }
+  if (html) {
     const note = document.createElement('div');
     note.id = 'ca-note';
     note.className = 'ca-note';
-    note.innerHTML = '🇨🇦 <strong>Canada edition note:</strong> this page cites the U.S. NEC. The math is universal and most table values match the Canadian CEC, but rule numbers and some details differ — a fully CEC-verified Canadian version is in the works. Treat rule citations here as U.S.-specific.';
-    const anchor = document.querySelector('main.guide .tool-intro') || document.querySelector('.tool-intro') || target;
+    note.innerHTML = html;
     anchor.insertAdjacentElement('afterend', note);
-  } else if (!isCA && existing) {
-    existing.remove();
   }
 }
 window.addEventListener('vd:country', vdCaNote);
