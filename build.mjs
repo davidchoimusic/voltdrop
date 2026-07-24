@@ -52,6 +52,14 @@ const PAGES = [
     title: 'Conduit Fill Calculator — what size conduit for my wires? | VoltDrop',
     description: 'Free conduit fill calculator: THHN wire count and size in, smallest legal EMT or PVC Schedule 40 conduit out — using the official NEC Chapter 9 tables and 53/31/40% fill limits.',
   },
+  {
+    dir: 'privacy',
+    tool: 'privacy',
+    script: null, // static page — common.js alone is enough
+    main: 'partials/privacy-main.html',
+    title: 'Privacy Policy | VoltDrop',
+    description: 'VoltDrop privacy policy: calculator inputs never leave your browser; optional sign-in data for comments only; no data sales; deletion on request.',
+  },
 ];
 
 for (const p of PAGES) {
@@ -72,8 +80,13 @@ for (const p of PAGES) {
     const main = readFileSync(p.main, 'utf8');
     html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
     // Page script replaces the calculator script; common.js stays.
-    html = html.replace(/<script src="\/app\.js[^"]*"><\/script>/, `<script src="/${p.script}?v=${V[p.script]}"></script>`);
-    if (!html.includes(p.script)) throw new Error(`script swap failed for ${p.dir}`);
+    // script: null drops the calculator script entirely (pure content pages).
+    if (p.script) {
+      html = html.replace(/<script src="\/app\.js[^"]*"><\/script>/, `<script src="/${p.script}?v=${V[p.script]}"></script>`);
+      if (!html.includes(p.script)) throw new Error(`script swap failed for ${p.dir}`);
+    } else {
+      html = html.replace(/<script src="\/app\.js[^"]*"><\/script>\n?/, '');
+    }
     // Highlight this tool in the sidebar (app.js does it for calculator modes).
     html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
   }
