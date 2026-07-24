@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Providers from './providers'
+import ChromeHeader from './ChromeHeader'
+import { TOOLS, toolLinkClass } from './tools'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -12,21 +14,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header className="site-header">
-          <div className="wrap">
-            <div className="brand-row">
-              {/* Plain <a>: back to the static site, outside this app's basePath */}
-              <a className="brand" href="/">
-                {/* Static site asset — same origin, outside basePath */}
-                <img className="brand-logo" src="/img/logo.png" alt="" width={30} height={30} />
-                <span className="brand-name">VoltDrop.app</span>
-              </a>
-              <a className="back-link" href="/">← Back to the tools</a>
-            </div>
-            <p className="tagline">Feedback</p>
+        <ChromeHeader />
+        <div className="layout wrap">
+          <aside className="sidebar">
+            <nav className="tool-nav" aria-label="Electrical tools">
+              <span className="tool-nav-head">Electrical Tools</span>
+              {TOOLS.map((t, i) =>
+                'sep' in t && t.sep
+                  ? <hr key={`sep-${i}`} className="tool-sep" />
+                  : <a key={t.href} href={t.href} className={toolLinkClass(t.href)}>
+                      <span aria-hidden="true">{t.icon}</span>{t.label}
+                    </a>
+              )}
+            </nav>
+          </aside>
+          <div className="main-col">
+            <Providers>{children}</Providers>
           </div>
-        </header>
-        <Providers>{children}</Providers>
+        </div>
         <footer className="site-footer">
           <div className="wrap">
             <p><strong>VoltDrop</strong> · voltdrop.app · Free forever.</p>

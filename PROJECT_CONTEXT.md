@@ -1,5 +1,7 @@
 # VoltDrop — voltdrop.app
 
+Architecture map: see [CODEBASE_MAP.md](CODEBASE_MAP.md) — 31 files, static calculators + Next.js comments app.
+
 ## Mission
 A free voltage drop calculator for electricians that wins on CLARITY, not brand or SEO muscle.
 Competitor research (2026-07-24, via Grok review-mining of Southwire app + calculator.net etc.) found the

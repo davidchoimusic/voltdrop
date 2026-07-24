@@ -193,7 +193,7 @@ export default function CommentsClient() {
   }
 
   return (
-    <main className="wrap comments-main">
+    <main className="comments-main">
 
       <section className="card composer">
         <h1 className="tool-title">💬 Leave feedback</h1>
