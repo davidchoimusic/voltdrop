@@ -676,6 +676,46 @@ select:focus {
 .inline-link:hover { color: var(--color-accent-hot); }
 .inline-link:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
 
+/* Guides */
+.guide .explainer p { line-height: 1.65; }
+.guide-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.guide-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--color-ink);
+}
+.guide-item:hover { border-color: var(--color-accent); }
+.guide-item:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.guide-item-title { font-weight: 750; font-size: 15.5px; }
+.guide-item-sub { font-size: 13.5px; color: var(--color-ink-soft); line-height: 1.45; }
+
+.gtable-wrap { overflow-x: auto; margin: var(--space-3) 0 var(--space-2); }
+.gtable {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.gtable th, .gtable td {
+  border: 1px solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+}
+.gtable th {
+  background: var(--color-surface-2);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gtable td:first-child { text-align: left; font-weight: 650; white-space: nowrap; }
+.gnote { font-size: 12.5px; color: var(--color-ink-soft); line-height: 1.5; margin: 0 0 var(--space-4); }
+
 /* ========================================================================
    Explainer & footer
    ======================================================================== */

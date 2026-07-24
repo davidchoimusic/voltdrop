@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wire Ampacity Chart — NEC Table 310.16, current code | VoltDrop</title>
+<meta name="description" content="Full copper and aluminum ampacity chart (60/75/90°C, verified against the published NEC tables, identical 2017-2023) plus the plain-English rule for which temperature column you may use.">
+<link rel="canonical" href="https://voltdrop.app/guides/wire-ampacity-chart/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Wire Ampacity Chart — NEC Table 310.16, current code | VoltDrop">
+<meta property="og:description" content="Full copper and aluminum ampacity chart (60/75/90°C, verified against the published NEC tables, identical 2017-2023) plus the plain-English rule for which temperature column you may use.">
+<meta property="og:url" content="https://voltdrop.app/guides/wire-ampacity-chart/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wire Ampacity Chart — NEC Table 310.16, current code | VoltDrop">
+<meta name="twitter:description" content="Full copper and aluminum ampacity chart (60/75/90°C, verified against the published NEC tables, identical 2017-2023) plus the plain-English rule for which temperature column you may use.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=8837519230">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop.app</span>
+      </a>
+      <a class="header-feedback" href="/comments">Feedback</a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <hr class="tool-sep">
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔥 Wire Ampacity Chart (NEC Table 310.16)</h1>
+    <p class="tool-sub">The full copper and aluminum table — current code — plus the one thing everyone gets wrong: which temperature column you're allowed to use.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The chart</h2>
+    <p>Amps each wire can carry continuously (up to three current-carrying wires in a cable or conduit, ordinary room temperature). These values are identical in the 2017, 2020, and 2023 NEC editions — we verified that against the published tables, so this chart is current by construction:</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th rowspan="2">Size</th><th colspan="3">Copper</th><th colspan="3">Aluminum</th></tr>
+      <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>12 AWG</td><td>20</td><td>25</td><td>30</td><td>15</td><td>20</td><td>25</td></tr>
+        <tr><td>10 AWG</td><td>30</td><td>35</td><td>40</td><td>25</td><td>30</td><td>35</td></tr>
+        <tr><td>8 AWG</td><td>40</td><td>50</td><td>55</td><td>35</td><td>40</td><td>45</td></tr>
+        <tr><td>6 AWG</td><td>55</td><td>65</td><td>75</td><td>40</td><td>50</td><td>55</td></tr>
+        <tr><td>4 AWG</td><td>70</td><td>85</td><td>95</td><td>55</td><td>65</td><td>75</td></tr>
+        <tr><td>3 AWG</td><td>85</td><td>100</td><td>115</td><td>65</td><td>75</td><td>85</td></tr>
+        <tr><td>2 AWG</td><td>95</td><td>115</td><td>130</td><td>75</td><td>90</td><td>100</td></tr>
+        <tr><td>1 AWG</td><td>110</td><td>130</td><td>145</td><td>85</td><td>100</td><td>115</td></tr>
+        <tr><td>1/0</td><td>125</td><td>150</td><td>170</td><td>100</td><td>120</td><td>135</td></tr>
+        <tr><td>2/0</td><td>145</td><td>175</td><td>195</td><td>115</td><td>135</td><td>150</td></tr>
+        <tr><td>3/0</td><td>165</td><td>200</td><td>225</td><td>130</td><td>155</td><td>175</td></tr>
+        <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
+        <tr><td>250 kcmil</td><td>215</td><td>255</td><td>290</td><td>170</td><td>205</td><td>230</td></tr>
+        <tr><td>300 kcmil</td><td>240</td><td>285</td><td>320</td><td>195</td><td>230</td><td>260</td></tr>
+        <tr><td>350 kcmil</td><td>260</td><td>310</td><td>350</td><td>210</td><td>250</td><td>280</td></tr>
+        <tr><td>400 kcmil</td><td>280</td><td>335</td><td>380</td><td>225</td><td>270</td><td>305</td></tr>
+        <tr><td>500 kcmil</td><td>320</td><td>380</td><td>430</td><td>260</td><td>310</td><td>350</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Source-verified against two verbatim NEC table reproductions. Small-conductor breaker caps (NEC 240.4(D)) still apply: 14 Cu → 15 A breaker, 12 Cu → 20 A, 10 Cu → 30 A, 12 Al → 15 A, 10 Al → 25 A, regardless of column. Interactive version with the caps built in: <a class="inline-link" href="/ampacity-check/">Ampacity Check</a>.</p>
+
+    <h2>Which column am I allowed to use?</h2>
+    <p>This is the single most-argued ampacity question on every electrician forum, and the rule is simpler than the arguments: <strong>use the column of your weakest link.</strong> The wire's insulation has a rating (THHN is 90°C), but the breaker lugs and receptacle terminals it lands on are usually rated 75°C — and Romex/NM-B cable is capped at the 60°C column by code no matter what its conductors say. So in practice: <strong>NM-B → 60°C column. THHN in conduit on standard equipment → 75°C column.</strong> The 90°C column is mostly useful as the <em>starting point</em> for derating calculations (hot attics, bundled cables), not as a rating you deliver to a breaker.</p>
+
+    <h2>Does voltage change ampacity?</h2>
+    <p>No — and this surprises a lot of the 12-volt crowd. A #10 wire can carry the same ~30 A whether it's a 12 V trolling-motor feed or a 240 V circuit. What changes brutally with voltage is <strong>voltage drop</strong>: losing 3 volts means losing 1.3% of a 240 V circuit but a crushing 25% of a 12 V one. That's why low-voltage wiring runs so much fatter than its amps suggest — check yours in the <a class="inline-link" href="/">Voltage Drop calculator</a> (it has a DC mode for exactly this).</p>
+
+    <h2>What this chart doesn't cover</h2>
+    <p>Normal conditions only: hot environments, more than three current-carrying conductors bundled together, and continuous loads (3+ hours → 80% rule) all reduce these numbers. A derating upgrade to our Ampacity tool is on the roadmap.</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many amps can 12 gauge wire handle?","acceptedAnswer":{"@type":"Answer","text":"20 amps in the 60°C column (Romex/NM-B), 25 A at 75°C, 30 A at 90°C — but NEC 240.4(D) caps 12 AWG copper at a 20 amp breaker in ordinary circuits regardless of column."}},{"@type":"Question","name":"Does wire ampacity change at 12 volts vs 120 or 240 volts?","acceptedAnswer":{"@type":"Answer","text":"No — ampacity is about heat from current and is the same at any voltage. What changes with voltage is the impact of voltage drop: the same 3-volt loss is 1.3% of a 240 V circuit but 25% of a 12 V circuit, which is why low-voltage systems need much thicker wire per amp."}},{"@type":"Question","name":"Why is Romex limited to the 60°C column when its conductors are rated 90°C?","acceptedAnswer":{"@type":"Answer","text":"The NEC caps NM-B cable at the 60°C ampacity column as a blanket rule for that cable type. Individual conductors like THHN can use the 75°C column when the terminations are 75°C-rated; the 90°C column mainly serves as the starting point for derating calculations."}},{"@type":"Question","name":"Is this ampacity chart current for the latest NEC?","acceptedAnswer":{"@type":"Answer","text":"Yes — the Table 310.16 values shown are identical across the 2017, 2020, and 2023 NEC editions. We verified this against verbatim reproductions of the published tables."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=70fed056d1"></script>
+</body>
+</html>

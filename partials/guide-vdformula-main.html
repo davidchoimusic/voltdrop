@@ -1,0 +1,32 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ Voltage Drop, Explained</h1>
+    <p class="tool-sub">The formula electricians actually use, three worked examples, and the truth about the 3% "rule."</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The formula</h2>
+    <p>For DC and single-phase AC: <strong>voltage drop = 2 × K × amps × one-way feet ÷ circular mils</strong>. For three-phase, replace the 2 with √3 (1.732). The pieces: <strong>K</strong> is the wire material's resistance constant — 12.9 for copper, 21.2 for aluminum (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section (#12 = 6,530; #6 = 26,240; #2/0 = 133,100). The <strong>2</strong> is the round trip — current flows out and back, so measure your distance <em>one way</em> and let the formula double it. (Mixing this up is the #1 reason two calculators "disagree.")</p>
+
+    <h2>Three worked examples</h2>
+    <p><strong>1. Garage receptacle:</strong> #12 copper, 20 A, 80 one-way ft, 120 V → 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong>. Too much — go to #10 or shorten the run.</p>
+    <p><strong>2. Hot tub feeder:</strong> #6 copper, 40 A actual load, 150 ft, 240 V → 2 × 12.9 × 40 × 150 ÷ 26,240 = <strong>5.9 V = 2.5%</strong>. Inside the 3% target.</p>
+    <p><strong>3. 12-volt trolling motor (DC):</strong> #14 copper, 8 A, 15 ft, 12 V → 2 × 12.9 × 8 × 15 ÷ 4,110 = <strong>0.75 V = 6.3%</strong>. Same formula, brutal result — at 12 V, even short thin runs bleed real percentage. This is why automotive, marine, solar, and landscape-lighting wiring runs so much fatter than the amps suggest, and why our <a class="inline-link" href="/">calculator</a> has a DC mode.</p>
+
+    <h2>Is the 3% rule actually code?</h2>
+    <p>Honest answer: <strong>it's an official recommendation, not an enforceable requirement</strong> — in the NEC it lives in Informational Notes (3% for a branch circuit, 5% total from service to the farthest load). You generally can't fail a standard inspection on voltage drop alone, with real exceptions: some loads (like fire pumps) have hard drop limits, some local jurisdictions and energy codes adopt stricter enforceable versions, and low-voltage systems often need tighter targets for the reason example 3 shows. Treat 3%/5% as the line between "performs well" and "expect complaints," not as law.</p>
+
+    <h2>Where "K" comes from (and why calculators disagree)</h2>
+    <p>K bundles the wire's resistivity into one field-friendly number. We use the standard conservative values (12.9/21.2); some tools instead use the code's DC resistance table, which is ~20–25% more optimistic. Neither is wrong — conservative leaves margin for temperature and real-world conditions. Every result in our tools opens with "How we calculated this" so you can compare constants against any other source directly.</p>
+
+    <h2>How to fix excessive voltage drop</h2>
+    <p>In order of usual practicality: <strong>go up a wire size</strong> (each AWG step cuts drop ~21%... two steps cuts it ~37%), <strong>raise the voltage</strong> (running the same watts at 240 V instead of 120 V halves the amps AND doubles the tolerable drop — a 4× improvement), <strong>shorten the route</strong>, or for very long rural runs, <strong>step up with a transformer</strong>. For motors that stumble on startup, drop during inrush is the culprit — size for the start, not just the run.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/">Voltage Drop calculator</a> · <a class="inline-link" href="/max-wire-length/">Max Wire Length</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">Sub-panel guide</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">How far can you run each gauge?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the 3% voltage drop rule code or a guideline?","acceptedAnswer":{"@type":"Answer","text":"It's an official recommendation in NEC Informational Notes (3% branch, 5% total), not a generally enforceable requirement — with exceptions like fire pumps, certain energy codes, and local jurisdictions that adopt stricter rules. Treat it as the threshold for good performance."}},{"@type":"Question","name":"Do I measure wire distance one-way or round trip for voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Measure one-way, from the source to the load. The standard formula's factor of 2 accounts for the round trip. Entering round-trip length into a one-way calculator doubles your error — the most common cause of disagreeing results."}},{"@type":"Question","name":"Is voltage drop the same for AC and DC?","acceptedAnswer":{"@type":"Answer","text":"For ordinary building wire sizes the same resistive formula applies to DC and single-phase AC (three-phase uses 1.732 instead of 2). The difference is impact: the same volts lost is a far larger percentage of a 12 V system than a 240 V one."}},{"@type":"Question","name":"How do I fix too much voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Increase the wire size (each AWG step cuts drop about 21%), raise the system voltage (240 V vs 120 V is a 4x improvement for the same watts), shorten the run, or use a step-up transformer for very long distances."}},{"@type":"Question","name":"Is voltage drop dangerous?","acceptedAnswer":{"@type":"Answer","text":"Mostly it's a performance problem — dim lights, hot motors, slow chargers — but chronically undervolted motors can overheat and fail, and the lost energy becomes heat in the wiring. Severe drop is a sign the circuit needs redesign."}}]}</script>
+
+</main>

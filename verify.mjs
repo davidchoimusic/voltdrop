@@ -212,6 +212,19 @@ cls = await page.getAttribute('#verdict', 'class');
 console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits' : `FAIL fit verdict: ${cls}`); (cls.includes('warn') || cls.includes('good')) ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
 
+// ---- Guides: every page loads, has an h1, highlights Guides in sidebar
+for (const g of ['guides/', 'guides/sub-panel-wire-size/', 'guides/50-amp-wire-size/', 'guides/wire-ampacity-chart/', 'guides/how-far-12-gauge-wire/', 'guides/voltage-drop-formula/']) {
+  await page.goto(BASE + g);
+  const h1 = await page.textContent('h1').catch(() => null);
+  const active = await page.textContent('.sidebar .tool-link.active').catch(() => '');
+  const ok = h1 && h1.trim().length > 3 && active.includes('Guides');
+  console.log(ok ? `PASS guide /${g} (${h1.trim().slice(0, 30)}…)` : `FAIL guide /${g}: h1=${h1} active=${active}`); ok ? pass++ : fail++;
+}
+// Spot-check a computed table value: sub-panel guide, 100A Cu @150ft = 2 AWG
+await page.goto(BASE + 'guides/sub-panel-wire-size/');
+const tbl = await page.textContent('.gtable');
+console.log(tbl.includes('100 A copper') ? 'PASS sub-panel table present' : 'FAIL table missing'); tbl.includes('100 A copper') ? pass++ : fail++;
+
 // ---- Logo present and loading on every page
 for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
   await page.goto(BASE + path);

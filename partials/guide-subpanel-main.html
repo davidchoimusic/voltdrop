@@ -1,0 +1,42 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🏠 Wire Size for a Sub-Panel (Shed or Detached Garage)</h1>
+    <p class="tool-sub">The question every forum argues about, answered with the actual math — including the distance tables nobody shows you.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The short answer</h2>
+    <p>For a <strong>100 amp sub-panel at 150 feet</strong>: <strong>#2 copper</strong> or <strong>1/0 aluminum</strong>. For a <strong>60 amp sub-panel at 100 feet</strong>: <strong>#6 copper</strong> or <strong>#4 aluminum</strong>. The full table for every common combination is below — and if your run isn't in it, the <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> handles any distance.</p>
+
+    <h2>Why every forum thread disagrees</h2>
+    <p>Ask this question online and you'll get three different "right" answers. That's because it's really <em>two</em> checks stacked together, and different people are answering different ones. First, the wire must be rated to carry the current at all (<strong>ampacity</strong>). Second, over a long run, the wire must be fat enough that voltage lost along the way stays reasonable (<strong>voltage drop</strong> — the usual planning target is 3%). At short distances the ampacity check decides; past roughly 100 feet, voltage drop takes over and forces bigger wire than the ampacity table alone suggests. People quoting only the ampacity table and people quoting drop-adjusted sizes are both "right" — for different distances.</p>
+
+    <h2>The table: minimum size at 240 V, 3% voltage drop</h2>
+    <p>Sized at the breaker rating (conservative), 75°C terminations, one-way distance:</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Feeder</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <tbody>
+        <tr><td>50 A copper</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>50 A aluminum</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>60 A copper</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><td>60 A aluminum</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A copper</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A aluminum</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">AWG sizes; computed with the same verified engine as our calculators (K = 12.9 copper / 21.2 aluminum, NEC Table 310.16 ampacities at 75°C). Cable assemblies like NM-B are limited to the 60°C column — see the <a class="inline-link" href="/guides/wire-ampacity-chart/">ampacity guide</a> — and aluminum here means modern AA-8000 series feeder cable (SER/URD/MHF), which is safe and code-recognized.</p>
+
+    <h2>Worked example: 100 A at 150 feet</h2>
+    <p>Voltage drop = 2 × K × amps × one-way feet ÷ circular mils. For #2 copper (66,360 cmil): 2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V</strong>, which is 2.4% of 240 V — inside the 3% target. One size smaller (#3, 52,620 cmil) gives 7.4 V = 3.1% — just over. That's the whole disagreement, resolved: <strong>#3 works on ampacity, #2 wins on voltage drop.</strong> Check your own numbers in the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+
+    <h2>Four things people miss</h2>
+    <p><strong>1. It's a 4-wire feeder.</strong> Two hots, a neutral, and a separate equipment ground — and at the sub-panel, neutrals and grounds land on separate bars (the bonding screw stays out). <strong>2. The famous "2-2-2-4" aluminum cable is rated 100 A only as a dwelling service.</strong> Feeding a detached-garage sub-panel, it's a 90 A feeder — a classic inspection surprise. <strong>3. Voltage drop doesn't "reset" at the sub-panel.</strong> Drop on the feeder and drop on the branch circuit beyond it add together; a common practice is ~2% budget for the feeder and ~3% total to the farthest load. <strong>4. Size for what you'll actually draw, someday.</strong> If the garage will someday host a welder or EV charger, the copper you bury today is the cheapest it will ever be.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> · <a class="inline-link" href="/">Voltage Drop calculator</a> · <a class="inline-link" href="/guides/50-amp-wire-size/">What size wire for 50 amps?</a> · <a class="inline-link" href="/conduit-fill/">Conduit Fill calculator</a> for the underground run</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire for a 100 amp sub panel 150 feet away?","acceptedAnswer":{"@type":"Answer","text":"#2 copper or 1/0 aluminum, using a 3% voltage drop target at 240 V with 75°C terminations. At that distance voltage drop, not ampacity, sets the size: #2 copper drops 5.8 V (2.4%) at 100 A over 150 feet."}},{"@type":"Question","name":"Does a sub panel reset voltage drop?","acceptedAnswer":{"@type":"Answer","text":"No. Voltage drop on the feeder to the sub-panel and drop on the branch circuit beyond it add together. A common planning practice is about 2% on the feeder and no more than 3% total from the main panel to the farthest load."}},{"@type":"Question","name":"What size ground wire for a sub panel feeder?","acceptedAnswer":{"@type":"Answer","text":"The equipment grounding conductor is sized from the feeder breaker per NEC Table 250.122 — for example #8 copper for a 100 A feeder — and must be upsized proportionally if you upsize the hot conductors for voltage drop."}},{"@type":"Question","name":"Is aluminum wire safe for a sub panel feeder?","acceptedAnswer":{"@type":"Answer","text":"Yes. Modern AA-8000 series aluminum feeder cable (SER, URD, MHF) is code-recognized and widely used for feeders because it costs far less than copper. The 1960s hazard reputation belongs to old small-gauge branch-circuit aluminum, not modern feeder cable."}}]}</script>
+
+</main>

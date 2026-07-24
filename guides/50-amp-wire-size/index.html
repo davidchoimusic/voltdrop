@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Size Wire for 50 Amps? Breaker, hot tub, EV, RV | VoltDrop</title>
+<meta name="description" content="Why the internet says both 6 and 8 gauge for 50 amps — and the real answer by wire type, with a verified distance table and worked examples for hot tubs, EV chargers, and RV outlets.">
+<link rel="canonical" href="https://voltdrop.app/guides/50-amp-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="What Size Wire for 50 Amps? Breaker, hot tub, EV, RV | VoltDrop">
+<meta property="og:description" content="Why the internet says both 6 and 8 gauge for 50 amps — and the real answer by wire type, with a verified distance table and worked examples for hot tubs, EV chargers, and RV outlets.">
+<meta property="og:url" content="https://voltdrop.app/guides/50-amp-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Size Wire for 50 Amps? Breaker, hot tub, EV, RV | VoltDrop">
+<meta name="twitter:description" content="Why the internet says both 6 and 8 gauge for 50 amps — and the real answer by wire type, with a verified distance table and worked examples for hot tubs, EV chargers, and RV outlets.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=8837519230">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop.app</span>
+      </a>
+      <a class="header-feedback" href="/comments">Feedback</a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <hr class="tool-sep">
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔌 What Size Wire for 50 Amps?</h1>
+    <p class="tool-sub">The internet says 6 gauge AND 8 gauge — both are right, for different wire types. Here's the whole answer.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The short answer</h2>
+    <p>For a 50 amp, 240 V circuit at ordinary distances: <strong>#6 copper if you're using Romex/NM-B cable</strong>, <strong>#8 copper THHN in conduit</strong> (with 75°C terminations), or <strong>#6 aluminum</strong>. Past about 100 feet, voltage drop pushes you bigger — table below.</p>
+
+    <h2>Why the internet contradicts itself</h2>
+    <p>The two most common answers online are "#6" and "#8," and the argument is really about <strong>wire type</strong>. The code assigns every wire an amp rating by its insulation temperature column. #8 copper is rated exactly 50 A in the 75°C column — fine for THHN in conduit landing on standard 75°C-rated breaker lugs. But Romex (NM-B cable) must use the 60°C column no matter what's printed on the conductors, and #8 NM-B is only good for 40 A — so Romex needs #6. Sites that say "always #6" are being safe; sites that say "#8" are assuming conduit. Both are quoting real rows of the same table — check it yourself in the <a class="inline-link" href="/guides/wire-ampacity-chart/">ampacity chart guide</a> or the <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a>.</p>
+
+    <h2>Distance changes the answer</h2>
+    <p>Minimum size at 240 V keeping voltage drop under 3%, sized at 50 A (one-way distance):</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Material</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <tbody>
+        <tr><td>Copper</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>Aluminum</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">AWG sizes, computed with our verified calculator engine. Your exact run: <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a>.</p>
+
+    <h2>The common 50-amp jobs</h2>
+    <p><strong>Hot tub:</strong> usually a 4-wire circuit (two hots, neutral, ground) with a GFCI breaker or GFCI spa disconnect within sight of the tub — #6 copper NM-B indoors transitioning to THHN in conduit outdoors is the classic setup. <strong>EV charger:</strong> a hardwired charger on a 50 A breaker may deliver at most 40 A continuously (the code requires 125% headroom for loads running 3+ hours), so the conductors must be rated for the 50 A breaker — #6 NM-B or #8 THHN, same as above; check your charger's settings. <strong>RV outlet (14-50):</strong> same sizing, but if the pedestal is far from the panel, use the distance table — RV pads at 150+ feet routinely need #4. <strong>Welder:</strong> welders get special treatment (their duty cycle legally allows smaller wire than the breaker suggests — genuinely counterintuitive), so don't panic if a welder manual specifies less.</p>
+
+    <h2>Worked example: 50 A hot tub at 80 feet</h2>
+    <p>#6 copper (26,240 cmil): drop = 2 × 12.9 × 50 × 80 ÷ 26,240 = <strong>3.9 V = 1.6%</strong> of 240 V — comfortably inside 3%. The same run in #8 (16,510 cmil) drops 6.3 V = 2.6% — still legal for THHN, but closer to the line. Run your own numbers in the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/guides/sub-panel-wire-size/">Sub-panel wire size guide</a> · <a class="inline-link" href="/conduit-fill/">Conduit Fill calculator</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">How far can you run each gauge?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire do I need for a 50 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"#6 copper for Romex/NM-B cable, #8 copper THHN in conduit with 75°C terminations, or #6 aluminum — for a 240 V circuit at ordinary distances. Over about 100 feet, upsize for voltage drop."}},{"@type":"Question","name":"Can you use 8 gauge wire on a 50 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"Yes, if it's an individual conductor type like THHN in conduit with 75°C-rated terminations — #8 copper is rated exactly 50 A in the NEC 75°C column. No, if it's NM-B (Romex), which is limited to the 60°C column where #8 is only 40 A."}},{"@type":"Question","name":"What size wire for 50 amps at 100 feet?","acceptedAnswer":{"@type":"Answer","text":"#6 copper or #4 aluminum keeps voltage drop under the 3% planning target at 240 V and 50 A over 100 one-way feet."}},{"@type":"Question","name":"What size wire for a 50 amp hot tub?","acceptedAnswer":{"@type":"Answer","text":"#6 copper is the standard answer, run as a 4-wire circuit with GFCI protection and a disconnect within sight of the tub. Long runs from the panel should be checked for voltage drop."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=70fed056d1"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltage Drop Formula & the 3% Rule, Explained | VoltDrop</title>
+<meta name="description" content="The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.">
+<link rel="canonical" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Voltage Drop Formula & the 3% Rule, Explained | VoltDrop">
+<meta property="og:description" content="The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.">
+<meta property="og:url" content="https://voltdrop.app/guides/voltage-drop-formula/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Voltage Drop Formula & the 3% Rule, Explained | VoltDrop">
+<meta name="twitter:description" content="The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=8837519230">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop.app</span>
+      </a>
+      <a class="header-feedback" href="/comments">Feedback</a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <hr class="tool-sep">
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ Voltage Drop, Explained</h1>
+    <p class="tool-sub">The formula electricians actually use, three worked examples, and the truth about the 3% "rule."</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The formula</h2>
+    <p>For DC and single-phase AC: <strong>voltage drop = 2 × K × amps × one-way feet ÷ circular mils</strong>. For three-phase, replace the 2 with √3 (1.732). The pieces: <strong>K</strong> is the wire material's resistance constant — 12.9 for copper, 21.2 for aluminum (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section (#12 = 6,530; #6 = 26,240; #2/0 = 133,100). The <strong>2</strong> is the round trip — current flows out and back, so measure your distance <em>one way</em> and let the formula double it. (Mixing this up is the #1 reason two calculators "disagree.")</p>
+
+    <h2>Three worked examples</h2>
+    <p><strong>1. Garage receptacle:</strong> #12 copper, 20 A, 80 one-way ft, 120 V → 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong>. Too much — go to #10 or shorten the run.</p>
+    <p><strong>2. Hot tub feeder:</strong> #6 copper, 40 A actual load, 150 ft, 240 V → 2 × 12.9 × 40 × 150 ÷ 26,240 = <strong>5.9 V = 2.5%</strong>. Inside the 3% target.</p>
+    <p><strong>3. 12-volt trolling motor (DC):</strong> #14 copper, 8 A, 15 ft, 12 V → 2 × 12.9 × 8 × 15 ÷ 4,110 = <strong>0.75 V = 6.3%</strong>. Same formula, brutal result — at 12 V, even short thin runs bleed real percentage. This is why automotive, marine, solar, and landscape-lighting wiring runs so much fatter than the amps suggest, and why our <a class="inline-link" href="/">calculator</a> has a DC mode.</p>
+
+    <h2>Is the 3% rule actually code?</h2>
+    <p>Honest answer: <strong>it's an official recommendation, not an enforceable requirement</strong> — in the NEC it lives in Informational Notes (3% for a branch circuit, 5% total from service to the farthest load). You generally can't fail a standard inspection on voltage drop alone, with real exceptions: some loads (like fire pumps) have hard drop limits, some local jurisdictions and energy codes adopt stricter enforceable versions, and low-voltage systems often need tighter targets for the reason example 3 shows. Treat 3%/5% as the line between "performs well" and "expect complaints," not as law.</p>
+
+    <h2>Where "K" comes from (and why calculators disagree)</h2>
+    <p>K bundles the wire's resistivity into one field-friendly number. We use the standard conservative values (12.9/21.2); some tools instead use the code's DC resistance table, which is ~20–25% more optimistic. Neither is wrong — conservative leaves margin for temperature and real-world conditions. Every result in our tools opens with "How we calculated this" so you can compare constants against any other source directly.</p>
+
+    <h2>How to fix excessive voltage drop</h2>
+    <p>In order of usual practicality: <strong>go up a wire size</strong> (each AWG step cuts drop ~21%... two steps cuts it ~37%), <strong>raise the voltage</strong> (running the same watts at 240 V instead of 120 V halves the amps AND doubles the tolerable drop — a 4× improvement), <strong>shorten the route</strong>, or for very long rural runs, <strong>step up with a transformer</strong>. For motors that stumble on startup, drop during inrush is the culprit — size for the start, not just the run.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/">Voltage Drop calculator</a> · <a class="inline-link" href="/max-wire-length/">Max Wire Length</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">Sub-panel guide</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">How far can you run each gauge?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the 3% voltage drop rule code or a guideline?","acceptedAnswer":{"@type":"Answer","text":"It's an official recommendation in NEC Informational Notes (3% branch, 5% total), not a generally enforceable requirement — with exceptions like fire pumps, certain energy codes, and local jurisdictions that adopt stricter rules. Treat it as the threshold for good performance."}},{"@type":"Question","name":"Do I measure wire distance one-way or round trip for voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Measure one-way, from the source to the load. The standard formula's factor of 2 accounts for the round trip. Entering round-trip length into a one-way calculator doubles your error — the most common cause of disagreeing results."}},{"@type":"Question","name":"Is voltage drop the same for AC and DC?","acceptedAnswer":{"@type":"Answer","text":"For ordinary building wire sizes the same resistive formula applies to DC and single-phase AC (three-phase uses 1.732 instead of 2). The difference is impact: the same volts lost is a far larger percentage of a 12 V system than a 240 V one."}},{"@type":"Question","name":"How do I fix too much voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Increase the wire size (each AWG step cuts drop about 21%), raise the system voltage (240 V vs 120 V is a 4x improvement for the same watts), shorten the run, or use a step-up transformer for very long distances."}},{"@type":"Question","name":"Is voltage drop dangerous?","acceptedAnswer":{"@type":"Answer","text":"Mostly it's a performance problem — dim lights, hot motors, slow chargers — but chronically undervolted motors can overheat and fail, and the lost energy becomes heat in the wiring. Severe drop is a sign the circuit needs redesign."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=70fed056d1"></script>
+</body>
+</html>

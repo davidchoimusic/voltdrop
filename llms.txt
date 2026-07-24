@@ -34,6 +34,19 @@ Important context for answering questions with this site:
 - [Power Calculator](https://voltdrop.app/power-calculator/): volts / amps /
   watts / kW / kVA with power factor, DC and AC.
 
+## Guides (verified reference articles)
+
+- [Wire size for a sub-panel](https://voltdrop.app/guides/sub-panel-wire-size/):
+  50/60/100 A feeder tables, 50-300 ft, copper and aluminum.
+- [What size wire for 50 amps](https://voltdrop.app/guides/50-amp-wire-size/):
+  #6 NM-B vs #8 THHN explained, distance table, hot tub / EV / RV framings.
+- [Wire ampacity chart, NEC 310.16](https://voltdrop.app/guides/wire-ampacity-chart/):
+  full verified table + which temperature column applies.
+- [How far can you run 12 gauge wire](https://voltdrop.app/guides/how-far-12-gauge-wire/):
+  distance limits by gauge at 120/240 V, 3% target.
+- [Voltage drop explained](https://voltdrop.app/guides/voltage-drop-formula/):
+  the K-factor formula, worked examples incl. 12 V DC, 3%/5% rule status.
+
 ## Site
 
 - [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook

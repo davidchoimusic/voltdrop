@@ -1,0 +1,41 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📏 How Far Can You Run 12 Gauge Wire?</h1>
+    <p class="tool-sub">Real distance limits for every common gauge — and why every site gives you a different number.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The short answer</h2>
+    <p>On a fully loaded 20 amp, 120 V circuit, <strong>#12 copper stays under the 3% voltage-drop target for about 46 one-way feet</strong>. At 240 V the same wire goes about 91 feet. Lighter actual loads go further — a 20 A breaker feeding a 10 A load doubles the distance. Full table below; your exact case: <a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a>.</p>
+
+    <h2>Distance table (3% drop, copper, fully loaded)</h2>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Wire</th><th>At amps</th><th>Max one-way @120 V</th><th>Max one-way @240 V</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15 A</td><td>38 ft</td><td>76 ft</td></tr>
+        <tr><td>12 AWG</td><td>15 A</td><td>61 ft</td><td>121 ft</td></tr>
+        <tr><td>12 AWG</td><td>20 A</td><td>46 ft</td><td>91 ft</td></tr>
+        <tr><td>10 AWG</td><td>30 A</td><td>48 ft</td><td>97 ft</td></tr>
+        <tr><td>8 AWG</td><td>40 A</td><td>58 ft</td><td>115 ft</td></tr>
+        <tr><td>6 AWG</td><td>50 A</td><td>73 ft</td><td>146 ft</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Computed with our verified engine (K = 12.9 ohm·cmil/ft for copper). Distances are one-way — from panel to load; the round trip is already accounted for.</p>
+
+    <h2>Why other sites say 50, 57, or 100 feet</h2>
+    <p>Three honest reasons, no conspiracy. <strong>First — the amps assumption.</strong> Should you compute at the breaker's 20 A or the actual load's amps? Forums split 50/50 on this. Our table uses the breaker rating (worst case, safe for planning); if you know the real load, use it in the <a class="inline-link" href="/max-wire-length/">calculator</a> and enjoy the extra distance. <strong>Second — the resistance constant.</strong> We use the field-standard K = 12.9, which is deliberately a bit conservative; some sites use the code's DC resistance table, which yields ~25% longer distances (that's the famous "57 feet"). Neither is wrong — ours leaves margin for real-world conditions. <strong>Third — the target.</strong> 3% is the common planning target, but it's a recommendation, not a hard law (<a class="inline-link" href="/guides/voltage-drop-formula/">full story here</a>) — sites using 5% quote much longer runs.</p>
+
+    <h2>What happens if you run too far?</h2>
+    <p>Nothing dramatic — and that's the trap. The circuit works, but the far end runs at lower voltage: motors start hard and run hot (a compressor that trips on a 100 ft extension cord but not a short one is pure voltage drop), LEDs flicker, chargers slow down, heaters underperform. Long runs also waste real energy as heat in the wall.</p>
+
+    <h2>Worked example</h2>
+    <p>#12 copper, 20 A, 80 one-way feet, 120 V: drop = 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong> — over both the 3% target and the 5% outer limit. Options: shorten the run, go up to #10 (drops 4.0 V = 3.3%), run it at 240 V if the load allows, or accept it for a non-critical load. The <a class="inline-link" href="/">Voltage Drop calculator</a> shows all of this instantly.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a> · <a class="inline-link" href="/guides/voltage-drop-formula/">Voltage drop, explained</a> · <a class="inline-link" href="/guides/wire-ampacity-chart/">Ampacity chart</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far can you run 12 gauge wire on a 20 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"About 46 one-way feet at 120 V fully loaded at 20 A, staying under the 3% voltage-drop planning target (about 91 feet at 240 V). Lighter actual loads go proportionally further."}},{"@type":"Question","name":"Do I use the breaker rating or the actual load for voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Either is defensible, which is why answers online disagree. Using the breaker rating is the conservative planning choice; using the known actual load is accurate for that load. If the circuit might someday carry its full rating, size for the breaker."}},{"@type":"Question","name":"How far can you run 12/2 without voltage drop?","acceptedAnswer":{"@type":"Answer","text":"There is no distance without voltage drop — every foot of wire drops some voltage. The practical question is how far before the drop exceeds 3%: roughly 46 one-way feet at a full 20 A and 120 V for 12/2 copper."}},{"@type":"Question","name":"What happens if a wire run is too long?","acceptedAnswer":{"@type":"Answer","text":"The circuit still works but delivers lower voltage at the far end: motors start hard and overheat, LEDs flicker, chargers and heaters underperform, and energy is wasted as heat in the wire. Fix it with thicker wire, a shorter route, or a higher voltage."}}]}</script>
+
+</main>
