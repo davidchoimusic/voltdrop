@@ -82,6 +82,7 @@ if (_toolsBtn && _mobileTools) {
    note when the CA edition is active. Injected (not baked into HTML) so
    it always follows the current country choice. */
 function vdCaNote() {
+  if (location.pathname.startsWith('/ca/')) return; // Canadian pages cite the CEC natively
   const target = document.querySelector('main.guide .tool-intro, #amp-form, #bf-form, #fill-form, main.guide');
   const existing = document.getElementById('ca-note');
   const isCA = window.VDCountry && VDCountry.get() === 'ca';

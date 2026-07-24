@@ -99,6 +99,7 @@ const PAGES = [
   {
     dir: 'guides/sub-panel-wire-size',
     tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/sub-panel-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/sub-panel-wire-size/'}],
     script: null,
     main: 'partials/guide-subpanel-main.html',
     title: 'Wire Size for a Sub-Panel (Shed or Detached Garage) — with distance tables | VoltDrop',
@@ -107,6 +108,7 @@ const PAGES = [
   {
     dir: 'guides/50-amp-wire-size',
     tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
     script: null,
     main: 'partials/guide-50amp-main.html',
     title: 'What Size Wire for 50 Amps? Breaker, hot tub, EV, RV | VoltDrop',
@@ -115,6 +117,7 @@ const PAGES = [
   {
     dir: 'guides/wire-ampacity-chart',
     tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/wire-ampacity-chart/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/wire-ampacity-chart/'}],
     script: null,
     main: 'partials/guide-ampacity-main.html',
     title: 'Wire Ampacity Chart — NEC Table 310.16, current code | VoltDrop',
@@ -123,6 +126,7 @@ const PAGES = [
   {
     dir: 'guides/how-far-12-gauge-wire',
     tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/how-far-12-gauge-wire/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/how-far-12-gauge-wire/'}],
     script: null,
     main: 'partials/guide-12gauge-main.html',
     title: 'How Far Can You Run 12 Gauge Wire? Distance limits by gauge | VoltDrop',
@@ -131,10 +135,64 @@ const PAGES = [
   {
     dir: 'guides/voltage-drop-formula',
     tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/voltage-drop-formula/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/voltage-drop-formula/'}],
     script: null,
     main: 'partials/guide-vdformula-main.html',
     title: 'Voltage Drop Formula & the 3% Rule, Explained | VoltDrop',
     description: 'The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.',
+  },
+  {
+    dir: 'ca/guides',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guides-index-main.html',
+    title: 'Canadian Electrical Guides — CEC, verified | VoltDrop',
+    description: 'Plain-English Canadian wiring guides written to the CEC: sub-panel wire size, 50 amp circuits, ampacity tables, run-length limits, and the mandatory Rule 8-102 voltage-drop rules.',
+  },
+  {
+    dir: 'ca/guides/sub-panel-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-subpanel-main.html',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/sub-panel-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/sub-panel-wire-size/'}],
+    title: 'Wire Size for a Sub-Panel in Canada (Shed or Garage) — CEC Rule 8-102 | VoltDrop',
+    description: "What size wire for a 50, 60 or 100 amp sub-panel in Canada: metric+imperial distance tables under the CEC's mandatory 3% voltage-drop limit, NMD90/aluminum notes, worked examples.",
+  },
+  {
+    dir: 'ca/guides/50-amp-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-50amp-main.html',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
+    title: 'What Size Wire for 50 Amps in Canada? NMD90, hot tub, EV | VoltDrop',
+    description: 'The Canadian 50-amp answer: #6 NMD90 vs #8 T90 in conduit under CEC termination rules, with a verified distance table and hot tub / EV / RV framings.',
+  },
+  {
+    dir: 'ca/guides/wire-ampacity-chart',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-ampacity-main.html',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/wire-ampacity-chart/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/wire-ampacity-chart/'}],
+    title: 'Wire Ampacity Chart Canada — CEC Table 2 & Table 4 | VoltDrop',
+    description: 'Canadian copper and aluminum ampacity chart (CEC Tables 2 and 4, harmonized with US values — verified), plus the NMD90 termination-temperature rules in plain English.',
+  },
+  {
+    dir: 'ca/guides/how-far-12-gauge-wire',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-12gauge-main.html',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/how-far-12-gauge-wire/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/how-far-12-gauge-wire/'}],
+    title: 'How Far Can You Run 12 Gauge Wire in Canada? (metres + feet) | VoltDrop',
+    description: "Distance limits by gauge in metres and feet under the CEC's mandatory 3% limit — plus Canada's official answer to the breaker-vs-actual-load question and Table 68.",
+  },
+  {
+    dir: 'ca/guides/voltage-drop-formula',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-vdformula-main.html',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/voltage-drop-formula/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/voltage-drop-formula/'}],
+    title: 'Voltage Drop in Canada — Rule 8-102 Explained | VoltDrop',
+    description: 'CEC Rule 8-102 in plain English: the mandatory 3%/3%/5% limits, the 80%-of-breaker calculation basis, Table 68 dwelling lengths, the formula, and worked examples.',
   },
   {
     dir: 'terms',
@@ -154,7 +212,8 @@ for (const p of PAGES) {
     .replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${p.description}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${p.description}$2`)
-    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://voltdrop.app/${p.dir}/">`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://voltdrop.app/${p.dir}/">` +
+      (p.hreflang ? '\n' + p.hreflang.map(h => `<link rel="alternate" hreflang="${h.lang}" href="${h.href}">`).join('\n') : ''))
     .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1https://voltdrop.app/${p.dir}/$2`);
 
   if (p.mode) {

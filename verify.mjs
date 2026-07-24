@@ -213,7 +213,7 @@ console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits'
 await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
 
 // ---- Guides: every page loads, has an h1, highlights Guides in sidebar
-for (const g of ['guides/', 'guides/sub-panel-wire-size/', 'guides/50-amp-wire-size/', 'guides/wire-ampacity-chart/', 'guides/how-far-12-gauge-wire/', 'guides/voltage-drop-formula/']) {
+for (const g of ['guides/', 'guides/sub-panel-wire-size/', 'guides/50-amp-wire-size/', 'guides/wire-ampacity-chart/', 'guides/how-far-12-gauge-wire/', 'guides/voltage-drop-formula/', 'ca/guides/', 'ca/guides/sub-panel-wire-size/', 'ca/guides/50-amp-wire-size/', 'ca/guides/wire-ampacity-chart/', 'ca/guides/how-far-12-gauge-wire/', 'ca/guides/voltage-drop-formula/']) {
   await page.goto(BASE + g);
   const h1 = await page.textContent('h1').catch(() => null);
   const active = await page.textContent('.sidebar .tool-link.active').catch(() => '');

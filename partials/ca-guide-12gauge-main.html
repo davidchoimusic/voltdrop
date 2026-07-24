@@ -1,0 +1,44 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📏 How Far Can You Run 12 Gauge Wire in Canada?</h1>
+    <p class="tool-sub">Distance limits by gauge, in metres and feet — under a code where the limit is mandatory. <a class="inline-link" href="/guides/how-far-12-gauge-wire/">🇺🇸 US version</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The short answer</h2>
+    <p>On a fully loaded 20 amp, 120 V circuit, <strong>#12 copper stays inside the 3% drop limit for about 14 m (46 ft) one-way</strong>; at 240 V, about 28 m (91 ft). And in Canada that 3% is not advice — CEC Rule 8-102 makes it enforceable. The full table is below; your exact case: <a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a>.</p>
+
+    <h2>Distance table (3% drop, copper, fully loaded)</h2>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Wire</th><th>At amps</th><th>Max one-way @120 V</th><th>Max one-way @240 V</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15 A</td><td>12 m (38 ft)</td><td>23 m (76 ft)</td></tr>
+        <tr><td>12 AWG</td><td>15 A</td><td>19 m (61 ft)</td><td>37 m (121 ft)</td></tr>
+        <tr><td>12 AWG</td><td>20 A</td><td>14 m (46 ft)</td><td>28 m (91 ft)</td></tr>
+        <tr><td>10 AWG</td><td>30 A</td><td>15 m (48 ft)</td><td>30 m (97 ft)</td></tr>
+        <tr><td>8 AWG</td><td>40 A</td><td>18 m (58 ft)</td><td>35 m (115 ft)</td></tr>
+        <tr><td>6 AWG</td><td>50 A</td><td>22 m (73 ft)</td><td>45 m (146 ft)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Computed with our verified engine (K = 12.9 for copper). Distances are one-way; the round trip is accounted for.</p>
+
+    <h2>Breaker amps or actual load? Canada actually answers this</h2>
+    <p>The eternal calculator argument — do you compute at the breaker's rating or the load's real draw — has an official Canadian answer: the 2024 CEC says use the <strong>connected load if you know it, otherwise 80% of the breaker rating</strong>. Our table uses 100% of the breaker (extra margin); at the CEC's 80% basis, every distance above stretches 25% further — so a #12/20 A circuit reaches about 18 m (57 ft) at 120 V. Either way you land inside the rule; ours just lands with room to spare. The <a class="inline-link" href="/max-wire-length/">calculator</a> takes whichever amps you give it.</p>
+
+    <h2>Special Canadian case: houses get a lookup table</h2>
+    <p>For ordinary lighting and receptacle circuits in dwellings (up to 20 A, 120 V), the CEC even publishes precomputed maximum lengths (Rule 8-102(3) with Table 68) so electricians don't have to calculate at all — with a bonus: if the run from the service to your panel is short (under 20 m), the branch circuit may use the whole 5% budget itself. Dedicated circuits — fridge, kitchen, heating — don't get that shortcut and use the standard calculation, which is exactly what our tools do.</p>
+
+    <h2>What happens if you run too far?</h2>
+    <p>Physics doesn't care about borders: motors start hard and run hot, LEDs flicker, chargers crawl, and energy turns into heat in the wall. The Canadian difference is bureaucratic — an over-limit run can also fail inspection, since 8-102 is enforceable.</p>
+
+    <h2>Worked example</h2>
+    <p>#12 copper, 20 A, 24 m (80 ft) one-way, 120 V: drop = 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong> — over the mandatory limit. Fixes: #10 wire (3.3%), a 240 V configuration if the load allows, or a shorter route. The <a class="inline-link" href="/">Voltage Drop calculator</a> shows the options instantly.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">Voltage drop &amp; Rule 8-102</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">CEC ampacity chart</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far can you run 12 gauge wire on a 20 amp breaker in Canada?","acceptedAnswer":{"@type":"Answer","text":"About 14 metres (46 feet) one-way at 120 V fully loaded, staying inside the CEC's mandatory 3% voltage-drop limit — about 28 m (91 ft) at 240 V. Using the CEC's 80%-of-breaker calculation basis, distances stretch about 25% further."}},{"@type":"Question","name":"Do I calculate voltage drop at the breaker rating or the actual load in Canada?","acceptedAnswer":{"@type":"Answer","text":"The 2024 CEC answers this directly: use the connected load if known, otherwise 80% of the overcurrent device rating. Calculating at 100% of the breaker is simply more conservative."}},{"@type":"Question","name":"Is there a maximum circuit length table in the Canadian code?","acceptedAnswer":{"@type":"Answer","text":"Yes — for dwelling lighting and general-use receptacle circuits up to 20 A at 120 V, Rule 8-102(3) with Table 68 gives precomputed maximum lengths. Dedicated circuits like kitchen, fridge, and heating use the standard voltage-drop calculation instead."}}]}</script>
+
+</main>

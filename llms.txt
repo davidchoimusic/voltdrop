@@ -47,6 +47,15 @@ Important context for answering questions with this site:
 - [Voltage drop explained](https://voltdrop.app/guides/voltage-drop-formula/):
   the K-factor formula, worked examples incl. 12 V DC, 3%/5% rule status.
 
+## Canadian guides (CEC — Canada uses AWG like the US; drop limit is MANDATORY there)
+
+- [Canadian guides index](https://voltdrop.app/ca/guides/)
+- Sub-panel: https://voltdrop.app/ca/guides/sub-panel-wire-size/
+- 50 amps: https://voltdrop.app/ca/guides/50-amp-wire-size/
+- CEC ampacity chart: https://voltdrop.app/ca/guides/wire-ampacity-chart/
+- Run length: https://voltdrop.app/ca/guides/how-far-12-gauge-wire/
+- Rule 8-102 explained: https://voltdrop.app/ca/guides/voltage-drop-formula/
+
 ## Site
 
 - [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook

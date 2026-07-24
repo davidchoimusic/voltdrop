@@ -1,0 +1,35 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ Voltage Drop in Canada: Rule 8-102, Explained</h1>
+    <p class="tool-sub">The formula, worked examples — and the big Canadian difference: here, the limit is the law. <a class="inline-link" href="/guides/voltage-drop-formula/">🇺🇸 US version</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>The Canadian difference, up front</h2>
+    <p>In the US, the famous 3%/5% voltage-drop figures are an official <em>recommendation</em>. In Canada they are <strong>CEC Rule 8-102 — an enforceable "shall"</strong>: maximum 3% on a branch circuit, 3% on the feeder (including the consumer's service), and 5% combined from the service to the farthest point. An inspector can fail an over-limit run. If you remember one cross-border fact about voltage drop, make it this one.</p>
+
+    <h2>The formula</h2>
+    <p>For DC and single-phase AC: <strong>voltage drop = 2 × K × amps × one-way feet ÷ circular mils</strong> (three-phase uses √3 instead of 2). K is the material constant — 12.9 for copper, 21.2 for aluminum. Circular mils is the wire's cross-section (#12 = 6,530; #6 = 26,240). Measure distance <strong>one way</strong>; the 2 handles the round trip. The CEC's own reference method (Appendix D, Table D3) is published in metric, but it's the same physics — same answers, different units.</p>
+
+    <h2>What amps do you plug in? Canada has an official answer</h2>
+    <p>Use the <strong>connected load if you know it; otherwise 80% of the breaker rating</strong> (2024 CEC). This settles the argument that splits every calculator forum. Computing at 100% of the breaker — as our conservative tables do — is always acceptable and leaves margin.</p>
+
+    <h2>Three worked examples</h2>
+    <p><strong>1. Garage receptacle:</strong> #12 copper, 20 A, 24 m (80 ft), 120 V → 6.3 V = <strong>5.3%</strong>. Over the mandatory limit — upsize to #10 (3.3%) or shorten the run.</p>
+    <p><strong>2. Hot tub feeder:</strong> #6 copper, 40 A load, 46 m (150 ft), 240 V → 5.9 V = <strong>2.5%</strong>. Passes 8-102 with room.</p>
+    <p><strong>3. 12-volt trolling motor (DC):</strong> #14 copper, 8 A, 4.6 m (15 ft), 12 V → 0.75 V = <strong>6.3%</strong>. Same formula, brutal percentage — low-voltage wiring on boats, trailers, and solar runs far fatter than its amps suggest. Our <a class="inline-link" href="/">calculator</a>'s DC mode exists for exactly this.</p>
+
+    <h2>The dwelling shortcut: Table 68</h2>
+    <p>For ordinary 120 V lighting and receptacle circuits up to 20 A in homes, the CEC provides precomputed maximum lengths (Rule 8-102(3), Table 68) — and where the service-to-panel run is under 20 m, the branch circuit may consume the full 5% by itself. Dedicated circuits (kitchen, fridge, heating) are excluded from the shortcut and use the standard calculation.</p>
+
+    <h2>How to fix excessive voltage drop</h2>
+    <p>In order of usual practicality: <strong>go up a wire size</strong> (each AWG step cuts drop ~21%), <strong>use 240 V instead of 120 V</strong> where the load allows (half the amps, double the tolerable volts — a 4× improvement), <strong>shorten the route</strong>, or for very long rural runs, <strong>step up with a transformer</strong>. Canadian commercial sites have an extra lever Americans lack: the 347/600 V system, where the same watts produce far less percentage drop.</p>
+
+    <h2>Related</h2>
+    <p><a class="inline-link" href="/">Voltage Drop calculator</a> · <a class="inline-link" href="/max-wire-length/">Max Wire Length</a> · <a class="inline-link" href="/ca/guides/sub-panel-wire-size/">Canadian sub-panel guide</a> · <a class="inline-link" href="/ca/guides/how-far-12-gauge-wire/">How far can you run each gauge in Canada?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the 3% voltage drop rule mandatory in Canada?","acceptedAnswer":{"@type":"Answer","text":"Yes. CEC Rule 8-102 is enforceable code: maximum 3% on a branch circuit, 3% on the feeder, 5% combined. This differs from the US, where the same figures are only an informational recommendation."}},{"@type":"Question","name":"What load do I use to calculate voltage drop under the CEC?","acceptedAnswer":{"@type":"Answer","text":"The 2024 CEC specifies the connected load if known, otherwise 80% of the overcurrent device rating. Calculating at the full breaker rating is a conservative, always-acceptable choice."}},{"@type":"Question","name":"Does the CEC use a different voltage drop formula than the NEC?","acceptedAnswer":{"@type":"Answer","text":"Same physics. The CEC's reference method (Appendix D, Table D3) is published in metric units, but it produces the same answers as the standard K-factor formula used in the field on both sides of the border."}},{"@type":"Question","name":"What is CEC Table 68?","acceptedAnswer":{"@type":"Answer","text":"A lookup table of precomputed maximum circuit lengths for dwelling lighting and general-use receptacle circuits up to 20 A at 120 V, provided by Rule 8-102(3) so routine residential circuits don't need a manual calculation. Dedicated circuits are excluded and use the standard method."}}]}</script>
+
+</main>
