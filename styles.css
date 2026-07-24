@@ -146,11 +146,11 @@ input, select, .big-number, .result-cell .v {
     flex-basis: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 30px;
     line-height: 1;
     margin: var(--space-4) 0 var(--space-1);
   }
-  .site-header .brand-logo { width: 28px; height: 28px; }
+  .site-header .brand-logo { width: 34px; height: 34px; }
   .tagline { text-align: center; }
   /* keep content clear of the hazard stripe */
   .main-col > :first-child { margin-top: var(--space-5); }
