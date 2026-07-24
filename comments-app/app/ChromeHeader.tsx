@@ -35,7 +35,7 @@ export default function ChromeHeader() {
             )}
           </nav>
         )}
-        <p className="tagline">Feedback</p>
+        <p className="tagline">Feedback from the field — what's working, what's confusing, what we should build next.</p>
       </div>
     </header>
   )
