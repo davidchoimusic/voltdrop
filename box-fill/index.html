@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Box Fill Calculator — is my electrical box big enough? | VoltDrop</title>
+<meta name="description" content="Free NEC 314.16 box fill calculator: count wires, devices, grounds and clamps, get a clear fits/too-full verdict with the cubic-inch math shown. No signup.">
+<link rel="canonical" href="https://voltdrop.app/box-fill/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Box Fill Calculator — is my electrical box big enough? | VoltDrop">
+<meta property="og:description" content="Free NEC 314.16 box fill calculator: count wires, devices, grounds and clamps, get a clear fits/too-full verdict with the cubic-inch math shown. No signup.">
+<meta property="og:url" content="https://voltdrop.app/box-fill/">
+<meta property="og:image" content="https://voltdrop.app/img/og.png">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/styles.css?v=345ac53c30">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop</span>
+      </a>
+      <a class="header-feedback" href="/comments">Feedback</a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link active" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <hr class="tool-sep">
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📦 Box Fill</h1>
+    <p class="tool-sub">Is your junction or device box big enough? Count what's in it, get a clear fits / doesn't-fit answer.</p>
+  </div>
+
+  <form id="bf-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label" for="bf-box">Box</label>
+      <select id="bf-box"></select>
+      <div class="input-unit" id="bf-custom-wrap" hidden>
+        <input type="number" id="bf-custom" inputmode="decimal" min="1" step="any" placeholder="e.g. 18">
+        <span class="unit">cu in</span>
+      </div>
+      <p class="hint">Plastic boxes have their volume stamped inside (e.g. "18.0 CU IN") — pick Custom and type it. Metal box sizes use the standard code volumes.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-size">Wire size in the box</label>
+      <select id="bf-size"></select>
+      <p class="hint">Most homes: 14 AWG (15 A circuits) or 12 AWG (20 A circuits). Mixed sizes coming — for now pick the size you have most of (or the largest, to be safe).</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-conductors">Insulated wires entering the box</label>
+      <div class="input-unit">
+        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
+        <span class="unit">wires</span>
+      </div>
+      <p class="hint">Count every hot and neutral that enters the box — including any that pass straight through unbroken (those count too). Don't count ground wires here (next question), and don't count pigtails that start and end inside the box.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-devices">Devices in the box</label>
+      <div class="input-unit">
+        <input type="number" id="bf-devices" inputmode="numeric" min="0" max="10" step="1" value="0">
+        <span class="unit">devices</span>
+      </div>
+      <p class="hint">Switches, receptacles/outlets, dimmers. Each one counts as two wires' worth of space.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Any ground wires in the box?</label>
+      <div class="seg" role="group" aria-label="Ground wires">
+        <button type="button" class="seg-btn active" data-grounds="1">Yes</button>
+        <button type="button" class="seg-btn" data-grounds="0">No</button>
+      </div>
+      <p class="hint">All the grounds together count as one wire's worth of space (that's the code rule — not one each).</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Internal cable clamps?</label>
+      <div class="seg" role="group" aria-label="Cable clamps">
+        <button type="button" class="seg-btn" data-clamps="1">Yes</button>
+        <button type="button" class="seg-btn active" data-clamps="0">No</button>
+      </div>
+      <p class="hint">Clamps built inside the box (common in metal boxes) count as one wire's worth. Connectors that stay outside the box don't count.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Check box fill</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <section class="card explainer">
+    <h2>Why box fill matters</h2>
+    <p>Cram too many wires into a box and connections get stressed, insulation gets nicked, and heat builds up — a classic cause of failed inspections and flickering circuits. The U.S. electrical code (NEC 314.16) assigns every wire a space allowance based on its size, and the box must have at least that much room.</p>
+    <h2>The counting rules, in plain English</h2>
+    <p>Each hot or neutral entering the box = 1 count — including wires that pass straight through unbroken (those count once too). Each device (switch/outlet) = 2 counts. All ground wires together = 1 count (with more than four grounds, each extra adds a ¼ count under the 2020 rules). Built-in cable clamps = 1 count. Pigtails that live entirely inside the box are free. Multiply the counts by your wire size's space allowance and compare to the box volume — we do exactly that, and show the math.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <p><strong>VoltDrop</strong> · voltdrop.app · Free forever, no signup. · <a class="inline-link" href="/comments">💬 Leave feedback</a> · <a class="inline-link" href="/privacy/">Privacy</a> · <a class="inline-link" href="/terms/">Terms</a></p>
+    <p class="fine">Estimates use standard DC resistance for stranded wire at 75°C (K = 12.9 for copper, 21.2 for aluminum, ohm·cmil/ft). Real-world results vary with temperature, conduit fill, and power factor. This is a planning aid, not a substitute for a licensed electrician or your local electrical code. Always follow ampacity (current-carrying) limits — a wire can pass the voltage-drop check and still be too small to carry the current safely.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=70fed056d1"></script>
+<script src="/boxfill.js?v=36cb710634"></script>
+</body>
+</html>

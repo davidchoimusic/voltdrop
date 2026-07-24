@@ -13,6 +13,8 @@ const V = {
   'common.js': hash('common.js'),
   'ampacity.js': hash('ampacity.js'),
   'conduit.js': hash('conduit.js'),
+  'power.js': hash('power.js'),
+  'boxfill.js': hash('boxfill.js'),
 };
 const stamp = (html) => html
   .replace(/\/styles\.css\?v=[A-Za-z0-9]+/g, `/styles.css?v=${V['styles.css']}`)
@@ -59,6 +61,22 @@ const PAGES = [
     main: 'partials/privacy-main.html',
     title: 'Privacy Policy | VoltDrop',
     description: 'VoltDrop privacy policy: calculator inputs never leave your browser; optional sign-in data for comments only; no data sales; deletion on request.',
+  },
+  {
+    dir: 'power-calculator',
+    tool: 'power',
+    script: 'power.js',
+    main: 'partials/power-main.html',
+    title: 'Power Calculator — volts, amps, watts, kW & kVA | VoltDrop',
+    description: 'Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup.',
+  },
+  {
+    dir: 'box-fill',
+    tool: 'boxfill',
+    script: 'boxfill.js',
+    main: 'partials/boxfill-main.html',
+    title: 'Box Fill Calculator — is my electrical box big enough? | VoltDrop',
+    description: 'Free NEC 314.16 box fill calculator: count wires, devices, grounds and clamps, get a clear fits/too-full verdict with the cubic-inch math shown. No signup.',
   },
   {
     dir: 'terms',

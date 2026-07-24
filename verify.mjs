@@ -139,6 +139,43 @@ let fillCells = await page.textContent('#result-grid');
 console.log(fillCells.includes('25.0%') ? 'PASS fill % = 25.0%' : `FAIL fill %: "${fillCells.slice(0, 120)}"`); fillCells.includes('25.0%') ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/8-conduit.png`, fullPage: true });
 
+// ---- Power Calculator: 1φ 240V 1500W PF1 → 6.25 A; 3φ 480V 10000W PF0.85 → 14.15 A
+await page.goto(BASE + 'power-calculator/');
+await page.click('[data-system="ac1"]');
+await page.fill('#pw-volts', '240');
+await page.fill('#pw-watts', '1500');
+await page.click('#pw-form .calc-btn');
+await page.waitForSelector('#results:not([hidden])');
+let pwBig = await page.textContent('#big-number');
+check('power amps (240V 1500W 1φ)', parseFloat(pwBig), 6.25);
+await page.click('[data-system="ac3"]');
+await page.fill('#pw-volts', '480');
+await page.fill('#pw-watts', '10000');
+await page.fill('#pw-pf', '0.85');
+await page.click('#pw-form .calc-btn');
+pwBig = await page.textContent('#big-number');
+check('power amps (480V 10kW 3φ PF0.85)', parseFloat(pwBig), 14.15);
+await page.screenshot({ path: `${shots}/13-power.png`, fullPage: true });
+
+// ---- Box Fill: 18 cu in box, 12 AWG, 6 wires + 1 device + grounds = 9 × 2.25 = 20.25 → TOO FULL
+await page.goto(BASE + 'box-fill/');
+await page.fill('#bf-conductors', '6');
+await page.fill('#bf-devices', '1');
+await page.click('#bf-form .calc-btn');
+await page.waitForSelector('#results:not([hidden])');
+let bfBig = await page.textContent('#big-number');
+check('box fill needed cu in (6w+1d+gnd 12AWG)', parseFloat(bfBig.replace(/,/g, '')), 20.25);
+cls = await page.getAttribute('#verdict', 'class');
+console.log(cls.includes('bad') ? 'PASS box fill verdict TOO FULL' : `FAIL box verdict: ${cls}`); cls.includes('bad') ? pass++ : fail++;
+// Same box with 14 AWG → 9 × 2.0 = 18.0 exactly → fits (tight)
+await page.selectOption('#bf-size', '14 AWG');
+await page.click('#bf-form .calc-btn');
+bfBig = await page.textContent('#big-number');
+check('box fill 14 AWG exact fit', parseFloat(bfBig.replace(/,/g, '')), 18.0);
+cls = await page.getAttribute('#verdict', 'class');
+console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits' : `FAIL fit verdict: ${cls}`); (cls.includes('warn') || cls.includes('good')) ? pass++ : fail++;
+await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
+
 // ---- Logo present and loading on every page
 for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
   await page.goto(BASE + path);

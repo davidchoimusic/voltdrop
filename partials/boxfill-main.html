@@ -1,0 +1,88 @@
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📦 Box Fill</h1>
+    <p class="tool-sub">Is your junction or device box big enough? Count what's in it, get a clear fits / doesn't-fit answer.</p>
+  </div>
+
+  <form id="bf-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label" for="bf-box">Box</label>
+      <select id="bf-box"></select>
+      <div class="input-unit" id="bf-custom-wrap" hidden>
+        <input type="number" id="bf-custom" inputmode="decimal" min="1" step="any" placeholder="e.g. 18">
+        <span class="unit">cu in</span>
+      </div>
+      <p class="hint">Plastic boxes have their volume stamped inside (e.g. "18.0 CU IN") — pick Custom and type it. Metal box sizes use the standard code volumes.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-size">Wire size in the box</label>
+      <select id="bf-size"></select>
+      <p class="hint">Most homes: 14 AWG (15 A circuits) or 12 AWG (20 A circuits). Mixed sizes coming — for now pick the size you have most of (or the largest, to be safe).</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-conductors">Insulated wires entering the box</label>
+      <div class="input-unit">
+        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
+        <span class="unit">wires</span>
+      </div>
+      <p class="hint">Count every hot and neutral that enters the box — including any that pass straight through unbroken (those count too). Don't count ground wires here (next question), and don't count pigtails that start and end inside the box.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-devices">Devices in the box</label>
+      <div class="input-unit">
+        <input type="number" id="bf-devices" inputmode="numeric" min="0" max="10" step="1" value="0">
+        <span class="unit">devices</span>
+      </div>
+      <p class="hint">Switches, receptacles/outlets, dimmers. Each one counts as two wires' worth of space.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Any ground wires in the box?</label>
+      <div class="seg" role="group" aria-label="Ground wires">
+        <button type="button" class="seg-btn active" data-grounds="1">Yes</button>
+        <button type="button" class="seg-btn" data-grounds="0">No</button>
+      </div>
+      <p class="hint">All the grounds together count as one wire's worth of space (that's the code rule — not one each).</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Internal cable clamps?</label>
+      <div class="seg" role="group" aria-label="Cable clamps">
+        <button type="button" class="seg-btn" data-clamps="1">Yes</button>
+        <button type="button" class="seg-btn active" data-clamps="0">No</button>
+      </div>
+      <p class="hint">Clamps built inside the box (common in metal boxes) count as one wire's worth. Connectors that stay outside the box don't count.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Check box fill</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <section class="card explainer">
+    <h2>Why box fill matters</h2>
+    <p>Cram too many wires into a box and connections get stressed, insulation gets nicked, and heat builds up — a classic cause of failed inspections and flickering circuits. The U.S. electrical code (NEC 314.16) assigns every wire a space allowance based on its size, and the box must have at least that much room.</p>
+    <h2>The counting rules, in plain English</h2>
+    <p>Each hot or neutral entering the box = 1 count — including wires that pass straight through unbroken (those count once too). Each device (switch/outlet) = 2 counts. All ground wires together = 1 count (with more than four grounds, each extra adds a ¼ count under the 2020 rules). Built-in cable clamps = 1 count. Pigtails that live entirely inside the box are free. Multiply the counts by your wire size's space allowance and compare to the box volume — we do exactly that, and show the math.</p>
+  </section>
+
+</main>
