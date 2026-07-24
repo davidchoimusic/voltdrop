@@ -20,6 +20,7 @@ const DATA_TABLES = [
   ['ampacity.js', 'AMPACITY'], ['ampacity.js', 'SMALL_CAP'],
   ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
   ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
+  ['boxfill.js', 'CEC_VOL_ML'],
 ];
 const GOLDEN = JSON.parse(readFileSync('data-golden.json', 'utf8'));
 let dataPass = 0, dataFail = 0;

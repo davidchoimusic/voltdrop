@@ -12,7 +12,7 @@ verification gate before shipping in any tool or guide.
    14 AWG–4/0 against Canadian sources (electdesign.ca, celtex.ca; IAEI
    confirms harmonization). Termination rule (CEC 4-006) ≈ NEC 110.14(C).
    Small-conductor caps (CEC 14-104(2)) = same 15/20/30 A for Cu 14/12/10.
-   CONFIDENCE: HIGH. (Al small-conductor caps: UNCERTAIN — verify before use.)
+   CONFIDENCE: HIGH. (Al small-conductor caps: CONFIRMED 2026-07-25 — #12 Al 15 A, #10 Al 25 A; IAEI + verbatim forum quote of 14-104(2).)
 2. **Voltage drop: THE marquee difference.** CEC Rule 8-102 is a "shall" —
    MANDATORY and enforceable, unlike the NEC's informational note. Same
    numbers (3% branch / 3% feeder / 5% total), different legal force. 2024
@@ -25,7 +25,10 @@ verification gate before shipping in any tool or guide.
    nipples ≤600 mm). BUT conductor areas come from CEC Tables 6A–6K in mm²
    with metric trade sizes (16/21/27/35 mm). Do NOT assume RW90 areas = THHN
    areas (RW90 is XLPE = RHW-2/XHHW-2 analog, thicker). T90 Nylon = THHN
-   (often dual-marked). CONFIDENCE: percentages HIGH; area equivalence UNCERTAIN.
+   (often dual-marked). CONFIDENCE: percentages HIGH; areas BLOCKED — second research pass proved
+   CEC Table 9 ≠ NEC areas (trade-16 EMT 72.51 mm² vs NEC ½" 78.4 mm²) and
+   public sources can't supply full 6A/6K/9 tables. Shipping a CA conduit
+   mode requires purchasing CSA C22.1 access. Until then: honesty note.
 4. **Box fill: a REAL fork — do not reuse NEC numbers.** CEC Table 22 is in
    millilitres and one NEC "step" smaller across the board: 14 AWG = 24.6 mL
    (≈1.5 in³ vs NEC 2.0), 12 = 28.7 (≈1.75 vs 2.25), 10 = 36.9 (≈2.25 vs 2.5),
@@ -34,8 +37,13 @@ verification gate before shipping in any tool or guide.
    conductor entering — NEC counts wire nuts as free); deep devices deduct
    32 cm³ × cm of depth (no NEC analog). Bond-wire counting and clamp
    allowances: UNCERTAIN — read 12-3034 text at the verification gate.
-   CONFIDENCE: Table 22 values MEDIUM-HIGH (single numeric source, internally
-   consistent conversions) — needs second source at gate.
+   GATE PASSED 2026-07-25: Table 22 values CONFIRMED (Alberta STANDATA
+   21/24-ECI-012 verbatim rule text + T&B Iberville catalog). Verbatim rule
+   findings: bare bonds NEVER counted, NO NEC-style all-grounds allowance
+   (offsetnotes' calculator wrongly imports it — we don't), clamps get NO
+   allowance (12-3034(5) verbatim), marrettes = 1 allowance per PAIR (2(b)),
+   deep devices deduct 32 cm³/cm. SHIPPED: box fill CA mode live, table
+   sealed as boxfill.js:CEC_VOL_ML.
 5. **Voltages: add 347 V and 600 V** (Canadian commercial standard 347/600 wye
    vs US 277/480; 575 V motors). Residential 120/240 identical. Already
    partially reflected in CA presets (347/600 present). CONFIDENCE: HIGH.
