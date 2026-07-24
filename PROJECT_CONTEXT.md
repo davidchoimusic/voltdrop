@@ -53,9 +53,18 @@ Day-one MVP built and verified. Pure static site — 3 files, no framework, no b
 Done: one-way distance w/ plain-English explainer · DC + AC 1φ/3φ · Cu/Al · AWG 18→500 kcmil ·
 3 result modes · volts/%/end-voltage + green-yellow-red vs 3%/5% · "How we calculated this" ·
 mobile-first, no signup.
-Next up: split-phase/residential-240 helper · mm² for non-US · share link + print ·
-simple ampacity check (separate card). Don't rush: motor starting, landscape daisy-chains,
-any "NEC certified" claims (never claim that).
+**Tool roadmap (agreed with David 2026-07-24, from Codex brainstorm + my triage):**
+DONE: voltage drop (3 modes) · ampacity check · conduit fill · box fill · power calculator.
+NEXT (in order): ampacity DERATING upgrade (ambient-temp + conductor-count correction
+factor tables added to /ampacity-check/) → Ground Wire Size (Tables 250.122 + 250.66 —
+label clearly WHICH ground conductor is being sized) → then pause and read Feedback before
+the big one: Load Calculator (NEC Article 220 — complex, wrong-answer-prone, needs its own
+verification pass; also the point where an NEC-edition selector becomes real, since our
+current tables are edition-stable but Art. 220 rules aren't). Later/pro tier: motor calc,
+transformer calc, fault current/AIC, EV charger, panel balancer, pulling tension, bend calc.
+Also still open: split-phase/240 helper · mm² for non-US · share link + print.
+Don't rush: multi-fixture landscape daisy-chains (powerful niche later) · any
+"NEC certified" claims (never claim that).
 
 ## Math (so nobody re-derives it wrong)
 K-factor method: `Vd = mult × K × I × L_oneway / CM`. mult = 2 (DC & single-phase round trip),
