@@ -98,8 +98,18 @@ await page.screenshot({ path: `${shots}/6-canada.png`, fullPage: true });
 // back to US for the desktop shot
 await page.click('[data-country="us"]');
 
-// Desktop screenshot too
+// ---- Per-tool pages (own URLs) preselect the right mode + sidebar highlight
 await page.setViewportSize({ width: 1280, height: 900 });
+await page.goto(BASE + 'wire-size-calculator/');
+let activeTab = await page.textContent('.mode-tab.active .mode-title');
+console.log(activeTab.includes('Wire size') ? 'PASS /wire-size-calculator/ preselects Wire size' : `FAIL preselect: "${activeTab}"`); activeTab.includes('Wire size') ? pass++ : fail++;
+let activeTool = await page.textContent('.tool-link.active');
+console.log(activeTool.includes('Wire Size') ? 'PASS sidebar highlights Wire Size' : `FAIL sidebar: "${activeTool}"`); activeTool.includes('Wire Size') ? pass++ : fail++;
+await page.goto(BASE + 'max-wire-length/');
+activeTab = await page.textContent('.mode-tab.active .mode-title');
+console.log(activeTab.includes('Max distance') ? 'PASS /max-wire-length/ preselects Max distance' : `FAIL preselect: "${activeTab}"`); activeTab.includes('Max distance') ? pass++ : fail++;
+
+// Desktop screenshot too
 await page.goto(BASE);
 await page.screenshot({ path: `${shots}/5-desktop.png`, fullPage: true });
 

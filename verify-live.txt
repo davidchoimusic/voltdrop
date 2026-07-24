@@ -1,0 +1,13 @@
+PASS drop % (12V 20A 25ft 12AWG Cu): got 16.46, expected ~16.46
+PASS verdict red
+PASS drop % (120V 15A 50ft 12AWG Cu): got 2.47, expected ~2.47
+PASS verdict green
+PASS drop % (3ph 480V 100A 300ft 1/0 Al): got 2.17, expected ~2.17
+PASS min size = 6 AWG
+PASS max length ft (12V 10A 10AWG 3%): got 14, expected ~14.48
+PASS chip shows Canada
+PASS Canada remembered after reload
+PASS explainer cites CEC
+PASS CA 3-phase presets include 600 V
+
+11 passed, 0 failed, JS errors: 0

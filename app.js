@@ -169,18 +169,22 @@ $('country-chip').addEventListener('click', () => {
 
 applyCountry();
 
-// ---- mode tabs ----
-document.querySelectorAll('.mode-tab').forEach((tab) => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.mode-tab').forEach((t) => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-    });
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected', 'true');
-    mode = tab.dataset.mode;
-    applyMode();
+// ---- mode tabs & sidebar tool links ----
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-tab').forEach((t) => {
+    const on = t.dataset.mode === m;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
   });
+  document.querySelectorAll('.tool-link[data-tool]').forEach((l) => {
+    l.classList.toggle('active', l.dataset.tool === m);
+  });
+  applyMode();
+}
+
+document.querySelectorAll('.mode-tab').forEach((tab) => {
+  tab.addEventListener('click', () => setMode(tab.dataset.mode));
 });
 
 function applyMode() {
@@ -195,7 +199,9 @@ function applyMode() {
     length: 'Find max distance',
   }[mode];
 }
-applyMode();
+
+// Each tool page (built by build.mjs) stamps its mode on <body data-mode>.
+setMode(document.body.dataset.mode || 'drop');
 
 // ---- core math ----
 function dropVolts(cm, amps, feet) {
