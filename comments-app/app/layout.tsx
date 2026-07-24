@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a className="brand" href="/">
                 {/* Static site asset — same origin, outside basePath */}
                 <img className="brand-logo" src="/img/logo.png" alt="" width={30} height={30} />
-                <span className="brand-name">VoltDrop</span>
+                <span className="brand-name">VoltDrop.app</span>
               </a>
               <a className="back-link" href="/">← Back to the tools</a>
             </div>

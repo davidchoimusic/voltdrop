@@ -128,20 +128,22 @@ input, select, .big-number, .result-cell .v {
 }
 
 @media (max-width: 1023px) {
-  .brand-row { flex-wrap: wrap; position: relative; justify-content: space-between; }
-  .tools-btn { display: inline-flex; order: 1; font-size: 12px; padding: var(--space-1) var(--space-2); }
+  /* Row 1: Tools · country · Feedback. Row 2: centered brand. Row 3: tagline. */
+  .brand-row { flex-wrap: wrap; justify-content: space-between; }
+  .tools-btn { display: inline-flex; order: 1; font-size: 12.5px; padding: var(--space-1) var(--space-2); }
+  .country-chip { order: 2; font-size: 12px; }
+  .header-feedback { display: inline-flex; order: 3; font-size: 12.5px; padding: var(--space-1) var(--space-2); }
   .brand {
-    order: 2;
-    position: absolute;
-    left: 50%;
-    top: 7px;
-    transform: translateX(-50%);
-    font-size: 18px;
+    order: 4;
+    flex-basis: 100%;
+    justify-content: center;
+    font-size: 22px;
+    margin-top: var(--space-3);
   }
-  .brand-logo { width: 22px; height: 22px; }
-  .header-feedback { display: inline-flex; order: 3; font-size: 12px; padding: var(--space-1) var(--space-2); }
-  .country-chip { order: 4; flex-basis: 100%; align-self: center; width: fit-content; margin: var(--space-3) auto 0; }
+  .brand-logo { width: 26px; height: 26px; }
   .tagline { text-align: center; }
+  /* keep content clear of the hazard stripe */
+  .main-col > :first-child { margin-top: var(--space-5); }
 }
 
 @media (min-width: 1024px) {
