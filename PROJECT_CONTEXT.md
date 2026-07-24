@@ -27,9 +27,11 @@ Day-one MVP built and verified. Pure static site — 3 files, no framework, no b
   cache small per the disk-bloat lesson). Domains: voltdrop.app + www.voltdrop.app.
 - Deploy command: Coolify deploy endpoint with `COOLIFY_DEPLOY_TOKEN` (see coolify-deploy memory).
   First deploy 2026-07-24: finished, serving verified via `--resolve` curl; disk 48% after.
-- DNS: voltdrop.app zone is on Cloudflare (same NS as pitchchanger.io) but records were
-  EMPTY at first deploy — David must add A @ → 178.156.255.18 (proxied) + CNAME www (proxied),
-  or drop a `CF_VOLTDROP_DNS_TOKEN` (Zone.DNS:Edit, voltdrop.app) into `~/.brain-secrets/secrets.env`.
+- DNS: LIVE 2026-07-24 — David added A @ → 178.156.255.18 + www (both Cloudflare-proxied,
+  same NS as pitchchanger.io). Post-DNS verification: 11/11 Playwright checks against the live
+  site (`BASE=https://www.voltdrop.app/ node verify.mjs`), GA tag confirmed in served HTML.
+  No API token for this zone exists yet — future DNS edits need David, or a
+  `CF_VOLTDROP_DNS_TOKEN` (Zone.DNS:Edit, voltdrop.app) dropped into `~/.brain-secrets/secrets.env`.
 - Google Analytics GA4: measurement ID `G-NC7ETLY8Q1`, tag in index.html head (added 2026-07-24).
 
 ## Product decisions (from David, 2026-07-24)
