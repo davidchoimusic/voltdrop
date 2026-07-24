@@ -102,7 +102,7 @@ function vdCaNote() {
   const existing = document.getElementById('ca-note');
   if (existing) existing.remove();
   const path = location.pathname;
-  const anchor = document.querySelector('.tool-intro') || document.querySelector('#amp-form, #bf-form, #fill-form');
+  const anchor = document.querySelector('.tool-intro') || document.querySelector('#bf-form, #fill-form');
   if (!anchor) return;
 
   let html = null;
@@ -112,7 +112,7 @@ function vdCaNote() {
   } else if (!isCA && GUIDE_TWINS_REV[path]) {
     html = '🇺🇸 <strong>You\'re on the US edition</strong> — this is the Canadian guide. '
       + '<a class="inline-link" href="' + GUIDE_TWINS_REV[path] + '">Read the US version →</a>';
-  } else if (isCA && !path.startsWith('/ca/') && document.querySelector('main.guide, #amp-form, #bf-form, #fill-form')) {
+  } else if (isCA && !path.startsWith('/ca/') && document.querySelector('main.guide, #bf-form, #fill-form')) {
     html = '🇨🇦 <strong>Canada edition note:</strong> this page cites the U.S. NEC. The math is universal and most table values match the Canadian CEC, but rule numbers and some details differ. Treat rule citations here as U.S.-specific.';
   }
   if (html) {

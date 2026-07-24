@@ -34,6 +34,33 @@ const MATERIAL_NAME = { cu: 'copper', al: 'aluminum' };
 let material = 'cu';
 let temp = 75;
 
+// Country-aware wording: same verified data both countries (CEC Tables 2/4
+// are harmonized with NEC 310.16); citations, cable names, and rules swap.
+const AMP_TEXT = {
+  us: {
+    tableCite: 'NEC Table 310.16',
+    capCite: 'NEC 240.4(D)',
+    tempHint: 'Not sure? Use <strong>75°C</strong> — it\'s what most breaker and lug terminations are rated for. Romex/NM-B cable must use the 60°C column. THHN in dry locations is 90°C, but the connection points usually still limit you to 75°C.',
+    expLookup: 'We look up your wire in the standard U.S. ampacity table (NEC Table 310.16 — normal conditions: up to three current-carrying wires in a conduit, ordinary room temperature). For small wires we also apply the special breaker-size rule (NEC 240.4(D)): 14 AWG copper tops out at a 15 A breaker, 12 AWG at 20 A, and 10 AWG at 30 A, even though the raw table says more.',
+  },
+  ca: {
+    tableCite: 'CEC Table 2/Table 4 (harmonized with NEC 310.16)',
+    capCite: 'CEC Rule 14-104',
+    tempHint: 'Not sure? Use <strong>75°C</strong> — it\'s what most marked breakers and lugs are rated for; unmarked equipment counts as 60°C (CEC Rule 4-006). NMD90 isn\'t blanket-capped at 60°C like American Romex — the terminations set the ceiling — but running it at the 60°C column is the conservative habit.',
+    expLookup: 'We look up your wire in the Canadian ampacity tables (CEC Table 2 for copper, Table 4 for aluminum — harmonized with the US table, and we verified the values match). For small wires we also apply Canada\'s breaker-size rule (CEC 14-104): #14 copper tops out at a 15 A breaker, #12 at 20 A, and #10 at 30 A, even though the raw table says more.',
+  },
+};
+function ampCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
+function applyAmpCountryText() {
+  const t = AMP_TEXT[ampCountry()];
+  const hint = $('amp-temp-hint');
+  if (hint) hint.innerHTML = t.tempHint;
+  const exp = $('amp-exp-lookup');
+  if (exp) exp.textContent = t.expLookup;
+  if (!$('results').hidden) check();
+}
+window.addEventListener('vd:country', applyAmpCountryText);
+
 const $ = (id) => document.getElementById(id);
 
 function fillSizes() {
@@ -97,11 +124,14 @@ function check() {
         : 'It fits, but barely. For continuous loads (3+ hours), heat, or bundled wires, go up a size — the 80% guideline puts you at ' + Math.floor(rated * 0.8) + ' A.')
     : 'This wire is NOT rated for ' + load + ' A. Go up in size — undersized wire overheats and is a fire risk.';
 
+  const T = AMP_TEXT[ampCountry()];
   $('math-body').innerHTML = `
-<p>NEC Table 310.16 lists ${label} ${MATERIAL_NAME[material]} at the ${temp}°C column as <strong>${tableAmps} A</strong> (up to three current-carrying wires in conduit, normal room temperature).</p>
-${cap ? `<p>The small-conductor rule (NEC 240.4(D)) caps the breaker for ${label} ${MATERIAL_NAME[material]} at <strong>${cap} A</strong>, so that's the practical limit we compare against.</p>` : ''}
+<p>${T.tableCite} lists ${label} ${MATERIAL_NAME[material]} at the ${temp}°C column as <strong>${tableAmps} A</strong> (up to three current-carrying wires in conduit, normal room temperature).</p>
+${cap ? `<p>The small-conductor rule (${T.capCite}) caps the breaker for ${label} ${MATERIAL_NAME[material]} at <strong>${cap} A</strong>, so that's the practical limit we compare against.</p>` : ''}
 <div class="formula">Safe limit = ${rated} A   vs   your load = ${load} A   →   ${ok ? 'OK' : 'exceeds the limit'}</div>`;
 
   $('results').hidden = false;
   $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+applyAmpCountryText();
