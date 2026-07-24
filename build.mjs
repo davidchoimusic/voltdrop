@@ -104,6 +104,8 @@ for (const p of PAGES) {
     .replace(/(<meta name="description" content=")[^"]*(">)/, `$1${p.description}$2`)
     .replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
     .replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${p.description}$2`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${p.description}$2`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://voltdrop.app/${p.dir}/">`)
     .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1https://voltdrop.app/${p.dir}/$2`);
 
