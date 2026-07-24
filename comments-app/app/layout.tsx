@@ -3,7 +3,7 @@ import Providers from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Comments | VoltDrop',
+  title: 'Feedback | VoltDrop',
   description: 'Leave feedback on VoltDrop — the voltage drop calculator that explains itself. Sign in with Google or Facebook.',
   robots: { index: true, follow: true },
 }
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </a>
               <a className="back-link" href="/">← Back to the tools</a>
             </div>
-            <p className="tagline">Comments &amp; feedback</p>
+            <p className="tagline">Feedback</p>
           </div>
         </header>
         <Providers>{children}</Providers>

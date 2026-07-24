@@ -196,7 +196,7 @@ export default function CommentsClient() {
     <main className="wrap comments-main">
 
       <section className="card composer">
-        <h1 className="tool-title">💬 Leave a comment</h1>
+        <h1 className="tool-title">💬 Leave feedback</h1>
         <p className="tool-sub">Found a bug? Want a feature? Did a calculation save your bacon? Tell us — we read everything.</p>
 
         {status === 'loading' && <p className="hint">Checking sign-in…</p>}

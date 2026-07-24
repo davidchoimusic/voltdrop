@@ -232,6 +232,12 @@ input, select, .big-number, .result-cell .v {
   color: var(--color-accent);
 }
 
+.tool-sep {
+  border: none;
+  border-top: 1.5px solid var(--color-line);
+  margin: var(--space-3) var(--space-2);
+}
+
 .tool-link.soon {
   color: var(--color-ink-soft);
   cursor: default;

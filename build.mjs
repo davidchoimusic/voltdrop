@@ -60,6 +60,14 @@ const PAGES = [
     title: 'Privacy Policy | VoltDrop',
     description: 'VoltDrop privacy policy: calculator inputs never leave your browser; optional sign-in data for comments only; no data sales; deletion on request.',
   },
+  {
+    dir: 'terms',
+    tool: 'terms',
+    script: null,
+    main: 'partials/terms-main.html',
+    title: 'Terms of Service | VoltDrop',
+    description: 'VoltDrop terms of service: free electrical calculators provided as planning estimates, not professional advice; no warranty; comment rules.',
+  },
 ];
 
 for (const p of PAGES) {
