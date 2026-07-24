@@ -55,3 +55,21 @@ if (_chip) {
 }
 
 vdApplyCountry();
+
+/* Mobile Tools menu: clones the sidebar's tool links so there's one source
+   of truth for the tool list (the <aside> nav in the page). */
+const _toolsBtn = document.getElementById('tools-btn');
+const _mobileTools = document.getElementById('mobile-tools');
+if (_toolsBtn && _mobileTools) {
+  const _nav = document.querySelector('.tool-nav');
+  if (_nav) {
+    _nav.querySelectorAll('a.tool-link').forEach((a) => {
+      _mobileTools.appendChild(a.cloneNode(true));
+    });
+  }
+  _toolsBtn.addEventListener('click', () => {
+    const open = _mobileTools.hidden;
+    _mobileTools.hidden = !open;
+    _toolsBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}

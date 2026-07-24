@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://voltdrop.app/conduit-fill/">
 <meta property="og:image" content="https://voltdrop.app/img/og.png">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="/styles.css?v=d266dce0e5">
+<link rel="stylesheet" href="/styles.css?v=345ac53c30">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -30,12 +30,15 @@
 <header class="site-header">
   <div class="wrap">
     <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
       <a class="brand" href="/">
         <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
         <span class="brand-name">VoltDrop</span>
       </a>
+      <a class="header-feedback" href="/comments">Feedback</a>
       <button type="button" class="country-chip" id="country-chip" title="Change country">🇺🇸 US edition</button>
     </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
     <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
   </div>
 </header>
@@ -130,7 +133,7 @@
   </div>
 </footer>
 
-<script src="/common.js?v=c4007743ce"></script>
+<script src="/common.js?v=70fed056d1"></script>
 <script src="/conduit.js?v=a53c32335a"></script>
 </body>
 </html>
