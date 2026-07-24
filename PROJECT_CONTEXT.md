@@ -37,6 +37,9 @@ Day-one MVP built and verified. Pure static site — 3 files, no framework, no b
 - Google Analytics GA4: measurement ID `G-NC7ETLY8Q1`, tag in index.html head (added 2026-07-24).
 
 ## ⚠️ Country expansion — READ docs/COUNTRY_EXPANSION_METHODOLOGY.md before ANY new guide or country work (2026-07-25)
+STANDING RULE (David): country editions must CONFORM, not just annotate — every new tool/
+guide ships country-aware for all live editions (see Ampacity Check AMP_TEXT pattern);
+notes are only the temporary state while a country's data awaits the verification gate.
 Physics/standards/language three-layer model; NEVER translate articles — regenerate from
 templates + verified country packs; 5-stage pipeline with unskippable verification gate;
 subdirectory URLs + hreflang; rollout CA → UK/AU → EU metric. CEC difference map (verified):

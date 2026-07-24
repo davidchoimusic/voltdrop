@@ -46,6 +46,18 @@ country packs.**
   /tmp/guide-tables.mjs pattern), never hand-typed, and sealed in the data
   tripwire once shipped.
 
+## STANDING RULE (David, 2026-07-25): tools and content must CONFORM, not just annotate
+
+When a country edition is selected, every tool and page must actually behave
+as that country's tool — citations, cable/wire names, rules, hints, shown-math
+wording, and (where verified) data all swap to the selected country. The
+honesty note is only the TEMPORARY state for surfaces whose country data
+hasn't passed the verification gate yet; it is never the end state. Every NEW
+tool or guide ships country-aware from day one for every live edition
+(pattern: the Ampacity Check's AMP_TEXT swap + vd:country listener). If a
+country's data can't be verified yet, ship the note AND queue the
+verification — never silently serve one country's rules to another.
+
 ## The per-country pipeline (repeatable, agent-parallelizable)
 
 Each new country is the same five stages. Stages 1–2 are research agents
