@@ -53,6 +53,8 @@
    ======================================================================== */
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 [hidden] { display: none !important; }
 
 body {
@@ -699,6 +701,9 @@ select:focus {
 
 .footer-brand { color: var(--color-ink-soft); }
 .footer-brand strong { color: var(--color-ink); }
+.footer-brand-link { text-decoration: none; }
+.footer-brand-link:hover strong { color: var(--color-accent); }
+.footer-brand-link:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
 
 .site-footer .fine {
   font-size: 12.5px;
