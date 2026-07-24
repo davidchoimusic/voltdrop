@@ -121,12 +121,18 @@ input, select, .big-number, .result-cell .v {
 .mobile-tools {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);
   margin-top: var(--space-3);
   padding: var(--space-2);
   background: var(--color-surface-2);
   border: 1.5px solid var(--color-line);
   border-radius: var(--radius);
+}
+
+.mobile-tools .tool-link {
+  min-height: 48px;
+  padding: var(--space-3);
+  font-size: 15px;
 }
 
 @media (max-width: 1023px) {
@@ -152,10 +158,21 @@ input, select, .big-number, .result-cell .v {
 
 @media (min-width: 1024px) {
   .mobile-tools { display: none !important; }
-  /* Desktop header: brand left, Feedback + country grouped right */
-  .brand-row { justify-content: flex-start; }
-  .header-feedback { display: inline-flex; margin-left: auto; min-height: 44px; }
-  .country-chip { min-height: 44px; }
+  /* Desktop header: same stacked structure as mobile — controls top-right,
+     brand centered on its own line, tagline centered. */
+  .site-header .wrap, .site-footer .wrap { max-width: 860px; }
+  .brand-row { flex-wrap: wrap; justify-content: flex-end; }
+  .header-feedback { display: inline-flex; order: 1; min-height: 44px; }
+  .country-chip { order: 2; min-height: 44px; }
+  .brand {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    font-size: 28px;
+    line-height: 1;
+    margin: var(--space-3) 0 var(--space-1);
+  }
+  .tagline { text-align: center; }
 }
 
 .country-chip {
@@ -719,6 +736,32 @@ select:focus {
   padding-top: var(--space-3);
   margin-top: var(--space-3);
   margin-bottom: 0;
+}
+
+/* Desktop footer: spread out — brand+links left/right on one row,
+   country picker on the next, fine print full-width below */
+@media (min-width: 1024px) {
+  .site-footer .wrap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand links"
+      "country country"
+      "fine fine";
+    align-items: center;
+    column-gap: var(--space-6);
+  }
+  .footer-brand { grid-area: brand; margin: 0; }
+  .footer-links { grid-area: links; margin: 0; justify-content: flex-end; }
+  .country-picker {
+    grid-area: country;
+    border-bottom: none;
+    border-top: 1px solid var(--color-line);
+    padding: var(--space-3) 0 0;
+    margin: var(--space-3) 0 0;
+  }
+  .country-note { flex-basis: auto; margin-left: auto; }
+  .site-footer .fine { grid-area: fine; }
 }
 
 /* ========================================================================
