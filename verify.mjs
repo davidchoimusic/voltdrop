@@ -109,6 +109,44 @@ await page.goto(BASE + 'max-wire-length/');
 activeTab = await page.textContent('.mode-tab.active .mode-title');
 console.log(activeTab.includes('Max distance') ? 'PASS /max-wire-length/ preselects Max distance' : `FAIL preselect: "${activeTab}"`); activeTab.includes('Max distance') ? pass++ : fail++;
 
+// ---- Ampacity Check: 12 AWG Cu @75°C = 25 A table, but 20 A breaker cap → limit 20 A
+await page.goto(BASE + 'ampacity-check/');
+await page.fill('#amp-load', '15');
+await page.click('#amp-form .calc-btn');
+await page.waitForSelector('#results:not([hidden])');
+let ampBig = await page.textContent('#big-number');
+console.log(ampBig.trim() === '20 A' ? 'PASS ampacity 12AWG Cu 75C limit = 20 A (240.4(D) cap)' : `FAIL ampacity: got "${ampBig}"`); ampBig.trim() === '20 A' ? pass++ : fail++;
+cls = await page.getAttribute('#verdict', 'class');
+console.log(cls.includes('good') ? 'PASS ampacity verdict OK at 15 A' : `FAIL verdict: ${cls}`); cls.includes('good') ? pass++ : fail++;
+// Aluminum 8 AWG @60°C = 35 A (the value the source-check corrected)
+await page.click('[data-material="al"]');
+await page.selectOption('#amp-size', '8 AWG');
+await page.click('[data-temp="60"]');
+await page.fill('#amp-load', '30');
+await page.click('#amp-form .calc-btn');
+ampBig = await page.textContent('#big-number');
+console.log(ampBig.trim() === '35 A' ? 'PASS ampacity 8AWG Al 60C = 35 A' : `FAIL Al ampacity: got "${ampBig}"`); ampBig.trim() === '35 A' ? pass++ : fail++;
+await page.screenshot({ path: `${shots}/7-ampacity.png`, fullPage: true });
+
+// ---- Conduit Fill: 10 × 12 THHN = 0.133 sq in → 1/2" EMT 40% = 0.1216 (no), 3/4" = 0.2132 (yes)
+await page.goto(BASE + 'conduit-fill/');
+await page.fill('#fill-count', '10');
+await page.click('#fill-form .calc-btn');
+await page.waitForSelector('#results:not([hidden])');
+let fillBig = await page.textContent('#big-number');
+console.log(fillBig.trim() === '3/4"' ? 'PASS conduit 10×12 THHN EMT = 3/4"' : `FAIL conduit: got "${fillBig}"`); fillBig.trim() === '3/4"' ? pass++ : fail++;
+let fillCells = await page.textContent('#result-grid');
+console.log(fillCells.includes('25.0%') ? 'PASS fill % = 25.0%' : `FAIL fill %: "${fillCells.slice(0, 120)}"`); fillCells.includes('25.0%') ? pass++ : fail++;
+await page.screenshot({ path: `${shots}/8-conduit.png`, fullPage: true });
+
+// ---- Logo present and loading on every page
+for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
+  await page.goto(BASE + path);
+  const logoOk = await page.$eval('.brand-logo', (img) => img.complete && img.naturalWidth > 0);
+  const favOk = await page.$('link[rel="icon"]') !== null;
+  console.log(logoOk && favOk ? `PASS logo+favicon on /${path}` : `FAIL logo on /${path}: img=${logoOk} fav=${favOk}`); logoOk && favOk ? pass++ : fail++;
+}
+
 // Desktop screenshot too
 await page.goto(BASE);
 await page.screenshot({ path: `${shots}/5-desktop.png`, fullPage: true });

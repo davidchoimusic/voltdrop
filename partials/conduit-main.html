@@ -1,0 +1,59 @@
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🚇 Conduit Fill</h1>
+    <p class="tool-sub">How big a conduit do you need for your wires? Enter what you're pulling, get the smallest legal size.</p>
+  </div>
+
+  <form id="fill-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">Conduit type</label>
+      <div class="seg" role="group" aria-label="Conduit type">
+        <button type="button" class="seg-btn active" data-conduit="emt">EMT (metal)</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+      </div>
+      <p class="hint">EMT is the common thin-wall metal tubing. PVC Sch 40 is the gray plastic conduit.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="fill-size">Wire size (THHN / THWN)</label>
+      <select id="fill-size"></select>
+      <p class="hint">Sizes are for standard THHN/THWN insulated building wire — the most common single-conductor wire pulled in conduit.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="fill-count">How many wires</label>
+      <div class="input-unit">
+        <input type="number" id="fill-count" inputmode="numeric" min="1" max="60" step="1" placeholder="e.g. 3" required>
+        <span class="unit">wires</span>
+      </div>
+      <p class="hint">Count every insulated wire in the pipe, including the neutral and an insulated ground. All one size for now — mixed sizes coming.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Find conduit size</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <section class="card explainer">
+    <h2>The fill rules, in plain English</h2>
+    <p>Wires need free space in a conduit — jam it full and you can't pull them through, and they can overheat. The standard U.S. limits (NEC Chapter 9): one wire may fill <strong>53%</strong> of the pipe's inside area, two wires <strong>31%</strong>, and three or more <strong>40%</strong>. We do that area math for you using the official wire and conduit dimensions.</p>
+    <p><strong>Good to know:</strong> long runs with lots of bends are easier with a size bigger than the legal minimum — many electricians upsize on purpose. This tool covers one wire size at a time; mixed-size pulls are coming.</p>
+  </section>
+
+</main>

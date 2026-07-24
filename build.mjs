@@ -1,20 +1,27 @@
 // Generates the per-tool pages (own URLs for SEO) from index.html.
-// Run after editing index.html: node build.mjs — then commit the outputs.
+// Run after editing index.html, styles.css, or any .js: node build.mjs
+// Then commit the outputs.
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
 
 // Cache-busting: stamp asset links with a content hash so Cloudflare's
-// edge cache can never serve stale JS/CSS after a deploy. Idempotent —
-// re-running with unchanged assets produces identical output.
+// edge cache can never serve stale JS/CSS after a deploy. Idempotent.
 const hash = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 10);
-const cssV = hash('styles.css');
-const jsV = hash('app.js');
+const V = {
+  'styles.css': hash('styles.css'),
+  'app.js': hash('app.js'),
+  'common.js': hash('common.js'),
+  'ampacity.js': hash('ampacity.js'),
+  'conduit.js': hash('conduit.js'),
+};
+const stamp = (html) => html
+  .replace(/\/styles\.css\?v=[A-Za-z0-9]+/g, `/styles.css?v=${V['styles.css']}`)
+  .replace(/\/app\.js\?v=[A-Za-z0-9]+/g, `/app.js?v=${V['app.js']}`)
+  .replace(/\/common\.js\?v=[A-Za-z0-9]+/g, `/common.js?v=${V['common.js']}`);
 
-let src = readFileSync('index.html', 'utf8')
-  .replace(/\/styles\.css\?v=[A-Za-z0-9]+/, `/styles.css?v=${cssV}`)
-  .replace(/\/app\.js\?v=[A-Za-z0-9]+/, `/app.js?v=${jsV}`);
+let src = stamp(readFileSync('index.html', 'utf8'));
 writeFileSync('index.html', src);
-console.log(`stamped assets: styles.css?v=${cssV} app.js?v=${jsV}`);
+console.log('stamped:', Object.entries(V).map(([k, v]) => `${k}?v=${v}`).join(' '));
 
 const PAGES = [
   {
@@ -29,15 +36,48 @@ const PAGES = [
     title: 'Max Wire Length Calculator — how far can this wire run? | VoltDrop',
     description: 'Free max wire run calculator: enter wire size, amps, and voltage to get the longest one-way distance that stays under 3% or 5% voltage drop. Copper and aluminum, DC and AC, no signup.',
   },
+  {
+    dir: 'ampacity-check',
+    tool: 'ampacity',
+    script: 'ampacity.js',
+    main: 'partials/ampacity-main.html',
+    title: 'Ampacity Check — how many amps can this wire carry? | VoltDrop',
+    description: 'Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.',
+  },
+  {
+    dir: 'conduit-fill',
+    tool: 'conduit',
+    script: 'conduit.js',
+    main: 'partials/conduit-main.html',
+    title: 'Conduit Fill Calculator — what size conduit for my wires? | VoltDrop',
+    description: 'Free conduit fill calculator: THHN wire count and size in, smallest legal EMT or PVC Schedule 40 conduit out — using the official NEC Chapter 9 tables and 53/31/40% fill limits.',
+  },
 ];
 
 for (const p of PAGES) {
   let html = src
     .replace(/<title>[^<]*<\/title>/, `<title>${p.title}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(">)/, `$1${p.description}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${p.description}$2`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://voltdrop.app/${p.dir}/">`)
-    .replace('<body>', `<body data-mode="${p.mode}">`);
-  if (!html.includes(`data-mode="${p.mode}"`)) throw new Error(`body stamp failed for ${p.dir}`);
+    .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1https://voltdrop.app/${p.dir}/$2`);
+
+  if (p.mode) {
+    html = html.replace('<body>', `<body data-mode="${p.mode}">`);
+    if (!html.includes(`data-mode="${p.mode}"`)) throw new Error(`body stamp failed for ${p.dir}`);
+  }
+
+  if (p.main) {
+    const main = readFileSync(p.main, 'utf8');
+    html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
+    // Page script replaces the calculator script; common.js stays.
+    html = html.replace(/<script src="\/app\.js[^"]*"><\/script>/, `<script src="/${p.script}?v=${V[p.script]}"></script>`);
+    if (!html.includes(p.script)) throw new Error(`script swap failed for ${p.dir}`);
+    // Highlight this tool in the sidebar (app.js does it for calculator modes).
+    html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
+  }
+
   mkdirSync(p.dir, { recursive: true });
   writeFileSync(`${p.dir}/index.html`, html);
   console.log(`built ${p.dir}/index.html`);

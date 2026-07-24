@@ -9,18 +9,8 @@ PASS chip shows Canada
 PASS Canada remembered after reload
 PASS explainer cites CEC
 PASS CA 3-phase presets include 600 V
-FAIL preselect: "Voltage drop"
-node:internal/modules/run_main:104
-    triggerUncaughtException(
-    ^
+PASS /wire-size-calculator/ preselects Wire size
+PASS sidebar highlights Wire Size
+PASS /max-wire-length/ preselects Max distance
 
-page.textContent: Timeout 30000ms exceeded.
-Call log:
-[2m  - waiting for locator('.tool-link.active')[22m
-
-    at /Users/davidchoi/Documents/0 projects/Voltdrop/verify.mjs:106:29 {
-  log: [ "  - waiting for locator('.tool-link.active')" ],
-  name: 'TimeoutError'
-}
-
-Node.js v23.11.0
+14 passed, 0 failed, JS errors: 0
