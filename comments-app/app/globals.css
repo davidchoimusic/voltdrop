@@ -43,8 +43,23 @@ body {
 .brand-name { color: var(--color-ink); }
 .brand:hover .brand-name { color: var(--color-accent); }
 .brand-logo { display: block; width: 30px; height: 30px; }
-.back-link { color: var(--color-ink-soft); font-size: 14px; font-weight: 650; text-decoration: none; }
-.back-link:hover { color: var(--color-accent); }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back-link:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.back-link:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.back-link:active { transform: translateY(1px); }
 .tagline { margin: var(--space-1) 0 0; color: var(--color-ink-soft); font-size: 15px; }
 .site-footer {
   border-top: 6px solid transparent;

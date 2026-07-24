@@ -139,7 +139,7 @@ input, select, .big-number, .result-cell .v {
   /* Row 1: Tools · country · Feedback. Row 2: centered brand. Row 3: tagline. */
   .brand-row { flex-wrap: wrap; justify-content: space-between; }
   .tools-btn { display: inline-flex; order: 1; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
-  .country-chip { order: 2; font-size: 13px; min-height: 44px; padding: var(--space-2) var(--space-3); }
+  .country-chip { order: 2; }
   .header-feedback { display: inline-flex; order: 3; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
   .brand {
     order: 4;
@@ -163,7 +163,7 @@ input, select, .big-number, .result-cell .v {
   .site-header .wrap, .site-footer .wrap { max-width: 860px; }
   .brand-row { flex-wrap: wrap; justify-content: flex-end; }
   .header-feedback { display: inline-flex; order: 1; min-height: 44px; }
-  .country-chip { order: 2; min-height: 44px; }
+  .country-chip { order: 2; }
   .brand {
     order: 3;
     flex-basis: 100%;
@@ -177,16 +177,18 @@ input, select, .big-number, .result-cell .v {
 
 .country-chip {
   font-family: inherit;
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 750;
   color: var(--color-ink);
   background: var(--color-surface-2);
   border: 2px solid var(--color-line);
-  border-radius: 999px;
-  padding: var(--space-1) var(--space-3);
-  min-height: 34px;
+  border-radius: var(--radius-sm); /* same rectangle style as Tools/Feedback */
+  padding: var(--space-2) var(--space-3);
+  min-height: 44px;
   cursor: pointer;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 
 .country-chip:hover { border-color: var(--color-accent); }
