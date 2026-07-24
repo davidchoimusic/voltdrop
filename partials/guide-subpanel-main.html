@@ -9,6 +9,27 @@
     <h2>The short answer</h2>
     <p>For a <strong>100 amp sub-panel at 150 feet</strong>: <strong>#2 copper</strong> or <strong>1/0 aluminum</strong>. For a <strong>60 amp sub-panel at 100 feet</strong>: <strong>#6 copper</strong> or <strong>#4 aluminum</strong>. The full table for every common combination is below — and if your run isn't in it, the <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> handles any distance.</p>
 
+    
+    <figure class="gfig" role="img" aria-label="Diagram: a 4-wire feeder runs from the main panel in the house to the sub-panel in the detached garage">
+      <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 15 60 L 60 25 L 105 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="25" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="60" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">MAIN</text>
+        <text x="60" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">PANEL</text>
+        <path d="M 455 60 L 500 25 L 545 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="465" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="500" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">SUB-</text>
+        <text x="500" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">PANEL</text>
+        <line x1="105" y1="78" x2="465" y2="78" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="86" x2="465" y2="86" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="94" x2="465" y2="94" stroke="var(--color-ink-soft)" stroke-width="3"/>
+        <line x1="105" y1="102" x2="465" y2="102" stroke="var(--verdict-good-bar)" stroke-width="3"/>
+        <text x="285" y="68" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">4-wire feeder: 2 hots · neutral · ground</text>
+        <path d="M 105 135 L 105 145 L 465 145 L 465 135" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="285" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">one-way distance — this is what drives the wire size</text>
+      </svg>
+    </figure>
+
     <h2>Why every forum thread disagrees</h2>
     <p>Ask this question online and you'll get three different "right" answers. That's because it's really <em>two</em> checks stacked together, and different people are answering different ones. First, the wire must be rated to carry the current at all (<strong>ampacity</strong>). Second, over a long run, the wire must be fat enough that voltage lost along the way stays reasonable (<strong>voltage drop</strong> — the usual planning target is 3%). At short distances the ampacity check decides; past roughly 100 feet, voltage drop takes over and forces bigger wire than the ampacity table alone suggests. People quoting only the ampacity table and people quoting drop-adjusted sizes are both "right" — for different distances.</p>
 

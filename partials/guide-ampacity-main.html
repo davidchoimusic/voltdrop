@@ -37,6 +37,24 @@
     <h2>Which column am I allowed to use?</h2>
     <p>This is the single most-argued ampacity question on every electrician forum, and the rule is simpler than the arguments: <strong>use the column of your weakest link.</strong> The wire's insulation has a rating (THHN is 90°C), but the breaker lugs and receptacle terminals it lands on are usually rated 75°C — and Romex/NM-B cable is capped at the 60°C column by code no matter what its conductors say. So in practice: <strong>NM-B → 60°C column. THHN in conduit on standard equipment → 75°C column.</strong> The 90°C column is mostly useful as the <em>starting point</em> for derating calculations (hot attics, bundled cables), not as a rating you deliver to a breaker.</p>
 
+    
+    <figure class="gfig" role="img" aria-label="Diagram: the wire insulation is rated 90 degrees, the breaker terminals 75 degrees, so the 75 degree column applies — the weakest link wins">
+      <svg viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="90" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">THHN insulation</text>
+        <text x="90" y="70" text-anchor="middle" font-size="13" fill="var(--color-ink-soft)">rated 90°C</text>
+        <line x1="170" y1="55" x2="200" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
+        <rect x="200" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-accent)" stroke-width="3"/>
+        <text x="280" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-accent)">breaker terminals</text>
+        <text x="280" y="70" text-anchor="middle" font-size="13" fill="var(--color-accent)">rated 75°C ← weakest</text>
+        <line x1="360" y1="55" x2="390" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
+        <rect x="390" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="470" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">you must use</text>
+        <text x="470" y="70" text-anchor="middle" font-size="13" font-weight="800" fill="var(--color-hazard)">the 75°C column</text>
+        <text x="280" y="115" text-anchor="middle" font-size="12.5" fill="var(--color-ink-soft)">The chain is only as strong as its weakest link — use the lowest rating in the circuit.</text>
+      </svg>
+    </figure>
+
     <h2>Does voltage change ampacity?</h2>
     <p>No — and this surprises a lot of the 12-volt crowd. A #10 wire can carry the same ~30 A whether it's a 12 V trolling-motor feed or a 240 V circuit. What changes brutally with voltage is <strong>voltage drop</strong>: losing 3 volts means losing 1.3% of a 240 V circuit but a crushing 25% of a 12 V one. That's why low-voltage wiring runs so much fatter than its amps suggest — check yours in the <a class="inline-link" href="/">Voltage Drop calculator</a> (it has a DC mode for exactly this).</p>
 

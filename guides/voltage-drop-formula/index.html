@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<link rel="stylesheet" href="/styles.css?v=8837519230">
+<link rel="stylesheet" href="/styles.css?v=d9d970afb3">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -78,6 +78,24 @@
     <h2>The formula</h2>
     <p>For DC and single-phase AC: <strong>voltage drop = 2 × K × amps × one-way feet ÷ circular mils</strong>. For three-phase, replace the 2 with √3 (1.732). The pieces: <strong>K</strong> is the wire material's resistance constant — 12.9 for copper, 21.2 for aluminum (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section (#12 = 6,530; #6 = 26,240; #2/0 = 133,100). The <strong>2</strong> is the round trip — current flows out and back, so measure your distance <em>one way</em> and let the formula double it. (Mixing this up is the #1 reason two calculators "disagree.")</p>
 
+    
+    <figure class="gfig" role="img" aria-label="Diagram: measure the one-way distance from panel to load; current travels out on one wire and back on the other">
+      <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="55" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">PANEL</text>
+        <rect x="460" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="505" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">LOAD</text>
+        <line x1="100" y1="48" x2="460" y2="48" stroke="var(--color-accent)" stroke-width="4"/>
+        <polygon points="440,42 460,48 440,54" fill="var(--color-accent)"/>
+        <line x1="100" y1="82" x2="460" y2="82" stroke="var(--color-ink-soft)" stroke-width="4"/>
+        <polygon points="120,76 100,82 120,88" fill="var(--color-ink-soft)"/>
+        <text x="280" y="38" text-anchor="middle" font-size="12" fill="var(--color-accent)">current out</text>
+        <text x="280" y="102" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">current back</text>
+        <path d="M 100 118 L 100 128 L 460 128 L 460 118" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="280" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">measure THIS: one-way distance (the formula doubles it)</text>
+      </svg>
+    </figure>
+
     <h2>Three worked examples</h2>
     <p><strong>1. Garage receptacle:</strong> #12 copper, 20 A, 80 one-way ft, 120 V → 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong>. Too much — go to #10 or shorten the run.</p>
     <p><strong>2. Hot tub feeder:</strong> #6 copper, 40 A actual load, 150 ft, 240 V → 2 × 12.9 × 40 × 150 ÷ 26,240 = <strong>5.9 V = 2.5%</strong>. Inside the 3% target.</p>
@@ -120,6 +138,6 @@
   </div>
 </footer>
 
-<script src="/common.js?v=70fed056d1"></script>
+<script src="/common.js?v=e0562242c8"></script>
 </body>
 </html>

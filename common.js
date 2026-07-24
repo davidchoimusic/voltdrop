@@ -73,3 +73,25 @@ if (_toolsBtn && _mobileTools) {
     _toolsBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 }
+
+/* Canada edition: pages whose content cites the U.S. NEC get an honest
+   note when the CA edition is active. Injected (not baked into HTML) so
+   it always follows the current country choice. */
+function vdCaNote() {
+  const target = document.querySelector('main.guide .tool-intro, #amp-form, #bf-form, #fill-form, main.guide');
+  const existing = document.getElementById('ca-note');
+  const isCA = window.VDCountry && VDCountry.get() === 'ca';
+  if (!target) return;
+  if (isCA && !existing) {
+    const note = document.createElement('div');
+    note.id = 'ca-note';
+    note.className = 'ca-note';
+    note.innerHTML = '🇨🇦 <strong>Canada edition note:</strong> this page cites the U.S. NEC. The math is universal and most table values match the Canadian CEC, but rule numbers and some details differ — a fully CEC-verified Canadian version is in the works. Treat rule citations here as U.S.-specific.';
+    const anchor = document.querySelector('main.guide .tool-intro') || document.querySelector('.tool-intro') || target;
+    anchor.insertAdjacentElement('afterend', note);
+  } else if (!isCA && existing) {
+    existing.remove();
+  }
+}
+window.addEventListener('vd:country', vdCaNote);
+vdCaNote();
