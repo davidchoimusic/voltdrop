@@ -61,6 +61,22 @@ body {
 .back-link:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
 .back-link:active { transform: translateY(1px); }
 .tagline { margin: var(--space-1) 0 0; color: var(--color-ink-soft); font-size: 15px; }
+
+/* Mobile: back button top-right, brand centered on its own row (matches the main site) */
+@media (max-width: 1023px) {
+  .brand-row { flex-wrap: wrap; justify-content: flex-end; }
+  .back-link { order: 1; }
+  .brand {
+    order: 2;
+    flex-basis: 100%;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    margin: var(--space-4) 0 var(--space-1);
+  }
+  .brand-logo { width: 26px; height: 26px; }
+  .tagline { text-align: center; }
+}
 .site-footer {
   border-top: 6px solid transparent;
   border-image: var(--hazard-stripe) 1;
