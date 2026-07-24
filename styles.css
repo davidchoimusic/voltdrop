@@ -130,15 +130,17 @@ input, select, .big-number, .result-cell .v {
 @media (max-width: 1023px) {
   /* Row 1: Tools · country · Feedback. Row 2: centered brand. Row 3: tagline. */
   .brand-row { flex-wrap: wrap; justify-content: space-between; }
-  .tools-btn { display: inline-flex; order: 1; font-size: 12.5px; padding: var(--space-1) var(--space-2); }
-  .country-chip { order: 2; font-size: 12px; }
-  .header-feedback { display: inline-flex; order: 3; font-size: 12.5px; padding: var(--space-1) var(--space-2); }
+  .tools-btn { display: inline-flex; order: 1; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
+  .country-chip { order: 2; font-size: 13px; min-height: 44px; padding: var(--space-2) var(--space-3); }
+  .header-feedback { display: inline-flex; order: 3; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
   .brand {
     order: 4;
     flex-basis: 100%;
     justify-content: center;
+    align-items: center;
     font-size: 22px;
-    margin-top: var(--space-3);
+    line-height: 1;
+    margin: var(--space-4) 0 var(--space-1);
   }
   .brand-logo { width: 26px; height: 26px; }
   .tagline { text-align: center; }
