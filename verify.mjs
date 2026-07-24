@@ -1,7 +1,7 @@
 // End-to-end check: drive all three modes, assert the math, screenshot.
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:8642/';
+const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
 import { mkdirSync } from 'fs';
 mkdirSync(shots, { recursive: true });
