@@ -81,9 +81,20 @@ admin (ADMIN_EMAILS) replies + delete, owner edit, single-level replies.
   base dir /comments-app, port 3000, domain https://voltdrop.app/comments)
 - Postgres uuid `rsoli4j54nmvwllk9eh93wrs` (db voltdrop_comments; internal URL in app env)
 - Env: NEXTAUTH_URL=https://voltdrop.app/comments/api/auth, NEXTAUTH_SECRET set,
-  ADMIN_EMAILS=davidchoimusic@gmail.com; **GOOGLE_/FACEBOOK_ CLIENT_ID/SECRET = "PENDING"**
-  until David creates the OAuth apps (redirect URIs:
-  https://voltdrop.app/comments/api/auth/callback/google and .../callback/facebook)
+  ADMIN_EMAILS=davidchoimusic@gmail.com; Google + Facebook OAuth creds SET (2026-07-24,
+  values live only in Coolify env). Google project "voltdrop"; Meta app 1582229980220104.
+  ⚠️ Facebook app is in DEVELOPMENT mode — David can sign in, general public needs Meta
+  business verification + app review (Google sign-in has no such gate and is fully live).
+- **LIVE + verified 2026-07-24**: /comments 200 on apex+www, providers endpoint lists
+  google+facebook with correct callbacks, DB migrated (empty list OK), sign-in buttons
+  render, 0 JS errors.
+- **Traefik gotcha**: Coolify's path-based domain auto-adds a stripprefix middleware that
+  breaks Next basePath (/comments → 404). Fixed via custom_labels (base64) on the app:
+  same generated labels minus stripprefix, plus www host. The API rejects
+  `is_stripprefix_enabled` — custom_labels is the lever. If domains change, regenerate
+  labels accordingly (they no longer auto-update while custom_labels is set).
+- Email: CF Email Routing ENABLED for voltdrop.app (catch-all → davidchoimusic@gmail.com);
+  support@voltdrop.app receives. /privacy/ page exists (required by Meta).
 - Migrations: prisma/migrations/0_init generated via `prisma migrate diff`; container
   runs `prisma migrate deploy` on start
 - New calculators/tools stay in the STATIC site; only comments/auth live in this app
