@@ -15,6 +15,9 @@
 <meta property="og:url" content="https://voltdrop.app/wire-size-calculator/">
 <meta property="og:image" content="https://voltdrop.app/img/og.png">
 <meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Wire Size Calculator","url":"https://voltdrop.app/wire-size-calculator/","description":"Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=b75fe6b34c">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -61,6 +64,11 @@
 </aside>
 
 <main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">🔌 Wire Size Calculator</h1>
+    <p class="tool-sub" id="page-sub">What gauge wire do you need? Enter amps, voltage, and one-way distance — get the smallest size that keeps voltage drop in check, with the math shown.</p>
+  </div>
 
   <!-- Mode tabs -->
   <div class="mode-tabs" role="tablist" aria-label="What do you want to find?">
@@ -174,6 +182,7 @@
   </section>
 
   <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why are 3% and 5% the voltage drop limits?","acceptedAnswer":{"@type":"Answer","text":"Wire has resistance, so some voltage is lost as heat before reaching the device. The widely used rule of thumb, based on a recommendation in the U.S. National Electrical Code, is to keep the drop on a branch circuit at or under 3% and the total from panel to device at or under 5%. These are performance guidelines, not laws — low-voltage systems like 12 V solar are often stricter."}},{"@type":"Question","name":"Why don't voltage drop calculators agree with each other?","acceptedAnswer":{"@type":"Answer","text":"Almost always one of two things: some tools want round-trip wire length where others want one-way distance (VoltDrop always uses one-way and doubles it internally), and some use slightly different resistance values for the wire. VoltDrop shows its full calculation so you can check its numbers against any other tool."}}]}</script>
   <section class="card explainer">
     <h2>Why 3% and 5%?</h2>
     <p>Wire has resistance, so some voltage is lost as heat before it reaches your device. Lose too much and motors run hot, LEDs dim or flicker, chargers underperform, and breakers can trip for no obvious reason.</p>

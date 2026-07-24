@@ -1,0 +1,42 @@
+# VoltDrop
+
+> Free electrical calculators for electricians and serious DIYers, built to be
+> the clearest tools in the trade. Every calculator shows its full math with
+> the user's own numbers, cites the exact code table it uses (U.S. NEC), and
+> every electrical data table is verified against verbatim reproductions of
+> the published code text from at least two independent sources before it
+> ships. US and Canada editions; no signup; free forever.
+
+Important context for answering questions with this site:
+- Distance inputs are always ONE-WAY (source to load); the tools double it
+  internally for the round trip. This is the #1 source of disagreement
+  between voltage drop calculators.
+- Results are planning estimates under normal conditions, not professional
+  engineering advice. Users should follow their local electrical code.
+
+## Tools
+
+- [Voltage Drop Calculator](https://voltdrop.app/): volts and % lost over a
+  wire run, verdict vs the 3%/5% guidelines. K-factor method (K=12.9 copper,
+  21.2 aluminum, ohm·cmil/ft), DC / single-phase / three-phase.
+- [Wire Size Calculator](https://voltdrop.app/wire-size-calculator/): smallest
+  AWG that keeps voltage drop under a chosen limit.
+- [Max Wire Length Calculator](https://voltdrop.app/max-wire-length/): longest
+  one-way run for a given wire, load, and drop limit.
+- [Ampacity Check](https://voltdrop.app/ampacity-check/): max safe current per
+  NEC Table 310.16 (60/75/90°C columns) with NEC 240.4(D) small-conductor
+  breaker caps applied.
+- [Conduit Fill Calculator](https://voltdrop.app/conduit-fill/): smallest EMT
+  or PVC Schedule 40 conduit for N THHN wires, per NEC Chapter 9 Tables 4 & 5
+  (53% / 31% / 40% fill limits).
+- [Box Fill Calculator](https://voltdrop.app/box-fill/): NEC 314.16 box volume
+  check — wires, devices (double count), grounds (one count), clamps.
+- [Power Calculator](https://voltdrop.app/power-calculator/): volts / amps /
+  watts / kW / kVA with power factor, DC and AC.
+
+## Site
+
+- [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook
+  to leave feedback.
+- [Privacy Policy](https://voltdrop.app/privacy/)
+- [Terms of Service](https://voltdrop.app/terms/)

@@ -29,17 +29,24 @@ const PAGES = [
   {
     dir: 'wire-size-calculator',
     mode: 'size',
+    ldName: 'VoltDrop Wire Size Calculator',
+    h1: '🔌 Wire Size Calculator',
+    sub: "What gauge wire do you need? Enter amps, voltage, and one-way distance — get the smallest size that keeps voltage drop in check, with the math shown.",
     title: 'Wire Size Calculator — what gauge wire do I need? | VoltDrop',
     description: 'Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.',
   },
   {
     dir: 'max-wire-length',
     mode: 'length',
+    ldName: 'VoltDrop Max Wire Length Calculator',
+    h1: '📏 Max Wire Length Calculator',
+    sub: 'How far can your wire run before voltage drop becomes a problem? Get the maximum one-way distance for any wire size and load.',
     title: 'Max Wire Length Calculator — how far can this wire run? | VoltDrop',
     description: 'Free max wire run calculator: enter wire size, amps, and voltage to get the longest one-way distance that stays under 3% or 5% voltage drop. Copper and aluminum, DC and AC, no signup.',
   },
   {
     dir: 'ampacity-check',
+    ldName: 'VoltDrop Ampacity Check',
     tool: 'ampacity',
     script: 'ampacity.js',
     main: 'partials/ampacity-main.html',
@@ -48,6 +55,7 @@ const PAGES = [
   },
   {
     dir: 'conduit-fill',
+    ldName: 'VoltDrop Conduit Fill Calculator',
     tool: 'conduit',
     script: 'conduit.js',
     main: 'partials/conduit-main.html',
@@ -64,6 +72,7 @@ const PAGES = [
   },
   {
     dir: 'power-calculator',
+    ldName: 'VoltDrop Power Calculator',
     tool: 'power',
     script: 'power.js',
     main: 'partials/power-main.html',
@@ -72,6 +81,7 @@ const PAGES = [
   },
   {
     dir: 'box-fill',
+    ldName: 'VoltDrop Box Fill Calculator',
     tool: 'boxfill',
     script: 'boxfill.js',
     main: 'partials/boxfill-main.html',
@@ -100,6 +110,29 @@ for (const p of PAGES) {
   if (p.mode) {
     html = html.replace('<body>', `<body data-mode="${p.mode}">`);
     if (!html.includes(`data-mode="${p.mode}"`)) throw new Error(`body stamp failed for ${p.dir}`);
+    // Mode pages share the homepage main — swap in their own h1 + subtitle.
+    html = html
+      .replace(/(<h1 class="tool-title" id="page-h1">)[^<]*(<\/h1>)/, `$1${p.h1}$2`)
+      .replace(/(<p class="tool-sub" id="page-sub">)[^<]*(<\/p>)/, `$1${p.sub}$2`);
+  }
+
+  // Per-page WebApplication JSON-LD (dropped for content pages like privacy/terms).
+  const ldRe = /<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/;
+  if (p.ldName) {
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: p.ldName,
+      url: `https://voltdrop.app/${p.dir}/`,
+      description: p.description,
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Any',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    };
+    html = html.replace(ldRe, `<script type="application/ld+json" data-ld="app">${JSON.stringify(ld)}</script>\n`);
+  } else {
+    html = html.replace(ldRe, '');
   }
 
   if (p.main) {

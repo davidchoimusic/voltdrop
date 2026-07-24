@@ -15,6 +15,9 @@
 <meta property="og:url" content="https://voltdrop.app/power-calculator/">
 <meta property="og:image" content="https://voltdrop.app/img/og.png">
 <meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Power Calculator","url":"https://voltdrop.app/power-calculator/","description":"Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=b75fe6b34c">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -142,6 +145,7 @@
     </details>
   </section>
 
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between kW and kVA?", "acceptedAnswer": {"@type": "Answer", "text": "Watts (kW) measure real usable power, while kVA measures the apparent power the wiring must carry. For heaters and simple loads they are equal; for motors and electronics kVA can be higher, and the ratio between them is the power factor."}}, {"@type": "Question", "name": "How do I convert watts to amps?", "acceptedAnswer": {"@type": "Answer", "text": "For DC, amps = watts ÷ volts. For single-phase AC, amps = watts ÷ (volts × power factor). For three-phase AC, amps = watts ÷ (1.732 × line-to-line volts × power factor)."}}]}</script>
   <section class="card explainer">
     <h2>Watts vs kW vs kVA — the 30-second version</h2>
     <p><strong>Watts (W)</strong> is real usable power; <strong>1 kW = 1,000 W</strong>. <strong>kVA</strong> is the "apparent" power the wiring actually has to carry. For heaters and simple loads they're equal. For motors and electronics, some current sloshes back and forth without doing useful work — that's why kVA can be higher than kW, and the ratio between them is the <strong>power factor</strong>.</p>
