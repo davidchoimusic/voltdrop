@@ -141,16 +141,16 @@ input, select, .big-number, .result-cell .v {
   .tools-btn { display: inline-flex; order: 1; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
   .country-chip { order: 2; }
   .header-feedback { display: inline-flex; order: 3; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
-  .brand {
+  .site-header .brand {
     order: 4;
     flex-basis: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1;
     margin: var(--space-4) 0 var(--space-1);
   }
-  .brand-logo { width: 26px; height: 26px; }
+  .site-header .brand-logo { width: 28px; height: 28px; }
   .tagline { text-align: center; }
   /* keep content clear of the hazard stripe */
   .main-col > :first-child { margin-top: var(--space-5); }
@@ -162,8 +162,8 @@ input, select, .big-number, .result-cell .v {
      Feedback + country right, tagline left underneath. */
   .site-header .wrap, .site-footer .wrap { max-width: 860px; }
   .brand-row { justify-content: flex-start; }
-  .brand { font-size: 32px; line-height: 1; }
-  .brand-logo { width: 36px; height: 36px; }
+  .site-header .brand { font-size: 42px; line-height: 1; gap: var(--space-3); }
+  .site-header .brand-logo { width: 48px; height: 48px; }
   .header-feedback { display: inline-flex; margin-left: auto; min-height: 44px; }
   .tagline { text-align: left; margin-top: var(--space-2); }
 }
