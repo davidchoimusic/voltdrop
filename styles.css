@@ -152,6 +152,10 @@ input, select, .big-number, .result-cell .v {
 
 @media (min-width: 1024px) {
   .mobile-tools { display: none !important; }
+  /* Desktop header: brand left, Feedback + country grouped right */
+  .brand-row { justify-content: flex-start; }
+  .header-feedback { display: inline-flex; margin-left: auto; min-height: 44px; }
+  .country-chip { min-height: 44px; }
 }
 
 .country-chip {
@@ -257,7 +261,9 @@ input, select, .big-number, .result-cell .v {
   }
   .sidebar { display: block; padding-top: var(--space-5); }
   .tool-nav { position: sticky; top: var(--space-5); display: flex; flex-direction: column; gap: 2px; }
-  .mode-tabs { display: none; }  /* sidebar is the tool switcher on desktop */
+  /* sidebar is the tool switcher on desktop; !important because the
+     .mode-tabs base rule appears later in the file and would win otherwise */
+  .mode-tabs { display: none !important; }
   .main-col { padding-top: var(--space-5); }
 }
 
