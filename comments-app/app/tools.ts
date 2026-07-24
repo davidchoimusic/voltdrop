@@ -11,6 +11,7 @@ export const TOOLS: Tool[] = [
   { href: '/box-fill/', icon: '📦', label: 'Box Fill' },
   { href: '/power-calculator/', icon: '🧮', label: 'Power Calculator' },
   { sep: true },
+  { href: '/guides/', icon: '📚', label: 'Guides' },
   { href: '/comments', icon: '💬', label: 'Feedback' },
 ]
 

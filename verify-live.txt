@@ -1,3 +1,11 @@
+PASS data intact: app.js:WIRE_TABLE
+PASS data intact: app.js:K_FACTOR
+PASS data intact: ampacity.js:AMPACITY
+PASS data intact: ampacity.js:SMALL_CAP
+PASS data intact: conduit.js:THHN_AREA
+PASS data intact: conduit.js:CONDUIT
+PASS data intact: boxfill.js:VOL_PER_CONDUCTOR
+PASS data intact: boxfill.js:BOXES
 PASS drop % (12V 20A 25ft 12AWG Cu): got 16.46, expected ~16.46
 PASS verdict red
 PASS drop % (120V 15A 50ft 12AWG Cu): got 2.47, expected ~2.47
@@ -23,8 +31,15 @@ PASS box fill needed cu in (6w+1d+gnd 12AWG): got 20.25, expected ~20.25
 PASS box fill verdict TOO FULL
 PASS box fill 14 AWG exact fit: got 18, expected ~18
 PASS 18.0/18.0 fits
+PASS guide /guides/ (📚 Guides…)
+PASS guide /guides/sub-panel-wire-size/ (🏠 Wire Size for a Sub-Panel (…)
+PASS guide /guides/50-amp-wire-size/ (🔌 What Size Wire for 50 Amps?…)
+PASS guide /guides/wire-ampacity-chart/ (🔥 Wire Ampacity Chart (NEC Ta…)
+PASS guide /guides/how-far-12-gauge-wire/ (📏 How Far Can You Run 12 Gaug…)
+PASS guide /guides/voltage-drop-formula/ (⚡ Voltage Drop, Explained…)
+PASS sub-panel table present
 PASS logo+favicon on /
 PASS logo+favicon on /ampacity-check/
 PASS logo+favicon on /conduit-fill/
 
-28 passed, 0 failed, JS errors: 0
+43 passed (8 data-integrity), 0 failed, JS errors: 0
