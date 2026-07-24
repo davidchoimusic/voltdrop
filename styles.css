@@ -158,21 +158,14 @@ input, select, .big-number, .result-cell .v {
 
 @media (min-width: 1024px) {
   .mobile-tools { display: none !important; }
-  /* Desktop header: same stacked structure as mobile — controls top-right,
-     brand centered on its own line, tagline centered. */
+  /* Desktop header: big brand left (aligned with the tools column),
+     Feedback + country right, tagline left underneath. */
   .site-header .wrap, .site-footer .wrap { max-width: 860px; }
-  .brand-row { flex-wrap: wrap; justify-content: flex-end; }
-  .header-feedback { display: inline-flex; order: 1; min-height: 44px; }
-  .country-chip { order: 2; }
-  .brand {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: center;
-    font-size: 28px;
-    line-height: 1;
-    margin: var(--space-3) 0 var(--space-1);
-  }
-  .tagline { text-align: center; }
+  .brand-row { justify-content: flex-start; }
+  .brand { font-size: 32px; line-height: 1; }
+  .brand-logo { width: 36px; height: 36px; }
+  .header-feedback { display: inline-flex; margin-left: auto; min-height: 44px; }
+  .tagline { text-align: left; margin-top: var(--space-2); }
 }
 
 .country-chip {
