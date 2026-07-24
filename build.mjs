@@ -1,8 +1,20 @@
 // Generates the per-tool pages (own URLs for SEO) from index.html.
 // Run after editing index.html: node build.mjs — then commit the outputs.
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { createHash } from 'crypto';
 
-const src = readFileSync('index.html', 'utf8');
+// Cache-busting: stamp asset links with a content hash so Cloudflare's
+// edge cache can never serve stale JS/CSS after a deploy. Idempotent —
+// re-running with unchanged assets produces identical output.
+const hash = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 10);
+const cssV = hash('styles.css');
+const jsV = hash('app.js');
+
+let src = readFileSync('index.html', 'utf8')
+  .replace(/\/styles\.css\?v=[A-Za-z0-9]+/, `/styles.css?v=${cssV}`)
+  .replace(/\/app\.js\?v=[A-Za-z0-9]+/, `/app.js?v=${jsV}`);
+writeFileSync('index.html', src);
+console.log(`stamped assets: styles.css?v=${cssV} app.js?v=${jsV}`);
 
 const PAGES = [
   {
