@@ -16,11 +16,6 @@
       "quote": "'"
     },
     {
-      "key": "runtime.common.english",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
       "key": "runtime.common.canadaEdition",
       "kind": "quoted",
       "quote": "'"
@@ -36,67 +31,14 @@
       "quote": "'"
     },
     {
-      "key": "runtime.common.languageIn",
-      "kind": "templateChunk",
-      "leading": "",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.common.isnTAvailableFor",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.common.yetShowingEnglishAvailableHere",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.common.aMANDATORYLimitInThe",
+      "key": "runtime.common.languageLabelPattern",
       "kind": "quoted",
       "quote": "'"
     },
     {
-      "key": "runtime.common.basedOnARecommendationInThe",
+      "key": "runtime.common.unavailableLanguagePattern",
       "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.youReOnTheCanadaEditionThisPage",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.aClassInlineLinkHref",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.readTheCanadianVersionOfThisGuide",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.youReOnTheUSEditionThisIs",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.readTheUSVersion",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.mainGuideFillForm",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.common.canadaEditionNoteThisPageCitesTheU",
-      "kind": "quoted",
-      "quote": "'"
+      "quote": "\""
     }
   ],
   "app.js": [
@@ -241,11 +183,6 @@
       "quote": "'"
     },
     {
-      "key": "runtime.drop.voltage",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
       "key": "runtime.drop.calculateVoltageDrop",
       "kind": "quoted",
       "quote": "'"
@@ -257,11 +194,6 @@
     },
     {
       "key": "runtime.drop.findMaxDistance",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.current",
       "kind": "quoted",
       "quote": "'"
     },
@@ -532,6 +464,26 @@
       "kind": "templateChunk",
       "leading": " ",
       "trailing": ""
+    },
+    {
+      "key": "runtime.drop.evenPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.smallestPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.currentResult",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.guidelinesResult",
+      "kind": "quoted",
+      "quote": "'"
     }
   ],
   "ampacity.js": [
@@ -785,6 +737,16 @@
     },
     {
       "key": "runtime.ampacity.exceedsTheLimit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.atJoin",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.headroom",
       "kind": "quoted",
       "quote": "'"
     }
@@ -1046,6 +1008,32 @@
       "kind": "templateChunk",
       "leading": "",
       "trailing": ""
+    },
+    {
+      "key": "runtime.conduit.smallestPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.forJoin",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.oneWire",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.twoWires",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.eachPrefix",
+      "kind": "templateChunk",
+      "leading": "\n<p>",
+      "trailing": " "
     }
   ],
   "boxfill.js": [
@@ -1322,9 +1310,8 @@
     },
     {
       "key": "runtime.boxFill.marrettePair",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
+      "kind": "quoted",
+      "quote": "'"
     },
     {
       "key": "runtime.boxFill.totalCounts",
@@ -1410,6 +1397,32 @@
       "kind": "templateChunk",
       "leading": "",
       "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.availableSuffix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceSingular",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.devicesPlural",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.marrettePairsLower",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.eachPrefix",
+      "kind": "templateChunk",
+      "leading": "\n<p>",
+      "trailing": " "
     }
   ],
   "power.js": [

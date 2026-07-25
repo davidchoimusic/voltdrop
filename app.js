@@ -44,6 +44,27 @@ const SYSTEMS = {
   ac3: { mult: 1.732, multLabel: '√3 (1.732)', name: 'AC three-phase',
          hint: 'Three-phase: commercial and industrial. Voltage is line-to-line.' },
 };
+const DROP_TEXT = {
+  volts: '{volts} V',
+  amps: '{amps} A',
+  percent: '{percent}%',
+  dropLabel: 'voltage drop on {size} {material}',
+  limit: '{percent}% = {volts} V',
+  actualDrop: '{percent}% ({volts} V)',
+  noFitLabel: 'no listed size keeps you under {percent}%',
+  noFitNote: 'Even {size} {material} drops more than {percent}% over {feet} one-way feet at {amps} A.',
+  smallestWireLabel: 'smallest {material} wire that stays under {percent}%',
+  ampacityWarning: 'Heads up: this answers voltage drop only. The wire must ALSO be rated to carry {amps} A safely (ampacity) — check that separately before buying.',
+  maxDistanceNote: 'At exactly this distance you hit {percent}% drop. Stay shorter for margin. And remember: the wire must also be rated for {amps} A (ampacity) regardless of distance.',
+  feet: '{feet} ft',
+  maxRunLabel: 'max one-way run for {size} {material} at {percent}% drop',
+  mathIntroRoundTrip: '<p>We use the standard K-factor formula electricians use in the field:</p>\n<div class="formula">Voltage drop = {mult} × K × amps × one-way feet ÷ circular mils</div>\n<p><strong>{mult}</strong> accounts for the round trip — current flows out AND back, so the wire path is twice your one-way distance. <strong>K = {factor}</strong> is the resistance constant for {material} (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire\'s cross-section area.</p>',
+  mathIntroThreePhase: '<p>We use the standard K-factor formula electricians use in the field:</p>\n<div class="formula">Voltage drop = {mult} × K × amps × one-way feet ÷ circular mils</div>\n<p><strong>{mult}</strong> accounts for the three-phase geometry. <strong>K = {factor}</strong> is the resistance constant for {material} (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire\'s cross-section area.</p>',
+  dropMath: '\n<p>With your numbers ({size} = {cm} circular mils):</p>\n<div class="formula">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} volts dropped\n÷ {source} V source = {percent}%</div>\n<p>Voltage at the load: {source} − {dropped} = <strong>{endVolts} V</strong>.</p>',
+  noFitMath: '<p>We checked every size from smallest to largest; none dropped ≤ {maxDrop} V ({percent}% of {source} V).</p>',
+  sizeMath: '\n<p>We tested each size, smallest first, until one kept the drop under your {percent}% limit ({maxDrop} V):</p>\n<div class="formula">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ under your limit</div>',
+  maxRunMath: '\n<p>We rearranged the formula to solve for distance, with your limit of {percent}% ({maxDrop} V):</p>\n<div class="formula">Max one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>',
+};
 
 // Country editions live in common.js (window.VDCountry) — shared with the
 // ampacity and conduit tools. Future countries (mm²/IEC) additionally swap
@@ -110,7 +131,7 @@ function renderVoltagePresets() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'preset-btn';
-    btn.textContent = v + ' V';
+    btn.textContent = vdFormat(DROP_TEXT.volts, { volts: v });
     if (Number($('voltage').value) === v) btn.classList.add('active');
     btn.addEventListener('click', () => {
       $('voltage').value = v;
@@ -253,9 +274,14 @@ function showResults(v, bigNumber, bigLabel, cells, note, math) {
 }
 
 function mathIntro() {
-  return `<p>We use the standard K-factor formula electricians use in the field:</p>
-<div class="formula">Voltage drop = ${SYSTEMS[system].multLabel} × K × amps × one-way feet ÷ circular mils</div>
-<p><strong>${SYSTEMS[system].multLabel}</strong> accounts for the ${system === 'ac3' ? 'three-phase geometry' : 'round trip — current flows out AND back, so the wire path is twice your one-way distance'}. <strong>K = ${K_FACTOR[material]}</strong> is the resistance constant for ${MATERIAL_NAME[material]} (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section area.</p>`;
+  return vdFormat(
+    system === 'ac3' ? DROP_TEXT.mathIntroThreePhase : DROP_TEXT.mathIntroRoundTrip,
+    {
+      mult: SYSTEMS[system].multLabel,
+      factor: K_FACTOR[material],
+      material: MATERIAL_NAME[material],
+    },
+  );
 }
 
 function renderDrop({ label, cm, volts, amps, feet, vd, pct }) {
@@ -263,21 +289,27 @@ function renderDrop({ label, cm, volts, amps, feet, vd, pct }) {
   const endV = volts - vd;
   showResults(
     v,
-    fmt(pct) + '%',
-    'voltage drop on ' + label + ' ' + MATERIAL_NAME[material],
+    vdFormat(DROP_TEXT.percent, { percent: fmt(pct) }),
+    vdFormat(DROP_TEXT.dropLabel, { size: label, material: MATERIAL_NAME[material] }),
     [
-      ['Volts lost in the wire', fmt(vd) + ' V'],
-      ['Voltage at the load', fmt(endV) + ' V'],
-      ['Started with', fmt(volts) + ' V'],
+      ['Volts lost in the wire', vdFormat(DROP_TEXT.volts, { volts: fmt(vd) })],
+      ['Voltage at the load', vdFormat(DROP_TEXT.volts, { volts: fmt(endV) })],
+      ['Started with', vdFormat(DROP_TEXT.volts, { volts: fmt(volts) })],
       ['Guidelines', '3% good · 5% max'],
     ],
     v.note,
-    mathIntro() + `
-<p>With your numbers (${label} = ${cm.toLocaleString('en-US')} circular mils):</p>
-<div class="formula">${SYSTEMS[system].multLabel} × ${K_FACTOR[material]} × ${fmt(amps)} A × ${fmt(feet, 1)} ft ÷ ${cm.toLocaleString('en-US')}
-= ${fmt(vd, 3)} volts dropped
-÷ ${fmt(volts)} V source = ${fmt(pct)}%</div>
-<p>Voltage at the load: ${fmt(volts)} − ${fmt(vd, 3)} = <strong>${fmt(endV)} V</strong>.</p>`
+    [mathIntro(), vdFormat(DROP_TEXT.dropMath, {
+      size: label,
+      cm: cm.toLocaleString('en-US'),
+      mult: SYSTEMS[system].multLabel,
+      factor: K_FACTOR[material],
+      amps: fmt(amps),
+      feet: fmt(feet, 1),
+      dropped: fmt(vd, 3),
+      source: fmt(volts),
+      percent: fmt(pct),
+      endVolts: fmt(endV),
+    })].join('')
   );
 }
 
@@ -286,13 +318,23 @@ function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
     showResults(
       { cls: 'bad', badge: 'NO FIT', note: 'No single wire in our table keeps the drop under your limit. Options: shorten the run, raise the voltage, allow a bigger drop, or run parallel conductors (ask an electrician).' },
       '—',
-      'no listed size keeps you under ' + maxPct + '%',
+      vdFormat(DROP_TEXT.noFitLabel, { percent: maxPct }),
       [
-        ['Your limit', fmt(maxPct) + '% = ' + fmt(maxVd) + ' V'],
+        ['Your limit', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
         ['Largest size checked', WIRE_TABLE[WIRE_TABLE.length - 1][0]],
       ],
-      'Even ' + WIRE_TABLE[WIRE_TABLE.length - 1][0] + ' ' + MATERIAL_NAME[material] + ' drops more than ' + fmt(maxPct) + '% over ' + fmt(feet, 1) + ' one-way feet at ' + fmt(amps) + ' A.',
-      mathIntro() + `<p>We checked every size from smallest to largest; none dropped ≤ ${fmt(maxVd, 3)} V (${fmt(maxPct)}% of ${fmt(volts)} V).</p>`
+      vdFormat(DROP_TEXT.noFitNote, {
+        size: WIRE_TABLE[WIRE_TABLE.length - 1][0],
+        material: MATERIAL_NAME[material],
+        percent: fmt(maxPct),
+        feet: fmt(feet, 1),
+        amps: fmt(amps),
+      }),
+      [mathIntro(), vdFormat(DROP_TEXT.noFitMath, {
+        maxDrop: fmt(maxVd, 3),
+        percent: fmt(maxPct),
+        source: fmt(volts),
+      })].join('')
     );
     return;
   }
@@ -301,19 +343,29 @@ function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
   showResults(
     v,
     found.label,
-    'smallest ' + MATERIAL_NAME[material] + ' wire that stays under ' + fmt(maxPct) + '%',
+    vdFormat(DROP_TEXT.smallestWireLabel, {
+      material: MATERIAL_NAME[material],
+      percent: fmt(maxPct),
+    }),
     [
-      ['Actual drop at this size', fmt(pct) + '% (' + fmt(found.vd) + ' V)'],
-      ['Voltage at the load', fmt(volts - found.vd) + ' V'],
-      ['Your limit', fmt(maxPct) + '% = ' + fmt(maxVd) + ' V'],
+      ['Actual drop at this size', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(pct), volts: fmt(found.vd) })],
+      ['Voltage at the load', vdFormat(DROP_TEXT.volts, { volts: fmt(volts - found.vd) })],
+      ['Your limit', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
       ['Guidelines', '3% good · 5% max'],
     ],
-    'Heads up: this answers voltage drop only. The wire must ALSO be rated to carry ' + fmt(amps) + ' A safely (ampacity) — check that separately before buying.',
-    mathIntro() + `
-<p>We tested each size, smallest first, until one kept the drop under your ${fmt(maxPct)}% limit (${fmt(maxVd, 3)} V):</p>
-<div class="formula">${found.label} (${found.cm.toLocaleString('en-US')} cmil):
-${SYSTEMS[system].multLabel} × ${K_FACTOR[material]} × ${fmt(amps)} A × ${fmt(feet, 1)} ft ÷ ${found.cm.toLocaleString('en-US')}
-= ${fmt(found.vd, 3)} V = ${fmt(pct)}%  ✓ under your limit</div>`
+    vdFormat(DROP_TEXT.ampacityWarning, { amps: fmt(amps) }),
+    [mathIntro(), vdFormat(DROP_TEXT.sizeMath, {
+      percent: fmt(maxPct),
+      maxDrop: fmt(maxVd, 3),
+      size: found.label,
+      cm: found.cm.toLocaleString('en-US'),
+      mult: SYSTEMS[system].multLabel,
+      factor: K_FACTOR[material],
+      amps: fmt(amps),
+      feet: fmt(feet, 1),
+      dropped: fmt(found.vd, 3),
+      actualPercent: fmt(pct),
+    })].join('')
   );
 }
 
@@ -323,22 +375,33 @@ function renderLength({ label, cm, volts, amps, maxPct, maxVd, feet }) {
     : maxPct <= 5
       ? { cls: 'warn', badge: 'MAX RUN', note: '' }
       : { cls: 'bad', badge: 'MAX RUN', note: '' };
-  v.note = 'At exactly this distance you hit ' + fmt(maxPct) + '% drop. Stay shorter for margin. And remember: the wire must also be rated for ' + fmt(amps) + ' A (ampacity) regardless of distance.';
+  v.note = vdFormat(DROP_TEXT.maxDistanceNote, {
+    percent: fmt(maxPct),
+    amps: fmt(amps),
+  });
   showResults(
     v,
-    fmt(feet, 0) + ' ft',
-    'max one-way run for ' + label + ' ' + MATERIAL_NAME[material] + ' at ' + fmt(maxPct) + '% drop',
+    vdFormat(DROP_TEXT.feet, { feet: fmt(feet, 0) }),
+    vdFormat(DROP_TEXT.maxRunLabel, {
+      size: label,
+      material: MATERIAL_NAME[material],
+      percent: fmt(maxPct),
+    }),
     [
-      ['Drop at that distance', fmt(maxPct) + '% (' + fmt(maxVd) + ' V)'],
-      ['Voltage at the load', fmt(volts - maxVd) + ' V'],
-      ['Current', fmt(amps) + ' A'],
+      ['Drop at that distance', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(maxPct), volts: fmt(maxVd) })],
+      ['Voltage at the load', vdFormat(DROP_TEXT.volts, { volts: fmt(volts - maxVd) })],
+      ['Current', vdFormat(DROP_TEXT.amps, { amps: fmt(amps) })],
       ['Guidelines', '3% good · 5% max'],
     ],
     v.note,
-    mathIntro() + `
-<p>We rearranged the formula to solve for distance, with your limit of ${fmt(maxPct)}% (${fmt(maxVd, 3)} V):</p>
-<div class="formula">Max one-way feet = ${fmt(maxVd, 3)} V × ${cm.toLocaleString('en-US')} cmil
-             ÷ (${SYSTEMS[system].multLabel} × ${K_FACTOR[material]} × ${fmt(amps)} A)
-             = ${fmt(feet, 1)} ft</div>`
+    [mathIntro(), vdFormat(DROP_TEXT.maxRunMath, {
+      percent: fmt(maxPct),
+      maxDrop: fmt(maxVd, 3),
+      cm: cm.toLocaleString('en-US'),
+      mult: SYSTEMS[system].multLabel,
+      factor: K_FACTOR[material],
+      amps: fmt(amps),
+      feet: fmt(feet, 1),
+    })].join('')
   );
 }

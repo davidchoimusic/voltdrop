@@ -1,0 +1,199 @@
+{
+  "_policy": {
+    "status": "locked",
+    "rule": "Every localized tool, legal page, metadata string, and runtime message must use these exact terms for these concepts. Numbers keep the English source format: period decimal separators and the existing unit spacing.",
+    "localeNotes": {
+      "es": "Latin American / U.S. trade Spanish",
+      "fr-CA": "Quebec French",
+      "zh-Hans": "Simplified Chinese"
+    }
+  },
+  "terms": {
+    "voltage drop": {
+      "gloss": "Voltage lost along a conductor because it has resistance.",
+      "es": "caída de tensión",
+      "fr-CA": "chute de tension",
+      "zh-Hans": "电压降"
+    },
+    "one-way distance": {
+      "gloss": "Distance from the source to the load only; never the return path.",
+      "es": "distancia en un solo sentido",
+      "fr-CA": "distance à l’aller (un seul trajet)",
+      "zh-Hans": "单程距离（仅去程）"
+    },
+    "round trip": {
+      "gloss": "The complete outgoing and return current path.",
+      "es": "recorrido de ida y vuelta",
+      "fr-CA": "trajet aller-retour",
+      "zh-Hans": "往返距离"
+    },
+    "ampacity": {
+      "gloss": "Maximum current a conductor can carry under stated conditions.",
+      "es": "ampacidad",
+      "fr-CA": "courant admissible",
+      "zh-Hans": "载流量"
+    },
+    "conductor": {
+      "gloss": "A wire or other material that carries electric current.",
+      "es": "conductor",
+      "fr-CA": "conducteur",
+      "zh-Hans": "导体"
+    },
+    "wire size / gauge": {
+      "gloss": "The standardized cross-sectional size designation of a wire.",
+      "es": "calibre del conductor",
+      "fr-CA": "calibre du conducteur",
+      "zh-Hans": "导线规格（线规）"
+    },
+    "branch circuit": {
+      "gloss": "Circuit from the final overcurrent device to its outlets or loads.",
+      "es": "circuito derivado",
+      "fr-CA": "circuit de dérivation",
+      "zh-Hans": "分支电路"
+    },
+    "feeder": {
+      "gloss": "Conductors carrying power from service equipment to downstream distribution.",
+      "es": "alimentador",
+      "fr-CA": "artère",
+      "zh-Hans": "馈线"
+    },
+    "panel": {
+      "gloss": "Distribution panel containing breakers or other protective devices.",
+      "es": "tablero",
+      "fr-CA": "panneau",
+      "zh-Hans": "配电盘"
+    },
+    "sub-panel": {
+      "gloss": "A downstream distribution panel supplied by a feeder.",
+      "es": "subtablero",
+      "fr-CA": "panneau secondaire",
+      "zh-Hans": "子配电盘"
+    },
+    "breaker / overcurrent device": {
+      "gloss": "A device that opens a circuit when current exceeds its permitted value.",
+      "es": "interruptor automático / dispositivo de sobrecorriente",
+      "fr-CA": "disjoncteur / dispositif de protection contre les surintensités",
+      "zh-Hans": "断路器 / 过电流保护装置"
+    },
+    "grounding conductor": {
+      "gloss": "Conductor used to provide the grounding or bonding fault-current path.",
+      "es": "conductor de puesta a tierra",
+      "fr-CA": "conducteur de mise à la terre",
+      "zh-Hans": "接地导体"
+    },
+    "neutral": {
+      "gloss": "Grounded circuit conductor connected to the system neutral point.",
+      "es": "neutro",
+      "fr-CA": "neutre",
+      "zh-Hans": "中性线"
+    },
+    "phase": {
+      "gloss": "One alternating-current waveform or energized system leg.",
+      "es": "fase",
+      "fr-CA": "phase",
+      "zh-Hans": "相"
+    },
+    "load": {
+      "gloss": "Equipment or demand that consumes electrical power.",
+      "es": "carga",
+      "fr-CA": "charge",
+      "zh-Hans": "负载"
+    },
+    "continuous load": {
+      "gloss": "A load expected to operate continuously for the code-defined duration.",
+      "es": "carga continua",
+      "fr-CA": "charge continue",
+      "zh-Hans": "连续负载"
+    },
+    "derating": {
+      "gloss": "Reducing usable ampacity because of heat, bundling, or other conditions.",
+      "es": "reducción de ampacidad",
+      "fr-CA": "réduction du courant admissible",
+      "zh-Hans": "降容"
+    },
+    "ambient temperature": {
+      "gloss": "Temperature of the surrounding air or environment.",
+      "es": "temperatura ambiente",
+      "fr-CA": "température ambiante",
+      "zh-Hans": "环境温度"
+    },
+    "terminal temperature rating": {
+      "gloss": "Maximum temperature rating permitted by the connected terminal.",
+      "es": "temperatura nominal de las terminales",
+      "fr-CA": "température nominale des bornes",
+      "zh-Hans": "端子额定温度"
+    },
+    "copper": {
+      "gloss": "Copper conductor material.",
+      "es": "cobre",
+      "fr-CA": "cuivre",
+      "zh-Hans": "铜"
+    },
+    "aluminum": {
+      "gloss": "Aluminum conductor material.",
+      "es": "aluminio",
+      "fr-CA": "aluminium",
+      "zh-Hans": "铝"
+    },
+    "box fill": {
+      "gloss": "Code calculation limiting conductors and devices inside an electrical box.",
+      "es": "llenado de caja",
+      "fr-CA": "remplissage de boîte",
+      "zh-Hans": "接线盒填充"
+    },
+    "conduit fill": {
+      "gloss": "Code calculation limiting conductor area inside a raceway.",
+      "es": "llenado de tubo conduit",
+      "fr-CA": "remplissage de conduit",
+      "zh-Hans": "导管填充"
+    },
+    "service": {
+      "gloss": "The electrical supply connection and equipment at the building entrance.",
+      "es": "acometida",
+      "fr-CA": "branchement",
+      "zh-Hans": "供电进线"
+    },
+    "mandatory": {
+      "gloss": "Required by the governing rule, not optional.",
+      "es": "obligatorio",
+      "fr-CA": "obligatoire",
+      "zh-Hans": "强制"
+    },
+    "recommendation": {
+      "gloss": "Advised for good practice but not generally enforceable.",
+      "es": "recomendación",
+      "fr-CA": "recommandation",
+      "zh-Hans": "建议"
+    },
+    "within the limit": {
+      "gloss": "At or below a stated maximum.",
+      "es": "dentro del límite",
+      "fr-CA": "dans la limite",
+      "zh-Hans": "在限值内"
+    },
+    "over the limit": {
+      "gloss": "Above a stated maximum.",
+      "es": "supera el límite",
+      "fr-CA": "au-dessus de la limite",
+      "zh-Hans": "超出限值"
+    },
+    "must": {
+      "gloss": "Expresses a requirement.",
+      "es": "debe",
+      "fr-CA": "doit",
+      "zh-Hans": "必须"
+    },
+    "should": {
+      "gloss": "Expresses advice rather than a requirement.",
+      "es": "debería",
+      "fr-CA": "devrait",
+      "zh-Hans": "应"
+    },
+    "rated for": {
+      "gloss": "Having an approved nominal capacity for the stated duty.",
+      "es": "con capacidad nominal para",
+      "fr-CA": "homologué pour",
+      "zh-Hans": "额定适用于"
+    }
+  }
+}

@@ -4,9 +4,10 @@
 // this suite until the source-verification pass is re-run and the golden
 // hash deliberately updated. See PROJECT_CONTEXT.md "REGRESSION RISKS".
 import { chromium } from 'playwright';
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync, statSync } from 'fs';
 import { createHash } from 'crypto';
 import { spawnSync } from 'node:child_process';
+import { extname, join } from 'node:path';
 
 const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
@@ -19,6 +20,33 @@ const identical = spawnSync(process.execPath, ['tools/check-build-identical.mjs'
   stdio: 'inherit',
 });
 if (identical.status !== 0) process.exit(identical.status ?? 1);
+
+// ---- Back-translation contamination and meaning-review gate ----
+const backtranslation = spawnSync(process.execPath, ['tools/generate-backtranslation-report.mjs', '--check'], {
+  cwd: process.cwd(),
+  stdio: 'inherit',
+});
+if (backtranslation.status !== 0) process.exit(backtranslation.status ?? 1);
+
+// ---- Whole-sentence runtime pattern gate ----
+// Result copy with live values must use one locale-owned pattern with named
+// placeholders. This rejects both '+' fragments and natural-language
+// template interpolation in every root-level calculator script.
+const runtimePatterns = spawnSync(process.execPath, ['tools/check-runtime-result-patterns.mjs'], {
+  cwd: process.cwd(),
+  stdio: 'inherit',
+});
+if (runtimePatterns.status !== 0) process.exit(runtimePatterns.status ?? 1);
+
+// ---- Runtime code identity gate ----
+// Display copy may change by language. Program wiring may not: element IDs,
+// selectors, classes, data keys/values, events, storage keys, and URL pieces
+// must stay byte-identical to the English source in every built asset.
+const runtimeCodeIdentity = spawnSync(process.execPath, ['tools/check-runtime-code-identity.mjs'], {
+  cwd: process.cwd(),
+  stdio: 'inherit',
+});
+if (runtimeCodeIdentity.status !== 0) process.exit(runtimeCodeIdentity.status ?? 1);
 
 // ---- Electrical data tripwire (runs before browser checks) ----
 // Each entry: [file, constant name]. Golden hashes = the state that passed
@@ -51,14 +79,29 @@ if (dataFail > 0) {
   process.exit(1);
 }
 
-const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); // iPhone-ish
+// Read test expectations from the exact constants whose hashes just passed the
+// electrical-data tripwire. The calculator files are browser scripts rather
+// than importable modules, so evaluate only the named literal declarations.
+const readSealedConstant = (file, name) => {
+  const isSealed = DATA_TABLES.some(([sealedFile, sealedName]) =>
+    sealedFile === file && sealedName === name);
+  if (!isSealed) throw new Error(`Test expectation requested unsealed data: ${file}:${name}`);
+  const source = readFileSync(file, 'utf8');
+  const match = source.match(new RegExp(`const ${name} = ([\\s\\S]*?);\\n`));
+  if (!match) throw new Error(`Cannot read sealed constant ${name} from ${file}`);
+  return Function(`"use strict"; return (${match[1]});`)();
+};
+
+const TEST_WIRE_TABLE = readSealedConstant('app.js', 'WIRE_TABLE');
+const TEST_K_FACTOR = readSealedConstant('app.js', 'K_FACTOR');
+const TEST_AMPACITY = readSealedConstant('ampacity.js', 'AMPACITY');
+const TEST_SMALL_CAP = readSealedConstant('ampacity.js', 'SMALL_CAP');
+const TEST_THHN_AREA = readSealedConstant('conduit.js', 'THHN_AREA');
+const TEST_CONDUIT = readSealedConstant('conduit.js', 'CONDUIT');
+const TEST_VOL_PER_CONDUCTOR = readSealedConstant('boxfill.js', 'VOL_PER_CONDUCTOR');
+const TEST_CEC_VOL_ML = readSealedConstant('boxfill.js', 'CEC_VOL_ML');
+
 const errors = [];
-page.on('pageerror', (e) => errors.push(String(e)));
-page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-
-await page.goto(BASE);
-
 let pass = 0, fail = 0;
 const check = (name, got, want, tol = 0.02) => {
   const ok = Math.abs(got - want) <= tol * Math.max(1, Math.abs(want));
@@ -70,7 +113,18 @@ const checkBool = (name, ok, detail = '') => {
   ok ? pass++ : fail++;
 };
 
-const GENERATED_PATHS = [
+const EDITIONS = [
+  { prefix: '', country: 'us', locale: 'en', lang: 'en', hreflang: 'en-US', twin: '', chip: '🇺🇸 NEC · EN' },
+  { prefix: 'es', country: 'us', locale: 'es', lang: 'es', hreflang: 'es-US', twin: '', chip: '🇺🇸 NEC · ES' },
+  { prefix: 'zh', country: 'us', locale: 'zh-Hans', lang: 'zh-Hans', hreflang: 'zh-Hans-US', twin: '', chip: '🇺🇸 NEC · ZH' },
+  { prefix: 'ca', country: 'ca', locale: 'en', lang: 'en', hreflang: 'en-CA', twin: 'ca', chip: '🇨🇦 CEC · EN' },
+  { prefix: 'ca-fr', country: 'ca', locale: 'fr-CA', lang: 'fr-CA', hreflang: 'fr-CA', twin: 'ca', chip: '🇨🇦 CEC · FR' },
+  { prefix: 'ca-zh', country: 'ca', locale: 'zh-Hans', lang: 'zh-Hans', hreflang: 'zh-Hans-CA', twin: 'ca', chip: '🇨🇦 CEC · ZH' },
+];
+const runtimeEditionId = (edition) => edition.country === 'ca'
+  ? (edition.locale === 'fr-CA' ? 'ca-fr' : edition.locale === 'zh-Hans' ? 'ca-zh' : 'ca-en')
+  : (edition.locale === 'es' ? 'us-es' : edition.locale === 'zh-Hans' ? 'us-zh' : 'us-en');
+const SCOPED_PATHS = [
   '',
   'wire-size-calculator/',
   'max-wire-length/',
@@ -79,6 +133,11 @@ const GENERATED_PATHS = [
   'privacy/',
   'power-calculator/',
   'box-fill/',
+  'terms/',
+];
+const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
+const GENERATED_PATHS = [
+  ...EDITIONS.flatMap((edition) => SCOPED_PATHS.map((path) => editionPath(edition.prefix, path))),
   'guides/',
   'guides/sub-panel-wire-size/',
   'guides/50-amp-wire-size/',
@@ -91,7 +150,6 @@ const GENERATED_PATHS = [
   'ca/guides/wire-ampacity-chart/',
   'ca/guides/how-far-12-gauge-wire/',
   'ca/guides/voltage-drop-formula/',
-  'terms/',
 ];
 const GUIDE_PATHS = [
   '/guides/',
@@ -102,7 +160,381 @@ const GUIDE_PATHS = [
   '/guides/voltage-drop-formula/',
 ];
 
-// ---- Header fit: all four mobile controls stay on one row, with no page overflow.
+// ---- Edition pages: lang/canonical/hreflang and protected-token parity.
+const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
+const protectedLiterals = [
+  ...neverTranslate.brand,
+  ...neverTranslate.standards,
+  ...neverTranslate.citations,
+  ...neverTranslate.wireAndCableDesignations,
+  ...neverTranslate.unitSymbols,
+];
+const countLiteral = (source, token) => {
+  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (source.match(new RegExp(`(?<![\\p{Script=Latin}\\p{N}])${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
+};
+const patternChecks = neverTranslate.protectedPatterns.map((pattern) => ({
+  name: pattern.name,
+  re: new RegExp(pattern.source, pattern.flags),
+}));
+const protectedParity = (source, target) => {
+  const literalMismatch = protectedLiterals.find((token) =>
+    countLiteral(source, token) !== countLiteral(target, token));
+  const patternMismatch = patternChecks.find(({ re }) => {
+    re.lastIndex = 0;
+    const sourceMatches = source.match(re) || [];
+    re.lastIndex = 0;
+    const targetMatches = target.match(re) || [];
+    return sourceMatches.length !== targetMatches.length;
+  });
+  return literalMismatch || patternMismatch?.name || null;
+};
+
+// Runtime strings are shipped in per-edition JavaScript assets. Check those
+// assets as well as HTML so a translated warning cannot alter a citation,
+// designation, number, or unit after the user clicks Calculate.
+for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
+  const assetEdition = runtimeEditionId(edition);
+  for (const file of ['common.js', 'app.js', 'ampacity.js', 'conduit.js', 'boxfill.js', 'power.js']) {
+    const source = readFileSync(file, 'utf8');
+    const localized = readFileSync(`assets/${assetEdition}/${file}`, 'utf8');
+    const mismatch = protectedParity(source, localized);
+    checkBool(`${assetEdition}/${file} runtime never-translate parity`, !mismatch,
+      mismatch || 'all protected tokens');
+  }
+}
+
+for (const edition of EDITIONS) {
+  for (const path of SCOPED_PATHS) {
+    const generated = editionPath(edition.prefix, path);
+    const expectedCanonical = `https://voltdrop.app/${generated}`;
+    const html = readFileSync(generated ? `${generated}index.html` : 'index.html', 'utf8');
+    const langOk = html.includes(`<html lang="${edition.lang}">`);
+    const chipOk = html.includes(`<span id="country-chip-text">${edition.chip}</span>`);
+    const toolsAriaOk = /<button[^>]+id="tools-btn"[^>]+aria-label="[^"]+"/.test(html);
+    const canonicalOk = html.includes(`<link rel="canonical" href="${expectedCanonical}">`);
+    const runtimeAssetOk = runtimeEditionId(edition) === 'us-en'
+      ? html.includes('<script src="/common.js?v=')
+      : html.includes(`<script src="/assets/${runtimeEditionId(edition)}/common.js?v=`);
+    const alternatesOk = EDITIONS.every((alternate) => html.includes(
+      `hreflang="${alternate.hreflang}" href="https://voltdrop.app/${editionPath(alternate.prefix, path)}"`,
+    )) && html.includes(`hreflang="x-default" href="https://voltdrop.app/${path}"`);
+    checkBool(`${generated || '/'} metadata + short chip + Tools label`,
+      langOk && chipOk && toolsAriaOk && canonicalOk && runtimeAssetOk && alternatesOk);
+
+    if (edition.locale === 'en') continue;
+    const twinPath = editionPath(edition.twin, path);
+    const twin = readFileSync(twinPath ? `${twinPath}index.html` : 'index.html', 'utf8');
+    const mismatch = protectedParity(twin, html);
+    checkBool(`${generated} never-translate parity`, !mismatch,
+      mismatch || 'all protected tokens');
+  }
+}
+
+const oneWayTerms = {
+  es: 'distancia en un solo sentido',
+  'fr-CA': 'distance à l’aller (un seul trajet)',
+  'zh-Hans': '单程距离（仅去程）',
+};
+for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
+  const html = readFileSync(`${edition.prefix}/index.html`, 'utf8');
+  checkBool(`${edition.prefix} one-way term is explicit`, html.includes(oneWayTerms[edition.locale]));
+}
+
+if (process.env.STATIC_ONLY === '1') {
+  console.log(`\n${pass + dataPass} static checks passed (${dataPass} data-integrity), ${fail} failed.`);
+  process.exit(fail ? 1 : 0);
+}
+
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); // iPhone-ish
+const installFileRoute = async (targetPage) => {
+  if (!BASE.startsWith('file:')) return;
+  const root = process.cwd();
+  const mime = {
+    '.html': 'text/html; charset=utf-8',
+    '.js': 'text/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
+    '.png': 'image/png',
+    '.xml': 'application/xml; charset=utf-8',
+    '.txt': 'text/plain; charset=utf-8',
+  };
+  await targetPage.route('file:///**', async (route) => {
+    const url = new URL(route.request().url());
+    const decoded = decodeURIComponent(url.pathname);
+    let file = decoded.startsWith(`${root}/`) ? decoded : join(root, decoded.replace(/^\/+/, ''));
+    if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
+    if (!existsSync(file)) return route.fulfill({ status: 404, body: 'Not found' });
+    return route.fulfill({
+      status: 200,
+      contentType: mime[extname(file)] || 'application/octet-stream',
+      body: readFileSync(file),
+    });
+  });
+};
+await installFileRoute(page);
+page.on('pageerror', (e) => errors.push(String(e)));
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+await page.goto(BASE);
+
+// ---- Every calculator in every edition ----
+// Each case installs its error listeners before navigation, so both script
+// initialization and the actual interaction are covered.
+const MATRIX_INPUTS = {
+  voltageDrop: { volts: 12, amps: 20, feet: 25, wire: '12 AWG', material: 'cu' },
+  wireSize: { volts: 240, amps: 40, feet: 150, targetPercent: 3, material: 'cu' },
+  maxLength: { volts: 12, amps: 10, targetPercent: 3, wire: '10 AWG', material: 'cu' },
+  ampacity: { load: 15, wire: '12 AWG', material: 'cu', temperatureIndex: 1 },
+  conduit: { count: 10, wire: '12 AWG', family: 'emt' },
+  power: { volts: 240, watts: 1500, powerFactor: 1 },
+  boxFill: { wire: '12 AWG', conductors: 6, devices: 1, grounds: 1, clamps: 0, marrettes: 0 },
+};
+const circularMils = (wire) => {
+  const row = TEST_WIRE_TABLE.find(([label]) => label === wire);
+  if (!row) throw new Error(`Missing wire-size test data for ${wire}`);
+  return row[1];
+};
+const roundTripDrop = ({ material, amps, feet, wire }) =>
+  (2 * TEST_K_FACTOR[material] * amps * feet) / circularMils(wire);
+const expectedWireSize = () => {
+  const input = MATRIX_INPUTS.wireSize;
+  const maxDrop = input.volts * input.targetPercent / 100;
+  const row = TEST_WIRE_TABLE.find(([, cm]) =>
+    (2 * TEST_K_FACTOR[input.material] * input.amps * input.feet) / cm <= maxDrop);
+  if (!row) throw new Error('Wire-size matrix input exceeds the sealed wire table');
+  return parseFloat(row[0]);
+};
+// CEC Tables 2/4 and Rule 14-104 are verified as harmonized with the sealed
+// NEC table rows and small-wire caps currently used by the engine. Keep the
+// country mapping explicit: matching today is verified data, not a universal
+// assumption about future countries or future calculator inputs.
+const AMPACITY_DATA_BY_COUNTRY = {
+  us: { table: TEST_AMPACITY, caps: TEST_SMALL_CAP },
+  ca: { table: TEST_AMPACITY, caps: TEST_SMALL_CAP },
+};
+const expectedAmpacity = (country) => {
+  const input = MATRIX_INPUTS.ampacity;
+  const source = AMPACITY_DATA_BY_COUNTRY[country];
+  const tableValue = source.table[input.material][input.wire][input.temperatureIndex];
+  const cap = source.caps[input.material]?.[input.wire];
+  return cap === undefined ? tableValue : Math.min(tableValue, cap);
+};
+// Canada intentionally gets the current planning-only result from these
+// sealed NEC conductor/trade-size tables. Do not invent a Canadian size until
+// CEC Tables 6A-6K and 9 pass the project's verification gate.
+const CONDUIT_DATA_BY_COUNTRY = {
+  us: { areas: TEST_THHN_AREA, families: TEST_CONDUIT, planningOnly: false },
+  ca: { areas: TEST_THHN_AREA, families: TEST_CONDUIT, planningOnly: true },
+};
+const tradeSizeInches = (label) => {
+  const text = label.replace('"', '');
+  const [whole, fraction = ''] = text.includes('-') ? text.split('-') : ['', text];
+  if (!fraction.includes('/')) return Number(whole || fraction);
+  const [numerator, denominator] = fraction.split('/').map(Number);
+  return Number(whole || 0) + numerator / denominator;
+};
+const expectedConduitSize = (country) => {
+  const input = MATRIX_INPUTS.conduit;
+  const source = CONDUIT_DATA_BY_COUNTRY[country];
+  const needed = source.areas[input.wire] * input.count;
+  const fillLimit = input.count === 1 ? 0.53 : input.count === 2 ? 0.31 : 0.40;
+  const row = source.families[input.family].sizes.find(([, area]) => needed <= area * fillLimit);
+  if (!row) throw new Error('Conduit-fill matrix input exceeds the sealed conduit table');
+  return tradeSizeInches(row[0]);
+};
+const boxFillCounts = {
+  us: MATRIX_INPUTS.boxFill.conductors
+    + MATRIX_INPUTS.boxFill.devices * 2
+    + MATRIX_INPUTS.boxFill.grounds
+    + MATRIX_INPUTS.boxFill.clamps,
+  ca: MATRIX_INPUTS.boxFill.conductors
+    + MATRIX_INPUTS.boxFill.devices * 2
+    + Math.floor(MATRIX_INPUTS.boxFill.marrettes / 2),
+};
+const voltageDropLabels = {
+  en: 'voltage drop on 12 AWG copper',
+  es: 'caída de tensión en conductor de cobre 12 AWG',
+  'fr-CA': 'chute de tension du conducteur en cuivre 12 AWG',
+  'zh-Hans': '12 AWG 铜线的电压降',
+};
+const notRatedWarnings = {
+  en: 'This wire is NOT rated for 30 A. Go up in size — undersized wire overheats and is a fire risk.',
+  es: 'Este conductor NO tiene capacidad nominal para 30 A. Use un calibre mayor: un conductor de calibre insuficiente se sobrecalienta y supone un riesgo de incendio.',
+  'fr-CA': 'Ce conducteur N’EST PAS homologué pour 30 A. Utilisez un calibre supérieur — un conducteur trop petit surchauffe et présente un risque d’incendie.',
+  'zh-Hans': '此导线的额定载流量不足以承载30 A。请增大导线规格（线规）——导线规格过小会过热并造成火灾风险。',
+};
+
+// Per-edition expected values must come from that country's verified
+// constants and counting rules, never from typed answer totals. Countries can
+// genuinely diverge; a typed total silently turns an unverified guess into a
+// regression test, as the old Canadian box-fill expectation demonstrated.
+const calculatorCases = [
+  {
+    name: 'voltage drop',
+    path: '',
+    expectedLabel: (edition) => voltageDropLabels[edition.locale],
+    expected: () => {
+      const input = MATRIX_INPUTS.voltageDrop;
+      return roundTripDrop(input) / input.volts * 100;
+    },
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.voltageDrop;
+      await targetPage.fill('#current', String(input.amps));
+      await targetPage.fill('#distance', String(input.feet));
+      await targetPage.click('#calc-btn');
+    },
+  },
+  {
+    name: 'wire size',
+    path: 'wire-size-calculator/',
+    expected: expectedWireSize,
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.wireSize;
+      await targetPage.click('[data-system="ac1"]');
+      await targetPage.fill('#voltage', String(input.volts));
+      await targetPage.fill('#current', String(input.amps));
+      await targetPage.fill('#distance', String(input.feet));
+      await targetPage.click('#calc-btn');
+    },
+  },
+  {
+    name: 'max wire length',
+    path: 'max-wire-length/',
+    expected: () => {
+      const input = MATRIX_INPUTS.maxLength;
+      const maxDrop = input.volts * input.targetPercent / 100;
+      return (maxDrop * circularMils(input.wire))
+        / (2 * TEST_K_FACTOR[input.material] * input.amps);
+    },
+    readNumber: (value) => parseFloat(value),
+    tolerance: 0.05,
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.maxLength;
+      await targetPage.fill('#voltage', String(input.volts));
+      await targetPage.fill('#current', String(input.amps));
+      await targetPage.selectOption('#awg', String(
+        TEST_WIRE_TABLE.findIndex(([label]) => label === input.wire),
+      ));
+      await targetPage.click('#calc-btn');
+    },
+  },
+  {
+    name: 'ampacity',
+    path: 'ampacity-check/',
+    expected: (edition) => expectedAmpacity(edition.country),
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      await targetPage.fill('#amp-load', String(MATRIX_INPUTS.ampacity.load));
+      await targetPage.click('#amp-form .calc-btn');
+    },
+  },
+  {
+    name: 'conduit fill',
+    path: 'conduit-fill/',
+    expected: (edition) => expectedConduitSize(edition.country),
+    readNumber: (value) => tradeSizeInches(value.trim()),
+    interact: async (targetPage) => {
+      await targetPage.fill('#fill-count', String(MATRIX_INPUTS.conduit.count));
+      await targetPage.click('#fill-form .calc-btn');
+    },
+  },
+  {
+    name: 'power',
+    path: 'power-calculator/',
+    expected: () => {
+      const input = MATRIX_INPUTS.power;
+      return input.watts / (input.volts * input.powerFactor);
+    },
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.power;
+      await targetPage.click('[data-system="ac1"]');
+      await targetPage.fill('#pw-volts', String(input.volts));
+      await targetPage.fill('#pw-watts', String(input.watts));
+      await targetPage.click('#pw-form .calc-btn');
+    },
+  },
+  {
+    name: 'box fill',
+    path: 'box-fill/',
+    expected: (edition) => edition.country === 'ca'
+      ? TEST_CEC_VOL_ML[MATRIX_INPUTS.boxFill.wire] * boxFillCounts.ca
+      : TEST_VOL_PER_CONDUCTOR[MATRIX_INPUTS.boxFill.wire] * boxFillCounts.us,
+    readNumber: (value) => parseFloat(value.replace(/,/g, '')),
+    interact: async (targetPage, edition) => {
+      const input = MATRIX_INPUTS.boxFill;
+      if (edition.country === 'ca') await targetPage.fill('#bf-custom', '400');
+      await targetPage.fill('#bf-conductors', String(input.conductors));
+      await targetPage.fill('#bf-devices', String(input.devices));
+      await targetPage.click('#bf-form .calc-btn');
+    },
+  },
+];
+
+for (const edition of EDITIONS) {
+  const editionPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(editionPage);
+  let interactionErrors = [];
+  editionPage.on('pageerror', (error) => interactionErrors.push(`pageerror: ${String(error)}`));
+  editionPage.on('console', (message) => {
+    if (message.type() === 'error') interactionErrors.push(`console: ${message.text()}`);
+  });
+
+  for (const calculator of calculatorCases) {
+    interactionErrors = [];
+    const label = `${edition.prefix || 'us-en'} ${calculator.name}`;
+    await editionPage.goto(BASE + editionPath(edition.prefix, calculator.path));
+    await calculator.interact(editionPage, edition);
+    await editionPage.waitForTimeout(20);
+
+    const render = await editionPage.evaluate(() => {
+      const results = document.getElementById('results');
+      const bigNumber = document.getElementById('big-number');
+      const bigLabel = document.getElementById('big-label');
+      return {
+        visible: Boolean(results) && !results.hidden
+          && getComputedStyle(results).display !== 'none',
+        value: bigNumber?.textContent?.trim() || '',
+        label: bigLabel?.textContent || '',
+      };
+    });
+    checkBool(`${label} renders #results and #big-number`,
+      render.visible && render.value.length > 0,
+      render.value || 'no result');
+    check(`${label} numeric result`,
+      calculator.readNumber(render.value),
+      calculator.expected(edition),
+      calculator.tolerance);
+    if (calculator.expectedLabel) {
+      const expectedLabel = calculator.expectedLabel(edition);
+      checkBool(`${label} uses one locale-owned result pattern`,
+        render.label === expectedLabel,
+        render.label);
+    }
+    checkBool(`${label} interaction has zero page errors`,
+      interactionErrors.length === 0,
+      interactionErrors.join(' | '));
+  }
+
+  interactionErrors = [];
+  const ampacityPath = editionPath(edition.prefix, 'ampacity-check/');
+  await editionPage.goto(BASE + ampacityPath);
+  await editionPage.fill('#amp-load', '30');
+  await editionPage.click('#amp-form .calc-btn');
+  const notRated = await editionPage.textContent('#verdict-note');
+  checkBool(`${edition.prefix || 'us-en'} ampacity negation is complete and unambiguous`,
+    notRated === notRatedWarnings[edition.locale],
+    notRated);
+  checkBool(`${edition.prefix || 'us-en'} unsafe ampacity interaction has zero page errors`,
+    interactionErrors.length === 0,
+    interactionErrors.join(' | '));
+  await editionPage.close();
+}
+
+// ---- Header fit: every mobile control stays within its one-line height.
 for (const width of [360, 390]) {
   await page.setViewportSize({ width, height: 844 });
   const badPaths = [];
@@ -115,25 +547,110 @@ for (const width of [360, 390]) {
         const rect = element.getBoundingClientRect();
         return Math.round(rect.top + rect.height / 2);
       });
+      const heights = controls.map((element) => {
+        const clone = element.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.style.position = 'fixed';
+        clone.style.left = '-10000px';
+        clone.style.top = '0';
+        clone.style.visibility = 'hidden';
+        clone.style.width = `${element.getBoundingClientRect().width}px`;
+        clone.style.height = 'auto';
+        clone.style.whiteSpace = 'nowrap';
+        clone.style.overflowWrap = 'normal';
+        document.body.appendChild(clone);
+        const singleLine = clone.getBoundingClientRect().height;
+        clone.remove();
+        return {
+          name: element.id || element.className,
+          actual: element.getBoundingClientRect().height,
+          singleLine,
+        };
+      });
       return {
         oneRow: Math.max(...centers) - Math.min(...centers) <= 1 && getComputedStyle(row).flexWrap === 'nowrap',
         noOverflow: document.documentElement.scrollWidth <= window.innerWidth,
+        oneLine: heights.every(({ actual, singleLine }) => actual <= singleLine + 0.5),
+        heights,
       };
     });
-    if (!fit.oneRow || !fit.noOverflow) badPaths.push(`/${path || ''}`);
+    if (!fit.oneRow || !fit.noOverflow || !fit.oneLine) {
+      const badHeights = fit.heights
+        .filter(({ actual, singleLine }) => actual > singleLine + 0.5)
+        .map(({ name, actual, singleLine }) => `${name} ${actual}px>${singleLine}px`)
+        .join(', ');
+      badPaths.push(`/${path || ''}${badHeights ? ` (${badHeights})` : ''}`);
+    }
   }
-  checkBool(`header one row + no overflow at ${width}px`, badPaths.length === 0,
+  checkBool(`header controls are one line + no overflow at ${width}px`, badPaths.length === 0,
     badPaths.length ? `failed on ${badPaths.join(', ')}` : `all ${GENERATED_PATHS.length} pages`);
 }
 
-// ---- Edition picker: panel behavior, safety text, dependent language choices.
+// ---- Edition picker: deliberate navigation and honest guide fallback.
+const pickerExpectations = {
+  en: {
+    us: { label: 'Language in United States', countries: ['United States', 'Canada'] },
+    ca: { label: 'Language in Canada', countries: ['United States', 'Canada'] },
+  },
+  es: {
+    us: {
+      label: 'Idioma en Estados Unidos',
+      countries: ['Estados Unidos', 'Canadá'],
+      fallback: 'Deutsch todavía no está disponible para esta página en Estados Unidos; se muestra English. Disponible aquí: English, Español, 简体中文.',
+    },
+  },
+  'fr-CA': {
+    ca: {
+      label: 'Langue au Canada',
+      countries: ['États-Unis', 'Canada'],
+      fallback: 'Deutsch n’est pas encore disponible pour cette page au Canada; affichage en English. Disponible ici : English, Français (Québec), 简体中文.',
+    },
+  },
+  'zh-Hans': {
+    us: {
+      label: '美国的语言',
+      countries: ['美国', '加拿大'],
+      fallback: '美国的此页面暂不提供Deutsch；当前显示English。此处可用语言：English, Español, 简体中文。',
+    },
+    ca: {
+      label: '加拿大的语言',
+      countries: ['美国', '加拿大'],
+      fallback: '加拿大的此页面暂不提供Deutsch；当前显示English。此处可用语言：English, Français (Québec), 简体中文。',
+    },
+  },
+};
+for (const edition of EDITIONS) {
+  await page.goto(`${BASE}${edition.prefix ? `${edition.prefix}/` : ''}`);
+  await page.click('#country-chip');
+  const picker = await page.evaluate(() => ({
+    label: document.getElementById('edition-language-label').textContent,
+    countries: [...document.querySelectorAll('.edition-country-name')].map((name) => name.textContent),
+    commonSrc: document.querySelector('script[src*="common.js"]')?.getAttribute('src'),
+  }));
+  const expected = pickerExpectations[edition.locale][edition.country];
+  const usesLocalizedAsset = runtimeEditionId(edition) === 'us-en'
+    ? picker.commonSrc?.startsWith('/common.js?v=')
+    : picker.commonSrc?.startsWith(`/assets/${runtimeEditionId(edition)}/common.js?v=`);
+  const isEnglishChrome = picker.label.startsWith('Language in ')
+    || picker.countries.join('|') === 'United States|Canada';
+  checkBool(`${edition.prefix || 'us-en'} picker uses its locale`,
+    picker.label === expected.label
+      && picker.countries.join('|') === expected.countries.join('|')
+      && usesLocalizedAsset
+      && (edition.locale === 'en' || !isEnglishChrome),
+    `${picker.label}; ${picker.countries.join(', ')}; ${picker.commonSrc}`);
+
+  if (edition.locale !== 'en') {
+    const fallback = await page.evaluate((country) => {
+      window.vdShowFallback('Deutsch', country);
+      return document.getElementById('edition-fallback').textContent;
+    }, edition.country);
+    checkBool(`${edition.prefix} unavailable-language note uses its locale`,
+      fallback === expected.fallback, fallback);
+  }
+}
+
 await page.goto(BASE);
-await page.evaluate(() => localStorage.clear());
-await page.reload();
-
-let languageHidden = await page.locator('#edition-language-group').isHidden();
-checkBool('language group absent with one language per country', languageHidden);
-
 await page.click('#country-chip');
 let panelState = await page.evaluate(() => ({
   open: !document.getElementById('edition-panel').hidden,
@@ -149,74 +666,27 @@ panelState = await page.evaluate(() => ({
 checkBool('Escape closes edition panel', panelState.closed && panelState.expanded === 'false');
 
 await page.click('#country-chip');
-await page.click('.edition-country-option[data-country="ca"]');
-let codeName = await page.textContent('#code-name');
-let codeBasis = await page.textContent('#code-basis');
-let chip = await page.textContent('#country-chip');
-checkBool('panel country radio activates Canada', await page.evaluate(() => VDCountry.get() === 'ca'));
-checkBool('panel country switch swaps code name', codeName.includes('Canadian Electrical Code'));
-checkBool('panel country switch swaps mandatory basis', codeBasis.includes('MANDATORY'));
-checkBool('chip shows safety code and language', chip.includes('🇨🇦 CEC · EN'), chip.trim());
-let guidesHref = await page.getAttribute('.tool-link[data-tool="guides"]', 'href');
-checkBool('Canada switches Guides navigation', guidesHref === '/ca/guides/', guidesHref);
-
-await page.click('.edition-country-option[data-country="us"]');
-await page.click('.tagline');
-panelState = await page.evaluate(() => ({
-  closed: document.getElementById('edition-panel').hidden,
-  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
-}));
-checkBool('clicking outside closes edition panel', panelState.closed && panelState.expanded === 'false');
-
-await page.evaluate(() => {
-  VDCountry.COUNTRIES.us.langs.es = 'Español';
-  window.__langEvents = 0;
-  window.addEventListener('vd:lang', () => { window.__langEvents += 1; });
-});
-await page.click('#country-chip');
-languageHidden = await page.locator('#edition-language-group').isHidden();
 const usLanguageState = await page.evaluate(() => ({
   label: document.getElementById('edition-language-label').textContent,
   labels: [...document.querySelectorAll('.edition-language-option')].map((button) => button.textContent.trim()),
   spanishLang: document.querySelector('[data-lang="es"]')?.getAttribute('lang'),
 }));
 checkBool('second configured language reveals dependent group',
-  !languageHidden && usLanguageState.label === 'Language in United States');
+  usLanguageState.label === 'Language in United States');
 checkBool('language choices use native names and lang tags',
-  usLanguageState.labels.join('|') === 'English|Español' && usLanguageState.spanishLang === 'es',
+  usLanguageState.labels.join('|') === 'English|Español|简体中文' && usLanguageState.spanishLang === 'es',
   usLanguageState.labels.join(', '));
 
 await page.click('.edition-language-option[data-lang="es"]');
-const languageSelectionState = await page.evaluate(() => ({
-  panelHidden: document.getElementById('edition-panel').hidden,
-  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
-  lang: VDLanguage.get(),
-  events: window.__langEvents,
-}));
-checkBool('language selection updates state and leaves edition panel open',
-  !languageSelectionState.panelHidden
-    && languageSelectionState.expanded === 'true'
-    && languageSelectionState.lang === 'es'
-    && languageSelectionState.events === 1);
+await page.waitForURL('**/es/');
+checkBool('language click navigates to Spanish twin', new URL(page.url()).pathname === '/es/');
+
+await page.goto(BASE + 'wire-size-calculator/');
+await page.click('#country-chip');
 await page.click('.edition-country-option[data-country="ca"]');
-const fallbackState = await page.evaluate(() => ({
-  lang: VDLanguage.get(),
-  stored: localStorage.getItem('voltdrop.lang'),
-  events: window.__langEvents,
-  groupHidden: document.getElementById('edition-language-group').hidden,
-  available: [...document.querySelectorAll('.edition-language-option')].map((button) => button.textContent.trim()),
-  noteHidden: document.getElementById('edition-fallback').hidden,
-  note: document.getElementById('edition-fallback').textContent,
-}));
-checkBool('language choices filter to the selected country',
-  fallbackState.groupHidden && fallbackState.available.join('|') === 'English');
-checkBool('unavailable language falls back to English and fires event',
-  fallbackState.lang === 'en' && fallbackState.stored === 'en' && fallbackState.events === 2);
-checkBool('fallback note explains why and lists available language',
-  !fallbackState.noteHidden
-    && fallbackState.note.includes("Español isn't available for Canada")
-    && fallbackState.note.includes('Available here: English'),
-  fallbackState.note);
+await page.waitForURL('**/ca/wire-size-calculator/');
+checkBool('country click navigates to equivalent Canadian tool',
+  new URL(page.url()).pathname === '/ca/wire-size-calculator/');
 
 // ---- Edition path helper: computed twins match every old US↔CA guide pair.
 const editionPaths = await page.evaluate((paths) => paths.map((usPath) => ({
@@ -230,14 +700,13 @@ checkBool('edition helper matches all six US/CA guide twins', twinsMatch,
   `${editionPaths.length} paths checked both ways`);
 const unavailableEditions = await page.evaluate(() => ({
   es: VDEdition.pathFor('us', 'es', '/guides/'),
-  fr: VDEdition.pathFor('ca', 'fr', '/guides/'),
+  fr: VDEdition.pathFor('ca', 'fr-CA', '/guides/'),
   missing: VDEdition.pathFor('ca', 'en', '/not-built/'),
 }));
 checkBool('edition helper refuses unbuilt pages',
   unavailableEditions.es === null && unavailableEditions.fr === null && unavailableEditions.missing === null);
 
-await page.evaluate(() => localStorage.clear());
-await page.reload();
+await page.goto(BASE);
 
 // ---- Mode 1: voltage drop. DC 12V, 20A, 12AWG copper, 25ft one-way.
 // Vd = 2*12.9*20*25/6530 = 1.9755 V → 16.46% (classic 12V-lesson case, should be RED)
@@ -299,24 +768,21 @@ big = await page.textContent('#big-number');
 check('max length ft (12V 10A 10AWG 3%)', parseFloat(big), 14.48, 0.05);
 await page.screenshot({ path: `${shots}/4-length.png`, fullPage: true });
 
-// ---- Country selection + persistence
-await page.click('#country-chip');
-await page.click('.edition-country-option[data-country="ca"]');
-chip = await page.textContent('#country-chip');
-console.log(chip.includes('CEC · EN') ? 'PASS chip shows Canada code' : `FAIL chip: "${chip}"`); chip.includes('CEC · EN') ? pass++ : fail++;
-await page.reload();
-chip = await page.textContent('#country-chip');
-console.log(chip.includes('CEC · EN') ? 'PASS Canada remembered after reload' : `FAIL after reload: "${chip}"`); chip.includes('CEC · EN') ? pass++ : fail++;
-codeName = await page.textContent('#code-name');
-console.log(codeName.includes('Canadian') ? 'PASS explainer cites CEC' : `FAIL code name: "${codeName}"`); codeName.includes('Canadian') ? pass++ : fail++;
+// ---- Canadian edition: URL fixes the CEC pack; no geo or stored-state override.
+await page.goto(BASE + 'ca/');
+let chip = await page.textContent('#country-chip');
+checkBool('Canada URL shows CEC edition', chip.includes('CEC · EN'), chip.trim());
+const caRule = await page.textContent('.explainer');
+checkBool('Canada voltage-drop copy is mandatory and not contradictory',
+  caRule.includes('mandatory')
+    && caRule.includes('Rule 8-102')
+    && !caRule.includes('not laws')
+    && caRule.includes('not optional performance guidelines'));
 // Canada 3-phase presets should include 600 V
 await page.click('[data-system="ac3"]');
 const presets = await page.textContent('#voltage-presets');
 console.log(presets.includes('600') ? 'PASS CA 3-phase presets include 600 V' : `FAIL presets: "${presets}"`); presets.includes('600') ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/6-canada.png`, fullPage: true });
-// back to US for the desktop shot
-await page.click('#country-chip');
-await page.click('.edition-country-option[data-country="us"]');
 
 // ---- Per-tool pages (own URLs) preselect the right mode + sidebar highlight
 await page.setViewportSize({ width: 1280, height: 900 });

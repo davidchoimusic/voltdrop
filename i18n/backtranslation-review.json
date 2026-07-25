@@ -1,0 +1,2157 @@
+{
+  "policy": "Pass B: source-aware comparison after the Pass A output was saved and sealed.",
+  "targetDigest": "361be172747ed449fef874854a45fdc312aee3e20003a599b0188af35a8eb9ce",
+  "backtranslationDigest": "58db5a8f3191164cf695207842b2020226a31a1850827a42f4859c6b51d53fdb",
+  "entries": [
+    {
+      "id": "bt-0001",
+      "status": "PASS",
+      "verdict": "“amps” is rendered as “amperes”; the maximum continuous current, overheating condition, and table basis are preserved (us-es/es, bt-0001)."
+    },
+    {
+      "id": "bt-0002",
+      "status": "PASS",
+      "verdict": "“separate” is rendered as “independent”; the checks remain independent and still must be passed (us-es/es, bt-0002)."
+    },
+    {
+      "id": "bt-0003",
+      "status": "PASS",
+      "verdict": "“attics/engine” is rendered as “attics machine”; the derating direction and 3-hour/25% margin are unchanged (us-es/es, bt-0003)."
+    },
+    {
+      "id": "bt-0004",
+      "status": "PASS",
+      "verdict": "“it's what” is rendered as “is the temperature rating of”; the temperature restriction and safe-use direction are unchanged (us-es/es, bt-0004)."
+    },
+    {
+      "id": "bt-0005",
+      "status": "PASS",
+      "verdict": "“When unsure” is rendered as “If in doubt”; the 75°C, 60°C, and 90°C rules keep the same force (us-es/es, bt-0005)."
+    },
+    {
+      "id": "bt-0006",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Which insulation temperature column should I use?”; the question still asks for the applicable temperature column (us-es/es, bt-0006)."
+    },
+    {
+      "id": "bt-0007",
+      "status": "PASS",
+      "verdict": "The back-translation adds “grounding conductors together occupy”; grounding conductors retain exactly the same count (us-es/es, bt-0007)."
+    },
+    {
+      "id": "bt-0008",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “each”; each connector pair still counts once by the largest connected conductor (us-es/es, bt-0008)."
+    },
+    {
+      "id": "bt-0009",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Built-in”; the clamp counting or exclusion rule is unchanged (us-es/es, bt-0009)."
+    },
+    {
+      "id": "bt-0010",
+      "status": "PASS",
+      "verdict": "“every hot” is rendered as “each phase”; entering and pass-through conductors remain counted and internal pigtails excluded (us-es/es, bt-0010)."
+    },
+    {
+      "id": "bt-0011",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overloaded”; minimum box volume and the overfill hazard remain explicit (us-es/es, bt-0011)."
+    },
+    {
+      "id": "bt-0012",
+      "status": "PASS",
+      "verdict": "“pass-through wires” is rendered as “conductors that pass through the box”; the question concerns the same pass-through count (us-es/es, bt-0012)."
+    },
+    {
+      "id": "bt-0013",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (us-es/es, bt-0013)."
+    },
+    {
+      "id": "bt-0014",
+      "status": "PASS",
+      "verdict": "“big” is rendered as “large”; the result still distinguishes adequate from too-small capacity (us-es/es, bt-0014)."
+    },
+    {
+      "id": "bt-0015",
+      "status": "PASS",
+      "verdict": "The back-translation adds “use”; 14 AWG/15 A, 12 AWG/20 A, and the largest-size safety choice remain (us-es/es, bt-0015)."
+    },
+    {
+      "id": "bt-0016",
+      "status": "PASS",
+      "verdict": "The back-translation omits “each wire size”; the code basis, counts, and must-not-exceed box-volume boundary remain (us-es/es, bt-0016)."
+    },
+    {
+      "id": "bt-0017",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “all”; the neutral and insulated ground still count and one-size limitation remains (us-es/es, bt-0017)."
+    },
+    {
+      "id": "bt-0018",
+      "status": "PASS",
+      "verdict": "“How big a” is rendered as “What size”; the output remains the smallest permitted conduit size (us-es/es, bt-0018)."
+    },
+    {
+      "id": "bt-0019",
+      "status": "PASS",
+      "verdict": "“lots of” is rendered as “many”; upsizing remains advice and Canadian table confirmation stays required where present (us-es/es, bt-0019)."
+    },
+    {
+      "id": "bt-0020",
+      "status": "PASS",
+      "verdict": "“Under” is rendered as “According to”; one/two/three-plus limits remain 53/31/40% with the same basis (us-es/es, bt-0020)."
+    },
+    {
+      "id": "bt-0021",
+      "status": "PASS",
+      "verdict": "“Wires” is rendered as “Conductors”; free-space need and maximum-fill direction remain (us-es/es, bt-0021)."
+    },
+    {
+      "id": "bt-0022",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; the fragment introduces calculator differences without reversing distance handling (us-es/es, bt-0022)."
+    },
+    {
+      "id": "bt-0023",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; one-way versus round-trip handling and automatic doubling remain correct (us-es/es, bt-0023)."
+    },
+    {
+      "id": "bt-0024",
+      "status": "PASS",
+      "verdict": "“rule” is rendered as “recommendation”; 3% branch and 5% total ceilings, inclusion, and legal force remain (us-es/es, bt-0024)."
+    },
+    {
+      "id": "bt-0025",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; the user is still directly told not to double distance (us-es/es, bt-0025)."
+    },
+    {
+      "id": "bt-0026",
+      "status": "PASS",
+      "verdict": "“length where” is rendered as “when”; VoltDrop still requires one-way distance and never asks for a doubled run (us-es/es, bt-0026)."
+    },
+    {
+      "id": "bt-0027",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Maximum acceptable drop”; the label remains a maximum, not a minimum (us-es/es, bt-0027)."
+    },
+    {
+      "id": "bt-0028",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Measure one way”; the input direction stays explicitly one-way (us-es/es, bt-0028)."
+    },
+    {
+      "id": "bt-0029",
+      "status": "PASS",
+      "verdict": "“common guideline” is rendered as “usual recommendation”; 3% and 5% maxima keep their advisory or mandatory force (us-es/es, bt-0029)."
+    },
+    {
+      "id": "bt-0030",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “5% — upper limit”; 5% remains an upper limit (us-es/es, bt-0030)."
+    },
+    {
+      "id": "bt-0031",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do”; the heading adds no calculation or safety direction (us-es/es, bt-0031)."
+    },
+    {
+      "id": "bt-0032",
+      "status": "PASS",
+      "verdict": "“don't voltage drop” is rendered as “do voltage-drop”; the heading adds no calculation or safety direction (us-es/es, bt-0032)."
+    },
+    {
+      "id": "bt-0033",
+      "status": "PASS",
+      "verdict": "“Wire” is rendered as “The conductor”; 3% and 5% ceilings, heat loss, and edition-specific legal force remain (us-es/es, bt-0033)."
+    },
+    {
+      "id": "bt-0034",
+      "status": "PASS",
+      "verdict": "“from standard” is rendered as “based on”; planning-only status, local-code duty, and electrician advice remain (us-es/es, bt-0034)."
+    },
+    {
+      "id": "bt-0035",
+      "status": "PASS",
+      "verdict": "The back-translation adds “box-fill calculator according to”; the code basis and fits-versus-too-full purpose remain (us-es/es, bt-0035)."
+    },
+    {
+      "id": "bt-0036",
+      "status": "PASS",
+      "verdict": "“conduit fill” is rendered as “conduit-fill”; smallest-size direction and 53/31/40% limits remain (us-es/es, bt-0036)."
+    },
+    {
+      "id": "bt-0037",
+      "status": "PASS",
+      "verdict": "“max wire run” is rendered as “maximum-length”; the result stays the maximum one-way distance under 3% or 5% (us-es/es, bt-0037)."
+    },
+    {
+      "id": "bt-0038",
+      "status": "PASS",
+      "verdict": "“your wire” is rendered as “the conductor”; the result stays the maximum one-way distance under 3% or 5% (us-es/es, bt-0038)."
+    },
+    {
+      "id": "bt-0039",
+      "status": "PASS",
+      "verdict": "“wire size” is rendered as “conductor-gauge”; the result stays the smallest copper or aluminum AWG within the limit (us-es/es, bt-0039)."
+    },
+    {
+      "id": "bt-0040",
+      "status": "PASS",
+      "verdict": "The back-translation adds “that”; watts remain real power, kVA apparent power, with power factor unchanged (us-es/es, bt-0040)."
+    },
+    {
+      "id": "bt-0041",
+      "status": "PASS",
+      "verdict": "“type” is rendered as “enter”; the privacy promise and its scope are unchanged (us-es/es, bt-0041)."
+    },
+    {
+      "id": "bt-0042",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (us-es/es, bt-0042)."
+    },
+    {
+      "id": "bt-0043",
+      "status": "PASS",
+      "verdict": "“overall” is rendered as “general”; the privacy promise and its scope are unchanged (us-es/es, bt-0043)."
+    },
+    {
+      "id": "bt-0044",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (us-es/es, bt-0044)."
+    },
+    {
+      "id": "bt-0045",
+      "status": "PASS",
+      "verdict": "“so that's” is rendered as “that is”; the value stays the practical limit used for comparison (us-es/es, bt-0045)."
+    },
+    {
+      "id": "bt-0046",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “exceeds the limit”; the unsafe over-limit direction is unchanged (us-es/es, bt-0046)."
+    },
+    {
+      "id": "bt-0047",
+      "status": "PASS",
+      "verdict": "The back-translation omits “it's what”; the 75°C, 60°C, and 90°C rules keep the same force (us-es/es, bt-0047)."
+    },
+    {
+      "id": "bt-0048",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “<div class=\"formula\">Safe limit =”; the label remains a safety limit with no maximum/minimum reversal (us-es/es, bt-0048)."
+    },
+    {
+      "id": "bt-0049",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “safe limit for ”; the label remains a safety limit with no maximum/minimum reversal (us-es/es, bt-0049)."
+    },
+    {
+      "id": "bt-0050",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the safe result remains conditional and 3+ hour loads stay below 80% (us-es/es, bt-0050)."
+    },
+    {
+      "id": "bt-0051",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the warning still states that the conductor is not rated for the load (us-es/es, bt-0051)."
+    },
+    {
+      "id": "bt-0052",
+      "status": "PASS",
+      "verdict": "“counting” is rendered as “count”; all Canadian counts, exclusions, largest-wire basis, and millilitre comparison remain (us-es/es, bt-0052)."
+    },
+    {
+      "id": "bt-0053",
+      "status": "PASS",
+      "verdict": "“Pick the largest present to be safe” is recovered as “for greater safety, select the largest conductor size present”; the safe mixed-gauge selection rule now survives, together with the 2.54 cm and 32 mL-per-cm deduction (us-es/es, bt-0053)."
+    },
+    {
+      "id": "bt-0054",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overloaded”; minimum box volume and the overfill hazard remain explicit (us-es/es, bt-0054)."
+    },
+    {
+      "id": "bt-0055",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overloaded”; minimum box volume and the overfill hazard remain explicit (us-es/es, bt-0055)."
+    },
+    {
+      "id": "bt-0056",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Devices (count double)”; devices still count twice (us-es/es, bt-0056)."
+    },
+    {
+      "id": "bt-0057",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (us-es/es, bt-0057)."
+    },
+    {
+      "id": "bt-0058",
+      "status": "PASS",
+      "verdict": "“Fine print” is rendered as “Detail”; pigtail/pass-through rules, four-ground/¼ threshold, and largest-size choice remain (us-es/es, bt-0058)."
+    },
+    {
+      "id": "bt-0059",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the box remains legal at the limit and upsizing is still advised (us-es/es, bt-0059)."
+    },
+    {
+      "id": "bt-0060",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the over-limit state stays unsafe and all corrections remain (us-es/es, bt-0060)."
+    },
+    {
+      "id": "bt-0061",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a conduit-fill limit with no value or unit change (us-es/es, bt-0061)."
+    },
+    {
+      "id": "bt-0062",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a percentage limit with the same boundary (us-es/es, bt-0062)."
+    },
+    {
+      "id": "bt-0063",
+      "status": "PASS",
+      "verdict": "“Comfortable fit under” is rendered as “Fits with margin below”; the status remains below the fill limit with margin (us-es/es, bt-0063)."
+    },
+    {
+      "id": "bt-0064",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the conduit remains legal but near the limit, with upsizing advised (us-es/es, bt-0064)."
+    },
+    {
+      "id": "bt-0065",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the threshold remains the legal maximum (us-es/es, bt-0065)."
+    },
+    {
+      "id": "bt-0066",
+      "status": "PASS",
+      "verdict": "“Split” is rendered as “Divide”; both remedies—more conduits or fewer conductors—remain (us-es/es, bt-0066)."
+    },
+    {
+      "id": "bt-0067",
+      "status": "PASS",
+      "verdict": "“Stay” is rendered as “Keep the distance”; shorter distance still adds margin and ampacity must cover the load (us-es/es, bt-0067)."
+    },
+    {
+      "id": "bt-0068",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a percentage limit with the same boundary (us-es/es, bt-0068)."
+    },
+    {
+      "id": "bt-0069",
+      "status": "PASS",
+      "verdict": "“over” is rendered as “above”; the result remains above, not below, the limit (us-es/es, bt-0069)."
+    },
+    {
+      "id": "bt-0070",
+      "status": "PASS",
+      "verdict": "“under” is rendered as “below”; the result remains under the user’s limit (us-es/es, bt-0070)."
+    },
+    {
+      "id": "bt-0071",
+      "status": "PASS",
+      "verdict": "“Heads up” is rendered as “Attention”; the voltage-drop-only warning and separate ampacity requirement remain (us-es/es, bt-0071)."
+    },
+    {
+      "id": "bt-0072",
+      "status": "PASS",
+      "verdict": "“listed size keeps you under” is rendered as “available gauge falls below”; the failure direction remains that no listed size meets the limit (us-es/es, bt-0072)."
+    },
+    {
+      "id": "bt-0073",
+      "status": "PASS",
+      "verdict": "“single wire” is rendered as “conductor”; the failed result and all four remedies remain (us-es/es, bt-0073)."
+    },
+    {
+      "id": "bt-0074",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the run stays above 3% but within 5%, with safer corrective advice (us-es/es, bt-0074)."
+    },
+    {
+      "id": "bt-0075",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the run stays over the 5% maximum with safer corrective actions (us-es/es, bt-0075)."
+    },
+    {
+      "id": "bt-0076",
+      "status": "PASS",
+      "verdict": "“solve for” is rendered as “calculate the”; the formula still solves distance from the user’s maximum limit (us-es/es, bt-0076)."
+    },
+    {
+      "id": "bt-0077",
+      "status": "PASS",
+      "verdict": "“size” is rendered as “gauge from”; sizes remain tested smallest-first until the first compliant result (us-es/es, bt-0077)."
+    },
+    {
+      "id": "bt-0078",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the selected conductor remains below the limit (us-es/es, bt-0078)."
+    },
+    {
+      "id": "bt-0079",
+      "status": "PASS",
+      "verdict": "“guideline” is rendered as “recommendation”; the result remains within the inclusive 3% boundary (us-es/es, bt-0079)."
+    },
+    {
+      "id": "bt-0080",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Your limit”; the user-defined maximum is unchanged (us-es/es, bt-0080)."
+    },
+    {
+      "id": "bt-0081",
+      "status": "PASS",
+      "verdict": "The breaker-cap direction, citation slot, conductor descriptors, and {capAmps} A ceiling all remain explicit."
+    },
+    {
+      "id": "bt-0082",
+      "status": "PASS",
+      "verdict": "The safe-limit-versus-load comparison keeps both amp values and the computed status in the correct roles."
+    },
+    {
+      "id": "bt-0083",
+      "status": "PASS",
+      "verdict": "The rendering preserves that normal use passes while continuous loads of 3+ hours must stay below 80%, with {amps} A as the local ceiling."
+    },
+    {
+      "id": "bt-0084",
+      "status": "PASS",
+      "verdict": "The rendering preserves explicit negation, the unsafe direction, the larger-gauge action, overheating, and fire risk without ambiguity."
+    },
+    {
+      "id": "bt-0085",
+      "status": "PASS",
+      "verdict": "The rendering keeps size, material, and temperature attached to the safe current limit in natural target-language order."
+    },
+    {
+      "id": "bt-0086",
+      "status": "PASS",
+      "verdict": "The Canadian formula retains every named value, mL units, Rule 12-3034/Table 22 basis, marrette-pair rule, exclusions, and 2.54 cm/32 mL device-depth warning."
+    },
+    {
+      "id": "bt-0087",
+      "status": "PASS",
+      "verdict": "The formula keeps count, per-item allowance, multiplication, and resulting volume in their original roles."
+    },
+    {
+      "id": "bt-0088",
+      "status": "PASS",
+      "verdict": "The formula keeps the device double-count multiplier and resulting volume unchanged."
+    },
+    {
+      "id": "bt-0089",
+      "status": "PASS",
+      "verdict": "The US formula retains every named value, cu in units, NEC 314.16(B), pass-through and grounding rules, ¼ count, and largest-gauge safety advice."
+    },
+    {
+      "id": "bt-0090",
+      "status": "PASS",
+      "verdict": "The direction remains safely below the stated percentage limit; it is not weakened to merely near the limit."
+    },
+    {
+      "id": "bt-0091",
+      "status": "PASS",
+      "verdict": "The cross-sectional areas, NEC table citations, permitted-area calculation, ≤ comparison, and actual fill percentage keep their original roles."
+    },
+    {
+      "id": "bt-0092",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest conduit for the stated conductor count, size, and THHN designation."
+    },
+    {
+      "id": "bt-0093",
+      "status": "PASS",
+      "verdict": "The rendering keeps the unsafe exceeds direction, percentage limit, 4-inch size, conduit family, count, size, and area."
+    },
+    {
+      "id": "bt-0094",
+      "status": "PASS",
+      "verdict": "The rendering clearly says voltage drop is only one check and that the wire must ALSO safely carry {amps} A before purchase."
+    },
+    {
+      "id": "bt-0095",
+      "status": "PASS",
+      "verdict": "The exact-limit point, shorter-run margin action, and independent ampacity requirement at every distance are all preserved."
+    },
+    {
+      "id": "bt-0096",
+      "status": "PASS",
+      "verdict": "The rearranged one-way-distance formula retains every named input, source-formatted unit, and arithmetic role."
+    },
+    {
+      "id": "bt-0097",
+      "status": "PASS",
+      "verdict": "The negative result still says no listed size stays below the specified percentage threshold."
+    },
+    {
+      "id": "bt-0098",
+      "status": "PASS",
+      "verdict": "The rendering preserves that even the stated size and material exceed the percentage over the stated one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0099",
+      "status": "PASS",
+      "verdict": "The smallest-first search, below-limit direction, named values, units, and check mark all retain their meaning."
+    },
+    {
+      "id": "bt-0100",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest material-specific wire that remains below the stated percentage."
+    },
+    {
+      "id": "bt-0101",
+      "status": "PASS",
+      "verdict": "“follow your” is rendered as “comply with”; verification, local-code compliance, and professional help remain required (us-es/es, bt-0081)."
+    },
+    {
+      "id": "bt-0102",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; all prohibited conduct remains prohibited (us-es/es, bt-0082)."
+    },
+    {
+      "id": "bt-0103",
+      "status": "PASS",
+      "verdict": "“injure” is rendered as “cause injury”; injury, death, and fire risks are retained (us-es/es, bt-0083)."
+    },
+    {
+      "id": "bt-0104",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; non-agreement still means the service must not be used (us-es/es, bt-0084)."
+    },
+    {
+      "id": "bt-0105",
+      "status": "PASS",
+      "verdict": "The back-translation adds “The”; normal-condition limits and unmodeled safety factors remain (us-es/es, bt-0085)."
+    },
+    {
+      "id": "bt-0106",
+      "status": "PASS",
+      "verdict": "The back-translation omits “any”; $50 USD, damage categories, and jurisdiction caveat remain (us-es/es, bt-0086)."
+    },
+    {
+      "id": "bt-0107",
+      "status": "PASS",
+      "verdict": "“can” is rendered as “may”; ownership, license, prohibitions, moderation, and no-advice warning remain (us-es/es, bt-0087)."
+    },
+    {
+      "id": "bt-0108",
+      "status": "PASS",
+      "verdict": "“in amps” is rendered as “amperes”; the maximum continuous current, overheating condition, and table basis are preserved (us-zh/zh-Hans, bt-0088)."
+    },
+    {
+      "id": "bt-0109",
+      "status": "PASS",
+      "verdict": "“separate” is rendered as “two independent”; the checks remain independent and still must be passed (ca-zh/zh-Hans, bt-0264)."
+    },
+    {
+      "id": "bt-0110",
+      "status": "PASS",
+      "verdict": "“attics/engine” is rendered as “attics machine”; the derating direction and 3-hour/25% margin are unchanged (ca-zh/zh-Hans, bt-0265)."
+    },
+    {
+      "id": "bt-0111",
+      "status": "PASS",
+      "verdict": "The back-translation omits “it's what”; the temperature restriction and safe-use direction are unchanged (us-zh/zh-Hans, bt-0091)."
+    },
+    {
+      "id": "bt-0112",
+      "status": "PASS",
+      "verdict": "“unsure” is rendered as “uncertain”; the 75°C, 60°C, and 90°C rules keep the same force (us-zh/zh-Hans, bt-0092)."
+    },
+    {
+      "id": "bt-0113",
+      "status": "PASS",
+      "verdict": "“I use” is rendered as “be used”; the question still asks for the applicable temperature column (ca-zh/zh-Hans, bt-0268)."
+    },
+    {
+      "id": "bt-0114",
+      "status": "PASS",
+      "verdict": "The back-translation adds “grounding conductors together occupy”; grounding conductors retain exactly the same count (us-zh/zh-Hans, bt-0094)."
+    },
+    {
+      "id": "bt-0115",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “each”; each connector pair still counts once by the largest connected conductor (ca-zh/zh-Hans, bt-0270)."
+    },
+    {
+      "id": "bt-0116",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Cable”; the clamp counting or exclusion rule is unchanged (us-zh/zh-Hans, bt-0096)."
+    },
+    {
+      "id": "bt-0117",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase conductor”; entering and pass-through conductors remain counted and internal pigtails excluded (ca-zh/zh-Hans, bt-0272)."
+    },
+    {
+      "id": "bt-0118",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0317)."
+    },
+    {
+      "id": "bt-0119",
+      "status": "PASS",
+      "verdict": "“pass-through wires” is rendered as “conductors that pass through the junction box uncut”; the question concerns the same pass-through count (ca-zh/zh-Hans, bt-0274)."
+    },
+    {
+      "id": "bt-0120",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (us-zh/zh-Hans, bt-0100)."
+    },
+    {
+      "id": "bt-0121",
+      "status": "PASS",
+      "verdict": "“your” is rendered as “the”; the result still distinguishes adequate from too-small capacity (ca-zh/zh-Hans, bt-0276)."
+    },
+    {
+      "id": "bt-0122",
+      "status": "PASS",
+      "verdict": "The back-translation adds “use”; 14 AWG/15 A, 12 AWG/20 A, and the largest-size safety choice remain (ca-zh/zh-Hans, bt-0277)."
+    },
+    {
+      "id": "bt-0123",
+      "status": "PASS",
+      "verdict": "“assigns” is rendered as “specifies a volume for”; the code basis, counts, and must-not-exceed box-volume boundary remain (us-zh/zh-Hans, bt-0103)."
+    },
+    {
+      "id": "bt-0124",
+      "status": "PASS",
+      "verdict": "“wire in” is rendered as “conductor inside”; the neutral and insulated ground still count and one-size limitation remains (ca-zh/zh-Hans, bt-0279)."
+    },
+    {
+      "id": "bt-0125",
+      "status": "PASS",
+      "verdict": "“How big a” is rendered as “What size”; the output remains the smallest permitted conduit size (ca-zh/zh-Hans, bt-0281)."
+    },
+    {
+      "id": "bt-0126",
+      "status": "PASS",
+      "verdict": "The back-translation adds “When the run is”; upsizing remains advice and Canadian table confirmation stays required where present (us-zh/zh-Hans, bt-0106)."
+    },
+    {
+      "id": "bt-0127",
+      "status": "PASS",
+      "verdict": "“Under” is rendered as “According to”; one/two/three-plus limits remain 53/31/40% with the same basis (us-zh/zh-Hans, bt-0107)."
+    },
+    {
+      "id": "bt-0128",
+      "status": "PASS",
+      "verdict": "The back-translation omits “Wires need free”; free-space need and maximum-fill direction remain (us-zh/zh-Hans, bt-0108)."
+    },
+    {
+      "id": "bt-0129",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; the fragment introduces calculator differences without reversing distance handling (ca-zh/zh-Hans, bt-0285)."
+    },
+    {
+      "id": "bt-0130",
+      "status": "PASS",
+      "verdict": "“Almost always one of” is rendered as “There are usually”; one-way versus round-trip handling and automatic doubling remain correct (ca-zh/zh-Hans, bt-0286)."
+    },
+    {
+      "id": "bt-0131",
+      "status": "PASS",
+      "verdict": "“widely used rule” is rendered as “informational notes”; 3% branch and 5% total ceilings, inclusion, and legal force remain (us-zh/zh-Hans, bt-0111)."
+    },
+    {
+      "id": "bt-0132",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; the user is still directly told not to double distance (ca-zh/zh-Hans, bt-0288)."
+    },
+    {
+      "id": "bt-0133",
+      "status": "PASS",
+      "verdict": "“length where” is rendered as “while”; VoltDrop still requires one-way distance and never asks for a doubled run (ca-zh/zh-Hans, bt-0289)."
+    },
+    {
+      "id": "bt-0134",
+      "status": "PASS",
+      "verdict": "The back-translation adds “voltage”; the label remains a maximum, not a minimum (ca-zh/zh-Hans, bt-0290)."
+    },
+    {
+      "id": "bt-0135",
+      "status": "PASS",
+      "verdict": "“one way” is rendered as “the one-way distance outbound only”; the input direction stays explicitly one-way (ca-zh/zh-Hans, bt-0291)."
+    },
+    {
+      "id": "bt-0136",
+      "status": "PASS",
+      "verdict": "“the common guideline” is rendered as “usually recommended”; 3% and 5% maxima keep their advisory or mandatory force (us-zh/zh-Hans, bt-0116)."
+    },
+    {
+      "id": "bt-0137",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “5% — upper limit”; 5% remains an upper limit (ca-zh/zh-Hans, bt-0293)."
+    },
+    {
+      "id": "bt-0138",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “are the results from”; the heading adds no calculation or safety direction (ca-zh/zh-Hans, bt-0294)."
+    },
+    {
+      "id": "bt-0139",
+      "status": "PASS",
+      "verdict": "“don't voltage drop” is rendered as “are the results from different voltage-drop”; the heading adds no calculation or safety direction (ca-zh/zh-Hans, bt-0295)."
+    },
+    {
+      "id": "bt-0140",
+      "status": "PASS",
+      "verdict": "“Wire” is rendered as “A conductor”; 3% and 5% ceilings, heat loss, and edition-specific legal force remain (us-zh/zh-Hans, bt-0120)."
+    },
+    {
+      "id": "bt-0141",
+      "status": "PASS",
+      "verdict": "The back-translation adds “derived”; planning-only status, local-code duty, and electrician advice remain (ca-zh/zh-Hans, bt-0297)."
+    },
+    {
+      "id": "bt-0142",
+      "status": "PASS",
+      "verdict": "The back-translation adds “junction-box-fill calculator based on”; the code basis and fits-versus-too-full purpose remain (us-zh/zh-Hans, bt-0122)."
+    },
+    {
+      "id": "bt-0143",
+      "status": "PASS",
+      "verdict": "“conduit fill” is rendered as “conduit-fill”; smallest-size direction and 53/31/40% limits remain (us-zh/zh-Hans, bt-0123)."
+    },
+    {
+      "id": "bt-0144",
+      "status": "PASS",
+      "verdict": "“max wire run” is rendered as “maximum-wire-length”; the result stays the maximum one-way distance under 3% or 5% (us-zh/zh-Hans, bt-0124)."
+    },
+    {
+      "id": "bt-0145",
+      "status": "PASS",
+      "verdict": "The back-translation adds “at most”; the result stays the maximum one-way distance under 3% or 5% (ca-zh/zh-Hans, bt-0301)."
+    },
+    {
+      "id": "bt-0146",
+      "status": "PASS",
+      "verdict": "“wire size” is rendered as “conductor-size wire-gauge”; the result stays the smallest copper or aluminum AWG within the limit (us-zh/zh-Hans, bt-0126)."
+    },
+    {
+      "id": "bt-0147",
+      "status": "PASS",
+      "verdict": "“measure real” is rendered as “represent actual”; watts remain real power, kVA apparent power, with power factor unchanged (ca-zh/zh-Hans, bt-0303)."
+    },
+    {
+      "id": "bt-0148",
+      "status": "PASS",
+      "verdict": "The back-translation adds “and”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0304)."
+    },
+    {
+      "id": "bt-0149",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0305)."
+    },
+    {
+      "id": "bt-0150",
+      "status": "PASS",
+      "verdict": "“general” is rendered as “approximate”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0306)."
+    },
+    {
+      "id": "bt-0151",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0307)."
+    },
+    {
+      "id": "bt-0152",
+      "status": "PASS",
+      "verdict": "“that's” is rendered as “this is”; the value stays the practical limit used for comparison (ca-zh/zh-Hans, bt-0308)."
+    },
+    {
+      "id": "bt-0153",
+      "status": "PASS",
+      "verdict": "Only capitalization or punctuation changes; the unsafe over-limit direction is unchanged (ca-zh/zh-Hans, bt-0309)."
+    },
+    {
+      "id": "bt-0154",
+      "status": "PASS",
+      "verdict": "“Not sure” is rendered as “Uncertain”; the 75°C, 60°C, and 90°C rules keep the same force (ca-zh/zh-Hans, bt-0310)."
+    },
+    {
+      "id": "bt-0155",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “<div class=\"formula\">Safe limit =”; the label remains a safety limit with no maximum/minimum reversal (ca-zh/zh-Hans, bt-0311)."
+    },
+    {
+      "id": "bt-0156",
+      "status": "PASS",
+      "verdict": "The back-translation omits “for”; the label remains a safety limit with no maximum/minimum reversal (ca-zh/zh-Hans, bt-0312)."
+    },
+    {
+      "id": "bt-0157",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Under normal conditions”; the safe result remains conditional and 3+ hour loads stay below 80% (ca-zh/zh-Hans, bt-0313)."
+    },
+    {
+      "id": "bt-0158",
+      "status": "PASS",
+      "verdict": "“NOT rated for” becomes “rated ampacity is insufficient to carry”; insufficient capacity is an equally direct unsafe verdict for the appended load value, with no reversal of the rating boundary (ca-zh/zh-Hans, bt-0314)."
+    },
+    {
+      "id": "bt-0159",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Rule”; all Canadian counts, exclusions, largest-wire basis, and millilitre comparison remain (ca-zh/zh-Hans, bt-0315)."
+    },
+    {
+      "id": "bt-0160",
+      "status": "PASS",
+      "verdict": "The corrected wording explicitly says the tool uses the selected size and, “to ensure safety,” to choose the largest conductor in the box; the mixed-size safety direction and 2.54 cm/32 mL deduction both survive (ca-zh/zh-Hans, bt-0316)."
+    },
+    {
+      "id": "bt-0161",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0317)."
+    },
+    {
+      "id": "bt-0162",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0318)."
+    },
+    {
+      "id": "bt-0163",
+      "status": "PASS",
+      "verdict": "“count double” is rendered as “counted twice”; devices still count twice (ca-zh/zh-Hans, bt-0319)."
+    },
+    {
+      "id": "bt-0164",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (ca-zh/zh-Hans, bt-0320)."
+    },
+    {
+      "id": "bt-0165",
+      "status": "PASS",
+      "verdict": "“Fine print” is rendered as “Details”; pigtail/pass-through rules, four-ground/¼ threshold, and largest-size choice remain (ca-zh/zh-Hans, bt-0321)."
+    },
+    {
+      "id": "bt-0166",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the box remains legal at the limit and upsizing is still advised (ca-zh/zh-Hans, bt-0322)."
+    },
+    {
+      "id": "bt-0167",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the over-limit state stays unsafe and all corrections remain (ca-zh/zh-Hans, bt-0323)."
+    },
+    {
+      "id": "bt-0168",
+      "status": "PASS",
+      "verdict": "The back-translation omits “of”; the fragment remains a conduit-fill limit with no value or unit change (ca-zh/zh-Hans, bt-0324)."
+    },
+    {
+      "id": "bt-0169",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “% limit.”; the fragment remains a percentage limit with the same boundary (ca-zh/zh-Hans, bt-0325)."
+    },
+    {
+      "id": "bt-0170",
+      "status": "PASS",
+      "verdict": "“Comfortable fit under” is rendered as “Below”; the status remains below the fill limit with margin (ca-zh/zh-Hans, bt-0326)."
+    },
+    {
+      "id": "bt-0171",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the conduit remains legal but near the limit, with upsizing advised (ca-zh/zh-Hans, bt-0327)."
+    },
+    {
+      "id": "bt-0172",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the threshold remains the legal maximum (ca-zh/zh-Hans, bt-0328)."
+    },
+    {
+      "id": "bt-0173",
+      "status": "PASS",
+      "verdict": "“Split” is rendered as “Divide”; both remedies—more conduits or fewer conductors—remain (ca-zh/zh-Hans, bt-0329)."
+    },
+    {
+      "id": "bt-0174",
+      "status": "PASS",
+      "verdict": "The back-translation adds “voltage”; shorter distance still adds margin and ampacity must cover the load (ca-zh/zh-Hans, bt-0330)."
+    },
+    {
+      "id": "bt-0175",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “% limit (”; the fragment remains a percentage limit with the same boundary (ca-zh/zh-Hans, bt-0331)."
+    },
+    {
+      "id": "bt-0176",
+      "status": "PASS",
+      "verdict": "“over” is rendered as “above”; the result remains above, not below, the limit (ca-zh/zh-Hans, bt-0332)."
+    },
+    {
+      "id": "bt-0177",
+      "status": "PASS",
+      "verdict": "“under” is rendered as “below”; the result remains under the user’s limit (ca-zh/zh-Hans, bt-0333)."
+    },
+    {
+      "id": "bt-0178",
+      "status": "PASS",
+      "verdict": "“Heads up this answers” is rendered as “Note only”; the voltage-drop-only warning and separate ampacity requirement remain (ca-zh/zh-Hans, bt-0334)."
+    },
+    {
+      "id": "bt-0179",
+      "status": "PASS",
+      "verdict": "“keeps you under” is rendered as “can remain below”; the failure direction remains that no listed size meets the limit (ca-zh/zh-Hans, bt-0335)."
+    },
+    {
+      "id": "bt-0180",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the failed result and all four remedies remain (ca-zh/zh-Hans, bt-0336)."
+    },
+    {
+      "id": "bt-0181",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Above”; the run stays above 3% but within 5%, with safer corrective advice (us-zh/zh-Hans, bt-0161)."
+    },
+    {
+      "id": "bt-0182",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the run stays over the 5% maximum with safer corrective actions (us-zh/zh-Hans, bt-0162)."
+    },
+    {
+      "id": "bt-0183",
+      "status": "PASS",
+      "verdict": "“solve for” is rendered as “calculate”; the formula still solves distance from the user’s maximum limit (ca-zh/zh-Hans, bt-0339)."
+    },
+    {
+      "id": "bt-0184",
+      "status": "PASS",
+      "verdict": "“tested” is rendered as “checked”; sizes remain tested smallest-first until the first compliant result (ca-zh/zh-Hans, bt-0340)."
+    },
+    {
+      "id": "bt-0185",
+      "status": "PASS",
+      "verdict": "“wire that stays under” is rendered as “conductor remains below”; the selected conductor remains below the limit (ca-zh/zh-Hans, bt-0341)."
+    },
+    {
+      "id": "bt-0186",
+      "status": "PASS",
+      "verdict": "“guideline” is rendered as “recommended value”; the result remains within the inclusive 3% boundary (us-zh/zh-Hans, bt-0166)."
+    },
+    {
+      "id": "bt-0187",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Your limit”; the user-defined maximum is unchanged (ca-zh/zh-Hans, bt-0343)."
+    },
+    {
+      "id": "bt-0188",
+      "status": "PASS",
+      "verdict": "The breaker-cap direction, citation slot, conductor descriptors, and {capAmps} A ceiling all remain explicit."
+    },
+    {
+      "id": "bt-0189",
+      "status": "PASS",
+      "verdict": "The safe-limit-versus-load comparison keeps both amp values and the computed status in the correct roles."
+    },
+    {
+      "id": "bt-0190",
+      "status": "PASS",
+      "verdict": "The rendering preserves that normal use passes while continuous loads of 3+ hours must stay below 80%, with {amps} A as the local ceiling."
+    },
+    {
+      "id": "bt-0191",
+      "status": "PASS",
+      "verdict": "The rendering preserves explicit negation, the unsafe direction, the larger-gauge action, overheating, and fire risk without ambiguity."
+    },
+    {
+      "id": "bt-0192",
+      "status": "PASS",
+      "verdict": "The rendering keeps size, material, and temperature attached to the safe current limit in natural target-language order."
+    },
+    {
+      "id": "bt-0193",
+      "status": "PASS",
+      "verdict": "The Canadian formula retains every named value, mL units, Rule 12-3034/Table 22 basis, marrette-pair rule, exclusions, and 2.54 cm/32 mL device-depth warning."
+    },
+    {
+      "id": "bt-0194",
+      "status": "PASS",
+      "verdict": "The formula keeps count, per-item allowance, multiplication, and resulting volume in their original roles."
+    },
+    {
+      "id": "bt-0195",
+      "status": "PASS",
+      "verdict": "The formula keeps the device double-count multiplier and resulting volume unchanged."
+    },
+    {
+      "id": "bt-0196",
+      "status": "PASS",
+      "verdict": "The US formula retains every named value, cu in units, NEC 314.16(B), pass-through and grounding rules, ¼ count, and largest-gauge safety advice."
+    },
+    {
+      "id": "bt-0197",
+      "status": "PASS",
+      "verdict": "The direction remains safely below the stated percentage limit; it is not weakened to merely near the limit."
+    },
+    {
+      "id": "bt-0198",
+      "status": "PASS",
+      "verdict": "The cross-sectional areas, NEC table citations, permitted-area calculation, ≤ comparison, and actual fill percentage keep their original roles."
+    },
+    {
+      "id": "bt-0199",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest conduit for the stated conductor count, size, and THHN designation."
+    },
+    {
+      "id": "bt-0200",
+      "status": "PASS",
+      "verdict": "The rendering keeps the unsafe exceeds direction, percentage limit, 4-inch size, conduit family, count, size, and area."
+    },
+    {
+      "id": "bt-0201",
+      "status": "PASS",
+      "verdict": "The rendering clearly says voltage drop is only one check and that the wire must ALSO safely carry {amps} A before purchase."
+    },
+    {
+      "id": "bt-0202",
+      "status": "PASS",
+      "verdict": "The exact-limit point, shorter-run margin action, and independent ampacity requirement at every distance are all preserved."
+    },
+    {
+      "id": "bt-0203",
+      "status": "PASS",
+      "verdict": "The rearranged one-way-distance formula retains every named input, source-formatted unit, and arithmetic role."
+    },
+    {
+      "id": "bt-0204",
+      "status": "PASS",
+      "verdict": "The negative result still says no listed size stays below the specified percentage threshold."
+    },
+    {
+      "id": "bt-0205",
+      "status": "PASS",
+      "verdict": "The rendering preserves that even the stated size and material exceed the percentage over the stated one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0206",
+      "status": "PASS",
+      "verdict": "The smallest-first search, below-limit direction, named values, units, and check mark all retain their meaning."
+    },
+    {
+      "id": "bt-0207",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest material-specific wire that remains below the stated percentage."
+    },
+    {
+      "id": "bt-0208",
+      "status": "PASS",
+      "verdict": "“Always” is rendered as “Be sure to”; verification, local-code compliance, and professional help remain required (ca-zh/zh-Hans, bt-0344)."
+    },
+    {
+      "id": "bt-0209",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; all prohibited conduct remains prohibited (ca-zh/zh-Hans, bt-0345)."
+    },
+    {
+      "id": "bt-0210",
+      "status": "PASS",
+      "verdict": "“can injure” is rendered as “may cause injury”; injury, death, and fire risks are retained (ca-zh/zh-Hans, bt-0346)."
+    },
+    {
+      "id": "bt-0211",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; non-agreement still means the service must not be used (ca-zh/zh-Hans, bt-0347)."
+    },
+    {
+      "id": "bt-0212",
+      "status": "PASS",
+      "verdict": "The back-translation adds “The”; normal-condition limits and unmodeled safety factors remain (ca-zh/zh-Hans, bt-0348)."
+    },
+    {
+      "id": "bt-0213",
+      "status": "PASS",
+      "verdict": "“fullest” is rendered as “maximum”; $50 USD, damage categories, and jurisdiction caveat remain (ca-zh/zh-Hans, bt-0349)."
+    },
+    {
+      "id": "bt-0214",
+      "status": "PASS",
+      "verdict": "“can” is rendered as “may”; ownership, license, prohibitions, moderation, and no-advice warning remain (ca-zh/zh-Hans, bt-0350)."
+    },
+    {
+      "id": "bt-0215",
+      "status": "PASS",
+      "verdict": "“amps” is rendered as “amperes”; the maximum continuous current, overheating condition, and table basis are preserved (ca-fr/fr-CA, bt-0175)."
+    },
+    {
+      "id": "bt-0216",
+      "status": "PASS",
+      "verdict": "“a wire” is rendered as “the conductor”; the checks remain independent and still must be passed (ca-fr/fr-CA, bt-0176)."
+    },
+    {
+      "id": "bt-0217",
+      "status": "PASS",
+      "verdict": "“attics/engine” is rendered as “attics mechanical”; the derating direction and 3-hour/25% margin are unchanged (ca-fr/fr-CA, bt-0177)."
+    },
+    {
+      "id": "bt-0218",
+      "status": "PASS",
+      "verdict": "“when” is rendered as “if”; the temperature restriction and safe-use direction are unchanged (ca-fr/fr-CA, bt-0178)."
+    },
+    {
+      "id": "bt-0219",
+      "status": "PASS",
+      "verdict": "“When unsure” is rendered as “If in doubt”; the 75°C, 60°C, and 90°C rules keep the same force (ca-fr/fr-CA, bt-0179)."
+    },
+    {
+      "id": "bt-0220",
+      "status": "PASS",
+      "verdict": "“I use” is rendered as “be used”; the question still asks for the applicable temperature column (ca-fr/fr-CA, bt-0180)."
+    },
+    {
+      "id": "bt-0221",
+      "status": "PASS",
+      "verdict": "“bond wires are” is rendered as “bonding conductors do”; grounding conductors retain exactly the same count (ca-fr/fr-CA, bt-0181)."
+    },
+    {
+      "id": "bt-0222",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “each”; each connector pair still counts once by the largest connected conductor (ca-fr/fr-CA, bt-0182)."
+    },
+    {
+      "id": "bt-0223",
+      "status": "PASS",
+      "verdict": "The back-translation omits “allowance”; the clamp counting or exclusion rule is unchanged (ca-fr/fr-CA, bt-0183)."
+    },
+    {
+      "id": "bt-0224",
+      "status": "PASS",
+      "verdict": "“every hot” is rendered as “each phase”; entering and pass-through conductors remain counted and internal pigtails excluded (ca-fr/fr-CA, bt-0184)."
+    },
+    {
+      "id": "bt-0225",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled”; minimum box volume and the overfill hazard remain explicit (ca-fr/fr-CA, bt-0185)."
+    },
+    {
+      "id": "bt-0226",
+      "status": "PASS",
+      "verdict": "“pass-through wires” is rendered as “conductors that pass through the box”; the question concerns the same pass-through count (ca-fr/fr-CA, bt-0186)."
+    },
+    {
+      "id": "bt-0227",
+      "status": "PASS",
+      "verdict": "“counting” is rendered as “count”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (ca-fr/fr-CA, bt-0187)."
+    },
+    {
+      "id": "bt-0228",
+      "status": "PASS",
+      "verdict": "“big” is rendered as “large”; the result still distinguishes adequate from too-small capacity (ca-fr/fr-CA, bt-0188)."
+    },
+    {
+      "id": "bt-0229",
+      "status": "PASS",
+      "verdict": "The back-translation adds “In”; 14 AWG/15 A, 12 AWG/20 A, and the largest-size safety choice remain (ca-fr/fr-CA, bt-0189)."
+    },
+    {
+      "id": "bt-0230",
+      "status": "PASS",
+      "verdict": "The back-translation omits “each conductor size”; the code basis, counts, and must-not-exceed box-volume boundary remain (ca-fr/fr-CA, bt-0190)."
+    },
+    {
+      "id": "bt-0231",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “each”; the neutral and insulated ground still count and one-size limitation remains (ca-fr/fr-CA, bt-0191)."
+    },
+    {
+      "id": "bt-0232",
+      "status": "PASS",
+      "verdict": "The back-translation omits “shown here”; 53/31/40% and the ban on final reliance on NEC-specific size data remain (ca-fr/fr-CA, bt-0192)."
+    },
+    {
+      "id": "bt-0233",
+      "status": "PASS",
+      "verdict": "“How big a” is rendered as “What”; the output remains the smallest permitted conduit size (ca-fr/fr-CA, bt-0193)."
+    },
+    {
+      "id": "bt-0234",
+      "status": "PASS",
+      "verdict": "“many” is rendered as “several”; upsizing remains advice and Canadian table confirmation stays required where present (ca-fr/fr-CA, bt-0194)."
+    },
+    {
+      "id": "bt-0235",
+      "status": "PASS",
+      "verdict": "“Under” is rendered as “According to”; one/two/three-plus limits remain 53/31/40% with the same basis (ca-fr/fr-CA, bt-0195)."
+    },
+    {
+      "id": "bt-0236",
+      "status": "PASS",
+      "verdict": "“a” is rendered as “the”; free-space need and maximum-fill direction remain (ca-fr/fr-CA, bt-0196)."
+    },
+    {
+      "id": "bt-0237",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; the fragment introduces calculator differences without reversing distance handling (ca-fr/fr-CA, bt-0197)."
+    },
+    {
+      "id": "bt-0238",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; one-way versus round-trip handling and automatic doubling remain correct (ca-fr/fr-CA, bt-0198)."
+    },
+    {
+      "id": "bt-0239",
+      "status": "PASS",
+      "verdict": "The back-translation omits “keep”; 3% branch and 5% total ceilings, inclusion, and legal force remain (ca-fr/fr-CA, bt-0199)."
+    },
+    {
+      "id": "bt-0240",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; the user is still directly told not to double distance (ca-fr/fr-CA, bt-0200)."
+    },
+    {
+      "id": "bt-0241",
+      "status": "PASS",
+      "verdict": "“length where” is rendered as “while”; VoltDrop still requires one-way distance and never asks for a doubled run (ca-fr/fr-CA, bt-0201)."
+    },
+    {
+      "id": "bt-0242",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Maximum acceptable drop”; the label remains a maximum, not a minimum (ca-fr/fr-CA, bt-0202)."
+    },
+    {
+      "id": "bt-0243",
+      "status": "PASS",
+      "verdict": "“one way” is rendered as “the outbound distance one-way trip”; the input direction stays explicitly one-way (ca-fr/fr-CA, bt-0203)."
+    },
+    {
+      "id": "bt-0244",
+      "status": "PASS",
+      "verdict": "“path” is rendered as “run”; 3% and 5% maxima keep their advisory or mandatory force (ca-fr/fr-CA, bt-0204)."
+    },
+    {
+      "id": "bt-0245",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “5% — upper limit”; 5% remains an upper limit (ca-fr/fr-CA, bt-0205)."
+    },
+    {
+      "id": "bt-0246",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do the”; the heading adds no calculation or safety direction (ca-fr/fr-CA, bt-0206)."
+    },
+    {
+      "id": "bt-0247",
+      "status": "PASS",
+      "verdict": "“don't voltage drop” is rendered as “do voltage-drop”; the heading adds no calculation or safety direction (ca-fr/fr-CA, bt-0207)."
+    },
+    {
+      "id": "bt-0248",
+      "status": "PASS",
+      "verdict": "“Wire” is rendered as “A conductor”; 3% and 5% ceilings, heat loss, and edition-specific legal force remain (ca-fr/fr-CA, bt-0208)."
+    },
+    {
+      "id": "bt-0249",
+      "status": "PASS",
+      "verdict": "“from standard” is rendered as “based on”; planning-only status, local-code duty, and electrician advice remain (ca-fr/fr-CA, bt-0209)."
+    },
+    {
+      "id": "bt-0250",
+      "status": "PASS",
+      "verdict": "“box fill” is rendered as “box-fill”; the code basis and fits-versus-too-full purpose remain (ca-fr/fr-CA, bt-0210)."
+    },
+    {
+      "id": "bt-0251",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Preliminary”; smallest-size direction and 53/31/40% limits remain (ca-fr/fr-CA, bt-0211)."
+    },
+    {
+      "id": "bt-0252",
+      "status": "PASS",
+      "verdict": "“max wire run” is rendered as “maximum-length”; the result stays the maximum one-way distance under 3% or 5% (ca-fr/fr-CA, bt-0212)."
+    },
+    {
+      "id": "bt-0253",
+      "status": "PASS",
+      "verdict": "“your wire” is rendered as “the conductor”; the result stays the maximum one-way distance under 3% or 5% (ca-fr/fr-CA, bt-0213)."
+    },
+    {
+      "id": "bt-0254",
+      "status": "PASS",
+      "verdict": "“wire size” is rendered as “conductor-gauge”; the result stays the smallest copper or aluminum AWG within the limit (ca-fr/fr-CA, bt-0214)."
+    },
+    {
+      "id": "bt-0255",
+      "status": "PASS",
+      "verdict": "“real” is rendered as “actual”; watts remain real power, kVA apparent power, with power factor unchanged (ca-fr/fr-CA, bt-0215)."
+    },
+    {
+      "id": "bt-0256",
+      "status": "PASS",
+      "verdict": "“run” is rendered as “operate”; the privacy promise and its scope are unchanged (ca-fr/fr-CA, bt-0216)."
+    },
+    {
+      "id": "bt-0257",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “neither”; the privacy promise and its scope are unchanged (ca-fr/fr-CA, bt-0217)."
+    },
+    {
+      "id": "bt-0258",
+      "status": "PASS",
+      "verdict": "The back-translation adds “and”; the privacy promise and its scope are unchanged (ca-fr/fr-CA, bt-0218)."
+    },
+    {
+      "id": "bt-0259",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (ca-fr/fr-CA, bt-0219)."
+    },
+    {
+      "id": "bt-0260",
+      "status": "PASS",
+      "verdict": "“so that's” is rendered as “it is therefore”; the value stays the practical limit used for comparison (ca-fr/fr-CA, bt-0220)."
+    },
+    {
+      "id": "bt-0261",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “exceeds the limit”; the unsafe over-limit direction is unchanged (ca-fr/fr-CA, bt-0221)."
+    },
+    {
+      "id": "bt-0262",
+      "status": "PASS",
+      "verdict": "“Not sure” is rendered as “Unsure”; the 75°C, 60°C, and 90°C rules keep the same force (ca-fr/fr-CA, bt-0222)."
+    },
+    {
+      "id": "bt-0263",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “<div class=\"formula\">Safe limit =”; the label remains a safety limit with no maximum/minimum reversal (ca-fr/fr-CA, bt-0223)."
+    },
+    {
+      "id": "bt-0264",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “safe limit for ”; the label remains a safety limit with no maximum/minimum reversal (ca-fr/fr-CA, bt-0224)."
+    },
+    {
+      "id": "bt-0265",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the safe result remains conditional and 3+ hour loads stay below 80% (ca-fr/fr-CA, bt-0225)."
+    },
+    {
+      "id": "bt-0266",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the warning still states that the conductor is not rated for the load (ca-fr/fr-CA, bt-0226)."
+    },
+    {
+      "id": "bt-0267",
+      "status": "PASS",
+      "verdict": "“counting” is rendered as “count”; all Canadian counts, exclusions, largest-wire basis, and millilitre comparison remain (ca-fr/fr-CA, bt-0227)."
+    },
+    {
+      "id": "bt-0268",
+      "status": "PASS",
+      "verdict": "“For safety, choose the largest conductor present” now carries the original largest-wire instruction; the Canadian box-fill calculation cannot be read as permitting a smaller selected gauge, and the 2.54 cm/32 mL rule remains (ca-fr/fr-CA, bt-0228)."
+    },
+    {
+      "id": "bt-0269",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled”; minimum box volume and the overfill hazard remain explicit (ca-fr/fr-CA, bt-0229)."
+    },
+    {
+      "id": "bt-0270",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled”; minimum box volume and the overfill hazard remain explicit (ca-fr/fr-CA, bt-0230)."
+    },
+    {
+      "id": "bt-0271",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Devices (count double)”; devices still count twice (ca-fr/fr-CA, bt-0231)."
+    },
+    {
+      "id": "bt-0272",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (ca-fr/fr-CA, bt-0232)."
+    },
+    {
+      "id": "bt-0273",
+      "status": "PASS",
+      "verdict": "“Fine print” is rendered as “Detail”; pigtail/pass-through rules, four-ground/¼ threshold, and largest-size choice remain (ca-fr/fr-CA, bt-0233)."
+    },
+    {
+      "id": "bt-0274",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the box remains legal at the limit and upsizing is still advised (ca-fr/fr-CA, bt-0234)."
+    },
+    {
+      "id": "bt-0275",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Above”; the over-limit state stays unsafe and all corrections remain (ca-fr/fr-CA, bt-0235)."
+    },
+    {
+      "id": "bt-0276",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a conduit-fill limit with no value or unit change (ca-fr/fr-CA, bt-0236)."
+    },
+    {
+      "id": "bt-0277",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a percentage limit with the same boundary (ca-fr/fr-CA, bt-0237)."
+    },
+    {
+      "id": "bt-0278",
+      "status": "PASS",
+      "verdict": "“Comfortable fit under” is rendered as “Good clearance below”; the status remains below the fill limit with margin (ca-fr/fr-CA, bt-0238)."
+    },
+    {
+      "id": "bt-0279",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the conduit remains legal but near the limit, with upsizing advised (ca-fr/fr-CA, bt-0239)."
+    },
+    {
+      "id": "bt-0280",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Permitted”; the threshold remains the legal maximum (ca-fr/fr-CA, bt-0240)."
+    },
+    {
+      "id": "bt-0281",
+      "status": "PASS",
+      "verdict": "“Split” is rendered as “Divide”; both remedies—more conduits or fewer conductors—remain (ca-fr/fr-CA, bt-0241)."
+    },
+    {
+      "id": "bt-0282",
+      "status": "PASS",
+      "verdict": "“Stay” is rendered as “Keep the run”; shorter distance still adds margin and ampacity must cover the load (ca-fr/fr-CA, bt-0242)."
+    },
+    {
+      "id": "bt-0283",
+      "status": "PASS",
+      "verdict": "The back-translation adds “of”; the fragment remains a percentage limit with the same boundary (ca-fr/fr-CA, bt-0243)."
+    },
+    {
+      "id": "bt-0284",
+      "status": "PASS",
+      "verdict": "“over” is rendered as “above”; the result remains above, not below, the limit (ca-fr/fr-CA, bt-0244)."
+    },
+    {
+      "id": "bt-0285",
+      "status": "PASS",
+      "verdict": "“under” is rendered as “below”; the result remains under the user’s limit (ca-fr/fr-CA, bt-0245)."
+    },
+    {
+      "id": "bt-0286",
+      "status": "PASS",
+      "verdict": "“Heads up” is rendered as “Attention”; the voltage-drop-only warning and separate ampacity requirement remain (ca-fr/fr-CA, bt-0246)."
+    },
+    {
+      "id": "bt-0287",
+      "status": "PASS",
+      "verdict": "“size keeps you under” is rendered as “gauge remains below”; the failure direction remains that no listed size meets the limit (ca-fr/fr-CA, bt-0247)."
+    },
+    {
+      "id": "bt-0288",
+      "status": "PASS",
+      "verdict": "“single wire” is rendered as “conductor”; the failed result and all four remedies remain (ca-fr/fr-CA, bt-0248)."
+    },
+    {
+      "id": "bt-0289",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Above”; the run stays above 3% but within 5%, with safer corrective advice (ca-fr/fr-CA, bt-0249)."
+    },
+    {
+      "id": "bt-0290",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Above”; the run stays over the 5% maximum with safer corrective actions (ca-fr/fr-CA, bt-0250)."
+    },
+    {
+      "id": "bt-0291",
+      "status": "PASS",
+      "verdict": "“solve for” is rendered as “calculate the”; the formula still solves distance from the user’s maximum limit (ca-fr/fr-CA, bt-0251)."
+    },
+    {
+      "id": "bt-0292",
+      "status": "PASS",
+      "verdict": "“tested” is rendered as “checked”; sizes remain tested smallest-first until the first compliant result (ca-fr/fr-CA, bt-0252)."
+    },
+    {
+      "id": "bt-0293",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the selected conductor remains below the limit (ca-fr/fr-CA, bt-0253)."
+    },
+    {
+      "id": "bt-0294",
+      "status": "PASS",
+      "verdict": "“perform” is rendered as “work”; the result remains within the inclusive 3% boundary (ca-fr/fr-CA, bt-0254)."
+    },
+    {
+      "id": "bt-0295",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Your limit”; the user-defined maximum is unchanged (ca-fr/fr-CA, bt-0255)."
+    },
+    {
+      "id": "bt-0296",
+      "status": "PASS",
+      "verdict": "The breaker-cap direction, citation slot, conductor descriptors, and {capAmps} A ceiling all remain explicit."
+    },
+    {
+      "id": "bt-0297",
+      "status": "PASS",
+      "verdict": "The safe-limit-versus-load comparison keeps both amp values and the computed status in the correct roles."
+    },
+    {
+      "id": "bt-0298",
+      "status": "PASS",
+      "verdict": "The rendering preserves that normal use passes while continuous loads of 3+ hours must stay below 80%, with {amps} A as the local ceiling."
+    },
+    {
+      "id": "bt-0299",
+      "status": "PASS",
+      "verdict": "The rendering preserves explicit negation, the unsafe direction, the larger-gauge action, overheating, and fire risk without ambiguity."
+    },
+    {
+      "id": "bt-0300",
+      "status": "PASS",
+      "verdict": "The rendering keeps size, material, and temperature attached to the safe current limit in natural target-language order."
+    },
+    {
+      "id": "bt-0301",
+      "status": "PASS",
+      "verdict": "The Canadian formula retains every named value, mL units, Rule 12-3034/Table 22 basis, marrette-pair rule, exclusions, and 2.54 cm/32 mL device-depth warning."
+    },
+    {
+      "id": "bt-0302",
+      "status": "PASS",
+      "verdict": "The formula keeps count, per-item allowance, multiplication, and resulting volume in their original roles."
+    },
+    {
+      "id": "bt-0303",
+      "status": "PASS",
+      "verdict": "The formula keeps the device double-count multiplier and resulting volume unchanged."
+    },
+    {
+      "id": "bt-0304",
+      "status": "PASS",
+      "verdict": "The US formula retains every named value, cu in units, NEC 314.16(B), pass-through and grounding rules, ¼ count, and largest-gauge safety advice."
+    },
+    {
+      "id": "bt-0305",
+      "status": "PASS",
+      "verdict": "The direction remains safely below the stated percentage limit; it is not weakened to merely near the limit."
+    },
+    {
+      "id": "bt-0306",
+      "status": "PASS",
+      "verdict": "The cross-sectional areas, NEC table citations, permitted-area calculation, ≤ comparison, and actual fill percentage keep their original roles."
+    },
+    {
+      "id": "bt-0307",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest conduit for the stated conductor count, size, and THHN designation."
+    },
+    {
+      "id": "bt-0308",
+      "status": "PASS",
+      "verdict": "The rendering keeps the unsafe exceeds direction, percentage limit, 4-inch size, conduit family, count, size, and area."
+    },
+    {
+      "id": "bt-0309",
+      "status": "PASS",
+      "verdict": "The rendering clearly says voltage drop is only one check and that the wire must ALSO safely carry {amps} A before purchase."
+    },
+    {
+      "id": "bt-0310",
+      "status": "PASS",
+      "verdict": "The exact-limit point, shorter-run margin action, and independent ampacity requirement at every distance are all preserved."
+    },
+    {
+      "id": "bt-0311",
+      "status": "PASS",
+      "verdict": "The rearranged one-way-distance formula retains every named input, source-formatted unit, and arithmetic role."
+    },
+    {
+      "id": "bt-0312",
+      "status": "PASS",
+      "verdict": "The negative result still says no listed size stays below the specified percentage threshold."
+    },
+    {
+      "id": "bt-0313",
+      "status": "PASS",
+      "verdict": "The rendering preserves that even the stated size and material exceed the percentage over the stated one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0314",
+      "status": "PASS",
+      "verdict": "The smallest-first search, below-limit direction, named values, units, and check mark all retain their meaning."
+    },
+    {
+      "id": "bt-0315",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest material-specific wire that remains below the stated percentage."
+    },
+    {
+      "id": "bt-0316",
+      "status": "PASS",
+      "verdict": "“follow your” is rendered as “comply with”; verification, local-code compliance, and professional help remain required (ca-fr/fr-CA, bt-0256)."
+    },
+    {
+      "id": "bt-0317",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; all prohibited conduct remains prohibited (ca-fr/fr-CA, bt-0257)."
+    },
+    {
+      "id": "bt-0318",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Electrical work can injure or kill, and mistakes can cause fires.”; injury, death, and fire risks are retained (ca-fr/fr-CA, bt-0258)."
+    },
+    {
+      "id": "bt-0319",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; non-agreement still means the service must not be used (ca-fr/fr-CA, bt-0259)."
+    },
+    {
+      "id": "bt-0320",
+      "status": "PASS",
+      "verdict": "The back-translation adds “The”; normal-condition limits and unmodeled safety factors remain (ca-fr/fr-CA, bt-0260)."
+    },
+    {
+      "id": "bt-0321",
+      "status": "PASS",
+      "verdict": "“damages” is rendered as “damage”; $50 USD, damage categories, and jurisdiction caveat remain (ca-fr/fr-CA, bt-0261)."
+    },
+    {
+      "id": "bt-0322",
+      "status": "PASS",
+      "verdict": "“can” is rendered as “may”; ownership, license, prohibitions, moderation, and no-advice warning remain (ca-fr/fr-CA, bt-0262)."
+    },
+    {
+      "id": "bt-0323",
+      "status": "PASS",
+      "verdict": "“in amps” is rendered as “amperes”; the maximum continuous current, overheating condition, and table basis are preserved (ca-zh/zh-Hans, bt-0263)."
+    },
+    {
+      "id": "bt-0324",
+      "status": "PASS",
+      "verdict": "“separate” is rendered as “two independent”; the checks remain independent and still must be passed (ca-zh/zh-Hans, bt-0264)."
+    },
+    {
+      "id": "bt-0325",
+      "status": "PASS",
+      "verdict": "“attics/engine” is rendered as “attics machine”; the derating direction and 3-hour/25% margin are unchanged (ca-zh/zh-Hans, bt-0265)."
+    },
+    {
+      "id": "bt-0326",
+      "status": "PASS",
+      "verdict": "The back-translation omits “use”; the temperature restriction and safe-use direction are unchanged (ca-zh/zh-Hans, bt-0266)."
+    },
+    {
+      "id": "bt-0327",
+      "status": "PASS",
+      "verdict": "“unsure use” is rendered as “uncertain”; the 75°C, 60°C, and 90°C rules keep the same force (ca-zh/zh-Hans, bt-0267)."
+    },
+    {
+      "id": "bt-0328",
+      "status": "PASS",
+      "verdict": "“I use” is rendered as “be used”; the question still asks for the applicable temperature column (ca-zh/zh-Hans, bt-0268)."
+    },
+    {
+      "id": "bt-0329",
+      "status": "PASS",
+      "verdict": "“Bare bond wires are not counted under” is rendered as “According to”; grounding conductors retain exactly the same count (ca-zh/zh-Hans, bt-0269)."
+    },
+    {
+      "id": "bt-0330",
+      "status": "PASS",
+      "verdict": "“every” is rendered as “each”; each connector pair still counts once by the largest connected conductor (ca-zh/zh-Hans, bt-0270)."
+    },
+    {
+      "id": "bt-0331",
+      "status": "PASS",
+      "verdict": "The back-translation omits “Cable clamps receive no volume allowance”; the clamp counting or exclusion rule is unchanged (ca-zh/zh-Hans, bt-0271)."
+    },
+    {
+      "id": "bt-0332",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase conductor”; entering and pass-through conductors remain counted and internal pigtails excluded (ca-zh/zh-Hans, bt-0272)."
+    },
+    {
+      "id": "bt-0333",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0273)."
+    },
+    {
+      "id": "bt-0334",
+      "status": "PASS",
+      "verdict": "“pass-through wires” is rendered as “conductors that pass through the junction box uncut”; the question concerns the same pass-through count (ca-zh/zh-Hans, bt-0274)."
+    },
+    {
+      "id": "bt-0335",
+      "status": "PASS",
+      "verdict": "The back-translation adds “rule”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (ca-zh/zh-Hans, bt-0275)."
+    },
+    {
+      "id": "bt-0336",
+      "status": "PASS",
+      "verdict": "“your” is rendered as “the”; the result still distinguishes adequate from too-small capacity (ca-zh/zh-Hans, bt-0276)."
+    },
+    {
+      "id": "bt-0337",
+      "status": "PASS",
+      "verdict": "The back-translation adds “use”; 14 AWG/15 A, 12 AWG/20 A, and the largest-size safety choice remain (ca-zh/zh-Hans, bt-0277)."
+    },
+    {
+      "id": "bt-0338",
+      "status": "PASS",
+      "verdict": "“assign each conductor size” is rendered as “specify”; the code basis, counts, and must-not-exceed box-volume boundary remain (ca-zh/zh-Hans, bt-0278)."
+    },
+    {
+      "id": "bt-0339",
+      "status": "PASS",
+      "verdict": "“wire in” is rendered as “conductor inside”; the neutral and insulated ground still count and one-size limitation remains (ca-zh/zh-Hans, bt-0279)."
+    },
+    {
+      "id": "bt-0340",
+      "status": "PASS",
+      "verdict": "“percentages shown here” is rendered as “ratios”; 53/31/40% and the ban on final reliance on NEC-specific size data remain (ca-zh/zh-Hans, bt-0280)."
+    },
+    {
+      "id": "bt-0341",
+      "status": "PASS",
+      "verdict": "“How big a” is rendered as “What size”; the output remains the smallest permitted conduit size (ca-zh/zh-Hans, bt-0281)."
+    },
+    {
+      "id": "bt-0342",
+      "status": "PASS",
+      "verdict": "The back-translation adds “When the run is”; upsizing remains advice and Canadian table confirmation stays required where present (ca-zh/zh-Hans, bt-0282)."
+    },
+    {
+      "id": "bt-0343",
+      "status": "PASS",
+      "verdict": "“Under” is rendered as “According to”; one/two/three-plus limits remain 53/31/40% with the same basis (ca-zh/zh-Hans, bt-0283)."
+    },
+    {
+      "id": "bt-0344",
+      "status": "PASS",
+      "verdict": "The back-translation omits “Conductors need free”; free-space need and maximum-fill direction remain (ca-zh/zh-Hans, bt-0284)."
+    },
+    {
+      "id": "bt-0345",
+      "status": "PASS",
+      "verdict": "The back-translation adds “It is”; the fragment introduces calculator differences without reversing distance handling (ca-zh/zh-Hans, bt-0285)."
+    },
+    {
+      "id": "bt-0346",
+      "status": "PASS",
+      "verdict": "“Almost always one of” is rendered as “There are usually”; one-way versus round-trip handling and automatic doubling remain correct (ca-zh/zh-Hans, bt-0286)."
+    },
+    {
+      "id": "bt-0347",
+      "status": "PASS",
+      "verdict": "“sets a” is rendered as “specifies”; 3% branch and 5% total ceilings, inclusion, and legal force remain (ca-zh/zh-Hans, bt-0287)."
+    },
+    {
+      "id": "bt-0348",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; the user is still directly told not to double distance (ca-zh/zh-Hans, bt-0288)."
+    },
+    {
+      "id": "bt-0349",
+      "status": "PASS",
+      "verdict": "“length where” is rendered as “while”; VoltDrop still requires one-way distance and never asks for a doubled run (ca-zh/zh-Hans, bt-0289)."
+    },
+    {
+      "id": "bt-0350",
+      "status": "PASS",
+      "verdict": "The back-translation adds “voltage”; the label remains a maximum, not a minimum (ca-zh/zh-Hans, bt-0290)."
+    },
+    {
+      "id": "bt-0351",
+      "status": "PASS",
+      "verdict": "“one way” is rendered as “the one-way distance outbound only”; the input direction stays explicitly one-way (ca-zh/zh-Hans, bt-0291)."
+    },
+    {
+      "id": "bt-0352",
+      "status": "PASS",
+      "verdict": "The back-translation omits “3% is”; 3% and 5% maxima keep their advisory or mandatory force (ca-zh/zh-Hans, bt-0292)."
+    },
+    {
+      "id": "bt-0353",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “5% — upper limit”; 5% remains an upper limit (ca-zh/zh-Hans, bt-0293)."
+    },
+    {
+      "id": "bt-0354",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “are the results from”; the heading adds no calculation or safety direction (ca-zh/zh-Hans, bt-0294)."
+    },
+    {
+      "id": "bt-0355",
+      "status": "PASS",
+      "verdict": "“don't voltage drop” is rendered as “are the results from different voltage-drop”; the heading adds no calculation or safety direction (ca-zh/zh-Hans, bt-0295)."
+    },
+    {
+      "id": "bt-0356",
+      "status": "PASS",
+      "verdict": "“Wire” is rendered as “A conductor”; 3% and 5% ceilings, heat loss, and edition-specific legal force remain (ca-zh/zh-Hans, bt-0296)."
+    },
+    {
+      "id": "bt-0357",
+      "status": "PASS",
+      "verdict": "The back-translation adds “derived”; planning-only status, local-code duty, and electrician advice remain (ca-zh/zh-Hans, bt-0297)."
+    },
+    {
+      "id": "bt-0358",
+      "status": "PASS",
+      "verdict": "“box fill” is rendered as “junction-box-fill”; the code basis and fits-versus-too-full purpose remain (ca-zh/zh-Hans, bt-0298)."
+    },
+    {
+      "id": "bt-0359",
+      "status": "PASS",
+      "verdict": "“CEC” is rendered as “Displays the CEC's”; smallest-size direction and 53/31/40% limits remain (ca-zh/zh-Hans, bt-0299)."
+    },
+    {
+      "id": "bt-0360",
+      "status": "PASS",
+      "verdict": "“max wire run” is rendered as “maximum-wire-length”; the result stays the maximum one-way distance under 3% or 5% (ca-zh/zh-Hans, bt-0300)."
+    },
+    {
+      "id": "bt-0361",
+      "status": "PASS",
+      "verdict": "The back-translation adds “at most”; the result stays the maximum one-way distance under 3% or 5% (ca-zh/zh-Hans, bt-0301)."
+    },
+    {
+      "id": "bt-0362",
+      "status": "PASS",
+      "verdict": "“wire size” is rendered as “conductor-size wire-gauge”; the result stays the smallest copper or aluminum AWG within the limit (ca-zh/zh-Hans, bt-0302)."
+    },
+    {
+      "id": "bt-0363",
+      "status": "PASS",
+      "verdict": "“measure real” is rendered as “represent actual”; watts remain real power, kVA apparent power, with power factor unchanged (ca-zh/zh-Hans, bt-0303)."
+    },
+    {
+      "id": "bt-0364",
+      "status": "PASS",
+      "verdict": "The back-translation adds “and”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0304)."
+    },
+    {
+      "id": "bt-0365",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0305)."
+    },
+    {
+      "id": "bt-0366",
+      "status": "PASS",
+      "verdict": "“general” is rendered as “approximate”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0306)."
+    },
+    {
+      "id": "bt-0367",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; the privacy promise and its scope are unchanged (ca-zh/zh-Hans, bt-0307)."
+    },
+    {
+      "id": "bt-0368",
+      "status": "PASS",
+      "verdict": "“that's” is rendered as “this is”; the value stays the practical limit used for comparison (ca-zh/zh-Hans, bt-0308)."
+    },
+    {
+      "id": "bt-0369",
+      "status": "PASS",
+      "verdict": "Only capitalization or punctuation changes; the unsafe over-limit direction is unchanged (ca-zh/zh-Hans, bt-0309)."
+    },
+    {
+      "id": "bt-0370",
+      "status": "PASS",
+      "verdict": "“Not sure” is rendered as “Uncertain”; the 75°C, 60°C, and 90°C rules keep the same force (ca-zh/zh-Hans, bt-0310)."
+    },
+    {
+      "id": "bt-0371",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “<div class=\"formula\">Safe limit =”; the label remains a safety limit with no maximum/minimum reversal (ca-zh/zh-Hans, bt-0311)."
+    },
+    {
+      "id": "bt-0372",
+      "status": "PASS",
+      "verdict": "The back-translation omits “for”; the label remains a safety limit with no maximum/minimum reversal (ca-zh/zh-Hans, bt-0312)."
+    },
+    {
+      "id": "bt-0373",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Under normal conditions”; the safe result remains conditional and 3+ hour loads stay below 80% (ca-zh/zh-Hans, bt-0313)."
+    },
+    {
+      "id": "bt-0374",
+      "status": "PASS",
+      "verdict": "“NOT rated for” becomes “rated ampacity is insufficient to carry”; insufficient capacity is an equally direct unsafe verdict for the appended load value, with no reversal of the rating boundary (ca-zh/zh-Hans, bt-0314)."
+    },
+    {
+      "id": "bt-0375",
+      "status": "PASS",
+      "verdict": "The back-translation adds “Rule”; all Canadian counts, exclusions, largest-wire basis, and millilitre comparison remain (ca-zh/zh-Hans, bt-0315)."
+    },
+    {
+      "id": "bt-0376",
+      "status": "PASS",
+      "verdict": "The corrected wording explicitly says the tool uses the selected size and, “to ensure safety,” to choose the largest conductor in the box; the mixed-size safety direction and 2.54 cm/32 mL deduction both survive (ca-zh/zh-Hans, bt-0316)."
+    },
+    {
+      "id": "bt-0377",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0317)."
+    },
+    {
+      "id": "bt-0378",
+      "status": "PASS",
+      "verdict": "“Cram too many wires into a” is rendered as “An overfilled junction”; minimum box volume and the overfill hazard remain explicit (ca-zh/zh-Hans, bt-0318)."
+    },
+    {
+      "id": "bt-0379",
+      "status": "PASS",
+      "verdict": "“count double” is rendered as “counted twice”; devices still count twice (ca-zh/zh-Hans, bt-0319)."
+    },
+    {
+      "id": "bt-0380",
+      "status": "PASS",
+      "verdict": "“hot” is rendered as “phase”; the 1, 2, and ¼ counts, four-ground threshold, and volume boundary remain (ca-zh/zh-Hans, bt-0320)."
+    },
+    {
+      "id": "bt-0381",
+      "status": "PASS",
+      "verdict": "“Fine print” is rendered as “Details”; pigtail/pass-through rules, four-ground/¼ threshold, and largest-size choice remain (ca-zh/zh-Hans, bt-0321)."
+    },
+    {
+      "id": "bt-0382",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the box remains legal at the limit and upsizing is still advised (ca-zh/zh-Hans, bt-0322)."
+    },
+    {
+      "id": "bt-0383",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the over-limit state stays unsafe and all corrections remain (ca-zh/zh-Hans, bt-0323)."
+    },
+    {
+      "id": "bt-0384",
+      "status": "PASS",
+      "verdict": "The back-translation omits “of”; the fragment remains a conduit-fill limit with no value or unit change (ca-zh/zh-Hans, bt-0324)."
+    },
+    {
+      "id": "bt-0385",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “% limit.”; the fragment remains a percentage limit with the same boundary (ca-zh/zh-Hans, bt-0325)."
+    },
+    {
+      "id": "bt-0386",
+      "status": "PASS",
+      "verdict": "“Comfortable fit under” is rendered as “Below”; the status remains below the fill limit with margin (ca-zh/zh-Hans, bt-0326)."
+    },
+    {
+      "id": "bt-0387",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the conduit remains legal but near the limit, with upsizing advised (ca-zh/zh-Hans, bt-0327)."
+    },
+    {
+      "id": "bt-0388",
+      "status": "PASS",
+      "verdict": "“Legal” is rendered as “Compliant”; the threshold remains the legal maximum (ca-zh/zh-Hans, bt-0328)."
+    },
+    {
+      "id": "bt-0389",
+      "status": "PASS",
+      "verdict": "“Split” is rendered as “Divide”; both remedies—more conduits or fewer conductors—remain (ca-zh/zh-Hans, bt-0329)."
+    },
+    {
+      "id": "bt-0390",
+      "status": "PASS",
+      "verdict": "The back-translation adds “voltage”; shorter distance still adds margin and ampacity must cover the load (ca-zh/zh-Hans, bt-0330)."
+    },
+    {
+      "id": "bt-0391",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “% limit (”; the fragment remains a percentage limit with the same boundary (ca-zh/zh-Hans, bt-0331)."
+    },
+    {
+      "id": "bt-0392",
+      "status": "PASS",
+      "verdict": "“over” is rendered as “above”; the result remains above, not below, the limit (ca-zh/zh-Hans, bt-0332)."
+    },
+    {
+      "id": "bt-0393",
+      "status": "PASS",
+      "verdict": "“under” is rendered as “below”; the result remains under the user’s limit (ca-zh/zh-Hans, bt-0333)."
+    },
+    {
+      "id": "bt-0394",
+      "status": "PASS",
+      "verdict": "“Heads up this answers” is rendered as “Note only”; the voltage-drop-only warning and separate ampacity requirement remain (ca-zh/zh-Hans, bt-0334)."
+    },
+    {
+      "id": "bt-0395",
+      "status": "PASS",
+      "verdict": "“keeps you under” is rendered as “can remain below”; the failure direction remains that no listed size meets the limit (ca-zh/zh-Hans, bt-0335)."
+    },
+    {
+      "id": "bt-0396",
+      "status": "PASS",
+      "verdict": "“wire” is rendered as “conductor”; the failed result and all four remedies remain (ca-zh/zh-Hans, bt-0336)."
+    },
+    {
+      "id": "bt-0397",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the run stays above 3% but within 5%, with safer corrective advice (ca-zh/zh-Hans, bt-0337)."
+    },
+    {
+      "id": "bt-0398",
+      "status": "PASS",
+      "verdict": "“Over” is rendered as “Exceeds”; the run stays over the 5% maximum with safer corrective actions (ca-zh/zh-Hans, bt-0338)."
+    },
+    {
+      "id": "bt-0399",
+      "status": "PASS",
+      "verdict": "“solve for” is rendered as “calculate”; the formula still solves distance from the user’s maximum limit (ca-zh/zh-Hans, bt-0339)."
+    },
+    {
+      "id": "bt-0400",
+      "status": "PASS",
+      "verdict": "“tested” is rendered as “checked”; sizes remain tested smallest-first until the first compliant result (ca-zh/zh-Hans, bt-0340)."
+    },
+    {
+      "id": "bt-0401",
+      "status": "PASS",
+      "verdict": "“wire that stays under” is rendered as “conductor remains below”; the selected conductor remains below the limit (ca-zh/zh-Hans, bt-0341)."
+    },
+    {
+      "id": "bt-0402",
+      "status": "PASS",
+      "verdict": "“perform well” is rendered as “work normally”; the result remains within the inclusive 3% boundary (ca-zh/zh-Hans, bt-0342)."
+    },
+    {
+      "id": "bt-0403",
+      "status": "PASS",
+      "verdict": "The back-translation is byte-identical—literal wording was recovered for “Your limit”; the user-defined maximum is unchanged (ca-zh/zh-Hans, bt-0343)."
+    },
+    {
+      "id": "bt-0404",
+      "status": "PASS",
+      "verdict": "The breaker-cap direction, citation slot, conductor descriptors, and {capAmps} A ceiling all remain explicit."
+    },
+    {
+      "id": "bt-0405",
+      "status": "PASS",
+      "verdict": "The safe-limit-versus-load comparison keeps both amp values and the computed status in the correct roles."
+    },
+    {
+      "id": "bt-0406",
+      "status": "PASS",
+      "verdict": "The rendering preserves that normal use passes while continuous loads of 3+ hours must stay below 80%, with {amps} A as the local ceiling."
+    },
+    {
+      "id": "bt-0407",
+      "status": "PASS",
+      "verdict": "The rendering preserves explicit negation, the unsafe direction, the larger-gauge action, overheating, and fire risk without ambiguity."
+    },
+    {
+      "id": "bt-0408",
+      "status": "PASS",
+      "verdict": "The rendering keeps size, material, and temperature attached to the safe current limit in natural target-language order."
+    },
+    {
+      "id": "bt-0409",
+      "status": "PASS",
+      "verdict": "The Canadian formula retains every named value, mL units, Rule 12-3034/Table 22 basis, marrette-pair rule, exclusions, and 2.54 cm/32 mL device-depth warning."
+    },
+    {
+      "id": "bt-0410",
+      "status": "PASS",
+      "verdict": "The formula keeps count, per-item allowance, multiplication, and resulting volume in their original roles."
+    },
+    {
+      "id": "bt-0411",
+      "status": "PASS",
+      "verdict": "The formula keeps the device double-count multiplier and resulting volume unchanged."
+    },
+    {
+      "id": "bt-0412",
+      "status": "PASS",
+      "verdict": "The US formula retains every named value, cu in units, NEC 314.16(B), pass-through and grounding rules, ¼ count, and largest-gauge safety advice."
+    },
+    {
+      "id": "bt-0413",
+      "status": "PASS",
+      "verdict": "The direction remains safely below the stated percentage limit; it is not weakened to merely near the limit."
+    },
+    {
+      "id": "bt-0414",
+      "status": "PASS",
+      "verdict": "The cross-sectional areas, NEC table citations, permitted-area calculation, ≤ comparison, and actual fill percentage keep their original roles."
+    },
+    {
+      "id": "bt-0415",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest conduit for the stated conductor count, size, and THHN designation."
+    },
+    {
+      "id": "bt-0416",
+      "status": "PASS",
+      "verdict": "The rendering keeps the unsafe exceeds direction, percentage limit, 4-inch size, conduit family, count, size, and area."
+    },
+    {
+      "id": "bt-0417",
+      "status": "PASS",
+      "verdict": "The rendering clearly says voltage drop is only one check and that the wire must ALSO safely carry {amps} A before purchase."
+    },
+    {
+      "id": "bt-0418",
+      "status": "PASS",
+      "verdict": "The exact-limit point, shorter-run margin action, and independent ampacity requirement at every distance are all preserved."
+    },
+    {
+      "id": "bt-0419",
+      "status": "PASS",
+      "verdict": "The rearranged one-way-distance formula retains every named input, source-formatted unit, and arithmetic role."
+    },
+    {
+      "id": "bt-0420",
+      "status": "PASS",
+      "verdict": "The negative result still says no listed size stays below the specified percentage threshold."
+    },
+    {
+      "id": "bt-0421",
+      "status": "PASS",
+      "verdict": "The rendering preserves that even the stated size and material exceed the percentage over the stated one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0422",
+      "status": "PASS",
+      "verdict": "The smallest-first search, below-limit direction, named values, units, and check mark all retain their meaning."
+    },
+    {
+      "id": "bt-0423",
+      "status": "PASS",
+      "verdict": "The result still identifies the smallest material-specific wire that remains below the stated percentage."
+    },
+    {
+      "id": "bt-0424",
+      "status": "PASS",
+      "verdict": "“Always” is rendered as “Be sure to”; verification, local-code compliance, and professional help remain required (ca-zh/zh-Hans, bt-0344)."
+    },
+    {
+      "id": "bt-0425",
+      "status": "PASS",
+      "verdict": "“Don't” is rendered as “Do not”; all prohibited conduct remains prohibited (ca-zh/zh-Hans, bt-0345)."
+    },
+    {
+      "id": "bt-0426",
+      "status": "PASS",
+      "verdict": "“can injure” is rendered as “may cause injury”; injury, death, and fire risks are retained (ca-zh/zh-Hans, bt-0346)."
+    },
+    {
+      "id": "bt-0427",
+      "status": "PASS",
+      "verdict": "“don't” is rendered as “do not”; non-agreement still means the service must not be used (ca-zh/zh-Hans, bt-0347)."
+    },
+    {
+      "id": "bt-0428",
+      "status": "PASS",
+      "verdict": "The back-translation adds “The”; normal-condition limits and unmodeled safety factors remain (ca-zh/zh-Hans, bt-0348)."
+    },
+    {
+      "id": "bt-0429",
+      "status": "PASS",
+      "verdict": "“fullest” is rendered as “maximum”; $50 USD, damage categories, and jurisdiction caveat remain (ca-zh/zh-Hans, bt-0349)."
+    },
+    {
+      "id": "bt-0430",
+      "status": "PASS",
+      "verdict": "“can” is rendered as “may”; ownership, license, prohibitions, moderation, and no-advice warning remain (ca-zh/zh-Hans, bt-0350)."
+    }
+  ]
+}

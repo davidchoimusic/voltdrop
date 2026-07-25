@@ -1,0 +1,1727 @@
+{
+  "policy": "Pass A: back-translations rendered from the target-language-only packet before source comparison.",
+  "targetDigest": "361be172747ed449fef874854a45fdc312aee3e20003a599b0188af35a8eb9ce",
+  "backtranslationDigest": "58db5a8f3191164cf695207842b2020226a31a1850827a42f4859c6b51d53fdb",
+  "entries": [
+    {
+      "id": "bt-0001",
+      "backTranslation": "Ampacity is the maximum current, in amperes, that a conductor can carry continuously without overheating. It depends on the conductor gauge, material (copper or aluminum), and insulation temperature rating, and is established by NEC Table 310.16 for normal conditions."
+    },
+    {
+      "id": "bt-0002",
+      "backTranslation": "are independent checks; the conductor must pass"
+    },
+    {
+      "id": "bt-0003",
+      "backTranslation": "hot attics, machine rooms, groups of more than three current-carrying conductors, and continuous loads (3+ consecutive hours require a 25% margin). All of that reduces ampacity. If in doubt, use a larger conductor gauge or consult an electrician."
+    },
+    {
+      "id": "bt-0004",
+      "backTranslation": "— is the temperature rating of most circuit-breaker terminals and lugs. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0005",
+      "backTranslation": "If in doubt, use the 75°C column: most circuit-breaker terminals and lugs are rated 75°C. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually limit the circuit to the 75°C values."
+    },
+    {
+      "id": "bt-0006",
+      "backTranslation": "Which insulation temperature column should I use?"
+    },
+    {
+      "id": "bt-0007",
+      "backTranslation": "All grounding conductors together occupy the space of one conductor; that is the rule, not one for each conductor."
+    },
+    {
+      "id": "bt-0008",
+      "backTranslation": "Canadian rule: each pair of insulated connectors counts as the space of one conductor, based on the largest conductor connected. Count all marrettes."
+    },
+    {
+      "id": "bt-0009",
+      "backTranslation": "Built-in clamps inside the box, common in metal boxes, occupy the space of one conductor. Connectors that remain outside do not count."
+    },
+    {
+      "id": "bt-0010",
+      "backTranslation": "Count each phase and neutral conductor that enters the box, including those that pass through it uncut. Do not count grounding conductors here or pigtails that begin and end inside the box."
+    },
+    {
+      "id": "bt-0011",
+      "backTranslation": "An overloaded box strains connections, damages insulation, and accumulates heat. It is a common cause of failed inspections and intermittent circuits. NEC 314.16 assigns each conductor gauge a minimum volume, and the box must provide at least that space."
+    },
+    {
+      "id": "bt-0012",
+      "backTranslation": "Do conductors that pass through the box count toward box fill?"
+    },
+    {
+      "id": "bt-0013",
+      "backTranslation": "Each phase or neutral conductor that enters the box = 1, including those that pass through it uncut. Each device (switch or receptacle) = 2. All grounding conductors together = 1; if there are more than four, each additional conductor adds ¼ under the 2020 rules. Internal clamps = 1. Pigtails that remain inside the box do not count. We multiply the total by the volume corresponding to the conductor gauge and compare it with the box volume."
+    },
+    {
+      "id": "bt-0014",
+      "backTranslation": "Is your junction or device box large enough? Count its contents and get a clear answer."
+    },
+    {
+      "id": "bt-0015",
+      "backTranslation": "Most homes use 14 AWG (15 A circuits) or 12 AWG (20 A circuits). For now, if there are multiple gauges, choose the largest to maintain a safe margin."
+    },
+    {
+      "id": "bt-0016",
+      "backTranslation": "NEC 314.16 assigns a volume to each conductor gauge; for example, 2.25 cubic inches for 12 AWG. Count each phase or neutral conductor once, each device twice, all grounding conductors together once, and internal clamps once. The total multiplied by the assigned volume must not exceed the box volume."
+    },
+    {
+      "id": "bt-0017",
+      "backTranslation": "Count all insulated conductors inside the conduit, including the neutral and every insulated grounding conductor. For now, all must be the same gauge."
+    },
+    {
+      "id": "bt-0018",
+      "backTranslation": "What size conduit do you need for your conductors? Enter what you will run and get the smallest permitted size."
+    },
+    {
+      "id": "bt-0019",
+      "backTranslation": "long runs with many bends are easier with a size larger than the permitted minimum. Many electricians intentionally increase the size. This tool supports only one conductor gauge at a time."
+    },
+    {
+      "id": "bt-0020",
+      "backTranslation": "According to NEC Chapter 9, one conductor may occupy 53% of the conduit's interior area; two conductors, 31%; and three or more, 40%. The calculation uses the official cross-sectional areas for the conductor and conduit type."
+    },
+    {
+      "id": "bt-0021",
+      "backTranslation": "Conductors need free space inside the conduit. If it is overfilled, you will not be able to pull them and they may overheat. Standard U.S. limits (NEC Chapter 9): one conductor may occupy"
+    },
+    {
+      "id": "bt-0022",
+      "backTranslation": "It is almost always due to one of two things: some calculators use different resistance values, or some use"
+    },
+    {
+      "id": "bt-0023",
+      "backTranslation": "It is almost always due to one of two things: some calculators ask for the round-trip run and others ask for the one-way distance (VoltDrop always uses the one-way distance and doubles it internally); others use slightly different resistance values. VoltDrop shows the complete calculation so you can compare it."
+    },
+    {
+      "id": "bt-0024",
+      "backTranslation": "The widely used recommendation of the <span id=\"code-name\">U.S. National Electrical Code</span> is to keep the voltage drop of a <span id=\"code-basis\">branch circuit</span> at <strong>3%</strong> or less, and the total from the panel to the device at <strong>5%</strong> or less. These are good-performance recommendations, not general legal requirements. Low-voltage systems, such as 12&nbsp;V solar, often need a stricter target because 3% of 12&nbsp;V has a much greater effect than 3% of 240&nbsp;V."
+    },
+    {
+      "id": "bt-0025",
+      "backTranslation": ". Do not double it yourself."
+    },
+    {
+      "id": "bt-0026",
+      "backTranslation": "when others ask for the one-way distance. We always ask for the one-way distance and show the complete calculation."
+    },
+    {
+      "id": "bt-0027",
+      "backTranslation": "Maximum acceptable drop"
+    },
+    {
+      "id": "bt-0028",
+      "backTranslation": "Measure one way"
+    },
+    {
+      "id": "bt-0029",
+      "backTranslation": "3% is the usual recommendation for one circuit. 5% is the usual outer limit for the entire run."
+    },
+    {
+      "id": "bt-0030",
+      "backTranslation": "5% — upper limit"
+    },
+    {
+      "id": "bt-0031",
+      "backTranslation": "Why do other calculators not match?"
+    },
+    {
+      "id": "bt-0032",
+      "backTranslation": "Why do voltage-drop calculators not match?"
+    },
+    {
+      "id": "bt-0033",
+      "backTranslation": "The conductor has resistance, so part of the voltage is lost as heat. The informational notes of the U.S. National Electrical Code recommend a maximum of 3% for the branch circuit and 5% total. These are performance recommendations, not general legal requirements. Low-voltage systems, such as 12 V solar, are often stricter."
+    },
+    {
+      "id": "bt-0034",
+      "backTranslation": "All results are planning estimates based on published formulas and tables; they are not professional advice. Always comply with your local electrical code and consult a licensed electrician if in doubt."
+    },
+    {
+      "id": "bt-0035",
+      "backTranslation": "Free box-fill calculator according to NEC 314.16: count conductors, devices, grounds, and clamps to obtain a clear assessment with the volume calculation."
+    },
+    {
+      "id": "bt-0036",
+      "backTranslation": "Free conduit-fill calculator: THHN quantity and gauge, and smallest permitted EMT or PVC Schedule 40 size according to NEC Chapter 9 and the 53/31/40% limits."
+    },
+    {
+      "id": "bt-0037",
+      "backTranslation": "Free maximum-length calculator: enter conductor gauge, amperes, and voltage to obtain the greatest one-way distance that keeps the drop below 3% or 5%."
+    },
+    {
+      "id": "bt-0038",
+      "backTranslation": "How far can the conductor run before voltage drop becomes a problem? Get the maximum one-way distance for any gauge and load."
+    },
+    {
+      "id": "bt-0039",
+      "backTranslation": "Free conductor-gauge calculator: enter amperes, voltage, and one-way distance to find the smallest copper or aluminum AWG that keeps voltage drop below 3%."
+    },
+    {
+      "id": "bt-0040",
+      "backTranslation": "Watts (kW) measure real usable power, while kVA measures the apparent power that the wiring must carry. For heaters and simple loads they are equal; for motors and electronic equipment, kVA may be higher. The relationship between them is the power factor."
+    },
+    {
+      "id": "bt-0041",
+      "backTranslation": "The calculators run entirely in your browser: the numbers you enter never leave your device. We do not require an account, we do not sell data, and the only personal information we retain is what you give us if you choose to sign in and leave a comment."
+    },
+    {
+      "id": "bt-0042",
+      "backTranslation": "We do not sell or share your personal information with advertisers or data brokers. We do not send marketing emails. We do not track you on other websites."
+    },
+    {
+      "id": "bt-0043",
+      "backTranslation": "we use Google Analytics to understand general traffic (pages visited, general region, and device type). These are aggregated statistical data; we do not use them to identify you."
+    },
+    {
+      "id": "bt-0044",
+      "backTranslation": "What we do not do"
+    },
+    {
+      "id": "bt-0045",
+      "backTranslation": "A</strong>; that is the practical limit we use for comparison.</p>"
+    },
+    {
+      "id": "bt-0046",
+      "backTranslation": "exceeds the limit"
+    },
+    {
+      "id": "bt-0047",
+      "backTranslation": "Not sure? Use <strong>75°C</strong>: most circuit-breaker terminals and lugs are rated for that. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0048",
+      "backTranslation": "<div class=\"formula\">Safe limit ="
+    },
+    {
+      "id": "bt-0049",
+      "backTranslation": "safe limit for "
+    },
+    {
+      "id": "bt-0050",
+      "backTranslation": "This conductor can carry the load under normal conditions. Remember: continuous loads (3+ hours) should be kept below 80% of the limit, that is, "
+    },
+    {
+      "id": "bt-0051",
+      "backTranslation": "This conductor is NOT rated for "
+    },
+    {
+      "id": "bt-0052",
+      "backTranslation": "Canadian count (Rule 12-3034): each insulated conductor that enters the box = 1; bare bonding conductors do NOT count. Each device (switch/receptacle) = 2. Each PAIR of insulated connectors (marrettes) = 1, based on the largest conductor connected. This is a Canadian rule with no US equivalent. Clamps receive no volume in Canada. Pigtails that remain inside the box do not count. We multiply the total by the Table 22 volume and compare it with the box volume in millilitres."
+    },
+    {
+      "id": "bt-0053",
+      "backTranslation": "</div>\n<p>Canadian detail: bare bonding conductors and clamps receive no volume; each pair of marrettes receives one volume based on the largest conductor connected (we use the gauge you selected; for greater safety, select the largest conductor size present). Devices more than 2.54 cm deep need an additional deduction of 32 mL per cm of depth, which this simple check does not include.</p>"
+    },
+    {
+      "id": "bt-0054",
+      "backTranslation": "An overloaded box strains connections, damages insulation, and accumulates heat. It is a common cause of failed inspections and intermittent circuits. NEC 314.16 assigns a volume to each conductor gauge, and the box must provide at least that space."
+    },
+    {
+      "id": "bt-0055",
+      "backTranslation": "An overloaded box strains connections, damages insulation, and accumulates heat. It is a common cause of failed inspections. Canadian Electrical Code (Rule 12-3034 with Table 22) assigns each insulated conductor a volume in millilitres, and the box must provide at least that space."
+    },
+    {
+      "id": "bt-0056",
+      "backTranslation": "Devices (count double)"
+    },
+    {
+      "id": "bt-0057",
+      "backTranslation": "Each phase or neutral conductor that enters the box = 1, including those that pass through it uncut. Each device = 2. All grounding conductors together = 1; if there are more than four, each additional one adds ¼ under the 2020 rules. Internal clamps = 1. Pigtails that remain inside the box do not count. We multiply the total by the conductor-gauge volume and compare it with the box volume."
+    },
+    {
+      "id": "bt-0058",
+      "backTranslation": "</div>\n<p>Detail: pigtails that remain inside the box do not count, but a conductor that passes through it uncut DOES count once. If more than four grounding conductors enter, each one after the fourth adds ¼ under the 2020 rules. If there are multiple gauges, use the largest to maintain a safe margin.</p>"
+    },
+    {
+      "id": "bt-0059",
+      "backTranslation": "Permitted, but right at the limit. If you might add a device or another cable later, use a larger box now."
+    },
+    {
+      "id": "bt-0060",
+      "backTranslation": "Exceeds the limit. Use a deeper box, an extension, or fewer conductors. Overloaded boxes often fail inspection and present a heat risk."
+    },
+    {
+      "id": "bt-0061",
+      "backTranslation": "% of fill limit; even 4\""
+    },
+    {
+      "id": "bt-0062",
+      "backTranslation": "% of limit."
+    },
+    {
+      "id": "bt-0063",
+      "backTranslation": "Fits with margin below the "
+    },
+    {
+      "id": "bt-0064",
+      "backTranslation": "Permitted, but near the limit. A larger size makes pulling much easier on long runs or with several bends."
+    },
+    {
+      "id": "bt-0065",
+      "backTranslation": "Permitted limit"
+    },
+    {
+      "id": "bt-0066",
+      "backTranslation": "Divide the run among several conduits or reduce the number of conductors."
+    },
+    {
+      "id": "bt-0067",
+      "backTranslation": "% drop. Keep the distance shorter to preserve margin. Also remember that the conductor must be rated for "
+    },
+    {
+      "id": "bt-0068",
+      "backTranslation": "% of limit ("
+    },
+    {
+      "id": "bt-0069",
+      "backTranslation": "% above "
+    },
+    {
+      "id": "bt-0070",
+      "backTranslation": "%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0071",
+      "backTranslation": "Attention: this only calculates voltage drop. The conductor must ALSO be rated to carry "
+    },
+    {
+      "id": "bt-0072",
+      "backTranslation": "no available gauge falls below "
+    },
+    {
+      "id": "bt-0073",
+      "backTranslation": "No conductor in the table keeps the drop below your limit. Options: shorten the run, increase the voltage, allow a greater drop, or use parallel conductors; consult an electrician."
+    },
+    {
+      "id": "bt-0074",
+      "backTranslation": "Exceeds the 3% recommendation, but is within the 5% outer limit. It may be acceptable for some loads; consider a larger conductor gauge for motors, chargers, or long-running circuits."
+    },
+    {
+      "id": "bt-0075",
+      "backTranslation": "Exceeds the 5% outer limit. Expect real operating problems: use a larger conductor gauge, shorten the run, or increase the voltage."
+    },
+    {
+      "id": "bt-0076",
+      "backTranslation": "<p>We rearranged the formula to calculate the distance, with your limit of"
+    },
+    {
+      "id": "bt-0077",
+      "backTranslation": "<p>We tested each gauge, from smallest to largest, until finding one that kept the drop below"
+    },
+    {
+      "id": "bt-0078",
+      "backTranslation": " conductor that falls below "
+    },
+    {
+      "id": "bt-0079",
+      "backTranslation": "Within the 3% recommendation. This run should work well."
+    },
+    {
+      "id": "bt-0080",
+      "backTranslation": "Your limit"
+    },
+    {
+      "id": "bt-0081",
+      "backTranslation": "<p>The small-conductor rule ({citation}) limits the breaker for the {size} {material} conductor to <strong>{capAmps} A</strong>; this is the practical ceiling used in the comparison.</p>"
+    },
+    {
+      "id": "bt-0082",
+      "backTranslation": "<div class=\"formula\">Safe limit = {rated} A   compared with   your load = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0083",
+      "backTranslation": "This conductor can carry the load in normal conditions. Remember that continuous loads (3+ hours) should remain below 80% of the limit; here that is {amps} A."
+    },
+    {
+      "id": "bt-0084",
+      "backTranslation": "This conductor does NOT have the rated capacity for {amps} A. Choose a larger gauge: an undersized conductor overheats and presents a fire hazard."
+    },
+    {
+      "id": "bt-0085",
+      "backTranslation": "safe limit for a {size} {material} conductor at {temp}°C"
+    },
+    {
+      "id": "bt-0086",
+      "backTranslation": "\n<p>Each insulated {size} conductor needs <strong>{unit} mL</strong> of box space (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} total allowances × {unit} mL\n= {needed} mL required\n{box}: {available} mL available → {status}</div>\n<p>Canadian detail: bare bonding conductors and clamps receive no volume, unlike the US; each pair of marrettes receives one allowance based on the largest connected conductor (the selected gauge is used, so select the largest present for safety); devices deeper than 2.54 cm require another 32 mL deduction per cm of depth, which this simple check does not include.</p>"
+    },
+    {
+      "id": "bt-0087",
+      "backTranslation": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0088",
+      "backTranslation": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0089",
+      "backTranslation": "\n<p>Each {size} conductor needs <strong>{unit} cu in</strong> of box space (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} total allowances × {unit} cu in\n= {needed} cu in required\n{box}: {available} cu in available → {status}</div>\n<p>Detail: pigtails wholly inside the box do not count, but an uncut pass-through conductor DOES count once. Beyond four grounding conductors, each additional one adds ¼ allowance under the 2020 rule; allowing about one extra conductor is the safe shortcut. Mixed gauges need a gauge-by-gauge calculation; until that is available, selecting the largest gauge is the safe approach.</p>"
+    },
+    {
+      "id": "bt-0090",
+      "backTranslation": "Fits comfortably below the {percent}% limit."
+    },
+    {
+      "id": "bt-0091",
+      "backTranslation": "\n<p>Each {size} THHN conductor has a cross-sectional area of <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conductors × {wireArea} = {needed} sq in required\nInside area of {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitted: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  {actualPercent}% fill fits</div>"
+    },
+    {
+      "id": "bt-0092",
+      "backTranslation": "smallest {conduit} for {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0093",
+      "backTranslation": "<p>{count} × {size} THHN = {area} sq in of conductor area, exceeding the {percent}% fill limit even in a 4\" {conduit}.</p>"
+    },
+    {
+      "id": "bt-0094",
+      "backTranslation": "Attention: this calculates voltage drop only. The conductor must ALSO be rated to carry {amps} A safely (ampacity); check this separately before purchasing."
+    },
+    {
+      "id": "bt-0095",
+      "backTranslation": "At this exact distance the drop reaches {percent}%. Use a shorter run to keep margin. The conductor must also be rated for {amps} A (ampacity), regardless of distance."
+    },
+    {
+      "id": "bt-0096",
+      "backTranslation": "\n<p>We rearrange the formula to calculate distance using your {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">Maximum one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0097",
+      "backTranslation": "no listed gauge keeps the drop below {percent}%"
+    },
+    {
+      "id": "bt-0098",
+      "backTranslation": "Even a {size} {material} conductor drops more than {percent}% over {feet} one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0099",
+      "backTranslation": "\n<p>Starting with the smallest, each gauge was tested until one stayed below your {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0100",
+      "backTranslation": "smallest {material} conductor that remains below {percent}%"
+    },
+    {
+      "id": "bt-0101",
+      "backTranslation": "Always verify calculations independently, comply with local electrical code and permits, and hire a licensed professional when the law or prudence requires it."
+    },
+    {
+      "id": "bt-0102",
+      "backTranslation": "Do not attack, overload, or extract content at an abusive rate; do not reverse engineer for the purpose of causing harm or otherwise interfere with the Service. Also do not use it to break the law."
+    },
+    {
+      "id": "bt-0103",
+      "backTranslation": "Electrical work can cause injury or death, and mistakes can cause fires."
+    },
+    {
+      "id": "bt-0104",
+      "backTranslation": ". If you do not agree, do not use the Service."
+    },
+    {
+      "id": "bt-0105",
+      "backTranslation": "The results are simplified estimates for normal conditions. They do not account for all real-world factors (temperature, grouping, ampacity derating, continuous loads, local code changes, equipment certifications, and others). The Service is not a substitute for a licensed electrician or professional engineer, and its use does not create a professional relationship."
+    },
+    {
+      "id": "bt-0106",
+      "backTranslation": "To the fullest extent permitted by law, VoltDrop and its operator are not liable for damages arising from use of or inability to use the Service, including property damage, personal injury, lost profits, or the cost of redoing electrical work, whether under warranty, contract, tort, or another theory. If liability cannot be fully excluded, our total liability is limited to $50 (USD). Some jurisdictions do not allow certain exclusions, so some parts may not apply to you."
+    },
+    {
+      "id": "bt-0107",
+      "backTranslation": "You may sign in with Google or Facebook to leave comments. You retain ownership of what you write, but grant us a worldwide, royalty-free license to display it in the Service. Do not post illegal, hateful, harassing, deceptive, or spam content; nor links, third parties' personal information, or impersonations. We may remove comments or suspend access to commenting at our discretion, with or without notice. Comments express other users' opinions, not ours, and are never a source of professional electrical advice."
+    },
+    {
+      "id": "bt-0108",
+      "backTranslation": "Ampacity is the maximum current (amperes) that a conductor can carry continuously without overheating. It depends on the conductor size (wire gauge), material (copper or aluminum), and insulation temperature rating; values under normal conditions are specified by NEC Table 310.16."
+    },
+    {
+      "id": "bt-0109",
+      "backTranslation": "are two independent checks; the conductor must pass both"
+    },
+    {
+      "id": "bt-0110",
+      "backTranslation": "Hot attics, machine rooms, bundles of more than three current-carrying conductors, and continuous loads (3+ hours require a 25% margin) all reduce ampacity. If in doubt, increase the conductor size (wire gauge) or consult an electrician."
+    },
+    {
+      "id": "bt-0111",
+      "backTranslation": "— most circuit-breaker terminals and wiring terminals have this temperature rating. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually still limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0112",
+      "backTranslation": "When uncertain, use the 75°C column: most circuit-breaker terminals and wiring terminals are rated 75°C. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually still limit the circuit to the 75°C values."
+    },
+    {
+      "id": "bt-0113",
+      "backTranslation": "Which insulation temperature column should be used?"
+    },
+    {
+      "id": "bt-0114",
+      "backTranslation": "All grounding conductors together occupy the space of one wire; this is the code rule, not counting each one separately."
+    },
+    {
+      "id": "bt-0115",
+      "backTranslation": "Canadian rule: each pair of insulated wire connectors counts as the space of one wire, determined by the largest wire among them. Count all marrettes."
+    },
+    {
+      "id": "bt-0116",
+      "backTranslation": "Cable clamps built into the inside of a junction box (common in metal boxes) count as the space of one wire. Connectors remaining outside the box do not count."
+    },
+    {
+      "id": "bt-0117",
+      "backTranslation": "Count every phase conductor and neutral conductor entering the junction box, including conductors that pass through the box without being cut. Do not count grounding conductors here, and do not count pigtails that remain entirely inside the box."
+    },
+    {
+      "id": "bt-0118",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat, often causing failed inspections and intermittent circuit interruptions. NEC 314.16 specifies the required space by conductor size (wire gauge), and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0119",
+      "backTranslation": "Do conductors that pass through the junction box uncut count toward junction-box fill?"
+    },
+    {
+      "id": "bt-0120",
+      "backTranslation": "Each phase or neutral conductor entering the junction box = 1, including conductors that pass through the box uncut. Each device (switch or receptacle) = 2. All grounding conductors together = 1; after more than four, each additional conductor adds ¼ under the 2020 rules. Internal cable clamps = 1. Pigtails that remain entirely inside the box do not count. Multiply the total by the space for the corresponding conductor size (wire gauge), then compare it with the junction-box volume."
+    },
+    {
+      "id": "bt-0121",
+      "backTranslation": "Is the junction box or device box large enough? Count the items in the box to obtain a clear result."
+    },
+    {
+      "id": "bt-0122",
+      "backTranslation": "Most homes use 14 AWG (15 A circuits) or 12 AWG (20 A circuits). If the box contains multiple sizes, for now choose the largest conductor size (wire gauge) to preserve a safety margin."
+    },
+    {
+      "id": "bt-0123",
+      "backTranslation": "NEC 314.16 specifies a volume for each conductor size (wire gauge), for example 2.25 cubic inches for 12 AWG. Count each phase or neutral conductor once, each device twice, all grounding conductors together once, and internal cable clamps once. The total multiplied by the specified volume must not exceed the junction-box volume."
+    },
+    {
+      "id": "bt-0124",
+      "backTranslation": "Count every insulated conductor inside the conduit, including the neutral conductor and insulated grounding conductors. For now, all wires must use the same size."
+    },
+    {
+      "id": "bt-0125",
+      "backTranslation": "What size conduit do your wires need? Enter the wires to be pulled through it to obtain the smallest compliant size."
+    },
+    {
+      "id": "bt-0126",
+      "backTranslation": "When the run is long or has many bends, using conduit one size larger than the compliant minimum makes wire pulling easier. Many electricians proactively increase the size. This tool currently supports only one conductor size (wire gauge) at a time."
+    },
+    {
+      "id": "bt-0127",
+      "backTranslation": "According to NEC Chapter 9, one wire may occupy at most 53% of the conduit's interior area, two wires 31%, and three or more wires 40%. The calculation uses the official cross-sectional areas for the corresponding wire and conduit type."
+    },
+    {
+      "id": "bt-0128",
+      "backTranslation": "Space must be left inside the conduit. Filling it too full can make it impossible to pull the wires, and the wires may also overheat. U.S. standard limits (NEC Chapter 9): one wire may occupy"
+    },
+    {
+      "id": "bt-0129",
+      "backTranslation": "It is almost always one of the following two reasons: different calculators use different resistance values, or some calculators use"
+    },
+    {
+      "id": "bt-0130",
+      "backTranslation": "There are usually two reasons: some calculators require a round-trip distance, while others require a one-way distance (outbound only). VoltDrop always uses the one-way distance (outbound only) and automatically doubles it internally. Different calculators may also use slightly different wire-resistance values. VoltDrop displays the complete calculation process for easy checking."
+    },
+    {
+      "id": "bt-0131",
+      "backTranslation": "The informational notes of the <span id=\"code-name\">U.S. National Electrical Code</span> recommend that the voltage drop of a <span id=\"code-basis\">branch circuit</span> be no higher than <strong>3%</strong>, and that total voltage drop from the panel to the device be no higher than <strong>5%</strong>. These are good-performance recommendations, not generally enforceable legal requirements. Low-voltage systems such as 12&nbsp;V solar usually need a stricter target because 3% of 12&nbsp;V has a much greater effect than 3% of 240&nbsp;V."
+    },
+    {
+      "id": "bt-0132",
+      "backTranslation": ". Do not double it yourself."
+    },
+    {
+      "id": "bt-0133",
+      "backTranslation": "while others require the one-way distance (outbound only). We always require entry of the one-way distance (outbound only) and display the complete calculation."
+    },
+    {
+      "id": "bt-0134",
+      "backTranslation": "Maximum acceptable voltage drop"
+    },
+    {
+      "id": "bt-0135",
+      "backTranslation": "Measure the one-way distance (outbound only)"
+    },
+    {
+      "id": "bt-0136",
+      "backTranslation": "3% is usually recommended for a single circuit. 5% is usually used as the outer limit for the entire path."
+    },
+    {
+      "id": "bt-0137",
+      "backTranslation": "5% — upper limit"
+    },
+    {
+      "id": "bt-0138",
+      "backTranslation": "Why are the results from other calculators different?"
+    },
+    {
+      "id": "bt-0139",
+      "backTranslation": "Why are the results from different voltage-drop calculators inconsistent?"
+    },
+    {
+      "id": "bt-0140",
+      "backTranslation": "A conductor has resistance, so part of the voltage is lost in the form of heat. The informational notes of the U.S. National Electrical Code recommend a maximum of 3% for a branch circuit and a maximum of 5% for the total path. These are performance recommendations, not generally enforceable legal requirements. Low-voltage systems such as 12 V usually use stricter targets."
+    },
+    {
+      "id": "bt-0141",
+      "backTranslation": "All results are planning estimates derived from published formulas and tables and do not constitute professional advice. Always comply with local electrical codes; if in doubt, consult a licensed electrician."
+    },
+    {
+      "id": "bt-0142",
+      "backTranslation": "Free junction-box-fill calculator based on NEC 314.16: count wires, devices, grounding conductors, and cable clamps, and display a clear result and volume calculation."
+    },
+    {
+      "id": "bt-0143",
+      "backTranslation": "Free conduit-fill calculator: enter the quantity and size of THHN wires and find the smallest compliant EMT or PVC Schedule 40 size according to NEC Chapter 9 and the 53/31/40% limits."
+    },
+    {
+      "id": "bt-0144",
+      "backTranslation": "Free maximum-wire-length calculator: enter conductor size (wire gauge), amperes, and voltage to obtain the maximum one-way distance (outbound only) that keeps voltage drop within the 3% or 5% limit."
+    },
+    {
+      "id": "bt-0145",
+      "backTranslation": "How far at most can the conductor be run before voltage drop creates a problem? Calculate the maximum one-way distance (outbound only) for any conductor size (wire gauge) and load."
+    },
+    {
+      "id": "bt-0146",
+      "backTranslation": "Free conductor-size (wire-gauge) calculator: enter amperes, voltage, and one-way distance (outbound only) to find the smallest copper or aluminum AWG that keeps voltage drop within the 3% limit."
+    },
+    {
+      "id": "bt-0147",
+      "backTranslation": "Watts (kW) represent actual usable power, while kVA represents the apparent power that the wire must carry. For heaters and simple loads, the two are equal; for motors and electronic equipment, kVA may be higher. The ratio between the two is the power factor."
+    },
+    {
+      "id": "bt-0148",
+      "backTranslation": "The calculators run entirely in your browser, and the numbers you enter never leave the device. We do not require registration and do not sell data; we save personal information that you voluntarily provide only when you choose to sign in and post a comment."
+    },
+    {
+      "id": "bt-0149",
+      "backTranslation": "We do not sell or share your personal information with advertisers or data brokers. We do not send marketing emails, and we do not track you across websites."
+    },
+    {
+      "id": "bt-0150",
+      "backTranslation": "We use Google Analytics to understand overall traffic (pages visited, approximate region, and device type). These are aggregated analytics data and are not used to identify you."
+    },
+    {
+      "id": "bt-0151",
+      "backTranslation": "What we do not do"
+    },
+    {
+      "id": "bt-0152",
+      "backTranslation": "A</strong>, so this is the practical limit used for comparison.</p>"
+    },
+    {
+      "id": "bt-0153",
+      "backTranslation": "Exceeds the limit"
+    },
+    {
+      "id": "bt-0154",
+      "backTranslation": "Uncertain? Use <strong>75°C</strong>: most circuit-breaker terminals and wiring terminals are rated for this value. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually still limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0155",
+      "backTranslation": "<div class=\"formula\">Safe limit ="
+    },
+    {
+      "id": "bt-0156",
+      "backTranslation": "Safe limit:"
+    },
+    {
+      "id": "bt-0157",
+      "backTranslation": "Under normal conditions, this conductor can carry the load. Note: continuous loads (3+ hours) should be below 80% of the limit, namely"
+    },
+    {
+      "id": "bt-0158",
+      "backTranslation": "This conductor's rated ampacity is insufficient to carry"
+    },
+    {
+      "id": "bt-0159",
+      "backTranslation": "Canadian counting rule (Rule 12-3034): each insulated wire entering the junction box = 1; bare bonding conductors do not count. Each device = 2. Each pair of insulated wire connectors (marrettes) = 1, calculated according to the largest wire among them; this rule has no corresponding provision in the US. Canada does not reserve volume for cable clamps. Pigtails that remain entirely inside the box do not count. Multiply the total by the volume specified in Table 22, then compare it with the junction-box volume in millilitres."
+    },
+    {
+      "id": "bt-0160",
+      "backTranslation": "</div>\n<p>Canadian details: bare bonding conductors and cable clamps do not reserve volume; each pair of marrettes reserves volume according to the largest wire among them (this tool uses the conductor size you selected; to ensure safety, choose the largest-sized conductor in the box). When a device is more than 2.54 cm deep, an additional 32 mL per cm must be deducted; this simplified check does not include that deduction.</p>"
+    },
+    {
+      "id": "bt-0161",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat, often causing failed inspections and intermittent circuit interruptions. NEC 314.16 specifies the required space by conductor size (wire gauge), and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0162",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat, often causing failed inspections. Canadian Electrical Code (Rule 12-3034 and Table 22) specifies space in millilitres for each insulated wire, and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0163",
+      "backTranslation": "Devices (counted twice)"
+    },
+    {
+      "id": "bt-0164",
+      "backTranslation": "Each phase or neutral conductor entering the junction box = 1, including conductors that pass through the box uncut. Each device = 2. All grounding conductors together = 1; after more than four, each additional conductor adds ¼ under the 2020 rules. Internal cable clamps = 1. Pigtails that remain entirely inside the box do not count. Multiply the total by the space for the corresponding conductor size (wire gauge), then compare it with the junction-box volume."
+    },
+    {
+      "id": "bt-0165",
+      "backTranslation": "</div>\n<p>Details: pigtails that remain entirely inside the box do not count, but a conductor that passes through the junction box uncut must be counted once. When there are more than four grounding conductors, each additional one adds ¼ under the 2020 rules. If there are multiple sizes, choose the largest conductor size (wire gauge) to preserve a safety margin.</p>"
+    },
+    {
+      "id": "bt-0166",
+      "backTranslation": "Compliant, but exactly at the limit. If a device or cable may be added later, a larger junction box should be used now."
+    },
+    {
+      "id": "bt-0167",
+      "backTranslation": "Exceeds the limit. Use a deeper junction box, an extension box, or reduce the number of wires. Overfilled junction boxes usually cause failed inspections and create a heat risk."
+    },
+    {
+      "id": "bt-0168",
+      "backTranslation": "% fill limit; even 4\""
+    },
+    {
+      "id": "bt-0169",
+      "backTranslation": "% limit."
+    },
+    {
+      "id": "bt-0170",
+      "backTranslation": "Below the limit, with ample space:"
+    },
+    {
+      "id": "bt-0171",
+      "backTranslation": "Compliant, but close to the limit. When the run is long or has many bends, increasing by one size makes wire pulling easier."
+    },
+    {
+      "id": "bt-0172",
+      "backTranslation": "Compliant limit"
+    },
+    {
+      "id": "bt-0173",
+      "backTranslation": "Divide the run among multiple conduits, or reduce the number of wires."
+    },
+    {
+      "id": "bt-0174",
+      "backTranslation": "% voltage drop. Shorten the run to preserve margin. Also note that the conductor must have sufficient ampacity to carry"
+    },
+    {
+      "id": "bt-0175",
+      "backTranslation": "% limit ("
+    },
+    {
+      "id": "bt-0176",
+      "backTranslation": "% above"
+    },
+    {
+      "id": "bt-0177",
+      "backTranslation": "%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0178",
+      "backTranslation": "Note: only voltage drop is calculated here. The conductor must also have sufficient ampacity to carry"
+    },
+    {
+      "id": "bt-0179",
+      "backTranslation": "no listed size can remain below"
+    },
+    {
+      "id": "bt-0180",
+      "backTranslation": "No single conductor in the table can keep voltage drop within your limit. You can shorten the run, increase the voltage, allow greater voltage drop, or parallel conductors; consult an electrician."
+    },
+    {
+      "id": "bt-0181",
+      "backTranslation": "Above the recommended value of 3%, but still within the 5% outer limit. It may be suitable for some loads; for motors, chargers, or long-running circuits, consider increasing the conductor size (wire gauge)."
+    },
+    {
+      "id": "bt-0182",
+      "backTranslation": "Exceeds the 5% outer limit. Obvious performance problems may occur: increase the conductor size (wire gauge), shorten the run, or increase the voltage."
+    },
+    {
+      "id": "bt-0183",
+      "backTranslation": "<p>We rearranged the formula to calculate distance according to your limit:"
+    },
+    {
+      "id": "bt-0184",
+      "backTranslation": "<p>We checked each size one by one starting from the smallest, until finding a size that keeps voltage drop below the following limit:"
+    },
+    {
+      "id": "bt-0185",
+      "backTranslation": " conductor remains below"
+    },
+    {
+      "id": "bt-0186",
+      "backTranslation": "Within the 3% recommended value. This run should work normally."
+    },
+    {
+      "id": "bt-0187",
+      "backTranslation": "Your limit"
+    },
+    {
+      "id": "bt-0188",
+      "backTranslation": "<p>The small-conductor rule ({citation}) sets the breaker maximum for {size} {material} conductors at <strong>{capAmps} A</strong>; this actual ceiling is used for comparison.</p>"
+    },
+    {
+      "id": "bt-0189",
+      "backTranslation": "<div class=\"formula\">Safe limit = {rated} A   compared against   your load = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0190",
+      "backTranslation": "Under normal conditions, this conductor can carry the load. Continuous loads lasting 3+ hours should be below 80% of the limit, which here is {amps} A."
+    },
+    {
+      "id": "bt-0191",
+      "backTranslation": "The rated ampacity of this conductor is insufficient to carry {amps} A. Increase the conductor gauge—an undersized conductor will overheat and create a fire risk."
+    },
+    {
+      "id": "bt-0192",
+      "backTranslation": "safe limit for a {size} {material} conductor at {temp}°C"
+    },
+    {
+      "id": "bt-0193",
+      "backTranslation": "\n<p>Each {size} insulated conductor requires <strong>{unit} mL</strong> of box space (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} total allowances × {unit} mL\n= {needed} mL required\n{box}: {available} mL available → {status}</div>\n<p>Canadian detail: bare bonding conductors and cable clamps get no volume, unlike the US; each pair of marrettes gets one allowance based on the largest conductor (the selected gauge is used, so choose the largest present for safety); devices deeper than 2.54 cm require an additional 32 mL deduction for every cm of depth, which this simplified check excludes.</p>"
+    },
+    {
+      "id": "bt-0194",
+      "backTranslation": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0195",
+      "backTranslation": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0196",
+      "backTranslation": "\n<p>Each {size} conductor requires <strong>{unit} cu in</strong> of box space (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} total allowances × {unit} cu in\n= {needed} cu in required\n{box}: {available} cu in available → {status}</div>\n<p>Detail: pigtails fully contained in the box do not count, while an uncut conductor passing through the box must count once. When more than four grounding conductors enter, each from the fifth onward adds ¼ allowance under the 2020 rule; counting roughly one additional conductor keeps a safety margin. Mixed conductor gauges need a separate calculation by gauge; until then, selecting the largest present gauge is the safe method.</p>"
+    },
+    {
+      "id": "bt-0197",
+      "backTranslation": "The fill remains comfortably below the {percent}% limit."
+    },
+    {
+      "id": "bt-0198",
+      "backTranslation": "\n<p>Every {size} THHN conductor has a cross-sectional area of <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conductors × {wireArea} = {needed} sq in required\nInterior area of {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitted area: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  actual fill {actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0199",
+      "backTranslation": "smallest {conduit} that holds {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0200",
+      "backTranslation": "<p>{count} × {size} THHN = {area} sq in of conductor area, which is beyond what a 4\" {conduit} can hold at the {percent}% fill limit.</p>"
+    },
+    {
+      "id": "bt-0201",
+      "backTranslation": "Warning: this result calculates only voltage drop. The conductor must also be able to carry {amps} A safely (ampacity); verify that separately before purchase."
+    },
+    {
+      "id": "bt-0202",
+      "backTranslation": "At this distance, voltage drop is exactly {percent}%. Shorten the run to retain margin. Regardless of distance, the conductor must have an ampacity rating sufficient for {amps} A."
+    },
+    {
+      "id": "bt-0203",
+      "backTranslation": "\n<p>Using your {percent}% limit ({maxDrop} V), the formula is rearranged to solve for distance:</p>\n<div class=\"formula\">Maximum one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0204",
+      "backTranslation": "none of the listed gauges keeps voltage drop below {percent}%"
+    },
+    {
+      "id": "bt-0205",
+      "backTranslation": "Even with {size} {material} conductor over {feet} one-way feet at {amps} A, voltage drop remains above {percent}%."
+    },
+    {
+      "id": "bt-0206",
+      "backTranslation": "\n<p>Starting at the smallest gauge, each was checked until one kept voltage drop below the {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0207",
+      "backTranslation": "smallest {material} conductor gauge that keeps voltage drop below {percent}%"
+    },
+    {
+      "id": "bt-0208",
+      "backTranslation": "Be sure to verify calculations independently, comply with local electrical codes and permit requirements, and hire a licensed professional when required by law or common sense about safety."
+    },
+    {
+      "id": "bt-0209",
+      "backTranslation": "Do not attack the Service, overload it, scrape content at an abusive rate, reverse engineer it for the purpose of causing harm, or otherwise interfere with the Service; also do not use the Service unlawfully."
+    },
+    {
+      "id": "bt-0210",
+      "backTranslation": "Electrical work may cause injury or death, and errors may also cause fires."
+    },
+    {
+      "id": "bt-0211",
+      "backTranslation": ". If you do not agree, do not use this Service."
+    },
+    {
+      "id": "bt-0212",
+      "backTranslation": "The results are simplified estimates under normal conditions and do not cover all real-world factors, such as temperature, bundled installation, derating, continuous loads, local code revisions, and equipment certification. This Service cannot replace a licensed electrician or professional engineer, and use of this Service does not form any professional relationship."
+    },
+    {
+      "id": "bt-0213",
+      "backTranslation": "To the maximum extent permitted by law, VoltDrop and its operator are not responsible for any damage caused by your use of or inability to use this Service, including property loss, personal injury, lost profits, or rework costs, whether liability is based on warranty, contract, tort, or another theory. If liability cannot be fully excluded, our total liability is limited to $50 (USD). Some regions do not allow specific disclaimers, so some content may not apply to you."
+    },
+    {
+      "id": "bt-0214",
+      "backTranslation": "You may sign in with Google or Facebook and post comments. You retain ownership of what you write, but grant us a worldwide, royalty-free license to display that content in the Service. Do not post illegal, hateful, harassing, deceptive, or spam content; do not post links, other people's personal information, or impersonate others. We may decide at our sole discretion to remove comments or suspend commenting privileges, with or without separate notice. Comments represent only the opinions of other users, not ours, and are never a source of professional electrical advice."
+    },
+    {
+      "id": "bt-0215",
+      "backTranslation": "Ampacity is the maximum current, in amperes, that a conductor can carry continuously without overheating. It depends on the conductor gauge, material, and insulation temperature rating, and is established by CEC Table 2 for copper or Table 4 for aluminum under normal conditions."
+    },
+    {
+      "id": "bt-0216",
+      "backTranslation": "are separate checks; the conductor must pass"
+    },
+    {
+      "id": "bt-0217",
+      "backTranslation": "hot attics, mechanical rooms, groups of more than three current-carrying conductors, and continuous loads (3+ hours require a 25% margin). All of that reduces ampacity. If in doubt, use a larger conductor gauge or consult an electrician."
+    },
+    {
+      "id": "bt-0218",
+      "backTranslation": "— use it only if the circuit-breaker terminals and other terminals are marked 75°C. Unmarked equipment counts as 60°C according to CEC Rule 4-006."
+    },
+    {
+      "id": "bt-0219",
+      "backTranslation": "If in doubt, use the 75°C column only if the circuit-breaker terminals and other terminals are marked 75°C. Unmarked equipment counts as 60°C according to CEC Rule 4-006. The terminal temperature rating, not the NMD90 insulation alone, determines the usable column."
+    },
+    {
+      "id": "bt-0220",
+      "backTranslation": "Which insulation temperature column should be used?"
+    },
+    {
+      "id": "bt-0221",
+      "backTranslation": "Bare bonding conductors do not count according to CEC Rule 12-3034."
+    },
+    {
+      "id": "bt-0222",
+      "backTranslation": "Canadian rule: each pair of insulated connectors occupies the volume of one conductor, based on the largest conductor connected. Count all marrettes."
+    },
+    {
+      "id": "bt-0223",
+      "backTranslation": "Cable clamps receive no volume under the Canadian counting rule."
+    },
+    {
+      "id": "bt-0224",
+      "backTranslation": "Count each phase and neutral conductor that enters the box, including those that pass through it without being cut. Do not count grounding conductors here or pigtails that begin and end in the box."
+    },
+    {
+      "id": "bt-0225",
+      "backTranslation": "An overfilled box strains connections, damages insulation, and accumulates heat. Canadian Electrical Code (Rule 12-3034 with Table 22) assigns a volume in millilitres to each insulated conductor, and the box must provide at least that volume."
+    },
+    {
+      "id": "bt-0226",
+      "backTranslation": "Do conductors that pass through the box count toward box fill?"
+    },
+    {
+      "id": "bt-0227",
+      "backTranslation": "Canadian count: each insulated conductor that enters the box counts once; bare bonding conductors and cable clamps do not count. Each device counts twice. Each pair of insulated connectors (marrettes) counts once, based on the largest conductor connected."
+    },
+    {
+      "id": "bt-0228",
+      "backTranslation": "Is your junction or device box large enough? Count its contents to get a clear answer."
+    },
+    {
+      "id": "bt-0229",
+      "backTranslation": "In most homes: 14 AWG (15 A circuits) or 12 AWG (20 A circuits). If several gauges are present, for now choose the largest to maintain a safety margin."
+    },
+    {
+      "id": "bt-0230",
+      "backTranslation": "CEC Rule 12-3034 and Table 22 assign a volume in millilitres to each conductor gauge. Count each insulated conductor once, each device twice, and each pair of insulated connectors once. Bare bonding conductors and cable clamps do not count. The required volume must not exceed the box volume."
+    },
+    {
+      "id": "bt-0231",
+      "backTranslation": "Count each insulated conductor in the conduit, including the neutral and every insulated grounding conductor. All conductors must be the same gauge for now."
+    },
+    {
+      "id": "bt-0232",
+      "backTranslation": "<div class=\"ca-note\"><strong>Canada / CEC planning note:</strong> CEC Rule 12-910 and Table 8 use the same 53/31/40% fill percentages. However, this tool still uses THHN/THWN conductor areas and NEC trade dimensions because the Canadian values from Tables 6A–6K and 9 have not passed our verification. Do not use the diameter result as the final basis for a Canadian installation; confirm it in the CEC or with the inspection authority.</div>"
+    },
+    {
+      "id": "bt-0233",
+      "backTranslation": "What conduit diameter is needed for your conductors? Enter what you are pulling to get the smallest permitted diameter."
+    },
+    {
+      "id": "bt-0234",
+      "backTranslation": "long runs with several bends pull more easily in a diameter larger than the calculated minimum. For Canadian work, confirm conductor areas and metric trade diameters in CEC Tables 6A–6K and 9 before installation."
+    },
+    {
+      "id": "bt-0235",
+      "backTranslation": "According to CEC Rule 12-910 and Table 8, one conductor may occupy 53% of the interior area of a raceway; two conductors, 31%; and three conductors or more, 40%. This planning tool applies these percentages, but the conductor-area and trade-diameter tables remain specific to the NEC and must be confirmed for Canadian work."
+    },
+    {
+      "id": "bt-0236",
+      "backTranslation": "Conductors need free space in the conduit. The limits of CEC Rule 12-910 and Table 8 are as follows: one conductor may occupy"
+    },
+    {
+      "id": "bt-0237",
+      "backTranslation": "It is almost always one of two causes: some calculators use different resistance values, or some use the"
+    },
+    {
+      "id": "bt-0238",
+      "backTranslation": "It is almost always one of two causes: some calculators ask for the round trip, while others ask for the outbound distance (one-way trip). VoltDrop always uses the outbound distance and doubles it internally. Others use slightly different resistance values. VoltDrop displays the complete calculation to allow comparison."
+    },
+    {
+      "id": "bt-0239",
+      "backTranslation": "CEC Rule 8-102 sets a <strong>mandatory</strong> maximum: the voltage drop of a branch circuit or feeder must be at most <strong>3%</strong>, and the combined drop from the service to the farthest load must be at most <strong>5%</strong>. In Canada, these are enforceable limits, not mere performance recommendations. Low-voltage systems, such as 12&nbsp;V solar, often require an even tighter target because 3% of 12&nbsp;V has a much greater effect than 3% of 240&nbsp;V."
+    },
+    {
+      "id": "bt-0240",
+      "backTranslation": ". Do not double it yourself."
+    },
+    {
+      "id": "bt-0241",
+      "backTranslation": "while others ask for the outbound distance (one-way trip). We always ask for the outbound distance and display the complete calculation."
+    },
+    {
+      "id": "bt-0242",
+      "backTranslation": "Maximum acceptable drop"
+    },
+    {
+      "id": "bt-0243",
+      "backTranslation": "Measure the outbound distance (one-way trip)"
+    },
+    {
+      "id": "bt-0244",
+      "backTranslation": "3% is the mandatory maximum for a branch circuit or feeder. 5% is the mandatory maximum for the combined run."
+    },
+    {
+      "id": "bt-0245",
+      "backTranslation": "5% — upper limit"
+    },
+    {
+      "id": "bt-0246",
+      "backTranslation": "Why do the other calculators not agree?"
+    },
+    {
+      "id": "bt-0247",
+      "backTranslation": "Why do voltage-drop calculators not agree?"
+    },
+    {
+      "id": "bt-0248",
+      "backTranslation": "A conductor has resistance; part of the voltage is therefore lost as heat before reaching the device. CEC Rule 8-102 makes the limits enforceable: a maximum of 3% on a branch circuit or feeder and 5% total, from the service to the farthest load. Low-voltage systems, such as 12 V solar, often require an even tighter target."
+    },
+    {
+      "id": "bt-0249",
+      "backTranslation": "All results are planning estimates based on published formulas and tables; they do not constitute professional advice. Always comply with your local electrical code and consult a licensed electrician if in doubt."
+    },
+    {
+      "id": "bt-0250",
+      "backTranslation": "Free Canadian CEC box-fill calculator: Table 22 volumes in millilitres, counting conductors and marrettes according to Rule 12-3034, and a clear verdict."
+    },
+    {
+      "id": "bt-0251",
+      "backTranslation": "Preliminary Canadian conduit-fill check. The CEC limits of 53/31/40% are shown, with a clear warning that the sealed conductor-area and trade-diameter data remain specific to the NEC."
+    },
+    {
+      "id": "bt-0252",
+      "backTranslation": "Free Canadian maximum-length calculator: get the greatest outbound distance (one-way trip) within the CEC's mandatory voltage-drop limit of 3% or 5%. Copper and aluminum, DC and AC."
+    },
+    {
+      "id": "bt-0253",
+      "backTranslation": "How far can the conductor run before voltage drop becomes a problem? Get the maximum outbound distance (one-way trip) for any gauge and any load."
+    },
+    {
+      "id": "bt-0254",
+      "backTranslation": "Free Canadian conductor-gauge calculator: enter amperes, voltage, and outbound distance (one-way trip) to find the smallest copper or aluminum AWG within the mandatory limit of CEC Rule 8-102."
+    },
+    {
+      "id": "bt-0255",
+      "backTranslation": "Watts (kW) measure actual usable power, while kVA measures the apparent power that the wiring must carry. For heaters and simple loads, the two are equal; for motors and electronics, kVA may be higher. Their ratio is the power factor."
+    },
+    {
+      "id": "bt-0256",
+      "backTranslation": "The calculators operate entirely in your browser: the numbers entered never leave your device. No account is required, we do not sell data, and the only personal information we retain is what you give us if you choose to sign in and leave a comment."
+    },
+    {
+      "id": "bt-0257",
+      "backTranslation": "We neither sell nor share your personal information with advertisers or data brokers. We do not send marketing email. We do not track you on other websites."
+    },
+    {
+      "id": "bt-0258",
+      "backTranslation": "we use Google Analytics to understand overall traffic (pages visited, general region, and device type). This is aggregated analytics; we do not use it to identify you."
+    },
+    {
+      "id": "bt-0259",
+      "backTranslation": "What we do not do"
+    },
+    {
+      "id": "bt-0260",
+      "backTranslation": "A</strong>; it is therefore the practical limit used for comparison.</p>"
+    },
+    {
+      "id": "bt-0261",
+      "backTranslation": "exceeds the limit"
+    },
+    {
+      "id": "bt-0262",
+      "backTranslation": "Unsure? Use <strong>75°C</strong>: most circuit-breaker terminals are approved for this temperature. Romex/NM-B cable must use the 60°C column. THHN in a dry location is approved for 90°C, but the connection points usually limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0263",
+      "backTranslation": "<div class=\"formula\">Safe limit ="
+    },
+    {
+      "id": "bt-0264",
+      "backTranslation": "safe limit for "
+    },
+    {
+      "id": "bt-0265",
+      "backTranslation": "This conductor can carry the load under normal conditions. Reminder: continuous loads (3+ hours) should remain below 80% of the limit, namely "
+    },
+    {
+      "id": "bt-0266",
+      "backTranslation": "This conductor is NOT approved for "
+    },
+    {
+      "id": "bt-0267",
+      "backTranslation": "Canadian count (Rule 12-3034): each insulated conductor entering the box = 1; bare bonding conductors do NOT count. Each device = 2. Each PAIR of insulated connectors (marrettes) = 1, based on the largest conductor connected. This Canadian rule has no US equivalent. Cable clamps receive no volume in Canada. Pigtails entirely inside the box do not count. We multiply the total by the Table 22 volume and compare it with the box volume in millilitres."
+    },
+    {
+      "id": "bt-0268",
+      "backTranslation": "</div>\n<p>Canadian detail: bare bonding conductors and cable clamps receive no volume; each pair of marrettes receives a volume based on the largest conductor connected (we use the selected gauge; for safety, choose the largest conductor present). Devices more than 2.54 cm deep require an additional deduction of 32 mL per cm of depth, which this simple check does not include.</p>"
+    },
+    {
+      "id": "bt-0269",
+      "backTranslation": "An overfilled box strains connections, damages insulation, and accumulates heat. It is a frequent cause of inspection failure and intermittent circuits. NEC 314.16 assigns a volume to each conductor gauge, and the box must provide at least that volume."
+    },
+    {
+      "id": "bt-0270",
+      "backTranslation": "An overfilled box strains connections, damages insulation, and accumulates heat. It is a frequent cause of inspection failure. Canadian Electrical Code (Rule 12-3034 with Table 22) assigns a volume in millilitres to each insulated conductor, and the box must provide at least that volume."
+    },
+    {
+      "id": "bt-0271",
+      "backTranslation": "Devices (count double)"
+    },
+    {
+      "id": "bt-0272",
+      "backTranslation": "Each phase or neutral conductor that enters the box = 1, including a conductor that passes through it without being cut. Each device = 2. All grounding conductors together = 1; beyond four, each one adds ¼ under the 2020 rules. Internal cable clamps = 1. Pigtails entirely inside the box do not count. We multiply the total by the conductor-gauge volume and compare it with the box volume."
+    },
+    {
+      "id": "bt-0273",
+      "backTranslation": "</div>\n<p>Detail: pigtails entirely inside the box do not count, but a conductor that passes through it without being cut counts ONCE. Beyond four grounding conductors, each one adds ¼ under the 2020 rules. If several gauges are present, choose the largest to maintain a safety margin.</p>"
+    },
+    {
+      "id": "bt-0274",
+      "backTranslation": "Permitted, but right at the limit. If you might add a device or cable later, choose a larger box now."
+    },
+    {
+      "id": "bt-0275",
+      "backTranslation": "Above the limit. Use a deeper box, a box extension, or fewer conductors. An overfilled box often fails inspection and presents a heat risk."
+    },
+    {
+      "id": "bt-0276",
+      "backTranslation": "% of fill limit; even 4\""
+    },
+    {
+      "id": "bt-0277",
+      "backTranslation": "% of limit."
+    },
+    {
+      "id": "bt-0278",
+      "backTranslation": "Good clearance below the limit of "
+    },
+    {
+      "id": "bt-0279",
+      "backTranslation": "Permitted, but near the limit. A larger diameter makes pulling much easier on long runs or with several bends."
+    },
+    {
+      "id": "bt-0280",
+      "backTranslation": "Permitted limit"
+    },
+    {
+      "id": "bt-0281",
+      "backTranslation": "Divide the run among several conduits or reduce the number of conductors."
+    },
+    {
+      "id": "bt-0282",
+      "backTranslation": "% drop. Keep the run shorter to preserve a margin. The conductor must also be approved for "
+    },
+    {
+      "id": "bt-0283",
+      "backTranslation": "% of limit ("
+    },
+    {
+      "id": "bt-0284",
+      "backTranslation": "% above "
+    },
+    {
+      "id": "bt-0285",
+      "backTranslation": "%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0286",
+      "backTranslation": "Attention: this calculates only voltage drop. The conductor must ALSO be approved to carry "
+    },
+    {
+      "id": "bt-0287",
+      "backTranslation": "no listed gauge remains below "
+    },
+    {
+      "id": "bt-0288",
+      "backTranslation": "No conductor in the table keeps the drop below your limit. Options: shorten the run, increase the voltage, allow a greater drop, or use parallel conductors; consult an electrician."
+    },
+    {
+      "id": "bt-0289",
+      "backTranslation": "Above the mandatory 3% limit for the branch circuit or feeder, even though the combined run remains below the 5% maximum. Use a larger conductor gauge or shorten the run."
+    },
+    {
+      "id": "bt-0290",
+      "backTranslation": "Above the mandatory combined maximum of 5%. Use a larger conductor gauge, shorten the run, or increase the voltage."
+    },
+    {
+      "id": "bt-0291",
+      "backTranslation": "<p>We rearranged the formula to calculate the distance, with your limit of"
+    },
+    {
+      "id": "bt-0292",
+      "backTranslation": "<p>We checked each gauge, from smallest to largest, until a gauge kept the drop below"
+    },
+    {
+      "id": "bt-0293",
+      "backTranslation": " conductor that remains below "
+    },
+    {
+      "id": "bt-0294",
+      "backTranslation": "Within the mandatory 3% limit. This run should work well."
+    },
+    {
+      "id": "bt-0295",
+      "backTranslation": "Your limit"
+    },
+    {
+      "id": "bt-0296",
+      "backTranslation": "<p>The small-conductor rule ({citation}) limits the breaker for the {size} {material} conductor to <strong>{capAmps} A</strong>; this becomes the practical comparison limit.</p>"
+    },
+    {
+      "id": "bt-0297",
+      "backTranslation": "<div class=\"formula\">Safe limit = {rated} A   relative to   your load = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0298",
+      "backTranslation": "This conductor can carry the load under normal conditions. Continuous loads (3+ hours) should remain below 80% of the limit, or {amps} A here."
+    },
+    {
+      "id": "bt-0299",
+      "backTranslation": "This conductor is NOT approved for {amps} A. Use a larger gauge—an undersized conductor overheats and creates a fire hazard."
+    },
+    {
+      "id": "bt-0300",
+      "backTranslation": "safe limit of the {size} {material} conductor at {temp}°C"
+    },
+    {
+      "id": "bt-0301",
+      "backTranslation": "\n<p>Each insulated {size} conductor requires <strong>{unit} mL</strong> of box space (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} allowances total × {unit} mL\n= {needed} mL required\n{box}: {available} mL available → {status}</div>\n<p>Canadian detail: bare bonding conductors and cable clamps receive no volume, unlike the US; each pair of marrettes counts once based on the largest connected conductor (the chosen gauge is used, so select the largest present to retain a safety margin); devices deeper than 2.54 cm require an extra deduction of 32 mL per cm, which this simple check omits.</p>"
+    },
+    {
+      "id": "bt-0302",
+      "backTranslation": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0303",
+      "backTranslation": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0304",
+      "backTranslation": "\n<p>Each {size} conductor requires <strong>{unit} cu in</strong> of box space (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} allowances total × {unit} cu in\n= {needed} cu in required\n{box}: {available} cu in available → {status}</div>\n<p>Detail: pigtails entirely inside the box do not count, while an uncut pass-through conductor counts ONCE. When more than four grounding conductors enter, each after the fourth adds ¼ allowance under the 2020 rule; adding about one conductor preserves a safety margin. Mixed gauges require a complete gauge-by-gauge calculation; until then, choosing the largest gauge is the safe method.</p>"
+    },
+    {
+      "id": "bt-0305",
+      "backTranslation": "Comfortable clearance below the {percent}% limit."
+    },
+    {
+      "id": "bt-0306",
+      "backTranslation": "\n<p>Each {size} THHN conductor has a cross-section of <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conductors × {wireArea} = {needed} sq in required\nInterior area of {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitted: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  {actualPercent}% fill</div>"
+    },
+    {
+      "id": "bt-0307",
+      "backTranslation": "smallest {conduit} conduit for {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0308",
+      "backTranslation": "<p>{count} × {size} THHN = {area} sq in of conductors, exceeding the {percent}% fill limit even in a 4\" {conduit} conduit.</p>"
+    },
+    {
+      "id": "bt-0309",
+      "backTranslation": "Attention: this calculates only voltage drop. The conductor must ALSO be approved to carry {amps} A safely (ampacity); verify it separately before buying."
+    },
+    {
+      "id": "bt-0310",
+      "backTranslation": "At this exact distance, the drop reaches {percent}%. Keep the run shorter to preserve margin. The conductor must also be approved for {amps} A (ampacity), whatever the distance."
+    },
+    {
+      "id": "bt-0311",
+      "backTranslation": "\n<p>We rearranged the formula to calculate distance using your {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">Maximum one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0312",
+      "backTranslation": "no listed gauge keeps the drop below {percent}%"
+    },
+    {
+      "id": "bt-0313",
+      "backTranslation": "Even a {size} {material} conductor has more than {percent}% drop over {feet} one-way feet at {amps} A."
+    },
+    {
+      "id": "bt-0314",
+      "backTranslation": "\n<p>Each gauge was checked from smallest upward until one kept the drop below your {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0315",
+      "backTranslation": "smallest {material} conductor that stays below {percent}%"
+    },
+    {
+      "id": "bt-0316",
+      "backTranslation": "Always verify calculations independently, comply with local electrical code and permits, and hire a licensed professional when the law or prudence requires it."
+    },
+    {
+      "id": "bt-0317",
+      "backTranslation": "Do not attack the Service, overload it, collect its content at an abusive rate, reverse engineer it for the purpose of causing harm, or otherwise obstruct it. Also do not use it in violation of the law."
+    },
+    {
+      "id": "bt-0318",
+      "backTranslation": "Electrical work can injure or kill, and mistakes can cause fires."
+    },
+    {
+      "id": "bt-0319",
+      "backTranslation": ". If you do not agree, do not use the Service."
+    },
+    {
+      "id": "bt-0320",
+      "backTranslation": "The results are simplified estimates for normal conditions. They do not account for all real-world factors (temperature, grouping, ampacity reduction, continuous loads, local code modifications, equipment approvals, and others). The Service does not replace a licensed electrician or professional engineer, and its use creates no professional relationship."
+    },
+    {
+      "id": "bt-0321",
+      "backTranslation": "To the fullest extent permitted by law, VoltDrop and its operator are not liable for any damage arising from your use of or inability to use the Service, including property damage, injuries, lost profits, or the cost of redoing electrical work, regardless of the basis invoked. If liability cannot be fully excluded, our total liability is limited to $50 (USD). Some regions do not allow certain exclusions; parts of these terms may therefore not apply to you."
+    },
+    {
+      "id": "bt-0322",
+      "backTranslation": "You may sign in with Google or Facebook to leave comments. You remain the owner of your writings, but grant us a worldwide, royalty-free license to display them in the Service. Do not post anything illegal, hateful, harassing, deceptive, or unwanted; no links, personal information about others, or impersonation. We may delete any comment or suspend access to comments at our discretion, with or without notice. Comments express the opinions of other users, not ours, and never constitute a source of professional electrical advice."
+    },
+    {
+      "id": "bt-0323",
+      "backTranslation": "Ampacity is the maximum current (amperes) that a conductor can carry continuously without overheating. It depends on conductor size (wire gauge), material, and insulation temperature rating; under normal conditions, copper conductors are specified by CEC Table 2 and aluminum conductors by Table 4."
+    },
+    {
+      "id": "bt-0324",
+      "backTranslation": "are two independent checks; the conductor must pass both"
+    },
+    {
+      "id": "bt-0325",
+      "backTranslation": "Hot attics, machine rooms, bundles of more than three current-carrying conductors, and continuous loads (3+ hours require a 25% margin) all reduce ampacity. If in doubt, increase the conductor size (wire gauge) or consult an electrician."
+    },
+    {
+      "id": "bt-0326",
+      "backTranslation": "— it may be used only when the circuit-breaker terminals and other terminals are marked 75°C. According to CEC Rule 4-006, unmarked equipment is calculated as 60°C."
+    },
+    {
+      "id": "bt-0327",
+      "backTranslation": "When uncertain, the 75°C column may be used only when the circuit-breaker terminals and other terminals are marked 75°C. According to CEC Rule 4-006, unmarked equipment is calculated as 60°C. The usable column is determined by the terminal temperature rating and cannot be based only on NMD90 insulation."
+    },
+    {
+      "id": "bt-0328",
+      "backTranslation": "Which insulation temperature column should be used?"
+    },
+    {
+      "id": "bt-0329",
+      "backTranslation": "According to CEC Rule 12-3034, bare bonding conductors do not count."
+    },
+    {
+      "id": "bt-0330",
+      "backTranslation": "Canadian rule: each pair of insulated wire connectors counts as the space of one wire, determined by the largest wire among them. Count all marrettes."
+    },
+    {
+      "id": "bt-0331",
+      "backTranslation": "Under the Canadian counting rule, cable clamps do not reserve volume."
+    },
+    {
+      "id": "bt-0332",
+      "backTranslation": "Count every phase conductor and neutral conductor entering the junction box, including conductors that pass through the box without being cut. Do not count grounding conductors here, and do not count pigtails that remain entirely inside the box."
+    },
+    {
+      "id": "bt-0333",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat. Canadian Electrical Code (Rule 12-3034 and Table 22) specifies space in millilitres for each insulated wire, and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0334",
+      "backTranslation": "Do conductors that pass through the junction box uncut count toward junction-box fill?"
+    },
+    {
+      "id": "bt-0335",
+      "backTranslation": "Canadian counting rule: each insulated conductor entering the junction box is counted once; bare bonding conductors and cable clamps do not count. Each device is counted twice. Each pair of insulated wire connectors (marrettes) is counted once, calculated according to the largest conductor among them."
+    },
+    {
+      "id": "bt-0336",
+      "backTranslation": "Is the junction box or device box large enough? Count the items in the box to obtain a clear result."
+    },
+    {
+      "id": "bt-0337",
+      "backTranslation": "Most homes use 14 AWG (15 A circuits) or 12 AWG (20 A circuits). If the box contains multiple sizes, for now choose the largest conductor size (wire gauge) to preserve a safety margin."
+    },
+    {
+      "id": "bt-0338",
+      "backTranslation": "CEC Rule 12-3034 and Table 22 specify a volume in millilitres for each conductor size (wire gauge). Count each insulated wire once, each device twice, and each pair of insulated wire connectors once. Bare bonding conductors and cable clamps do not count. The required volume must not exceed the junction-box volume."
+    },
+    {
+      "id": "bt-0339",
+      "backTranslation": "Count every insulated conductor inside the conduit, including the neutral conductor and insulated grounding conductors. For now, all wires must use the same size."
+    },
+    {
+      "id": "bt-0340",
+      "backTranslation": "<div class=\"ca-note\"><strong>Canada / CEC planning note:</strong> CEC Rule 12-910 and Table 8 use the same 53/31/40% fill ratios. However, this tool still uses THHN/THWN conductor-area and NEC trade-size data because the data in Canadian Tables 6A–6K and 9 have not yet passed our verification. Do not use the conduit-size result as the final basis for a Canadian installation; check against the CEC or confirm with the local inspection authority.</div>"
+    },
+    {
+      "id": "bt-0341",
+      "backTranslation": "What size conduit do your wires need? Enter the wires to be pulled through it to obtain the smallest compliant size."
+    },
+    {
+      "id": "bt-0342",
+      "backTranslation": "When the run is long or has many bends, using conduit one size larger than the calculated minimum makes wire pulling easier. Before installation, Canadian projects must confirm conductor areas and metric trade sizes against CEC Tables 6A–6K and 9."
+    },
+    {
+      "id": "bt-0343",
+      "backTranslation": "According to CEC Rule 12-910 and Table 8, one wire may occupy at most 53% of the raceway's interior area, two wires 31%, and three or more wires 40%. This planning tool uses these ratios, but the conductor-area and trade-size tables are still NEC-specific data and must be separately confirmed for Canadian projects."
+    },
+    {
+      "id": "bt-0344",
+      "backTranslation": "Space must be left inside the conduit. The limits in CEC Rule 12-910 and Table 8 are: one wire may occupy at most"
+    },
+    {
+      "id": "bt-0345",
+      "backTranslation": "It is almost always one of the following two reasons: different calculators use different resistance values, or some calculators use"
+    },
+    {
+      "id": "bt-0346",
+      "backTranslation": "There are usually two reasons: some calculators require a round-trip distance, while others require a one-way distance (outbound only). VoltDrop always uses the one-way distance (outbound only) and automatically doubles it internally. Different calculators may also use slightly different wire-resistance values. VoltDrop displays the complete calculation process for easy checking."
+    },
+    {
+      "id": "bt-0347",
+      "backTranslation": "CEC Rule 8-102 specifies <strong>mandatory</strong> maximums: voltage drop for a branch circuit or feeder must be no higher than <strong>3%</strong>, and combined voltage drop from the service entrance to the farthest load must be no higher than <strong>5%</strong>. In Canada, these are enforceable limits, not optional performance recommendations. Low-voltage systems such as 12&nbsp;V solar usually need an even stricter design target because 3% of 12&nbsp;V has a much greater effect than 3% of 240&nbsp;V."
+    },
+    {
+      "id": "bt-0348",
+      "backTranslation": ". Do not double it yourself."
+    },
+    {
+      "id": "bt-0349",
+      "backTranslation": "while others require the one-way distance (outbound only). We always require entry of the one-way distance (outbound only) and display the complete calculation."
+    },
+    {
+      "id": "bt-0350",
+      "backTranslation": "Maximum acceptable voltage drop"
+    },
+    {
+      "id": "bt-0351",
+      "backTranslation": "Measure the one-way distance (outbound only)"
+    },
+    {
+      "id": "bt-0352",
+      "backTranslation": "The mandatory maximum for a branch circuit or feeder is 3%. The mandatory maximum for the combined path is 5%."
+    },
+    {
+      "id": "bt-0353",
+      "backTranslation": "5% — upper limit"
+    },
+    {
+      "id": "bt-0354",
+      "backTranslation": "Why are the results from other calculators different?"
+    },
+    {
+      "id": "bt-0355",
+      "backTranslation": "Why are the results from different voltage-drop calculators inconsistent?"
+    },
+    {
+      "id": "bt-0356",
+      "backTranslation": "A conductor has resistance, so part of the voltage is lost as heat before reaching the device. CEC Rule 8-102 makes the limits mandatory: a maximum of 3% for a branch circuit or feeder, and a maximum of 5% for the combined path from the service entrance to the farthest load. Low-voltage systems such as 12 V solar usually need a stricter design target."
+    },
+    {
+      "id": "bt-0357",
+      "backTranslation": "All results are planning estimates derived from published formulas and tables and do not constitute professional advice. Always comply with local electrical codes; if in doubt, consult a licensed electrician."
+    },
+    {
+      "id": "bt-0358",
+      "backTranslation": "Free Canadian CEC junction-box-fill calculator: use Table 22 millilitre volumes, count wires and marrettes according to Rule 12-3034, and provide a clear result."
+    },
+    {
+      "id": "bt-0359",
+      "backTranslation": "Canadian conduit-fill planning check. Displays the CEC's 53/31/40% limits and clearly warns that the sealed conductor-area and trade-size data are still NEC-specific data."
+    },
+    {
+      "id": "bt-0360",
+      "backTranslation": "Free Canadian maximum-wire-length calculator: obtain the maximum one-way distance (outbound only) that complies with the CEC's mandatory 3% or 5% voltage-drop limits. Supports copper, aluminum, DC, and AC."
+    },
+    {
+      "id": "bt-0361",
+      "backTranslation": "How far at most can the conductor be run before voltage drop creates a problem? Calculate the maximum one-way distance (outbound only) for any conductor size (wire gauge) and load."
+    },
+    {
+      "id": "bt-0362",
+      "backTranslation": "Free Canadian conductor-size (wire-gauge) calculator: enter amperes, voltage, and one-way distance (outbound only) to find the smallest copper or aluminum AWG that complies with the mandatory limit of CEC Rule 8-102."
+    },
+    {
+      "id": "bt-0363",
+      "backTranslation": "Watts (kW) represent actual usable power, while kVA represents the apparent power that the wire must carry. For heaters and simple loads, the two are equal; for motors and electronic equipment, kVA may be higher. The ratio between the two is the power factor."
+    },
+    {
+      "id": "bt-0364",
+      "backTranslation": "The calculators run entirely in your browser, and the numbers you enter never leave the device. We do not require registration and do not sell data; we save personal information that you voluntarily provide only when you choose to sign in and post a comment."
+    },
+    {
+      "id": "bt-0365",
+      "backTranslation": "We do not sell or share your personal information with advertisers or data brokers. We do not send marketing emails, and we do not track you across websites."
+    },
+    {
+      "id": "bt-0366",
+      "backTranslation": "We use Google Analytics to understand overall traffic (pages visited, approximate region, and device type). These are aggregated analytics data and are not used to identify you."
+    },
+    {
+      "id": "bt-0367",
+      "backTranslation": "What we do not do"
+    },
+    {
+      "id": "bt-0368",
+      "backTranslation": "A</strong>, so this is the practical limit used for comparison.</p>"
+    },
+    {
+      "id": "bt-0369",
+      "backTranslation": "Exceeds the limit"
+    },
+    {
+      "id": "bt-0370",
+      "backTranslation": "Uncertain? Use <strong>75°C</strong>: most circuit-breaker terminals and wiring terminals are rated for this value. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but connection points usually still limit the circuit to 75°C."
+    },
+    {
+      "id": "bt-0371",
+      "backTranslation": "<div class=\"formula\">Safe limit ="
+    },
+    {
+      "id": "bt-0372",
+      "backTranslation": "Safe limit:"
+    },
+    {
+      "id": "bt-0373",
+      "backTranslation": "Under normal conditions, this conductor can carry the load. Note: continuous loads (3+ hours) should be below 80% of the limit, namely"
+    },
+    {
+      "id": "bt-0374",
+      "backTranslation": "This conductor's rated ampacity is insufficient to carry"
+    },
+    {
+      "id": "bt-0375",
+      "backTranslation": "Canadian counting rule (Rule 12-3034): each insulated wire entering the junction box = 1; bare bonding conductors do not count. Each device = 2. Each pair of insulated wire connectors (marrettes) = 1, calculated according to the largest wire among them; this rule has no corresponding provision in the US. Canada does not reserve volume for cable clamps. Pigtails that remain entirely inside the box do not count. Multiply the total by the volume specified in Table 22, then compare it with the junction-box volume in millilitres."
+    },
+    {
+      "id": "bt-0376",
+      "backTranslation": "</div>\n<p>Canadian details: bare bonding conductors and cable clamps do not reserve volume; each pair of marrettes reserves volume according to the largest wire among them (this tool uses the conductor size you selected; to ensure safety, choose the largest-sized conductor in the box). When a device is more than 2.54 cm deep, an additional 32 mL per cm must be deducted; this simplified check does not include that deduction.</p>"
+    },
+    {
+      "id": "bt-0377",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat, often causing failed inspections and intermittent circuit interruptions. NEC 314.16 specifies the required space by conductor size (wire gauge), and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0378",
+      "backTranslation": "An overfilled junction box puts stress on connections, damages insulation, and accumulates heat, often causing failed inspections. Canadian Electrical Code (Rule 12-3034 and Table 22) specifies space in millilitres for each insulated wire, and the junction box must provide at least that volume."
+    },
+    {
+      "id": "bt-0379",
+      "backTranslation": "Devices (counted twice)"
+    },
+    {
+      "id": "bt-0380",
+      "backTranslation": "Each phase or neutral conductor entering the junction box = 1, including conductors that pass through the box uncut. Each device = 2. All grounding conductors together = 1; after more than four, each additional conductor adds ¼ under the 2020 rules. Internal cable clamps = 1. Pigtails that remain entirely inside the box do not count. Multiply the total by the space for the corresponding conductor size (wire gauge), then compare it with the junction-box volume."
+    },
+    {
+      "id": "bt-0381",
+      "backTranslation": "</div>\n<p>Details: pigtails that remain entirely inside the box do not count, but a conductor that passes through the junction box uncut must be counted once. When there are more than four grounding conductors, each additional one adds ¼ under the 2020 rules. If there are multiple sizes, choose the largest conductor size (wire gauge) to preserve a safety margin.</p>"
+    },
+    {
+      "id": "bt-0382",
+      "backTranslation": "Compliant, but exactly at the limit. If a device or cable may be added later, a larger junction box should be used now."
+    },
+    {
+      "id": "bt-0383",
+      "backTranslation": "Exceeds the limit. Use a deeper junction box, an extension box, or reduce the number of wires. Overfilled junction boxes usually cause failed inspections and create a heat risk."
+    },
+    {
+      "id": "bt-0384",
+      "backTranslation": "% fill limit; even 4\""
+    },
+    {
+      "id": "bt-0385",
+      "backTranslation": "% limit."
+    },
+    {
+      "id": "bt-0386",
+      "backTranslation": "Below the limit, with ample space:"
+    },
+    {
+      "id": "bt-0387",
+      "backTranslation": "Compliant, but close to the limit. When the run is long or has many bends, increasing by one size makes wire pulling easier."
+    },
+    {
+      "id": "bt-0388",
+      "backTranslation": "Compliant limit"
+    },
+    {
+      "id": "bt-0389",
+      "backTranslation": "Divide the run among multiple conduits, or reduce the number of wires."
+    },
+    {
+      "id": "bt-0390",
+      "backTranslation": "% voltage drop. Shorten the run to preserve margin. Also note that the conductor must have sufficient ampacity to carry"
+    },
+    {
+      "id": "bt-0391",
+      "backTranslation": "% limit ("
+    },
+    {
+      "id": "bt-0392",
+      "backTranslation": "% above"
+    },
+    {
+      "id": "bt-0393",
+      "backTranslation": "%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0394",
+      "backTranslation": "Note: only voltage drop is calculated here. The conductor must also have sufficient ampacity to carry"
+    },
+    {
+      "id": "bt-0395",
+      "backTranslation": "no listed size can remain below"
+    },
+    {
+      "id": "bt-0396",
+      "backTranslation": "No single conductor in the table can keep voltage drop within your limit. You can shorten the run, increase the voltage, allow greater voltage drop, or parallel conductors; consult an electrician."
+    },
+    {
+      "id": "bt-0397",
+      "backTranslation": "Exceeds the mandatory 3% limit for a branch circuit or feeder, but is still within the 5% maximum for the combined path. Increase the conductor size (wire gauge) or shorten the run."
+    },
+    {
+      "id": "bt-0398",
+      "backTranslation": "Exceeds the mandatory 5% maximum for the combined path. Increase the conductor size (wire gauge), shorten the run, or increase the voltage."
+    },
+    {
+      "id": "bt-0399",
+      "backTranslation": "<p>We rearranged the formula to calculate distance according to your limit:"
+    },
+    {
+      "id": "bt-0400",
+      "backTranslation": "<p>We checked each size one by one starting from the smallest, until finding a size that keeps voltage drop below the following limit:"
+    },
+    {
+      "id": "bt-0401",
+      "backTranslation": " conductor remains below"
+    },
+    {
+      "id": "bt-0402",
+      "backTranslation": "Within the mandatory 3% limit. This run should work normally."
+    },
+    {
+      "id": "bt-0403",
+      "backTranslation": "Your limit"
+    },
+    {
+      "id": "bt-0404",
+      "backTranslation": "<p>The small-conductor rule ({citation}) sets the breaker maximum for {size} {material} conductors at <strong>{capAmps} A</strong>; this actual ceiling is used for comparison.</p>"
+    },
+    {
+      "id": "bt-0405",
+      "backTranslation": "<div class=\"formula\">Safe limit = {rated} A   compared against   your load = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0406",
+      "backTranslation": "Under normal conditions, this conductor can carry the load. Continuous loads lasting 3+ hours should be below 80% of the limit, which here is {amps} A."
+    },
+    {
+      "id": "bt-0407",
+      "backTranslation": "The rated ampacity of this conductor is insufficient to carry {amps} A. Increase the conductor gauge—an undersized conductor will overheat and create a fire risk."
+    },
+    {
+      "id": "bt-0408",
+      "backTranslation": "safe limit for a {size} {material} conductor at {temp}°C"
+    },
+    {
+      "id": "bt-0409",
+      "backTranslation": "\n<p>Each {size} insulated conductor requires <strong>{unit} mL</strong> of box space (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} total allowances × {unit} mL\n= {needed} mL required\n{box}: {available} mL available → {status}</div>\n<p>Canadian detail: bare bonding conductors and cable clamps get no volume, unlike the US; each pair of marrettes gets one allowance based on the largest conductor (the selected gauge is used, so choose the largest present for safety); devices deeper than 2.54 cm require an additional 32 mL deduction for every cm of depth, which this simplified check excludes.</p>"
+    },
+    {
+      "id": "bt-0410",
+      "backTranslation": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0411",
+      "backTranslation": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0412",
+      "backTranslation": "\n<p>Each {size} conductor requires <strong>{unit} cu in</strong> of box space (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conductors + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} total allowances × {unit} cu in\n= {needed} cu in required\n{box}: {available} cu in available → {status}</div>\n<p>Detail: pigtails fully contained in the box do not count, while an uncut conductor passing through the box must count once. When more than four grounding conductors enter, each from the fifth onward adds ¼ allowance under the 2020 rule; counting roughly one additional conductor keeps a safety margin. Mixed conductor gauges need a separate calculation by gauge; until then, selecting the largest present gauge is the safe method.</p>"
+    },
+    {
+      "id": "bt-0413",
+      "backTranslation": "The fill remains comfortably below the {percent}% limit."
+    },
+    {
+      "id": "bt-0414",
+      "backTranslation": "\n<p>Every {size} THHN conductor has a cross-sectional area of <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conductors × {wireArea} = {needed} sq in required\nInterior area of {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitted area: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  actual fill {actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0415",
+      "backTranslation": "smallest {conduit} that holds {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0416",
+      "backTranslation": "<p>{count} × {size} THHN = {area} sq in of conductor area, which is beyond what a 4\" {conduit} can hold at the {percent}% fill limit.</p>"
+    },
+    {
+      "id": "bt-0417",
+      "backTranslation": "Warning: this result calculates only voltage drop. The conductor must also be able to carry {amps} A safely (ampacity); verify that separately before purchase."
+    },
+    {
+      "id": "bt-0418",
+      "backTranslation": "At this distance, voltage drop is exactly {percent}%. Shorten the run to retain margin. Regardless of distance, the conductor must have an ampacity rating sufficient for {amps} A."
+    },
+    {
+      "id": "bt-0419",
+      "backTranslation": "\n<p>Using your {percent}% limit ({maxDrop} V), the formula is rearranged to solve for distance:</p>\n<div class=\"formula\">Maximum one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0420",
+      "backTranslation": "none of the listed gauges keeps voltage drop below {percent}%"
+    },
+    {
+      "id": "bt-0421",
+      "backTranslation": "Even with {size} {material} conductor over {feet} one-way feet at {amps} A, voltage drop remains above {percent}%."
+    },
+    {
+      "id": "bt-0422",
+      "backTranslation": "\n<p>Starting at the smallest gauge, each was checked until one kept voltage drop below the {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ below your limit</div>"
+    },
+    {
+      "id": "bt-0423",
+      "backTranslation": "smallest {material} conductor gauge that keeps voltage drop below {percent}%"
+    },
+    {
+      "id": "bt-0424",
+      "backTranslation": "Be sure to verify calculations independently, comply with local electrical codes and permit requirements, and hire a licensed professional when required by law or common sense about safety."
+    },
+    {
+      "id": "bt-0425",
+      "backTranslation": "Do not attack the Service, overload it, scrape content at an abusive rate, reverse engineer it for the purpose of causing harm, or otherwise interfere with the Service; also do not use the Service unlawfully."
+    },
+    {
+      "id": "bt-0426",
+      "backTranslation": "Electrical work may cause injury or death, and errors may also cause fires."
+    },
+    {
+      "id": "bt-0427",
+      "backTranslation": ". If you do not agree, do not use this Service."
+    },
+    {
+      "id": "bt-0428",
+      "backTranslation": "The results are simplified estimates under normal conditions and do not cover all real-world factors, such as temperature, bundled installation, derating, continuous loads, local code revisions, and equipment certification. This Service cannot replace a licensed electrician or professional engineer, and use of this Service does not form any professional relationship."
+    },
+    {
+      "id": "bt-0429",
+      "backTranslation": "To the maximum extent permitted by law, VoltDrop and its operator are not responsible for any damage caused by your use of or inability to use this Service, including property loss, personal injury, lost profits, or rework costs, whether liability is based on warranty, contract, tort, or another theory. If liability cannot be fully excluded, our total liability is limited to $50 (USD). Some regions do not allow specific disclaimers, so some content may not apply to you."
+    },
+    {
+      "id": "bt-0430",
+      "backTranslation": "You may sign in with Google or Facebook and post comments. You retain ownership of what you write, but grant us a worldwide, royalty-free license to display that content in the Service. Do not post illegal, hateful, harassing, deceptive, or spam content; do not post links, other people's personal information, or impersonate others. We may decide at our sole discretion to remove comments or suspend commenting privileges, with or without separate notice. Comments represent only the opinions of other users, not ours, and are never a source of professional electrical advice."
+    }
+  ]
+}

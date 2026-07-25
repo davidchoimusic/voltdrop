@@ -1,0 +1,2156 @@
+{
+  "policy": "Target-language-only input for back-translation Pass A. It intentionally contains no source English and uses opaque row IDs.",
+  "targetDigest": "361be172747ed449fef874854a45fdc312aee3e20003a599b0188af35a8eb9ce",
+  "entries": [
+    {
+      "id": "bt-0001",
+      "locale": "es",
+      "targetText": "La ampacidad es la corriente máxima, en amperios, que un conductor puede transportar de forma continua sin sobrecalentarse. Depende del calibre del conductor, del material (cobre o aluminio) y de la temperatura nominal del aislamiento, y la establece NEC Table 310.16 para condiciones normales."
+    },
+    {
+      "id": "bt-0002",
+      "locale": "es",
+      "targetText": "son verificaciones independientes; el conductor debe aprobar"
+    },
+    {
+      "id": "bt-0003",
+      "locale": "es",
+      "targetText": "áticos calientes, salas de máquinas, grupos de más de tres conductores portadores de corriente y cargas continuas (3+ horas seguidas requieren 25% de margen). Todo eso reduce la ampacidad. Si tiene dudas, use un calibre del conductor mayor o consulte a un electricista."
+    },
+    {
+      "id": "bt-0004",
+      "locale": "es",
+      "targetText": "— es la temperatura nominal de la mayoría de las terminales de interruptores automáticos y zapatas. El cable Romex/NM-B debe usar la columna de 60°C. THHN en lugares secos tiene clasificación de 90°C, pero los puntos de conexión suelen limitar el circuito a 75°C."
+    },
+    {
+      "id": "bt-0005",
+      "locale": "es",
+      "targetText": "Si tiene dudas, use la columna de 75°C: la mayoría de las terminales de interruptores automáticos y zapatas tienen clasificación de 75°C. El cable Romex/NM-B debe usar la columna de 60°C. THHN en lugares secos tiene clasificación de 90°C, pero los puntos de conexión suelen limitar el circuito a los valores de 75°C."
+    },
+    {
+      "id": "bt-0006",
+      "locale": "es",
+      "targetText": "¿Qué columna de temperatura del aislamiento debo usar?"
+    },
+    {
+      "id": "bt-0007",
+      "locale": "es",
+      "targetText": "Todos los conductores de puesta a tierra juntos ocupan el espacio de un conductor; esa es la regla, no uno por cada conductor."
+    },
+    {
+      "id": "bt-0008",
+      "locale": "es",
+      "targetText": "Regla canadiense: cada par de conectores aislados cuenta como el espacio de un conductor, según el conductor más grande conectado. Cuente todas las marrettes."
+    },
+    {
+      "id": "bt-0009",
+      "locale": "es",
+      "targetText": "Las abrazaderas integradas dentro de la caja, comunes en cajas metálicas, ocupan el espacio de un conductor. Los conectores que quedan fuera no cuentan."
+    },
+    {
+      "id": "bt-0010",
+      "locale": "es",
+      "targetText": "Cuente cada conductor de fase y neutro que entra en la caja, incluidos los que la atraviesan sin cortarse. No cuente aquí los conductores de puesta a tierra ni las colas de conexión que comienzan y terminan dentro de la caja."
+    },
+    {
+      "id": "bt-0011",
+      "locale": "es",
+      "targetText": "Una caja sobrecargada fuerza las conexiones, daña el aislamiento y acumula calor. Es una causa habitual de inspecciones fallidas y circuitos intermitentes. NEC 314.16 asigna a cada calibre del conductor un volumen mínimo, y la caja debe ofrecer al menos ese espacio."
+    },
+    {
+      "id": "bt-0012",
+      "locale": "es",
+      "targetText": "¿Los conductores que atraviesan la caja cuentan para el llenado de caja?"
+    },
+    {
+      "id": "bt-0013",
+      "locale": "es",
+      "targetText": "Cada conductor de fase o neutro que entra en la caja = 1, incluidos los que la atraviesan sin cortarse. Cada dispositivo (interruptor o tomacorriente) = 2. Todos los conductores de puesta a tierra juntos = 1; si hay más de cuatro, cada conductor adicional suma ¼ según las reglas de 2020. Las abrazaderas internas = 1. Las colas de conexión que permanecen dentro de la caja no cuentan. Multiplicamos el total por el volumen correspondiente al calibre del conductor y lo comparamos con el volumen de la caja."
+    },
+    {
+      "id": "bt-0014",
+      "locale": "es",
+      "targetText": "¿Tiene su caja de conexiones o dispositivos el tamaño suficiente? Cuente su contenido y obtenga una respuesta clara."
+    },
+    {
+      "id": "bt-0015",
+      "locale": "es",
+      "targetText": "En la mayoría de las viviendas se usa 14 AWG (circuitos de 15 A) o 12 AWG (circuitos de 20 A). Por ahora, si hay varios calibres, elija el más grande para mantener un margen seguro."
+    },
+    {
+      "id": "bt-0016",
+      "locale": "es",
+      "targetText": "NEC 314.16 asigna un volumen a cada calibre del conductor; por ejemplo, 2.25 pulgadas cúbicas para 12 AWG. Cuente una vez cada conductor de fase o neutro, dos veces cada dispositivo, una vez todos los conductores de puesta a tierra juntos y una vez las abrazaderas internas. El total multiplicado por el volumen asignado no debe superar el volumen de la caja."
+    },
+    {
+      "id": "bt-0017",
+      "locale": "es",
+      "targetText": "Cuente todos los conductores aislados dentro del tubo conduit, incluido el neutro y todo conductor de puesta a tierra aislado. Por ahora, todos deben ser del mismo calibre."
+    },
+    {
+      "id": "bt-0018",
+      "locale": "es",
+      "targetText": "¿Qué tamaño de tubo conduit necesita para sus conductores? Ingrese lo que tenderá y obtenga el menor tamaño permitido."
+    },
+    {
+      "id": "bt-0019",
+      "locale": "es",
+      "targetText": "los recorridos largos con muchas curvas son más fáciles con un tamaño mayor que el mínimo permitido. Muchos electricistas aumentan el tamaño a propósito. Esta herramienta admite un solo calibre del conductor a la vez."
+    },
+    {
+      "id": "bt-0020",
+      "locale": "es",
+      "targetText": "Según NEC Chapter 9, un conductor puede ocupar 53% del área interior del tubo conduit; dos conductores, 31%; y tres o más, 40%. El cálculo usa las áreas transversales oficiales del conductor y del tipo de tubo conduit."
+    },
+    {
+      "id": "bt-0021",
+      "locale": "es",
+      "targetText": "Los conductores necesitan espacio libre dentro del tubo conduit. Si se llena en exceso, no podrá tenderlos y pueden sobrecalentarse. Límites estándar de EE. UU. (NEC Chapter 9): un conductor puede ocupar"
+    },
+    {
+      "id": "bt-0022",
+      "locale": "es",
+      "targetText": "Casi siempre se debe a una de dos cosas: algunos calculadores usan valores de resistencia distintos, o algunos usan"
+    },
+    {
+      "id": "bt-0023",
+      "locale": "es",
+      "targetText": "Casi siempre se debe a una de dos cosas: algunos calculadores piden el recorrido de ida y vuelta y otros piden la distancia en un solo sentido (VoltDrop siempre usa la distancia en un solo sentido y la duplica internamente); otros usan valores de resistencia ligeramente distintos. VoltDrop muestra el cálculo completo para que pueda compararlo."
+    },
+    {
+      "id": "bt-0024",
+      "locale": "es",
+      "targetText": "La recomendación ampliamente usada del <span id=\"code-name\">U.S. National Electrical Code</span> es mantener la caída de tensión de un <span id=\"code-basis\">circuito derivado</span> en <strong>3%</strong> o menos, y el total desde el tablero hasta el dispositivo en <strong>5%</strong> o menos. Son recomendaciones de buen funcionamiento, no requisitos legales generales. Los sistemas de baja tensión, como el solar de 12&nbsp;V, suelen necesitar un objetivo más estricto porque 3% de 12&nbsp;V afecta mucho más que 3% de 240&nbsp;V."
+    },
+    {
+      "id": "bt-0025",
+      "locale": "es",
+      "targetText": ". No la duplique usted."
+    },
+    {
+      "id": "bt-0026",
+      "locale": "es",
+      "targetText": "cuando otros piden la distancia en un solo sentido. Nosotros siempre pedimos la distancia en un solo sentido y mostramos el cálculo completo."
+    },
+    {
+      "id": "bt-0027",
+      "locale": "es",
+      "targetText": "Caída máxima aceptable"
+    },
+    {
+      "id": "bt-0028",
+      "locale": "es",
+      "targetText": "Mida en un solo sentido"
+    },
+    {
+      "id": "bt-0029",
+      "locale": "es",
+      "targetText": "3% es la recomendación habitual para un circuito. 5% es el límite exterior habitual para todo el recorrido."
+    },
+    {
+      "id": "bt-0030",
+      "locale": "es",
+      "targetText": "5% — límite superior"
+    },
+    {
+      "id": "bt-0031",
+      "locale": "es",
+      "targetText": "¿Por qué no coinciden otros calculadores?"
+    },
+    {
+      "id": "bt-0032",
+      "locale": "es",
+      "targetText": "¿Por qué no coinciden las calculadoras de caída de tensión?"
+    },
+    {
+      "id": "bt-0033",
+      "locale": "es",
+      "targetText": "El conductor tiene resistencia, por lo que parte de la tensión se pierde como calor. Las notas informativas del U.S. National Electrical Code recomiendan un máximo de 3% para el circuito derivado y 5% en total. Son recomendaciones de funcionamiento, no requisitos legales generales. Los sistemas de baja tensión, como el solar de 12 V, suelen ser más estrictos."
+    },
+    {
+      "id": "bt-0034",
+      "locale": "es",
+      "targetText": "Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas."
+    },
+    {
+      "id": "bt-0035",
+      "locale": "es",
+      "targetText": "Calculadora gratuita de llenado de caja según NEC 314.16: cuente conductores, dispositivos, tierras y abrazaderas para obtener una evaluación clara con el cálculo de volumen."
+    },
+    {
+      "id": "bt-0036",
+      "locale": "es",
+      "targetText": "Calculadora gratuita de llenado de tubo conduit: cantidad y calibre THHN, y menor tamaño permitido de EMT o PVC Schedule 40 según NEC Chapter 9 y los límites 53/31/40%."
+    },
+    {
+      "id": "bt-0037",
+      "locale": "es",
+      "targetText": "Calculadora gratuita de longitud máxima: ingrese calibre del conductor, amperios y tensión para obtener la mayor distancia en un solo sentido que mantiene la caída por debajo de 3% o 5%."
+    },
+    {
+      "id": "bt-0038",
+      "locale": "es",
+      "targetText": "¿Qué distancia puede recorrer el conductor antes de que la caída de tensión sea un problema? Obtenga la distancia máxima en un solo sentido para cualquier calibre y carga."
+    },
+    {
+      "id": "bt-0039",
+      "locale": "es",
+      "targetText": "Calculadora gratuita de calibre del conductor: ingrese amperios, tensión y distancia en un solo sentido para encontrar el menor AWG de cobre o aluminio que mantiene la caída de tensión por debajo de 3%."
+    },
+    {
+      "id": "bt-0040",
+      "locale": "es",
+      "targetText": "Los vatios (kW) miden la potencia real utilizable, mientras que kVA mide la potencia aparente que el cableado debe transportar. En calefactores y cargas simples son iguales; en motores y equipos electrónicos, kVA puede ser mayor. La relación entre ambas es el factor de potencia."
+    },
+    {
+      "id": "bt-0041",
+      "locale": "es",
+      "targetText": "Las calculadoras se ejecutan por completo en su navegador: los números que escribe nunca salen de su dispositivo. No exigimos una cuenta, no vendemos datos y la única información personal que conservamos es la que usted nos entrega si decide iniciar sesión y dejar un comentario."
+    },
+    {
+      "id": "bt-0042",
+      "locale": "es",
+      "targetText": "No vendemos ni compartimos su información personal con anunciantes ni corredores de datos. No enviamos correos de marketing. No lo rastreamos en otros sitios web."
+    },
+    {
+      "id": "bt-0043",
+      "locale": "es",
+      "targetText": "usamos Google Analytics para entender el tráfico general (páginas visitadas, región general y tipo de dispositivo). Son datos estadísticos agrupados; no los usamos para identificarlo."
+    },
+    {
+      "id": "bt-0044",
+      "locale": "es",
+      "targetText": "Qué no hacemos"
+    },
+    {
+      "id": "bt-0045",
+      "locale": "es",
+      "targetText": "A</strong>; ese es el límite práctico que usamos para comparar.</p>"
+    },
+    {
+      "id": "bt-0046",
+      "locale": "es",
+      "targetText": "supera el límite"
+    },
+    {
+      "id": "bt-0047",
+      "locale": "es",
+      "targetText": "¿No está seguro? Use <strong>75°C</strong>: la mayoría de las terminales de interruptores automáticos y zapatas tienen esa clasificación. El cable Romex/NM-B debe usar la columna de 60°C. THHN en lugares secos tiene clasificación de 90°C, pero los puntos de conexión suelen limitar el circuito a 75°C."
+    },
+    {
+      "id": "bt-0048",
+      "locale": "es",
+      "targetText": "<div class=\"formula\">Límite seguro ="
+    },
+    {
+      "id": "bt-0049",
+      "locale": "es",
+      "targetText": "límite seguro para "
+    },
+    {
+      "id": "bt-0050",
+      "locale": "es",
+      "targetText": "Este conductor puede transportar la carga en condiciones normales. Recuerde: las cargas continuas (3+ horas) deberían mantenerse por debajo de 80% del límite, es decir, "
+    },
+    {
+      "id": "bt-0051",
+      "locale": "es",
+      "targetText": "Este conductor NO tiene capacidad nominal para "
+    },
+    {
+      "id": "bt-0052",
+      "locale": "es",
+      "targetText": "Conteo canadiense (Rule 12-3034): cada conductor aislado que entra en la caja = 1; los conductores de continuidad de masa desnudos NO cuentan. Cada dispositivo (interruptor/tomacorriente) = 2. Cada PAR de conectores aislados (marrettes) = 1, según el conductor más grande conectado. Es una regla canadiense sin equivalente en US. Las abrazaderas no reciben volumen en Canadá. Las colas de conexión que permanecen dentro de la caja no cuentan. Multiplicamos el total por el volumen de Table 22 y lo comparamos con el volumen de la caja en mililitros."
+    },
+    {
+      "id": "bt-0053",
+      "locale": "es",
+      "targetText": "</div>\n<p>Detalle canadiense: los conductores de continuidad de masa desnudos y las abrazaderas no reciben volumen; cada par de marrettes recibe un volumen según el conductor más grande conectado (usamos el calibre que seleccionó; para mayor seguridad, seleccione el conductor de mayor tamaño presente). Los dispositivos con más de 2.54 cm de profundidad necesitan una deducción adicional de 32 mL por cm de profundidad, que esta verificación sencilla no incluye.</p>"
+    },
+    {
+      "id": "bt-0054",
+      "locale": "es",
+      "targetText": "Una caja sobrecargada fuerza las conexiones, daña el aislamiento y acumula calor. Es una causa habitual de inspecciones fallidas y circuitos intermitentes. NEC 314.16 asigna un volumen a cada calibre del conductor, y la caja debe ofrecer al menos ese espacio."
+    },
+    {
+      "id": "bt-0055",
+      "locale": "es",
+      "targetText": "Una caja sobrecargada fuerza las conexiones, daña el aislamiento y acumula calor. Es una causa habitual de inspecciones fallidas. Canadian Electrical Code (Rule 12-3034 con Table 22) asigna a cada conductor aislado un volumen en mililitros, y la caja debe ofrecer al menos ese espacio."
+    },
+    {
+      "id": "bt-0056",
+      "locale": "es",
+      "targetText": "Dispositivos (cuentan doble)"
+    },
+    {
+      "id": "bt-0057",
+      "locale": "es",
+      "targetText": "Cada conductor de fase o neutro que entra en la caja = 1, incluidos los que la atraviesan sin cortarse. Cada dispositivo = 2. Todos los conductores de puesta a tierra juntos = 1; si hay más de cuatro, cada adicional suma ¼ según las reglas de 2020. Las abrazaderas internas = 1. Las colas de conexión que permanecen dentro de la caja no cuentan. Multiplicamos el total por el volumen del calibre del conductor y lo comparamos con el volumen de la caja."
+    },
+    {
+      "id": "bt-0058",
+      "locale": "es",
+      "targetText": "</div>\n<p>Detalle: las colas de conexión que permanecen dentro de la caja no cuentan, pero un conductor que la atraviesa sin cortarse SÍ cuenta una vez. Si entran más de cuatro conductores de puesta a tierra, cada uno después del cuarto suma ¼ según las reglas de 2020. Si hay varios calibres, use el más grande para mantener un margen seguro.</p>"
+    },
+    {
+      "id": "bt-0059",
+      "locale": "es",
+      "targetText": "Permitido, pero justo en el límite. Si más adelante pudiera agregar un dispositivo u otro cable, use ahora una caja mayor."
+    },
+    {
+      "id": "bt-0060",
+      "locale": "es",
+      "targetText": "Supera el límite. Use una caja más profunda, una extensión o menos conductores. Las cajas sobrecargadas suelen fallar la inspección y presentan riesgo de calor."
+    },
+    {
+      "id": "bt-0061",
+      "locale": "es",
+      "targetText": "% de límite de llenado; incluso 4\""
+    },
+    {
+      "id": "bt-0062",
+      "locale": "es",
+      "targetText": "% de límite."
+    },
+    {
+      "id": "bt-0063",
+      "locale": "es",
+      "targetText": "Cabe con margen por debajo del "
+    },
+    {
+      "id": "bt-0064",
+      "locale": "es",
+      "targetText": "Permitido, pero cerca del límite. Un tamaño mayor facilita mucho el tendido en recorridos largos o con varias curvas."
+    },
+    {
+      "id": "bt-0065",
+      "locale": "es",
+      "targetText": "Límite permitido"
+    },
+    {
+      "id": "bt-0066",
+      "locale": "es",
+      "targetText": "Divida el recorrido entre varios tubos conduit o reduzca la cantidad de conductores."
+    },
+    {
+      "id": "bt-0067",
+      "locale": "es",
+      "targetText": "% de caída. Mantenga una distancia menor para conservar margen. Recuerde también que el conductor debe tener capacidad nominal para "
+    },
+    {
+      "id": "bt-0068",
+      "locale": "es",
+      "targetText": "% de límite ("
+    },
+    {
+      "id": "bt-0069",
+      "locale": "es",
+      "targetText": "% por encima de "
+    },
+    {
+      "id": "bt-0070",
+      "locale": "es",
+      "targetText": "%  ✓ por debajo de su límite</div>"
+    },
+    {
+      "id": "bt-0071",
+      "locale": "es",
+      "targetText": "Atención: esto solo calcula la caída de tensión. El conductor TAMBIÉN debe tener capacidad nominal para transportar "
+    },
+    {
+      "id": "bt-0072",
+      "locale": "es",
+      "targetText": "ningún calibre disponible queda por debajo de "
+    },
+    {
+      "id": "bt-0073",
+      "locale": "es",
+      "targetText": "Ningún conductor de la tabla mantiene la caída por debajo de su límite. Opciones: acorte el recorrido, aumente la tensión, permita una caída mayor o use conductores en paralelo; consulte a un electricista."
+    },
+    {
+      "id": "bt-0074",
+      "locale": "es",
+      "targetText": "Supera la recomendación de 3%, pero está dentro del límite exterior de 5%. Puede ser aceptable para algunas cargas; considere un calibre del conductor mayor para motores, cargadores o circuitos de servicio prolongado."
+    },
+    {
+      "id": "bt-0075",
+      "locale": "es",
+      "targetText": "Supera el límite exterior de 5%. Espere problemas reales de funcionamiento: use un calibre del conductor mayor, acorte el recorrido o aumente la tensión."
+    },
+    {
+      "id": "bt-0076",
+      "locale": "es",
+      "targetText": "<p>Reordenamos la fórmula para calcular la distancia, con su límite de"
+    },
+    {
+      "id": "bt-0077",
+      "locale": "es",
+      "targetText": "<p>Probamos cada calibre, de menor a mayor, hasta encontrar uno que mantuviera la caída por debajo de"
+    },
+    {
+      "id": "bt-0078",
+      "locale": "es",
+      "targetText": " conductor que queda por debajo de "
+    },
+    {
+      "id": "bt-0079",
+      "locale": "es",
+      "targetText": "Dentro de la recomendación de 3%. Este recorrido debería funcionar bien."
+    },
+    {
+      "id": "bt-0080",
+      "locale": "es",
+      "targetText": "Su límite"
+    },
+    {
+      "id": "bt-0081",
+      "locale": "es",
+      "targetText": "<p>La regla para conductores pequeños ({citation}) limita a <strong>{capAmps} A</strong> el interruptor del conductor de {material} {size}; ese es el límite práctico que usamos para comparar.</p>"
+    },
+    {
+      "id": "bt-0082",
+      "locale": "es",
+      "targetText": "<div class=\"formula\">Límite seguro = {rated} A   frente a   su carga = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0083",
+      "locale": "es",
+      "targetText": "Este conductor puede transportar la carga en condiciones normales. Recuerde: las cargas continuas (3+ horas) deberían mantenerse por debajo de 80% del límite; aquí son {amps} A."
+    },
+    {
+      "id": "bt-0084",
+      "locale": "es",
+      "targetText": "Este conductor NO tiene capacidad nominal para {amps} A. Use un calibre mayor: un conductor de calibre insuficiente se sobrecalienta y supone un riesgo de incendio."
+    },
+    {
+      "id": "bt-0085",
+      "locale": "es",
+      "targetText": "límite seguro para conductor de {material} {size} a {temp}°C"
+    },
+    {
+      "id": "bt-0086",
+      "locale": "es",
+      "targetText": "\n<p>Cada conductor aislado {size} requiere <strong>{unit} mL</strong> de espacio en la caja (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conductores + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} cuentas totales × {unit} mL\n= {needed} mL necesarios\n{box}: {available} mL disponibles → {status}</div>\n<p>Detalle canadiense: los conductores de continuidad de masa desnudos y las abrazaderas no reciben volumen (a diferencia de US); cada par de marrettes cuenta una vez según el conductor más grande conectado (usamos el calibre seleccionado; elija el mayor presente para conservar un margen seguro); los dispositivos con más de 2.54 cm de profundidad necesitan una deducción adicional de 32 mL por cm de profundidad, que esta verificación sencilla no incluye.</p>"
+    },
+    {
+      "id": "bt-0087",
+      "locale": "es",
+      "targetText": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0088",
+      "locale": "es",
+      "targetText": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0089",
+      "locale": "es",
+      "targetText": "\n<p>Cada conductor {size} requiere <strong>{unit} cu in</strong> de espacio en la caja (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conductores + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} cuentas totales × {unit} cu in\n= {needed} cu in necesarios\n{box}: {available} cu in disponibles → {status}</div>\n<p>Detalle: las colas de conexión que permanecen por completo dentro de la caja no cuentan, pero un conductor que la atraviesa sin cortarse SÍ cuenta una vez; inclúyalo arriba. Si entran más de cuatro conductores de puesta a tierra, cada uno después del cuarto suma ¼ de cuenta (regla de 2020); agregue aproximadamente un conductor extra para conservar un margen seguro. Con varios calibres se necesita el cálculo completo por calibre (próximamente); hasta entonces, seleccionar el calibre mayor es la forma segura de usar esta herramienta.</p>"
+    },
+    {
+      "id": "bt-0090",
+      "locale": "es",
+      "targetText": "Cabe con margen por debajo del límite de {percent}%."
+    },
+    {
+      "id": "bt-0091",
+      "locale": "es",
+      "targetText": "\n<p>Cada conductor {size} THHN tiene una sección transversal de <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conductores × {wireArea} = {needed} sq in necesarios\nÁrea interior de {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitido: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  cabe con un llenado de {actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0092",
+      "locale": "es",
+      "targetText": "menor {conduit} para {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0093",
+      "locale": "es",
+      "targetText": "<p>{count} × {size} THHN = {area} sq in de conductor, lo que supera el límite de llenado de {percent}% incluso en un {conduit} de 4\".</p>"
+    },
+    {
+      "id": "bt-0094",
+      "locale": "es",
+      "targetText": "Atención: esto solo calcula la caída de tensión. El conductor TAMBIÉN debe tener capacidad nominal para transportar {amps} A de forma segura (ampacidad); verifíquelo por separado antes de comprar."
+    },
+    {
+      "id": "bt-0095",
+      "locale": "es",
+      "targetText": "A esta distancia exacta se alcanza una caída de {percent}%. Mantenga el recorrido más corto para conservar margen. Recuerde también que el conductor debe tener capacidad nominal para {amps} A (ampacidad), sin importar la distancia."
+    },
+    {
+      "id": "bt-0096",
+      "locale": "es",
+      "targetText": "\n<p>Reordenamos la fórmula para calcular la distancia, con su límite de {percent}% ({maxDrop} V):</p>\n<div class=\"formula\">Máximo de pies en un solo sentido = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0097",
+      "locale": "es",
+      "targetText": "ningún calibre indicado mantiene la caída por debajo de {percent}%"
+    },
+    {
+      "id": "bt-0098",
+      "locale": "es",
+      "targetText": "Incluso un conductor de {material} {size} tiene una caída superior a {percent}% en {feet} pies de distancia en un solo sentido con {amps} A."
+    },
+    {
+      "id": "bt-0099",
+      "locale": "es",
+      "targetText": "\n<p>Probamos cada calibre, empezando por el menor, hasta encontrar uno que mantuviera la caída por debajo de su límite de {percent}% ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ por debajo de su límite</div>"
+    },
+    {
+      "id": "bt-0100",
+      "locale": "es",
+      "targetText": "menor conductor de {material} que mantiene la caída por debajo de {percent}%"
+    },
+    {
+      "id": "bt-0101",
+      "locale": "es",
+      "targetText": "Verifique siempre los cálculos de forma independiente, cumpla el código eléctrico y los permisos locales, y contrate a un profesional autorizado cuando la ley o la prudencia lo exijan."
+    },
+    {
+      "id": "bt-0102",
+      "locale": "es",
+      "targetText": "No ataque, sobrecargue ni extraiga contenido a un ritmo abusivo; no aplique ingeniería inversa con el fin de causar daños ni interfiera de otra forma con el Servicio. Tampoco lo use para infringir la ley."
+    },
+    {
+      "id": "bt-0103",
+      "locale": "es",
+      "targetText": "El trabajo eléctrico puede causar lesiones o la muerte, y los errores pueden provocar incendios."
+    },
+    {
+      "id": "bt-0104",
+      "locale": "es",
+      "targetText": ". Si no está de acuerdo, no use el Servicio."
+    },
+    {
+      "id": "bt-0105",
+      "locale": "es",
+      "targetText": "Los resultados son estimaciones simplificadas para condiciones normales. No consideran todos los factores reales (temperatura, agrupamiento, reducción de ampacidad, cargas continuas, cambios locales al código, certificaciones de equipos y otros). El Servicio no sustituye a un electricista autorizado ni a un ingeniero profesional, y su uso no crea una relación profesional."
+    },
+    {
+      "id": "bt-0106",
+      "locale": "es",
+      "targetText": "En la máxima medida permitida por la ley, VoltDrop y su operador no responden por daños derivados del uso o la imposibilidad de usar el Servicio, incluidos daños materiales, lesiones personales, pérdida de ganancias o el costo de rehacer trabajos eléctricos, ya sea por garantía, contrato, responsabilidad civil u otra teoría. Si la responsabilidad no puede excluirse por completo, nuestra responsabilidad total se limita a $50 (USD). Algunas jurisdicciones no permiten ciertas exclusiones, por lo que algunas partes pueden no aplicarse a usted."
+    },
+    {
+      "id": "bt-0107",
+      "locale": "es",
+      "targetText": "Puede iniciar sesión con Google o Facebook para dejar comentarios. Usted conserva la propiedad de lo que escribe, pero nos concede una licencia mundial y libre de regalías para mostrarlo en el Servicio. No publique contenido ilegal, odioso, acosador, engañoso ni spam; tampoco enlaces, información personal de terceros ni suplantaciones. Podemos retirar comentarios o suspender el acceso a comentar a nuestra discreción, con o sin aviso. Los comentarios expresan opiniones de otros usuarios, no las nuestras, y nunca son una fuente de asesoramiento eléctrico profesional."
+    },
+    {
+      "id": "bt-0108",
+      "locale": "zh-Hans",
+      "targetText": "载流量是导线在不过热的情况下可以连续承载的最大电流（安培）。它取决于导线规格（线规）、材料（铜或铝）和绝缘额定温度；正常条件下的数值由NEC Table 310.16规定。"
+    },
+    {
+      "id": "bt-0109",
+      "locale": "zh-Hans",
+      "targetText": "是两项独立检查；导线必须同时通过"
+    },
+    {
+      "id": "bt-0110",
+      "locale": "zh-Hans",
+      "targetText": "炎热阁楼、机房、超过三根载流导体成束敷设以及连续负载（3+小时需要25%的余量）都会降低载流量。如有疑问，请增大导线规格（线规）或咨询电工。"
+    },
+    {
+      "id": "bt-0111",
+      "locale": "zh-Hans",
+      "targetText": "— 大多数断路器端子和接线端子的额定温度都是该值。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C。"
+    },
+    {
+      "id": "bt-0112",
+      "locale": "zh-Hans",
+      "targetText": "不确定时，请使用75°C列：大多数断路器端子和接线端子的额定温度为75°C。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C数值。"
+    },
+    {
+      "id": "bt-0113",
+      "locale": "zh-Hans",
+      "targetText": "应该使用哪一列绝缘温度？"
+    },
+    {
+      "id": "bt-0114",
+      "locale": "zh-Hans",
+      "targetText": "所有接地导体合计占一根导线的空间；这是规范规则，并不是每根分别计数。"
+    },
+    {
+      "id": "bt-0115",
+      "locale": "zh-Hans",
+      "targetText": "加拿大规则：每对绝缘导线连接器按一根导线的空间计算，并按其中最大的导线确定。请计算所有marrettes。"
+    },
+    {
+      "id": "bt-0116",
+      "locale": "zh-Hans",
+      "targetText": "接线盒内部自带的电缆夹（常见于金属盒）按一根导线的空间计算。留在盒外的连接器不计。"
+    },
+    {
+      "id": "bt-0117",
+      "locale": "zh-Hans",
+      "targetText": "请计算进入接线盒的每根相线和中性线，包括未断开而穿过接线盒的导线。此处不要计算接地导体，也不要计算始终留在盒内的引出短线。"
+    },
+    {
+      "id": "bt-0118",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格和电路闪断。NEC 314.16按导线规格（线规）规定所需空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0119",
+      "locale": "zh-Hans",
+      "targetText": "未断开而穿过接线盒的导线是否计入接线盒填充？"
+    },
+    {
+      "id": "bt-0120",
+      "locale": "zh-Hans",
+      "targetText": "进入接线盒的每根相线或中性线 = 1，包括未断开而穿过盒体的导线。每个器件（开关或插座）= 2。所有接地导体合计 = 1；超过四根后，根据2020规则，每增加一根加¼。内部电缆夹 = 1。始终留在盒内的引出短线不计。总数乘以相应导线规格（线规）的空间，再与接线盒容积比较。"
+    },
+    {
+      "id": "bt-0121",
+      "locale": "zh-Hans",
+      "targetText": "接线盒或器件盒是否足够大？请计算盒内项目，即可获得明确结果。"
+    },
+    {
+      "id": "bt-0122",
+      "locale": "zh-Hans",
+      "targetText": "大多数住宅使用14 AWG（15 A电路）或12 AWG（20 A电路）。如果盒内有多个规格，目前请选择最大的导线规格（线规）以保留安全余量。"
+    },
+    {
+      "id": "bt-0123",
+      "locale": "zh-Hans",
+      "targetText": "NEC 314.16为每种导线规格（线规）规定容积，例如12 AWG为2.25立方英寸。每根相线或中性线计一次，每个器件计两次，所有接地导体合计一次，内部电缆夹计一次。总数乘以规定容积后不得超过接线盒容积。"
+    },
+    {
+      "id": "bt-0124",
+      "locale": "zh-Hans",
+      "targetText": "请计算导管内的每根绝缘导体，包括中性线和绝缘接地导体。目前所有导线必须使用同一规格。"
+    },
+    {
+      "id": "bt-0125",
+      "locale": "zh-Hans",
+      "targetText": "您的导线需要多大的导管？请输入要穿入的导线，即可获得最小合规规格。"
+    },
+    {
+      "id": "bt-0126",
+      "locale": "zh-Hans",
+      "targetText": "线路较长或弯头较多时，使用比合规最小值大一档的导管更容易穿线。许多电工会主动增大规格。本工具目前每次只支持一种导线规格（线规）。"
+    },
+    {
+      "id": "bt-0127",
+      "locale": "zh-Hans",
+      "targetText": "根据NEC Chapter 9，一根导线最多可占导管内部面积的53%，两根导线为31%，三根或更多导线为40%。计算采用相应导线和导管类型的官方横截面积。"
+    },
+    {
+      "id": "bt-0128",
+      "locale": "zh-Hans",
+      "targetText": "导管内必须留有空间。填得太满会导致无法穿线，导线也可能过热。美国标准限值（NEC Chapter 9）：一根导线可占"
+    },
+    {
+      "id": "bt-0129",
+      "locale": "zh-Hans",
+      "targetText": "几乎总是以下两个原因之一：不同计算器采用了不同的电阻值，或者有些计算器使用"
+    },
+    {
+      "id": "bt-0130",
+      "locale": "zh-Hans",
+      "targetText": "通常有两个原因：有些计算器要求输入往返距离，另一些要求输入单程距离（仅去程）。VoltDrop 始终使用单程距离（仅去程），并在内部自动加倍。不同计算器也可能采用略有不同的导线电阻值。VoltDrop 会显示完整计算过程，便于核对。"
+    },
+    {
+      "id": "bt-0131",
+      "locale": "zh-Hans",
+      "targetText": "<span id=\"code-name\">U.S. National Electrical Code</span> 的信息性说明建议：<span id=\"code-basis\">分支电路</span>的电压降不高于<strong>3%</strong>，从配电盘到设备的总电压降不高于<strong>5%</strong>。这些是良好性能建议，并非普遍可执行的法律要求。12&nbsp;V 太阳能等低压系统通常需要更严格的目标，因为12&nbsp;V的3%比240&nbsp;V的3%影响大得多。"
+    },
+    {
+      "id": "bt-0132",
+      "locale": "zh-Hans",
+      "targetText": "。请勿自行加倍。"
+    },
+    {
+      "id": "bt-0133",
+      "locale": "zh-Hans",
+      "targetText": "而另一些要求单程距离（仅去程）。我们始终要求输入单程距离（仅去程），并显示完整计算。"
+    },
+    {
+      "id": "bt-0134",
+      "locale": "zh-Hans",
+      "targetText": "可接受的最大电压降"
+    },
+    {
+      "id": "bt-0135",
+      "locale": "zh-Hans",
+      "targetText": "请测量单程距离（仅去程）"
+    },
+    {
+      "id": "bt-0136",
+      "locale": "zh-Hans",
+      "targetText": "单个电路通常建议3%。整个路径通常以5%为外部上限。"
+    },
+    {
+      "id": "bt-0137",
+      "locale": "zh-Hans",
+      "targetText": "5% — 上限"
+    },
+    {
+      "id": "bt-0138",
+      "locale": "zh-Hans",
+      "targetText": "为什么其他计算器的结果不同？"
+    },
+    {
+      "id": "bt-0139",
+      "locale": "zh-Hans",
+      "targetText": "为什么不同电压降计算器的结果不一致？"
+    },
+    {
+      "id": "bt-0140",
+      "locale": "zh-Hans",
+      "targetText": "导线具有电阻，因此一部分电压会以热量形式损失。U.S. National Electrical Code的信息性说明建议分支电路最大3%、总路径最大5%。这些是性能建议，并非普遍可执行的法律要求。12 V等低压系统通常采用更严格的目标。"
+    },
+    {
+      "id": "bt-0141",
+      "locale": "zh-Hans",
+      "targetText": "所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。"
+    },
+    {
+      "id": "bt-0142",
+      "locale": "zh-Hans",
+      "targetText": "基于NEC 314.16的免费接线盒填充计算器：计算导线、器件、接地导体和电缆夹，并显示明确结果和容积计算。"
+    },
+    {
+      "id": "bt-0143",
+      "locale": "zh-Hans",
+      "targetText": "免费导管填充计算器：输入THHN导线数量和规格，根据NEC Chapter 9及53/31/40%限值查找最小合规EMT或PVC Schedule 40规格。"
+    },
+    {
+      "id": "bt-0144",
+      "locale": "zh-Hans",
+      "targetText": "免费导线最大长度计算器：输入导线规格（线规）、安培和电压，即可获得能使电压降保持在3%或5%限值内的最大单程距离（仅去程）。"
+    },
+    {
+      "id": "bt-0145",
+      "locale": "zh-Hans",
+      "targetText": "在电压降产生问题之前，导线最长可以敷设多远？针对任何导线规格（线规）和负载计算最大单程距离（仅去程）。"
+    },
+    {
+      "id": "bt-0146",
+      "locale": "zh-Hans",
+      "targetText": "免费导线规格（线规）计算器：输入安培、电压和单程距离（仅去程），查找能使电压降保持在3%限值内的最小铜或铝AWG。"
+    },
+    {
+      "id": "bt-0147",
+      "locale": "zh-Hans",
+      "targetText": "瓦特（kW）表示实际可用功率，kVA表示导线必须承载的视在功率。对于加热器和简单负载，两者相等；对于电动机和电子设备，kVA可能更高。两者之比就是功率因数。"
+    },
+    {
+      "id": "bt-0148",
+      "locale": "zh-Hans",
+      "targetText": "计算器完全在您的浏览器中运行，您输入的数字绝不会离开设备。我们不要求注册、不出售数据；只有当您选择登录并发表评论时，我们才会保存您主动提供的个人信息。"
+    },
+    {
+      "id": "bt-0149",
+      "locale": "zh-Hans",
+      "targetText": "我们不会向广告商或数据经纪人出售或分享您的个人信息。我们不发送营销邮件，也不会跨网站跟踪您。"
+    },
+    {
+      "id": "bt-0150",
+      "locale": "zh-Hans",
+      "targetText": "我们使用Google Analytics了解总体流量（访问页面、大致地区和设备类型）。这些是汇总分析数据，不用于识别您的身份。"
+    },
+    {
+      "id": "bt-0151",
+      "locale": "zh-Hans",
+      "targetText": "我们不做什么"
+    },
+    {
+      "id": "bt-0152",
+      "locale": "zh-Hans",
+      "targetText": "A</strong>，因此这是用于比较的实际限值。</p>"
+    },
+    {
+      "id": "bt-0153",
+      "locale": "zh-Hans",
+      "targetText": "超过限值"
+    },
+    {
+      "id": "bt-0154",
+      "locale": "zh-Hans",
+      "targetText": "不确定？请使用<strong>75°C</strong>：大多数断路器端子和接线端子的额定温度为该值。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C。"
+    },
+    {
+      "id": "bt-0155",
+      "locale": "zh-Hans",
+      "targetText": "<div class=\"formula\">安全限值 ="
+    },
+    {
+      "id": "bt-0156",
+      "locale": "zh-Hans",
+      "targetText": "安全限值："
+    },
+    {
+      "id": "bt-0157",
+      "locale": "zh-Hans",
+      "targetText": "正常条件下，此导线可以承载该负载。请注意：连续负载（3+小时）应低于限值的80%，即"
+    },
+    {
+      "id": "bt-0158",
+      "locale": "zh-Hans",
+      "targetText": "此导线的额定载流量不足以承载"
+    },
+    {
+      "id": "bt-0159",
+      "locale": "zh-Hans",
+      "targetText": "加拿大计数规则（Rule 12-3034）：每根进入接线盒的绝缘导线 = 1；裸露的接地跨接导体不计。每个器件 = 2。每对绝缘导线连接器（marrettes）= 1，并按其中最大的导线计算；此规则在US没有对应规定。加拿大不为电缆夹预留容积。始终留在盒内的引出短线不计。总数乘以Table 22规定的容积，再与接线盒的毫升容积比较。"
+    },
+    {
+      "id": "bt-0160",
+      "locale": "zh-Hans",
+      "targetText": "</div>\n<p>加拿大细则：裸露的接地跨接导体和电缆夹不预留容积；每对marrettes按其中最大的导线预留容积（本工具使用您选择的导线规格；为确保安全，请选择盒内尺寸最大的导线）。器件深度超过2.54 cm时，每cm还需扣除32 mL，本简化检查不包括这项扣除。</p>"
+    },
+    {
+      "id": "bt-0161",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格和电路闪断。NEC 314.16按导线规格（线规）规定所需空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0162",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格。Canadian Electrical Code（Rule 12-3034和Table 22）按毫升为每根绝缘导线规定空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0163",
+      "locale": "zh-Hans",
+      "targetText": "器件（按两倍计）"
+    },
+    {
+      "id": "bt-0164",
+      "locale": "zh-Hans",
+      "targetText": "进入接线盒的每根相线或中性线 = 1，包括未断开而穿过盒体的导线。每个器件 = 2。所有接地导体合计 = 1；超过四根后，根据2020规则，每增加一根加¼。内部电缆夹 = 1。始终留在盒内的引出短线不计。总数乘以相应导线规格（线规）的空间，再与接线盒容积比较。"
+    },
+    {
+      "id": "bt-0165",
+      "locale": "zh-Hans",
+      "targetText": "</div>\n<p>细则：始终留在盒内的引出短线不计，但未断开而穿过接线盒的导线必须计一次。接地导体超过四根时，根据2020规则，每增加一根加¼。如果有多个规格，请选择最大的导线规格（线规）以保留安全余量。</p>"
+    },
+    {
+      "id": "bt-0166",
+      "locale": "zh-Hans",
+      "targetText": "合规，但正好达到限值。如果以后可能增加器件或电缆，现在就应使用更大的接线盒。"
+    },
+    {
+      "id": "bt-0167",
+      "locale": "zh-Hans",
+      "targetText": "超出限值。请使用更深的接线盒、扩展盒或减少导线数量。接线盒过满通常会导致检查不合格并产生发热风险。"
+    },
+    {
+      "id": "bt-0168",
+      "locale": "zh-Hans",
+      "targetText": "%填充限值；即使是4\""
+    },
+    {
+      "id": "bt-0169",
+      "locale": "zh-Hans",
+      "targetText": "%限值。"
+    },
+    {
+      "id": "bt-0170",
+      "locale": "zh-Hans",
+      "targetText": "低于限值，空间充足："
+    },
+    {
+      "id": "bt-0171",
+      "locale": "zh-Hans",
+      "targetText": "合规，但接近限值。线路较长或弯头较多时，增大一档规格会更容易穿线。"
+    },
+    {
+      "id": "bt-0172",
+      "locale": "zh-Hans",
+      "targetText": "合规限值"
+    },
+    {
+      "id": "bt-0173",
+      "locale": "zh-Hans",
+      "targetText": "请将线路分到多个导管中，或减少导线数量。"
+    },
+    {
+      "id": "bt-0174",
+      "locale": "zh-Hans",
+      "targetText": "%电压降。请缩短线路以保留余量。另请注意，导线还必须具有足够载流量以承载"
+    },
+    {
+      "id": "bt-0175",
+      "locale": "zh-Hans",
+      "targetText": "%限值（"
+    },
+    {
+      "id": "bt-0176",
+      "locale": "zh-Hans",
+      "targetText": "%高于"
+    },
+    {
+      "id": "bt-0177",
+      "locale": "zh-Hans",
+      "targetText": "%  ✓ 低于您的限值</div>"
+    },
+    {
+      "id": "bt-0178",
+      "locale": "zh-Hans",
+      "targetText": "注意：这里只计算电压降。导线还必须具有足够载流量以承载"
+    },
+    {
+      "id": "bt-0179",
+      "locale": "zh-Hans",
+      "targetText": "没有列出的规格能保持低于"
+    },
+    {
+      "id": "bt-0180",
+      "locale": "zh-Hans",
+      "targetText": "表中没有任何单根导线能将电压降保持在您的限值内。可以缩短线路、提高电压、允许更大的电压降，或并联导线；请咨询电工。"
+    },
+    {
+      "id": "bt-0181",
+      "locale": "zh-Hans",
+      "targetText": "高于3%的建议值，但仍在5%的外部限值内。某些负载可能适用；对于电动机、充电器或长时间运行的电路，请考虑增大导线规格（线规）。"
+    },
+    {
+      "id": "bt-0182",
+      "locale": "zh-Hans",
+      "targetText": "超出5%的外部限值。可能出现明显性能问题：请增大导线规格（线规）、缩短线路或提高电压。"
+    },
+    {
+      "id": "bt-0183",
+      "locale": "zh-Hans",
+      "targetText": "<p>我们重新排列公式，以便根据您的限值计算距离："
+    },
+    {
+      "id": "bt-0184",
+      "locale": "zh-Hans",
+      "targetText": "<p>我们从最小规格开始逐一检查，直到找到一个能使电压降低于以下限值的规格："
+    },
+    {
+      "id": "bt-0185",
+      "locale": "zh-Hans",
+      "targetText": " 导线保持低于"
+    },
+    {
+      "id": "bt-0186",
+      "locale": "zh-Hans",
+      "targetText": "在3%的建议值内。此线路应能正常工作。"
+    },
+    {
+      "id": "bt-0187",
+      "locale": "zh-Hans",
+      "targetText": "您的限值"
+    },
+    {
+      "id": "bt-0188",
+      "locale": "zh-Hans",
+      "targetText": "<p>小导体规则（{citation}）将{size} {material}导线的断路器上限设为<strong>{capAmps} A</strong>；因此我们使用该实际限值进行比较。</p>"
+    },
+    {
+      "id": "bt-0189",
+      "locale": "zh-Hans",
+      "targetText": "<div class=\"formula\">安全限值 = {rated} A   对比   您的负载 = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0190",
+      "locale": "zh-Hans",
+      "targetText": "在正常条件下，此导线可以承载该负载。请注意：连续负载（3小时以上）应低于限值的80%，此处为{amps} A。"
+    },
+    {
+      "id": "bt-0191",
+      "locale": "zh-Hans",
+      "targetText": "此导线的额定载流量不足以承载{amps} A。请增大导线规格（线规）——导线规格过小会过热并造成火灾风险。"
+    },
+    {
+      "id": "bt-0192",
+      "locale": "zh-Hans",
+      "targetText": "{temp}°C时{size} {material}导线的安全限值"
+    },
+    {
+      "id": "bt-0193",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size}绝缘导线需要<strong>{unit} mL</strong>接线盒空间（CEC Table 22，Rule 12-3034）。</p>\n<div class=\"formula\">{conductors}根导线 + {devices}个{deviceWord} × 2 + {pairs}{pairWord}\n= {counts}个总计数 × {unit} mL\n= 需要{needed} mL\n{box}：可用{available} mL → {status}</div>\n<p>加拿大细则：裸露的接地跨接导体和电缆夹不预留容积（与US不同）；每对marrettes按其中最大导线计一个容积（我们使用您选择的规格；为保留安全余量，请选择现场最大的导线）；深度超过2.54 cm的器件，每cm深度还要额外扣除32 mL，本简化检查未包括这项扣除。</p>"
+    },
+    {
+      "id": "bt-0194",
+      "locale": "zh-Hans",
+      "targetText": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0195",
+      "locale": "zh-Hans",
+      "targetText": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0196",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size}导线需要<strong>{unit} cu in</strong>接线盒空间（NEC Table 314.16(B)）。</p>\n<div class=\"formula\">{conductors}根导线 + {devices}个{deviceWord} × 2 + {grounds} + {clamps}\n= {counts}个总计数 × {unit} cu in\n= 需要{needed} cu in\n{box}：可用{available} cu in → {status}</div>\n<p>细则：完全留在接线盒内的引线不计数，但未断开而穿过接线盒的导线必须计一次，请将其包括在上方。如果超过四根接地导线进入接线盒，从第五根开始每根增加¼个计数（2020规范规则）；为保留安全余量，可按大约多一根导线计算。混合导线规格需要按规格分别完整计算（即将提供）；在此之前，选择现场最大的规格是使用本工具的安全方法。</p>"
+    },
+    {
+      "id": "bt-0197",
+      "locale": "zh-Hans",
+      "targetText": "填充率明显低于{percent}%限值。"
+    },
+    {
+      "id": "bt-0198",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size} THHN导线的横截面积为<strong>{wireArea} sq in</strong>（NEC Chapter 9, Table 5）。</p>\n<div class=\"formula\">{count}根导线 × {wireArea} = 需要{needed} sq in\n{conduitSize} {conduit}内部面积 = {conduitArea} sq in（NEC Chapter 9, Table 4）\n允许面积：{conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  实际填充率{actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0199",
+      "locale": "zh-Hans",
+      "targetText": "容纳{count} × {size} THHN的最小{conduit}"
+    },
+    {
+      "id": "bt-0200",
+      "locale": "zh-Hans",
+      "targetText": "<p>{count} × {size} THHN = {area} sq in导线面积，超过了4\" {conduit}在{percent}%填充限值下可容纳的面积。</p>"
+    },
+    {
+      "id": "bt-0201",
+      "locale": "zh-Hans",
+      "targetText": "注意：此结果只计算电压降。导线还必须能够安全承载{amps} A（载流量）；购买前请另行核验。"
+    },
+    {
+      "id": "bt-0202",
+      "locale": "zh-Hans",
+      "targetText": "在此距离下，电压降正好达到{percent}%。请缩短线路以保留余量。还要注意：无论距离多短，导线都必须具有承载{amps} A的额定载流量。"
+    },
+    {
+      "id": "bt-0203",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>根据您的{percent}%限值（{maxDrop} V），我们将公式变形以求解距离：</p>\n<div class=\"formula\">最大单程英尺 = {maxDrop} V × {cm} cmil\n             ÷（{mult} × {factor} × {amps} A）\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0204",
+      "locale": "zh-Hans",
+      "targetText": "没有任何所列规格可将电压降控制在{percent}%以下"
+    },
+    {
+      "id": "bt-0205",
+      "locale": "zh-Hans",
+      "targetText": "即使使用{size} {material}线，在{feet}英尺单程距离（仅去程）和{amps} A条件下，电压降仍超过{percent}%。"
+    },
+    {
+      "id": "bt-0206",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>我们从最小规格开始逐一检查，直到找到可将电压降控制在{percent}%限值（{maxDrop} V）以下的规格：</p>\n<div class=\"formula\">{size}（{cm} cmil）：\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ 低于您的限值</div>"
+    },
+    {
+      "id": "bt-0207",
+      "locale": "zh-Hans",
+      "targetText": "可将电压降控制在{percent}%以下的最小{material}线规格"
+    },
+    {
+      "id": "bt-0208",
+      "locale": "zh-Hans",
+      "targetText": "请务必独立核验计算，遵守当地电气规范和许可要求，并在法律或安全常识要求时聘请持证专业人员。"
+    },
+    {
+      "id": "bt-0209",
+      "locale": "zh-Hans",
+      "targetText": "不得攻击服务、使其过载、以滥用频率抓取内容、为造成损害而进行逆向工程，或以其他方式干扰服务；也不得违法使用服务。"
+    },
+    {
+      "id": "bt-0210",
+      "locale": "zh-Hans",
+      "targetText": "电气作业可能造成伤亡，错误还可能引发火灾。"
+    },
+    {
+      "id": "bt-0211",
+      "locale": "zh-Hans",
+      "targetText": "。如果您不同意，请勿使用本服务。"
+    },
+    {
+      "id": "bt-0212",
+      "locale": "zh-Hans",
+      "targetText": "结果是正常条件下的简化估算，并未涵盖所有实际因素，例如温度、成束敷设、降容、连续负载、当地规范修订和设备认证等。本服务不能替代持证电工或专业工程师，使用本服务也不会形成任何专业关系。"
+    },
+    {
+      "id": "bt-0213",
+      "locale": "zh-Hans",
+      "targetText": "在法律允许的最大范围内，VoltDrop及其运营者不对您使用或无法使用本服务造成的任何损害负责，包括财产损失、人身伤害、利润损失或返工费用，无论责任依据是保证、合同、侵权还是其他理论。如果责任无法完全排除，我们的总责任以$50 (USD)为限。某些地区不允许特定免责条款，因此部分内容可能不适用于您。"
+    },
+    {
+      "id": "bt-0214",
+      "locale": "zh-Hans",
+      "targetText": "您可以使用Google或Facebook登录并发表评论。您保留所写内容的所有权，但授予我们在服务中展示该内容的全球性、免版税许可。请勿发布违法、仇恨、骚扰、欺骗或垃圾内容；请勿发布链接、他人个人信息或冒充他人。我们可以自行决定删除评论或暂停评论权限，无论是否另行通知。评论仅代表其他用户的意见，并非我们的意见，也绝不是专业电气建议的来源。"
+    },
+    {
+      "id": "bt-0215",
+      "locale": "fr-CA",
+      "targetText": "Le courant admissible est le courant maximal, en ampères, qu’un conducteur peut transporter de façon continue sans surchauffer. Il dépend du calibre du conducteur, du matériau et de la température nominale de l’isolant, et il est établi par CEC Table 2 pour le cuivre ou Table 4 pour l’aluminium dans des conditions normales."
+    },
+    {
+      "id": "bt-0216",
+      "locale": "fr-CA",
+      "targetText": "sont des vérifications distinctes; le conducteur doit réussir"
+    },
+    {
+      "id": "bt-0217",
+      "locale": "fr-CA",
+      "targetText": "les greniers chauds, les salles mécaniques, les groupes de plus de trois conducteurs porteurs de courant et les charges continues (3+ heures exigent une marge de 25%). Tout cela réduit le courant admissible. En cas de doute, utilisez un calibre du conducteur supérieur ou consultez un électricien."
+    },
+    {
+      "id": "bt-0218",
+      "locale": "fr-CA",
+      "targetText": "— utilisez-la seulement si les bornes du disjoncteur et les autres bornes sont marquées 75°C. L’équipement non marqué compte comme 60°C selon CEC Rule 4-006."
+    },
+    {
+      "id": "bt-0219",
+      "locale": "fr-CA",
+      "targetText": "En cas de doute, utilisez la colonne de 75°C seulement si les bornes du disjoncteur et les autres bornes sont marquées 75°C. L’équipement non marqué compte comme 60°C selon CEC Rule 4-006. La température nominale des bornes, et non l’isolant NMD90 à lui seul, détermine la colonne utilisable."
+    },
+    {
+      "id": "bt-0220",
+      "locale": "fr-CA",
+      "targetText": "Quelle colonne de température de l’isolant faut-il utiliser?"
+    },
+    {
+      "id": "bt-0221",
+      "locale": "fr-CA",
+      "targetText": "Les conducteurs de continuité des masses nus ne comptent pas selon CEC Rule 12-3034."
+    },
+    {
+      "id": "bt-0222",
+      "locale": "fr-CA",
+      "targetText": "Règle canadienne : chaque paire de connecteurs isolés occupe le volume d’un conducteur, selon le plus gros conducteur raccordé. Comptez toutes les marrettes."
+    },
+    {
+      "id": "bt-0223",
+      "locale": "fr-CA",
+      "targetText": "Les serre-câbles ne reçoivent aucun volume selon la règle de comptage canadienne."
+    },
+    {
+      "id": "bt-0224",
+      "locale": "fr-CA",
+      "targetText": "Comptez chaque conducteur de phase et neutre qui entre dans la boîte, y compris ceux qui la traversent sans être coupés. Ne comptez pas ici les conducteurs de mise à la terre ni les queues de cochon qui commencent et se terminent dans la boîte."
+    },
+    {
+      "id": "bt-0225",
+      "locale": "fr-CA",
+      "targetText": "Une boîte trop remplie force les raccords, endommage l’isolant et accumule de la chaleur. Canadian Electrical Code (Rule 12-3034 avec Table 22) attribue un volume en millilitres à chaque conducteur isolé, et la boîte doit offrir au moins ce volume."
+    },
+    {
+      "id": "bt-0226",
+      "locale": "fr-CA",
+      "targetText": "Les conducteurs qui traversent la boîte comptent-ils dans le remplissage de boîte?"
+    },
+    {
+      "id": "bt-0227",
+      "locale": "fr-CA",
+      "targetText": "Comptage canadien : chaque conducteur isolé qui entre dans la boîte compte une fois; les conducteurs de continuité des masses nus et les serre-câbles ne comptent pas. Chaque dispositif compte deux fois. Chaque paire de connecteurs isolés (marrettes) compte une fois, selon le plus gros conducteur raccordé."
+    },
+    {
+      "id": "bt-0228",
+      "locale": "fr-CA",
+      "targetText": "Votre boîte de jonction ou de dispositif est-elle assez grande? Comptez son contenu pour obtenir une réponse claire."
+    },
+    {
+      "id": "bt-0229",
+      "locale": "fr-CA",
+      "targetText": "Dans la plupart des maisons : 14 AWG (circuits de 15 A) ou 12 AWG (circuits de 20 A). Si plusieurs calibres sont présents, choisissez pour l’instant le plus gros afin de garder une marge sécuritaire."
+    },
+    {
+      "id": "bt-0230",
+      "locale": "fr-CA",
+      "targetText": "CEC Rule 12-3034 et Table 22 attribuent un volume en millilitres à chaque calibre du conducteur. Comptez une fois chaque conducteur isolé, deux fois chaque dispositif et une fois chaque paire de connecteurs isolés. Les conducteurs de continuité des masses nus et les serre-câbles ne comptent pas. Le volume requis ne doit pas dépasser le volume de la boîte."
+    },
+    {
+      "id": "bt-0231",
+      "locale": "fr-CA",
+      "targetText": "Comptez chaque conducteur isolé dans le conduit, y compris le neutre et tout conducteur de mise à la terre isolé. Tous les conducteurs doivent être du même calibre pour l’instant."
+    },
+    {
+      "id": "bt-0232",
+      "locale": "fr-CA",
+      "targetText": "<div class=\"ca-note\"><strong>Note de planification Canada / CEC :</strong> la CEC Rule 12-910 et la Table 8 utilisent les mêmes pourcentages de remplissage de 53/31/40%. Toutefois, cet outil utilise encore les aires de conducteurs THHN/THWN et les dimensions commerciales NEC, car les valeurs canadiennes des Tables 6A–6K et 9 n’ont pas franchi notre vérification. N’utilisez pas le résultat de diamètre comme base finale d’une installation canadienne; confirmez-le dans le CEC ou auprès de l’autorité d’inspection.</div>"
+    },
+    {
+      "id": "bt-0233",
+      "locale": "fr-CA",
+      "targetText": "Quel diamètre de conduit faut-il pour vos conducteurs? Entrez ce que vous tirez pour obtenir le plus petit diamètre permis."
+    },
+    {
+      "id": "bt-0234",
+      "locale": "fr-CA",
+      "targetText": "les longs parcours avec plusieurs coudes se tirent plus facilement dans un diamètre supérieur au minimum calculé. Pour les travaux canadiens, confirmez les aires de conducteurs et les diamètres commerciaux métriques dans CEC Tables 6A–6K et 9 avant l’installation."
+    },
+    {
+      "id": "bt-0235",
+      "locale": "fr-CA",
+      "targetText": "Selon CEC Rule 12-910 et Table 8, un conducteur peut occuper 53% de l’aire intérieure d’une canalisation; deux conducteurs, 31%; et trois conducteurs ou plus, 40%. Cet outil de planification applique ces pourcentages, mais les tableaux d’aires de conducteurs et de diamètres commerciaux demeurent propres au NEC et doivent être confirmés pour les travaux canadiens."
+    },
+    {
+      "id": "bt-0236",
+      "locale": "fr-CA",
+      "targetText": "Les conducteurs ont besoin d’espace libre dans le conduit. Les limites de CEC Rule 12-910 et Table 8 sont les suivantes : un conducteur peut occuper"
+    },
+    {
+      "id": "bt-0237",
+      "locale": "fr-CA",
+      "targetText": "C’est presque toujours l’une de deux causes : certains calculateurs utilisent des valeurs de résistance différentes, ou certains utilisent la"
+    },
+    {
+      "id": "bt-0238",
+      "locale": "fr-CA",
+      "targetText": "C’est presque toujours l’une de deux causes : certains calculateurs demandent le trajet aller-retour, tandis que d’autres demandent la distance à l’aller (un seul trajet). VoltDrop utilise toujours la distance à l’aller et la double à l’interne. D’autres utilisent des valeurs de résistance légèrement différentes. VoltDrop affiche le calcul complet pour permettre la comparaison."
+    },
+    {
+      "id": "bt-0239",
+      "locale": "fr-CA",
+      "targetText": "La CEC Rule 8-102 fixe un maximum <strong>obligatoire</strong> : la chute de tension d’un circuit de dérivation ou d’une artère doit être d’au plus <strong>3%</strong>, et la chute combinée du branchement à la charge la plus éloignée doit être d’au plus <strong>5%</strong>. Au Canada, ce sont des limites exécutoires, et non de simples recommandations de rendement. Les systèmes à basse tension, comme le solaire 12&nbsp;V, exigent souvent une cible encore plus serrée, car 3% de 12&nbsp;V a beaucoup plus d’effet que 3% de 240&nbsp;V."
+    },
+    {
+      "id": "bt-0240",
+      "locale": "fr-CA",
+      "targetText": ". Ne la doublez pas vous-même."
+    },
+    {
+      "id": "bt-0241",
+      "locale": "fr-CA",
+      "targetText": "alors que d’autres demandent la distance à l’aller (un seul trajet). Nous demandons toujours la distance à l’aller et affichons le calcul complet."
+    },
+    {
+      "id": "bt-0242",
+      "locale": "fr-CA",
+      "targetText": "Chute maximale acceptable"
+    },
+    {
+      "id": "bt-0243",
+      "locale": "fr-CA",
+      "targetText": "Mesurez la distance à l’aller (un seul trajet)"
+    },
+    {
+      "id": "bt-0244",
+      "locale": "fr-CA",
+      "targetText": "3% est le maximum obligatoire pour un circuit de dérivation ou une artère. 5% est le maximum obligatoire pour le trajet combiné."
+    },
+    {
+      "id": "bt-0245",
+      "locale": "fr-CA",
+      "targetText": "5% — limite supérieure"
+    },
+    {
+      "id": "bt-0246",
+      "locale": "fr-CA",
+      "targetText": "Pourquoi les autres calculateurs ne concordent-ils pas?"
+    },
+    {
+      "id": "bt-0247",
+      "locale": "fr-CA",
+      "targetText": "Pourquoi les calculateurs de chute de tension ne concordent-ils pas?"
+    },
+    {
+      "id": "bt-0248",
+      "locale": "fr-CA",
+      "targetText": "Un conducteur a une résistance; une partie de la tension est donc perdue sous forme de chaleur avant d’atteindre l’appareil. La CEC Rule 8-102 rend les limites exécutoires : maximum de 3% sur un circuit de dérivation ou une artère et de 5% au total, du branchement à la charge la plus éloignée. Les systèmes à basse tension, comme le solaire 12 V, exigent souvent une cible encore plus serrée."
+    },
+    {
+      "id": "bt-0249",
+      "locale": "fr-CA",
+      "targetText": "Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute."
+    },
+    {
+      "id": "bt-0250",
+      "locale": "fr-CA",
+      "targetText": "Calculateur canadien gratuit CEC de remplissage de boîte : volumes en millilitres de Table 22, comptage des conducteurs et marrettes selon Rule 12-3034, et verdict clair."
+    },
+    {
+      "id": "bt-0251",
+      "locale": "fr-CA",
+      "targetText": "Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC."
+    },
+    {
+      "id": "bt-0252",
+      "locale": "fr-CA",
+      "targetText": "Calculateur canadien gratuit de longueur maximale : obtenez la plus grande distance à l’aller (un seul trajet) dans la limite obligatoire de chute de tension de 3% ou 5% du CEC. Cuivre et aluminium, DC et AC."
+    },
+    {
+      "id": "bt-0253",
+      "locale": "fr-CA",
+      "targetText": "Quelle distance le conducteur peut-il parcourir avant que la chute de tension pose problème? Obtenez la distance maximale à l’aller (un seul trajet) pour tout calibre et toute charge."
+    },
+    {
+      "id": "bt-0254",
+      "locale": "fr-CA",
+      "targetText": "Calculateur canadien gratuit de calibre du conducteur : entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour trouver le plus petit AWG en cuivre ou en aluminium dans la limite obligatoire de CEC Rule 8-102."
+    },
+    {
+      "id": "bt-0255",
+      "locale": "fr-CA",
+      "targetText": "Les watts (kW) mesurent la puissance réelle utilisable, tandis que kVA mesure la puissance apparente que le câblage doit transporter. Pour les appareils de chauffage et les charges simples, les deux sont égales; pour les moteurs et l’électronique, kVA peut être supérieur. Leur rapport est le facteur de puissance."
+    },
+    {
+      "id": "bt-0256",
+      "locale": "fr-CA",
+      "targetText": "Les calculateurs fonctionnent entièrement dans votre navigateur : les nombres saisis ne quittent jamais votre appareil. Aucun compte n’est exigé, nous ne vendons pas de données et les seuls renseignements personnels que nous conservons sont ceux que vous nous donnez si vous choisissez d’ouvrir une session et de laisser un commentaire."
+    },
+    {
+      "id": "bt-0257",
+      "locale": "fr-CA",
+      "targetText": "Nous ne vendons ni ne partageons vos renseignements personnels avec des annonceurs ou des courtiers en données. Nous n’envoyons pas de courriel de marketing. Nous ne vous suivons pas sur d’autres sites Web."
+    },
+    {
+      "id": "bt-0258",
+      "locale": "fr-CA",
+      "targetText": "nous utilisons Google Analytics pour comprendre le trafic global (pages visitées, région générale et type d’appareil). Il s’agit d’analytique regroupée; nous ne l’utilisons pas pour vous identifier."
+    },
+    {
+      "id": "bt-0259",
+      "locale": "fr-CA",
+      "targetText": "Ce que nous ne faisons pas"
+    },
+    {
+      "id": "bt-0260",
+      "locale": "fr-CA",
+      "targetText": "A</strong>; c’est donc la limite pratique utilisée pour la comparaison.</p>"
+    },
+    {
+      "id": "bt-0261",
+      "locale": "fr-CA",
+      "targetText": "dépasse la limite"
+    },
+    {
+      "id": "bt-0262",
+      "locale": "fr-CA",
+      "targetText": "Vous hésitez? Utilisez <strong>75°C</strong> : la plupart des bornes de disjoncteur sont homologuées pour cette température. Le câble Romex/NM-B doit utiliser la colonne de 60°C. THHN dans un endroit sec est homologué 90°C, mais les points de raccordement limitent habituellement le circuit à 75°C."
+    },
+    {
+      "id": "bt-0263",
+      "locale": "fr-CA",
+      "targetText": "<div class=\"formula\">Limite sécuritaire ="
+    },
+    {
+      "id": "bt-0264",
+      "locale": "fr-CA",
+      "targetText": "limite sécuritaire pour "
+    },
+    {
+      "id": "bt-0265",
+      "locale": "fr-CA",
+      "targetText": "Ce conducteur peut transporter la charge dans des conditions normales. Rappel : les charges continues (3+ heures) devraient demeurer sous 80% de la limite, soit "
+    },
+    {
+      "id": "bt-0266",
+      "locale": "fr-CA",
+      "targetText": "Ce conducteur N’EST PAS homologué pour "
+    },
+    {
+      "id": "bt-0267",
+      "locale": "fr-CA",
+      "targetText": "Comptage canadien (Rule 12-3034) : chaque conducteur isolé entrant dans la boîte = 1; les conducteurs de continuité des masses nus NE comptent PAS. Chaque dispositif = 2. Chaque PAIRE de connecteurs isolés (marrettes) = 1, selon le plus gros conducteur raccordé. Cette règle canadienne n’a pas d’équivalent aux US. Les serre-câbles ne reçoivent aucun volume au Canada. Les queues de cochon entièrement dans la boîte ne comptent pas. Nous multiplions le total par le volume de Table 22 et le comparons au volume de la boîte en millilitres."
+    },
+    {
+      "id": "bt-0268",
+      "locale": "fr-CA",
+      "targetText": "</div>\n<p>Détail canadien : les conducteurs de continuité des masses nus et les serre-câbles ne reçoivent aucun volume; chaque paire de marrettes reçoit un volume selon le plus gros conducteur raccordé (nous utilisons le calibre sélectionné; par sécurité, choisissez le plus gros conducteur présent). Les dispositifs de plus de 2.54 cm de profondeur exigent une déduction supplémentaire de 32 mL par cm de profondeur, que cette vérification simple n’inclut pas.</p>"
+    },
+    {
+      "id": "bt-0269",
+      "locale": "fr-CA",
+      "targetText": "Une boîte trop remplie force les raccords, endommage l’isolant et accumule de la chaleur. C’est une cause fréquente d’échec à l’inspection et de circuits intermittents. NEC 314.16 attribue un volume à chaque calibre du conducteur, et la boîte doit offrir au moins ce volume."
+    },
+    {
+      "id": "bt-0270",
+      "locale": "fr-CA",
+      "targetText": "Une boîte trop remplie force les raccords, endommage l’isolant et accumule de la chaleur. C’est une cause fréquente d’échec à l’inspection. Canadian Electrical Code (Rule 12-3034 avec Table 22) attribue un volume en millilitres à chaque conducteur isolé, et la boîte doit offrir au moins ce volume."
+    },
+    {
+      "id": "bt-0271",
+      "locale": "fr-CA",
+      "targetText": "Dispositifs (comptent double)"
+    },
+    {
+      "id": "bt-0272",
+      "locale": "fr-CA",
+      "targetText": "Chaque conducteur de phase ou neutre qui entre dans la boîte = 1, y compris un conducteur qui la traverse sans être coupé. Chaque dispositif = 2. Tous les conducteurs de mise à la terre ensemble = 1; au-delà de quatre, chacun ajoute ¼ selon les règles de 2020. Les serre-câbles internes = 1. Les queues de cochon entièrement dans la boîte ne comptent pas. Nous multiplions le total par le volume du calibre du conducteur et le comparons au volume de la boîte."
+    },
+    {
+      "id": "bt-0273",
+      "locale": "fr-CA",
+      "targetText": "</div>\n<p>Détail : les queues de cochon entièrement dans la boîte ne comptent pas, mais un conducteur qui la traverse sans être coupé compte UNE fois. Au-delà de quatre conducteurs de mise à la terre, chacun ajoute ¼ selon les règles de 2020. Si plusieurs calibres sont présents, choisissez le plus gros pour garder une marge sécuritaire.</p>"
+    },
+    {
+      "id": "bt-0274",
+      "locale": "fr-CA",
+      "targetText": "Permis, mais juste à la limite. Si vous pourriez ajouter un dispositif ou un câble plus tard, choisissez une boîte plus grande maintenant."
+    },
+    {
+      "id": "bt-0275",
+      "locale": "fr-CA",
+      "targetText": "Au-dessus de la limite. Utilisez une boîte plus profonde, une rallonge de boîte ou moins de conducteurs. Une boîte trop remplie échoue souvent à l’inspection et présente un risque de chaleur."
+    },
+    {
+      "id": "bt-0276",
+      "locale": "fr-CA",
+      "targetText": "% de limite de remplissage; même 4\""
+    },
+    {
+      "id": "bt-0277",
+      "locale": "fr-CA",
+      "targetText": "% de limite."
+    },
+    {
+      "id": "bt-0278",
+      "locale": "fr-CA",
+      "targetText": "Bon dégagement sous la limite de "
+    },
+    {
+      "id": "bt-0279",
+      "locale": "fr-CA",
+      "targetText": "Permis, mais près de la limite. Un diamètre supérieur facilite beaucoup le tirage sur les longs parcours ou avec plusieurs coudes."
+    },
+    {
+      "id": "bt-0280",
+      "locale": "fr-CA",
+      "targetText": "Limite permise"
+    },
+    {
+      "id": "bt-0281",
+      "locale": "fr-CA",
+      "targetText": "Répartissez le parcours dans plusieurs conduits ou réduisez le nombre de conducteurs."
+    },
+    {
+      "id": "bt-0282",
+      "locale": "fr-CA",
+      "targetText": "% de chute. Gardez un parcours plus court pour conserver une marge. Le conducteur doit aussi être homologué pour "
+    },
+    {
+      "id": "bt-0283",
+      "locale": "fr-CA",
+      "targetText": "% de limite ("
+    },
+    {
+      "id": "bt-0284",
+      "locale": "fr-CA",
+      "targetText": "% au-dessus de "
+    },
+    {
+      "id": "bt-0285",
+      "locale": "fr-CA",
+      "targetText": "%  ✓ sous votre limite</div>"
+    },
+    {
+      "id": "bt-0286",
+      "locale": "fr-CA",
+      "targetText": "Attention : ceci calcule seulement la chute de tension. Le conducteur doit AUSSI être homologué pour transporter "
+    },
+    {
+      "id": "bt-0287",
+      "locale": "fr-CA",
+      "targetText": "aucun calibre indiqué ne demeure sous "
+    },
+    {
+      "id": "bt-0288",
+      "locale": "fr-CA",
+      "targetText": "Aucun conducteur du tableau ne garde la chute sous votre limite. Options : raccourcissez le parcours, augmentez la tension, permettez une chute supérieure ou utilisez des conducteurs en parallèle; consultez un électricien."
+    },
+    {
+      "id": "bt-0289",
+      "locale": "fr-CA",
+      "targetText": "Au-dessus de la limite obligatoire de 3% du circuit de dérivation ou de l’artère, même si le trajet combiné demeure sous le maximum de 5%. Utilisez un calibre du conducteur supérieur ou raccourcissez le parcours."
+    },
+    {
+      "id": "bt-0290",
+      "locale": "fr-CA",
+      "targetText": "Au-dessus du maximum combiné obligatoire de 5%. Utilisez un calibre du conducteur supérieur, raccourcissez le parcours ou augmentez la tension."
+    },
+    {
+      "id": "bt-0291",
+      "locale": "fr-CA",
+      "targetText": "<p>Nous avons réorganisé la formule pour calculer la distance, avec votre limite de"
+    },
+    {
+      "id": "bt-0292",
+      "locale": "fr-CA",
+      "targetText": "<p>Nous avons vérifié chaque calibre, du plus petit au plus gros, jusqu’à ce qu’un calibre garde la chute sous"
+    },
+    {
+      "id": "bt-0293",
+      "locale": "fr-CA",
+      "targetText": " conducteur qui demeure sous "
+    },
+    {
+      "id": "bt-0294",
+      "locale": "fr-CA",
+      "targetText": "Dans la limite obligatoire de 3%. Ce parcours devrait bien fonctionner."
+    },
+    {
+      "id": "bt-0295",
+      "locale": "fr-CA",
+      "targetText": "Votre limite"
+    },
+    {
+      "id": "bt-0296",
+      "locale": "fr-CA",
+      "targetText": "<p>La règle des petits conducteurs ({citation}) limite à <strong>{capAmps} A</strong> le disjoncteur du conducteur en {material} {size}; c’est donc la limite pratique utilisée pour la comparaison.</p>"
+    },
+    {
+      "id": "bt-0297",
+      "locale": "fr-CA",
+      "targetText": "<div class=\"formula\">Limite sécuritaire = {rated} A   par rapport à   votre charge = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0298",
+      "locale": "fr-CA",
+      "targetText": "Ce conducteur peut transporter la charge dans des conditions normales. Rappel : les charges continues (3+ heures) devraient demeurer sous 80% de la limite, soit {amps} A ici."
+    },
+    {
+      "id": "bt-0299",
+      "locale": "fr-CA",
+      "targetText": "Ce conducteur N’EST PAS homologué pour {amps} A. Utilisez un calibre supérieur — un conducteur trop petit surchauffe et présente un risque d’incendie."
+    },
+    {
+      "id": "bt-0300",
+      "locale": "fr-CA",
+      "targetText": "limite sécuritaire du conducteur en {material} {size} à {temp}°C"
+    },
+    {
+      "id": "bt-0301",
+      "locale": "fr-CA",
+      "targetText": "\n<p>Chaque conducteur isolé {size} exige <strong>{unit} mL</strong> d’espace dans la boîte (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} conducteurs + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} comptes au total × {unit} mL\n= {needed} mL requis\n{box} : {available} mL disponibles → {status}</div>\n<p>Détail canadien : les conducteurs de continuité des masses nus et les serre-câbles ne reçoivent aucun volume (contrairement aux US); chaque paire de marrettes compte une fois selon le plus gros conducteur raccordé (nous utilisons le calibre sélectionné; choisissez le plus gros présent pour conserver une marge sécuritaire); les dispositifs de plus de 2.54 cm de profondeur exigent une déduction supplémentaire de 32 mL par cm de profondeur, que cette vérification simple n’inclut pas.</p>"
+    },
+    {
+      "id": "bt-0302",
+      "locale": "fr-CA",
+      "targetText": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0303",
+      "locale": "fr-CA",
+      "targetText": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0304",
+      "locale": "fr-CA",
+      "targetText": "\n<p>Chaque conducteur {size} exige <strong>{unit} cu in</strong> d’espace dans la boîte (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} conducteurs + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} comptes au total × {unit} cu in\n= {needed} cu in requis\n{box} : {available} cu in disponibles → {status}</div>\n<p>Détail : les queues de cochon entièrement dans la boîte ne comptent pas, mais un conducteur qui la traverse sans être coupé compte UNE fois; incluez-le ci-dessus. Si plus de quatre conducteurs de mise à la terre entrent dans la boîte, chacun au-delà du quatrième ajoute ¼ de compte (règle de 2020); ajoutez environ un conducteur pour conserver une marge sécuritaire. Plusieurs calibres exigent le calcul complet par calibre (à venir); d’ici là, choisir le plus gros calibre est la façon sécuritaire d’utiliser cet outil.</p>"
+    },
+    {
+      "id": "bt-0305",
+      "locale": "fr-CA",
+      "targetText": "Bon dégagement sous la limite de {percent}%."
+    },
+    {
+      "id": "bt-0306",
+      "locale": "fr-CA",
+      "targetText": "\n<p>Chaque conducteur {size} THHN a une section de <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} conducteurs × {wireArea} = {needed} sq in requis\nAire intérieure du conduit {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermis : {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  remplissage de {actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0307",
+      "locale": "fr-CA",
+      "targetText": "plus petit conduit {conduit} pour {count} × {size} THHN"
+    },
+    {
+      "id": "bt-0308",
+      "locale": "fr-CA",
+      "targetText": "<p>{count} × {size} THHN = {area} sq in de conducteurs, ce qui dépasse la limite de remplissage de {percent}% même dans un conduit {conduit} de 4\".</p>"
+    },
+    {
+      "id": "bt-0309",
+      "locale": "fr-CA",
+      "targetText": "Attention : ceci calcule seulement la chute de tension. Le conducteur doit AUSSI être homologué pour transporter {amps} A de façon sécuritaire (courant admissible); vérifiez ce point séparément avant l’achat."
+    },
+    {
+      "id": "bt-0310",
+      "locale": "fr-CA",
+      "targetText": "À cette distance exacte, la chute atteint {percent}%. Gardez le parcours plus court pour conserver une marge. Le conducteur doit aussi être homologué pour {amps} A (courant admissible), quelle que soit la distance."
+    },
+    {
+      "id": "bt-0311",
+      "locale": "fr-CA",
+      "targetText": "\n<p>Nous avons réorganisé la formule pour calculer la distance, avec votre limite de {percent}% ({maxDrop} V) :</p>\n<div class=\"formula\">Maximum de pieds à l’aller = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0312",
+      "locale": "fr-CA",
+      "targetText": "aucun calibre indiqué ne garde la chute sous {percent}%"
+    },
+    {
+      "id": "bt-0313",
+      "locale": "fr-CA",
+      "targetText": "Même un conducteur en {material} {size} subit une chute supérieure à {percent}% sur {feet} pieds à l’aller avec {amps} A."
+    },
+    {
+      "id": "bt-0314",
+      "locale": "fr-CA",
+      "targetText": "\n<p>Nous avons vérifié chaque calibre, du plus petit au plus gros, jusqu’à ce qu’un calibre garde la chute sous votre limite de {percent}% ({maxDrop} V) :</p>\n<div class=\"formula\">{size} ({cm} cmil) :\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ sous votre limite</div>"
+    },
+    {
+      "id": "bt-0315",
+      "locale": "fr-CA",
+      "targetText": "plus petit conducteur en {material} qui garde la chute sous {percent}%"
+    },
+    {
+      "id": "bt-0316",
+      "locale": "fr-CA",
+      "targetText": "Vérifiez toujours les calculs indépendamment, respectez le code de l’électricité et les permis locaux, et engagez un professionnel autorisé lorsque la loi ou la prudence l’exige."
+    },
+    {
+      "id": "bt-0317",
+      "locale": "fr-CA",
+      "targetText": "N’attaquez pas le Service, ne le surchargez pas, ne recueillez pas son contenu à un rythme abusif, ne faites pas d’ingénierie inverse dans le but de nuire et ne l’entravez pas autrement. Ne l’utilisez pas non plus en violation de la loi."
+    },
+    {
+      "id": "bt-0318",
+      "locale": "fr-CA",
+      "targetText": "Les travaux électriques peuvent blesser ou tuer, et les erreurs peuvent causer des incendies."
+    },
+    {
+      "id": "bt-0319",
+      "locale": "fr-CA",
+      "targetText": ". Si vous n’êtes pas d’accord, n’utilisez pas le Service."
+    },
+    {
+      "id": "bt-0320",
+      "locale": "fr-CA",
+      "targetText": "Les résultats sont des estimations simplifiées pour des conditions normales. Ils ne tiennent pas compte de tous les facteurs réels (température, regroupement, réduction du courant admissible, charges continues, modifications locales au code, homologations d’équipement et autres). Le Service ne remplace pas un électricien autorisé ni un ingénieur professionnel, et son utilisation ne crée aucune relation professionnelle."
+    },
+    {
+      "id": "bt-0321",
+      "locale": "fr-CA",
+      "targetText": "Dans toute la mesure permise par la loi, VoltDrop et son exploitant ne sont responsables d’aucun dommage découlant de votre utilisation du Service ou de votre incapacité à l’utiliser, notamment les dommages matériels, les blessures, la perte de profits ou le coût de reprise des travaux électriques, peu importe le fondement invoqué. Si la responsabilité ne peut être entièrement exclue, notre responsabilité totale est limitée à $50 (USD). Certaines régions n’autorisent pas certaines exclusions; des parties des présentes peuvent donc ne pas s’appliquer à vous."
+    },
+    {
+      "id": "bt-0322",
+      "locale": "fr-CA",
+      "targetText": "Vous pouvez ouvrir une session avec Google ou Facebook pour laisser des commentaires. Vous demeurez propriétaire de vos écrits, mais vous nous accordez une licence mondiale et libre de redevances pour les afficher dans le Service. Ne publiez rien d’illégal, de haineux, de harcelant, de trompeur ou d’indésirable; aucun lien, renseignement personnel sur autrui ou usurpation d’identité. Nous pouvons supprimer tout commentaire ou suspendre l’accès aux commentaires à notre discrétion, avec ou sans avis. Les commentaires expriment l’opinion d’autres utilisateurs, pas la nôtre, et ne constituent jamais une source de conseils électriques professionnels."
+    },
+    {
+      "id": "bt-0323",
+      "locale": "zh-Hans",
+      "targetText": "载流量是导线在不过热的情况下可以连续承载的最大电流（安培）。它取决于导线规格（线规）、材料和绝缘额定温度；正常条件下，铜导线由CEC Table 2规定，铝导线由Table 4规定。"
+    },
+    {
+      "id": "bt-0324",
+      "locale": "zh-Hans",
+      "targetText": "是两项独立检查；导线必须同时通过"
+    },
+    {
+      "id": "bt-0325",
+      "locale": "zh-Hans",
+      "targetText": "炎热阁楼、机房、超过三根载流导体成束敷设以及连续负载（3+小时需要25%的余量）都会降低载流量。如有疑问，请增大导线规格（线规）或咨询电工。"
+    },
+    {
+      "id": "bt-0326",
+      "locale": "zh-Hans",
+      "targetText": "— 只有在断路器端子和其他端子标有75°C时才能使用。根据CEC Rule 4-006，未标记设备按60°C计算。"
+    },
+    {
+      "id": "bt-0327",
+      "locale": "zh-Hans",
+      "targetText": "不确定时，只有在断路器端子和其他端子标有75°C时才能使用75°C列。根据CEC Rule 4-006，未标记设备按60°C计算。可用列由端子额定温度决定，不能仅依据NMD90绝缘。"
+    },
+    {
+      "id": "bt-0328",
+      "locale": "zh-Hans",
+      "targetText": "应该使用哪一列绝缘温度？"
+    },
+    {
+      "id": "bt-0329",
+      "locale": "zh-Hans",
+      "targetText": "根据CEC Rule 12-3034，裸露的接地跨接导体不计。"
+    },
+    {
+      "id": "bt-0330",
+      "locale": "zh-Hans",
+      "targetText": "加拿大规则：每对绝缘导线连接器按一根导线的空间计算，并按其中最大的导线确定。请计算所有marrettes。"
+    },
+    {
+      "id": "bt-0331",
+      "locale": "zh-Hans",
+      "targetText": "根据加拿大计数规则，电缆夹不预留容积。"
+    },
+    {
+      "id": "bt-0332",
+      "locale": "zh-Hans",
+      "targetText": "请计算进入接线盒的每根相线和中性线，包括未断开而穿过接线盒的导线。此处不要计算接地导体，也不要计算始终留在盒内的引出短线。"
+    },
+    {
+      "id": "bt-0333",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量。Canadian Electrical Code（Rule 12-3034和Table 22）按毫升为每根绝缘导线规定空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0334",
+      "locale": "zh-Hans",
+      "targetText": "未断开而穿过接线盒的导线是否计入接线盒填充？"
+    },
+    {
+      "id": "bt-0335",
+      "locale": "zh-Hans",
+      "targetText": "加拿大计数规则：每根进入接线盒的绝缘导体计一次；裸露的接地跨接导体和电缆夹不计。每个器件计两次。每对绝缘导线连接器（marrettes）计一次，并按其中最大的导体计算。"
+    },
+    {
+      "id": "bt-0336",
+      "locale": "zh-Hans",
+      "targetText": "接线盒或器件盒是否足够大？请计算盒内项目，即可获得明确结果。"
+    },
+    {
+      "id": "bt-0337",
+      "locale": "zh-Hans",
+      "targetText": "大多数住宅使用14 AWG（15 A电路）或12 AWG（20 A电路）。如果盒内有多个规格，目前请选择最大的导线规格（线规）以保留安全余量。"
+    },
+    {
+      "id": "bt-0338",
+      "locale": "zh-Hans",
+      "targetText": "CEC Rule 12-3034和Table 22按毫升为每种导线规格（线规）规定容积。每根绝缘导线计一次，每个器件计两次，每对绝缘导线连接器计一次。裸露的接地跨接导体和电缆夹不计。所需容积不得超过接线盒容积。"
+    },
+    {
+      "id": "bt-0339",
+      "locale": "zh-Hans",
+      "targetText": "请计算导管内的每根绝缘导体，包括中性线和绝缘接地导体。目前所有导线必须使用同一规格。"
+    },
+    {
+      "id": "bt-0340",
+      "locale": "zh-Hans",
+      "targetText": "<div class=\"ca-note\"><strong>加拿大 / CEC 规划说明：</strong>CEC Rule 12-910 和 Table 8 使用相同的53/31/40%填充比例。但是，本工具仍使用THHN/THWN导体面积和NEC公称尺寸数据，因为加拿大Tables 6A–6K和9的数据尚未通过我们的验证。请勿将导管尺寸结果作为加拿大安装的最终依据；应对照CEC或向当地检查机构确认。</div>"
+    },
+    {
+      "id": "bt-0341",
+      "locale": "zh-Hans",
+      "targetText": "您的导线需要多大的导管？请输入要穿入的导线，即可获得最小合规规格。"
+    },
+    {
+      "id": "bt-0342",
+      "locale": "zh-Hans",
+      "targetText": "线路较长或弯头较多时，使用比计算最小值大一档的导管更容易穿线。加拿大工程在安装前必须对照CEC Tables 6A–6K和9确认导线面积及公制公称尺寸。"
+    },
+    {
+      "id": "bt-0343",
+      "locale": "zh-Hans",
+      "targetText": "根据CEC Rule 12-910和Table 8，一根导线最多可占线槽内部面积的53%，两根导线为31%，三根或更多导线为40%。本规划工具使用这些比例，但导线面积和公称尺寸表仍为NEC专用数据，加拿大工程必须另行确认。"
+    },
+    {
+      "id": "bt-0344",
+      "locale": "zh-Hans",
+      "targetText": "导管内必须留有空间。CEC Rule 12-910和Table 8的限值是：一根导线最多可占"
+    },
+    {
+      "id": "bt-0345",
+      "locale": "zh-Hans",
+      "targetText": "几乎总是以下两个原因之一：不同计算器采用了不同的电阻值，或者有些计算器使用"
+    },
+    {
+      "id": "bt-0346",
+      "locale": "zh-Hans",
+      "targetText": "通常有两个原因：有些计算器要求输入往返距离，另一些要求输入单程距离（仅去程）。VoltDrop 始终使用单程距离（仅去程），并在内部自动加倍。不同计算器也可能采用略有不同的导线电阻值。VoltDrop 会显示完整计算过程，便于核对。"
+    },
+    {
+      "id": "bt-0347",
+      "locale": "zh-Hans",
+      "targetText": "CEC Rule 8-102 规定了<strong>强制</strong>最大值：分支电路或馈线的电压降必须不高于<strong>3%</strong>，从供电进线到最远负载的组合电压降必须不高于<strong>5%</strong>。在加拿大，这些是可执行的限值，而不是可选的性能建议。12&nbsp;V 太阳能等低压系统通常还需要更严格的设计目标，因为12&nbsp;V的3%比240&nbsp;V的3%影响大得多。"
+    },
+    {
+      "id": "bt-0348",
+      "locale": "zh-Hans",
+      "targetText": "。请勿自行加倍。"
+    },
+    {
+      "id": "bt-0349",
+      "locale": "zh-Hans",
+      "targetText": "而另一些要求单程距离（仅去程）。我们始终要求输入单程距离（仅去程），并显示完整计算。"
+    },
+    {
+      "id": "bt-0350",
+      "locale": "zh-Hans",
+      "targetText": "可接受的最大电压降"
+    },
+    {
+      "id": "bt-0351",
+      "locale": "zh-Hans",
+      "targetText": "请测量单程距离（仅去程）"
+    },
+    {
+      "id": "bt-0352",
+      "locale": "zh-Hans",
+      "targetText": "分支电路或馈线的强制最大值为3%。组合路径的强制最大值为5%。"
+    },
+    {
+      "id": "bt-0353",
+      "locale": "zh-Hans",
+      "targetText": "5% — 上限"
+    },
+    {
+      "id": "bt-0354",
+      "locale": "zh-Hans",
+      "targetText": "为什么其他计算器的结果不同？"
+    },
+    {
+      "id": "bt-0355",
+      "locale": "zh-Hans",
+      "targetText": "为什么不同电压降计算器的结果不一致？"
+    },
+    {
+      "id": "bt-0356",
+      "locale": "zh-Hans",
+      "targetText": "导线具有电阻，因此一部分电压会在到达设备前以热量形式损失。CEC Rule 8-102 使限值具有强制性：分支电路或馈线最大3%，从供电进线到最远负载的组合路径最大5%。12 V太阳能等低压系统通常需要更严格的设计目标。"
+    },
+    {
+      "id": "bt-0357",
+      "locale": "zh-Hans",
+      "targetText": "所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。"
+    },
+    {
+      "id": "bt-0358",
+      "locale": "zh-Hans",
+      "targetText": "免费加拿大CEC接线盒填充计算器：使用Table 22毫升容积，按Rule 12-3034计算导线和marrettes，并给出明确结果。"
+    },
+    {
+      "id": "bt-0359",
+      "locale": "zh-Hans",
+      "targetText": "加拿大导管填充规划检查。显示CEC的53/31/40%限值，并明确警告封存的导线面积和公称尺寸数据仍为NEC专用数据。"
+    },
+    {
+      "id": "bt-0360",
+      "locale": "zh-Hans",
+      "targetText": "免费加拿大导线最大长度计算器：获得符合CEC强制3%或5%电压降限值的最大单程距离（仅去程）。支持铜、铝、DC和AC。"
+    },
+    {
+      "id": "bt-0361",
+      "locale": "zh-Hans",
+      "targetText": "在电压降产生问题之前，导线最长可以敷设多远？针对任何导线规格（线规）和负载计算最大单程距离（仅去程）。"
+    },
+    {
+      "id": "bt-0362",
+      "locale": "zh-Hans",
+      "targetText": "免费加拿大导线规格（线规）计算器：输入安培、电压和单程距离（仅去程），查找符合CEC Rule 8-102强制限值的最小铜或铝AWG。"
+    },
+    {
+      "id": "bt-0363",
+      "locale": "zh-Hans",
+      "targetText": "瓦特（kW）表示实际可用功率，kVA表示导线必须承载的视在功率。对于加热器和简单负载，两者相等；对于电动机和电子设备，kVA可能更高。两者之比就是功率因数。"
+    },
+    {
+      "id": "bt-0364",
+      "locale": "zh-Hans",
+      "targetText": "计算器完全在您的浏览器中运行，您输入的数字绝不会离开设备。我们不要求注册、不出售数据；只有当您选择登录并发表评论时，我们才会保存您主动提供的个人信息。"
+    },
+    {
+      "id": "bt-0365",
+      "locale": "zh-Hans",
+      "targetText": "我们不会向广告商或数据经纪人出售或分享您的个人信息。我们不发送营销邮件，也不会跨网站跟踪您。"
+    },
+    {
+      "id": "bt-0366",
+      "locale": "zh-Hans",
+      "targetText": "我们使用Google Analytics了解总体流量（访问页面、大致地区和设备类型）。这些是汇总分析数据，不用于识别您的身份。"
+    },
+    {
+      "id": "bt-0367",
+      "locale": "zh-Hans",
+      "targetText": "我们不做什么"
+    },
+    {
+      "id": "bt-0368",
+      "locale": "zh-Hans",
+      "targetText": "A</strong>，因此这是用于比较的实际限值。</p>"
+    },
+    {
+      "id": "bt-0369",
+      "locale": "zh-Hans",
+      "targetText": "超过限值"
+    },
+    {
+      "id": "bt-0370",
+      "locale": "zh-Hans",
+      "targetText": "不确定？请使用<strong>75°C</strong>：大多数断路器端子和接线端子的额定温度为该值。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C。"
+    },
+    {
+      "id": "bt-0371",
+      "locale": "zh-Hans",
+      "targetText": "<div class=\"formula\">安全限值 ="
+    },
+    {
+      "id": "bt-0372",
+      "locale": "zh-Hans",
+      "targetText": "安全限值："
+    },
+    {
+      "id": "bt-0373",
+      "locale": "zh-Hans",
+      "targetText": "正常条件下，此导线可以承载该负载。请注意：连续负载（3+小时）应低于限值的80%，即"
+    },
+    {
+      "id": "bt-0374",
+      "locale": "zh-Hans",
+      "targetText": "此导线的额定载流量不足以承载"
+    },
+    {
+      "id": "bt-0375",
+      "locale": "zh-Hans",
+      "targetText": "加拿大计数规则（Rule 12-3034）：每根进入接线盒的绝缘导线 = 1；裸露的接地跨接导体不计。每个器件 = 2。每对绝缘导线连接器（marrettes）= 1，并按其中最大的导线计算；此规则在US没有对应规定。加拿大不为电缆夹预留容积。始终留在盒内的引出短线不计。总数乘以Table 22规定的容积，再与接线盒的毫升容积比较。"
+    },
+    {
+      "id": "bt-0376",
+      "locale": "zh-Hans",
+      "targetText": "</div>\n<p>加拿大细则：裸露的接地跨接导体和电缆夹不预留容积；每对marrettes按其中最大的导线预留容积（本工具使用您选择的导线规格；为确保安全，请选择盒内尺寸最大的导线）。器件深度超过2.54 cm时，每cm还需扣除32 mL，本简化检查不包括这项扣除。</p>"
+    },
+    {
+      "id": "bt-0377",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格和电路闪断。NEC 314.16按导线规格（线规）规定所需空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0378",
+      "locale": "zh-Hans",
+      "targetText": "接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格。Canadian Electrical Code（Rule 12-3034和Table 22）按毫升为每根绝缘导线规定空间，接线盒必须至少提供该容积。"
+    },
+    {
+      "id": "bt-0379",
+      "locale": "zh-Hans",
+      "targetText": "器件（按两倍计）"
+    },
+    {
+      "id": "bt-0380",
+      "locale": "zh-Hans",
+      "targetText": "进入接线盒的每根相线或中性线 = 1，包括未断开而穿过盒体的导线。每个器件 = 2。所有接地导体合计 = 1；超过四根后，根据2020规则，每增加一根加¼。内部电缆夹 = 1。始终留在盒内的引出短线不计。总数乘以相应导线规格（线规）的空间，再与接线盒容积比较。"
+    },
+    {
+      "id": "bt-0381",
+      "locale": "zh-Hans",
+      "targetText": "</div>\n<p>细则：始终留在盒内的引出短线不计，但未断开而穿过接线盒的导线必须计一次。接地导体超过四根时，根据2020规则，每增加一根加¼。如果有多个规格，请选择最大的导线规格（线规）以保留安全余量。</p>"
+    },
+    {
+      "id": "bt-0382",
+      "locale": "zh-Hans",
+      "targetText": "合规，但正好达到限值。如果以后可能增加器件或电缆，现在就应使用更大的接线盒。"
+    },
+    {
+      "id": "bt-0383",
+      "locale": "zh-Hans",
+      "targetText": "超出限值。请使用更深的接线盒、扩展盒或减少导线数量。接线盒过满通常会导致检查不合格并产生发热风险。"
+    },
+    {
+      "id": "bt-0384",
+      "locale": "zh-Hans",
+      "targetText": "%填充限值；即使是4\""
+    },
+    {
+      "id": "bt-0385",
+      "locale": "zh-Hans",
+      "targetText": "%限值。"
+    },
+    {
+      "id": "bt-0386",
+      "locale": "zh-Hans",
+      "targetText": "低于限值，空间充足："
+    },
+    {
+      "id": "bt-0387",
+      "locale": "zh-Hans",
+      "targetText": "合规，但接近限值。线路较长或弯头较多时，增大一档规格会更容易穿线。"
+    },
+    {
+      "id": "bt-0388",
+      "locale": "zh-Hans",
+      "targetText": "合规限值"
+    },
+    {
+      "id": "bt-0389",
+      "locale": "zh-Hans",
+      "targetText": "请将线路分到多个导管中，或减少导线数量。"
+    },
+    {
+      "id": "bt-0390",
+      "locale": "zh-Hans",
+      "targetText": "%电压降。请缩短线路以保留余量。另请注意，导线还必须具有足够载流量以承载"
+    },
+    {
+      "id": "bt-0391",
+      "locale": "zh-Hans",
+      "targetText": "%限值（"
+    },
+    {
+      "id": "bt-0392",
+      "locale": "zh-Hans",
+      "targetText": "%高于"
+    },
+    {
+      "id": "bt-0393",
+      "locale": "zh-Hans",
+      "targetText": "%  ✓ 低于您的限值</div>"
+    },
+    {
+      "id": "bt-0394",
+      "locale": "zh-Hans",
+      "targetText": "注意：这里只计算电压降。导线还必须具有足够载流量以承载"
+    },
+    {
+      "id": "bt-0395",
+      "locale": "zh-Hans",
+      "targetText": "没有列出的规格能保持低于"
+    },
+    {
+      "id": "bt-0396",
+      "locale": "zh-Hans",
+      "targetText": "表中没有任何单根导线能将电压降保持在您的限值内。可以缩短线路、提高电压、允许更大的电压降，或并联导线；请咨询电工。"
+    },
+    {
+      "id": "bt-0397",
+      "locale": "zh-Hans",
+      "targetText": "超出分支电路或馈线3%的强制限值，但仍在组合路径5%的最大值内。请增大导线规格（线规）或缩短线路。"
+    },
+    {
+      "id": "bt-0398",
+      "locale": "zh-Hans",
+      "targetText": "超出组合路径5%的强制最大值。请增大导线规格（线规）、缩短线路或提高电压。"
+    },
+    {
+      "id": "bt-0399",
+      "locale": "zh-Hans",
+      "targetText": "<p>我们重新排列公式，以便根据您的限值计算距离："
+    },
+    {
+      "id": "bt-0400",
+      "locale": "zh-Hans",
+      "targetText": "<p>我们从最小规格开始逐一检查，直到找到一个能使电压降低于以下限值的规格："
+    },
+    {
+      "id": "bt-0401",
+      "locale": "zh-Hans",
+      "targetText": " 导线保持低于"
+    },
+    {
+      "id": "bt-0402",
+      "locale": "zh-Hans",
+      "targetText": "在3%的强制限值内。此线路应能正常工作。"
+    },
+    {
+      "id": "bt-0403",
+      "locale": "zh-Hans",
+      "targetText": "您的限值"
+    },
+    {
+      "id": "bt-0404",
+      "locale": "zh-Hans",
+      "targetText": "<p>小导体规则（{citation}）将{size} {material}导线的断路器上限设为<strong>{capAmps} A</strong>；因此我们使用该实际限值进行比较。</p>"
+    },
+    {
+      "id": "bt-0405",
+      "locale": "zh-Hans",
+      "targetText": "<div class=\"formula\">安全限值 = {rated} A   对比   您的负载 = {load} A   →   {status}</div>"
+    },
+    {
+      "id": "bt-0406",
+      "locale": "zh-Hans",
+      "targetText": "在正常条件下，此导线可以承载该负载。请注意：连续负载（3小时以上）应低于限值的80%，此处为{amps} A。"
+    },
+    {
+      "id": "bt-0407",
+      "locale": "zh-Hans",
+      "targetText": "此导线的额定载流量不足以承载{amps} A。请增大导线规格（线规）——导线规格过小会过热并造成火灾风险。"
+    },
+    {
+      "id": "bt-0408",
+      "locale": "zh-Hans",
+      "targetText": "{temp}°C时{size} {material}导线的安全限值"
+    },
+    {
+      "id": "bt-0409",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size}绝缘导线需要<strong>{unit} mL</strong>接线盒空间（CEC Table 22，Rule 12-3034）。</p>\n<div class=\"formula\">{conductors}根导线 + {devices}个{deviceWord} × 2 + {pairs}{pairWord}\n= {counts}个总计数 × {unit} mL\n= 需要{needed} mL\n{box}：可用{available} mL → {status}</div>\n<p>加拿大细则：裸露的接地跨接导体和电缆夹不预留容积（与US不同）；每对marrettes按其中最大导线计一个容积（我们使用您选择的规格；为保留安全余量，请选择现场最大的导线）；深度超过2.54 cm的器件，每cm深度还要额外扣除32 mL，本简化检查未包括这项扣除。</p>"
+    },
+    {
+      "id": "bt-0410",
+      "locale": "zh-Hans",
+      "targetText": "{count} × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0411",
+      "locale": "zh-Hans",
+      "targetText": "{count} × 2 × {unit} = {volume}"
+    },
+    {
+      "id": "bt-0412",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size}导线需要<strong>{unit} cu in</strong>接线盒空间（NEC Table 314.16(B)）。</p>\n<div class=\"formula\">{conductors}根导线 + {devices}个{deviceWord} × 2 + {grounds} + {clamps}\n= {counts}个总计数 × {unit} cu in\n= 需要{needed} cu in\n{box}：可用{available} cu in → {status}</div>\n<p>细则：完全留在接线盒内的引线不计数，但未断开而穿过接线盒的导线必须计一次，请将其包括在上方。如果超过四根接地导线进入接线盒，从第五根开始每根增加¼个计数（2020规范规则）；为保留安全余量，可按大约多一根导线计算。混合导线规格需要按规格分别完整计算（即将提供）；在此之前，选择现场最大的规格是使用本工具的安全方法。</p>"
+    },
+    {
+      "id": "bt-0413",
+      "locale": "zh-Hans",
+      "targetText": "填充率明显低于{percent}%限值。"
+    },
+    {
+      "id": "bt-0414",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>每根{size} THHN导线的横截面积为<strong>{wireArea} sq in</strong>（NEC Chapter 9, Table 5）。</p>\n<div class=\"formula\">{count}根导线 × {wireArea} = 需要{needed} sq in\n{conduitSize} {conduit}内部面积 = {conduitArea} sq in（NEC Chapter 9, Table 4）\n允许面积：{conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  实际填充率{actualPercent}%</div>"
+    },
+    {
+      "id": "bt-0415",
+      "locale": "zh-Hans",
+      "targetText": "容纳{count} × {size} THHN的最小{conduit}"
+    },
+    {
+      "id": "bt-0416",
+      "locale": "zh-Hans",
+      "targetText": "<p>{count} × {size} THHN = {area} sq in导线面积，超过了4\" {conduit}在{percent}%填充限值下可容纳的面积。</p>"
+    },
+    {
+      "id": "bt-0417",
+      "locale": "zh-Hans",
+      "targetText": "注意：此结果只计算电压降。导线还必须能够安全承载{amps} A（载流量）；购买前请另行核验。"
+    },
+    {
+      "id": "bt-0418",
+      "locale": "zh-Hans",
+      "targetText": "在此距离下，电压降正好达到{percent}%。请缩短线路以保留余量。还要注意：无论距离多短，导线都必须具有承载{amps} A的额定载流量。"
+    },
+    {
+      "id": "bt-0419",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>根据您的{percent}%限值（{maxDrop} V），我们将公式变形以求解距离：</p>\n<div class=\"formula\">最大单程英尺 = {maxDrop} V × {cm} cmil\n             ÷（{mult} × {factor} × {amps} A）\n             = {feet} ft</div>"
+    },
+    {
+      "id": "bt-0420",
+      "locale": "zh-Hans",
+      "targetText": "没有任何所列规格可将电压降控制在{percent}%以下"
+    },
+    {
+      "id": "bt-0421",
+      "locale": "zh-Hans",
+      "targetText": "即使使用{size} {material}线，在{feet}英尺单程距离（仅去程）和{amps} A条件下，电压降仍超过{percent}%。"
+    },
+    {
+      "id": "bt-0422",
+      "locale": "zh-Hans",
+      "targetText": "\n<p>我们从最小规格开始逐一检查，直到找到可将电压降控制在{percent}%限值（{maxDrop} V）以下的规格：</p>\n<div class=\"formula\">{size}（{cm} cmil）：\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ 低于您的限值</div>"
+    },
+    {
+      "id": "bt-0423",
+      "locale": "zh-Hans",
+      "targetText": "可将电压降控制在{percent}%以下的最小{material}线规格"
+    },
+    {
+      "id": "bt-0424",
+      "locale": "zh-Hans",
+      "targetText": "请务必独立核验计算，遵守当地电气规范和许可要求，并在法律或安全常识要求时聘请持证专业人员。"
+    },
+    {
+      "id": "bt-0425",
+      "locale": "zh-Hans",
+      "targetText": "不得攻击服务、使其过载、以滥用频率抓取内容、为造成损害而进行逆向工程，或以其他方式干扰服务；也不得违法使用服务。"
+    },
+    {
+      "id": "bt-0426",
+      "locale": "zh-Hans",
+      "targetText": "电气作业可能造成伤亡，错误还可能引发火灾。"
+    },
+    {
+      "id": "bt-0427",
+      "locale": "zh-Hans",
+      "targetText": "。如果您不同意，请勿使用本服务。"
+    },
+    {
+      "id": "bt-0428",
+      "locale": "zh-Hans",
+      "targetText": "结果是正常条件下的简化估算，并未涵盖所有实际因素，例如温度、成束敷设、降容、连续负载、当地规范修订和设备认证等。本服务不能替代持证电工或专业工程师，使用本服务也不会形成任何专业关系。"
+    },
+    {
+      "id": "bt-0429",
+      "locale": "zh-Hans",
+      "targetText": "在法律允许的最大范围内，VoltDrop及其运营者不对您使用或无法使用本服务造成的任何损害负责，包括财产损失、人身伤害、利润损失或返工费用，无论责任依据是保证、合同、侵权还是其他理论。如果责任无法完全排除，我们的总责任以$50 (USD)为限。某些地区不允许特定免责条款，因此部分内容可能不适用于您。"
+    },
+    {
+      "id": "bt-0430",
+      "locale": "zh-Hans",
+      "targetText": "您可以使用Google或Facebook登录并发表评论。您保留所写内容的所有权，但授予我们在服务中展示该内容的全球性、免版税许可。请勿发布违法、仇恨、骚扰、欺骗或垃圾内容；请勿发布链接、他人个人信息或冒充他人。我们可以自行决定删除评论或暂停评论权限，无论是否另行通知。评论仅代表其他用户的意见，并非我们的意见，也绝不是专业电气建议的来源。"
+    }
+  ]
+}

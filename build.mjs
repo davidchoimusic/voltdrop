@@ -1,29 +1,82 @@
 // Generates the per-tool pages (own URLs for SEO) from index.html.
 // Run after editing index.html, styles.css, or any .js: node build.mjs
 // Then commit the outputs.
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
+import { localizeRuntimeSource } from './tools/runtime-code-boundary.mjs';
 
-const localeArg = process.argv.find((arg) => arg.startsWith('--locale='));
-const locale = localeArg ? localeArg.slice('--locale='.length) : 'en';
-const SUPPORTED_LOCALES = new Set(['en']);
-if (!SUPPORTED_LOCALES.has(locale)) {
-  throw new Error(`Unsupported locale "${locale}". Stage 1 intentionally ships English only.`);
-}
-
-const catalog = JSON.parse(readFileSync(`i18n/strings/${locale}.json`, 'utf8'));
 const englishCatalog = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
+const runtimePatternGroups = {
+  'app.js': 'drop',
+  'ampacity.js': 'ampacity',
+  'conduit.js': 'conduit',
+  'boxfill.js': 'boxFill',
+  'power.js': 'power',
+};
+const countryPacks = {
+  us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
+  ca: JSON.parse(readFileSync('i18n/country-packs/ca.json', 'utf8')),
+};
+const EDITIONS = [
+  { id: 'us-en', country: 'us', locale: 'en', lang: 'en', hreflang: 'en-US', prefix: '' },
+  { id: 'us-es', country: 'us', locale: 'es', lang: 'es', hreflang: 'es-US', prefix: '/es' },
+  { id: 'us-zh', country: 'us', locale: 'zh-Hans', lang: 'zh-Hans', hreflang: 'zh-Hans-US', prefix: '/zh' },
+  { id: 'ca-en', country: 'ca', locale: 'en', lang: 'en', hreflang: 'en-CA', prefix: '/ca' },
+  { id: 'ca-fr', country: 'ca', locale: 'fr-CA', lang: 'fr-CA', hreflang: 'fr-CA', prefix: '/ca-fr' },
+  { id: 'ca-zh', country: 'ca', locale: 'zh-Hans', lang: 'zh-Hans', hreflang: 'zh-Hans-CA', prefix: '/ca-zh' },
+].map((edition) => {
+  const file = `i18n/strings/${edition.locale}.json`;
+  return {
+    ...edition,
+    catalog: edition.locale === 'en'
+      ? englishCatalog
+      : (existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null),
+    pack: countryPacks[edition.country],
+  };
+});
+const EDITION_UI = {
+  'us-en': { flag: '🇺🇸', code: 'NEC', languageLabel: 'Language in United States' },
+  'us-es': { flag: '🇺🇸', code: 'NEC', languageLabel: 'Idioma en Estados Unidos' },
+  'us-zh': { flag: '🇺🇸', code: 'NEC', languageLabel: '美国的语言' },
+  'ca-en': { flag: '🇨🇦', code: 'CEC', languageLabel: 'Language in Canada' },
+  'ca-fr': { flag: '🇨🇦', code: 'CEC', languageLabel: 'Langue au Canada' },
+  'ca-zh': { flag: '🇨🇦', code: 'CEC', languageLabel: '加拿大的语言' },
+};
+const editionChip = (edition) => {
+  const ui = EDITION_UI[edition.id];
+  const language = edition.locale.split('-', 1)[0].toUpperCase();
+  return `${ui.flag} ${ui.code} · ${language}`;
+};
 
-const text = (key, source = catalog) => {
-  const value = key.split('.').reduce((cursor, part) => cursor?.[part], source);
+const valueAt = (source, key) => {
+  if (!source) return undefined;
+  if (typeof source[key] === 'string') return source[key];
+  return key.split('.').reduce((cursor, part) => cursor?.[part], source);
+};
+
+const text = (key, edition, { allowEnglishFallback = false } = {}) => {
+  const packLocalized = edition.pack.localizedStrings?.[edition.locale]?.[key];
+  const localized = valueAt(edition.catalog, key);
+  const packEnglish = edition.pack.strings?.[key];
+  const english = valueAt(englishCatalog, key);
+  let value;
+  if (edition.locale === 'en') {
+    value = packEnglish ?? english;
+  } else if (packEnglish !== undefined) {
+    value = packLocalized;
+    if (value === undefined && allowEnglishFallback) value = packEnglish;
+  } else {
+    value = localized;
+    if (value === undefined && allowEnglishFallback) value = english;
+  }
   if (typeof value !== 'string') throw new Error(`Missing catalog string: ${key}`);
   return value;
 };
 
-const renderTemplate = (template, label) => {
+const renderTemplate = (template, label, edition, options) => {
   const rendered = template.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
-    const value = text(key);
+    const value = text(key, edition, options);
     if (format === 'json') return JSON.stringify(value).slice(1, -1);
     return value;
   });
@@ -41,54 +94,58 @@ const quoteLike = (value, quote) => {
   return `${quote}${escaped}${quote}`;
 };
 
-// Runtime copy lives in the JavaScript assets rather than the HTML templates.
-// The map makes those strings catalog-driven too. English replacements are
-// deliberately identity replacements, which preserves the asset hashes.
-for (const [file, entries] of Object.entries(runtimeMap)) {
-  let source = readFileSync(file, 'utf8');
-  for (const entry of entries) {
-    const english = text(entry.key, englishCatalog);
-    const localized = text(entry.key);
-    const raw = entry.kind === 'quoted'
-      ? quoteLike(english, entry.quote)
-      : `${entry.leading}${english}${entry.trailing}`;
-    if (!source.includes(raw)) {
-      throw new Error(`Runtime source fragment for ${entry.key} is missing from ${file}`);
-    }
-    let replacement;
-    if (entry.kind === 'quoted') {
-      const decoded = Function(`"use strict"; return (${raw});`)();
-      if (decoded !== english) throw new Error(`Runtime map drift for ${entry.key} in ${file}`);
-      replacement = locale === 'en' ? raw : quoteLike(localized, entry.quote);
-    } else {
-      replacement = locale === 'en' ? raw : `${entry.leading}${localized}${entry.trailing}`;
-    }
-    source = source.replaceAll(raw, replacement);
-  }
-  writeFileSync(file, source);
-}
+// Runtime copy lives in JavaScript assets. Each non-root edition gets its own
+// localized, content-hashed copy; source files and sealed data stay untouched.
+const localizeRuntime = (file, edition) => {
+  const patternGroup = runtimePatternGroups[file];
+  const patternEntries = patternGroup
+    ? Object.keys(englishCatalog.runtimePatterns[patternGroup]).map((name) => ({
+        key: `runtimePatterns.${patternGroup}.${name}`,
+        kind: 'quoted',
+        quote: "'",
+      }))
+    : [];
+  return localizeRuntimeSource({
+    source: readFileSync(file, 'utf8'),
+    file,
+    entries: [...runtimeMap[file], ...patternEntries],
+    englishFor: (key) => valueAt(englishCatalog, key),
+    localizedFor: (key) => text(key, edition),
+    quoteLike,
+    localize: edition.id !== 'us-en',
+  });
+};
 
 // Cache-busting: stamp asset links with a content hash so Cloudflare's
 // edge cache can never serve stale JS/CSS after a deploy. Idempotent.
-const hash = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 10);
-const V = {
-  'styles.css': hash('styles.css'),
-  'app.js': hash('app.js'),
-  'common.js': hash('common.js'),
-  'ampacity.js': hash('ampacity.js'),
-  'conduit.js': hash('conduit.js'),
-  'power.js': hash('power.js'),
-  'boxfill.js': hash('boxfill.js'),
+const hashContent = (content) => createHash('md5').update(content).digest('hex').slice(0, 10);
+const RUNTIME_FILES = Object.keys(runtimeMap);
+const makeAssets = (edition) => {
+  const files = {};
+  for (const file of RUNTIME_FILES) {
+    files[file] = localizeRuntime(file, edition);
+    if (edition.id !== 'us-en') {
+      const dir = `assets/${edition.id}`;
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(`${dir}/${file}`, files[file]);
+    }
+  }
+  files['styles.css'] = readFileSync('styles.css', 'utf8');
+  const hashes = Object.fromEntries(Object.entries(files).map(([file, content]) => [file, hashContent(content)]));
+  const href = (file) => edition.id === 'us-en' || file === 'styles.css'
+    ? `/${file}`
+    : `/assets/${edition.id}/${file}`;
+  const stamp = (html) => {
+    for (const file of ['styles.css', ...RUNTIME_FILES]) {
+      const escaped = file.replace('.', '\\.');
+      html = html.replace(new RegExp(`/(?:assets/[^/]+/)?${escaped}\\?v=[A-Za-z0-9]+`, 'g'), `${href(file)}?v=${hashes[file]}`);
+    }
+    return html;
+  };
+  return { hashes, href, stamp };
 };
-const stamp = (html) => html
-  .replace(/\/styles\.css\?v=[A-Za-z0-9]+/g, `/styles.css?v=${V['styles.css']}`)
-  .replace(/\/app\.js\?v=[A-Za-z0-9]+/g, `/app.js?v=${V['app.js']}`)
-  .replace(/\/common\.js\?v=[A-Za-z0-9]+/g, `/common.js?v=${V['common.js']}`);
 
-let src = stamp(renderTemplate(readFileSync('templates/index.html', 'utf8'), 'templates/index.html'));
-writeFileSync('index.html', src);
-console.log(`locale: ${locale}`);
-console.log('stamped:', Object.entries(V).map(([k, v]) => `${k}?v=${v}`).join(' '));
+const templateSource = readFileSync('templates/index.html', 'utf8');
 
 const PAGES = [
   {
@@ -269,69 +326,164 @@ const PAGES = [
   },
 ];
 
-for (const page of PAGES) {
-  const p = {
-    ...page,
-    ldName: page.ldNameKey ? text(page.ldNameKey) : undefined,
-    h1: page.h1Key ? text(page.h1Key) : undefined,
-    sub: page.subKey ? text(page.subKey) : undefined,
-    title: text(page.titleKey),
-    description: text(page.descriptionKey),
-  };
-  let html = src
-    .replace(/<title>[^<]*<\/title>/, `<title>${p.title}</title>`)
-    .replace(/(<meta name="description" content=")[^"]*(">)/, `$1${p.description}$2`)
-    .replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
-    .replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${p.description}$2`)
-    .replace(/(<meta name="twitter:title" content=")[^"]*(">)/, `$1${p.title.replace(/"/g, '&quot;')}$2`)
-    .replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${p.description}$2`)
-    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://voltdrop.app/${p.dir}/">` +
-      (p.hreflang ? '\n' + p.hreflang.map(h => `<link rel="alternate" hreflang="${h.lang}" href="${h.href}">`).join('\n') : ''))
-    .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1https://voltdrop.app/${p.dir}/$2`);
+const scopedPages = PAGES.filter((page) => !page.dir.startsWith('guides') && !page.dir.startsWith('ca/guides'));
+const guidePages = PAGES.filter((page) => page.dir.startsWith('guides') || page.dir.startsWith('ca/guides'));
 
-  if (p.mode) {
-    html = html.replace('<body>', `<body data-mode="${p.mode}">`);
-    if (!html.includes(`data-mode="${p.mode}"`)) throw new Error(`body stamp failed for ${p.dir}`);
-    // Mode pages share the homepage main — swap in their own h1 + subtitle.
-    html = html
-      .replace(/(<h1 class="tool-title" id="page-h1">)[^<]*(<\/h1>)/, `$1${p.h1}$2`)
-      .replace(/(<p class="tool-sub" id="page-sub">)[^<]*(<\/p>)/, `$1${p.sub}$2`);
-  }
+const editionPath = (edition, dir = '') => {
+  const suffix = dir ? `/${dir}/` : '/';
+  return `${edition.prefix}${suffix}`;
+};
+const absoluteUrl = (edition, dir = '') => `https://voltdrop.app${editionPath(edition, dir)}`;
+const hreflangMarkup = (dir = '') => [
+  ...EDITIONS.map((edition) => `<link rel="alternate" hreflang="${edition.hreflang}" href="${absoluteUrl(edition, dir)}">`),
+  `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(EDITIONS[0], dir)}">`,
+].join('\n');
 
-  // Per-page WebApplication JSON-LD (dropped for content pages like privacy/terms).
-  const ldRe = /<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/;
-  if (p.ldName) {
-    const ld = {
+const applyMetadata = (html, { title, description, canonical, alternates }) => html
+  .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+  .replace(/(<meta name="description" content=")[^"]*(">)/, `$1${description}$2`)
+  .replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${title.replace(/"/g, '&quot;')}$2`)
+  .replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${description}$2`)
+  .replace(/(<meta name="twitter:title" content=")[^"]*(">)/, `$1${title.replace(/"/g, '&quot;')}$2`)
+  .replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${description}$2`)
+  .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${canonical}">\n${alternates}`)
+  .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${canonical}$2`);
+
+const writeEditionPage = (edition, dir, html) => {
+  const outputDir = edition.prefix
+    ? `${edition.prefix.slice(1)}${dir ? `/${dir}` : ''}`
+    : dir;
+  const output = outputDir ? `${outputDir}/index.html` : 'index.html';
+  if (outputDir) mkdirSync(outputDir, { recursive: true });
+  writeFileSync(output, html);
+  console.log(`built ${output}`);
+};
+
+for (const edition of EDITIONS) {
+  if (!edition.catalog) throw new Error(`Missing locale catalog: i18n/strings/${edition.locale}.json`);
+  const assets = makeAssets(edition);
+  let src = assets.stamp(renderTemplate(templateSource, 'templates/index.html', edition))
+    .replace('<html lang="en">', `<html lang="${edition.lang}">`)
+    .replace('<body>', `<body data-country="${edition.country}" data-locale="${edition.locale}">`)
+    .replace(/(<span id="country-chip-text">)[^<]*(<\/span>)/, `$1${editionChip(edition)}$2`)
+    .replace(/(<span class="edition-label" id="edition-language-label">)[^<]*(<\/span>)/, `$1${EDITION_UI[edition.id].languageLabel}$2`);
+
+  const homeTitle = text('meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle', edition);
+  const homeDescription = text('meta.home.freeVoltageDropCalculatorForCopperAndMeta', edition);
+  const homeCanonical = absoluteUrl(edition);
+  let home = applyMetadata(src, {
+    title: homeTitle,
+    description: homeDescription,
+    canonical: homeCanonical,
+    alternates: hreflangMarkup(),
+  }).replace(
+    /<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>/,
+    `<script type="application/ld+json" data-ld="app">${JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
-      name: p.ldName,
-      url: `https://voltdrop.app/${p.dir}/`,
-      description: p.description,
+      name: text('meta.home.voltDropVoltageDropCalculatorTitle', edition),
+      url: homeCanonical,
+      description: text('meta.home.freeVoltageDropCalculatorForCopperAndAluminum', edition),
       applicationCategory: 'UtilitiesApplication',
       operatingSystem: 'Any',
       isAccessibleForFree: true,
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: edition.country === 'ca' ? 'CAD' : 'USD' },
+    })}</script>`,
+  );
+  writeEditionPage(edition, '', home);
+
+  for (const page of scopedPages) {
+    const p = {
+      ...page,
+      ldName: page.ldNameKey ? text(page.ldNameKey, edition) : undefined,
+      h1: page.h1Key ? text(page.h1Key, edition) : undefined,
+      sub: page.subKey ? text(page.subKey, edition) : undefined,
+      title: text(page.titleKey, edition),
+      description: text(page.descriptionKey, edition),
     };
-    html = html.replace(ldRe, `<script type="application/ld+json" data-ld="app">${JSON.stringify(ld)}</script>\n`);
-  } else {
-    html = html.replace(ldRe, '');
-  }
+    const canonical = absoluteUrl(edition, p.dir);
+    let html = applyMetadata(src, {
+      title: p.title,
+      description: p.description,
+      canonical,
+      alternates: hreflangMarkup(p.dir),
+    });
 
-  if (p.main) {
-    const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main);
-    html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
-    // Page script replaces the calculator script; common.js stays.
-    // script: null drops the calculator script entirely (pure content pages).
-    if (p.script) {
-      html = html.replace(/<script src="\/app\.js[^"]*"><\/script>/, `<script src="/${p.script}?v=${V[p.script]}"></script>`);
-      if (!html.includes(p.script)) throw new Error(`script swap failed for ${p.dir}`);
-    } else {
-      html = html.replace(/<script src="\/app\.js[^"]*"><\/script>\n?/, '');
+    if (p.mode) {
+      html = html.replace('<body ', `<body data-mode="${p.mode}" `);
+      if (!html.includes(`data-mode="${p.mode}"`)) throw new Error(`body stamp failed for ${edition.id}/${p.dir}`);
+      html = html
+        .replace(/(<h1 class="tool-title" id="page-h1">)[^<]*(<\/h1>)/, `$1${p.h1}$2`)
+        .replace(/(<p class="tool-sub" id="page-sub">)[^<]*(<\/p>)/, `$1${p.sub}$2`);
     }
-    // Highlight this tool in the sidebar (app.js does it for calculator modes).
-    html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
-  }
 
+    const ldRe = /<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/;
+    if (p.ldName) {
+      const ld = {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: p.ldName,
+        url: canonical,
+        description: p.description,
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'Any',
+        isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: edition.country === 'ca' ? 'CAD' : 'USD' },
+      };
+      html = html.replace(ldRe, `<script type="application/ld+json" data-ld="app">${JSON.stringify(ld)}</script>\n`);
+    } else {
+      html = html.replace(ldRe, '');
+    }
+
+    if (p.main) {
+      const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main, edition);
+      html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
+      if (p.script) {
+        html = html.replace(
+          /<script src="[^"]*\/app\.js[^"]*"><\/script>/,
+          `<script src="${assets.href(p.script)}?v=${assets.hashes[p.script]}"></script>`,
+        );
+        if (!html.includes(assets.href(p.script))) throw new Error(`script swap failed for ${edition.id}/${p.dir}`);
+      } else {
+        html = html.replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '');
+      }
+      html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
+    }
+
+    writeEditionPage(edition, p.dir, html);
+  }
+  console.log(`edition ${edition.id}:`, Object.entries(assets.hashes).map(([k, v]) => `${k}?v=${v}`).join(' '));
+}
+
+// Guides remain English-only in Stage 2. They keep their existing US/Canada
+// pairs and deliberately do not receive translated edition URLs.
+const englishEdition = EDITIONS[0];
+const guideAssets = makeAssets(englishEdition);
+const guideBase = guideAssets.stamp(renderTemplate(templateSource, 'templates/index.html', englishEdition, { allowEnglishFallback: true }));
+for (const page of guidePages) {
+  const isCanada = page.dir.startsWith('ca/');
+  const guideEdition = isCanada ? { ...englishEdition, country: 'ca', pack: countryPacks.ca } : englishEdition;
+  const p = {
+    ...page,
+    title: text(page.titleKey, guideEdition, { allowEnglishFallback: true }),
+    description: text(page.descriptionKey, guideEdition, { allowEnglishFallback: true }),
+  };
+  const canonical = `https://voltdrop.app/${p.dir}/`;
+  const alternates = p.hreflang
+    ? `${p.hreflang.map((h) => `<link rel="alternate" hreflang="${h.lang}" href="${h.href}">`).join('\n')}\n<link rel="alternate" hreflang="x-default" href="${p.hreflang[0].href}">`
+    : '';
+  let html = applyMetadata(
+    guideBase
+      .replace('<html lang="en">', '<html lang="en">')
+      .replace('<body>', `<body data-country="${isCanada ? 'ca' : 'us'}" data-locale="en">`),
+    { title: p.title, description: p.description, canonical, alternates },
+  );
+  html = html.replace(/<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/, '');
+  const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main, guideEdition, { allowEnglishFallback: true });
+  html = html
+    .replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim())
+    .replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '')
+    .replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
   mkdirSync(p.dir, { recursive: true });
   writeFileSync(`${p.dir}/index.html`, html);
   console.log(`built ${p.dir}/index.html`);

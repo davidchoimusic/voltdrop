@@ -70,6 +70,7 @@
     "yesButton": "Yes"
   },
   "conduit": {
+    "countryDataNoteHtml": "",
     "andThreeOrMoreContinuation": ", and three or more",
     "conduitFillTitle": "🚇 Conduit Fill",
     "conduitTypeLabel": "Conduit type",
@@ -153,6 +154,7 @@
     "whyDonTVoltageDropCalculatorsAgreeQuestion": "Why don't voltage drop calculators agree with each other?",
     "whyN3%AndN5%Heading": "Why 3% and 5%?",
     "wireHasResistanceSoSomeVoltageIs": "Wire has resistance, so some voltage is lost as heat before it reaches your device. Lose too much and motors run hot, LEDs dim or flicker, chargers underperform, and breakers can trip for no obvious reason.",
+    "countryVoltageDropRuleHtml": "The widely used rule of thumb (<span id=\"code-basis\">based on a recommendation in the</span> <span id=\"code-name\">U.S. National Electrical Code</span>): keep the drop on a branch circuit at or under <strong>3%</strong>, and the total from your panel to the device at or under <strong>5%</strong>. These are guidelines for good performance, not laws — low-voltage systems like 12&nbsp;V solar are often even stricter, because 3% of 12&nbsp;V hurts a lot more than 3% of 240&nbsp;V.",
     "wireHasResistanceSoSomeVoltageIsAnswer": "Wire has resistance, so some voltage is lost as heat before reaching the device. The widely used rule of thumb, based on a recommendation in the U.S. National Electrical Code, is to keep the drop on a branch circuit at or under 3% and the total from panel to device at or under 5%. These are performance guidelines, not laws — low-voltage systems like 12 V solar are often stricter.",
     "wireMaterialLabel": "Wire material",
     "wireSize": "Wire size"
@@ -1227,8 +1229,84 @@
       }
     }
   },
+  "runtimePatterns": {
+    "drop": {
+      "volts": "{volts} V",
+      "amps": "{amps} A",
+      "percent": "{percent}%",
+      "dropLabel": "voltage drop on {size} {material}",
+      "limit": "{percent}% = {volts} V",
+      "actualDrop": "{percent}% ({volts} V)",
+      "noFitLabel": "no listed size keeps you under {percent}%",
+      "noFitNote": "Even {size} {material} drops more than {percent}% over {feet} one-way feet at {amps} A.",
+      "smallestWireLabel": "smallest {material} wire that stays under {percent}%",
+      "ampacityWarning": "Heads up: this answers voltage drop only. The wire must ALSO be rated to carry {amps} A safely (ampacity) — check that separately before buying.",
+      "maxDistanceNote": "At exactly this distance you hit {percent}% drop. Stay shorter for margin. And remember: the wire must also be rated for {amps} A (ampacity) regardless of distance.",
+      "feet": "{feet} ft",
+      "maxRunLabel": "max one-way run for {size} {material} at {percent}% drop",
+      "mathIntroRoundTrip": "<p>We use the standard K-factor formula electricians use in the field:</p>\n<div class=\"formula\">Voltage drop = {mult} × K × amps × one-way feet ÷ circular mils</div>\n<p><strong>{mult}</strong> accounts for the round trip — current flows out AND back, so the wire path is twice your one-way distance. <strong>K = {factor}</strong> is the resistance constant for {material} (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section area.</p>",
+      "mathIntroThreePhase": "<p>We use the standard K-factor formula electricians use in the field:</p>\n<div class=\"formula\">Voltage drop = {mult} × K × amps × one-way feet ÷ circular mils</div>\n<p><strong>{mult}</strong> accounts for the three-phase geometry. <strong>K = {factor}</strong> is the resistance constant for {material} (ohm·cmil/ft at 75°C). <strong>Circular mils</strong> is the wire's cross-section area.</p>",
+      "dropMath": "\n<p>With your numbers ({size} = {cm} circular mils):</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} volts dropped\n÷ {source} V source = {percent}%</div>\n<p>Voltage at the load: {source} − {dropped} = <strong>{endVolts} V</strong>.</p>",
+      "noFitMath": "<p>We checked every size from smallest to largest; none dropped ≤ {maxDrop} V ({percent}% of {source} V).</p>",
+      "sizeMath": "\n<p>We tested each size, smallest first, until one kept the drop under your {percent}% limit ({maxDrop} V):</p>\n<div class=\"formula\">{size} ({cm} cmil):\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ under your limit</div>",
+      "maxRunMath": "\n<p>We rearranged the formula to solve for distance, with your limit of {percent}% ({maxDrop} V):</p>\n<div class=\"formula\">Max one-way feet = {maxDrop} V × {cm} cmil\n             ÷ ({mult} × {factor} × {amps} A)\n             = {feet} ft</div>"
+    },
+    "ampacity": {
+      "amps": "{amps} A",
+      "safeLimit": "safe limit for {size} {material} at {temp}°C",
+      "normalMargin": "This wire can carry your load under normal conditions. Remember: continuous loads (3+ hours) should stay under 80% of the limit — that's {amps} A here.",
+      "tightMargin": "It fits, but barely. For continuous loads (3+ hours), heat, or bundled wires, go up a size — the 80% guideline puts you at {amps} A.",
+      "notRated": "This wire is NOT rated for {amps} A. Go up in size — undersized wire overheats and is a fire risk.",
+      "lookup": "\n<p>{table} lists {size} {material} at the {temp}°C column as <strong>{tableAmps} A</strong> (up to three current-carrying wires in conduit, normal room temperature).</p>",
+      "cap": "<p>The small-conductor rule ({citation}) caps the breaker for {size} {material} at <strong>{capAmps} A</strong>, so that's the practical limit we compare against.</p>",
+      "comparison": "<div class=\"formula\">Safe limit = {rated} A   vs   your load = {load} A   →   {status}</div>"
+    },
+    "conduit": {
+      "tooLarge": "more than a 4\" {conduit} can legally hold",
+      "tooLargeMath": "<p>{count} × {size} THHN = {area} sq in of wire, which exceeds the {percent}% fill limit of even 4\" {conduit}.</p>",
+      "smallest": "smallest {conduit} for {count} × {size} THHN",
+      "fillAtSize": "{percent}% of {size}",
+      "oneWireLimit": "{percent}% for 1 wire",
+      "twoWireLimit": "{percent}% for 2 wires",
+      "manyWireLimit": "{percent}% for 3+ wires",
+      "squareInches": "{area} sq in",
+      "comfortable": "Comfortable fit under the {percent}% limit.",
+      "math": "\n<p>Each {size} THHN wire has a cross-section of <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class=\"formula\">{count} wires × {wireArea} = {needed} sq in needed\n{conduitSize} {conduit} inside area = {conduitArea} sq in (NEC Chapter 9, Table 4)\nAllowed: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  fits at {actualPercent}% fill</div>"
+    },
+    "boxFill": {
+      "mlOption": "{size} ({volume} mL each)",
+      "cubicInchOption": "{size} ({volume} cu in each)",
+      "boxOption": "{box} — {volume} cu in",
+      "needed": "{volume} {unit}",
+      "neededVsAvailable": "needed vs {volume} {unit} available",
+      "countVolume": "{count} × {unit} = {volume}",
+      "doubleCountVolume": "{count} × 2 × {unit} = {volume}",
+      "usage": "{percent}%",
+      "oneCountVolume": "1 × {unit} = {volume}",
+      "caMath": "\n<p>Each {size} insulated conductor requires <strong>{unit} mL</strong> of box space (CEC Table 22, Rule 12-3034).</p>\n<div class=\"formula\">{conductors} wires + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} total counts × {unit} mL\n= {needed} mL needed\n{box}: {available} mL available → {status}</div>\n<p>Canadian fine print: bare bond wires and cable clamps get no allowance (unlike the US); marrettes count one allowance per pair, sized by the largest wire in them (we use your selected size — pick the largest present to be safe); devices deeper than 2.54 cm need an extra deduction of 32 mL per cm of depth, which this simple check doesn't include.</p>",
+      "usMath": "\n<p>Each {size} conductor requires <strong>{unit} cu in</strong> of box space (NEC Table 314.16(B)).</p>\n<div class=\"formula\">{conductors} wires + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} total counts × {unit} cu in\n= {needed} cu in needed\n{box}: {available} cu in available → {status}</div>\n<p>Fine print: pigtails that stay entirely inside the box don't count, but a wire passing through unbroken DOES count once — include it above. If more than four ground wires enter the box, each one beyond four adds a ¼ count (2020 code rule) — add roughly one extra wire to be safe. Mixed wire sizes deserve the full by-size calculation (coming soon); until then, picking your largest size is the safe way to use this tool.</p>"
+    },
+    "power": {
+      "amps": "{amps} A",
+      "watts": "{watts} W",
+      "volts": "{volts} V",
+      "kilovoltAmps": "{kva} kVA",
+      "resultLabel": "{result} · {system}",
+      "wattsAndKilowatts": "{watts} W ({kilowatts} kW)",
+      "ampsFormula": "Amps = watts ÷ ({mult}volts)\n     = {watts} ÷ ({mult}{volts})\n     = {amps} A",
+      "ampsPfFormula": "Amps = watts ÷ ({mult}volts × PF)\n     = {watts} ÷ ({mult}{volts} × {pf})\n     = {amps} A",
+      "wattsFormula": "Watts = {mult}volts × amps\n      = {mult}{volts} × {amps}\n      = {watts} W",
+      "wattsPfFormula": "Watts = {mult}volts × amps × PF\n      = {mult}{volts} × {amps} × {pf}\n      = {watts} W",
+      "voltsFormula": "Volts = watts ÷ ({mult}amps)\n      = {watts} ÷ ({mult}{amps})\n      = {volts} V",
+      "voltsPfFormula": "Volts = watts ÷ ({mult}amps × PF)\n      = {watts} ÷ ({mult}{amps} × {pf})\n      = {volts} V",
+      "math": "\n<p>{system}:</p>\n<div class=\"formula\">{formula}</div>\n",
+      "mathWithPf": "\n<p>{system} with power factor {pf}:</p>\n<div class=\"formula\">{formula}</div>\n<p>Apparent power: {mult}{volts} V × {amps} A = {va} VA = <strong>{kva} kVA</strong>.</p>"
+    }
+  },
   "runtime": {
     "common": {
+      "thisPageIn": "this page in",
+      "yetAvailableHere": "yet. Available for this page:",
       "uSEdition": "🇺🇸 US edition",
       "unitedStates": "United States",
       "uSNationalElectricalCodeNEC": "U.S. National Electrical Code (NEC)",
@@ -1236,6 +1314,8 @@
       "canadaEdition": "🇨🇦 Canada edition",
       "canada": "Canada",
       "canadianElectricalCodeCEC": "Canadian Electrical Code (CEC)",
+      "languageLabelPattern": "Language in {country}",
+      "unavailableLanguagePattern": "{language} isn't available for this page in {country} yet — showing English. Available here: {available}.",
       "languageIn": "Language in",
       "isnTAvailableFor": "isn't available for",
       "yetShowingEnglishAvailableHere": "yet — showing English. Available here:",
@@ -1278,11 +1358,9 @@
       "n3N1N732": "√3 (1.732)",
       "aCThreePhase": "AC three-phase",
       "threePhaseCommercialAndIndustrialVoltageIsLine": "Three-phase: commercial and industrial. Voltage is line-to-line.",
-      "voltage": "voltage",
       "calculateVoltageDrop": "Calculate voltage drop",
       "findSmallestWire": "Find smallest wire",
       "findMaxDistance": "Find max distance",
-      "current": "current",
       "gOOD": "GOOD",
       "withinTheN3%GuidelineThisRunShouldPerform": "Within the 3% guideline. This run should perform well.",
       "cAUTION": "CAUTION",
@@ -1332,7 +1410,11 @@
       "dropAtThatDistance": "Drop at that distance",
       "weRearrangedTheFormulaToSolveForDistance": "<p>We rearranged the formula to solve for distance, with your limit of",
       "vMaxOneWayFeet": "V):</p>\n<div class=\"formula\">Max one-way feet =",
-      "cmil": "cmil\n             ÷ ("
+      "cmil": "cmil\n             ÷ (",
+      "evenPrefix": "Even ",
+      "smallestPrefix": "smallest ",
+      "currentResult": "Current",
+      "guidelinesResult": "Guidelines"
     },
     "ampacity": {
       "n14AWG": "14 AWG",
@@ -1362,7 +1444,7 @@
       "cECTableN2TableN4HarmonizedWithNEC": "CEC Table 2/Table 4 (harmonized with NEC 310.16)",
       "cECRuleN14N104": "CEC Rule 14-104",
       "notSureUseN75CItSWhatMost": "Not sure? Use <strong>75°C</strong> — it's what most marked breakers and lugs are rated for; unmarked equipment counts as 60°C (CEC Rule 4-006). NMD90 isn't blanket-capped at 60°C like American Romex — the terminations set the ceiling — but running it at the 60°C column is the conservative habit.",
-      "weLookUpYourWireInTheCanadian": "We look up your wire in the Canadian ampacity tables (CEC Table 2 for copper, Table 4 for aluminum — harmonized with the US table, and we verified the values match). For small wires we also apply Canada's breaker-size rule (CEC 14-104): #14 copper tops out at a 15 A breaker, #12 at 20 A, and #10 at 30 A, even though the raw table says more.",
+      "weLookUpYourWireInTheCanadian": "We look up your wire in the Canadian ampacity tables (CEC Table 2 for copper, Table 4 for aluminum — harmonized with the US table, and we verified the values match). For small wires we also apply Canada's breaker-size rule (CEC Rule 14-104): #14 copper tops out at a 15 A breaker, #12 at 20 A, and #10 at 30 A, even though the raw table says more.",
       "oK": "OK",
       "tIGHT": "TIGHT",
       "tOOSMALL": "TOO SMALL",
@@ -1383,7 +1465,9 @@
       "aSoThatSThePracticalLimitWe": "A</strong>, so that's the practical limit we compare against.</p>",
       "safeLimit": "<div class=\"formula\">Safe limit =",
       "aVsYourLoad": "A   vs   your load =",
-      "exceedsTheLimit": "exceeds the limit"
+      "exceedsTheLimit": "exceeds the limit",
+      "atJoin": " at ",
+      "headroom": "Headroom"
     },
     "conduit": {
       "n14AWG": "14 AWG",
@@ -1434,7 +1518,12 @@
       "sqInNECChapterN9TableN4Allowed": "sq in (NEC Chapter 9, Table 4)\nAllowed:",
       "sqInVariant": "sq in",
       "fitsAt": "→  fits at",
-      "%Fill": "% fill</div>"
+      "%Fill": "% fill</div>",
+      "smallestPrefix": "smallest ",
+      "forJoin": " for ",
+      "oneWire": "1 wire",
+      "twoWires": "2 wires",
+      "eachPrefix": "Each"
     },
     "boxFill": {
       "n18AWG": "18 AWG",
@@ -1504,7 +1593,12 @@
       "cuInBlock": "cu in\n=",
       "cuInNeeded": "cu in needed",
       "cuInAvailable": "cu in available →",
-      "finePrintPigtailsThatStayEntirelyInsideThe": "</div>\n<p>Fine print: pigtails that stay entirely inside the box don't count, but a wire passing through unbroken DOES count once — include it above. If more than four ground wires enter the box, each one beyond four adds a ¼ count (2020 code rule) — add roughly one extra wire to be safe. Mixed wire sizes deserve the full by-size calculation (coming soon); until then, picking your largest size is the safe way to use this tool.</p>"
+      "finePrintPigtailsThatStayEntirelyInsideThe": "</div>\n<p>Fine print: pigtails that stay entirely inside the box don't count, but a wire passing through unbroken DOES count once — include it above. If more than four ground wires enter the box, each one beyond four adds a ¼ count (2020 code rule) — add roughly one extra wire to be safe. Mixed wire sizes deserve the full by-size calculation (coming soon); until then, picking your largest size is the safe way to use this tool.</p>",
+      "availableSuffix": " available",
+      "deviceSingular": "device",
+      "devicesPlural": "devices",
+      "marrettePairsLower": "marrette pairs",
+      "eachPrefix": "Each"
     },
     "power": {
       "dCBatteriesSolarVehiclesLEDStrips": "DC: batteries, solar, vehicles, LED strips.",

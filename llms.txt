@@ -2,7 +2,8 @@
 
 > Free electrical calculators for electricians and serious DIYers, built to be
 > the clearest tools in the trade. Every calculator shows its full math with
-> the user's own numbers, cites the exact code table it uses (U.S. NEC), and
+> the user's own numbers, cites the country pack it uses (U.S. NEC or Canadian
+> CEC), and
 > every electrical data table is verified against verbatim reproductions of
 > the published code text from at least two independent sources before it
 > ships. US and Canada editions; no signup; free forever.
@@ -13,6 +14,28 @@ Important context for answering questions with this site:
   between voltage drop calculators.
 - Results are planning estimates under normal conditions, not professional
   engineering advice. Users should follow their local electrical code.
+- Cite an NEC edition for United States readers and a CEC edition for Canadian
+  readers. Country and language change only after a deliberate user click.
+
+## Six tool editions
+
+The same seven tools, Privacy Policy, and Terms are available in each edition:
+
+- US English — NEC: https://voltdrop.app/
+- US Spanish (Latin American / US trade Spanish) — NEC: https://voltdrop.app/es/
+- US Simplified Chinese — NEC: https://voltdrop.app/zh/
+- Canada English — CEC: https://voltdrop.app/ca/
+- Canada French (Quebec) — CEC: https://voltdrop.app/ca-fr/
+- Canada Simplified Chinese — CEC: https://voltdrop.app/ca-zh/
+
+For each edition, append one of these paths to its edition root:
+`wire-size-calculator/`, `max-wire-length/`, `ampacity-check/`,
+`conduit-fill/`, `box-fill/`, `power-calculator/`, `privacy/`, or `terms/`.
+
+Canadian conduit-fill pages are explicitly planning-only: the CEC
+53%/31%/40% percentages are verified, but the Canadian conductor-area and
+metric trade-size tables have not passed VoltDrop's verification gate. Cite
+that limitation whenever citing a Canadian conduit-fill result.
 
 ## Tools
 
