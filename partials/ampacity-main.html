@@ -1,45 +1,45 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Ampacity Check</h1>
-    <p class="tool-sub">Ampacity = the most current a wire can carry safely without overheating. Enter your wire and load, get a clear yes/no.</p>
+    <h1 class="tool-title">{{ampacity.ampacityCheckTitle}}</h1>
+    <p class="tool-sub">{{ampacity.ampacityTheMostCurrentAWireCan}}</p>
   </div>
 
   <form id="amp-form" class="card" autocomplete="off">
 
     <div class="field">
-      <label class="field-label">Wire material</label>
-      <div class="seg" role="group" aria-label="Wire material">
-        <button type="button" class="seg-btn active" data-material="cu">Copper</button>
-        <button type="button" class="seg-btn" data-material="al">Aluminum</button>
+      <label class="field-label">{{ampacity.wireMaterialLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:ampacity.wireMaterialLabel}}">
+        <button type="button" class="seg-btn active" data-material="cu">{{ampacity.copperButton}}</button>
+        <button type="button" class="seg-btn" data-material="al">{{ampacity.aluminumButton}}</button>
       </div>
     </div>
 
     <div class="field">
-      <label class="field-label" for="amp-size">Wire size</label>
+      <label class="field-label" for="amp-size">{{ampacity.wireSizeLabel}}</label>
       <select id="amp-size"></select>
-      <p class="hint">AWG = American Wire Gauge. It's printed on the wire jacket.</p>
+      <p class="hint">{{ampacity.aWGAmericanWireGaugeItSPrinted}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label">Insulation temperature rating</label>
-      <div class="seg" role="group" aria-label="Insulation temperature rating">
-        <button type="button" class="seg-btn" data-temp="60">60°C</button>
-        <button type="button" class="seg-btn active" data-temp="75">75°C</button>
-        <button type="button" class="seg-btn" data-temp="90">90°C</button>
+      <label class="field-label">{{ampacity.insulationTemperatureRatingLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:ampacity.insulationTemperatureRatingLabel}}">
+        <button type="button" class="seg-btn" data-temp="60">{{ampacity.n60CButton}}</button>
+        <button type="button" class="seg-btn active" data-temp="75">{{ampacity.n75CButton}}</button>
+        <button type="button" class="seg-btn" data-temp="90">{{ampacity.n90CButton}}</button>
       </div>
-      <p class="hint" id="amp-temp-hint">Not sure? Use <strong>75°C</strong> — it's what most breaker and lug terminations are rated for. Romex/NM-B cable must use the 60°C column. THHN in dry locations is 90°C, but the connection points usually still limit you to 75°C.</p>
+      <p class="hint" id="amp-temp-hint">{{ampacity.notSureUse}} <strong>{{ampacity.n75CButton}}</strong> {{ampacity.itSWhatMostBreakerAndLugContinuation}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="amp-load">Current it needs to carry</label>
+      <label class="field-label" for="amp-load">{{ampacity.currentItNeedsToCarryLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
-        <span class="unit">amps</span>
+        <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="{{attr:ampacity.eGN20Placeholder}}" required>
+        <span class="unit">{{ampacity.amps}}</span>
       </div>
     </div>
 
-    <button type="submit" class="calc-btn">Check ampacity</button>
+    <button type="submit" class="calc-btn">{{ampacity.checkAmpacityButton}}</button>
   </form>
 
   <section id="results" class="card results" hidden aria-live="polite">
@@ -53,17 +53,17 @@
     <div class="result-grid" id="result-grid"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
-      <summary>How we checked this</summary>
+      <summary>{{ampacity.howWeCheckedThisSummary}}</summary>
       <div class="math-body" id="math-body"></div>
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current, in amps, that a wire can carry continuously without overheating. It depends on the wire size, the material (copper or aluminum), and the insulation temperature rating, and is set by NEC Table 310.16 under normal conditions."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "When unsure, use the 75°C column — most breaker and lug terminations are rated 75°C. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but the connection points usually still limit the circuit to the 75°C values."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:ampacity.whatIsAmpacityQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.ampacityIsTheMaximumCurrentInAmpsAnswer}}"}}, {"@type": "Question", "name": "{{json:ampacity.whichInsulationTemperatureColumnShouldIUseQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.whenUnsureUseTheN75CColumnAnswer}}"}}]}</script>
   <section class="card explainer">
-    <h2>What this checks (and what it doesn't)</h2>
-    <p id="amp-exp-lookup">We look up your wire in the standard U.S. ampacity table (NEC Table 310.16 — normal conditions: up to three current-carrying wires in a conduit, ordinary room temperature). For small wires we also apply the special breaker-size rule (NEC 240.4(D)): 14 AWG copper tops out at a 15 A breaker, 12 AWG at 20 A, and 10 AWG at 30 A, even though the raw table says more.</p>
-    <p><strong>Not included:</strong> hot attics/engine rooms, bundles of more than three current-carrying wires, and continuous loads (running 3+ hours straight needs 25% headroom). Those all reduce what the wire can carry — when in doubt, go up a size or ask an electrician.</p>
-    <p>Ampacity and <a class="inline-link" href="/">voltage drop</a> are separate checks — a wire must pass <strong>both</strong>.</p>
+    <h2>{{ampacity.whatThisChecksAndWhatItDoesnHeading}}</h2>
+    <p id="amp-exp-lookup">{{ampacity.weLookUpYourWireInThe}}</p>
+    <p><strong>{{ampacity.notIncluded}}</strong> {{ampacity.hotAtticsEngineRoomsBundlesOfMore}}</p>
+    <p>{{ampacity.ampacityAnd}} <a class="inline-link" href="/">{{ampacity.voltageDrop}}</a> {{ampacity.areSeparateChecksAWireMustPass}} <strong>{{ampacity.both}}</strong>.</p>
   </section>
 
 </main>

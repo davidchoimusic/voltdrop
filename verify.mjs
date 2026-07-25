@@ -6,13 +6,21 @@
 import { chromium } from 'playwright';
 import { readFileSync } from 'fs';
 import { createHash } from 'crypto';
+import { spawnSync } from 'node:child_process';
 
 const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
 import { mkdirSync } from 'fs';
 mkdirSync(shots, { recursive: true });
 
-// ---- Electrical data tripwire (runs before anything else) ----
+// ---- Byte-identical English build gate ----
+const identical = spawnSync(process.execPath, ['tools/check-build-identical.mjs'], {
+  cwd: process.cwd(),
+  stdio: 'inherit',
+});
+if (identical.status !== 0) process.exit(identical.status ?? 1);
+
+// ---- Electrical data tripwire (runs before browser checks) ----
 // Each entry: [file, constant name]. Golden hashes = the state that passed
 // independent source verification (NEC page reproductions, 2026-07-24).
 const DATA_TABLES = [

@@ -61,6 +61,16 @@ the word-of-mouth. This decomposes into three commitments:
    2008–2023*; the moment we build edition-sensitive tools (the Article 220
    load calculator), code year becomes explicit user-facing state too.
 
+4. **English is the executable baseline, not a draft to “clean up.”** The
+   current 21 generated pages are pinned by SHA-256 before international work
+   begins. Moving copy into a catalog is safe only when rebuilding English
+   reproduces every page byte for byte, including metadata, structured FAQ
+   data, whitespace, and cache-busting asset hashes. This separates refactoring
+   risk from translation risk: if English changes during extraction, the
+   extraction is wrong. Brand names, code citations, cable designations, units,
+   and numbers are protected by a data registry so later locale checks can
+   compare them verbatim rather than trusting translator instructions.
+
 ## Strategy
 
 Depth before breadth, and honesty about scope at every step. The sequence —
@@ -89,6 +99,13 @@ page twins. That keeps the number of routing rules proportional to editions,
 not editions multiplied by every guide, while the page-existence list remains
 the release gate.
 
+Copy follows the same model. HTML source templates contain stable, surface-led
+keys; the locale catalog supplies headings, labels, metadata, guide prose, FAQ
+answers, and legal copy. Runtime calculator messages are cataloged separately
+from the electrical tables and resolved during the build. The English-only
+builder accepts a locale now but refuses unsupported locales, which keeps the
+dimension real without creating empty or misleading language routes.
+
 ## Key Discoveries
 
 - **Verification-by-independent-agent works.** Having a separate research pass
@@ -109,6 +126,11 @@ the release gate.
   translation from quietly changing which code applies. A dependent language
   picker makes that model visible: impossible pairs are not offered, and
   switching countries falls back visibly instead of serving mismatched copy.
+- **Byte identity is a stronger extraction test than review.** Text embedded
+  inside SVGs, JSON-LD, metadata attributes, table cells, and JavaScript
+  interpolation is easy to miss in a visual pass. Catalog substitution plus a
+  21-page hash manifest proves the complete English render, while the existing
+  data seals independently prove that safety tables did not move.
 - **Same-specificity CSS ordering silently eats rules** (desktop tabs, brand
   sizing). Cosmetic, but the meta-lesson matches the data lesson: verify the
   discriminating observable (computed style, live measurement), never the
@@ -128,5 +150,11 @@ the release gate.
   architecture assumes table-swapping suffices; the first non-AWG country
   build will test whether that assumption holds or the calculators need
   per-territory formula strategies too.
+- **Translation-unit shape**: many explanations mix markup, citations, and
+  interpolated numbers inside one sentence. The catalog preserves those
+  fragments exactly for English, but Stage 2 must decide where translators
+  need whole-sentence templates with named values instead of small fragments.
+  Protected citations and units cannot be used as an excuse to lock English
+  word order into French, Spanish, or Chinese.
 - **What do users actually ask for?** The feedback channel is live but empty.
   The roadmap's deliberate pause exists to let real field requests reorder it.

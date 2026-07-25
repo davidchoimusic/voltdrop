@@ -4,6 +4,70 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
 
+const localeArg = process.argv.find((arg) => arg.startsWith('--locale='));
+const locale = localeArg ? localeArg.slice('--locale='.length) : 'en';
+const SUPPORTED_LOCALES = new Set(['en']);
+if (!SUPPORTED_LOCALES.has(locale)) {
+  throw new Error(`Unsupported locale "${locale}". Stage 1 intentionally ships English only.`);
+}
+
+const catalog = JSON.parse(readFileSync(`i18n/strings/${locale}.json`, 'utf8'));
+const englishCatalog = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
+const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
+
+const text = (key, source = catalog) => {
+  const value = key.split('.').reduce((cursor, part) => cursor?.[part], source);
+  if (typeof value !== 'string') throw new Error(`Missing catalog string: ${key}`);
+  return value;
+};
+
+const renderTemplate = (template, label) => {
+  const rendered = template.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
+    const value = text(key);
+    if (format === 'json') return JSON.stringify(value).slice(1, -1);
+    return value;
+  });
+  const unresolved = rendered.match(/\{\{[^}]+\}\}/);
+  if (unresolved) throw new Error(`Unresolved catalog placeholder in ${label}: ${unresolved[0]}`);
+  return rendered;
+};
+
+const quoteLike = (value, quote) => {
+  const escaped = value
+    .replace(/\\/g, '\\\\')
+    .replace(new RegExp(quote, 'g'), `\\${quote}`)
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n');
+  return `${quote}${escaped}${quote}`;
+};
+
+// Runtime copy lives in the JavaScript assets rather than the HTML templates.
+// The map makes those strings catalog-driven too. English replacements are
+// deliberately identity replacements, which preserves the asset hashes.
+for (const [file, entries] of Object.entries(runtimeMap)) {
+  let source = readFileSync(file, 'utf8');
+  for (const entry of entries) {
+    const english = text(entry.key, englishCatalog);
+    const localized = text(entry.key);
+    const raw = entry.kind === 'quoted'
+      ? quoteLike(english, entry.quote)
+      : `${entry.leading}${english}${entry.trailing}`;
+    if (!source.includes(raw)) {
+      throw new Error(`Runtime source fragment for ${entry.key} is missing from ${file}`);
+    }
+    let replacement;
+    if (entry.kind === 'quoted') {
+      const decoded = Function(`"use strict"; return (${raw});`)();
+      if (decoded !== english) throw new Error(`Runtime map drift for ${entry.key} in ${file}`);
+      replacement = locale === 'en' ? raw : quoteLike(localized, entry.quote);
+    } else {
+      replacement = locale === 'en' ? raw : `${entry.leading}${localized}${entry.trailing}`;
+    }
+    source = source.replaceAll(raw, replacement);
+  }
+  writeFileSync(file, source);
+}
+
 // Cache-busting: stamp asset links with a content hash so Cloudflare's
 // edge cache can never serve stale JS/CSS after a deploy. Idempotent.
 const hash = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 10);
@@ -21,80 +85,81 @@ const stamp = (html) => html
   .replace(/\/app\.js\?v=[A-Za-z0-9]+/g, `/app.js?v=${V['app.js']}`)
   .replace(/\/common\.js\?v=[A-Za-z0-9]+/g, `/common.js?v=${V['common.js']}`);
 
-let src = stamp(readFileSync('index.html', 'utf8'));
+let src = stamp(renderTemplate(readFileSync('templates/index.html', 'utf8'), 'templates/index.html'));
 writeFileSync('index.html', src);
+console.log(`locale: ${locale}`);
 console.log('stamped:', Object.entries(V).map(([k, v]) => `${k}?v=${v}`).join(' '));
 
 const PAGES = [
   {
     dir: 'wire-size-calculator',
     mode: 'size',
-    ldName: 'VoltDrop Wire Size Calculator',
-    h1: '🔌 Wire Size Calculator',
-    sub: "What gauge wire do you need? Enter amps, voltage, and one-way distance — get the smallest size that keeps voltage drop in check, with the math shown.",
-    title: 'Wire Size Calculator — what gauge wire do I need? | VoltDrop',
-    description: 'Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.',
+    ldNameKey: 'pages.us.wireSize.ldName',
+    h1Key: 'pages.us.wireSize.h1',
+    subKey: 'pages.us.wireSize.sub',
+    titleKey: 'pages.us.wireSize.title',
+    descriptionKey: 'pages.us.wireSize.description',
   },
   {
     dir: 'max-wire-length',
     mode: 'length',
-    ldName: 'VoltDrop Max Wire Length Calculator',
-    h1: '📏 Max Wire Length Calculator',
-    sub: 'How far can your wire run before voltage drop becomes a problem? Get the maximum one-way distance for any wire size and load.',
-    title: 'Max Wire Length Calculator — how far can this wire run? | VoltDrop',
-    description: 'Free max wire run calculator: enter wire size, amps, and voltage to get the longest one-way distance that stays under 3% or 5% voltage drop. Copper and aluminum, DC and AC, no signup.',
+    ldNameKey: 'pages.us.maxLength.ldName',
+    h1Key: 'pages.us.maxLength.h1',
+    subKey: 'pages.us.maxLength.sub',
+    titleKey: 'pages.us.maxLength.title',
+    descriptionKey: 'pages.us.maxLength.description',
   },
   {
     dir: 'ampacity-check',
-    ldName: 'VoltDrop Ampacity Check',
+    ldNameKey: 'pages.us.ampacity.ldName',
     tool: 'ampacity',
     script: 'ampacity.js',
     main: 'partials/ampacity-main.html',
-    title: 'Ampacity Check — how many amps can this wire carry? | VoltDrop',
-    description: 'Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.',
+    titleKey: 'pages.us.ampacity.title',
+    descriptionKey: 'pages.us.ampacity.description',
   },
   {
     dir: 'conduit-fill',
-    ldName: 'VoltDrop Conduit Fill Calculator',
+    ldNameKey: 'pages.us.conduit.ldName',
     tool: 'conduit',
     script: 'conduit.js',
     main: 'partials/conduit-main.html',
-    title: 'Conduit Fill Calculator — what size conduit for my wires? | VoltDrop',
-    description: 'Free conduit fill calculator: THHN wire count and size in, smallest legal EMT or PVC Schedule 40 conduit out — using the official NEC Chapter 9 tables and 53/31/40% fill limits.',
+    titleKey: 'pages.us.conduit.title',
+    descriptionKey: 'pages.us.conduit.description',
   },
   {
     dir: 'privacy',
     tool: 'privacy',
     script: null, // static page — common.js alone is enough
     main: 'partials/privacy-main.html',
-    title: 'Privacy Policy | VoltDrop',
-    description: 'VoltDrop privacy policy: calculator inputs never leave your browser; optional sign-in data for comments only; no data sales; deletion on request.',
+    titleKey: 'pages.us.privacy.title',
+    descriptionKey: 'pages.us.privacy.description',
   },
   {
     dir: 'power-calculator',
-    ldName: 'VoltDrop Power Calculator',
+    ldNameKey: 'pages.us.power.ldName',
     tool: 'power',
     script: 'power.js',
     main: 'partials/power-main.html',
-    title: 'Power Calculator — volts, amps, watts, kW & kVA | VoltDrop',
-    description: 'Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup.',
+    titleKey: 'pages.us.power.title',
+    descriptionKey: 'pages.us.power.description',
   },
   {
     dir: 'box-fill',
-    ldName: 'VoltDrop Box Fill Calculator',
+    ldNameKey: 'pages.us.boxFill.ldName',
     tool: 'boxfill',
     script: 'boxfill.js',
     main: 'partials/boxfill-main.html',
-    title: 'Box Fill Calculator — is my electrical box big enough? | VoltDrop',
-    description: 'Free NEC 314.16 box fill calculator: count wires, devices, grounds and clamps, get a clear fits/too-full verdict with the cubic-inch math shown. No signup.',
+    titleKey: 'pages.us.boxFill.title',
+    descriptionKey: 'pages.us.boxFill.description',
   },
   {
     dir: 'guides',
     tool: 'guides',
     script: null,
     main: 'partials/guides-index-main.html',
-    title: 'Electrical Wiring Guides — verified answers, math shown | VoltDrop',
-    description: 'Plain-English guides to wire sizing, voltage drop, ampacity and box fill — every number source-verified against the published code tables, every answer with the math shown.',
+    titleKey: 'pages.us.guides.index.title',
+    descriptionKey: 'pages.us.guides.index.description',
   },
   {
     dir: 'guides/sub-panel-wire-size',
@@ -102,8 +167,8 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/sub-panel-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/sub-panel-wire-size/'}],
     script: null,
     main: 'partials/guide-subpanel-main.html',
-    title: 'Wire Size for a Sub-Panel (Shed or Detached Garage) — with distance tables | VoltDrop',
-    description: 'What size wire for a 50, 60 or 100 amp sub-panel at 50-300 feet: verified copper and aluminum tables, the voltage-drop math that reconciles the forum debates, and the 4 things people miss.',
+    titleKey: 'pages.us.guides.subPanel.title',
+    descriptionKey: 'pages.us.guides.subPanel.description',
   },
   {
     dir: 'guides/50-amp-wire-size',
@@ -111,8 +176,8 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
     script: null,
     main: 'partials/guide-50amp-main.html',
-    title: 'What Size Wire for 50 Amps? Breaker, hot tub, EV, RV | VoltDrop',
-    description: 'Why the internet says both 6 and 8 gauge for 50 amps — and the real answer by wire type, with a verified distance table and worked examples for hot tubs, EV chargers, and RV outlets.',
+    titleKey: 'pages.us.guides.fiftyAmp.title',
+    descriptionKey: 'pages.us.guides.fiftyAmp.description',
   },
   {
     dir: 'guides/wire-ampacity-chart',
@@ -120,8 +185,8 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/wire-ampacity-chart/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/wire-ampacity-chart/'}],
     script: null,
     main: 'partials/guide-ampacity-main.html',
-    title: 'Wire Ampacity Chart — NEC Table 310.16, current code | VoltDrop',
-    description: 'Full copper and aluminum ampacity chart (60/75/90°C, verified against the published NEC tables, identical 2017-2023) plus the plain-English rule for which temperature column you may use.',
+    titleKey: 'pages.us.guides.ampacityChart.title',
+    descriptionKey: 'pages.us.guides.ampacityChart.description',
   },
   {
     dir: 'guides/how-far-12-gauge-wire',
@@ -129,8 +194,8 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/how-far-12-gauge-wire/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/how-far-12-gauge-wire/'}],
     script: null,
     main: 'partials/guide-12gauge-main.html',
-    title: 'How Far Can You Run 12 Gauge Wire? Distance limits by gauge | VoltDrop',
-    description: 'Verified distance tables for 14-6 AWG at 120 V and 240 V under the 3% voltage-drop target — plus why other sites say 50, 57, or 100 feet for the same wire.',
+    titleKey: 'pages.us.guides.twelveGauge.title',
+    descriptionKey: 'pages.us.guides.twelveGauge.description',
   },
   {
     dir: 'guides/voltage-drop-formula',
@@ -138,16 +203,16 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/voltage-drop-formula/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/voltage-drop-formula/'}],
     script: null,
     main: 'partials/guide-vdformula-main.html',
-    title: 'Voltage Drop Formula & the 3% Rule, Explained | VoltDrop',
-    description: 'The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop.',
+    titleKey: 'pages.us.guides.voltageDrop.title',
+    descriptionKey: 'pages.us.guides.voltageDrop.description',
   },
   {
     dir: 'ca/guides',
     tool: 'guides',
     script: null,
     main: 'partials/ca-guides-index-main.html',
-    title: 'Canadian Electrical Guides — CEC, verified | VoltDrop',
-    description: 'Plain-English Canadian wiring guides written to the CEC: sub-panel wire size, 50 amp circuits, ampacity tables, run-length limits, and the mandatory Rule 8-102 voltage-drop rules.',
+    titleKey: 'pages.ca.guides.index.title',
+    descriptionKey: 'pages.ca.guides.index.description',
   },
   {
     dir: 'ca/guides/sub-panel-wire-size',
@@ -155,8 +220,8 @@ const PAGES = [
     script: null,
     main: 'partials/ca-guide-subpanel-main.html',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/sub-panel-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/sub-panel-wire-size/'}],
-    title: 'Wire Size for a Sub-Panel in Canada (Shed or Garage) — CEC Rule 8-102 | VoltDrop',
-    description: "What size wire for a 50, 60 or 100 amp sub-panel in Canada: metric+imperial distance tables under the CEC's mandatory 3% voltage-drop limit, NMD90/aluminum notes, worked examples.",
+    titleKey: 'pages.ca.guides.subPanel.title',
+    descriptionKey: 'pages.ca.guides.subPanel.description',
   },
   {
     dir: 'ca/guides/50-amp-wire-size',
@@ -164,8 +229,8 @@ const PAGES = [
     script: null,
     main: 'partials/ca-guide-50amp-main.html',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
-    title: 'What Size Wire for 50 Amps in Canada? NMD90, hot tub, EV | VoltDrop',
-    description: 'The Canadian 50-amp answer: #6 NMD90 vs #8 T90 in conduit under CEC termination rules, with a verified distance table and hot tub / EV / RV framings.',
+    titleKey: 'pages.ca.guides.fiftyAmp.title',
+    descriptionKey: 'pages.ca.guides.fiftyAmp.description',
   },
   {
     dir: 'ca/guides/wire-ampacity-chart',
@@ -173,8 +238,8 @@ const PAGES = [
     script: null,
     main: 'partials/ca-guide-ampacity-main.html',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/wire-ampacity-chart/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/wire-ampacity-chart/'}],
-    title: 'Wire Ampacity Chart Canada — CEC Table 2 & Table 4 | VoltDrop',
-    description: 'Canadian copper and aluminum ampacity chart (CEC Tables 2 and 4, harmonized with US values — verified), plus the NMD90 termination-temperature rules in plain English.',
+    titleKey: 'pages.ca.guides.ampacityChart.title',
+    descriptionKey: 'pages.ca.guides.ampacityChart.description',
   },
   {
     dir: 'ca/guides/how-far-12-gauge-wire',
@@ -182,8 +247,8 @@ const PAGES = [
     script: null,
     main: 'partials/ca-guide-12gauge-main.html',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/how-far-12-gauge-wire/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/how-far-12-gauge-wire/'}],
-    title: 'How Far Can You Run 12 Gauge Wire in Canada? (metres + feet) | VoltDrop',
-    description: "Distance limits by gauge in metres and feet under the CEC's mandatory 3% limit — plus Canada's official answer to the breaker-vs-actual-load question and Table 68.",
+    titleKey: 'pages.ca.guides.twelveGauge.title',
+    descriptionKey: 'pages.ca.guides.twelveGauge.description',
   },
   {
     dir: 'ca/guides/voltage-drop-formula',
@@ -191,20 +256,28 @@ const PAGES = [
     script: null,
     main: 'partials/ca-guide-vdformula-main.html',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/voltage-drop-formula/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/voltage-drop-formula/'}],
-    title: 'Voltage Drop in Canada — Rule 8-102 Explained | VoltDrop',
-    description: 'CEC Rule 8-102 in plain English: the mandatory 3%/3%/5% limits, the 80%-of-breaker calculation basis, Table 68 dwelling lengths, the formula, and worked examples.',
+    titleKey: 'pages.ca.guides.voltageDrop.title',
+    descriptionKey: 'pages.ca.guides.voltageDrop.description',
   },
   {
     dir: 'terms',
     tool: 'terms',
     script: null,
     main: 'partials/terms-main.html',
-    title: 'Terms of Service | VoltDrop',
-    description: 'VoltDrop terms of service: free electrical calculators provided as planning estimates, not professional advice; no warranty; comment rules.',
+    titleKey: 'pages.us.terms.title',
+    descriptionKey: 'pages.us.terms.description',
   },
 ];
 
-for (const p of PAGES) {
+for (const page of PAGES) {
+  const p = {
+    ...page,
+    ldName: page.ldNameKey ? text(page.ldNameKey) : undefined,
+    h1: page.h1Key ? text(page.h1Key) : undefined,
+    sub: page.subKey ? text(page.subKey) : undefined,
+    title: text(page.titleKey),
+    description: text(page.descriptionKey),
+  };
   let html = src
     .replace(/<title>[^<]*<\/title>/, `<title>${p.title}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(">)/, `$1${p.description}$2`)
@@ -245,7 +318,7 @@ for (const p of PAGES) {
   }
 
   if (p.main) {
-    const main = readFileSync(p.main, 'utf8');
+    const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main);
     html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
     // Page script replaces the calculator script; common.js stays.
     // script: null drops the calculator script entirely (pure content pages).

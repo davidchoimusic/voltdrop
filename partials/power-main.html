@@ -1,72 +1,72 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🧮 Power Calculator</h1>
-    <p class="tool-sub">Volts, amps, watts, kW and kVA — enter what you know, get the rest. DC, single-phase, and three-phase.</p>
+    <h1 class="tool-title">{{power.powerCalculatorTitle}}</h1>
+    <p class="tool-sub">{{power.voltsAmpsWattsKWAndKVAEnter}}</p>
   </div>
 
   <form id="pw-form" class="card" autocomplete="off">
 
     <div class="field">
-      <label class="field-label">What do you want to find?</label>
-      <div class="seg" role="group" aria-label="What to find">
-        <button type="button" class="seg-btn active" data-find="amps">Amps</button>
-        <button type="button" class="seg-btn" data-find="watts">Watts</button>
-        <button type="button" class="seg-btn" data-find="volts">Volts</button>
+      <label class="field-label">{{power.whatDoYouWantToFindLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:power.whatToFindAriaLabel}}">
+        <button type="button" class="seg-btn active" data-find="amps">{{power.ampsButton}}</button>
+        <button type="button" class="seg-btn" data-find="watts">{{power.wattsButton}}</button>
+        <button type="button" class="seg-btn" data-find="volts">{{power.voltsButton}}</button>
       </div>
     </div>
 
     <div class="field">
-      <label class="field-label">Power type</label>
-      <div class="seg" role="group" aria-label="Power type">
-        <button type="button" class="seg-btn active" data-system="dc">DC</button>
-        <button type="button" class="seg-btn" data-system="ac1">AC single-phase</button>
-        <button type="button" class="seg-btn" data-system="ac3">AC three-phase</button>
+      <label class="field-label">{{power.powerTypeLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:power.powerTypeLabel}}">
+        <button type="button" class="seg-btn active" data-system="dc">{{power.dCButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac1">{{power.aCSinglePhaseButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac3">{{power.aCThreePhaseButton}}</button>
       </div>
-      <p class="hint" id="pw-system-hint">DC: batteries, solar, vehicles, LED strips.</p>
+      <p class="hint" id="pw-system-hint">{{power.dCBatteriesSolarVehiclesLEDStrips}}</p>
     </div>
 
     <div class="field" id="pw-field-volts">
-      <label class="field-label" for="pw-volts">Voltage</label>
+      <label class="field-label" for="pw-volts">{{power.voltageLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
-        <span class="unit">volts</span>
+        <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="{{attr:power.eGN120Placeholder}}" required>
+        <span class="unit">{{power.volts}}</span>
       </div>
-      <p class="hint">Three-phase: use the line-to-line voltage (e.g. 208, 480).</p>
+      <p class="hint">{{power.threePhaseUseTheLineToLine}}</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>
-      <label class="field-label" for="pw-amps">Current</label>
+      <label class="field-label" for="pw-amps">{{power.currentLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="pw-amps" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 15">
-        <span class="unit">amps</span>
+        <input type="number" id="pw-amps" inputmode="decimal" min="0.01" step="any" placeholder="{{attr:power.eGN15Placeholder}}">
+        <span class="unit">{{power.amps}}</span>
       </div>
     </div>
 
     <div class="field" id="pw-field-watts">
-      <label class="field-label" for="pw-watts">Power</label>
+      <label class="field-label" for="pw-watts">{{power.powerLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="pw-watts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 1500">
-        <span class="unit">watts</span>
+        <input type="number" id="pw-watts" inputmode="decimal" min="0.1" step="any" placeholder="{{attr:power.eGN1500Placeholder}}">
+        <span class="unit">{{power.watts}}</span>
       </div>
-      <p class="hint">Tip: 1 kW = 1,000 W. A label that says "1.5 kW" is 1500 watts.</p>
+      <p class="hint">{{power.tipN1KWN1N000WA}}</p>
     </div>
 
     <div class="field" id="pw-field-pf">
-      <label class="field-label" for="pw-pf">Power factor</label>
+      <label class="field-label" for="pw-pf">{{power.powerFactorLabel}}</label>
       <div class="input-unit">
         <input type="number" id="pw-pf" inputmode="decimal" min="0.1" max="1" step="any" value="1.0">
-        <span class="unit">0–1</span>
+        <span class="unit">{{power.n0N1}}</span>
       </div>
-      <p class="hint">How efficiently the load uses current. Heaters and simple loads: <strong>1.0</strong>. Motors and fluorescent lighting: often <strong>0.8–0.9</strong>. If unsure, leave 1.0.</p>
+      <p class="hint">{{power.howEfficientlyTheLoadUsesCurrentHeaters}} <strong>{{power.n1N0}}</strong>{{power.motorsAndFluorescentLightingOftenContinuation}} <strong>{{power.n0N8N0N9}}</strong>{{power.ifUnsureLeaveN1N0Continuation}}</p>
     </div>
 
-    <button type="submit" class="calc-btn">Calculate</button>
+    <button type="submit" class="calc-btn">{{power.calculateButton}}</button>
   </form>
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">RESULT</div>
+      <div class="verdict-badge">{{power.rESULT}}</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>
@@ -75,18 +75,18 @@
     <div class="result-grid" id="result-grid"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
-      <summary>How we calculated this</summary>
+      <summary>{{power.howWeCalculatedThisSummary}}</summary>
       <div class="math-body" id="math-body"></div>
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between kW and kVA?", "acceptedAnswer": {"@type": "Answer", "text": "Watts (kW) measure real usable power, while kVA measures the apparent power the wiring must carry. For heaters and simple loads they are equal; for motors and electronics kVA can be higher, and the ratio between them is the power factor."}}, {"@type": "Question", "name": "How do I convert watts to amps?", "acceptedAnswer": {"@type": "Answer", "text": "For DC, amps = watts ÷ volts. For single-phase AC, amps = watts ÷ (volts × power factor). For three-phase AC, amps = watts ÷ (1.732 × line-to-line volts × power factor)."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:power.whatIsTheDifferenceBetweenKWAndQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:power.wattsKWMeasureRealUsablePowerWhileAnswer}}"}}, {"@type": "Question", "name": "{{json:power.howDoIConvertWattsToAmpsQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:power.forDCAmpsWattsVoltsForSingleAnswer}}"}}]}</script>
   <section class="card explainer">
-    <h2>Watts vs kW vs kVA — the 30-second version</h2>
-    <p><strong>Watts (W)</strong> is real usable power; <strong>1 kW = 1,000 W</strong>. <strong>kVA</strong> is the "apparent" power the wiring actually has to carry. For heaters and simple loads they're equal. For motors and electronics, some current sloshes back and forth without doing useful work — that's why kVA can be higher than kW, and the ratio between them is the <strong>power factor</strong>.</p>
-    <h2>The formulas we use</h2>
-    <p>DC: watts = volts × amps. Single-phase AC: watts = volts × amps × power factor. Three-phase AC: watts = √3 (1.732) × line-to-line volts × amps × power factor. Every result shows its math — open "How we calculated this."</p>
-    <p>Sizing wire for this load? Take the amps from here straight into the <a class="inline-link" href="/wire-size-calculator/">Wire Size</a> and <a class="inline-link" href="/ampacity-check/">Ampacity Check</a> tools.</p>
+    <h2>{{power.wattsVsKWVsKVATheN30Heading}}</h2>
+    <p><strong>{{power.wattsW}}</strong> {{power.isRealUsablePower}} <strong>{{power.n1KWN1N000W}}</strong>. <strong>{{power.kVA}}</strong> {{power.isTheApparentPowerTheWiringActually}} <strong>{{power.powerFactor}}</strong>.</p>
+    <h2>{{power.theFormulasWeUseHeading}}</h2>
+    <p>{{power.dCWattsVoltsAmpsSinglePhaseAC}}</p>
+    <p>{{power.sizingWireForThisLoadTakeThe}} <a class="inline-link" href="/wire-size-calculator/">{{power.wireSize}}</a> {{power.and}} <a class="inline-link" href="/ampacity-check/">{{power.ampacityCheck}}</a> {{power.tools}}</p>
   </section>
 
 </main>

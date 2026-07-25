@@ -1,58 +1,58 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">📏 How Far Can You Run 12 Gauge Wire?</h1>
-    <p class="tool-sub">Real distance limits for every common gauge — and why every site gives you a different number.</p>
+    <h1 class="tool-title">{{guides.twelveGauge.howFarCanYouRunN12GaugeTitle}}</h1>
+    <p class="tool-sub">{{guides.twelveGauge.realDistanceLimitsForEveryCommonGauge}}</p>
   </div>
 
   <section class="card explainer">
-    <h2>The short answer</h2>
-    <p>On a fully loaded 20 amp, 120 V circuit, <strong>#12 copper stays under the 3% voltage-drop target for about 46 one-way feet</strong>. At 240 V the same wire goes about 91 feet. Lighter actual loads go further — a 20 A breaker feeding a 10 A load doubles the distance. Full table below; your exact case: <a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a>.</p>
+    <h2>{{guides.twelveGauge.theShortAnswerHeading}}</h2>
+    <p>{{guides.twelveGauge.onAFullyLoadedN20AmpN120}} <strong>{{guides.twelveGauge.n12CopperStaysUnderTheN3%Voltage}}</strong>{{guides.twelveGauge.atN240VTheSameWireGoesContinuation}} <a class="inline-link" href="/max-wire-length/">{{guides.twelveGauge.maxWireLengthCalculator}}</a>.</p>
 
-    <h2>Distance table (3% drop, copper, fully loaded)</h2>
+    <h2>{{guides.twelveGauge.distanceTableN3%DropCopperFullyLoadedHeading}}</h2>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th>Wire</th><th>At amps</th><th>Max one-way @120 V</th><th>Max one-way @240 V</th></tr></thead>
+      <thead><tr><th>{{guides.twelveGauge.wire}}</th><th>{{guides.twelveGauge.atAmps}}</th><th>{{guides.twelveGauge.maxOneWayN120V}}</th><th>{{guides.twelveGauge.maxOneWayN240V}}</th></tr></thead>
       <tbody>
-        <tr><td>14 AWG</td><td>15 A</td><td>38 ft</td><td>76 ft</td></tr>
-        <tr><td>12 AWG</td><td>15 A</td><td>61 ft</td><td>121 ft</td></tr>
-        <tr><td>12 AWG</td><td>20 A</td><td>46 ft</td><td>91 ft</td></tr>
-        <tr><td>10 AWG</td><td>30 A</td><td>48 ft</td><td>97 ft</td></tr>
-        <tr><td>8 AWG</td><td>40 A</td><td>58 ft</td><td>115 ft</td></tr>
-        <tr><td>6 AWG</td><td>50 A</td><td>73 ft</td><td>146 ft</td></tr>
+        <tr><td>{{guides.twelveGauge.n14AWG}}</td><td>{{guides.twelveGauge.n15A}}</td><td>{{guides.twelveGauge.n38Ft}}</td><td>{{guides.twelveGauge.n76Ft}}</td></tr>
+        <tr><td>{{guides.twelveGauge.n12AWG}}</td><td>{{guides.twelveGauge.n15A}}</td><td>{{guides.twelveGauge.n61Ft}}</td><td>{{guides.twelveGauge.n121Ft}}</td></tr>
+        <tr><td>{{guides.twelveGauge.n12AWG}}</td><td>{{guides.twelveGauge.n20A}}</td><td>{{guides.twelveGauge.n46Ft}}</td><td>{{guides.twelveGauge.n91Ft}}</td></tr>
+        <tr><td>{{guides.twelveGauge.n10AWG}}</td><td>{{guides.twelveGauge.n30A}}</td><td>{{guides.twelveGauge.n48Ft}}</td><td>{{guides.twelveGauge.n97Ft}}</td></tr>
+        <tr><td>{{guides.twelveGauge.n8AWG}}</td><td>{{guides.twelveGauge.n40A}}</td><td>{{guides.twelveGauge.n58Ft}}</td><td>{{guides.twelveGauge.n115Ft}}</td></tr>
+        <tr><td>{{guides.twelveGauge.n6AWG}}</td><td>{{guides.twelveGauge.n50A}}</td><td>{{guides.twelveGauge.n73Ft}}</td><td>{{guides.twelveGauge.n146Ft}}</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">Computed with our verified engine (K = 12.9 ohm·cmil/ft for copper). Distances are one-way — from panel to load; the round trip is already accounted for.</p>
+    <p class="gnote">{{guides.twelveGauge.computedWithOurVerifiedEngineKN12}}</p>
 
     
-    <figure class="gfig" role="img" aria-label="Bar chart: the same 12 gauge wire reaches 46 feet at 20 amps 120 volts, 61 feet at 15 amps 120 volts, and 91 feet at 20 amps 240 volts">
+    <figure class="gfig" role="img" aria-label="{{attr:guides.twelveGauge.barChartTheSameN12GaugeWireAriaLabel}}">
       <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
-        <text x="12" y="20" font-size="13" font-weight="700" fill="var(--color-ink)">Same #12 wire, three honest answers (3% drop)</text>
-        <text x="12" y="52" font-size="12" fill="var(--color-ink)">20 A @ 120 V</text>
+        <text x="12" y="20" font-size="13" font-weight="700" fill="var(--color-ink)">{{guides.twelveGauge.sameN12WireThreeHonestAnswersN3%}}</text>
+        <text x="12" y="52" font-size="12" fill="var(--color-ink)">{{guides.twelveGauge.n20AN120V}}</text>
         <rect x="120" y="38" width="190" height="20" rx="4" fill="var(--color-accent)"/>
-        <text x="320" y="53" font-size="12" font-weight="700" fill="var(--color-ink)">46 ft</text>
-        <text x="12" y="92" font-size="12" fill="var(--color-ink)">15 A @ 120 V</text>
+        <text x="320" y="53" font-size="12" font-weight="700" fill="var(--color-ink)">{{guides.twelveGauge.n46Ft}}</text>
+        <text x="12" y="92" font-size="12" fill="var(--color-ink)">{{guides.twelveGauge.n15AN120V}}</text>
         <rect x="120" y="78" width="252" height="20" rx="4" fill="var(--color-hazard)"/>
-        <text x="382" y="93" font-size="12" font-weight="700" fill="var(--color-ink)">61 ft</text>
-        <text x="12" y="132" font-size="12" fill="var(--color-ink)">20 A @ 240 V</text>
+        <text x="382" y="93" font-size="12" font-weight="700" fill="var(--color-ink)">{{guides.twelveGauge.n61Ft}}</text>
+        <text x="12" y="132" font-size="12" fill="var(--color-ink)">{{guides.twelveGauge.n20AN240V}}</text>
         <rect x="120" y="118" width="376" height="20" rx="4" fill="var(--verdict-good-bar)"/>
-        <text x="506" y="133" font-size="12" font-weight="700" fill="var(--color-ink)">91 ft</text>
-        <text x="12" y="160" font-size="11.5" fill="var(--color-ink-soft)">Lighter load or higher voltage = longer reach. This is why sites "disagree."</text>
+        <text x="506" y="133" font-size="12" font-weight="700" fill="var(--color-ink)">{{guides.twelveGauge.n91Ft}}</text>
+        <text x="12" y="160" font-size="11.5" fill="var(--color-ink-soft)">{{guides.twelveGauge.lighterLoadOrHigherVoltageLongerReach}}</text>
       </svg>
     </figure>
 
-    <h2>Why other sites say 50, 57, or 100 feet</h2>
-    <p>Three honest reasons, no conspiracy. <strong>First — the amps assumption.</strong> Should you compute at the breaker's 20 A or the actual load's amps? Forums split 50/50 on this. Our table uses the breaker rating (worst case, safe for planning); if you know the real load, use it in the <a class="inline-link" href="/max-wire-length/">calculator</a> and enjoy the extra distance. <strong>Second — the resistance constant.</strong> We use the field-standard K = 12.9, which is deliberately a bit conservative; some sites use the code's DC resistance table, which yields ~25% longer distances (that's the famous "57 feet"). Neither is wrong — ours leaves margin for real-world conditions. <strong>Third — the target.</strong> 3% is the common planning target, but it's a recommendation, not a hard law (<a class="inline-link" href="/guides/voltage-drop-formula/">full story here</a>) — sites using 5% quote much longer runs.</p>
+    <h2>{{guides.twelveGauge.whyOtherSitesSayN50N57OrHeading}}</h2>
+    <p>{{guides.twelveGauge.threeHonestReasonsNoConspiracy}} <strong>{{guides.twelveGauge.firstTheAmpsAssumption}}</strong> {{guides.twelveGauge.shouldYouComputeAtTheBreakerS}} <a class="inline-link" href="/max-wire-length/">{{guides.twelveGauge.calculator}}</a> {{guides.twelveGauge.andEnjoyTheExtraDistance}} <strong>{{guides.twelveGauge.secondTheResistanceConstant}}</strong> {{guides.twelveGauge.weUseTheFieldStandardKN12}} <strong>{{guides.twelveGauge.thirdTheTarget}}</strong> {{guides.twelveGauge.n3%IsTheCommonPlanningTargetBut}}<a class="inline-link" href="/guides/voltage-drop-formula/">{{guides.twelveGauge.fullStoryHere}}</a>{{guides.twelveGauge.sitesUsingN5%QuoteMuchLongerRuns}}</p>
 
-    <h2>What happens if you run too far?</h2>
-    <p>Nothing dramatic — and that's the trap. The circuit works, but the far end runs at lower voltage: motors start hard and run hot (a compressor that trips on a 100 ft extension cord but not a short one is pure voltage drop), LEDs flicker, chargers slow down, heaters underperform. Long runs also waste real energy as heat in the wall.</p>
+    <h2>{{guides.twelveGauge.whatHappensIfYouRunTooFarHeading}}</h2>
+    <p>{{guides.twelveGauge.nothingDramaticAndThatSTheTrap}}</p>
 
-    <h2>Worked example</h2>
-    <p>#12 copper, 20 A, 80 one-way feet, 120 V: drop = 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong> — over both the 3% target and the 5% outer limit. Options: shorten the run, go up to #10 (drops 4.0 V = 3.3%), run it at 240 V if the load allows, or accept it for a non-critical load. The <a class="inline-link" href="/">Voltage Drop calculator</a> shows all of this instantly.</p>
+    <h2>{{guides.twelveGauge.workedExampleHeading}}</h2>
+    <p>{{guides.twelveGauge.n12CopperN20AN80OneWay}} <strong>{{guides.twelveGauge.n6N3VN5N3%}}</strong> {{guides.twelveGauge.overBothTheN3%TargetAndTheContinuation}} <a class="inline-link" href="/">{{guides.twelveGauge.voltageDropCalculator}}</a> {{guides.twelveGauge.showsAllOfThisInstantly}}</p>
 
-    <h2>Related</h2>
-    <p><a class="inline-link" href="/max-wire-length/">Max Wire Length calculator</a> · <a class="inline-link" href="/guides/voltage-drop-formula/">Voltage drop, explained</a> · <a class="inline-link" href="/guides/wire-ampacity-chart/">Ampacity chart</a></p>
+    <h2>{{guides.twelveGauge.relatedHeading}}</h2>
+    <p><a class="inline-link" href="/max-wire-length/">{{guides.twelveGauge.maxWireLengthCalculator}}</a> · <a class="inline-link" href="/guides/voltage-drop-formula/">{{guides.twelveGauge.voltageDropExplained}}</a> · <a class="inline-link" href="/guides/wire-ampacity-chart/">{{guides.twelveGauge.ampacityChart}}</a></p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far can you run 12 gauge wire on a 20 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"About 46 one-way feet at 120 V fully loaded at 20 A, staying under the 3% voltage-drop planning target (about 91 feet at 240 V). Lighter actual loads go proportionally further."}},{"@type":"Question","name":"Do I use the breaker rating or the actual load for voltage drop?","acceptedAnswer":{"@type":"Answer","text":"Either is defensible, which is why answers online disagree. Using the breaker rating is the conservative planning choice; using the known actual load is accurate for that load. If the circuit might someday carry its full rating, size for the breaker."}},{"@type":"Question","name":"How far can you run 12/2 without voltage drop?","acceptedAnswer":{"@type":"Answer","text":"There is no distance without voltage drop — every foot of wire drops some voltage. The practical question is how far before the drop exceeds 3%: roughly 46 one-way feet at a full 20 A and 120 V for 12/2 copper."}},{"@type":"Question","name":"What happens if a wire run is too long?","acceptedAnswer":{"@type":"Answer","text":"The circuit still works but delivers lower voltage at the far end: motors start hard and overheat, LEDs flicker, chargers and heaters underperform, and energy is wasted as heat in the wire. Fix it with thicker wire, a shorter route, or a higher voltage."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.twelveGauge.howFarCanYouRunN12GaugeQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.twelveGauge.aboutN46OneWayFeetAtN120Answer}}"}},{"@type":"Question","name":"{{json:guides.twelveGauge.doIUseTheBreakerRatingOrQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.twelveGauge.eitherIsDefensibleWhichIsWhyAnswersAnswer}}"}},{"@type":"Question","name":"{{json:guides.twelveGauge.howFarCanYouRunN12N2Question}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.twelveGauge.thereIsNoDistanceWithoutVoltageDropAnswer}}"}},{"@type":"Question","name":"{{json:guides.twelveGauge.whatHappensIfAWireRunIsQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.twelveGauge.theCircuitStillWorksButDeliversLowerAnswer}}"}}]}</script>
 
 </main>

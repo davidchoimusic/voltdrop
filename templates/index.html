@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle}}</title>
+<meta name="description" content="{{attr:meta.home.freeVoltageDropCalculatorForCopperAndMeta}}">
+<link rel="canonical" href="https://voltdrop.app/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="{{attr:meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle}}">
+<meta property="og:description" content="{{attr:meta.home.freeVoltageDropWireSizeAmpacityAndMeta}}">
+<meta property="og:url" content="https://voltdrop.app/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{attr:meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle}}">
+<meta name="twitter:description" content="{{attr:meta.home.freeVoltageDropWireSizeAmpacityAndMeta}}">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"{{json:meta.home.voltDropTitle}}","url":"https://voltdrop.app/","description":"{{json:meta.home.freeElectricalCalculatorsForElectriciansVoltageDropMeta}}"},{"@type":"Organization","name":"{{json:meta.home.voltDropTitle}}","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"{{json:meta.home.voltDropVoltageDropCalculatorTitle}}","url":"https://voltdrop.app/","description":"{{json:meta.home.freeVoltageDropCalculatorForCopperAndAluminum}}","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=9c1a0d010b">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-expanded="false" aria-controls="mobile-tools">{{header.toolsButton}}</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">{{header.voltDrop}}<span class="brand-suffix">{{header.appContinuation}}</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="{{attr:header.changeCountryOrLanguageTitle}}" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">{{header.nECEN}}</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">{{header.feedback}}</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">{{header.whichCodeApplies}}</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">{{header.languageInUnitedStates}}</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="{{attr:header.electricalToolsMenuAriaLabel}}"></nav>
+    <p class="tagline">{{header.theVoltageDropCalculatorThatExplainsItself}}</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="{{attr:nav.electricalToolsAriaLabel}}">
+    <span class="tool-nav-head">{{nav.electricalTools}}</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>{{nav.voltageDrop}}</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>{{nav.wireSize}}</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>{{nav.maxWireLength}}</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>{{nav.ampacityCheck}}</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>{{nav.conduitFill}}</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>{{nav.boxFill}}</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>{{nav.powerCalculator}}</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>{{nav.guides}}</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>{{nav.feedback}}</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">{{drop.voltageDropCalculatorTitle}}</h1>
+    <p class="tool-sub" id="page-sub">{{drop.howMuchVoltageDoesYourWireLose}}</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="{{attr:drop.whatDoYouWantToFindAriaLabel}}">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">{{drop.voltageDrop}}</span>
+      <span class="mode-sub">{{drop.iKnowMyWireHowMuchDo}}</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">{{drop.wireSize}}</span>
+      <span class="mode-sub">{{drop.whatSTheSmallestWireThatWorks}}</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">{{drop.maxDistance}}</span>
+      <span class="mode-sub">{{drop.howFarCanThisWireRun}}</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">{{drop.powerTypeLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:drop.powerTypeLabel}}">
+        <button type="button" class="seg-btn active" data-system="dc">{{drop.dCButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac1">{{drop.aCSinglePhaseButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac3">{{drop.aCThreePhaseButton}}</button>
+      </div>
+      <p class="hint" id="system-hint">{{drop.dCBatteriesSolarVehiclesLEDStrips}}</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">{{drop.voltageAtTheSourceLabel}}</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">{{drop.volts}}</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">{{drop.currentLoadLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="{{attr:drop.eGN20Placeholder}}" required>
+        <span class="unit">{{drop.amps}}</span>
+      </div>
+      <p class="hint">{{drop.theAmpsYourDeviceOrCircuitActually}}</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">{{drop.wireMaterialLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:drop.wireMaterialLabel}}">
+        <button type="button" class="seg-btn active" data-material="cu">{{drop.copperButton}}</button>
+        <button type="button" class="seg-btn" data-material="al">{{drop.aluminumButton}}</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">{{drop.wireSize}}</label>
+      <select id="awg"></select>
+      <p class="hint">{{drop.aWGAmericanWireGaugeSmallerNumberThicker}}</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">{{drop.oneWayDistanceLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="{{attr:drop.eGN100Placeholder}}" required>
+        <span class="unit">{{drop.feet}}</span>
+      </div>
+      <p class="hint highlight-hint"><strong>{{drop.measureOneWay}}</strong> {{drop.fromThePowerSourceToTheLoadContinuation}} <strong>{{drop.weDoubleItForYou}}</strong>{{drop.donTDoubleItYourselfContinuation}}</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">{{drop.biggestVoltageDropYouLlAcceptLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:drop.maximumAcceptableDropAriaLabel}}">
+        <button type="button" class="seg-btn active" data-target="3">{{drop.n3%RecommendedButton}}</button>
+        <button type="button" class="seg-btn" data-target="5">{{drop.n5%UpperLimitButton}}</button>
+        <button type="button" class="seg-btn" data-target="custom">{{drop.customButton}}</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">{{drop.%}}</span>
+      </div>
+      <p class="hint">{{drop.n3%IsTheCommonGuidelineForA}}</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">{{drop.calculateButton}}</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>{{drop.howWeCalculatedThisSummary}}</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:drop.whyAreN3%AndN5%TheVoltageQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:drop.wireHasResistanceSoSomeVoltageIsAnswer}}"}},{"@type":"Question","name":"{{json:drop.whyDonTVoltageDropCalculatorsAgreeQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:drop.almostAlwaysOneOfTwoThingsSomeAnswer}}"}}]}</script>
+  <section class="card explainer">
+    <h2>{{drop.whyN3%AndN5%Heading}}</h2>
+    <p>{{drop.wireHasResistanceSoSomeVoltageIs}}</p>
+    <p>{{drop.theWidelyUsedRuleOfThumb}}<span id="code-basis">{{drop.basedOnARecommendationInThe}}</span> <span id="code-name">{{drop.uSNationalElectricalCode}}</span>{{drop.keepTheDropOnABranchCircuit}} <strong>{{drop.n3%}}</strong>{{drop.andTheTotalFromYourPanelToContinuation}} <strong>{{drop.n5%}}</strong>{{drop.theseAreGuidelinesForGoodPerformanceNotContinuation}}</p>
+    <h2>{{drop.whyDonTOtherCalculatorsAgreeWithHeading}}</h2>
+    <p>{{drop.almostAlwaysOneOfTwoThingsSome}} <strong>{{drop.roundTrip}}</strong> {{drop.lengthWhereOthersWantOneWayWe}}</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">{{footer.country}}</span>
+      <button type="button" class="country-btn" data-country="us">{{footer.unitedStatesButton}}</button>
+      <button type="button" class="country-btn" data-country="ca">{{footer.canadaButton}}</button>
+      <span class="country-note">{{footer.weLlRememberYourChoiceOnThis}}</span>
+    </div>
+    <nav class="footer-links" aria-label="{{attr:footer.footerAriaLabel}}">
+      <a class="footer-link" href="/comments">{{footer.leaveFeedback}}</a>
+      <a class="footer-link" href="/privacy/">{{footer.privacy}}</a>
+      <a class="footer-link" href="/terms/">{{footer.terms}}</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>{{footer.voltDrop}}</strong></a> {{footer.freeElectricalCalculatorsNoSignupForever}}</p>
+    <p class="fine">{{footer.allResultsArePlanningEstimatesFromStandard}} <a class="inline-link" href="/terms/">{{footer.terms}}</a>{{footer.eachToolSHowWeCalculatedThisContinuation}}</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=8bb689634a"></script>
+<script src="/app.js?v=b5f5222909"></script>
+</body>
+</html>
