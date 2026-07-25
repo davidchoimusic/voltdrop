@@ -10,29 +10,32 @@ equipment termination with a lower temperature rating. The unsafe answer looks
 precise because the missing conditions are hidden.
 
 Electrical rules are also territorial. The physics crosses borders, but the
-NEC, CEC, wire names, limits, and counting rules do not. A fluent Canadian page
-using NEC factors would be more dangerous than a page that plainly refuses the
-calculation. Trust therefore depends on both mathematical transparency and
-honest limits.
+NEC, CEC, wire names, limits, and counting rules do not. Some current NEC and
+CEC base values are deliberately harmonized while the rules applied to those
+values remain different. Trust therefore depends on making both the shared
+data and the territorial forks explicit.
 
 ## Operating Theory
 
 Trust is the product. Four commitments make it concrete.
 
 1. **Every electrical fact has a source and a seal.** New tables enter the
-   calculator only after row-by-row verification. Eleven live data tables are
+   calculator only after row-by-row verification. Thirteen live data tables are
    fingerprinted, so copy, localization, and interface work cannot alter a
-   safety value unnoticed. The two ampacity derating tables are sealed beside
-   the existing base ampacity and small-conductor tables; existing table hashes
-   remain independent and unchanged.
+   safety value unnoticed. CEC Tables 5A and 5C are sealed beside their NEC
+   counterparts. The existing base-ampacity dataset stays byte-identical and is
+   deliberately shared by NEC Table 310.16 and the 60/75/90°C columns of 2024
+   CEC Tables 2 and 4 because all 105 cells shipped here were verified with zero
+   mismatches.
 
 2. **Show the calculation in the order the rule operates.** Ampacity begins in
    the conductor's insulation temperature column, then applies ambient
    correction and conductor-count adjustment together. Termination and
    small-conductor limits are caps applied afterward. The result must name the
    binding limit because that tells the worker what actually controls the
-   circuit. A dash in a source table is a refusal state, never an invitation to
-   interpolate.
+   circuit. A dash in a source table is a refusal state. Canadian Table 5A
+   points create an additional conservative rule: an in-between ambient uses
+   the next higher published row, never interpolation or rounding down.
 
 3. **Keep different safety questions separate.** Derating asks how much current
    the conductor can safely carry under heat-producing conditions. The
@@ -44,10 +47,11 @@ Trust is the product. Four commitments make it concrete.
 4. **Country and language are separate dimensions.** Country selects the
    rulebook; language selects the explanation. Six explicit URL editions cover
    US English, Spanish, and Simplified Chinese over the NEC pack, plus Canada
-   English, Quebec French, and Simplified Chinese over the CEC pack. The only
-   available base ampacity grid is NEC Table 310.16. Canadian base, correction,
-   and adjustment tables remain outside the verified country pack until CEC
-   Tables 2, 4, 5A, and 5C pass the source gate.
+   English, Quebec French, and Simplified Chinese over the CEC pack. The country
+   fork begins after the shared base lookup: CEC Table 5A uses point rows and no
+   cool-ambient credit, Table 5C uses Canadian conductor-count bands, Rule
+   4-004 supplies Canadian counting, and Rules 4-006, 8-104, and 14-104 supply
+   Canadian caps and load checks.
 
 English remains an executable baseline. The 22 reviewed English pages are
 pinned by SHA-256, including the Canadian ampacity calculator itself, while
@@ -60,19 +64,26 @@ unrelated pages or existing data.
 Depth comes before breadth. Tools progress from bounded, verified formulas and
 tables toward riskier code logic. Whenever a tool simplifies or lacks local
 data, the limitation is visible at the point of use. Canadian conduit sizing
-and ampacity derating therefore use prominent planning notes rather than
-borrowed US numbers wearing Canadian labels.
+still carries its planning limitation. Canadian ampacity no longer does:
+CSA C22.1:24, 26th edition (2024) now supplies the verified base, ambient,
+conductor-count, termination, continuous-load, and small-conductor rules.
 
-The US ampacity interface mirrors the electrical model. Insulation temperature
+The ampacity interface mirrors the electrical model. Insulation temperature
 and termination temperature are distinct inputs because they play different
-roles. Ambient temperature and current-carrying conductor count produce the
-two derating factors. The result then shows the base value, both multiplication
-steps, both caps, and a plain-language binding decision. Counting guidance sits
-beside the input because a mathematically perfect result is still wrong when a
-neutral, spare, or grounding conductor is counted incorrectly. The Canadian
-interface refuses the result and labels the available base grid as NEC data;
-its visible note names every unverified CEC grid and the known 14 AWG
-difference.
+roles. Ambient temperature and conductor count produce the two derating
+factors. The result then shows the base value, selected ambient row, both
+multiplication steps, both caps, and a plain-language binding decision.
+Counting guidance sits beside the input because a mathematically perfect result
+is still wrong when a neutral, spare, bond, or control conductor is classified
+incorrectly.
+
+The Canadian interface also states its simplifications. Rule 4-006 applies the
+termination constraint to the first 1.2 m and permits a transition beyond it;
+VoltDrop conservatively applies the lower termination column throughout.
+Rule 8-104 is displayed as an 80% continuous-load ceiling for standard
+80%-rated equipment, never combined with a 125% multiplier. Installed
+power/lighting spares count by default, explicitly labeled as a conservative
+reading because the Code is silent and the local authority may differ.
 
 Localization uses stable template keys and locale-owned full thoughts. Country
 packs own territorial claims, citations, limits, and scenarios. Locale
@@ -109,15 +120,27 @@ for fragmented labels and generated table output.
   meaning. The engine, interface, and tests must preserve that state all the
   way to a visible “not permitted” message with no numeric ampacity.
 
-- **Honest incompleteness is safer than false conformity.** Sources disagree
-  about Canadian ambient factors, Table 5C ranges differ from NEC ranges, and
-  the Canadian conductor-count rule is unresolved. The Canadian editions name
-  those gaps and return no factor or result.
+- **Verified sharing is different from accidental reuse.** Current CEC Tables
+  2 and 4 match NEC Table 310.16 in the supported 60/75/90°C cells, so one
+  shared dataset is the honest design. Comments and independent seals prevent a
+  future maintainer from duplicating it or extending the harmonization to
+  unrelated columns, free-air tables, or rules.
+
+- **The largest country divergence comes after the shared lookup.** At ten
+  countable conductors, CEC Table 5C uses 0.70 while NEC Table 310.15(C)(1)
+  uses 0.50. A country gate must therefore select the derating pack before any
+  factor is shown.
 
 - **Verification needs independent oracles.** Hand-checkable cases cover
   derating, termination, the small-conductor cap, continuous load separation,
   and the null-cell refusal. These examples protect the rule order rather than
   merely repeating the production function.
+
+- **Text boundaries are script-specific.** A digit beside a Latin letter can
+  belong to an identifier such as `COVID19`, but a digit beside a Chinese
+  ideograph is ordinary unspaced prose. Numeric and protected-token gates
+  therefore block Latin letters and digits at their edges, not every Unicode
+  letter; otherwise valid Chinese citations are silently dropped or truncated.
 
 - **Rendered behavior is the release unit.** CSS ordering can defeat a correct
   rule, controls can wrap without overflowing, and a localized asset can exist
@@ -125,23 +148,17 @@ for fragmented labels and generated table output.
   check still has to exercise all six calculators and measure 360/390 px
   layouts in a real browser.
 
-- **Country honesty belongs in behavior as well as copy.** A Canadian warning
+- **Country honesty belongs in behavior as well as copy.** A Canadian citation
   would be cosmetic if the script still exposed NEC multipliers. The country
-  gate must refuse before any factor or computed ampacity enters the result.
+  gate selects CEC point-row ambient logic, CEC conductor bands, Canadian
+  counting copy, Canadian cap citations, and the 80% continuous-load display.
 
-- **Verification claims are safety data too.** The earlier Canadian copy said
-  CEC Tables 2 and 4 matched NEC Table 310.16 even though the project had never
-  produced or checked those CEC grids. The confirmed 14 AWG copper example
-  (CEC 20 A versus NEC 15 A at 60 °C) disproves the premise. A conservative
-  numerical result does not make a false source label acceptable; the product
-  must name the borrowed table and the missing verification.
+- **Edition history can reverse a true claim.** The 2012 CEC really did list
+  14 AWG copper at 20 A in the 60°C column, but the current 2024 edition lists
+  15 A and matches the NEC. The old difference was evidence about the wrong
+  edition, not evidence that the current grids differ.
 
 ## Open Questions
-
-- **Canadian ampacity data:** CEC Tables 2 and 4 need verified, row-complete
-  base grids. Tables 5A and 5C additionally need two agreeing sources and a
-  resolved conductor-count interpretation before the planning note can become
-  a calculator.
 
 - **Jurisdiction adoption:** edition-sensitive tools will need to decide
   whether users select a code year or the code actually enforced by their

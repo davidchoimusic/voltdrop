@@ -130,8 +130,9 @@
       <div class="seg" role="group" aria-label="Termination temperature rating">
         <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
         <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">90°C</button>
       </div>
-      <p class="hint">Use 60°C for NM-B or unmarked equipment. Use 75°C only when the equipment is marked 75°C. The termination limit is applied after both derating factors.</p>
+      <p class="hint">Use 60°C for NM-B or unmarked equipment. Use 75°C or 90°C only when the equipment is marked and listed for that temperature. The termination limit is applied after both derating factors.</p>
     </div>
 
     <div class="field">
@@ -177,18 +178,15 @@
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">Pass</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>Too small</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>Not permitted</div>
-      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>Planning only</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label amp-big-label" id="amp-label-final">final permitted ampacity</div>
         <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>this combination is not permitted</div>
-        <div class="big-label amp-big-label" id="amp-label-canada" hidden>Canadian derating result unavailable</div>
       </div>
     </div>
 
     <div id="amp-result-unavailable" hidden>
-      <p class="verdict-note" id="amp-nec-unavailable">NEC Table 310.15(B)(1) publishes “—” for this ambient-temperature and insulation-rating combination, or the temperature is outside the published table. No factor is substituted and no permitted ampacity is produced.</p>
-      <p class="verdict-note" id="amp-ca-unavailable">No ampacity number is produced. CEC Tables 5A and 5C have not passed the source-verification gate, so this Canadian edition will not display NEC correction or adjustment factors.</p>
+      <p class="verdict-note" id="amp-code-unavailable">NEC Table 310.15(B)(1) publishes “—” for this ambient-temperature and insulation-rating combination, or the temperature is outside the published table. No factor is substituted and no permitted ampacity is produced.</p>
     </div>
 
     <div id="amp-result-calculation">
@@ -199,6 +197,7 @@
           <div class="formula">
             <div>Base ampacity (insulation column) <strong id="amp-base-value"></strong></div>
             <div>Ambient correction <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>Ambient table row used <strong id="amp-ambient-row-value"></strong> — The published ambient band containing the entered temperature is used.</div>
             <div>Current-carrying conductor adjustment <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="derating">— not binding</span></div>
             <div>110.14(C) termination limit <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="termination">— not binding</span></div>
             <div>240.4(D) small-conductor cap <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="cap">— not binding</span></div>
@@ -261,6 +260,6 @@
 </footer>
 
 <script src="/common.js?v=d3b64342ae"></script>
-<script src="/ampacity.js?v=df828c963d"></script>
+<script src="/ampacity.js?v=6a59acfd19"></script>
 </body>
 </html>

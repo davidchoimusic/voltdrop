@@ -1,7 +1,10 @@
 /* VoltDrop — Ampacity Check
-   Base data: NEC Table 310.16.
-   Derating data: NEC Tables 310.15(B)(1) and 310.15(C)(1).
-   Limits: NEC 110.14(C) termination ratings and 240.4(D) small conductors.
+   Base data: one deliberately shared 60/75/90°C dataset for NEC Table 310.16
+   and CEC Tables 2/4. The grids were verified cell-for-cell against
+   CSA C22.1:24, 26th edition (2024): all 105 cells shipped here were
+   verified, with zero mismatches.
+   Do not duplicate this table. The harmonization does not extend to the CEC's
+   higher-temperature columns, free-air tables, derating rules, or other data.
 
    Order matters: insulation-column ampacity × ambient correction × conductor
    adjustment, then the termination limit, then the small-conductor cap. */
@@ -25,7 +28,8 @@ const AMPACITY = {
   },
 };
 
-// NEC 240.4(D): max overcurrent device for small conductors.
+// Same values, cited by country: NEC 240.4(D) and CEC Rule 14-104.
+// This is an overcurrent-device cap, not a derating factor.
 const SMALL_CAP = {
   cu: { '14 AWG': 15, '12 AWG': 20, '10 AWG': 30 },
   al: { '12 AWG': 15, '10 AWG': 25 },
@@ -63,6 +67,33 @@ const CONDUCTOR_ADJUSTMENT = [
   { min: 41, max: null, factor: 0.35 },
 ];
 
+// CEC Table 5A, CSA C22.1:24 (2024), single-point ambient rows above 30°C.
+// The real CEC table also has 110/125/200°C columns. VoltDrop deliberately
+// omits them because this interface supports only 60/75/90°C insulation.
+// null is the table's published "—": that combination is not permitted.
+const CEC_AMBIENT_CORRECTION = [
+  { ambient: 35, factors: { 60: 0.91, 75: 0.94, 90: 0.96 } },
+  { ambient: 40, factors: { 60: 0.82, 75: 0.88, 90: 0.91 } },
+  { ambient: 45, factors: { 60: 0.71, 75: 0.82, 90: 0.87 } },
+  { ambient: 50, factors: { 60: 0.58, 75: 0.75, 90: 0.82 } },
+  { ambient: 55, factors: { 60: 0.41, 75: 0.67, 90: 0.76 } },
+  { ambient: 60, factors: { 60: null, 75: 0.58, 90: 0.71 } },
+  { ambient: 65, factors: { 60: null, 75: 0.47, 90: 0.65 } },
+  { ambient: 70, factors: { 60: null, 75: 0.33, 90: 0.58 } },
+  { ambient: 75, factors: { 60: null, 75: null, 90: 0.50 } },
+  { ambient: 80, factors: { 60: null, 75: null, 90: 0.41 } },
+];
+
+// CEC Table 5C, CSA C22.1:24 (2024). These bands are genuinely Canadian;
+// never replace them with NEC Table 310.15(C)(1).
+const CEC_CONDUCTOR_ADJUSTMENT = [
+  { min: 1, max: 3, factor: 1.00 },
+  { min: 4, max: 6, factor: 0.80 },
+  { min: 7, max: 24, factor: 0.70 },
+  { min: 25, max: 42, factor: 0.60 },
+  { min: 43, max: null, factor: 0.50 },
+];
+
 const TEMP_INDEX = { 60: 0, 75: 1, 90: 2 };
 const BINDING_LABEL_IDS = {
   derating: 'amp-binding-derating',
@@ -73,6 +104,8 @@ const AMP_RESULT_TEXT = {
   amps: '{amps} A',
   factor: '× {factor}',
   degrees: '{degrees}°C',
+  atMostDegrees: '≤{max}°C',
+  degreeRange: '{min}–{max}°C',
   combined: '{base} A × {ambientFactor} × {adjustmentFactor} = {derated} A',
 };
 
@@ -82,6 +115,7 @@ let terminationTemp = 75;
 let continuous = false;
 
 const $ = (id) => document.getElementById(id);
+const isCanada = () => document.body.dataset.country === 'ca';
 const setText = (id, value) => { $(id).textContent = value; };
 const formatNumber = (value) => Number.isInteger(value)
   ? String(value)
@@ -128,14 +162,44 @@ document.querySelectorAll('.seg-btn').forEach((button) => {
   });
 });
 
-function ambientBandFor(ambient) {
-  return AMBIENT_CORRECTION.find((row) =>
-    (row.min === null || ambient >= row.min) && ambient <= row.max);
+function ambientSelectionFor(ambient) {
+  if (isCanada()) {
+    // Table 5A starts above 30°C and grants no cool-ambient credit.
+    if (ambient <= 30) {
+      return {
+        factor: 1,
+        rowDisplay: vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: 30 }),
+      };
+    }
+
+    // CEC rows are points, not bands. Always select the next higher listed
+    // point so an in-between input can never overstate permitted ampacity.
+    const row = CEC_AMBIENT_CORRECTION.find((item) => ambient <= item.ambient);
+    return {
+      factor: row?.factors[insulationTemp],
+      rowDisplay: row
+        ? vdFormat(AMP_RESULT_TEXT.degrees, { degrees: row.ambient })
+        : '',
+    };
+  }
+
+  const row = AMBIENT_CORRECTION.find((item) =>
+    (item.min === null || ambient >= item.min) && ambient <= item.max);
+  const rowDisplay = row
+    ? row.min === null
+      ? vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: row.max })
+      : vdFormat(AMP_RESULT_TEXT.degreeRange, { min: row.min, max: row.max })
+    : '';
+  return {
+    factor: row?.factors[insulationTemp],
+    rowDisplay,
+  };
 }
 
 function adjustmentFor(count) {
-  if (count <= 3) return 1;
-  return CONDUCTOR_ADJUSTMENT.find((row) =>
+  const table = isCanada() ? CEC_CONDUCTOR_ADJUSTMENT : CONDUCTOR_ADJUSTMENT;
+  if (!isCanada() && count <= 3) return 1;
+  return table.find((row) =>
     count >= row.min && (row.max === null || count <= row.max))?.factor;
 }
 
@@ -145,15 +209,13 @@ function showOnly(selector, id) {
   });
 }
 
-function showUnavailable(kind) {
+function showUnavailable() {
   $('results').hidden = false;
   $('amp-result-calculation').hidden = true;
   $('amp-result-unavailable').hidden = false;
-  $('amp-ca-unavailable').hidden = kind !== 'canada';
-  $('amp-nec-unavailable').hidden = kind !== 'nec';
-  $('verdict').className = kind === 'canada' ? 'verdict warn' : 'verdict bad';
-  showOnly('.amp-verdict-badge', kind === 'canada' ? 'amp-badge-planning' : 'amp-badge-not-permitted');
-  showOnly('.amp-big-label', kind === 'canada' ? 'amp-label-canada' : 'amp-label-not-permitted');
+  $('verdict').className = 'verdict bad';
+  showOnly('.amp-verdict-badge', 'amp-badge-not-permitted');
+  showOnly('.amp-big-label', 'amp-label-not-permitted');
   setText('big-number', '—');
   $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -174,15 +236,10 @@ function check() {
   const conductorCount = Number($('amp-conductors').value);
   if (!load || !Number.isFinite(ambient) || !Number.isInteger(conductorCount) || conductorCount < 1) return;
 
-  if (document.body.dataset.country === 'ca') {
-    showUnavailable('canada');
-    return;
-  }
-
-  const ambientBand = ambientBandFor(ambient);
-  const ambientFactor = ambientBand?.factors[insulationTemp];
-  if (!ambientBand || ambientFactor === null || ambientFactor === undefined) {
-    showUnavailable('nec');
+  const ambientSelection = ambientSelectionFor(ambient);
+  const ambientFactor = ambientSelection.factor;
+  if (ambientFactor === null || ambientFactor === undefined) {
+    showUnavailable();
     return;
   }
 
@@ -199,8 +256,12 @@ function check() {
     smallCap === undefined ? Infinity : smallCap,
   );
   const permitted = Math.floor(exactPermitted + 1e-9);
-  const required = continuous ? load * 1.25 : load;
-  const passes = required <= permitted;
+  const loadCheckValue = continuous
+    ? (isCanada() ? permitted * 0.80 : load * 1.25)
+    : load;
+  const passes = continuous && isCanada()
+    ? load <= loadCheckValue
+    : loadCheckValue <= permitted;
 
   let binding = 'derating';
   if (smallCap !== undefined
@@ -221,6 +282,7 @@ function check() {
 
   setText('amp-base-value', formatAmps(baseAmpacity));
   setText('amp-ambient-input', vdFormat(AMP_RESULT_TEXT.degrees, { degrees: formatNumber(ambient) }));
+  setText('amp-ambient-row-value', ambientSelection.rowDisplay);
   setText('amp-ambient-factor', formatFactor(ambientFactor));
   setText('amp-ambient-value', formatWholeAmps(ambientAdjusted));
   setText('amp-conductor-input', String(conductorCount));
@@ -238,7 +300,7 @@ function check() {
   setBinding(binding);
 
   setText('amp-load-entered', formatAmps(load));
-  setText('amp-load-required', formatAmps(required));
+  setText('amp-load-required', formatAmps(loadCheckValue));
   $('amp-continuous-row').hidden = !continuous;
   $('amp-noncontinuous-row').hidden = continuous;
   showOnly('.amp-load-note', passes

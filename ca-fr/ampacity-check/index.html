@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Réduction du courant admissible — note CEC | VoltDrop</title>
-<meta name="description" content="Page canadienne de planification du courant admissible. La grille de base disponible est NEC Table 310.16; CEC Tables 2, 4, 5A et 5C n’ont pas franchi notre vérification.">
+<title>Calculateur canadien de réduction du courant admissible — CEC Tables 5A et 5C | VoltDrop</title>
+<meta name="description" content="Calculateur canadien du courant admissible fondé sur CSA C22.1:24 Tables 2/4, 5A et 5C, le comptage de Rule 4-004, les bornes de Rule 4-006, les charges continues de Rule 8-104 et les plafonds de Rule 14-104.">
 <link rel="canonical" href="https://voltdrop.app/ca-fr/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Réduction du courant admissible — note CEC | VoltDrop">
-<meta property="og:description" content="Page canadienne de planification du courant admissible. La grille de base disponible est NEC Table 310.16; CEC Tables 2, 4, 5A et 5C n’ont pas franchi notre vérification.">
+<meta property="og:title" content="Calculateur canadien de réduction du courant admissible — CEC Tables 5A et 5C | VoltDrop">
+<meta property="og:description" content="Calculateur canadien du courant admissible fondé sur CSA C22.1:24 Tables 2/4, 5A et 5C, le comptage de Rule 4-004, les bornes de Rule 4-006, les charges continues de Rule 8-104 et les plafonds de Rule 14-104.">
 <meta property="og:url" content="https://voltdrop.app/ca-fr/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Réduction du courant admissible — note CEC | VoltDrop">
-<meta name="twitter:description" content="Page canadienne de planification du courant admissible. La grille de base disponible est NEC Table 310.16; CEC Tables 2, 4, 5A et 5C n’ont pas franchi notre vérification.">
+<meta name="twitter:title" content="Calculateur canadien de réduction du courant admissible — CEC Tables 5A et 5C | VoltDrop">
+<meta name="twitter:description" content="Calculateur canadien du courant admissible fondé sur CSA C22.1:24 Tables 2/4, 5A et 5C, le comptage de Rule 4-004, les bornes de Rule 4-006, les charges continues de Rule 8-104 et les plafonds de Rule 14-104.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Note de planification canadienne VoltDrop sur la réduction du courant admissible","url":"https://voltdrop.app/ca-fr/ampacity-check/","description":"Page canadienne de planification du courant admissible. La grille de base disponible est NEC Table 310.16; CEC Tables 2, 4, 5A et 5C n’ont pas franchi notre vérification.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur canadien VoltDrop de réduction du courant admissible","url":"https://voltdrop.app/ca-fr/ampacity-check/","description":"Calculateur canadien du courant admissible fondé sur CSA C22.1:24 Tables 2/4, 5A et 5C, le comptage de Rule 4-004, les bornes de Rule 4-006, les charges continues de Rule 8-104 et les plafonds de Rule 14-104.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -93,11 +93,11 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Réduction du courant admissible — planification seulement</h1>
-    <p class="tool-sub">Les données CEC de correction et d’ajustement ne sont pas encore vérifiées. Cette édition refuse d’emprunter les facteurs NEC.</p>
+    <h1 class="tool-title">🔥 Vérification canadienne du courant admissible et de la réduction</h1>
+    <p class="tool-sub">Appliquez les facteurs canadiens de température ambiante et de nombre de conducteurs, puis voyez quelle limite de sécurité CEC s’applique.</p>
   </div>
 
-<div class="ca-note"><strong>Note de planification Canada / CEC :</strong> La grille de base de courant admissible dont dispose ce site provient de NEC Table 310.16. CEC Table 2 et Table 4 n’ont pas encore franchi notre vérification et diffèrent au moins pour les petits calibres : pour le cuivre 14 AWG dans la colonne 60°C, le CEC indique 20 A et le NEC 15 A. CEC Tables 5A et 5C demeurent également non vérifiées; cette page n’affiche donc aucun facteur de correction, facteur d’ajustement ou courant admissible canadien réduit. Les plafonds pour petits conducteurs de CEC Rule 14-104 et les règles de terminaison de CEC Rule 4-006 restent vérifiés séparément.</div>
+<div class="ca-note"><strong>Source canadienne :</strong> <strong>CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)</strong>. Ce calculateur utilise Tables 2/4, 5A et 5C ainsi que Rules 4-004, 4-006, 8-104 et 14-104. L’adoption provinciale et les modifications varient; confirmez l’édition adoptée localement.</div>
 
   <form id="amp-form" class="card" autocomplete="off">
 
@@ -130,8 +130,9 @@
       <div class="seg" role="group" aria-label="Température nominale des bornes">
         <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
         <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">90°C</button>
       </div>
-      <p class="hint">Utilisez 60°C pour NM-B ou l’équipement non marqué. Utilisez 75°C seulement si l’équipement porte la marque 75°C. La limite des bornes s’applique après les deux facteurs de réduction.</p>
+      <p class="hint">Équipement marqué : utilisez la température de borne indiquée. Équipement non marqué : utilisez 60°C s’il est d’au plus 100 A ou marqué pour #1 AWG et plus petit; utilisez 75°C au-dessus. Rule 4-006 vise les premiers 1.2 m et permet une transition au-delà. Par prudence, VoltDrop applique la limite inférieure sur toute la longueur comme méthode simplifiée.</p>
     </div>
 
     <div class="field">
@@ -140,16 +141,16 @@
         <input type="number" id="amp-ambient" inputmode="decimal" step="any" value="30" required>
         <span class="unit">°C</span>
       </div>
-      <p class="hint">Entrez la température de l’air autour des conducteurs. NEC Table 310.15(B)(1) publie des plages jusqu’à 85°C; une cellule « — » n’est pas permise et cette calculatrice ne remplacera aucune valeur.</p>
+      <p class="hint">CEC Table 5A ne donne que des points de température au-dessus de 30°C. À 30°C ou moins, le facteur est 1.00, sans crédit pour une température plus fraîche. Entre deux points, ce calculateur prend la ligne supérieure suivante; il n’interpole jamais et n’arrondit jamais vers le bas.</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="amp-conductors">Nombre de conducteurs porteurs de courant</label>
+      <label class="field-label" for="amp-conductors">Conducteurs de puissance et d’éclairage à compter — Rule 4-004</label>
       <div class="input-unit">
         <input type="number" id="amp-conductors" inputmode="numeric" min="1" step="1" value="3" required>
         <span class="unit">conducteurs</span>
       </div>
-      <p class="hint">La règle canadienne de comptage des conducteurs n’est toujours pas confirmée par nos sources vérifiées. L’entrée d’un nombre ne produira aucun facteur ni résultat de courant admissible dans cette édition.</p>
+      <p class="hint">Comptez les conducteurs isolés de puissance et d’éclairage. Un conducteur de continuité des masses ne compte jamais. Ne comptez pas les conducteurs de commande ou de signal, ni un neutre qui ne transporte que le courant déséquilibré d’un circuit normalement équilibré. Comptez un neutre qui transporte un courant comparable à celui des phases ou un courant harmonique important provenant de charges non linéaires. Le Code ne précise rien sur les réserves; VoltDrop compte par défaut les réserves de puissance ou d’éclairage installées par prudence, et non comme citation du Code. L’autorité locale peut décider autrement.</p>
     </div>
 
     <div class="field">
@@ -163,10 +164,10 @@
     <div class="field">
       <label class="field-label">Durée de la charge</label>
       <div class="seg" role="group" aria-label="Durée de la charge">
-        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Moins de 3 heures</button>
-        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">3+ heures — continue</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Charge non continue</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">Continue — équipement standard coté à 80%</button>
       </div>
-      <p class="hint">Une charge prévue pour fonctionner 3 heures ou plus est dimensionnée à 125%. Il s’agit d’une vérification distincte du côté de la charge, et non d’un facteur de réduction.</p>
+      <p class="hint">CEC Rule 8-104 limite une charge continue à 80% du courant admissible corrigé avec un équipement standard coté à 80%. Il s’agit d’une vérification distincte, et non d’un facteur de réduction.</p>
     </div>
 
     <button type="submit" class="calc-btn">Vérifier le courant admissible</button>
@@ -177,49 +178,47 @@
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">Réussi</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>Trop petit</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>Non permis</div>
-      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>Planification seulement</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label amp-big-label" id="amp-label-final">courant admissible final permis</div>
         <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>cette combinaison n’est pas permise</div>
-        <div class="big-label amp-big-label" id="amp-label-canada" hidden>Résultat canadien de réduction non disponible</div>
       </div>
     </div>
 
     <div id="amp-result-unavailable" hidden>
-      <p class="verdict-note" id="amp-nec-unavailable">NEC Table 310.15(B)(1) publie « — » pour cette combinaison de température ambiante et de température nominale de l’isolant, ou la température se trouve hors du tableau publié. Aucun facteur n’est remplacé et aucun courant admissible permis n’est produit.</p>
-      <p class="verdict-note" id="amp-ca-unavailable">Aucune valeur de courant admissible n’est produite. CEC Tables 5A et 5C n’ont pas franchi la vérification des sources; cette édition canadienne n’affiche donc aucun facteur NEC de correction ou d’ajustement.</p>
+      <p class="verdict-note" id="amp-code-unavailable">CEC Table 5A publie « — » pour cette combinaison de température ambiante et de température nominale de l’isolant, ou la température dépasse les lignes prises en charge. Aucun facteur n’est remplacé et aucun courant admissible permis n’est produit.</p>
     </div>
 
     <div id="amp-result-calculation">
       <details class="math-details" open>
         <summary>Réduction du côté du conducteur</summary>
         <div class="math-body">
-          <p>Les deux facteurs multiplient d’abord le courant admissible de la colonne de l’isolant. Les limites de borne et de petits conducteurs s’appliquent seulement ensuite.</p>
+          <p>CEC Table 5A et Table 5C multiplient d’abord le courant admissible de la colonne de l’isolant. Rule 4-006 et Rule 14-104 imposent ensuite des plafonds distincts. Méthode simplifiée : VoltDrop applique le plafond de borne sur toute la longueur, même si Rule 4-006 permet une transition au-delà des premiers 1.2 m.</p>
           <div class="formula">
-            <div>Courant admissible de base (colonne de l’isolant) <strong id="amp-base-value"></strong></div>
-            <div>Correction selon la température ambiante <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
-            <div>Ajustement selon les conducteurs porteurs de courant <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="derating">— non déterminante</span></div>
-            <div>Limite des bornes de 110.14(C) <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="termination">— non déterminante</span></div>
-            <div>Limite des petits conducteurs de 240.4(D) <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="cap">— non déterminante</span></div>
+            <div>Courant admissible de base — CEC Table 2/4 (colonne de l’isolant) <strong id="amp-base-value"></strong></div>
+            <div>Correction ambiante de CEC Table 5A <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>Ligne de CEC Table 5A utilisée <strong id="amp-ambient-row-value"></strong> — Pour une température intermédiaire, la ligne publiée supérieure suivante est utilisée; jamais d’interpolation ni d’arrondi vers le bas.</div>
+            <div>Ajustement des conducteurs de CEC Table 5C <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="derating">— non déterminante</span></div>
+            <div>Limite de borne simplifiée de Rule 4-006 <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="termination">— non déterminante</span></div>
+            <div>Plafond du dispositif pour petits conducteurs de Rule 14-104 <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← déterminante</span><span class="amp-not-binding-marker" data-binding="cap">— non déterminante</span></div>
             <div><strong>COURANT ADMISSIBLE FINAL PERMIS <span id="amp-final-value"></span></strong></div>
           </div>
           <div class="formula" id="amp-combined-formula"></div>
           <p><strong>Limite déterminante :</strong> <span id="amp-binding-value"></span></p>
-          <span id="amp-binding-derating" hidden>Réduction après la correction ambiante et l’ajustement des conducteurs</span>
-          <span id="amp-binding-termination" hidden>Limite de température des bornes de 110.14(C)</span>
-          <span id="amp-binding-cap" hidden>Limite des petits conducteurs de 240.4(D)</span>
+          <span id="amp-binding-derating" hidden>Réduction après CEC Table 5A et Table 5C</span>
+          <span id="amp-binding-termination" hidden>Limite de borne simplifiée de CEC Rule 4-006</span>
+          <span id="amp-binding-cap" hidden>Plafond CEC du dispositif pour petits conducteurs de Rule 14-104</span>
         </div>
       </details>
 
       <details class="math-details" open>
-        <summary>Vérification du côté de la charge — calcul séparé</summary>
+        <summary>Vérification de la charge selon Rule 8-104 — calcul distinct</summary>
         <div class="math-body">
-          <p>Le dimensionnement des charges continues et la réduction du conducteur répondent à des questions différentes. La règle de 125% dimensionne le circuit pour une charge de longue durée; elle ne se multiplie pas avec les facteurs de réduction du conducteur.</p>
+          <p>Le dimensionnement d’une charge continue et la réduction du conducteur répondent à des questions différentes. CEC Rule 8-104 vérifie que la charge continue ne dépasse pas 80% du courant admissible corrigé avec un équipement standard coté à 80%. Cette vérification n’est jamais combinée à un multiplicateur de 125%.</p>
           <div class="formula">
             <div>Charge entrée <strong id="amp-load-entered"></strong></div>
-            <div id="amp-noncontinuous-row">Charge de moins de 3 heures : aucun multiplicateur de charge continue de 125%</div>
-            <div id="amp-continuous-row" hidden>Exigence de charge continue (charge entrée × 125%) <strong id="amp-load-required"></strong></div>
+            <div id="amp-noncontinuous-row">Charge non continue : aucune limite de 80% de Rule 8-104 n’est appliquée</div>
+            <div id="amp-continuous-row" hidden>Limite de charge continue (courant admissible corrigé × 80%) <strong id="amp-load-required"></strong></div>
           </div>
           <p class="amp-load-note" id="amp-note-load-pass">La charge entrée respecte le courant admissible final permis.</p>
           <p class="amp-load-note" id="amp-note-load-fail" hidden>La charge entrée dépasse le courant admissible final permis.</p>
@@ -230,11 +229,11 @@
     </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qu’est-ce que le courant admissible?", "acceptedAnswer": {"@type": "Answer", "text": "Le courant admissible est le courant maximal qu’un conducteur peut transporter dans les conditions indiquées sans surchauffer. La réduction canadienne exige des données vérifiées de CEC Tables 5A et 5C; cette édition ne remplace pas ces données par des facteurs NEC tant que les données et la règle de comptage des conducteurs demeurent non résolues."}}, {"@type": "Question", "name": "Quelle colonne de température d’isolant dois-je utiliser?", "acceptedAnswer": {"@type": "Answer", "text": "La colonne de l’isolant et la température nominale des bornes sont deux entrées distinctes. Selon CEC Rule 4-006, utilisez 60°C pour l’équipement d’au plus 100 A ou marqué pour #1 AWG et plus petit, et 75°C au-dessus de cette limite; la limite s’applique aux premiers 1.2 m à partir de la terminaison. Cette édition canadienne ne produit toujours aucun courant admissible réduit avant la vérification de CEC Tables 2, 4, 5A et 5C et de la règle canadienne de comptage des conducteurs."}}, {"@type": "Question", "name": "Comment compter les conducteurs porteurs de courant?", "acceptedAnswer": {"@type": "Answer", "text": "Cette édition canadienne ne donne pas encore de règle de comptage. Les sources disponibles ne s’entendent pas sur la question de savoir si CEC Table 5C compte tous les conducteurs ou seulement les conducteurs porteurs de courant; aucun facteur ni résultat de courant admissible n’est donc affiché avant vérification."}}, {"@type": "Question", "name": "La règle de charge continue fait-elle partie de la réduction?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Le dimensionnement d’une charge continue est un calcul distinct du côté de la charge, séparé de la réduction du conducteur. Cette édition canadienne ne calcule aucun résultat parce que les données CEC de réduction requises n’ont pas été vérifiées."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qu’est-ce que le courant admissible?", "acceptedAnswer": {"@type": "Answer", "text": "Le courant admissible est le courant maximal qu’un conducteur peut transporter dans les conditions indiquées sans surchauffer. Ce calculateur canadien utilise CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024) : Tables 2/4, 5A et 5C, avec Rules 4-004, 4-006, 8-104 et 14-104."}}, {"@type": "Question", "name": "Quelle colonne de température d’isolant dois-je utiliser?", "acceptedAnswer": {"@type": "Answer", "text": "Utilisez la température nominale de l’isolant du conducteur comme colonne de départ. Selon CEC Rule 4-006, l’équipement marqué utilise la température de borne indiquée. Pour l’équipement non marqué, utilisez 60°C s’il est d’au plus 100 A ou marqué pour #1 AWG et plus petit, et 75°C au-dessus. La règle vise les premiers 1.2 m depuis une borne et permet une transition au-delà. Par prudence, VoltDrop applique la limite de borne inférieure sur toute la longueur comme méthode simplifiée."}}, {"@type": "Question", "name": "Comment compter les conducteurs porteurs de courant?", "acceptedAnswer": {"@type": "Answer", "text": "Selon CEC Rule 4-004, comptez les conducteurs isolés de puissance et d’éclairage. Un conducteur de continuité des masses ne compte jamais. Les conducteurs de commande et de signal ne comptent pas. Un neutre qui ne transporte que le courant déséquilibré d’un circuit normalement équilibré ne compte pas; un neutre qui transporte un courant comparable à celui des phases ou un courant harmonique important de charges non linéaires compte. Le Code ne précise rien sur les réserves; VoltDrop compte donc par défaut les réserves de puissance ou d’éclairage installées par prudence, et non comme citation du Code. L’autorité locale peut décider autrement."}}, {"@type": "Question", "name": "La règle de charge continue fait-elle partie de la réduction?", "acceptedAnswer": {"@type": "Answer", "text": "Non. CEC Table 5A et Table 5C réduisent le courant admissible utilisable à cause de la chaleur. Rule 8-104 limite séparément la charge continue à 80% du courant admissible corrigé avec un équipement standard coté à 80%. Ce calculateur montre les deux vérifications séparément et ne multiplie jamais le courant admissible à la fois par 0.80 et par 1.25."}}]}</script>
 
   <section class="card explainer">
     <h2>Ce que cette vérification couvre</h2>
-    <p>Cette édition canadienne est une barrière d’honnêteté, et non un calcul. CEC Tables 5A et 5C ne sont pas encore vérifiées; elle n’affiche donc aucun facteur de correction, facteur d’ajustement ou courant admissible réduit.</p>
+    <p>Cette édition canadienne utilise les courants admissibles de base de CSA C22.1:24 Tables 2/4, les facteurs ambiants de Table 5A, les facteurs de conducteurs de Table 5C, le comptage de Rule 4-004, une vérification prudente et simplifiée des bornes selon Rule 4-006, les plafonds de petits conducteurs de Rule 14-104 et une vérification distincte des charges continues de Rule 8-104.</p>
     <p>Le courant admissible et la <a class="inline-link" href="/">chute de tension</a> sont des vérifications distinctes — un conducteur doit réussir <strong>les deux</strong>.</p>
   </section>
 
@@ -261,6 +260,6 @@
 </footer>
 
 <script src="/assets/ca-fr/common.js?v=827ad44530"></script>
-<script src="/assets/ca-fr/ampacity.js?v=df828c963d"></script>
+<script src="/assets/ca-fr/ampacity.js?v=6a59acfd19"></script>
 </body>
 </html>

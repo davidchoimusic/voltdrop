@@ -38,6 +38,7 @@
       <div class="seg" role="group" aria-label="{{attr:ampacity.terminationTemperatureRatingLabel}}">
         <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">{{ampacity.n60CButton}}</button>
         <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">{{ampacity.n75CButton}}</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">{{ampacity.n90CButton}}</button>
       </div>
       <p class="hint">{{ampacity.terminationRatingHint}}</p>
     </div>
@@ -85,18 +86,15 @@
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">{{ampacity.passBadge}}</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>{{ampacity.tooSmallBadge}}</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>{{ampacity.notPermittedBadge}}</div>
-      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>{{ampacity.planningOnlyBadge}}</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label amp-big-label" id="amp-label-final">{{ampacity.finalPermittedAmpacityLabel}}</div>
         <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>{{ampacity.noPermittedAmpacityLabel}}</div>
-        <div class="big-label amp-big-label" id="amp-label-canada" hidden>{{ampacity.canadianResultUnavailableLabel}}</div>
       </div>
     </div>
 
     <div id="amp-result-unavailable" hidden>
-      <p class="verdict-note" id="amp-nec-unavailable">{{ampacity.notPermittedExplanation}}</p>
-      <p class="verdict-note" id="amp-ca-unavailable">{{ampacity.canadianResultUnavailableExplanation}}</p>
+      <p class="verdict-note" id="amp-code-unavailable">{{ampacity.notPermittedExplanation}}</p>
     </div>
 
     <div id="amp-result-calculation">
@@ -107,6 +105,7 @@
           <div class="formula">
             <div>{{ampacity.baseAmpacityLabel}} <strong id="amp-base-value"></strong></div>
             <div>{{ampacity.ambientCorrectionLabel}} <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>{{ampacity.ambientTableRowLabel}} <strong id="amp-ambient-row-value"></strong> — {{ampacity.ambientTableRowMethod}}</div>
             <div>{{ampacity.conductorAdjustmentLabel}} <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="derating">— {{ampacity.notBindingLabel}}</span></div>
             <div>{{ampacity.terminationLimitLabel}} <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="termination">— {{ampacity.notBindingLabel}}</span></div>
             <div>{{ampacity.smallConductorCapLabel}} <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="cap">— {{ampacity.notBindingLabel}}</span></div>

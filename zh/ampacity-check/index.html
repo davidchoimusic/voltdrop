@@ -130,8 +130,9 @@
       <div class="seg" role="group" aria-label="端子温度额定值">
         <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
         <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">90°C</button>
       </div>
-      <p class="hint">NM-B或无标记设备使用60°C。只有设备标有75°C时才使用75°C。端子限值在两个降容系数之后应用。</p>
+      <p class="hint">NM-B或无标记设备使用60°C。只有设备已标记并获准用于相应温度时，才可使用75°C或90°C。端子限值在两个降容系数之后应用。</p>
     </div>
 
     <div class="field">
@@ -177,18 +178,15 @@
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">通过</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>规格过小</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>不允许</div>
-      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>仅供规划</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label amp-big-label" id="amp-label-final">最终允许载流量</div>
         <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>此组合不允许</div>
-        <div class="big-label amp-big-label" id="amp-label-canada" hidden>加拿大降容结果不可用</div>
       </div>
     </div>
 
     <div id="amp-result-unavailable" hidden>
-      <p class="verdict-note" id="amp-nec-unavailable">NEC Table 310.15(B)(1)对此环境温度与绝缘温度额定值组合公布“—”，或该温度超出已公布表格。不会替代任何系数，也不会生成允许载流量。</p>
-      <p class="verdict-note" id="amp-ca-unavailable">不会生成任何载流量数值。CEC Tables 5A和5C尚未通过来源核验，因此加拿大版本不会显示任何NEC校正系数或调整系数。</p>
+      <p class="verdict-note" id="amp-code-unavailable">NEC Table 310.15(B)(1)对此环境温度与绝缘温度额定值组合公布“—”，或该温度超出已公布表格。不会替代任何系数，也不会生成允许载流量。</p>
     </div>
 
     <div id="amp-result-calculation">
@@ -199,6 +197,7 @@
           <div class="formula">
             <div>基础载流量（绝缘温度栏） <strong id="amp-base-value"></strong></div>
             <div>环境温度校正 <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>采用的环境温度表行 <strong id="amp-ambient-row-value"></strong> — 采用包含输入温度的已公布环境温度区间。</div>
             <div>载流导体数量调整 <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← 决定性</span><span class="amp-not-binding-marker" data-binding="derating">— 非决定性</span></div>
             <div>110.14(C)端子限值 <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← 决定性</span><span class="amp-not-binding-marker" data-binding="termination">— 非决定性</span></div>
             <div>240.4(D)小导体上限 <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← 决定性</span><span class="amp-not-binding-marker" data-binding="cap">— 非决定性</span></div>
@@ -261,6 +260,6 @@
 </footer>
 
 <script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
-<script src="/assets/us-zh/ampacity.js?v=df828c963d"></script>
+<script src="/assets/us-zh/ampacity.js?v=6a59acfd19"></script>
 </body>
 </html>

@@ -236,6 +236,24 @@
       "es": "temperatura nominal de la terminación",
       "fr-CA": "température nominale des bornes",
       "zh-Hans": "端子温度额定值"
+    },
+    "bonding conductor": {
+      "gloss": "A conductor that provides the low-impedance fault-current bond between metal parts; CEC Rule 4-004 excludes it from the derating count.",
+      "es": "conductor de unión equipotencial",
+      "fr-CA": "conducteur de continuité des masses",
+      "zh-Hans": "接地跨接导体"
+    },
+    "power and lighting conductors": {
+      "gloss": "The CEC category of installed insulated conductors considered for the Rule 4-004 derating count, subject to the rule's neutral and bonding exclusions.",
+      "es": "conductores de fuerza y alumbrado",
+      "fr-CA": "conducteurs de puissance et d’éclairage",
+      "zh-Hans": "功率及照明导体"
+    },
+    "spare conductor": {
+      "gloss": "An installed conductor reserved for possible future use and not presently connected to a load.",
+      "es": "conductor de reserva",
+      "fr-CA": "conducteur de réserve",
+      "zh-Hans": "备用导体"
     }
   }
 }

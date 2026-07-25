@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ampacity Derating — CEC planning note | VoltDrop</title>
-<meta name="description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
+<title>Canadian Ampacity Derating Calculator — CEC Tables 5A & 5C | VoltDrop</title>
+<meta name="description" content="Canadian ampacity calculator using CSA C22.1:24 Tables 2/4, 5A, and 5C, Rule 4-004 counting, Rule 4-006 terminations, Rule 8-104 continuous loads, and Rule 14-104 caps.">
 <link rel="canonical" href="https://voltdrop.app/ca/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Ampacity Derating — CEC planning note | VoltDrop">
-<meta property="og:description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
+<meta property="og:title" content="Canadian Ampacity Derating Calculator — CEC Tables 5A & 5C | VoltDrop">
+<meta property="og:description" content="Canadian ampacity calculator using CSA C22.1:24 Tables 2/4, 5A, and 5C, Rule 4-004 counting, Rule 4-006 terminations, Rule 8-104 continuous loads, and Rule 14-104 caps.">
 <meta property="og:url" content="https://voltdrop.app/ca/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ampacity Derating — CEC planning note | VoltDrop">
-<meta name="twitter:description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
+<meta name="twitter:title" content="Canadian Ampacity Derating Calculator — CEC Tables 5A & 5C | VoltDrop">
+<meta name="twitter:description" content="Canadian ampacity calculator using CSA C22.1:24 Tables 2/4, 5A, and 5C, Rule 4-004 counting, Rule 4-006 terminations, Rule 8-104 continuous loads, and Rule 14-104 caps.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Canadian Ampacity Derating Planning Note","url":"https://voltdrop.app/ca/ampacity-check/","description":"Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Canadian Ampacity Derating Calculator","url":"https://voltdrop.app/ca/ampacity-check/","description":"Canadian ampacity calculator using CSA C22.1:24 Tables 2/4, 5A, and 5C, Rule 4-004 counting, Rule 4-006 terminations, Rule 8-104 continuous loads, and Rule 14-104 caps.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -93,11 +93,11 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Ampacity derating — planning only</h1>
-    <p class="tool-sub">CEC correction and adjustment data is not yet verified. This edition refuses to borrow NEC factors.</p>
+    <h1 class="tool-title">🔥 Canadian Ampacity & Derating Check</h1>
+    <p class="tool-sub">Apply the Canadian ambient and conductor-count factors, then see which CEC safety limit controls.</p>
   </div>
 
-<div class="ca-note"><strong>Canada / CEC planning note:</strong> The base ampacity grid available to this site is NEC Table 310.16. CEC Table 2 and Table 4 have not yet passed our verification gate and are known to differ at least at small sizes: 14 AWG copper in the 60°C column is 20 A under the CEC and 15 A under the NEC. CEC Tables 5A and 5C also remain unverified, so this page displays no correction factor, adjustment factor, or Canadian derated ampacity. CEC Rule 14-104 small-conductor caps and CEC Rule 4-006 termination rules remain separately verified.</div>
+<div class="ca-note"><strong>Canadian source:</strong> <strong>CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)</strong>. This calculator uses Tables 2/4, 5A, and 5C and Rules 4-004, 4-006, 8-104, and 14-104. Provincial adoption and amendments vary; confirm the edition adopted locally.</div>
 
   <form id="amp-form" class="card" autocomplete="off">
 
@@ -130,8 +130,9 @@
       <div class="seg" role="group" aria-label="Termination temperature rating">
         <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
         <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">90°C</button>
       </div>
-      <p class="hint">Use 60°C for NM-B or unmarked equipment. Use 75°C only when the equipment is marked 75°C. The termination limit is applied after both derating factors.</p>
+      <p class="hint">Marked equipment: use its marked termination temperature. Unmarked equipment: use 60°C when rated not more than 100 A or marked for #1 AWG and smaller; use 75°C above that. Rule 4-006 applies to the first 1.2 m and permits a transition beyond it. VoltDrop conservatively applies the lower limit throughout as a simplified method.</p>
     </div>
 
     <div class="field">
@@ -140,16 +141,16 @@
         <input type="number" id="amp-ambient" inputmode="decimal" step="any" value="30" required>
         <span class="unit">°C</span>
       </div>
-      <p class="hint">Enter the surrounding air temperature at the conductors. NEC Table 310.15(B)(1) publishes bands through 85°C; a “—” cell is not permitted and this calculator will not substitute a value.</p>
+      <p class="hint">CEC Table 5A lists single ambient points only above 30°C. At or below 30°C the factor is 1.00, with no cool-ambient credit. Between listed points, this calculator uses the next higher row; it never interpolates or rounds down.</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="amp-conductors">Number of current-carrying conductors</label>
+      <label class="field-label" for="amp-conductors">Countable power and lighting conductors — Rule 4-004</label>
       <div class="input-unit">
         <input type="number" id="amp-conductors" inputmode="numeric" min="1" step="1" value="3" required>
         <span class="unit">conductors</span>
       </div>
-      <p class="hint">The Canadian conductor-counting rule is still unresolved in our verified sources. Entering a count will not produce a factor or ampacity result in this edition.</p>
+      <p class="hint">Count insulated power and lighting conductors. A bonding conductor never counts. Do not count control or signal conductors, or a neutral carrying only unbalanced current in a normally balanced circuit. Count a neutral carrying current comparable to the phase conductors or significant harmonic current from non-linear loads. The Code is silent on spares; VoltDrop counts installed power or lighting spares by default as a conservative reading, not a Code quotation. Your local authority may differ.</p>
     </div>
 
     <div class="field">
@@ -163,10 +164,10 @@
     <div class="field">
       <label class="field-label">Load duration</label>
       <div class="seg" role="group" aria-label="Load duration">
-        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Under 3 hours</button>
-        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">3+ hours — continuous</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Not continuous</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">Continuous — standard 80%-rated equipment</button>
       </div>
-      <p class="hint">A load expected to run for 3 hours or more is sized at 125%. This is a separate load-side check, not a derating multiplier.</p>
+      <p class="hint">CEC Rule 8-104 limits a continuous load to 80% of corrected ampacity for standard 80%-rated equipment. This is a separate check, not a derating multiplier.</p>
     </div>
 
     <button type="submit" class="calc-btn">Check ampacity</button>
@@ -177,49 +178,47 @@
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">Pass</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>Too small</div>
       <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>Not permitted</div>
-      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>Planning only</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label amp-big-label" id="amp-label-final">final permitted ampacity</div>
         <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>this combination is not permitted</div>
-        <div class="big-label amp-big-label" id="amp-label-canada" hidden>Canadian derating result unavailable</div>
       </div>
     </div>
 
     <div id="amp-result-unavailable" hidden>
-      <p class="verdict-note" id="amp-nec-unavailable">NEC Table 310.15(B)(1) publishes “—” for this ambient-temperature and insulation-rating combination, or the temperature is outside the published table. No factor is substituted and no permitted ampacity is produced.</p>
-      <p class="verdict-note" id="amp-ca-unavailable">No ampacity number is produced. CEC Tables 5A and 5C have not passed the source-verification gate, so this Canadian edition will not display NEC correction or adjustment factors.</p>
+      <p class="verdict-note" id="amp-code-unavailable">CEC Table 5A publishes “—” for this ambient-temperature and insulation-rating combination, or the temperature is above the supported table rows. No factor is substituted and no permitted ampacity is produced.</p>
     </div>
 
     <div id="amp-result-calculation">
       <details class="math-details" open>
         <summary>Conductor-side derating</summary>
         <div class="math-body">
-          <p>The two factors multiply the insulation-column ampacity first. Only after that do the termination and small-conductor limits apply.</p>
+          <p>CEC Table 5A and Table 5C multiply the insulation-column ampacity first. Rule 4-006 and Rule 14-104 are separate caps afterward. Simplified method: VoltDrop applies the termination cap throughout, although Rule 4-006 permits a transition beyond the first 1.2 m.</p>
           <div class="formula">
-            <div>Base ampacity (insulation column) <strong id="amp-base-value"></strong></div>
-            <div>Ambient correction <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
-            <div>Current-carrying conductor adjustment <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="derating">— not binding</span></div>
-            <div>110.14(C) termination limit <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="termination">— not binding</span></div>
-            <div>240.4(D) small-conductor cap <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="cap">— not binding</span></div>
+            <div>Base ampacity — CEC Table 2/4 (insulation column) <strong id="amp-base-value"></strong></div>
+            <div>CEC Table 5A ambient correction <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>CEC Table 5A row used <strong id="amp-ambient-row-value"></strong> — For an in-between temperature, the next higher listed row is used; never interpolation or rounding down.</div>
+            <div>CEC Table 5C conductor adjustment <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="derating">— not binding</span></div>
+            <div>Simplified Rule 4-006 termination limit <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="termination">— not binding</span></div>
+            <div>Rule 14-104 small-conductor device cap <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="cap">— not binding</span></div>
             <div><strong>FINAL PERMITTED AMPACITY <span id="amp-final-value"></span></strong></div>
           </div>
           <div class="formula" id="amp-combined-formula"></div>
           <p><strong>Binding limit:</strong> <span id="amp-binding-value"></span></p>
-          <span id="amp-binding-derating" hidden>Derating after ambient correction and conductor adjustment</span>
-          <span id="amp-binding-termination" hidden>110.14(C) termination temperature limit</span>
-          <span id="amp-binding-cap" hidden>240.4(D) small-conductor cap</span>
+          <span id="amp-binding-derating" hidden>Derating after CEC Table 5A and Table 5C</span>
+          <span id="amp-binding-termination" hidden>Simplified CEC Rule 4-006 termination limit</span>
+          <span id="amp-binding-cap" hidden>CEC Rule 14-104 small-conductor device cap</span>
         </div>
       </details>
 
       <details class="math-details" open>
-        <summary>Load-side check — separate calculation</summary>
+        <summary>Rule 8-104 load-side check — separate calculation</summary>
         <div class="math-body">
-          <p>Continuous-load sizing and conductor derating answer different questions. The 125% rule sizes the circuit for a long-running load; it is not multiplied into the conductor derating factors.</p>
+          <p>Continuous-load sizing and conductor derating answer different questions. CEC Rule 8-104 checks that the continuous load is no more than 80% of corrected ampacity for standard 80%-rated equipment. It is never combined with a 125% multiplier.</p>
           <div class="formula">
             <div>Entered load <strong id="amp-load-entered"></strong></div>
-            <div id="amp-noncontinuous-row">Load under 3 hours: no 125% continuous-load multiplier</div>
-            <div id="amp-continuous-row" hidden>Continuous-load requirement (entered load × 125%) <strong id="amp-load-required"></strong></div>
+            <div id="amp-noncontinuous-row">Not a continuous load: no Rule 8-104 80% limit applied</div>
+            <div id="amp-continuous-row" hidden>Continuous-load limit (corrected ampacity × 80%) <strong id="amp-load-required"></strong></div>
           </div>
           <p class="amp-load-note" id="amp-note-load-pass">The entered load is within the final permitted ampacity.</p>
           <p class="amp-load-note" id="amp-note-load-fail" hidden>The entered load is above the final permitted ampacity.</p>
@@ -230,11 +229,11 @@
     </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current a conductor can carry under stated conditions without overheating. Canadian derating requires verified CEC Tables 5A and 5C data; this edition does not substitute NEC factors while that data and the conductor-counting rule remain unresolved."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "The insulation column and the termination temperature rating are separate inputs. Under CEC Rule 4-006, use 60°C for equipment rated 100 A or less or marked for #1 AWG and smaller, and 75°C above that; the limit applies to the first 1.2 m from the termination. This Canadian edition still does not produce a derated ampacity until CEC Tables 2, 4, 5A, and 5C and the Canadian conductor-counting rule are verified."}}, {"@type": "Question", "name": "How do I count current-carrying conductors?", "acceptedAnswer": {"@type": "Answer", "text": "This Canadian edition does not state a counting rule yet. Available sources disagree about whether CEC Table 5C counts all conductors or only current-carrying conductors, so no factor or ampacity result is shown until verified."}}, {"@type": "Question", "name": "Is the continuous-load rule part of derating?", "acceptedAnswer": {"@type": "Answer", "text": "No. Continuous-load sizing is a separate load-side calculation from conductor derating. This Canadian edition does not calculate either result because its required CEC derating data has not passed verification."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current a conductor can carry under stated conditions without overheating. This Canadian calculator uses CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A, and 5C, with Rules 4-004, 4-006, 8-104, and 14-104."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Use the conductor insulation rating for the starting column. Under CEC Rule 4-006, marked equipment uses its marked termination temperature. For unmarked equipment, use 60°C when it is rated not more than 100 A or marked for #1 AWG and smaller, and 75°C above that. The rule applies to the first 1.2 m from a termination and permits a transition beyond it. VoltDrop conservatively applies the lower termination limit throughout as a simplified method."}}, {"@type": "Question", "name": "How do I count current-carrying conductors?", "acceptedAnswer": {"@type": "Answer", "text": "Under CEC Rule 4-004, count insulated power and lighting conductors. A bonding conductor never counts. Control and signal conductors do not count. A neutral carrying only unbalanced current in a normally balanced circuit does not count; a neutral carrying current comparable to the phases or significant harmonic current from non-linear loads does count. The Code is silent on spares, so VoltDrop counts installed power or lighting spares by default as a conservative reading, not a Code quotation; your local authority may differ."}}, {"@type": "Question", "name": "Is the continuous-load rule part of derating?", "acceptedAnswer": {"@type": "Answer", "text": "No. CEC Table 5A and Table 5C reduce usable conductor ampacity because of heat. Rule 8-104 separately limits continuous load to 80% of corrected ampacity for standard 80%-rated equipment. This calculator shows both checks separately and never multiplies ampacity by both 0.80 and 1.25."}}]}</script>
 
   <section class="card explainer">
     <h2>What this checks</h2>
-    <p>This Canadian edition is an honesty gate, not a calculation. CEC Tables 5A and 5C remain unverified, so it displays no correction factor, adjustment factor, or derated ampacity.</p>
+    <p>This Canadian edition uses CSA C22.1:24 Tables 2/4 base ampacities, Table 5A ambient factors, Table 5C conductor factors, Rule 4-004 counting, a conservative simplified Rule 4-006 termination check, Rule 14-104 small-conductor caps, and a separate Rule 8-104 continuous-load check.</p>
     <p>Ampacity and <a class="inline-link" href="/">voltage drop</a> are separate checks — a wire must pass <strong>both</strong>.</p>
   </section>
 
@@ -261,6 +260,6 @@
 </footer>
 
 <script src="/assets/ca-en/common.js?v=d3b64342ae"></script>
-<script src="/assets/ca-en/ampacity.js?v=df828c963d"></script>
+<script src="/assets/ca-en/ampacity.js?v=6a59acfd19"></script>
 </body>
 </html>

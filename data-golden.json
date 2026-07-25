@@ -5,6 +5,8 @@
   "ampacity.js:SMALL_CAP": "50a3245ddb2882ce153c9018d3c23f35",
   "ampacity.js:AMBIENT_CORRECTION": "25d255a1d8a6c41adaa9aab5594401bd",
   "ampacity.js:CONDUCTOR_ADJUSTMENT": "bbaef709d42510b8f086999709d2d74e",
+  "ampacity.js:CEC_AMBIENT_CORRECTION": "175c30d7995cbcd07bd2e263830309ae",
+  "ampacity.js:CEC_CONDUCTOR_ADJUSTMENT": "1ac6c154b58edf4bda6649e147d72ded",
   "conduit.js:THHN_AREA": "f4c637777099a09c3a5ecd843fd4b6ed",
   "conduit.js:CONDUIT": "59ffae62a59c83646bdd6a9a75db25bf",
   "boxfill.js:VOL_PER_CONDUCTOR": "94fde8ccf746df6275d4f58534b0b08a",
