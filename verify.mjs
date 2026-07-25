@@ -57,6 +57,179 @@ const check = (name, got, want, tol = 0.02) => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${name}: got ${got}, expected ~${want}`);
   ok ? pass++ : fail++;
 };
+const checkBool = (name, ok, detail = '') => {
+  console.log(`${ok ? 'PASS' : 'FAIL'} ${name}${detail ? `: ${detail}` : ''}`);
+  ok ? pass++ : fail++;
+};
+
+const GENERATED_PATHS = [
+  '',
+  'wire-size-calculator/',
+  'max-wire-length/',
+  'ampacity-check/',
+  'conduit-fill/',
+  'privacy/',
+  'power-calculator/',
+  'box-fill/',
+  'guides/',
+  'guides/sub-panel-wire-size/',
+  'guides/50-amp-wire-size/',
+  'guides/wire-ampacity-chart/',
+  'guides/how-far-12-gauge-wire/',
+  'guides/voltage-drop-formula/',
+  'ca/guides/',
+  'ca/guides/sub-panel-wire-size/',
+  'ca/guides/50-amp-wire-size/',
+  'ca/guides/wire-ampacity-chart/',
+  'ca/guides/how-far-12-gauge-wire/',
+  'ca/guides/voltage-drop-formula/',
+  'terms/',
+];
+const GUIDE_PATHS = [
+  '/guides/',
+  '/guides/sub-panel-wire-size/',
+  '/guides/50-amp-wire-size/',
+  '/guides/wire-ampacity-chart/',
+  '/guides/how-far-12-gauge-wire/',
+  '/guides/voltage-drop-formula/',
+];
+
+// ---- Header fit: all four mobile controls stay on one row, with no page overflow.
+for (const width of [360, 390]) {
+  await page.setViewportSize({ width, height: 844 });
+  const badPaths = [];
+  for (const path of GENERATED_PATHS) {
+    await page.goto(BASE + path);
+    const fit = await page.evaluate(() => {
+      const row = document.querySelector('.brand-row');
+      const controls = [...row.children].filter((element) => getComputedStyle(element).display !== 'none');
+      const centers = controls.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return Math.round(rect.top + rect.height / 2);
+      });
+      return {
+        oneRow: Math.max(...centers) - Math.min(...centers) <= 1 && getComputedStyle(row).flexWrap === 'nowrap',
+        noOverflow: document.documentElement.scrollWidth <= window.innerWidth,
+      };
+    });
+    if (!fit.oneRow || !fit.noOverflow) badPaths.push(`/${path || ''}`);
+  }
+  checkBool(`header one row + no overflow at ${width}px`, badPaths.length === 0,
+    badPaths.length ? `failed on ${badPaths.join(', ')}` : `all ${GENERATED_PATHS.length} pages`);
+}
+
+// ---- Edition picker: panel behavior, safety text, dependent language choices.
+await page.goto(BASE);
+await page.evaluate(() => localStorage.clear());
+await page.reload();
+
+let languageHidden = await page.locator('#edition-language-group').isHidden();
+checkBool('language group absent with one language per country', languageHidden);
+
+await page.click('#country-chip');
+let panelState = await page.evaluate(() => ({
+  open: !document.getElementById('edition-panel').hidden,
+  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
+}));
+checkBool('chip opens edition panel and expands aria state', panelState.open && panelState.expanded === 'true');
+
+await page.keyboard.press('Escape');
+panelState = await page.evaluate(() => ({
+  closed: document.getElementById('edition-panel').hidden,
+  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
+}));
+checkBool('Escape closes edition panel', panelState.closed && panelState.expanded === 'false');
+
+await page.click('#country-chip');
+await page.click('.edition-country-option[data-country="ca"]');
+let codeName = await page.textContent('#code-name');
+let codeBasis = await page.textContent('#code-basis');
+let chip = await page.textContent('#country-chip');
+checkBool('panel country radio activates Canada', await page.evaluate(() => VDCountry.get() === 'ca'));
+checkBool('panel country switch swaps code name', codeName.includes('Canadian Electrical Code'));
+checkBool('panel country switch swaps mandatory basis', codeBasis.includes('MANDATORY'));
+checkBool('chip shows safety code and language', chip.includes('🇨🇦 CEC · EN'), chip.trim());
+let guidesHref = await page.getAttribute('.tool-link[data-tool="guides"]', 'href');
+checkBool('Canada switches Guides navigation', guidesHref === '/ca/guides/', guidesHref);
+
+await page.click('.edition-country-option[data-country="us"]');
+await page.click('.tagline');
+panelState = await page.evaluate(() => ({
+  closed: document.getElementById('edition-panel').hidden,
+  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
+}));
+checkBool('clicking outside closes edition panel', panelState.closed && panelState.expanded === 'false');
+
+await page.evaluate(() => {
+  VDCountry.COUNTRIES.us.langs.es = 'Español';
+  window.__langEvents = 0;
+  window.addEventListener('vd:lang', () => { window.__langEvents += 1; });
+});
+await page.click('#country-chip');
+languageHidden = await page.locator('#edition-language-group').isHidden();
+const usLanguageState = await page.evaluate(() => ({
+  label: document.getElementById('edition-language-label').textContent,
+  labels: [...document.querySelectorAll('.edition-language-option')].map((button) => button.textContent.trim()),
+  spanishLang: document.querySelector('[data-lang="es"]')?.getAttribute('lang'),
+}));
+checkBool('second configured language reveals dependent group',
+  !languageHidden && usLanguageState.label === 'Language in United States');
+checkBool('language choices use native names and lang tags',
+  usLanguageState.labels.join('|') === 'English|Español' && usLanguageState.spanishLang === 'es',
+  usLanguageState.labels.join(', '));
+
+await page.click('.edition-language-option[data-lang="es"]');
+const languageSelectionState = await page.evaluate(() => ({
+  panelHidden: document.getElementById('edition-panel').hidden,
+  expanded: document.getElementById('country-chip').getAttribute('aria-expanded'),
+  lang: VDLanguage.get(),
+  events: window.__langEvents,
+}));
+checkBool('language selection updates state and leaves edition panel open',
+  !languageSelectionState.panelHidden
+    && languageSelectionState.expanded === 'true'
+    && languageSelectionState.lang === 'es'
+    && languageSelectionState.events === 1);
+await page.click('.edition-country-option[data-country="ca"]');
+const fallbackState = await page.evaluate(() => ({
+  lang: VDLanguage.get(),
+  stored: localStorage.getItem('voltdrop.lang'),
+  events: window.__langEvents,
+  groupHidden: document.getElementById('edition-language-group').hidden,
+  available: [...document.querySelectorAll('.edition-language-option')].map((button) => button.textContent.trim()),
+  noteHidden: document.getElementById('edition-fallback').hidden,
+  note: document.getElementById('edition-fallback').textContent,
+}));
+checkBool('language choices filter to the selected country',
+  fallbackState.groupHidden && fallbackState.available.join('|') === 'English');
+checkBool('unavailable language falls back to English and fires event',
+  fallbackState.lang === 'en' && fallbackState.stored === 'en' && fallbackState.events === 2);
+checkBool('fallback note explains why and lists available language',
+  !fallbackState.noteHidden
+    && fallbackState.note.includes("Español isn't available for Canada")
+    && fallbackState.note.includes('Available here: English'),
+  fallbackState.note);
+
+// ---- Edition path helper: computed twins match every old US↔CA guide pair.
+const editionPaths = await page.evaluate((paths) => paths.map((usPath) => ({
+  usPath,
+  caPath: VDEdition.pathFor('ca', 'en', usPath),
+  roundTrip: VDEdition.pathFor('us', 'en', `/ca${usPath}`),
+})), GUIDE_PATHS);
+const twinsMatch = editionPaths.every(({ usPath, caPath, roundTrip }) =>
+  caPath === `/ca${usPath}` && roundTrip === usPath);
+checkBool('edition helper matches all six US/CA guide twins', twinsMatch,
+  `${editionPaths.length} paths checked both ways`);
+const unavailableEditions = await page.evaluate(() => ({
+  es: VDEdition.pathFor('us', 'es', '/guides/'),
+  fr: VDEdition.pathFor('ca', 'fr', '/guides/'),
+  missing: VDEdition.pathFor('ca', 'en', '/not-built/'),
+}));
+checkBool('edition helper refuses unbuilt pages',
+  unavailableEditions.es === null && unavailableEditions.fr === null && unavailableEditions.missing === null);
+
+await page.evaluate(() => localStorage.clear());
+await page.reload();
 
 // ---- Mode 1: voltage drop. DC 12V, 20A, 12AWG copper, 25ft one-way.
 // Vd = 2*12.9*20*25/6530 = 1.9755 V → 16.46% (classic 12V-lesson case, should be RED)
@@ -119,13 +292,14 @@ check('max length ft (12V 10A 10AWG 3%)', parseFloat(big), 14.48, 0.05);
 await page.screenshot({ path: `${shots}/4-length.png`, fullPage: true });
 
 // ---- Country selection + persistence
-await page.click('[data-country="ca"]');
-let chip = await page.textContent('#country-chip');
-console.log(chip.includes('Canada') ? 'PASS chip shows Canada' : `FAIL chip: "${chip}"`); chip.includes('Canada') ? pass++ : fail++;
+await page.click('#country-chip');
+await page.click('.edition-country-option[data-country="ca"]');
+chip = await page.textContent('#country-chip');
+console.log(chip.includes('CEC · EN') ? 'PASS chip shows Canada code' : `FAIL chip: "${chip}"`); chip.includes('CEC · EN') ? pass++ : fail++;
 await page.reload();
 chip = await page.textContent('#country-chip');
-console.log(chip.includes('Canada') ? 'PASS Canada remembered after reload' : `FAIL after reload: "${chip}"`); chip.includes('Canada') ? pass++ : fail++;
-let codeName = await page.textContent('#code-name');
+console.log(chip.includes('CEC · EN') ? 'PASS Canada remembered after reload' : `FAIL after reload: "${chip}"`); chip.includes('CEC · EN') ? pass++ : fail++;
+codeName = await page.textContent('#code-name');
 console.log(codeName.includes('Canadian') ? 'PASS explainer cites CEC' : `FAIL code name: "${codeName}"`); codeName.includes('Canadian') ? pass++ : fail++;
 // Canada 3-phase presets should include 600 V
 await page.click('[data-system="ac3"]');
@@ -133,7 +307,8 @@ const presets = await page.textContent('#voltage-presets');
 console.log(presets.includes('600') ? 'PASS CA 3-phase presets include 600 V' : `FAIL presets: "${presets}"`); presets.includes('600') ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/6-canada.png`, fullPage: true });
 // back to US for the desktop shot
-await page.click('[data-country="us"]');
+await page.click('#country-chip');
+await page.click('.edition-country-option[data-country="us"]');
 
 // ---- Per-tool pages (own URLs) preselect the right mode + sidebar highlight
 await page.setViewportSize({ width: 1280, height: 900 });
@@ -214,7 +389,7 @@ console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits'
 await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
 
 // ---- Guides: every page loads, has an h1, highlights Guides in sidebar
-for (const g of ['guides/', 'guides/sub-panel-wire-size/', 'guides/50-amp-wire-size/', 'guides/wire-ampacity-chart/', 'guides/how-far-12-gauge-wire/', 'guides/voltage-drop-formula/', 'ca/guides/', 'ca/guides/sub-panel-wire-size/', 'ca/guides/50-amp-wire-size/', 'ca/guides/wire-ampacity-chart/', 'ca/guides/how-far-12-gauge-wire/', 'ca/guides/voltage-drop-formula/']) {
+for (const g of GENERATED_PATHS.filter((path) => path.startsWith('guides/') || path.startsWith('ca/guides/'))) {
   await page.goto(BASE + g);
   const h1 = await page.textContent('h1').catch(() => null);
   const active = await page.textContent('.sidebar .tool-link.active').catch(() => '');

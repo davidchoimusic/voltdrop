@@ -93,9 +93,11 @@ input, select, .big-number, .result-cell .v {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
-/* Mobile header (pitchchanger-style): Tools | VOLTDROP | Feedback, chip on row 2 */
+/* Mobile header: Tools | VOLTDROP | code/language | Feedback */
 .tools-btn, .header-feedback {
   display: none;
   font-family: inherit;
@@ -136,24 +138,36 @@ input, select, .big-number, .result-cell .v {
 }
 
 @media (max-width: 1023px) {
-  /* Row 1: Tools · country · Feedback. Row 2: centered brand. Row 3: tagline. */
-  .brand-row { flex-wrap: wrap; justify-content: space-between; }
-  .tools-btn { display: inline-flex; order: 1; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
-  .country-chip { order: 2; }
-  .header-feedback { display: inline-flex; order: 3; font-size: 14px; min-height: 44px; padding: var(--space-2) var(--space-3); }
-  .site-header .brand {
-    order: 4;
-    flex-basis: 100%;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    line-height: 1;
-    margin: var(--space-4) 0 var(--space-1);
+  .site-header { padding: var(--space-3) 0; }
+  .site-header .wrap { padding-left: 10px; padding-right: 10px; }
+  .brand-row { gap: 5px; }
+  .tools-btn, .header-feedback {
+    display: inline-flex;
+    font-size: 11px;
+    min-height: 38px;
+    padding: var(--space-1) 6px;
   }
-  .site-header .brand-logo { width: 34px; height: 34px; }
-  .tagline { text-align: center; }
+  .site-header .brand {
+    align-items: center;
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: var(--space-1);
+    font-size: 12.5px;
+    line-height: 1;
+  }
+  .site-header .brand-logo { width: 24px; height: 24px; }
+  .country-chip {
+    font-size: 11.5px;
+    min-height: 38px;
+    padding: var(--space-1) 7px;
+  }
+  .tagline { text-align: center; margin-top: var(--space-2); font-size: 13px; }
   /* keep content clear of the hazard stripe */
   .main-col > :first-child { margin-top: var(--space-5); }
+}
+
+@media (max-width: 480px) {
+  .brand-suffix { display: none; }
 }
 
 @media (min-width: 1024px) {
@@ -167,6 +181,7 @@ input, select, .big-number, .result-cell .v {
   .site-header .brand-logo { width: 48px; height: 48px; }
   /* Feedback stays in the sidebar on desktop — header keeps just the country control */
   .country-chip { margin-left: auto; }
+  .edition-panel { width: 380px; margin-left: auto; }
   .tagline { text-align: left; margin-top: var(--space-2); }
 }
 
@@ -184,11 +199,147 @@ input, select, .big-number, .result-cell .v {
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
+  gap: 5px;
 }
 
 .country-chip:hover { border-color: var(--color-accent); }
 .country-chip:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
 .country-chip:active { transform: translateY(1px); }
+.country-chip:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.country-chip[aria-expanded="true"] { border-color: var(--color-accent); }
+.country-caret { color: var(--color-ink-soft); font-size: 10px; }
+
+.edition-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius);
+  animation: edition-panel-in 130ms ease-out;
+}
+
+@keyframes edition-panel-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: none; }
+}
+
+.edition-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.edition-label {
+  color: var(--color-ink-soft);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.edition-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.edition-language-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.edition-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 11px;
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line);
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.edition-language-options .edition-option {
+  flex: 1 1 112px;
+  width: auto;
+}
+
+.edition-option:hover { border-color: var(--color-accent); }
+.edition-option:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.edition-option:active { transform: translateY(1px); }
+.edition-option:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.edition-option[aria-checked="true"] { border-color: var(--color-accent); }
+
+.edition-radio-mark {
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  border: 2px solid var(--color-line-strong);
+  border-radius: 50%;
+}
+
+.edition-option[aria-checked="true"] .edition-radio-mark { border-color: var(--color-accent); }
+.edition-option[aria-checked="true"] .edition-radio-mark::after {
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  content: "";
+}
+
+.edition-country-name {
+  color: var(--color-ink-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.edition-divider {
+  height: 1px;
+  background: var(--color-line);
+}
+
+.edition-language-group.swapped { animation: edition-language-swap 420ms ease-out; }
+
+@keyframes edition-language-swap {
+  from { opacity: 0.25; transform: translateY(-3px); }
+  to { opacity: 1; transform: none; }
+}
+
+.edition-fallback {
+  margin: 0;
+  padding: 9px 10px;
+  color: var(--verdict-warn-ink);
+  background: var(--verdict-warn-bg);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edition-panel,
+  .edition-language-group.swapped { animation: none; }
+}
+
+@media (max-width: 374px) {
+  .brand-row { gap: var(--space-1); }
+  .tools-btn, .header-feedback { padding-left: var(--space-1); padding-right: var(--space-1); font-size: 10.5px; }
+  .site-header .brand { font-size: 11.5px; }
+  .site-header .brand-logo { width: 22px; height: 22px; }
+  .country-chip { padding-left: 5px; padding-right: 5px; font-size: 10.5px; }
+}
 
 .country-picker {
   display: flex;
