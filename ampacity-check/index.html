@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ampacity Check — NEC Table 310.16 | VoltDrop</title>
-<meta name="description" content="Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.">
+<title>Ampacity Derating Calculator — NEC 310.15 | VoltDrop</title>
+<meta name="description" content="Free NEC ampacity derating calculator for ambient temperature, current-carrying conductors, termination limits, 240.4(D), and separate continuous-load sizing.">
 <link rel="canonical" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Ampacity Check — NEC Table 310.16 | VoltDrop">
-<meta property="og:description" content="Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.">
+<meta property="og:title" content="Ampacity Derating Calculator — NEC 310.15 | VoltDrop">
+<meta property="og:description" content="Free NEC ampacity derating calculator for ambient temperature, current-carrying conductors, termination limits, 240.4(D), and separate continuous-load sizing.">
 <meta property="og:url" content="https://voltdrop.app/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ampacity Check — NEC Table 310.16 | VoltDrop">
-<meta name="twitter:description" content="Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.">
+<meta name="twitter:title" content="Ampacity Derating Calculator — NEC 310.15 | VoltDrop">
+<meta name="twitter:description" content="Free NEC ampacity derating calculator for ambient temperature, current-carrying conductors, termination limits, 240.4(D), and separate continuous-load sizing.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Ampacity Check","url":"https://voltdrop.app/ampacity-check/","description":"Free wire ampacity checker based on NEC Table 310.16: copper and aluminum, 60/75/90°C insulation, small-conductor breaker caps included. Clear yes/no verdict, no signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Ampacity Derating Check","url":"https://voltdrop.app/ampacity-check/","description":"Free NEC ampacity derating calculator for ambient temperature, current-carrying conductors, termination limits, 240.4(D), and separate continuous-load sizing.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -93,42 +93,80 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Ampacity Check</h1>
-    <p class="tool-sub">Ampacity = the most current a wire can carry safely without overheating. Enter your wire and load, get a clear yes/no.</p>
+    <h1 class="tool-title">🔥 Ampacity & Derating Check</h1>
+    <p class="tool-sub">Start with the insulation column, correct for heat and bundled conductors, then see exactly which safety limit controls.</p>
   </div>
+
+
 
   <form id="amp-form" class="card" autocomplete="off">
 
     <div class="field">
       <label class="field-label">Wire material</label>
       <div class="seg" role="group" aria-label="Wire material">
-        <button type="button" class="seg-btn active" data-material="cu">Copper</button>
-        <button type="button" class="seg-btn" data-material="al">Aluminum</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-material="cu">Copper</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-material="al">Aluminum</button>
       </div>
     </div>
 
     <div class="field">
       <label class="field-label" for="amp-size">Wire size</label>
       <select id="amp-size"></select>
-      <p class="hint">AWG = American Wire Gauge. It's printed on the wire jacket.</p>
+      <p class="hint">AWG = American Wire Gauge. It is printed on the wire jacket.</p>
     </div>
 
     <div class="field">
       <label class="field-label">Insulation temperature rating</label>
       <div class="seg" role="group" aria-label="Insulation temperature rating">
-        <button type="button" class="seg-btn" data-temp="60">60°C</button>
-        <button type="button" class="seg-btn active" data-temp="75">75°C</button>
-        <button type="button" class="seg-btn" data-temp="90">90°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="60">60°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="75">75°C</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-insulation="90">90°C</button>
       </div>
-      <p class="hint" id="amp-temp-hint">Not sure? Use <strong>75°C</strong> — it's what most breaker and lug terminations are rated for. Romex/NM-B cable must use the 60°C column. THHN in dry locations is 90°C, but the connection points usually still limit you to 75°C.</p>
+      <p class="hint">Use the conductor insulation rating for the starting column. THHN is normally 90°C. This is not the termination temperature rating.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Termination temperature rating</label>
+      <div class="seg" role="group" aria-label="Termination temperature rating">
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+      </div>
+      <p class="hint">Use 60°C for NM-B or unmarked equipment. Use 75°C only when the equipment is marked 75°C. The termination limit is applied after both derating factors.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-ambient">Ambient temperature</label>
+      <div class="input-unit">
+        <input type="number" id="amp-ambient" inputmode="decimal" step="any" value="30" required>
+        <span class="unit">°C</span>
+      </div>
+      <p class="hint">Enter the surrounding air temperature at the conductors. NEC Table 310.15(B)(1) publishes bands through 85°C; a “—” cell is not permitted and this calculator will not substitute a value.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-conductors">Number of current-carrying conductors</label>
+      <div class="input-unit">
+        <input type="number" id="amp-conductors" inputmode="numeric" min="1" step="1" value="3" required>
+        <span class="unit">conductors</span>
+      </div>
+      <p class="hint">Count ungrounded conductors and any neutral carrying current under normal conditions, including neutrals carrying harmonics from non-linear loads. Do not count equipment grounding or grounding electrode conductors. Count spare conductors. Do not count conductors that cannot be energized at the same time.</p>
     </div>
 
     <div class="field">
       <label class="field-label" for="amp-load">Current it needs to carry</label>
       <div class="input-unit">
         <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
-        <span class="unit">amps</span>
+        <span class="unit">A</span>
       </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Load duration</label>
+      <div class="seg" role="group" aria-label="Load duration">
+        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Under 3 hours</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">3+ hours — continuous</button>
+      </div>
+      <p class="hint">A load expected to run for 3 hours or more is sized at 125%. This is a separate load-side check, not a derating multiplier.</p>
     </div>
 
     <button type="submit" class="calc-btn">Check ampacity</button>
@@ -136,25 +174,67 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict" id="verdict">
-      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">Pass</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>Too small</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>Not permitted</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>Planning only</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
-        <div class="big-label" id="big-label"></div>
+        <div class="big-label amp-big-label" id="amp-label-final">final permitted ampacity</div>
+        <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>this combination is not permitted</div>
+        <div class="big-label amp-big-label" id="amp-label-canada" hidden>Canadian derating result unavailable</div>
       </div>
     </div>
-    <div class="result-grid" id="result-grid"></div>
-    <p class="verdict-note" id="verdict-note"></p>
-    <details class="math-details">
-      <summary>How we checked this</summary>
-      <div class="math-body" id="math-body"></div>
-    </details>
+
+    <div id="amp-result-unavailable" hidden>
+      <p class="verdict-note" id="amp-nec-unavailable">NEC Table 310.15(B)(1) publishes “—” for this ambient-temperature and insulation-rating combination, or the temperature is outside the published table. No factor is substituted and no permitted ampacity is produced.</p>
+      <p class="verdict-note" id="amp-ca-unavailable">No ampacity number is produced. CEC Tables 5A and 5C have not passed the source-verification gate, so this Canadian edition will not display NEC correction or adjustment factors.</p>
+    </div>
+
+    <div id="amp-result-calculation">
+      <details class="math-details" open>
+        <summary>Conductor-side derating</summary>
+        <div class="math-body">
+          <p>The two factors multiply the insulation-column ampacity first. Only after that do the termination and small-conductor limits apply.</p>
+          <div class="formula">
+            <div>Base ampacity (insulation column) <strong id="amp-base-value"></strong></div>
+            <div>Ambient correction <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>Current-carrying conductor adjustment <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="derating">— not binding</span></div>
+            <div>110.14(C) termination limit <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="termination">— not binding</span></div>
+            <div>240.4(D) small-conductor cap <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← binding</span><span class="amp-not-binding-marker" data-binding="cap">— not binding</span></div>
+            <div><strong>FINAL PERMITTED AMPACITY <span id="amp-final-value"></span></strong></div>
+          </div>
+          <div class="formula" id="amp-combined-formula"></div>
+          <p><strong>Binding limit:</strong> <span id="amp-binding-value"></span></p>
+          <span id="amp-binding-derating" hidden>Derating after ambient correction and conductor adjustment</span>
+          <span id="amp-binding-termination" hidden>110.14(C) termination temperature limit</span>
+          <span id="amp-binding-cap" hidden>240.4(D) small-conductor cap</span>
+        </div>
+      </details>
+
+      <details class="math-details" open>
+        <summary>Load-side check — separate calculation</summary>
+        <div class="math-body">
+          <p>Continuous-load sizing and conductor derating answer different questions. The 125% rule sizes the circuit for a long-running load; it is not multiplied into the conductor derating factors.</p>
+          <div class="formula">
+            <div>Entered load <strong id="amp-load-entered"></strong></div>
+            <div id="amp-noncontinuous-row">Load under 3 hours: no 125% continuous-load multiplier</div>
+            <div id="amp-continuous-row" hidden>Continuous-load requirement (entered load × 125%) <strong id="amp-load-required"></strong></div>
+          </div>
+          <p class="amp-load-note" id="amp-note-load-pass">The entered load is within the final permitted ampacity.</p>
+          <p class="amp-load-note" id="amp-note-load-fail" hidden>The entered load is above the final permitted ampacity.</p>
+          <p class="amp-load-note" id="amp-note-continuous-pass" hidden>The separately calculated continuous-load requirement is within the final permitted ampacity.</p>
+          <p class="amp-load-note" id="amp-note-continuous-fail" hidden>The separately calculated continuous-load requirement is above the final permitted ampacity.</p>
+        </div>
+      </details>
+    </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current, in amps, that a wire can carry continuously without overheating. It depends on the wire size, the material (copper or aluminum), and the insulation temperature rating, and is set by NEC Table 310.16 under normal conditions."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "When unsure, use the 75°C column — most breaker and lug terminations are rated 75°C. Romex/NM-B cable must use the 60°C column. THHN in dry locations is rated 90°C, but the connection points usually still limit the circuit to the 75°C values."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current, in amps, that a conductor can carry under stated conditions without overheating. This calculator starts with NEC Table 310.16, applies NEC Table 310.15(B)(1) ambient correction and NEC Table 310.15(C)(1) conductor adjustment, then applies NEC 110.14(C) and 240.4(D) limits."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Use the insulation rating for the starting ampacity column, then separately choose the termination rating. THHN is normally a 90°C insulation, while marked equipment commonly limits the final result to the 75°C column. NM-B and unmarked equipment use the 60°C termination limit."}}, {"@type": "Question", "name": "How do I count current-carrying conductors?", "acceptedAnswer": {"@type": "Answer", "text": "Count ungrounded conductors and neutrals that carry current under normal conditions, including harmonic current from non-linear loads. Count spare conductors. Do not count equipment grounding conductors, grounding electrode conductors, or conductors that cannot be energized simultaneously."}}, {"@type": "Question", "name": "Is the continuous-load rule part of derating?", "acceptedAnswer": {"@type": "Answer", "text": "No. Ambient correction and conductor adjustment reduce usable conductor ampacity because of heat. NEC 210.19(A)(1) and 215.2 separately require 125% sizing for a continuous load. This calculator shows the two checks separately."}}]}</script>
+
   <section class="card explainer">
-    <h2>What this checks (and what it doesn't)</h2>
-    <p id="amp-exp-lookup">We look up your wire in the standard U.S. ampacity table (NEC Table 310.16 — normal conditions: up to three current-carrying wires in a conduit, ordinary room temperature). For small wires we also apply the special breaker-size rule (NEC 240.4(D)): 14 AWG copper tops out at a 15 A breaker, 12 AWG at 20 A, and 10 AWG at 30 A, even though the raw table says more.</p>
-    <p><strong>Not included:</strong> hot attics/engine rooms, bundles of more than three current-carrying wires, and continuous loads (running 3+ hours straight needs 25% headroom). Those all reduce what the wire can carry — when in doubt, go up a size or ask an electrician.</p>
+    <h2>What this checks</h2>
+    <p>This U.S. edition uses the verified NEC Table 310.16 base ampacities, Table 310.15(B)(1) ambient factors, Table 310.15(C)(1) conductor factors, 110.14(C) termination limits, and 240.4(D) small-conductor caps. It never interpolates a missing value.</p>
     <p>Ampacity and <a class="inline-link" href="/">voltage drop</a> are separate checks — a wire must pass <strong>both</strong>.</p>
   </section>
 
@@ -181,6 +261,6 @@
 </footer>
 
 <script src="/common.js?v=d3b64342ae"></script>
-<script src="/ampacity.js?v=635b079e17"></script>
+<script src="/ampacity.js?v=df828c963d"></script>
 </body>
 </html>

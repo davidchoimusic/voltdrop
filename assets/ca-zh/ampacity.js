@@ -1,7 +1,10 @@
 /* VoltDrop — Ampacity Check
-   Data: NEC Table 310.16 (≤3 current-carrying conductors, 30°C ambient),
-   columns 60/75/90°C. Small-conductor overcurrent caps per NEC 240.4(D).
-   Verdict uses min(table ampacity, 240.4(D) cap) — the practical limit. */
+   Base data: NEC Table 310.16.
+   Derating data: NEC Tables 310.15(B)(1) and 310.15(C)(1).
+   Limits: NEC 110.14(C) termination ratings and 240.4(D) small conductors.
+
+   Order matters: insulation-column ampacity × ambient correction × conductor
+   adjustment, then the termination limit, then the small-conductor cap. */
 
 const AMPACITY = {
   cu: {
@@ -28,50 +31,64 @@ const SMALL_CAP = {
   al: { '12 AWG': 15, '10 AWG': 25 },
 };
 
+// NEC Table 310.15(B)(1), based on 30°C ambient.
+// null is the table's published "—": that combination is not permitted.
+const AMBIENT_CORRECTION = [
+  { min: null, max: 10, factors: { 60: 1.29, 75: 1.20, 90: 1.15 } },
+  { min: 11, max: 15, factors: { 60: 1.22, 75: 1.15, 90: 1.12 } },
+  { min: 16, max: 20, factors: { 60: 1.15, 75: 1.11, 90: 1.08 } },
+  { min: 21, max: 25, factors: { 60: 1.08, 75: 1.05, 90: 1.04 } },
+  { min: 26, max: 30, factors: { 60: 1.00, 75: 1.00, 90: 1.00 } },
+  { min: 31, max: 35, factors: { 60: 0.91, 75: 0.94, 90: 0.96 } },
+  { min: 36, max: 40, factors: { 60: 0.82, 75: 0.88, 90: 0.91 } },
+  { min: 41, max: 45, factors: { 60: 0.71, 75: 0.82, 90: 0.87 } },
+  { min: 46, max: 50, factors: { 60: 0.58, 75: 0.75, 90: 0.82 } },
+  { min: 51, max: 55, factors: { 60: 0.41, 75: 0.67, 90: 0.76 } },
+  { min: 56, max: 60, factors: { 60: null, 75: 0.58, 90: 0.71 } },
+  { min: 61, max: 65, factors: { 60: null, 75: 0.47, 90: 0.65 } },
+  { min: 66, max: 70, factors: { 60: null, 75: 0.33, 90: 0.58 } },
+  { min: 71, max: 75, factors: { 60: null, 75: null, 90: 0.50 } },
+  { min: 76, max: 80, factors: { 60: null, 75: null, 90: 0.41 } },
+  { min: 81, max: 85, factors: { 60: null, 75: null, 90: 0.29 } },
+];
+
+// NEC Table 310.15(C)(1). One through three conductors use 1.00 because
+// this adjustment table begins at four current-carrying conductors.
+const CONDUCTOR_ADJUSTMENT = [
+  { min: 4, max: 6, factor: 0.80 },
+  { min: 7, max: 9, factor: 0.70 },
+  { min: 10, max: 20, factor: 0.50 },
+  { min: 21, max: 30, factor: 0.45 },
+  { min: 31, max: 40, factor: 0.40 },
+  { min: 41, max: null, factor: 0.35 },
+];
+
 const TEMP_INDEX = { 60: 0, 75: 1, 90: 2 };
-const MATERIAL_NAME = { cu: '铜', al: '铝' };
+const BINDING_LABEL_IDS = {
+  derating: 'amp-binding-derating',
+  termination: 'amp-binding-termination',
+  cap: 'amp-binding-cap',
+};
 const AMP_RESULT_TEXT = {
   amps: '{amps} A',
-  safeLimit: '{temp}°C时{size} {material}导线的安全限值',
-  normalMargin: '在正常条件下，此导线可以承载该负载。请注意：连续负载（3小时以上）应低于限值的80%，此处为{amps} A。',
-  tightMargin: '符合限值，但余量很小。对于连续负载（3小时以上）、高温或成束导线，请增大一个规格；按80%建议值计算，此处最大为{amps} A。',
-  notRated: '此导线的额定载流量不足以承载{amps} A。请增大导线规格（线规）——导线规格过小会过热并造成火灾风险。',
-  lookup: '\n<p>{table}规定：{temp}°C列中的{size} {material}导线载流量为<strong>{tableAmps} A</strong>（导管内最多三根载流导体，且为正常室温）。</p>',
-  cap: '<p>小导体规则（{citation}）将{size} {material}导线的断路器上限设为<strong>{capAmps} A</strong>；因此我们使用该实际限值进行比较。</p>',
-  comparison: '<div class="formula">安全限值 = {rated} A   对比   您的负载 = {load} A   →   {status}</div>',
+  factor: '× {factor}',
+  degrees: '{degrees}°C',
+  combined: '{base} A × {ambientFactor} × {adjustmentFactor} = {derated} A',
 };
 
 let material = 'cu';
-let temp = 75;
-
-// Country-aware wording: same verified data both countries (CEC Tables 2/4
-// are harmonized with NEC 310.16); citations, cable names, and rules swap.
-const AMP_TEXT = {
-  us: {
-    tableCite: 'NEC表310.16',
-    capCite: 'NEC 240.4(D)',
-    tempHint: '不确定？请使用<strong>75°C</strong>：大多数断路器端子和接线端子的额定温度为该值。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C。',
-    expLookup: '我们根据美国标准载流量表查找导线（NEC Table 310.16；正常条件：导管内最多三根载流导体，且为正常室温）。小导体还适用NEC 240.4(D)：14 AWG铜最大15 A，12 AWG最大20 A，10 AWG最大30 A，即使原始表格给出更高数值。',
-  },
-  ca: {
-    tableCite: 'CEC Table 2/Table 4 (harmonized使用NEC 310.16)',
-    capCite: 'CEC Rule 14-104',
-    tempHint: '不sure?使用<strong>75°C</strong> — it\'s什么大多数marked breakers和lugs是额定用于; unmarked equipment计数as 60°C (CEC Rule 4-006). NMD90 isn\'t blanket-capped在60°C like American Romex —接线端子规定ceiling —但运行它在60°C列是conservative habit.',
-    expLookup: '我们根据加拿大载流量表查找导线（铜使用CEC Table 2，铝使用Table 4；已经核实这些数值与US表一致）。小导体还适用CEC Rule 14-104：#14铜最大15 A，#12最大20 A，#10最大30 A，即使原始表格给出更高数值。',
-  },
-};
-function ampCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
-function applyAmpCountryText() {
-  const t = AMP_TEXT[ampCountry()];
-  const hint = $('amp-temp-hint');
-  if (hint) hint.innerHTML = t.tempHint;
-  const exp = $('amp-exp-lookup');
-  if (exp) exp.textContent = t.expLookup;
-  if (!$('results').hidden) check();
-}
-window.addEventListener('vd:country', applyAmpCountryText);
+let insulationTemp = 90;
+let terminationTemp = 75;
+let continuous = false;
 
 const $ = (id) => document.getElementById(id);
+const setText = (id, value) => { $(id).textContent = value; };
+const formatNumber = (value) => Number.isInteger(value)
+  ? String(value)
+  : value.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+const formatAmps = (value) => vdFormat(AMP_RESULT_TEXT.amps, { amps: formatNumber(value) });
+const formatWholeAmps = (value) => formatAmps(Math.floor(value + 1e-9));
+const formatFactor = (value) => vdFormat(AMP_RESULT_TEXT.factor, { factor: value.toFixed(2) });
 
 function fillSizes() {
   const sel = $('amp-size');
@@ -83,85 +100,156 @@ function fillSizes() {
     opt.textContent = label;
     sel.appendChild(opt);
   });
-  if ([...sel.options].some((o) => o.value === prev)) sel.value = prev;
+  if ([...sel.options].some((option) => option.value === prev)) sel.value = prev;
   else sel.value = '12 AWG';
 }
 
-document.querySelectorAll('.seg-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const group = btn.closest('.seg');
-    group.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-    if ('material' in btn.dataset) { material = btn.dataset.material; fillSizes(); }
-    if ('temp' in btn.dataset) temp = Number(btn.dataset.temp);
+function activateButton(button) {
+  const group = button.closest('.seg');
+  group.querySelectorAll('.seg-btn').forEach((item) => {
+    item.classList.remove('active');
+    item.setAttribute('aria-pressed', 'false');
+  });
+  button.classList.add('active');
+  button.setAttribute('aria-pressed', 'true');
+}
+
+document.querySelectorAll('.seg-btn').forEach((button) => {
+  button.addEventListener('click', () => {
+    activateButton(button);
+    if ('material' in button.dataset) {
+      material = button.dataset.material;
+      fillSizes();
+    }
+    if ('insulation' in button.dataset) insulationTemp = Number(button.dataset.insulation);
+    if ('termination' in button.dataset) terminationTemp = Number(button.dataset.termination);
+    if ('continuous' in button.dataset) continuous = button.dataset.continuous === 'yes';
     if (!$('results').hidden) check();
   });
 });
 
-fillSizes();
+function ambientBandFor(ambient) {
+  return AMBIENT_CORRECTION.find((row) =>
+    (row.min === null || ambient >= row.min) && ambient <= row.max);
+}
 
-$('amp-form').addEventListener('submit', (e) => { e.preventDefault(); check(); });
+function adjustmentFor(count) {
+  if (count <= 3) return 1;
+  return CONDUCTOR_ADJUSTMENT.find((row) =>
+    count >= row.min && (row.max === null || count <= row.max))?.factor;
+}
 
-function check() {
-  const load = Number($('amp-load').value);
-  if (!load) return;
-  const label = $('amp-size').value;
-  const tableAmps = AMPACITY[material][label][TEMP_INDEX[temp]];
-  const cap = (SMALL_CAP[material] || {})[label];
-  const rated = cap ? Math.min(tableAmps, cap) : tableAmps;
-  const ok = load <= rated;
-  const margin = rated - load;
-
-  const verdict = $('verdict');
-  verdict.className = 'verdict ' + (ok ? (margin / rated >= 0.2 ? 'good' : 'warn') : 'bad');
-  $('verdict-badge').textContent = ok ? (margin / rated >= 0.2 ? 'OK' : '余量较小') : '规格过小';
-  $('big-number').textContent = vdFormat(AMP_RESULT_TEXT.amps, { amps: rated });
-  $('big-label').textContent = vdFormat(AMP_RESULT_TEXT.safeLimit, {
-    size: label,
-    material: MATERIAL_NAME[material],
-    temp,
+function showOnly(selector, id) {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.hidden = element.id !== id;
   });
+}
 
-  const cells = [
-    ['您的负载', vdFormat(AMP_RESULT_TEXT.amps, { amps: load })],
-    ['表载流量', vdFormat(AMP_RESULT_TEXT.amps, { amps: tableAmps })],
-  ];
-  if (cap) cells.push(['断路器限值（小导体规则）', vdFormat(AMP_RESULT_TEXT.amps, { amps: cap })]);
-  cells.push(['余量', vdFormat(AMP_RESULT_TEXT.amps, { amps: margin >= 0 ? margin : 0 })]);
-  $('result-grid').innerHTML = cells
-    .map(([k, v]) => `<div class="result-cell"><div class="k">${k}</div><div class="v">${v}</div></div>`)
-    .join('');
-
-  $('verdict-note').textContent = ok
-    ? (margin / rated >= 0.2
-        ? vdFormat(AMP_RESULT_TEXT.normalMargin, { amps: Math.floor(rated * 0.8) })
-        : vdFormat(AMP_RESULT_TEXT.tightMargin, { amps: Math.floor(rated * 0.8) }))
-    : vdFormat(AMP_RESULT_TEXT.notRated, { amps: load });
-
-  const T = AMP_TEXT[ampCountry()];
-  $('math-body').innerHTML = [
-    vdFormat(AMP_RESULT_TEXT.lookup, {
-      table: T.tableCite,
-      size: label,
-      material: MATERIAL_NAME[material],
-      temp,
-      tableAmps,
-    }),
-    cap ? vdFormat(AMP_RESULT_TEXT.cap, {
-      citation: T.capCite,
-      size: label,
-      material: MATERIAL_NAME[material],
-      capAmps: cap,
-    }) : '',
-    vdFormat(AMP_RESULT_TEXT.comparison, {
-      rated,
-      load,
-      status: ok ? 'OK' : '超过限值',
-    }),
-  ].filter(Boolean).join('\n');
-
+function showUnavailable(kind) {
   $('results').hidden = false;
+  $('amp-result-calculation').hidden = true;
+  $('amp-result-unavailable').hidden = false;
+  $('amp-ca-unavailable').hidden = kind !== 'canada';
+  $('amp-nec-unavailable').hidden = kind !== 'nec';
+  $('verdict').className = kind === 'canada' ? 'verdict warn' : 'verdict bad';
+  showOnly('.amp-verdict-badge', kind === 'canada' ? 'amp-badge-planning' : 'amp-badge-not-permitted');
+  showOnly('.amp-big-label', kind === 'canada' ? 'amp-label-canada' : 'amp-label-not-permitted');
+  setText('big-number', '—');
   $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-applyAmpCountryText();
+function setBinding(binding) {
+  document.querySelectorAll('.amp-binding-marker').forEach((marker) => {
+    marker.hidden = marker.dataset.binding !== binding;
+  });
+  document.querySelectorAll('.amp-not-binding-marker').forEach((marker) => {
+    marker.hidden = marker.dataset.binding === binding;
+  });
+  setText('amp-binding-value', $(BINDING_LABEL_IDS[binding]).textContent);
+}
+
+function check() {
+  const load = Number($('amp-load').value);
+  const ambient = Number($('amp-ambient').value);
+  const conductorCount = Number($('amp-conductors').value);
+  if (!load || !Number.isFinite(ambient) || !Number.isInteger(conductorCount) || conductorCount < 1) return;
+
+  if (document.body.dataset.country === 'ca') {
+    showUnavailable('canada');
+    return;
+  }
+
+  const ambientBand = ambientBandFor(ambient);
+  const ambientFactor = ambientBand?.factors[insulationTemp];
+  if (!ambientBand || ambientFactor === null || ambientFactor === undefined) {
+    showUnavailable('nec');
+    return;
+  }
+
+  const adjustmentFactor = adjustmentFor(conductorCount);
+  const label = $('amp-size').value;
+  const baseAmpacity = AMPACITY[material][label][TEMP_INDEX[insulationTemp]];
+  const ambientAdjusted = baseAmpacity * ambientFactor;
+  const adjustedAmpacity = ambientAdjusted * adjustmentFactor;
+  const terminationLimit = AMPACITY[material][label][TEMP_INDEX[terminationTemp]];
+  const smallCap = (SMALL_CAP[material] || {})[label];
+  const exactPermitted = Math.min(
+    adjustedAmpacity,
+    terminationLimit,
+    smallCap === undefined ? Infinity : smallCap,
+  );
+  const permitted = Math.floor(exactPermitted + 1e-9);
+  const required = continuous ? load * 1.25 : load;
+  const passes = required <= permitted;
+
+  let binding = 'derating';
+  if (smallCap !== undefined
+      && smallCap <= terminationLimit
+      && smallCap <= adjustedAmpacity) {
+    binding = 'cap';
+  } else if (terminationLimit <= adjustedAmpacity) {
+    binding = 'termination';
+  }
+
+  $('results').hidden = false;
+  $('amp-result-calculation').hidden = false;
+  $('amp-result-unavailable').hidden = true;
+  $('verdict').className = passes ? 'verdict good' : 'verdict bad';
+  showOnly('.amp-verdict-badge', passes ? 'amp-badge-pass' : 'amp-badge-too-small');
+  showOnly('.amp-big-label', 'amp-label-final');
+  setText('big-number', formatAmps(permitted));
+
+  setText('amp-base-value', formatAmps(baseAmpacity));
+  setText('amp-ambient-input', vdFormat(AMP_RESULT_TEXT.degrees, { degrees: formatNumber(ambient) }));
+  setText('amp-ambient-factor', formatFactor(ambientFactor));
+  setText('amp-ambient-value', formatWholeAmps(ambientAdjusted));
+  setText('amp-conductor-input', String(conductorCount));
+  setText('amp-adjustment-factor', formatFactor(adjustmentFactor));
+  setText('amp-adjusted-value', formatWholeAmps(adjustedAmpacity));
+  setText('amp-termination-value', formatAmps(terminationLimit));
+  setText('amp-cap-value', smallCap === undefined ? '—' : formatAmps(smallCap));
+  setText('amp-final-value', formatAmps(permitted));
+  setText('amp-combined-formula', vdFormat(AMP_RESULT_TEXT.combined, {
+    base: formatNumber(baseAmpacity),
+    ambientFactor: ambientFactor.toFixed(2),
+    adjustmentFactor: adjustmentFactor.toFixed(2),
+    derated: formatNumber(Math.floor(adjustedAmpacity + 1e-9)),
+  }));
+  setBinding(binding);
+
+  setText('amp-load-entered', formatAmps(load));
+  setText('amp-load-required', formatAmps(required));
+  $('amp-continuous-row').hidden = !continuous;
+  $('amp-noncontinuous-row').hidden = continuous;
+  showOnly('.amp-load-note', passes
+    ? (continuous ? 'amp-note-continuous-pass' : 'amp-note-load-pass')
+    : (continuous ? 'amp-note-continuous-fail' : 'amp-note-load-fail'));
+
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+fillSizes();
+$('amp-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  check();
+});

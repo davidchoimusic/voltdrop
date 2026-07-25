@@ -5,13 +5,15 @@
     <p class="tool-sub">{{ampacity.ampacityTheMostCurrentAWireCan}}</p>
   </div>
 
+{{ampacity.countryDataNoteHtml}}
+
   <form id="amp-form" class="card" autocomplete="off">
 
     <div class="field">
       <label class="field-label">{{ampacity.wireMaterialLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:ampacity.wireMaterialLabel}}">
-        <button type="button" class="seg-btn active" data-material="cu">{{ampacity.copperButton}}</button>
-        <button type="button" class="seg-btn" data-material="al">{{ampacity.aluminumButton}}</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-material="cu">{{ampacity.copperButton}}</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-material="al">{{ampacity.aluminumButton}}</button>
       </div>
     </div>
 
@@ -24,19 +26,55 @@
     <div class="field">
       <label class="field-label">{{ampacity.insulationTemperatureRatingLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:ampacity.insulationTemperatureRatingLabel}}">
-        <button type="button" class="seg-btn" data-temp="60">{{ampacity.n60CButton}}</button>
-        <button type="button" class="seg-btn active" data-temp="75">{{ampacity.n75CButton}}</button>
-        <button type="button" class="seg-btn" data-temp="90">{{ampacity.n90CButton}}</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="60">{{ampacity.n60CButton}}</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="75">{{ampacity.n75CButton}}</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-insulation="90">{{ampacity.n90CButton}}</button>
       </div>
-      <p class="hint" id="amp-temp-hint">{{ampacity.notSureUse}} <strong>{{ampacity.n75CButton}}</strong> {{ampacity.itSWhatMostBreakerAndLugContinuation}}</p>
+      <p class="hint">{{ampacity.insulationColumnHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{ampacity.terminationTemperatureRatingLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:ampacity.terminationTemperatureRatingLabel}}">
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">{{ampacity.n60CButton}}</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">{{ampacity.n75CButton}}</button>
+      </div>
+      <p class="hint">{{ampacity.terminationRatingHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-ambient">{{ampacity.ambientTemperatureLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="amp-ambient" inputmode="decimal" step="any" value="30" required>
+        <span class="unit">°C</span>
+      </div>
+      <p class="hint">{{ampacity.ambientTemperatureHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-conductors">{{ampacity.currentCarryingConductorsLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="amp-conductors" inputmode="numeric" min="1" step="1" value="3" required>
+        <span class="unit">{{ampacity.conductorsUnit}}</span>
+      </div>
+      <p class="hint">{{ampacity.currentCarryingConductorsHint}}</p>
     </div>
 
     <div class="field">
       <label class="field-label" for="amp-load">{{ampacity.currentItNeedsToCarryLabel}}</label>
       <div class="input-unit">
         <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="{{attr:ampacity.eGN20Placeholder}}" required>
-        <span class="unit">{{ampacity.amps}}</span>
+        <span class="unit">A</span>
       </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{ampacity.loadDurationLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:ampacity.loadDurationLabel}}">
+        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">{{ampacity.underThreeHoursButton}}</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">{{ampacity.threeHoursOrMoreButton}}</button>
+      </div>
+      <p class="hint">{{ampacity.continuousLoadHint}}</p>
     </div>
 
     <button type="submit" class="calc-btn">{{ampacity.checkAmpacityButton}}</button>
@@ -44,25 +82,67 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict" id="verdict">
-      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">{{ampacity.passBadge}}</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>{{ampacity.tooSmallBadge}}</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>{{ampacity.notPermittedBadge}}</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-planning" hidden>{{ampacity.planningOnlyBadge}}</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
-        <div class="big-label" id="big-label"></div>
+        <div class="big-label amp-big-label" id="amp-label-final">{{ampacity.finalPermittedAmpacityLabel}}</div>
+        <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>{{ampacity.noPermittedAmpacityLabel}}</div>
+        <div class="big-label amp-big-label" id="amp-label-canada" hidden>{{ampacity.canadianResultUnavailableLabel}}</div>
       </div>
     </div>
-    <div class="result-grid" id="result-grid"></div>
-    <p class="verdict-note" id="verdict-note"></p>
-    <details class="math-details">
-      <summary>{{ampacity.howWeCheckedThisSummary}}</summary>
-      <div class="math-body" id="math-body"></div>
-    </details>
+
+    <div id="amp-result-unavailable" hidden>
+      <p class="verdict-note" id="amp-nec-unavailable">{{ampacity.notPermittedExplanation}}</p>
+      <p class="verdict-note" id="amp-ca-unavailable">{{ampacity.canadianResultUnavailableExplanation}}</p>
+    </div>
+
+    <div id="amp-result-calculation">
+      <details class="math-details" open>
+        <summary>{{ampacity.conductorSideDeratingSummary}}</summary>
+        <div class="math-body">
+          <p>{{ampacity.deratingOrderExplanation}}</p>
+          <div class="formula">
+            <div>{{ampacity.baseAmpacityLabel}} <strong id="amp-base-value"></strong></div>
+            <div>{{ampacity.ambientCorrectionLabel}} <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>{{ampacity.conductorAdjustmentLabel}} <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="derating">— {{ampacity.notBindingLabel}}</span></div>
+            <div>{{ampacity.terminationLimitLabel}} <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="termination">— {{ampacity.notBindingLabel}}</span></div>
+            <div>{{ampacity.smallConductorCapLabel}} <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← {{ampacity.bindingMarker}}</span><span class="amp-not-binding-marker" data-binding="cap">— {{ampacity.notBindingLabel}}</span></div>
+            <div><strong>{{ampacity.finalPermittedAmpacityUpperLabel}} <span id="amp-final-value"></span></strong></div>
+          </div>
+          <div class="formula" id="amp-combined-formula"></div>
+          <p><strong>{{ampacity.bindingLimitLabel}}</strong> <span id="amp-binding-value"></span></p>
+          <span id="amp-binding-derating" hidden>{{ampacity.deratingBindsLabel}}</span>
+          <span id="amp-binding-termination" hidden>{{ampacity.terminationBindsLabel}}</span>
+          <span id="amp-binding-cap" hidden>{{ampacity.smallConductorCapBindsLabel}}</span>
+        </div>
+      </details>
+
+      <details class="math-details" open>
+        <summary>{{ampacity.loadSideCheckSummary}}</summary>
+        <div class="math-body">
+          <p>{{ampacity.continuousLoadSeparateExplanation}}</p>
+          <div class="formula">
+            <div>{{ampacity.enteredLoadLabel}} <strong id="amp-load-entered"></strong></div>
+            <div id="amp-noncontinuous-row">{{ampacity.noContinuousMultiplierLabel}}</div>
+            <div id="amp-continuous-row" hidden>{{ampacity.continuousLoadRequirementLabel}} <strong id="amp-load-required"></strong></div>
+          </div>
+          <p class="amp-load-note" id="amp-note-load-pass">{{ampacity.enteredLoadPassesLabel}}</p>
+          <p class="amp-load-note" id="amp-note-load-fail" hidden>{{ampacity.enteredLoadFailsLabel}}</p>
+          <p class="amp-load-note" id="amp-note-continuous-pass" hidden>{{ampacity.continuousLoadPassesLabel}}</p>
+          <p class="amp-load-note" id="amp-note-continuous-fail" hidden>{{ampacity.continuousLoadFailsLabel}}</p>
+        </div>
+      </details>
+    </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:ampacity.whatIsAmpacityQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.ampacityIsTheMaximumCurrentInAmpsAnswer}}"}}, {"@type": "Question", "name": "{{json:ampacity.whichInsulationTemperatureColumnShouldIUseQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.whenUnsureUseTheN75CColumnAnswer}}"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:ampacity.whatIsAmpacityQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.ampacityIsTheMaximumCurrentInAmpsAnswer}}"}}, {"@type": "Question", "name": "{{json:ampacity.whichInsulationTemperatureColumnShouldIUseQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.whenUnsureUseTheN75CColumnAnswer}}"}}, {"@type": "Question", "name": "{{json:ampacity.howDoICountCurrentCarryingConductorsQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.howDoICountCurrentCarryingConductorsAnswer}}"}}, {"@type": "Question", "name": "{{json:ampacity.isContinuousLoadPartOfDeratingQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:ampacity.isContinuousLoadPartOfDeratingAnswer}}"}}]}</script>
+
   <section class="card explainer">
-    <h2>{{ampacity.whatThisChecksAndWhatItDoesnHeading}}</h2>
-    <p id="amp-exp-lookup">{{ampacity.weLookUpYourWireInThe}}</p>
-    <p><strong>{{ampacity.notIncluded}}</strong> {{ampacity.hotAtticsEngineRoomsBundlesOfMore}}</p>
+    <h2>{{ampacity.whatThisChecksHeading}}</h2>
+    <p>{{ampacity.whatThisChecksExplanation}}</p>
     <p>{{ampacity.ampacityAnd}} <a class="inline-link" href="/">{{ampacity.voltageDrop}}</a> {{ampacity.areSeparateChecksAWireMustPass}} <strong>{{ampacity.both}}</strong>.</p>
   </section>
 

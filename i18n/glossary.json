@@ -218,6 +218,24 @@
       "es": "muestran cómo se obtiene cada resultado",
       "fr-CA": "montrent comment chaque résultat est obtenu",
       "zh-Hans": "展示每项结果的计算过程"
+    },
+    "correction factor": {
+      "gloss": "Multiplier used to change ampacity for ambient temperature.",
+      "es": "factor de corrección",
+      "fr-CA": "facteur de correction",
+      "zh-Hans": "校正系数"
+    },
+    "adjustment factor": {
+      "gloss": "Multiplier used to change ampacity for the number of conductors.",
+      "es": "factor de ajuste",
+      "fr-CA": "facteur d’ajustement",
+      "zh-Hans": "调整系数"
+    },
+    "termination temperature rating": {
+      "gloss": "Temperature rating of a conductor connection that limits final usable ampacity.",
+      "es": "temperatura nominal de la terminación",
+      "fr-CA": "température nominale des bornes",
+      "zh-Hans": "端子温度额定值"
     }
   }
 }
