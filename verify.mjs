@@ -54,6 +54,8 @@ if (runtimeCodeIdentity.status !== 0) process.exit(runtimeCodeIdentity.status ??
 const DATA_TABLES = [
   ['app.js', 'WIRE_TABLE'], ['app.js', 'K_FACTOR'],
   ['ampacity.js', 'AMPACITY'], ['ampacity.js', 'SMALL_CAP'],
+  ['ampacity.js', 'AMBIENT_CORRECTION'], ['ampacity.js', 'CONDUCTOR_ADJUSTMENT'],
+  ['ampacity.js', 'CEC_AMBIENT_CORRECTION'], ['ampacity.js', 'CEC_CONDUCTOR_ADJUSTMENT'],
   ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
   ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
   ['boxfill.js', 'CEC_VOL_ML'],
@@ -96,6 +98,10 @@ const TEST_WIRE_TABLE = readSealedConstant('app.js', 'WIRE_TABLE');
 const TEST_K_FACTOR = readSealedConstant('app.js', 'K_FACTOR');
 const TEST_AMPACITY = readSealedConstant('ampacity.js', 'AMPACITY');
 const TEST_SMALL_CAP = readSealedConstant('ampacity.js', 'SMALL_CAP');
+const TEST_AMBIENT_CORRECTION = readSealedConstant('ampacity.js', 'AMBIENT_CORRECTION');
+const TEST_CONDUCTOR_ADJUSTMENT = readSealedConstant('ampacity.js', 'CONDUCTOR_ADJUSTMENT');
+const TEST_CEC_AMBIENT_CORRECTION = readSealedConstant('ampacity.js', 'CEC_AMBIENT_CORRECTION');
+const TEST_CEC_CONDUCTOR_ADJUSTMENT = readSealedConstant('ampacity.js', 'CEC_CONDUCTOR_ADJUSTMENT');
 const TEST_THHN_AREA = readSealedConstant('conduit.js', 'THHN_AREA');
 const TEST_CONDUIT = readSealedConstant('conduit.js', 'CONDUIT');
 const TEST_VOL_PER_CONDUCTOR = readSealedConstant('boxfill.js', 'VOL_PER_CONDUCTOR');
@@ -112,6 +118,21 @@ const checkBool = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${name}${detail ? `: ${detail}` : ''}`);
   ok ? pass++ : fail++;
 };
+
+// Digits next to Latin letters are usually part of an identifier (COVID19,
+// a1), but digits next to CJK text are normal prose because Chinese does not
+// separate words with spaces. Using \p{L} here silently drops or truncates
+// valid Chinese citations and values, so only Latin letters and digits form
+// numeric-token boundaries.
+const NUMERIC_TOKEN_PATTERN = String.raw`(?<![\p{Script=Latin}\p{N}])#?\d+(?:[.,/-]\d+)*(?![\p{Script=Latin}\p{N}])`;
+const extractNumericTokens = (text) =>
+  (text.match(new RegExp(NUMERIC_TOKEN_PATTERN, 'gu')) || []).sort();
+const numericExtractorFixture = 'Rule 14-104将 Table 310.16相同 其60/75/90°C COVID19 a1';
+const numericExtractorExpected = ['14-104', '310.16', '60/75/90'];
+const numericExtractorActual = extractNumericTokens(numericExtractorFixture);
+checkBool('numeric extractor handles CJK adjacency without matching Latin identifiers',
+  JSON.stringify(numericExtractorActual) === JSON.stringify(numericExtractorExpected),
+  JSON.stringify(numericExtractorActual));
 
 const EDITIONS = [
   { prefix: '', country: 'us', locale: 'en', lang: 'en', hreflang: 'en-US', twin: '', chip: '🇺🇸 NEC · EN' },
@@ -149,6 +170,53 @@ const GENERATED_PATHS = [
   ...EDITIONS.flatMap((edition) =>
     [...SCOPED_PATHS, ...GUIDE_PATHS].map((path) => editionPath(edition.prefix, path))),
 ];
+const CEC_EDITION_NAME = 'CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)';
+const TERMS_JURISDICTION_WARNING = {
+  en: 'You must confirm the edition adopted by your own authority.',
+  es: 'Debe confirmar la edición adoptada por su propia autoridad competente.',
+  'fr-CA': 'Vous devez confirmer l’édition adoptée par votre propre autorité compétente.',
+  'zh-Hans': '您必须确认您所在地区的主管机构所采用的版本。',
+};
+for (const edition of EDITIONS) {
+  const path = editionPath(edition.prefix, 'terms/');
+  const html = readFileSync(`${path}index.html`, 'utf8');
+  checkBool(`${edition.prefix || 'us-en'} Terms names the CEC edition and warns that jurisdiction varies`,
+    html.includes(CEC_EDITION_NAME)
+      && html.includes(TERMS_JURISDICTION_WARNING[edition.locale]));
+}
+const staleCanadianAmpacityClaims = [
+  'planning only',
+  'planning note',
+  'have not yet been verified',
+  'has not verified',
+  'not a calculation',
+  'no ampacity number is produced',
+  'planification seulement',
+  'note de planification',
+  'ne sont pas encore vérifiées',
+  'n’a pas vérifié',
+  '仅供规划',
+  '规划说明',
+  '尚未核验',
+];
+const canadianAmpacityRenderedFiles = ['ca', 'ca-fr', 'ca-zh'].flatMap((prefix) => [
+  `${prefix}/ampacity-check/index.html`,
+  `${prefix}/guides/wire-ampacity-chart/index.html`,
+]);
+const staleCanadianAmpacityMatches = [];
+for (const file of canadianAmpacityRenderedFiles) {
+  const source = readFileSync(file, 'utf8').toLowerCase();
+  for (const claim of staleCanadianAmpacityClaims) {
+    if (source.includes(claim.toLowerCase())) {
+      staleCanadianAmpacityMatches.push(`${file}: ${claim}`);
+    }
+  }
+}
+checkBool('Canadian ampacity pages contain no superseded planning-only refusal',
+  staleCanadianAmpacityMatches.length === 0,
+  staleCanadianAmpacityMatches.length
+    ? staleCanadianAmpacityMatches.join(' | ')
+    : 'calculator and ampacity guide clean in all three Canadian editions');
 const sitemap = readFileSync('sitemap.xml', 'utf8');
 const missingGuideSitemapUrls = GENERATED_PATHS
   .filter((path) => path.includes('guides/'))
@@ -170,6 +238,10 @@ const countLiteral = (source, token) => {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (source.match(new RegExp(`(?<![\\p{Script=Latin}\\p{N}])${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
 };
+const countContextualUnit = (source, token) => {
+  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (source.match(new RegExp(`(?:\\d+(?:\\.\\d+)?|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
+};
 const patternChecks = neverTranslate.protectedPatterns.map((pattern) => ({
   name: pattern.name,
   re: new RegExp(pattern.source, pattern.flags),
@@ -177,6 +249,8 @@ const patternChecks = neverTranslate.protectedPatterns.map((pattern) => ({
 const protectedParity = (source, target) => {
   const literalMismatch = protectedLiterals.find((token) =>
     countLiteral(source, token) !== countLiteral(target, token));
+  const contextualMismatch = (neverTranslate.contextualUnitSymbols ?? []).find((token) =>
+    countContextualUnit(source, token) !== countContextualUnit(target, token));
   const patternMismatch = patternChecks.find(({ re }) => {
     re.lastIndex = 0;
     const sourceMatches = source.match(re) || [];
@@ -184,7 +258,7 @@ const protectedParity = (source, target) => {
     const targetMatches = target.match(re) || [];
     return sourceMatches.length !== targetMatches.length;
   });
-  return literalMismatch || patternMismatch?.name || null;
+  return literalMismatch || contextualMismatch || patternMismatch?.name || null;
 };
 
 // Runtime strings are shipped in per-edition JavaScript assets. Check those
@@ -279,7 +353,7 @@ const visibleTextNumbers = (file) => {
     .replace(/&(?:nbsp|#160);/gi, ' ')
     .replace(/&(?:amp|#38);/gi, '&')
     .replace(/\s+/g, ' ');
-  return (text.match(/#?\d+(?:[.,/-]\d+)*/g) || []).sort();
+  return extractNumericTokens(text);
 };
 for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   const englishPrefix = edition.country === 'ca' ? 'ca' : '';
@@ -291,6 +365,125 @@ for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
     checkBool(`static numeric parity /${translatedPath}`,
       JSON.stringify(translatedNumbers) === JSON.stringify(englishNumbers),
       `${translatedNumbers.length} visible numeric tokens`);
+  }
+  const translatedTermsPath = editionPath(edition.prefix, 'terms/');
+  const englishTermsPath = editionPath(englishPrefix, 'terms/');
+  const translatedTermsNumbers = visibleTextNumbers(`${translatedTermsPath}index.html`);
+  const englishTermsNumbers = visibleTextNumbers(`${englishTermsPath}index.html`);
+  checkBool(`static numeric parity /${translatedTermsPath}`,
+    JSON.stringify(translatedTermsNumbers) === JSON.stringify(englishTermsNumbers),
+    `${translatedTermsNumbers.length} visible numeric tokens`);
+}
+
+// Sealed, browser-independent ampacity oracles. These run even when the
+// environment cannot launch Chromium, so the required hand-checkable cases
+// still prove the table order directly from the sealed constants.
+const SEALED_TEMP_INDEX = { 60: 0, 75: 1, 90: 2 };
+const sealedAmbientSelection = (country, ambient, insulation) => {
+  if (country === 'ca') {
+    if (ambient <= 30) return { factor: 1, row: 30 };
+    const row = TEST_CEC_AMBIENT_CORRECTION.find((item) => ambient <= item.ambient);
+    return { factor: row?.factors[insulation], row: row?.ambient };
+  }
+  const row = TEST_AMBIENT_CORRECTION.find((item) =>
+    (item.min === null || ambient >= item.min) && ambient <= item.max);
+  return { factor: row?.factors[insulation], row };
+};
+const sealedConductorFactor = (country, count) => {
+  const table = country === 'ca'
+    ? TEST_CEC_CONDUCTOR_ADJUSTMENT
+    : TEST_CONDUCTOR_ADJUSTMENT;
+  if (country === 'us' && count <= 3) return 1;
+  return table.find((item) =>
+    count >= item.min && (item.max === null || count <= item.max))?.factor;
+};
+const sealedPermittedAmpacity = ({
+  country = 'us', material, wire, insulation, termination, ambient, conductorCount,
+}) => {
+  const ambientFactor = sealedAmbientSelection(country, ambient, insulation).factor;
+  if (ambientFactor === null || ambientFactor === undefined) return null;
+  const row = TEST_AMPACITY[material][wire];
+  const adjusted = row[SEALED_TEMP_INDEX[insulation]]
+    * ambientFactor
+    * sealedConductorFactor(country, conductorCount);
+  const terminationLimit = row[SEALED_TEMP_INDEX[termination]];
+  const cap = TEST_SMALL_CAP[material]?.[wire] ?? Infinity;
+  return Math.floor(Math.min(adjusted, terminationLimit, cap) + 1e-9);
+};
+checkBool('sealed worked example: 55 × 0.91 × 0.80 = 40 A',
+  sealedPermittedAmpacity({
+    material: 'cu', wire: '8 AWG', insulation: 90, termination: 75,
+    ambient: 40, conductorCount: 6,
+  }) === 40);
+checkBool('sealed termination-binding case: 55 A becomes 50 A',
+  sealedPermittedAmpacity({
+    material: 'cu', wire: '8 AWG', insulation: 90, termination: 75,
+    ambient: 30, conductorCount: 3,
+  }) === 50);
+checkBool('sealed 240.4(D)-binding case: 12 AWG copper becomes 20 A',
+  sealedPermittedAmpacity({
+    material: 'cu', wire: '12 AWG', insulation: 90, termination: 75,
+    ambient: 30, conductorCount: 3,
+  }) === 20);
+checkBool('sealed ambient-binding case: 75 × 0.82 = 61 A permitted',
+  sealedPermittedAmpacity({
+    material: 'cu', wire: '6 AWG', insulation: 90, termination: 75,
+    ambient: 50, conductorCount: 3,
+  }) === 61);
+checkBool('sealed not-permitted case returns no number',
+  sealedPermittedAmpacity({
+    material: 'cu', wire: '12 AWG', insulation: 60, termination: 60,
+    ambient: 60, conductorCount: 3,
+  }) === null);
+const sealedUsTenConductors = sealedPermittedAmpacity({
+  country: 'us', material: 'cu', wire: '8 AWG', insulation: 90, termination: 75,
+  ambient: 40, conductorCount: 10,
+});
+const sealedCanadaTenConductors = sealedPermittedAmpacity({
+  country: 'ca', material: 'cu', wire: '8 AWG', insulation: 90, termination: 75,
+  ambient: 40, conductorCount: 10,
+});
+checkBool('sealed US/Canada divergence at ten conductors is 0.50 vs 0.70',
+  sealedConductorFactor('us', 10) === 0.50
+    && sealedConductorFactor('ca', 10) === 0.70
+    && sealedUsTenConductors === 25
+    && sealedCanadaTenConductors === 35,
+  `US=${sealedUsTenConductors} A, Canada=${sealedCanadaTenConductors} A`);
+const cec37Selection = sealedAmbientSelection('ca', 37, 90);
+checkBool('sealed CEC 37°C case uses the next higher 40°C row',
+  cec37Selection.row === 40 && cec37Selection.factor === 0.91,
+  JSON.stringify(cec37Selection));
+checkBool('sealed CEC dash combination returns no number',
+  sealedPermittedAmpacity({
+    country: 'ca', material: 'cu', wire: '12 AWG', insulation: 60, termination: 60,
+    ambient: 60, conductorCount: 3,
+  }) === null);
+
+for (const edition of EDITIONS) {
+  const path = editionPath(edition.prefix, 'ampacity-check/');
+  const html = readFileSync(`${path}index.html`, 'utf8');
+  checkBool(`${edition.prefix || 'us-en'} ampacity page contains both new inputs`,
+    html.includes('id="amp-ambient"') && html.includes('id="amp-conductors"'));
+  if (edition.country === 'ca') {
+    checkBool(`${edition.prefix} ampacity page names the approved Canadian source and rules`,
+      html.includes('class="ca-note"')
+        && html.includes('CSA C22.1:24')
+        && html.includes('26th edition (2024)')
+        && html.includes('Tables 2/4')
+        && html.includes('5A')
+        && html.includes('5C')
+        && html.includes('4-004')
+        && html.includes('4-006')
+        && html.includes('8-104')
+        && html.includes('14-104'));
+
+    const guidePath = editionPath(edition.prefix, 'guides/wire-ampacity-chart/');
+    const guideHtml = readFileSync(`${guidePath}index.html`, 'utf8');
+    checkBool(`${edition.prefix} ampacity guide names CSA C22.1:24 and verified CEC Tables 2/4`,
+      guideHtml.includes('class="ca-note"')
+        && guideHtml.includes('CSA C22.1:24')
+        && guideHtml.includes('CEC Table 2')
+        && guideHtml.includes('Table 4'));
   }
 }
 
@@ -338,7 +531,15 @@ const MATRIX_INPUTS = {
   voltageDrop: { volts: 12, amps: 20, feet: 25, wire: '12 AWG', material: 'cu' },
   wireSize: { volts: 240, amps: 40, feet: 150, targetPercent: 3, material: 'cu' },
   maxLength: { volts: 12, amps: 10, targetPercent: 3, wire: '10 AWG', material: 'cu' },
-  ampacity: { load: 15, wire: '12 AWG', material: 'cu', temperatureIndex: 1 },
+  ampacity: {
+    load: 35,
+    wire: '8 AWG',
+    material: 'cu',
+    insulation: 90,
+    termination: 75,
+    ambient: 40,
+    conductorCount: 6,
+  },
   conduit: { count: 10, wire: '12 AWG', family: 'emt' },
   power: { volts: 240, watts: 1500, powerFactor: 1 },
   boxFill: { wire: '12 AWG', conductors: 6, devices: 1, grounds: 1, clamps: 0, marrettes: 0 },
@@ -358,20 +559,35 @@ const expectedWireSize = () => {
   if (!row) throw new Error('Wire-size matrix input exceeds the sealed wire table');
   return parseFloat(row[0]);
 };
-// CEC Tables 2/4 and Rule 14-104 are verified as harmonized with the sealed
-// NEC table rows and small-wire caps currently used by the engine. Keep the
-// country mapping explicit: matching today is verified data, not a universal
-// assumption about future countries or future calculator inputs.
-const AMPACITY_DATA_BY_COUNTRY = {
-  us: { table: TEST_AMPACITY, caps: TEST_SMALL_CAP },
-  ca: { table: TEST_AMPACITY, caps: TEST_SMALL_CAP },
+const TEMP_INDEX = { 60: 0, 75: 1, 90: 2 };
+const ambientFactorFor = (country, ambient, insulation) => {
+  if (country === 'ca') {
+    if (ambient <= 30) return 1;
+    return TEST_CEC_AMBIENT_CORRECTION.find((item) =>
+      ambient <= item.ambient)?.factors[insulation];
+  }
+  const row = TEST_AMBIENT_CORRECTION.find((item) =>
+    (item.min === null || ambient >= item.min) && ambient <= item.max);
+  return row?.factors[insulation];
 };
-const expectedAmpacity = (country) => {
+const conductorFactorFor = (country, count) => {
+  const table = country === 'ca'
+    ? TEST_CEC_CONDUCTOR_ADJUSTMENT
+    : TEST_CONDUCTOR_ADJUSTMENT;
+  if (country === 'us' && count <= 3) return 1;
+  return table.find((item) =>
+    count >= item.min && (item.max === null || count <= item.max))?.factor;
+};
+const expectedAmpacity = (edition) => {
   const input = MATRIX_INPUTS.ampacity;
-  const source = AMPACITY_DATA_BY_COUNTRY[country];
-  const tableValue = source.table[input.material][input.wire][input.temperatureIndex];
-  const cap = source.caps[input.material]?.[input.wire];
-  return cap === undefined ? tableValue : Math.min(tableValue, cap);
+  const row = TEST_AMPACITY[input.material][input.wire];
+  const base = row[TEMP_INDEX[input.insulation]];
+  const adjusted = base
+    * ambientFactorFor(edition.country, input.ambient, input.insulation)
+    * conductorFactorFor(edition.country, input.conductorCount);
+  const termination = row[TEMP_INDEX[input.termination]];
+  const cap = TEST_SMALL_CAP[input.material]?.[input.wire] ?? Infinity;
+  return Math.floor(Math.min(adjusted, termination, cap) + 1e-9);
 };
 // Canada intentionally gets the current planning-only result from these
 // sealed NEC conductor/trade-size tables. Do not invent a Canadian size until
@@ -411,13 +627,6 @@ const voltageDropLabels = {
   'fr-CA': 'chute de tension du conducteur en cuivre 12 AWG',
   'zh-Hans': '12 AWG 铜线的电压降',
 };
-const notRatedWarnings = {
-  en: 'This wire is NOT rated for 30 A. Go up in size — undersized wire overheats and is a fire risk.',
-  es: 'Este conductor NO tiene capacidad nominal para 30 A. Use un calibre mayor: un conductor de calibre insuficiente se sobrecalienta y supone un riesgo de incendio.',
-  'fr-CA': 'Ce conducteur N’EST PAS homologué pour 30 A. Utilisez un calibre supérieur — un conducteur trop petit surchauffe et présente un risque d’incendie.',
-  'zh-Hans': '此导线的额定载流量不足以承载30 A。请增大导线规格（线规）——导线规格过小会过热并造成火灾风险。',
-};
-
 // Per-edition expected values must come from that country's verified
 // constants and counting rules, never from typed answer totals. Countries can
 // genuinely diverge; a typed total silently turns an unverified guess into a
@@ -477,10 +686,16 @@ const calculatorCases = [
   {
     name: 'ampacity',
     path: 'ampacity-check/',
-    expected: (edition) => expectedAmpacity(edition.country),
+    expected: expectedAmpacity,
     readNumber: (value) => parseFloat(value),
     interact: async (targetPage) => {
-      await targetPage.fill('#amp-load', String(MATRIX_INPUTS.ampacity.load));
+      const input = MATRIX_INPUTS.ampacity;
+      await targetPage.selectOption('#amp-size', input.wire);
+      await targetPage.click(`[data-insulation="${input.insulation}"]`);
+      await targetPage.click(`[data-termination="${input.termination}"]`);
+      await targetPage.fill('#amp-ambient', String(input.ambient));
+      await targetPage.fill('#amp-conductors', String(input.conductorCount));
+      await targetPage.fill('#amp-load', String(input.load));
       await targetPage.click('#amp-form .calc-btn');
     },
   },
@@ -572,18 +787,6 @@ for (const edition of EDITIONS) {
       interactionErrors.join(' | '));
   }
 
-  interactionErrors = [];
-  const ampacityPath = editionPath(edition.prefix, 'ampacity-check/');
-  await editionPage.goto(BASE + ampacityPath);
-  await editionPage.fill('#amp-load', '30');
-  await editionPage.click('#amp-form .calc-btn');
-  const notRated = await editionPage.textContent('#verdict-note');
-  checkBool(`${edition.prefix || 'us-en'} ampacity negation is complete and unambiguous`,
-    notRated === notRatedWarnings[edition.locale],
-    notRated);
-  checkBool(`${edition.prefix || 'us-en'} unsafe ampacity interaction has zero page errors`,
-    interactionErrors.length === 0,
-    interactionErrors.join(' | '));
   await editionPage.close();
 }
 
@@ -870,24 +1073,158 @@ await page.goto(BASE + 'max-wire-length/');
 activeTab = await page.textContent('.mode-tab.active .mode-title');
 console.log(activeTab.includes('Max distance') ? 'PASS /max-wire-length/ preselects Max distance' : `FAIL preselect: "${activeTab}"`); activeTab.includes('Max distance') ? pass++ : fail++;
 
-// ---- Ampacity Check: 12 AWG Cu @75°C = 25 A table, but 20 A breaker cap → limit 20 A
+// ---- Ampacity derating: verified order, binding limits, and refusal cases.
 await page.goto(BASE + 'ampacity-check/');
-await page.fill('#amp-load', '15');
+await page.selectOption('#amp-size', '8 AWG');
+await page.click('[data-insulation="90"]');
+await page.click('[data-termination="75"]');
+await page.fill('#amp-ambient', '40');
+await page.fill('#amp-conductors', '6');
+await page.fill('#amp-load', '35');
 await page.click('#amp-form .calc-btn');
 await page.waitForSelector('#results:not([hidden])');
 let ampBig = await page.textContent('#big-number');
-console.log(ampBig.trim() === '20 A' ? 'PASS ampacity 12AWG Cu 75C limit = 20 A (240.4(D) cap)' : `FAIL ampacity: got "${ampBig}"`); ampBig.trim() === '20 A' ? pass++ : fail++;
-cls = await page.getAttribute('#verdict', 'class');
-console.log(cls.includes('good') ? 'PASS ampacity verdict OK at 15 A' : `FAIL verdict: ${cls}`); cls.includes('good') ? pass++ : fail++;
-// Aluminum 8 AWG @60°C = 35 A (the value the source-check corrected)
-await page.click('[data-material="al"]');
-await page.selectOption('#amp-size', '8 AWG');
-await page.click('[data-temp="60"]');
-await page.fill('#amp-load', '30');
+let ampBinding = await page.textContent('#amp-binding-value');
+check('worked example 55A × 0.91 × 0.80', parseFloat(ampBig), 40);
+checkBool('worked example binding limit is derating',
+  ampBinding.includes('Derating after ambient correction'),
+  ampBinding);
+let ampFormula = await page.textContent('#amp-combined-formula');
+checkBool('worked example shows both factors multiplied together',
+  ampFormula.trim() === '55 A × 0.91 × 0.80 = 40 A',
+  ampFormula.trim());
+
+// 8 AWG Cu, 90°C insulation, ordinary ambient, 3 CCC: 55A derated,
+// then the 75°C terminal column limits the final answer to 50A.
+await page.fill('#amp-ambient', '30');
+await page.fill('#amp-conductors', '3');
 await page.click('#amp-form .calc-btn');
 ampBig = await page.textContent('#big-number');
-console.log(ampBig.trim() === '35 A' ? 'PASS ampacity 8AWG Al 60C = 35 A' : `FAIL Al ampacity: got "${ampBig}"`); ampBig.trim() === '35 A' ? pass++ : fail++;
+ampBinding = await page.textContent('#amp-binding-value');
+check('termination-binding case', parseFloat(ampBig), 50);
+checkBool('110.14(C) termination limit binds',
+  ampBinding.includes('110.14(C)'),
+  ampBinding);
+
+// 12 AWG Cu, 90°C insulation, 75°C terminals, 30°C, 3 CCC:
+// 30A raw, 25A terminal limit, then 240.4(D) caps the final answer at 20A.
+await page.selectOption('#amp-size', '12 AWG');
+await page.click('#amp-form .calc-btn');
+ampBig = await page.textContent('#big-number');
+ampBinding = await page.textContent('#amp-binding-value');
+check('240.4(D)-binding case', parseFloat(ampBig), 20);
+checkBool('240.4(D) small-conductor cap binds',
+  ampBinding.includes('240.4(D)'),
+  ampBinding);
+
+// A 33A continuous load needs 41.25A on the load side, while the conductor
+// side remains the worked-example 40A. The two calculations must stay apart.
+await page.selectOption('#amp-size', '8 AWG');
+await page.fill('#amp-ambient', '40');
+await page.fill('#amp-conductors', '6');
+await page.fill('#amp-load', '33');
+await page.click('[data-continuous="yes"]');
+await page.click('#amp-form .calc-btn');
+ampBig = await page.textContent('#big-number');
+const continuousRequired = await page.textContent('#amp-load-required');
+cls = await page.getAttribute('#verdict', 'class');
+check('continuous case leaves conductor-side ampacity unchanged', parseFloat(ampBig), 40);
+check('continuous case calculates load-side 125% separately', parseFloat(continuousRequired), 41.25);
+checkBool('continuous requirement fails separately without changing derating',
+  cls.includes('bad'),
+  cls);
+
+// 60°C insulation at 60°C ambient is a published "—". No neighboring
+// factor may be substituted and no ampacity number may be returned.
+await page.click('[data-insulation="60"]');
+await page.click('[data-termination="60"]');
+await page.fill('#amp-ambient', '60');
+await page.click('#amp-form .calc-btn');
+ampBig = await page.textContent('#big-number');
+const notPermittedVisible = await page.isVisible('#amp-code-unavailable');
+const calculationHidden = await page.$eval('#amp-result-calculation', (element) => element.hidden);
+checkBool('not-permitted ambient/insulation combination refuses a number',
+  ampBig.trim() === '—' && notPermittedVisible && calculationHidden,
+  `${ampBig.trim()} visible=${notPermittedVisible} hidden=${calculationHidden}`);
 await page.screenshot({ path: `${shots}/7-ampacity.png`, fullPage: true });
+
+// Same physical inputs, different country tables: ten conductors are 0.50
+// under NEC Table 310.15(C)(1) and 0.70 under CEC Table 5C.
+const runTenConductorAmpacity = async (path) => {
+  await page.goto(BASE + path);
+  await page.selectOption('#amp-size', '8 AWG');
+  await page.click('[data-insulation="90"]');
+  await page.click('[data-termination="75"]');
+  await page.fill('#amp-ambient', '40');
+  await page.fill('#amp-conductors', '10');
+  await page.fill('#amp-load', '20');
+  await page.click('#amp-form .calc-btn');
+  return {
+    result: parseFloat(await page.textContent('#big-number')),
+    factor: (await page.textContent('#amp-adjustment-factor')).trim(),
+    formula: (await page.textContent('#amp-combined-formula')).trim(),
+  };
+};
+const usTen = await runTenConductorAmpacity('ampacity-check/');
+const caTen = await runTenConductorAmpacity('ca/ampacity-check/');
+checkBool('rendered US/Canada ten-conductor paths diverge at 0.50 vs 0.70',
+  usTen.result === 25
+    && caTen.result === 35
+    && usTen.factor === '× 0.50'
+    && caTen.factor === '× 0.70',
+  `US ${JSON.stringify(usTen)}; Canada ${JSON.stringify(caTen)}`);
+
+// CEC Table 5A is point-based. 37°C must move up to the 40°C row.
+await page.fill('#amp-ambient', '37');
+await page.click('#amp-form .calc-btn');
+const cec37 = {
+  result: parseFloat(await page.textContent('#big-number')),
+  row: (await page.textContent('#amp-ambient-row-value')).trim(),
+  factor: (await page.textContent('#amp-ambient-factor')).trim(),
+  math: (await page.textContent('.math-details .math-body')).replace(/\s+/g, ' '),
+};
+checkBool('rendered CEC 37°C case shows the 40°C row and conservative method',
+  cec37.result === 35
+    && cec37.row === '40°C'
+    && cec37.factor === '× 0.91'
+    && cec37.math.includes('next higher listed row'),
+  JSON.stringify(cec37));
+
+// A published dash remains a refusal in the Canadian path.
+await page.click('[data-insulation="60"]');
+await page.click('[data-termination="60"]');
+await page.fill('#amp-ambient', '60');
+await page.click('#amp-form .calc-btn');
+const caDash = {
+  value: (await page.textContent('#big-number')).trim(),
+  noteVisible: await page.isVisible('#amp-code-unavailable'),
+  calculationHidden: await page.$eval('#amp-result-calculation', (element) => element.hidden),
+};
+checkBool('rendered CEC dash combination refuses a number',
+  caDash.value === '—' && caDash.noteVisible && caDash.calculationHidden,
+  JSON.stringify(caDash));
+
+// Rule 8-104 is displayed as an 80% Canadian load limit, not as a second
+// 125% ampacity multiplier.
+await page.click('[data-insulation="90"]');
+await page.click('[data-termination="75"]');
+await page.fill('#amp-ambient', '40');
+await page.fill('#amp-conductors', '6');
+await page.fill('#amp-load', '33');
+await page.click('[data-continuous="yes"]');
+await page.click('#amp-form .calc-btn');
+const caContinuous = {
+  ampacity: parseFloat(await page.textContent('#big-number')),
+  limit: parseFloat(await page.textContent('#amp-load-required')),
+  label: (await page.textContent('#amp-continuous-row')).replace(/\s+/g, ' ').trim(),
+  verdict: await page.getAttribute('#verdict', 'class'),
+};
+checkBool('rendered CEC Rule 8-104 keeps 80% separate from conductor derating',
+  caContinuous.ampacity === 40
+    && caContinuous.limit === 32
+    && caContinuous.label.includes('× 80%')
+    && caContinuous.verdict.includes('bad'),
+  JSON.stringify(caContinuous));
 
 // ---- Conduit Fill: 10 × 12 THHN = 0.133 sq in → 1/2" EMT 40% = 0.1216 (no), 3/4" = 0.2132 (yes)
 await page.goto(BASE + 'conduit-fill/');
@@ -964,10 +1301,10 @@ for (const g of GENERATED_PATHS.filter((path) => path.includes('guides/'))) {
 // formatting and multiplicity of its country-specific English twin.
 const renderedNumberMultiset = async (path) => {
   await page.goto(BASE + path);
-  return page.evaluate(() => {
-    const tokens = document.body.innerText.match(/(?<![\p{L}\p{N}])#?\d+(?:[.,/-]\d+)*(?![\p{L}\p{N}])/gu) || [];
+  return page.evaluate((numericTokenPattern) => {
+    const tokens = document.body.innerText.match(new RegExp(numericTokenPattern, 'gu')) || [];
     return tokens.sort();
-  });
+  }, NUMERIC_TOKEN_PATTERN);
 };
 for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   const englishPrefix = edition.country === 'ca' ? 'ca' : '';
@@ -982,6 +1319,17 @@ for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
     checkBool(`numeric parity /${translatedPath}`, same,
       same ? `${translatedNumbers.length} rendered numeric tokens` : `translated=${JSON.stringify(translatedNumbers)} english=${JSON.stringify(englishNumbers)}`);
   }
+  const translatedTermsPath = editionPath(edition.prefix, 'terms/');
+  const englishTermsPath = editionPath(englishPrefix, 'terms/');
+  const [translatedTermsNumbers, englishTermsNumbers] = [
+    await renderedNumberMultiset(translatedTermsPath),
+    await renderedNumberMultiset(englishTermsPath),
+  ];
+  const termsSame = JSON.stringify(translatedTermsNumbers) === JSON.stringify(englishTermsNumbers);
+  checkBool(`numeric parity /${translatedTermsPath}`, termsSame,
+    termsSame
+      ? `${translatedTermsNumbers.length} rendered numeric tokens`
+      : `translated=${JSON.stringify(translatedTermsNumbers)} english=${JSON.stringify(englishTermsNumbers)}`);
 }
 // Spot-check a computed table value: sub-panel guide, 100A Cu @150ft = 2 AWG
 await page.goto(BASE + 'guides/sub-panel-wire-size/');

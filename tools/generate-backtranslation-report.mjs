@@ -45,8 +45,14 @@ const literalCount = (source, token) => {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (source.match(new RegExp(`(?<![\\p{Script=Latin}\\p{N}])${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
 };
+const contextualUnitCount = (source, token) => {
+  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (source.match(new RegExp(`(?:\\d+(?:\\.\\d+)?|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
+};
 const unitCountsMatch = (source, target) => never.unitSymbols.every((unit) =>
-  literalCount(source, unit) === literalCount(target, unit));
+  literalCount(source, unit) === literalCount(target, unit))
+  && (never.contextualUnitSymbols ?? []).every((unit) =>
+    contextualUnitCount(source, unit) === contextualUnitCount(target, unit));
 
 const expectedDigest = createHash('sha256')
   .update(JSON.stringify(passAInput.entries))

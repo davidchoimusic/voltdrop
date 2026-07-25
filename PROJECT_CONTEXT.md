@@ -42,11 +42,11 @@ guide ships country-aware for all live editions (see Ampacity Check AMP_TEXT pat
 notes are only the temporary state while a country's data awaits the verification gate.
 Physics/standards/language three-layer model; NEVER translate articles — regenerate from
 templates + verified country packs; 5-stage pipeline with unskippable verification gate;
-subdirectory URLs + hreflang; rollout CA → UK/AU → EU metric. CEC difference map (verified):
-docs/research/CEC_VS_NEC.md — ampacity harmonized (reuse), VD MANDATORY in Canada (fixed in
-product 2026-07-25), box fill is a real fork (mL, marrettes count). CA edition today = honest
-NEC-based with auto note on NEC-citing pages (common.js vdCaNote) + country-aware
-recommendation/mandatory wording (code-basis span).
+subdirectory URLs + hreflang; rollout CA → UK/AU → EU metric. CEC difference map:
+docs/research/CEC_VS_NEC.md — base ampacity grids NOT verified (do not reuse as CEC),
+VD MANDATORY in Canada (fixed in product 2026-07-25), box fill is a real fork (mL,
+marrettes count). CA edition today = honest NEC-based with visible planning notes on
+unverified surfaces + country-aware recommendation/mandatory wording (code-basis span).
 
 ## Product decisions (from David, 2026-07-24)
 - **Start US + Canada only** (AWG, feet, NEC 3%/5% guidelines). International later.
@@ -152,10 +152,10 @@ live site; ~2/3 of it was already this roadmap. The four items that were NOT:**
    few tools, not as one more list item.
 
 Where the review was WRONG or out of date, recorded so it is not re-litigated:
-- Its Canada criticism was accurate that morning and is now mostly fixed (ampacity cites
-  CEC Rule 14-104 + Table 2; box fill uses marrettes + mL). Only conduit fill remains, and
-  our visible planning-only warning is STRONGER than its suggested "label it Canadian units
-  and common values".
+- Its Canada criticism was accurate. Box fill now uses verified CEC marrette counting and
+  mL values. Ampacity and conduit fill remain planning-only because their Canadian base
+  grids have not passed verification; both surfaces name the missing tables instead of
+  presenting NEC data under a CEC label.
 - **Its expansion table conflates COUNTRY with LANGUAGE** — it ranks "Mexico / Spanish LatAm"
   7th and treats Spanish as a market. US-Spanish serves US electricians on US NEC rules with
   no country pack and was nearly free; Spanish-for-Mexico needs a full verified pack. David's

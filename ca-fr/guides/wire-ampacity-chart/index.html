@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tableau du courant admissible des conducteurs Canada — CEC Table 2 & Table 4 | VoltDrop</title>
-<meta name="description" content="Tableau canadien du courant admissible pour le cuivre et l’aluminium (CEC Tables 2 et 4, harmonisé avec les valeurs américaines — vérifié), plus les règles de température des bornes du NMD90 en langage clair.">
+<meta name="description" content="Tableau canadien vérifié du courant admissible tiré de CSA C22.1:24 CEC Table 2 et Table 4, avec les colonnes 60/75/90°C, les bornes de Rule 4-006 et les plafonds de Rule 14-104.">
 <link rel="canonical" href="https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/wire-ampacity-chart/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/wire-ampacity-chart/">
@@ -18,14 +18,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
 <meta property="og:title" content="Tableau du courant admissible des conducteurs Canada — CEC Table 2 & Table 4 | VoltDrop">
-<meta property="og:description" content="Tableau canadien du courant admissible pour le cuivre et l’aluminium (CEC Tables 2 et 4, harmonisé avec les valeurs américaines — vérifié), plus les règles de température des bornes du NMD90 en langage clair.">
+<meta property="og:description" content="Tableau canadien vérifié du courant admissible tiré de CSA C22.1:24 CEC Table 2 et Table 4, avec les colonnes 60/75/90°C, les bornes de Rule 4-006 et les plafonds de Rule 14-104.">
 <meta property="og:url" content="https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tableau du courant admissible des conducteurs Canada — CEC Table 2 & Table 4 | VoltDrop">
-<meta name="twitter:description" content="Tableau canadien du courant admissible pour le cuivre et l’aluminium (CEC Tables 2 et 4, harmonisé avec les valeurs américaines — vérifié), plus les règles de température des bornes du NMD90 en langage clair.">
+<meta name="twitter:description" content="Tableau canadien vérifié du courant admissible tiré de CSA C22.1:24 CEC Table 2 et Table 4, avec les colonnes 60/75/90°C, les bornes de Rule 4-006 et les plafonds de Rule 14-104.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
@@ -92,15 +92,17 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Tableau du courant admissible des conducteurs — Canada (CEC Table 2 &amp; Table 4)</h1>
-    <p class="tool-sub">Le tableau canadien du cuivre et de l’aluminium — harmonisé avec les valeurs américaines, régi par les règles canadiennes. <a class="inline-link" href="/guides/wire-ampacity-chart/" data-edition-country="us">🇺🇸 Version américaine</a></p>
+    <h1 class="tool-title">🔥 Tableau canadien du courant admissible — CEC Tables 2 et 4</h1>
+    <p class="tool-sub">Valeurs vérifiées de CEC Table 2 et Table 4, avec les règles canadiennes qui déterminent l’emploi des colonnes. <a class="inline-link" href="/guides/wire-ampacity-chart/" data-edition-country="us">🇺🇸 Version américaine</a></p>
   </div>
+
+<div class="ca-note"><strong>Source canadienne :</strong> <strong>CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)</strong>. Les colonnes 60/75/90°C ci-dessous sont vérifiées dans CEC Table 2 et Table 4. L’adoption provinciale et les modifications varient; confirmez l’édition adoptée localement.</div>
 
   <section class="card explainer">
     <h2>Le tableau</h2>
-    <p>Ampères que chaque conducteur peut transporter en continu selon le CEC (jusqu’à trois conducteurs porteurs de courant dans un conduit ou un câble, 30°C de température ambiante). Bonne nouvelle pour ceux qui travaillent des deux côtés de la frontière : <strong>la Table 2 du CEC (cuivre) et la Table 4 (aluminium) sont harmonisées avec la Table 310.16 du NEC américain</strong> — nous avons vérifié que les valeurs concordent, alors voici un seul tableau pour les deux pays :</p>
+    <p>La grille ci-dessous contient <strong>les données de CEC Table 2 pour le cuivre et de Table 4 pour l’aluminium</strong> . Leurs colonnes 60/75/90°C sont vérifiées comme identiques à NEC Table 310.16 pour chaque calibre commun à cet outil.</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th rowspan="2">Calibre</th><th colspan="3">Cuivre (Table 2)</th><th colspan="3">Aluminium (Table 4)</th></tr>
+      <thead><tr><th rowspan="2">Calibre</th><th colspan="3">Cuivre (CEC Table 2)</th><th colspan="3">Aluminium (CEC Table 4)</th></tr>
       <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
       <tbody>
         <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
@@ -118,19 +120,19 @@
         <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">Valeurs vérifiées auprès de sources canadiennes (et comparées aux reproductions américaines — elles concordent). Les plafonds de disjoncteur pour petits conducteurs s’appliquent aussi au Canada (CEC 14-104) : #14 cuivre → disjoncteur de 15 A, #12 → 20 A, #10 → 30 A, peu importe la colonne. Version interactive : <a class="inline-link" href="/ampacity-check/">Vérification du courant admissible</a>.</p>
+    <p class="gnote">Source : CSA C22.1:24, 26th edition (2024). Rule 14-104 plafonne le dispositif de protection à #14 cuivre → 15 A, #12 → 20 A et #10 → 30 A, peu importe la colonne brute. Calculateur interactif : <a class="inline-link" href="/ampacity-check/">Vérification du courant admissible</a>.</p>
 
     <h2>Quelle colonne ai-je le droit d’utiliser? (l’histoire du NMD90)</h2>
-    <p>Même principe que partout ailleurs : <strong>utilisez la colonne de votre maillon le plus faible</strong> (CEC Rule 4-006). L’isolant du conducteur peut être homologué pour 90°C — le NMD90 et le T90 le sont tous les deux — mais les cosses du disjoncteur et les bornes des appareils fixent le plafond : un équipement non marqué compte comme 60°C, un équipement marqué 75°C donne droit à la colonne 75°C. Voici la différence avec les États-Unis qui fait trébucher les lecteurs des deux côtés de la frontière : <strong>Le Romex américain (NM-B) est plafonné d’office à la colonne 60°C par une règle générale; le NMD90 canadien, non</strong> — il suit la règle de la température des bornes comme tout autre conducteur 90°C. Dans le résidentiel de tous les jours, les réponses tombent aux mêmes endroits familiers (#14 → 15 A, #12 → 20 A, #10 → 30 A), mais la cote 90°C donne au NMD90 un meilleur point de départ pour la réduction du courant admissible due à la chaleur ou au groupage.</p>
+    <p>Même principe que partout ailleurs : <strong>utilisez la colonne de votre maillon le plus faible</strong> (CEC Rule 4-006). L’isolant du conducteur peut être homologué pour 90°C — le NMD90 et le T90 le sont tous les deux. L’équipement marqué utilise la température de borne indiquée. Pour l’équipement non marqué, utilisez 60°C s’il est d’au plus 100 A ou marqué pour #1 AWG et plus petit, et 75°C au-dessus. La règle vise les premiers 1.2 m et permet une transition au-delà; par prudence, le calculateur VoltDrop applique la limite inférieure sur toute la longueur comme méthode simplifiée. Voici la différence avec les États-Unis qui fait trébucher les lecteurs des deux côtés de la frontière : <strong>Le Romex américain (NM-B) est plafonné d’office à la colonne 60°C par une règle générale; le NMD90 canadien, non</strong> — il suit la règle de la température des bornes comme tout autre conducteur 90°C. Dans le résidentiel de tous les jours, les réponses tombent aux mêmes endroits familiers (#14 → 15 A, #12 → 20 A, #10 → 30 A), mais la cote 90°C donne au NMD90 un meilleur point de départ pour la réduction du courant admissible due à la chaleur ou au groupage.</p>
 
     <h2>La tension change-t-elle le courant admissible?</h2>
     <p>Non. Un conducteur #10 transporte les mêmes ~30 A à 12 V, 120 V, 240 V ou au 347/600 V commercial canadien. Ce que la tension change, c’est le <em>mordant</em> de la chute de tension — 3 volts perdus, c’est 1.3% d’un circuit de 240 V, mais 25% d’un circuit de 12 V. Et rappelez-vous : au Canada, la limite de chute est <a class="inline-link" href="/ca/guides/voltage-drop-formula/">obligatoire (Rule 8-102)</a>.</p>
 
     <h2>Ce que ce tableau ne couvre pas</h2>
-    <p>Conditions normales seulement. Les environnements chauds, les groupages de plus de trois conducteurs porteurs de courant et les charges continues font tous baisser ces valeurs — et notez que le tableau canadien de réduction pour groupage (Table 5C) diffère de celui des États-Unis : les conseils américains de réduction ne se transposent donc pas. Un outil de réduction du courant admissible est prévu à notre feuille de route.</p>
+    <p>Ce sont des valeurs de base. La chaleur, plus de trois conducteurs à compter, la température des bornes, les plafonds de dispositif pour petits conducteurs et les charges continues peuvent réduire le résultat utilisable. Utilisez le calculateur canadien pour CEC Table 5A, Table 5C et Rules 4-004, 4-006, 8-104 et 14-104.</p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Les tableaux canadiens de courant admissible sont-ils les mêmes qu’aux États-Unis?","acceptedAnswer":{"@type":"Answer","text":"Pour les calibres courants en bâtiment, oui — la Table 2 (cuivre) et la Table 4 (aluminium) du CEC sont harmonisées avec la Table 310.16 du NEC, vérifiées valeur par valeur du 14 AWG au 4/0. Ce qui diffère, ce sont les règles autour : le traitement des types de câbles (NMD90 contre NM-B), les tableaux de réduction du courant admissible et la limite obligatoire de chute de tension au Canada."}},{"@type":"Question","name":"Combien d’ampères un conducteur de calibre 12 peut-il supporter au Canada?","acceptedAnswer":{"@type":"Answer","text":"20 ampères sur un disjoncteur de 20 A pour les circuits ordinaires — le CEC 14-104 plafonne le #12 en cuivre à un dispositif de protection contre les surintensités de 20 A, exactement comme la règle américaine, même si les colonnes 75°C et 90°C affichent 25 et 30 A."}},{"@type":"Question","name":"Le NMD90 est-il limité à 60°C comme le NM-B américain?","acceptedAnswer":{"@type":"Answer","text":"Aucun plafond général. Le NMD90 a un isolant 90°C et suit la règle de la température nominale des bornes (CEC 4-006) : 60°C pour un équipement non marqué, 75°C lorsque l’équipement porte cette marque, la colonne 90°C servant surtout de point de départ pour la réduction du courant admissible."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Les tableaux canadiens de courant admissible sont-ils les mêmes qu’aux États-Unis?","acceptedAnswer":{"@type":"Answer","text":"Oui, pour les colonnes 60/75/90°C et chaque calibre commun affiché dans cet outil. Les valeurs actuelles de CEC Table 2 et Table 4 sont vérifiées comme identiques à NEC Table 310.16. Cette harmonisation ne s’étend pas aux colonnes de température supérieure, aux tableaux à l’air libre ni aux règles de réduction du CEC."}},{"@type":"Question","name":"Combien d’ampères un conducteur de calibre 12 peut-il supporter au Canada?","acceptedAnswer":{"@type":"Answer","text":"20 ampères sur un disjoncteur de 20 A pour les circuits ordinaires — le CEC 14-104 plafonne le #12 en cuivre à un dispositif de protection contre les surintensités de 20 A, exactement comme la règle américaine, même si les colonnes 75°C et 90°C affichent 25 et 30 A."}},{"@type":"Question","name":"Le NMD90 est-il limité à 60°C comme le NM-B américain?","acceptedAnswer":{"@type":"Answer","text":"Aucun plafond général. Le NMD90 a un isolant 90°C et suit la règle de la température nominale des bornes (CEC 4-006) : utilisez 60°C pour l’équipement d’au plus 100 A ou marqué pour #1 AWG et plus petit, et 75°C au-dessus de cette limite. La limite s’applique aux premiers 1.2 m à partir de la terminaison; la colonne 90°C sert surtout de point de départ pour la réduction du courant admissible."}}]}</script>
 
 </main>
 

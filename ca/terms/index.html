@@ -93,7 +93,7 @@
 
   <div class="tool-intro card">
     <h1 class="tool-title">Terms of Service</h1>
-    <p class="tool-sub">Last updated: July 24, 2026</p>
+    <p class="tool-sub">Last updated: July 25, 2026</p>
   </div>
 
   <section class="card explainer">
@@ -107,6 +107,13 @@
     <p>The Service provides calculators for voltage drop, wire sizing, ampacity, conduit fill, and related electrical estimates, based on commonly used published formulas and tables such as those in the Canadian Electrical Code. Where a Canadian data table has not passed our verification gate, the page states that limitation directly.</p>
     <p><strong>The Service is NOT professional advice.</strong> Results are simplified estimates for normal conditions. They do not account for every real-world factor (temperature, bundling, derating, continuous loads, local code amendments, equipment listings, and more). The Service is not a substitute for a licensed electrician or professional engineer, and using it does not create any professional relationship.</p>
     <p><strong>Electrical work can injure or kill, and mistakes can cause fires.</strong> Always verify calculations independently, follow your local electrical code and permit requirements, and hire a licensed professional where required by law or common sense.</p>
+    <p>VoltDrop sometimes uses a simplified or conservative method. For example, CEC Rule 4-006 limits the termination-temperature requirement to the first 1.2 m of conductor and permits a compliant transition beyond it. VoltDrop does not model that split; it applies the lower of the conductor and termination temperature ratings to the entire run. This is conservative, but it is not the full Code procedure.</p>
+    <p>Where a Code does not expressly answer an implementation detail, VoltDrop may make a conservative choice that your local inspector or authority may not share. For example, CEC Rule 4-004 does not expressly address installed spare power or lighting conductors; VoltDrop counts them toward Table 5C.</p>
+
+    <h2>2A. Code editions and local adoption</h2>
+    <p>For U.S. code-based calculations, VoltDrop implements the 2023 edition of NFPA 70 — National Electrical Code (NEC): Table 310.16, Tables 310.15(B)(1) and 310.15(C)(1), 240.4(D), and 110.14(C). Its conduit-fill and box-fill tools also use NEC Chapter 9 Tables 4 and 5 and NEC 314.16, including Tables 314.16(A) and 314.16(B).</p>
+    <p>For Canadian code-based calculations, VoltDrop implements CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2, 4, 5A, 5C, and 22, and Rules 4-004, 4-006, 8-102, 8-104, 12-3034, and 14-104.</p>
+    <p><strong>States, provinces, and municipalities adopt codes on different schedules and may add local amendments. A result that is correct under the edition VoltDrop implements can be wrong where an earlier edition or local amendment applies. You must confirm the edition adopted by your own authority.</strong></p>
 
     <h2>3. No warranty</h2>
     <p>The Service is provided "as is" and "as available," without warranties of any kind, express or implied — including accuracy, reliability, fitness for a particular purpose, and uninterrupted availability. Published standards change; we may lag behind them. We may modify or discontinue any part of the Service at any time.</p>
@@ -125,6 +132,9 @@
 
     <h2>8. Changes to these terms</h2>
     <p>We may update these terms; the date at the top reflects the latest revision. Continued use after a change means you accept the new terms.</p>
+
+    <h2>8A. Translated versions</h2>
+    <p>Translations are provided for convenience. If a translated version is inconsistent with the English version, the English version governs.</p>
 
     <h2>9. Governing law</h2>
     <p>These terms are governed by the laws of the United States and the operator's state of residence, without regard to conflict-of-law rules.</p>

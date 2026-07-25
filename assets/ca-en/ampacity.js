@@ -1,7 +1,13 @@
 /* VoltDrop — Ampacity Check
-   Data: NEC Table 310.16 (≤3 current-carrying conductors, 30°C ambient),
-   columns 60/75/90°C. Small-conductor overcurrent caps per NEC 240.4(D).
-   Verdict uses min(table ampacity, 240.4(D) cap) — the practical limit. */
+   Base data: one deliberately shared 60/75/90°C dataset for NEC Table 310.16
+   and CEC Tables 2/4. The grids were verified cell-for-cell against
+   CSA C22.1:24, 26th edition (2024): all 105 cells shipped here were
+   verified, with zero mismatches.
+   Do not duplicate this table. The harmonization does not extend to the CEC's
+   higher-temperature columns, free-air tables, derating rules, or other data.
+
+   Order matters: insulation-column ampacity × ambient correction × conductor
+   adjustment, then the termination limit, then the small-conductor cap. */
 
 const AMPACITY = {
   cu: {
@@ -22,56 +28,101 @@ const AMPACITY = {
   },
 };
 
-// NEC 240.4(D): max overcurrent device for small conductors.
+// Same values, cited by country: NEC 240.4(D) and CEC Rule 14-104.
+// This is an overcurrent-device cap, not a derating factor.
 const SMALL_CAP = {
   cu: { '14 AWG': 15, '12 AWG': 20, '10 AWG': 30 },
   al: { '12 AWG': 15, '10 AWG': 25 },
 };
 
+// NEC Table 310.15(B)(1), based on 30°C ambient.
+// null is the table's published "—": that combination is not permitted.
+const AMBIENT_CORRECTION = [
+  { min: null, max: 10, factors: { 60: 1.29, 75: 1.20, 90: 1.15 } },
+  { min: 11, max: 15, factors: { 60: 1.22, 75: 1.15, 90: 1.12 } },
+  { min: 16, max: 20, factors: { 60: 1.15, 75: 1.11, 90: 1.08 } },
+  { min: 21, max: 25, factors: { 60: 1.08, 75: 1.05, 90: 1.04 } },
+  { min: 26, max: 30, factors: { 60: 1.00, 75: 1.00, 90: 1.00 } },
+  { min: 31, max: 35, factors: { 60: 0.91, 75: 0.94, 90: 0.96 } },
+  { min: 36, max: 40, factors: { 60: 0.82, 75: 0.88, 90: 0.91 } },
+  { min: 41, max: 45, factors: { 60: 0.71, 75: 0.82, 90: 0.87 } },
+  { min: 46, max: 50, factors: { 60: 0.58, 75: 0.75, 90: 0.82 } },
+  { min: 51, max: 55, factors: { 60: 0.41, 75: 0.67, 90: 0.76 } },
+  { min: 56, max: 60, factors: { 60: null, 75: 0.58, 90: 0.71 } },
+  { min: 61, max: 65, factors: { 60: null, 75: 0.47, 90: 0.65 } },
+  { min: 66, max: 70, factors: { 60: null, 75: 0.33, 90: 0.58 } },
+  { min: 71, max: 75, factors: { 60: null, 75: null, 90: 0.50 } },
+  { min: 76, max: 80, factors: { 60: null, 75: null, 90: 0.41 } },
+  { min: 81, max: 85, factors: { 60: null, 75: null, 90: 0.29 } },
+];
+
+// NEC Table 310.15(C)(1). One through three conductors use 1.00 because
+// this adjustment table begins at four current-carrying conductors.
+const CONDUCTOR_ADJUSTMENT = [
+  { min: 4, max: 6, factor: 0.80 },
+  { min: 7, max: 9, factor: 0.70 },
+  { min: 10, max: 20, factor: 0.50 },
+  { min: 21, max: 30, factor: 0.45 },
+  { min: 31, max: 40, factor: 0.40 },
+  { min: 41, max: null, factor: 0.35 },
+];
+
+// CEC Table 5A, CSA C22.1:24 (2024), single-point ambient rows above 30°C.
+// The real CEC table also has 110/125/200°C columns. VoltDrop deliberately
+// omits them because this interface supports only 60/75/90°C insulation.
+// null is the table's published "—": that combination is not permitted.
+const CEC_AMBIENT_CORRECTION = [
+  { ambient: 35, factors: { 60: 0.91, 75: 0.94, 90: 0.96 } },
+  { ambient: 40, factors: { 60: 0.82, 75: 0.88, 90: 0.91 } },
+  { ambient: 45, factors: { 60: 0.71, 75: 0.82, 90: 0.87 } },
+  { ambient: 50, factors: { 60: 0.58, 75: 0.75, 90: 0.82 } },
+  { ambient: 55, factors: { 60: 0.41, 75: 0.67, 90: 0.76 } },
+  { ambient: 60, factors: { 60: null, 75: 0.58, 90: 0.71 } },
+  { ambient: 65, factors: { 60: null, 75: 0.47, 90: 0.65 } },
+  { ambient: 70, factors: { 60: null, 75: 0.33, 90: 0.58 } },
+  { ambient: 75, factors: { 60: null, 75: null, 90: 0.50 } },
+  { ambient: 80, factors: { 60: null, 75: null, 90: 0.41 } },
+];
+
+// CEC Table 5C, CSA C22.1:24 (2024). These bands are genuinely Canadian;
+// never replace them with NEC Table 310.15(C)(1).
+const CEC_CONDUCTOR_ADJUSTMENT = [
+  { min: 1, max: 3, factor: 1.00 },
+  { min: 4, max: 6, factor: 0.80 },
+  { min: 7, max: 24, factor: 0.70 },
+  { min: 25, max: 42, factor: 0.60 },
+  { min: 43, max: null, factor: 0.50 },
+];
+
 const TEMP_INDEX = { 60: 0, 75: 1, 90: 2 };
-const MATERIAL_NAME = { cu: 'copper', al: 'aluminum' };
+const BINDING_LABEL_IDS = {
+  derating: 'amp-binding-derating',
+  termination: 'amp-binding-termination',
+  cap: 'amp-binding-cap',
+};
 const AMP_RESULT_TEXT = {
   amps: '{amps} A',
-  safeLimit: 'safe limit for {size} {material} at {temp}°C',
-  normalMargin: 'This wire can carry your load under normal conditions. Remember: continuous loads (3+ hours) should stay under 80% of the limit — that\'s {amps} A here.',
-  tightMargin: 'It fits, but barely. For continuous loads (3+ hours), heat, or bundled wires, go up a size — the 80% guideline puts you at {amps} A.',
-  notRated: 'This wire is NOT rated for {amps} A. Go up in size — undersized wire overheats and is a fire risk.',
-  lookup: '\n<p>{table} lists {size} {material} at the {temp}°C column as <strong>{tableAmps} A</strong> (up to three current-carrying wires in conduit, normal room temperature).</p>',
-  cap: '<p>The small-conductor rule ({citation}) caps the breaker for {size} {material} at <strong>{capAmps} A</strong>, so that\'s the practical limit we compare against.</p>',
-  comparison: '<div class="formula">Safe limit = {rated} A   vs   your load = {load} A   →   {status}</div>',
+  factor: '× {factor}',
+  degrees: '{degrees}°C',
+  atMostDegrees: '≤{max}°C',
+  degreeRange: '{min}–{max}°C',
+  combined: '{base} A × {ambientFactor} × {adjustmentFactor} = {derated} A',
 };
 
 let material = 'cu';
-let temp = 75;
-
-// Country-aware wording: same verified data both countries (CEC Tables 2/4
-// are harmonized with NEC 310.16); citations, cable names, and rules swap.
-const AMP_TEXT = {
-  us: {
-    tableCite: 'NEC Table 310.16',
-    capCite: 'NEC 240.4(D)',
-    tempHint: 'Not sure? Use <strong>75°C</strong> — it\'s what most breaker and lug terminations are rated for. Romex/NM-B cable must use the 60°C column. THHN in dry locations is 90°C, but the connection points usually still limit you to 75°C.',
-    expLookup: 'We look up your wire in the standard U.S. ampacity table (NEC Table 310.16 — normal conditions: up to three current-carrying wires in a conduit, ordinary room temperature). For small wires we also apply the special breaker-size rule (NEC 240.4(D)): 14 AWG copper tops out at a 15 A breaker, 12 AWG at 20 A, and 10 AWG at 30 A, even though the raw table says more.',
-  },
-  ca: {
-    tableCite: 'CEC Table 2/Table 4 (harmonized with NEC 310.16)',
-    capCite: 'CEC Rule 14-104',
-    tempHint: 'Not sure? Use <strong>75°C</strong> — it\'s what most marked breakers and lugs are rated for; unmarked equipment counts as 60°C (CEC Rule 4-006). NMD90 isn\'t blanket-capped at 60°C like American Romex — the terminations set the ceiling — but running it at the 60°C column is the conservative habit.',
-    expLookup: 'We look up your wire in the Canadian ampacity tables (CEC Table 2 for copper, Table 4 for aluminum — harmonized with the US table, and we verified the values match). For small wires we also apply Canada\'s breaker-size rule (CEC Rule 14-104): #14 copper tops out at a 15 A breaker, #12 at 20 A, and #10 at 30 A, even though the raw table says more.',
-  },
-};
-function ampCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
-function applyAmpCountryText() {
-  const t = AMP_TEXT[ampCountry()];
-  const hint = $('amp-temp-hint');
-  if (hint) hint.innerHTML = t.tempHint;
-  const exp = $('amp-exp-lookup');
-  if (exp) exp.textContent = t.expLookup;
-  if (!$('results').hidden) check();
-}
-window.addEventListener('vd:country', applyAmpCountryText);
+let insulationTemp = 90;
+let terminationTemp = 75;
+let continuous = false;
 
 const $ = (id) => document.getElementById(id);
+const isCanada = () => document.body.dataset.country === 'ca';
+const setText = (id, value) => { $(id).textContent = value; };
+const formatNumber = (value) => Number.isInteger(value)
+  ? String(value)
+  : value.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+const formatAmps = (value) => vdFormat(AMP_RESULT_TEXT.amps, { amps: formatNumber(value) });
+const formatWholeAmps = (value) => formatAmps(Math.floor(value + 1e-9));
+const formatFactor = (value) => vdFormat(AMP_RESULT_TEXT.factor, { factor: value.toFixed(2) });
 
 function fillSizes() {
   const sel = $('amp-size');
@@ -83,85 +134,184 @@ function fillSizes() {
     opt.textContent = label;
     sel.appendChild(opt);
   });
-  if ([...sel.options].some((o) => o.value === prev)) sel.value = prev;
+  if ([...sel.options].some((option) => option.value === prev)) sel.value = prev;
   else sel.value = '12 AWG';
 }
 
-document.querySelectorAll('.seg-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const group = btn.closest('.seg');
-    group.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-    if ('material' in btn.dataset) { material = btn.dataset.material; fillSizes(); }
-    if ('temp' in btn.dataset) temp = Number(btn.dataset.temp);
+function activateButton(button) {
+  const group = button.closest('.seg');
+  group.querySelectorAll('.seg-btn').forEach((item) => {
+    item.classList.remove('active');
+    item.setAttribute('aria-pressed', 'false');
+  });
+  button.classList.add('active');
+  button.setAttribute('aria-pressed', 'true');
+}
+
+document.querySelectorAll('.seg-btn').forEach((button) => {
+  button.addEventListener('click', () => {
+    activateButton(button);
+    if ('material' in button.dataset) {
+      material = button.dataset.material;
+      fillSizes();
+    }
+    if ('insulation' in button.dataset) insulationTemp = Number(button.dataset.insulation);
+    if ('termination' in button.dataset) terminationTemp = Number(button.dataset.termination);
+    if ('continuous' in button.dataset) continuous = button.dataset.continuous === 'yes';
     if (!$('results').hidden) check();
   });
 });
 
-fillSizes();
+function ambientSelectionFor(ambient) {
+  if (isCanada()) {
+    // Table 5A starts above 30°C and grants no cool-ambient credit.
+    if (ambient <= 30) {
+      return {
+        factor: 1,
+        rowDisplay: vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: 30 }),
+      };
+    }
 
-$('amp-form').addEventListener('submit', (e) => { e.preventDefault(); check(); });
+    // CEC rows are points, not bands. Always select the next higher listed
+    // point so an in-between input can never overstate permitted ampacity.
+    const row = CEC_AMBIENT_CORRECTION.find((item) => ambient <= item.ambient);
+    return {
+      factor: row?.factors[insulationTemp],
+      rowDisplay: row
+        ? vdFormat(AMP_RESULT_TEXT.degrees, { degrees: row.ambient })
+        : '',
+    };
+  }
 
-function check() {
-  const load = Number($('amp-load').value);
-  if (!load) return;
-  const label = $('amp-size').value;
-  const tableAmps = AMPACITY[material][label][TEMP_INDEX[temp]];
-  const cap = (SMALL_CAP[material] || {})[label];
-  const rated = cap ? Math.min(tableAmps, cap) : tableAmps;
-  const ok = load <= rated;
-  const margin = rated - load;
+  const row = AMBIENT_CORRECTION.find((item) =>
+    (item.min === null || ambient >= item.min) && ambient <= item.max);
+  const rowDisplay = row
+    ? row.min === null
+      ? vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: row.max })
+      : vdFormat(AMP_RESULT_TEXT.degreeRange, { min: row.min, max: row.max })
+    : '';
+  return {
+    factor: row?.factors[insulationTemp],
+    rowDisplay,
+  };
+}
 
-  const verdict = $('verdict');
-  verdict.className = 'verdict ' + (ok ? (margin / rated >= 0.2 ? 'good' : 'warn') : 'bad');
-  $('verdict-badge').textContent = ok ? (margin / rated >= 0.2 ? 'OK' : 'TIGHT') : 'TOO SMALL';
-  $('big-number').textContent = vdFormat(AMP_RESULT_TEXT.amps, { amps: rated });
-  $('big-label').textContent = vdFormat(AMP_RESULT_TEXT.safeLimit, {
-    size: label,
-    material: MATERIAL_NAME[material],
-    temp,
+function adjustmentFor(count) {
+  const table = isCanada() ? CEC_CONDUCTOR_ADJUSTMENT : CONDUCTOR_ADJUSTMENT;
+  if (!isCanada() && count <= 3) return 1;
+  return table.find((row) =>
+    count >= row.min && (row.max === null || count <= row.max))?.factor;
+}
+
+function showOnly(selector, id) {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.hidden = element.id !== id;
   });
+}
 
-  const cells = [
-    ['Your load', vdFormat(AMP_RESULT_TEXT.amps, { amps: load })],
-    ['Table ampacity', vdFormat(AMP_RESULT_TEXT.amps, { amps: tableAmps })],
-  ];
-  if (cap) cells.push(['Breaker cap (small-wire rule)', vdFormat(AMP_RESULT_TEXT.amps, { amps: cap })]);
-  cells.push(['Headroom', vdFormat(AMP_RESULT_TEXT.amps, { amps: margin >= 0 ? margin : 0 })]);
-  $('result-grid').innerHTML = cells
-    .map(([k, v]) => `<div class="result-cell"><div class="k">${k}</div><div class="v">${v}</div></div>`)
-    .join('');
-
-  $('verdict-note').textContent = ok
-    ? (margin / rated >= 0.2
-        ? vdFormat(AMP_RESULT_TEXT.normalMargin, { amps: Math.floor(rated * 0.8) })
-        : vdFormat(AMP_RESULT_TEXT.tightMargin, { amps: Math.floor(rated * 0.8) }))
-    : vdFormat(AMP_RESULT_TEXT.notRated, { amps: load });
-
-  const T = AMP_TEXT[ampCountry()];
-  $('math-body').innerHTML = [
-    vdFormat(AMP_RESULT_TEXT.lookup, {
-      table: T.tableCite,
-      size: label,
-      material: MATERIAL_NAME[material],
-      temp,
-      tableAmps,
-    }),
-    cap ? vdFormat(AMP_RESULT_TEXT.cap, {
-      citation: T.capCite,
-      size: label,
-      material: MATERIAL_NAME[material],
-      capAmps: cap,
-    }) : '',
-    vdFormat(AMP_RESULT_TEXT.comparison, {
-      rated,
-      load,
-      status: ok ? 'OK' : 'exceeds the limit',
-    }),
-  ].filter(Boolean).join('\n');
-
+function showUnavailable() {
   $('results').hidden = false;
+  $('amp-result-calculation').hidden = true;
+  $('amp-result-unavailable').hidden = false;
+  $('verdict').className = 'verdict bad';
+  showOnly('.amp-verdict-badge', 'amp-badge-not-permitted');
+  showOnly('.amp-big-label', 'amp-label-not-permitted');
+  setText('big-number', '—');
   $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-applyAmpCountryText();
+function setBinding(binding) {
+  document.querySelectorAll('.amp-binding-marker').forEach((marker) => {
+    marker.hidden = marker.dataset.binding !== binding;
+  });
+  document.querySelectorAll('.amp-not-binding-marker').forEach((marker) => {
+    marker.hidden = marker.dataset.binding === binding;
+  });
+  setText('amp-binding-value', $(BINDING_LABEL_IDS[binding]).textContent);
+}
+
+function check() {
+  const load = Number($('amp-load').value);
+  const ambient = Number($('amp-ambient').value);
+  const conductorCount = Number($('amp-conductors').value);
+  if (!load || !Number.isFinite(ambient) || !Number.isInteger(conductorCount) || conductorCount < 1) return;
+
+  const ambientSelection = ambientSelectionFor(ambient);
+  const ambientFactor = ambientSelection.factor;
+  if (ambientFactor === null || ambientFactor === undefined) {
+    showUnavailable();
+    return;
+  }
+
+  const adjustmentFactor = adjustmentFor(conductorCount);
+  const label = $('amp-size').value;
+  const baseAmpacity = AMPACITY[material][label][TEMP_INDEX[insulationTemp]];
+  const ambientAdjusted = baseAmpacity * ambientFactor;
+  const adjustedAmpacity = ambientAdjusted * adjustmentFactor;
+  const terminationLimit = AMPACITY[material][label][TEMP_INDEX[terminationTemp]];
+  const smallCap = (SMALL_CAP[material] || {})[label];
+  const exactPermitted = Math.min(
+    adjustedAmpacity,
+    terminationLimit,
+    smallCap === undefined ? Infinity : smallCap,
+  );
+  const permitted = Math.floor(exactPermitted + 1e-9);
+  const loadCheckValue = continuous
+    ? (isCanada() ? permitted * 0.80 : load * 1.25)
+    : load;
+  const passes = continuous && isCanada()
+    ? load <= loadCheckValue
+    : loadCheckValue <= permitted;
+
+  let binding = 'derating';
+  if (smallCap !== undefined
+      && smallCap <= terminationLimit
+      && smallCap <= adjustedAmpacity) {
+    binding = 'cap';
+  } else if (terminationLimit <= adjustedAmpacity) {
+    binding = 'termination';
+  }
+
+  $('results').hidden = false;
+  $('amp-result-calculation').hidden = false;
+  $('amp-result-unavailable').hidden = true;
+  $('verdict').className = passes ? 'verdict good' : 'verdict bad';
+  showOnly('.amp-verdict-badge', passes ? 'amp-badge-pass' : 'amp-badge-too-small');
+  showOnly('.amp-big-label', 'amp-label-final');
+  setText('big-number', formatAmps(permitted));
+
+  setText('amp-base-value', formatAmps(baseAmpacity));
+  setText('amp-ambient-input', vdFormat(AMP_RESULT_TEXT.degrees, { degrees: formatNumber(ambient) }));
+  setText('amp-ambient-row-value', ambientSelection.rowDisplay);
+  setText('amp-ambient-factor', formatFactor(ambientFactor));
+  setText('amp-ambient-value', formatWholeAmps(ambientAdjusted));
+  setText('amp-conductor-input', String(conductorCount));
+  setText('amp-adjustment-factor', formatFactor(adjustmentFactor));
+  setText('amp-adjusted-value', formatWholeAmps(adjustedAmpacity));
+  setText('amp-termination-value', formatAmps(terminationLimit));
+  setText('amp-cap-value', smallCap === undefined ? '—' : formatAmps(smallCap));
+  setText('amp-final-value', formatAmps(permitted));
+  setText('amp-combined-formula', vdFormat(AMP_RESULT_TEXT.combined, {
+    base: formatNumber(baseAmpacity),
+    ambientFactor: ambientFactor.toFixed(2),
+    adjustmentFactor: adjustmentFactor.toFixed(2),
+    derated: formatNumber(Math.floor(adjustedAmpacity + 1e-9)),
+  }));
+  setBinding(binding);
+
+  setText('amp-load-entered', formatAmps(load));
+  setText('amp-load-required', formatAmps(loadCheckValue));
+  $('amp-continuous-row').hidden = !continuous;
+  $('amp-noncontinuous-row').hidden = continuous;
+  showOnly('.amp-load-note', passes
+    ? (continuous ? 'amp-note-continuous-pass' : 'amp-note-load-pass')
+    : (continuous ? 'amp-note-continuous-fail' : 'amp-note-load-fail'));
+
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+fillSizes();
+$('amp-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  check();
+});

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verificación de ampacidad — NEC Table 310.16 | VoltDrop</title>
-<meta name="description" content="Verificador gratuito de ampacidad basado en NEC Table 310.16: cobre y aluminio, aislamiento de 60/75/90°C y límites de interruptores para conductores pequeños.">
+<title>Calculadora de reducción de ampacidad — NEC 310.15 | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita de reducción de ampacidad NEC para temperatura ambiente, conductores portadores de corriente, límites de terminación, 240.4(D) y dimensionamiento separado de cargas continuas.">
 <link rel="canonical" href="https://voltdrop.app/es/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Verificación de ampacidad — NEC Table 310.16 | VoltDrop">
-<meta property="og:description" content="Verificador gratuito de ampacidad basado en NEC Table 310.16: cobre y aluminio, aislamiento de 60/75/90°C y límites de interruptores para conductores pequeños.">
+<meta property="og:title" content="Calculadora de reducción de ampacidad — NEC 310.15 | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita de reducción de ampacidad NEC para temperatura ambiente, conductores portadores de corriente, límites de terminación, 240.4(D) y dimensionamiento separado de cargas continuas.">
 <meta property="og:url" content="https://voltdrop.app/es/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Verificación de ampacidad — NEC Table 310.16 | VoltDrop">
-<meta name="twitter:description" content="Verificador gratuito de ampacidad basado en NEC Table 310.16: cobre y aluminio, aislamiento de 60/75/90°C y límites de interruptores para conductores pequeños.">
+<meta name="twitter:title" content="Calculadora de reducción de ampacidad — NEC 310.15 | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita de reducción de ampacidad NEC para temperatura ambiente, conductores portadores de corriente, límites de terminación, 240.4(D) y dimensionamiento separado de cargas continuas.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Verificación de ampacidad VoltDrop","url":"https://voltdrop.app/es/ampacity-check/","description":"Verificador gratuito de ampacidad basado en NEC Table 310.16: cobre y aluminio, aislamiento de 60/75/90°C y límites de interruptores para conductores pequeños.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Verificación de reducción de ampacidad VoltDrop","url":"https://voltdrop.app/es/ampacity-check/","description":"Calculadora gratuita de reducción de ampacidad NEC para temperatura ambiente, conductores portadores de corriente, límites de terminación, 240.4(D) y dimensionamiento separado de cargas continuas.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -93,42 +93,81 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Verificación de ampacidad</h1>
-    <p class="tool-sub">Ampacidad = la corriente máxima que un conductor puede transportar de forma segura sin sobrecalentarse. Ingrese el conductor y la carga para obtener una respuesta clara de sí o no.</p>
+    <h1 class="tool-title">🔥 Verificación de ampacidad y reducción</h1>
+    <p class="tool-sub">Comience con la columna del aislamiento, corrija por calor y conductores agrupados, y vea exactamente qué límite de seguridad controla.</p>
   </div>
+
+
 
   <form id="amp-form" class="card" autocomplete="off">
 
     <div class="field">
       <label class="field-label">Material del conductor</label>
       <div class="seg" role="group" aria-label="Material del conductor">
-        <button type="button" class="seg-btn active" data-material="cu">Cobre</button>
-        <button type="button" class="seg-btn" data-material="al">Aluminio</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-material="cu">Cobre</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-material="al">Aluminio</button>
       </div>
     </div>
 
     <div class="field">
       <label class="field-label" for="amp-size">Calibre del conductor</label>
       <select id="amp-size"></select>
-      <p class="hint">AWG = American Wire Gauge. Está impreso en el aislamiento del conductor.</p>
+      <p class="hint">AWG = American Wire Gauge. Está impreso en la cubierta del conductor.</p>
     </div>
 
     <div class="field">
       <label class="field-label">Temperatura nominal del aislamiento</label>
       <div class="seg" role="group" aria-label="Temperatura nominal del aislamiento">
-        <button type="button" class="seg-btn" data-temp="60">60°C</button>
-        <button type="button" class="seg-btn active" data-temp="75">75°C</button>
-        <button type="button" class="seg-btn" data-temp="90">90°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="60">60°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-insulation="75">75°C</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-insulation="90">90°C</button>
       </div>
-      <p class="hint" id="amp-temp-hint">¿No está seguro? Use <strong>75°C</strong> — es la temperatura nominal de la mayoría de las terminales de interruptores automáticos y zapatas. El cable Romex/NM-B debe usar la columna de 60°C. THHN en lugares secos tiene clasificación de 90°C, pero los puntos de conexión suelen limitar el circuito a 75°C.</p>
+      <p class="hint">Use la temperatura nominal del aislamiento del conductor para la columna inicial. THHN normalmente es 90°C. Esta no es la temperatura nominal de la terminación.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Temperatura nominal de la terminación</label>
+      <div class="seg" role="group" aria-label="Temperatura nominal de la terminación">
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="60">60°C</button>
+        <button type="button" class="seg-btn active" aria-pressed="true" data-termination="75">75°C</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-termination="90">90°C</button>
+      </div>
+      <p class="hint">Use 60°C para NM-B o equipos sin marcar. Use 75°C o 90°C solo cuando el equipo esté marcado y aprobado para esa temperatura. El límite de terminación se aplica después de ambos factores de reducción.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-ambient">Temperatura ambiente</label>
+      <div class="input-unit">
+        <input type="number" id="amp-ambient" inputmode="decimal" step="any" value="30" required>
+        <span class="unit">°C</span>
+      </div>
+      <p class="hint">Ingrese la temperatura del aire alrededor de los conductores. NEC Table 310.15(B)(1) publica intervalos hasta 85°C; una celda “—” no está permitida y esta calculadora no sustituirá ningún valor.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-conductors">Número de conductores portadores de corriente</label>
+      <div class="input-unit">
+        <input type="number" id="amp-conductors" inputmode="numeric" min="1" step="1" value="3" required>
+        <span class="unit">conductores</span>
+      </div>
+      <p class="hint">Cuente los conductores no puestos a tierra y cualquier neutro que transporte corriente en condiciones normales, incluidos los neutros que transportan armónicos de cargas no lineales. No cuente los conductores de puesta a tierra de equipos ni los conductores del electrodo de puesta a tierra. Cuente los conductores de reserva. No cuente conductores que no puedan energizarse al mismo tiempo.</p>
     </div>
 
     <div class="field">
       <label class="field-label" for="amp-load">Corriente que debe transportar</label>
       <div class="input-unit">
         <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="p. ej., 20" required>
-        <span class="unit">amperios</span>
+        <span class="unit">A</span>
       </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Duración de la carga</label>
+      <div class="seg" role="group" aria-label="Duración de la carga">
+        <button type="button" class="seg-btn active" aria-pressed="true" data-continuous="no">Menos de 3 horas</button>
+        <button type="button" class="seg-btn" aria-pressed="false" data-continuous="yes">3+ horas — continua</button>
+      </div>
+      <p class="hint">Una carga prevista para funcionar 3 horas o más se dimensiona al 125%. Esta es una verificación separada del lado de la carga, no un multiplicador de reducción.</p>
     </div>
 
     <button type="submit" class="calc-btn">Verificar ampacidad</button>
@@ -136,26 +175,66 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict" id="verdict">
-      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-pass">Aprobado</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-too-small" hidden>Demasiado pequeño</div>
+      <div class="verdict-badge amp-verdict-badge" id="amp-badge-not-permitted" hidden>No permitido</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
-        <div class="big-label" id="big-label"></div>
+        <div class="big-label amp-big-label" id="amp-label-final">ampacidad final permitida</div>
+        <div class="big-label amp-big-label" id="amp-label-not-permitted" hidden>esta combinación no está permitida</div>
       </div>
     </div>
-    <div class="result-grid" id="result-grid"></div>
-    <p class="verdict-note" id="verdict-note"></p>
-    <details class="math-details">
-      <summary>Cómo verificamos esto</summary>
-      <div class="math-body" id="math-body"></div>
-    </details>
+
+    <div id="amp-result-unavailable" hidden>
+      <p class="verdict-note" id="amp-code-unavailable">NEC Table 310.15(B)(1) publica “—” para esta combinación de temperatura ambiente y temperatura nominal del aislamiento, o la temperatura queda fuera de la tabla publicada. No se sustituye ningún factor ni se produce una ampacidad permitida.</p>
+    </div>
+
+    <div id="amp-result-calculation">
+      <details class="math-details" open>
+        <summary>Reducción del lado del conductor</summary>
+        <div class="math-body">
+          <p>Los dos factores multiplican primero la ampacidad de la columna del aislamiento. Solo después se aplican los límites de terminación y de conductores pequeños.</p>
+          <div class="formula">
+            <div>Ampacidad base (columna del aislamiento) <strong id="amp-base-value"></strong></div>
+            <div>Corrección por temperatura ambiente <span id="amp-ambient-input"></span> <strong id="amp-ambient-factor"></strong> <strong id="amp-ambient-value"></strong></div>
+            <div>Fila de temperatura ambiente utilizada <strong id="amp-ambient-row-value"></strong> — Se utiliza el intervalo de temperatura ambiente publicado que contiene la temperatura ingresada.</div>
+            <div>Ajuste por conductores portadores de corriente <span id="amp-conductor-input"></span> <strong id="amp-adjustment-factor"></strong> <strong id="amp-adjusted-value"></strong> <span class="amp-binding-marker" data-binding="derating" hidden>← vinculante</span><span class="amp-not-binding-marker" data-binding="derating">— no vinculante</span></div>
+            <div>Límite de terminación de 110.14(C) <strong id="amp-termination-value"></strong> <span class="amp-binding-marker" data-binding="termination" hidden>← vinculante</span><span class="amp-not-binding-marker" data-binding="termination">— no vinculante</span></div>
+            <div>Límite para conductores pequeños de 240.4(D) <strong id="amp-cap-value"></strong> <span class="amp-binding-marker" data-binding="cap" hidden>← vinculante</span><span class="amp-not-binding-marker" data-binding="cap">— no vinculante</span></div>
+            <div><strong>AMPACIDAD FINAL PERMITIDA <span id="amp-final-value"></span></strong></div>
+          </div>
+          <div class="formula" id="amp-combined-formula"></div>
+          <p><strong>Límite vinculante:</strong> <span id="amp-binding-value"></span></p>
+          <span id="amp-binding-derating" hidden>Reducción después de la corrección ambiental y el ajuste de conductores</span>
+          <span id="amp-binding-termination" hidden>Límite de temperatura de terminación de 110.14(C)</span>
+          <span id="amp-binding-cap" hidden>Límite para conductores pequeños de 240.4(D)</span>
+        </div>
+      </details>
+
+      <details class="math-details" open>
+        <summary>Verificación del lado de la carga — cálculo separado</summary>
+        <div class="math-body">
+          <p>El dimensionamiento de cargas continuas y la reducción del conductor responden preguntas distintas. La regla del 125% dimensiona el circuito para una carga de larga duración; no se multiplica con los factores de reducción del conductor.</p>
+          <div class="formula">
+            <div>Carga ingresada <strong id="amp-load-entered"></strong></div>
+            <div id="amp-noncontinuous-row">Carga menor de 3 horas: no se aplica el multiplicador de carga continua del 125%</div>
+            <div id="amp-continuous-row" hidden>Requisito de carga continua (carga ingresada × 125%) <strong id="amp-load-required"></strong></div>
+          </div>
+          <p class="amp-load-note" id="amp-note-load-pass">La carga ingresada está dentro de la ampacidad final permitida.</p>
+          <p class="amp-load-note" id="amp-note-load-fail" hidden>La carga ingresada supera la ampacidad final permitida.</p>
+          <p class="amp-load-note" id="amp-note-continuous-pass" hidden>El requisito de carga continua, calculado por separado, está dentro de la ampacidad final permitida.</p>
+          <p class="amp-load-note" id="amp-note-continuous-fail" hidden>El requisito de carga continua, calculado por separado, supera la ampacidad final permitida.</p>
+        </div>
+      </details>
+    </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué es la ampacidad?", "acceptedAnswer": {"@type": "Answer", "text": "La ampacidad es la corriente máxima, en amperios, que un conductor puede transportar de forma continua sin sobrecalentarse. Depende del calibre del conductor, del material (cobre o aluminio) y de la temperatura nominal del aislamiento, y la establece NEC Table 310.16 para condiciones normales."}}, {"@type": "Question", "name": "¿Qué columna de temperatura del aislamiento debo usar?", "acceptedAnswer": {"@type": "Answer", "text": "Si tiene dudas, use la columna de 75°C: la mayoría de las terminales de interruptores automáticos y zapatas tienen clasificación de 75°C. El cable Romex/NM-B debe usar la columna de 60°C. THHN en lugares secos tiene clasificación de 90°C, pero los puntos de conexión suelen limitar el circuito a los valores de 75°C."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué es la ampacidad?", "acceptedAnswer": {"@type": "Answer", "text": "La ampacidad es la corriente máxima, en amperios, que un conductor puede transportar en las condiciones indicadas sin sobrecalentarse. Esta calculadora comienza con NEC Table 310.16, aplica la corrección ambiental de NEC Table 310.15(B)(1) y el ajuste de conductores de NEC Table 310.15(C)(1), y después aplica los límites de NEC 110.14(C) y 240.4(D)."}}, {"@type": "Question", "name": "¿Qué columna de temperatura del aislamiento debo usar?", "acceptedAnswer": {"@type": "Answer", "text": "Use la temperatura nominal del aislamiento para la ampacidad inicial y luego elija por separado la temperatura nominal de la terminación. THHN normalmente tiene aislamiento de 90°C, mientras que los equipos marcados suelen limitar el resultado final a la columna de 75°C. NM-B y los equipos sin marcar usan el límite de terminación de 60°C."}}, {"@type": "Question", "name": "¿Cómo cuento los conductores portadores de corriente?", "acceptedAnswer": {"@type": "Answer", "text": "Cuente los conductores no puestos a tierra y los neutros que transportan corriente en condiciones normales, incluida la corriente armónica de cargas no lineales. Cuente los conductores de reserva. No cuente conductores de puesta a tierra de equipos, conductores del electrodo de puesta a tierra ni conductores que no puedan energizarse simultáneamente."}}, {"@type": "Question", "name": "¿La regla de carga continua forma parte de la reducción?", "acceptedAnswer": {"@type": "Answer", "text": "No. La corrección ambiental y el ajuste de conductores reducen la ampacidad utilizable debido al calor. NEC 210.19(A)(1) y 215.2 exigen por separado dimensionar al 125% una carga continua. Esta calculadora muestra ambas verificaciones por separado."}}]}</script>
+
   <section class="card explainer">
-    <h2>Qué verifica esta herramienta (y qué no)</h2>
-    <p id="amp-exp-lookup">Buscamos el conductor en la tabla de ampacidad de EE. UU. (NEC Table 310.16; condiciones normales: hasta tres conductores portadores de corriente en un tubo conduit y temperatura ambiente normal). Para conductores pequeños también aplicamos la regla especial del interruptor automático (NEC 240.4(D)): 14 AWG de cobre admite como máximo un interruptor de 15 A; 12 AWG, 20 A; y 10 AWG, 30 A, aunque la tabla indique un valor mayor.</p>
-    <p><strong>No incluye:</strong> áticos calientes, salas de máquinas, grupos de más de tres conductores portadores de corriente y cargas continuas (3+ horas seguidas requieren 25% de margen). Todo eso reduce la ampacidad. Si tiene dudas, use un calibre del conductor mayor o consulte a un electricista.</p>
-    <p>Ampacidad y <a class="inline-link" href="/">caída de tensión</a> son verificaciones independientes; el conductor debe aprobar <strong>ambas</strong>.</p>
+    <h2>Qué verifica</h2>
+    <p>Esta edición de Estados Unidos usa las ampacidades base verificadas de NEC Table 310.16, los factores ambientales de Table 310.15(B)(1), los factores de conductores de Table 310.15(C)(1), los límites de terminación de 110.14(C) y los límites para conductores pequeños de 240.4(D). Nunca interpola un valor faltante.</p>
+    <p>La ampacidad y la <a class="inline-link" href="/">caída de tensión</a> son verificaciones separadas; un conductor debe aprobar <strong>ambas</strong>.</p>
   </section>
 
 </main>
@@ -181,6 +260,6 @@
 </footer>
 
 <script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
-<script src="/assets/us-es/ampacity.js?v=2ed29ddce4"></script>
+<script src="/assets/us-es/ampacity.js?v=6a59acfd19"></script>
 </body>
 </html>

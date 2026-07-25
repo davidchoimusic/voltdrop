@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wire Ampacity Chart Canada — CEC Table 2 & Table 4 | VoltDrop</title>
-<meta name="description" content="Canadian copper and aluminum ampacity chart (CEC Tables 2 and 4, harmonized with US values — verified), plus the NMD90 termination-temperature rules in plain English.">
+<meta name="description" content="Verified Canadian wire ampacity chart from CSA C22.1:24 CEC Table 2 and Table 4, with 60/75/90°C columns, Rule 4-006 termination guidance, and Rule 14-104 caps.">
 <link rel="canonical" href="https://voltdrop.app/ca/guides/wire-ampacity-chart/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/wire-ampacity-chart/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/wire-ampacity-chart/">
@@ -18,14 +18,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
 <meta property="og:title" content="Wire Ampacity Chart Canada — CEC Table 2 & Table 4 | VoltDrop">
-<meta property="og:description" content="Canadian copper and aluminum ampacity chart (CEC Tables 2 and 4, harmonized with US values — verified), plus the NMD90 termination-temperature rules in plain English.">
+<meta property="og:description" content="Verified Canadian wire ampacity chart from CSA C22.1:24 CEC Table 2 and Table 4, with 60/75/90°C columns, Rule 4-006 termination guidance, and Rule 14-104 caps.">
 <meta property="og:url" content="https://voltdrop.app/ca/guides/wire-ampacity-chart/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wire Ampacity Chart Canada — CEC Table 2 & Table 4 | VoltDrop">
-<meta name="twitter:description" content="Canadian copper and aluminum ampacity chart (CEC Tables 2 and 4, harmonized with US values — verified), plus the NMD90 termination-temperature rules in plain English.">
+<meta name="twitter:description" content="Verified Canadian wire ampacity chart from CSA C22.1:24 CEC Table 2 and Table 4, with 60/75/90°C columns, Rule 4-006 termination guidance, and Rule 14-104 caps.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
@@ -92,15 +92,17 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Wire Ampacity Chart — Canada (CEC Table 2 &amp; Table 4)</h1>
-    <p class="tool-sub">The Canadian copper and aluminum table — harmonized with the US values, governed by Canadian rules. <a class="inline-link" href="/guides/wire-ampacity-chart/" data-edition-country="us">🇺🇸 US version</a></p>
+    <h1 class="tool-title">🔥 Canadian Wire Ampacity Chart — CEC Tables 2 & 4</h1>
+    <p class="tool-sub">Verified CEC Table 2 and Table 4 values, with the Canadian rules that control how the columns are used. <a class="inline-link" href="/guides/wire-ampacity-chart/" data-edition-country="us">🇺🇸 US version</a></p>
   </div>
+
+<div class="ca-note"><strong>Canadian source:</strong> <strong>CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)</strong>. The 60/75/90°C columns below are verified from CEC Table 2 and Table 4. Provincial adoption and amendments vary; confirm the edition adopted locally.</div>
 
   <section class="card explainer">
     <h2>The chart</h2>
-    <p>Amps each wire can carry continuously under the CEC (up to three current-carrying conductors in a raceway or cable, 30°C ambient). Good news for anyone working both sides of the border: <strong>CEC Table 2 (copper) and Table 4 (aluminum) are harmonized with the US NEC's Table 310.16</strong> — we verified the values match, so this is one chart for both countries:</p>
+    <p>The grid below is <strong>CEC Table 2 copper and Table 4 aluminum data</strong> . Their 60/75/90°C columns are verified identical to NEC Table 310.16 across every shared size in this tool.</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th rowspan="2">Size</th><th colspan="3">Copper (Table 2)</th><th colspan="3">Aluminum (Table 4)</th></tr>
+      <thead><tr><th rowspan="2">Size</th><th colspan="3">Copper (CEC Table 2)</th><th colspan="3">Aluminum (CEC Table 4)</th></tr>
       <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
       <tbody>
         <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
@@ -118,19 +120,19 @@
         <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">Values verified against Canadian sources (and against US reproductions — they match). Small-conductor breaker caps apply in Canada too (CEC 14-104): #14 copper → 15 A breaker, #12 → 20 A, #10 → 30 A, regardless of column. Interactive version: <a class="inline-link" href="/ampacity-check/">Ampacity Check</a>.</p>
+    <p class="gnote">Source: CSA C22.1:24, 26th edition (2024). Rule 14-104 caps the overcurrent device at #14 copper → 15 A, #12 → 20 A, and #10 → 30 A regardless of the raw column. Interactive calculator: <a class="inline-link" href="/ampacity-check/">Ampacity Check</a>.</p>
 
     <h2>Which column am I allowed to use? (the NMD90 story)</h2>
-    <p>Same principle as everywhere: <strong>use the column of your weakest link</strong> (CEC Rule 4-006). Wire insulation may be rated 90°C — NMD90 and T90 both are — but the breaker lugs and device terminals set the ceiling: unmarked equipment counts as 60°C, equipment marked 75°C allows the 75°C column. Here's the difference from the US that trips up cross-border readers: <strong>American Romex (NM-B) is hard-capped at the 60°C column by a blanket rule; Canadian NMD90 is not</strong> — it follows the termination rule like any other 90°C conductor. In everyday residential work the answers land in the same familiar places (#14 → 15 A, #12 → 20 A, #10 → 30 A), but the 90°C rating gives NMD90 a better starting point when derating for heat or bundling.</p>
+    <p>Same principle as everywhere: <strong>use the column of your weakest link</strong> (CEC Rule 4-006). Wire insulation may be rated 90°C — NMD90 and T90 both are. Marked equipment uses its marked termination temperature. For unmarked equipment, use 60°C when rated not more than 100 A or marked for #1 AWG and smaller, and 75°C above that. The rule applies to the first 1.2 m and permits a transition beyond it; VoltDrop's calculator conservatively applies the lower limit throughout as a simplified method. Here's the difference from the US that trips up cross-border readers: <strong>American Romex (NM-B) is hard-capped at the 60°C column by a blanket rule; Canadian NMD90 is not</strong> — it follows the termination rule like any other 90°C conductor. In everyday residential work the answers land in the same familiar places (#14 → 15 A, #12 → 20 A, #10 → 30 A), but the 90°C rating gives NMD90 a better starting point when derating for heat or bundling.</p>
 
     <h2>Does voltage change ampacity?</h2>
     <p>No. A #10 wire carries the same ~30 A at 12 V, 120 V, 240 V, or Canada's commercial 347/600 V. What voltage changes is the <em>sting</em> of voltage drop — 3 lost volts is 1.3% of a 240 V circuit but 25% of a 12 V one. And remember: in Canada the drop limit is <a class="inline-link" href="/ca/guides/voltage-drop-formula/">mandatory (Rule 8-102)</a>.</p>
 
     <h2>What this chart doesn't cover</h2>
-    <p>Normal conditions only. Hot environments, bundles of more than three current-carrying conductors, and continuous loads all reduce these numbers — and note that Canada's bundling-derate table (Table 5C) differs from the US one, so cross-border derating advice doesn't transfer. A derating tool is on our roadmap.</p>
+    <p>These are base values. Hot environments, countable conductors above three, termination ratings, small-conductor device caps, and continuous loads can lower the usable result. Use the Canadian ampacity calculator for CEC Table 5A, Table 5C, Rules 4-004, 4-006, 8-104, and 14-104.</p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are Canadian wire ampacity tables the same as American ones?","acceptedAnswer":{"@type":"Answer","text":"For the common building sizes, yes — CEC Table 2 (copper) and Table 4 (aluminum) are harmonized with NEC Table 310.16, verified value-by-value for 14 AWG through 4/0. What differs is the surrounding rules: cable-type treatment (NMD90 vs NM-B), derating tables, and Canada's mandatory voltage-drop limit."}},{"@type":"Question","name":"How many amps can 12 gauge wire handle in Canada?","acceptedAnswer":{"@type":"Answer","text":"20 amps on a 20 A breaker for ordinary circuits — CEC 14-104 caps #12 copper at a 20 A overcurrent device, the same as the US rule, even though the 75°C and 90°C columns list 25 and 30 A."}},{"@type":"Question","name":"Is NMD90 limited to 60°C like American NM-B?","acceptedAnswer":{"@type":"Answer","text":"No blanket cap. NMD90 has 90°C insulation and follows the termination-temperature rule (CEC 4-006): 60°C for unmarked equipment, 75°C where equipment is so marked, with the 90°C column mainly serving as the derating starting point."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are Canadian wire ampacity tables the same as American ones?","acceptedAnswer":{"@type":"Answer","text":"Yes for the 60/75/90°C columns and every shared size shown in this tool. The current CEC Table 2 and Table 4 values are verified identical to NEC Table 310.16. That harmonization does not extend to the CEC's higher-temperature columns, free-air tables, or derating rules."}},{"@type":"Question","name":"How many amps can 12 gauge wire handle in Canada?","acceptedAnswer":{"@type":"Answer","text":"20 amps on a 20 A breaker for ordinary circuits — CEC 14-104 caps #12 copper at a 20 A overcurrent device, the same as the US rule, even though the 75°C and 90°C columns list 25 and 30 A."}},{"@type":"Question","name":"Is NMD90 limited to 60°C like American NM-B?","acceptedAnswer":{"@type":"Answer","text":"No blanket cap. NMD90 has 90°C insulation and follows the termination-temperature rule (CEC 4-006): use 60°C for equipment rated 100 A or less or marked for #1 AWG and smaller, and 75°C above that. The limit applies to the first 1.2 m from the termination; the 90°C column mainly serves as the derating starting point."}}]}</script>
 
 </main>
 
