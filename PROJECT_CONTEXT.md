@@ -119,6 +119,50 @@ LV/multi-point work below. Differentiation comes from country variation **OR** f
 technical difficulty competitors avoided. A universal tool that is genuinely hard and
 badly served elsewhere still beats a country-specific one that is easy.
 
+**⭐ FROM THE CHATGPT STRATEGY REVIEW (David brought it 2026-07-25). Verified against the
+live site; ~2/3 of it was already this roadmap. The four items that were NOT:**
+
+1. **TAGLINE IS WRONG SITE-WIDE — fix first, it is small and currently misdescribes the
+   product.** Every page (box fill, conduit fill, power calculator…) still reads "The
+   voltage drop calculator that explains itself." True with one tool; there are now seven.
+   Site-wide default becomes "Electrical calculators that explain themselves"; the voltage
+   drop page keeps the specific wording for search. Note this is NOT a one-line edit any
+   more — the tagline lives in `i18n/strings/*` and must land correctly in all four
+   languages across six editions. Possible later refinement: a per-tool tagline
+   ("The box fill calculator that explains itself") for sharper per-page search intent.
+2. **MIXED WIRE SIZES in conduit fill AND box fill.** Verified: box fill takes ONE
+   `bf-size` for every conductor. Real jobs mix them — three 4 AWG + one 8 AWG bond + two
+   10 AWG control. This is a genuine field gap, not a nicety.
+3. **OFFLINE / INSTALLABLE (PWA).** Not previously on the roadmap and it should be: our own
+   mission says "used standing on jobsites", and basements, steel buildings and rural runs
+   have no signal. Pairs with remembered defaults + recent calculations.
+   ⚠️ **CACHING LANDMINE — read the Cloudflare gotcha above before building this.** This
+   site has already served stale `app.js` behind fresh HTML once; the fix was the `?v=`
+   content-hash stamp. A service worker adds a THIRD cache layer (browser SW) on top of
+   Cloudflare's edge and the browser's own. Get this wrong and an electrician is holding a
+   cached calculator with last month's tables — the worst possible failure for a safety
+   tool. Any SW must be version-aware, must never outlive a `?v=` change, and needs an
+   explicit "how does a user get the new version" answer BEFORE it ships.
+4. **⭐ "BUILD THIS CIRCUIT" — the best idea in the review, and a REFRAME not a tool.**
+   One entry (voltage, load, distance, material, install method, ambient) → one combined
+   answer: breaker size, ampacity-driven conductor, voltage-drop-driven conductor, final
+   recommended conductor, minimum conduit, full shown math. Turns a pile of separate
+   calculators into one workflow — load → breaker → ampacity → voltage drop → conduit →
+   box → printable result. Treat it as the ORGANISING IDEA for what comes after the next
+   few tools, not as one more list item.
+
+Where the review was WRONG or out of date, recorded so it is not re-litigated:
+- Its Canada criticism was accurate that morning and is now mostly fixed (ampacity cites
+  CEC Rule 14-104 + Table 2; box fill uses marrettes + mL). Only conduit fill remains, and
+  our visible planning-only warning is STRONGER than its suggested "label it Canadian units
+  and common values".
+- **Its expansion table conflates COUNTRY with LANGUAGE** — it ranks "Mexico / Spanish LatAm"
+  7th and treats Spanish as a market. US-Spanish serves US electricians on US NEC rules with
+  no country pack and was nearly free; Spanish-for-Mexico needs a full verified pack. David's
+  two-axis model is sharper than the review's. Do not adopt its ordering wholesale.
+- It says "don't add twenty random calculators" then lists ~20, and prices none of them
+  against the 6× translation/verification cost every new tool now carries.
+
 **"LEARN" / "RESOURCES" PAGE — NOT NEEDED (David raised it 2026-07-25, agreed `/guides/`
 already serves it).** `/guides/` IS the Learn section; a page called Learn would rename or
 duplicate it. A classic Resources page (outbound links to NFPA/CSA/code books) was
