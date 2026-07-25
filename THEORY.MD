@@ -44,14 +44,16 @@ Trust is the product. Four commitments make it concrete.
 4. **Country and language are separate dimensions.** Country selects the
    rulebook; language selects the explanation. Six explicit URL editions cover
    US English, Spanish, and Simplified Chinese over the NEC pack, plus Canada
-   English, Quebec French, and Simplified Chinese over the CEC pack. Canadian
-   correction and adjustment tables remain outside the engine until Tables 5A
-   and 5C pass the source gate.
+   English, Quebec French, and Simplified Chinese over the CEC pack. The only
+   available base ampacity grid is NEC Table 310.16. Canadian base, correction,
+   and adjustment tables remain outside the verified country pack until CEC
+   Tables 2, 4, 5A, and 5C pass the source gate.
 
-English remains an executable baseline. The 21 generated English pages are
-pinned by SHA-256, while electrical data has its own table seals. A legitimate
-ampacity upgrade changes the one ampacity-page baseline and adds two seals; it
-does not grant permission to refresh unrelated pages or existing data.
+English remains an executable baseline. The 22 reviewed English pages are
+pinned by SHA-256, including the Canadian ampacity calculator itself, while
+electrical data has its own table seals. A legitimate ampacity copy correction
+changes only the affected page hashes; it does not grant permission to refresh
+unrelated pages or existing data.
 
 ## Strategy
 
@@ -61,13 +63,16 @@ data, the limitation is visible at the point of use. Canadian conduit sizing
 and ampacity derating therefore use prominent planning notes rather than
 borrowed US numbers wearing Canadian labels.
 
-The ampacity interface mirrors the electrical model. Insulation temperature
+The US ampacity interface mirrors the electrical model. Insulation temperature
 and termination temperature are distinct inputs because they play different
 roles. Ambient temperature and current-carrying conductor count produce the
 two derating factors. The result then shows the base value, both multiplication
 steps, both caps, and a plain-language binding decision. Counting guidance sits
 beside the input because a mathematically perfect result is still wrong when a
-neutral, spare, or grounding conductor is counted incorrectly.
+neutral, spare, or grounding conductor is counted incorrectly. The Canadian
+interface refuses the result and labels the available base grid as NEC data;
+its visible note names every unverified CEC grid and the known 14 AWG
+difference.
 
 Localization uses stable template keys and locale-owned full thoughts. Country
 packs own territorial claims, citations, limits, and scenarios. Locale
@@ -124,11 +129,19 @@ for fragmented labels and generated table output.
   would be cosmetic if the script still exposed NEC multipliers. The country
   gate must refuse before any factor or computed ampacity enters the result.
 
+- **Verification claims are safety data too.** The earlier Canadian copy said
+  CEC Tables 2 and 4 matched NEC Table 310.16 even though the project had never
+  produced or checked those CEC grids. The confirmed 14 AWG copper example
+  (CEC 20 A versus NEC 15 A at 60 °C) disproves the premise. A conservative
+  numerical result does not make a false source label acceptable; the product
+  must name the borrowed table and the missing verification.
+
 ## Open Questions
 
-- **Canadian ampacity data:** CEC Tables 5A and 5C need two agreeing,
-  row-complete sources and a resolved conductor-count interpretation before the
-  planning note can become a calculator.
+- **Canadian ampacity data:** CEC Tables 2 and 4 need verified, row-complete
+  base grids. Tables 5A and 5C additionally need two agreeing sources and a
+  resolved conductor-count interpretation before the planning note can become
+  a calculator.
 
 - **Jurisdiction adoption:** edition-sensitive tools will need to decide
   whether users select a code year or the code actually enforced by their

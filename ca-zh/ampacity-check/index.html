@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>载流量降容 — CEC规划说明 | VoltDrop</title>
-<meta name="description" content="加拿大载流量降容规划页面。由于来源数值和导体计数规则尚未通过核验，因此不显示CEC Tables 5A和5C数据。">
+<meta name="description" content="加拿大载流量规划页面。现有基础表格为NEC Table 310.16；CEC Tables 2、4、5A和5C尚未通过核验。">
 <link rel="canonical" href="https://voltdrop.app/ca-zh/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -18,17 +18,17 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
 <meta property="og:title" content="载流量降容 — CEC规划说明 | VoltDrop">
-<meta property="og:description" content="加拿大载流量降容规划页面。由于来源数值和导体计数规则尚未通过核验，因此不显示CEC Tables 5A和5C数据。">
+<meta property="og:description" content="加拿大载流量规划页面。现有基础表格为NEC Table 310.16；CEC Tables 2、4、5A和5C尚未通过核验。">
 <meta property="og:url" content="https://voltdrop.app/ca-zh/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="载流量降容 — CEC规划说明 | VoltDrop">
-<meta name="twitter:description" content="加拿大载流量降容规划页面。由于来源数值和导体计数规则尚未通过核验，因此不显示CEC Tables 5A和5C数据。">
+<meta name="twitter:description" content="加拿大载流量规划页面。现有基础表格为NEC Table 310.16；CEC Tables 2、4、5A和5C尚未通过核验。">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop加拿大载流量降容规划说明","url":"https://voltdrop.app/ca-zh/ampacity-check/","description":"加拿大载流量降容规划页面。由于来源数值和导体计数规则尚未通过核验，因此不显示CEC Tables 5A和5C数据。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop加拿大载流量降容规划说明","url":"https://voltdrop.app/ca-zh/ampacity-check/","description":"加拿大载流量规划页面。现有基础表格为NEC Table 310.16；CEC Tables 2、4、5A和5C尚未通过核验。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -97,7 +97,7 @@
     <p class="tool-sub">CEC校正和调整数据尚未核验。此版本拒绝借用NEC系数。</p>
   </div>
 
-<div class="ca-note"><strong>加拿大 / CEC规划说明：</strong>CEC Tables 5A和5C尚未通过我们的核验。已发布来源互相矛盾，导体数量范围与NEC不同，而且尚未确定CEC是计入所有导体，还是只计入载流导体。在通过经核验的CEC来源解决这些问题之前，本页面不显示校正系数、调整系数或加拿大降容载流量。</div>
+<div class="ca-note"><strong>加拿大 / CEC规划说明：</strong>本站现有的基础载流量表格来自NEC Table 310.16。CEC Table 2和Table 4尚未通过本项目的核验，而且已知至少在小规格上不同：14 AWG铜导线的60°C栏，CEC为20 A，NEC为15 A。CEC Tables 5A和5C也仍未核验，因此本页面不显示校正系数、调整系数或加拿大降容载流量。CEC Rule 14-104的小导体上限和CEC Rule 4-006的端子规则已另行核验。</div>
 
   <form id="amp-form" class="card" autocomplete="off">
 
@@ -230,7 +230,7 @@
     </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "什么是载流量？", "acceptedAnswer": {"@type": "Answer", "text": "载流量是导体在规定条件下不过热时可承载的最大电流。加拿大降容需要经核验的CEC Tables 5A和5C数据；在这些数据和导体计数规则仍未解决期间，此版本不会替代使用NEC系数。"}}, {"@type": "Question", "name": "应使用哪个绝缘温度栏？", "acceptedAnswer": {"@type": "Answer", "text": "绝缘温度栏和端子温度额定值是两个独立输入。但是，在CEC Tables 5A和5C以及加拿大导体计数规则完成核验之前，加拿大版本不会生成降容载流量。"}}, {"@type": "Question", "name": "如何计算载流导体数量？", "acceptedAnswer": {"@type": "Answer", "text": "加拿大版本目前不说明计数规则。现有来源对CEC Table 5C是计入所有导体还是仅计入载流导体说法不一，因此核验完成前不会显示任何系数或载流量结果。"}}, {"@type": "Question", "name": "连续负载规则是否属于降容？", "acceptedAnswer": {"@type": "Answer", "text": "不是。连续负载选型是独立的负载侧计算，与导体降容分开。由于所需CEC降容数据尚未通过核验，加拿大版本不计算任何结果。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "什么是载流量？", "acceptedAnswer": {"@type": "Answer", "text": "载流量是导体在规定条件下不过热时可承载的最大电流。加拿大降容需要经核验的CEC Tables 5A和5C数据；在这些数据和导体计数规则仍未解决期间，此版本不会替代使用NEC系数。"}}, {"@type": "Question", "name": "应使用哪个绝缘温度栏？", "acceptedAnswer": {"@type": "Answer", "text": "绝缘温度栏和端子额定温度是两个独立输入。根据CEC Rule 4-006，额定100 A或以下、或者标注适用于#1 AWG及更小导线的设备使用60°C；超过该范围使用75°C。此限制适用于从端子起的前1.2 m导线。在CEC Tables 2、4、5A和5C以及加拿大导体计数规则完成核验之前，加拿大版本仍不会生成降容载流量。"}}, {"@type": "Question", "name": "如何计算载流导体数量？", "acceptedAnswer": {"@type": "Answer", "text": "加拿大版本目前不说明计数规则。现有来源对CEC Table 5C是计入所有导体还是仅计入载流导体说法不一，因此核验完成前不会显示任何系数或载流量结果。"}}, {"@type": "Question", "name": "连续负载规则是否属于降容？", "acceptedAnswer": {"@type": "Answer", "text": "不是。连续负载选型是独立的负载侧计算，与导体降容分开。由于所需CEC降容数据尚未通过核验，加拿大版本不计算任何结果。"}}]}</script>
 
   <section class="card explainer">
     <h2>本工具检查什么</h2>

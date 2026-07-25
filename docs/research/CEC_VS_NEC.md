@@ -7,12 +7,18 @@ verification gate before shipping in any tool or guide.
 
 ## Engineering summary — what a real CEC mode changes
 
-1. **Ampacity: REUSE our verified 310.16 numbers.** CEC Table 2 (Cu) and
-   Table 4 (Al) are harmonized with NEC 310.16 — verified value-by-value for
-   14 AWG–4/0 against Canadian sources (electdesign.ca, celtex.ca; IAEI
-   confirms harmonization). Termination rule (CEC 4-006) ≈ NEC 110.14(C).
-   Small-conductor caps (CEC 14-104(2)) = same 15/20/30 A for Cu 14/12/10.
-   CONFIDENCE: HIGH. (Al small-conductor caps: CONFIRMED 2026-07-25 — #12 Al 15 A, #10 Al 25 A; IAEI + verbatim forum quote of 14-104(2).)
+1. **Ampacity base grids: BLOCKED — do not reuse NEC values as CEC data.**
+   This project has not produced or verified CEC Table 2 (Cu) or Table 4 (Al)
+   grids. The standards are known to differ: 14 AWG copper in the 60 °C
+   column is 20 A in the CEC and 15 A in NEC Table 310.16. The available
+   grid in `ampacity.js` is NEC Table 310.16 only. Termination rule CEC
+   4-006 and the small-conductor caps in CEC 14-104(2) are separately
+   verified and remain usable. Current CEC 4-006 wording uses 60 °C for
+   equipment rated 100 A or less or marked for #1 AWG and smaller, and
+   75 °C above that, applied to the first 1.2 m from the termination.
+   CONFIDENCE: base grids NOT VERIFIED; termination rule and small-conductor
+   caps HIGH. (Al small-conductor caps: CONFIRMED 2026-07-25 — #12 Al 15 A,
+   #10 Al 25 A; IAEI + verbatim forum quote of 14-104(2).)
 2. **Voltage drop: THE marquee difference.** CEC Rule 8-102 is a "shall" —
    MANDATORY and enforceable, unlike the NEC's informational note. Same
    numbers (3% branch / 3% feeder / 5% total), different legal force. 2024
@@ -57,7 +63,8 @@ verification gate before shipping in any tool or guide.
    derating needs its own verified table.
 
 ## Sources
-IAEI 4-006 article · electdesign.ca CEC Table 1/2 · celtex.ca Tables 2&4 ·
+IAEI 4-006 article · electdesign.ca and celtex.ca (prior base-table leads,
+not accepted as row-complete cross-validation) ·
 ESA Bulletin 8-6-5 PDF (Rule 8-102) · Dakota Prep CEC-2024 VD guide ·
 cablify.ca CEC conduit fill · offsetnotes CEC box fill + 8-102 ·
 electriciantalk (12-3034, NMD90, wire types) · sparkshift CEC 14-104 ·

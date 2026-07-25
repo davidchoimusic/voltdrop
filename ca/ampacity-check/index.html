@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ampacity Derating — CEC planning note | VoltDrop</title>
-<meta name="description" content="Canadian ampacity-derating planning page. CEC Tables 5A and 5C are not shown because the source values and conductor-counting rule have not passed verification.">
+<meta name="description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
 <link rel="canonical" href="https://voltdrop.app/ca/ampacity-check/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
@@ -18,17 +18,17 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
 <meta property="og:title" content="Ampacity Derating — CEC planning note | VoltDrop">
-<meta property="og:description" content="Canadian ampacity-derating planning page. CEC Tables 5A and 5C are not shown because the source values and conductor-counting rule have not passed verification.">
+<meta property="og:description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
 <meta property="og:url" content="https://voltdrop.app/ca/ampacity-check/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ampacity Derating — CEC planning note | VoltDrop">
-<meta name="twitter:description" content="Canadian ampacity-derating planning page. CEC Tables 5A and 5C are not shown because the source values and conductor-counting rule have not passed verification.">
+<meta name="twitter:description" content="Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Canadian Ampacity Derating Planning Note","url":"https://voltdrop.app/ca/ampacity-check/","description":"Canadian ampacity-derating planning page. CEC Tables 5A and 5C are not shown because the source values and conductor-counting rule have not passed verification.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Canadian Ampacity Derating Planning Note","url":"https://voltdrop.app/ca/ampacity-check/","description":"Canadian ampacity planning page. The available base grid is NEC Table 310.16; CEC Tables 2, 4, 5A, and 5C have not passed verification.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=22c499be4f">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
@@ -97,7 +97,7 @@
     <p class="tool-sub">CEC correction and adjustment data is not yet verified. This edition refuses to borrow NEC factors.</p>
   </div>
 
-<div class="ca-note"><strong>Canada / CEC planning note:</strong> CEC Tables 5A and 5C have not passed our verification gate. Published sources conflict, the conductor ranges differ from the NEC, and it is unresolved whether the CEC count includes all conductors or only current-carrying conductors. This page displays no correction factor, no adjustment factor, and no Canadian derated ampacity until those questions are resolved from verified CEC sources.</div>
+<div class="ca-note"><strong>Canada / CEC planning note:</strong> The base ampacity grid available to this site is NEC Table 310.16. CEC Table 2 and Table 4 have not yet passed our verification gate and are known to differ at least at small sizes: 14 AWG copper in the 60°C column is 20 A under the CEC and 15 A under the NEC. CEC Tables 5A and 5C also remain unverified, so this page displays no correction factor, adjustment factor, or Canadian derated ampacity. CEC Rule 14-104 small-conductor caps and CEC Rule 4-006 termination rules remain separately verified.</div>
 
   <form id="amp-form" class="card" autocomplete="off">
 
@@ -230,7 +230,7 @@
     </div>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current a conductor can carry under stated conditions without overheating. Canadian derating requires verified CEC Tables 5A and 5C data; this edition does not substitute NEC factors while that data and the conductor-counting rule remain unresolved."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "The insulation column and the termination temperature rating are separate inputs. However, this Canadian edition does not produce a derated ampacity until CEC Tables 5A and 5C and the Canadian conductor-counting rule are verified."}}, {"@type": "Question", "name": "How do I count current-carrying conductors?", "acceptedAnswer": {"@type": "Answer", "text": "This Canadian edition does not state a counting rule yet. Available sources disagree about whether CEC Table 5C counts all conductors or only current-carrying conductors, so no factor or ampacity result is shown until verified."}}, {"@type": "Question", "name": "Is the continuous-load rule part of derating?", "acceptedAnswer": {"@type": "Answer", "text": "No. Continuous-load sizing is a separate load-side calculation from conductor derating. This Canadian edition does not calculate either result because its required CEC derating data has not passed verification."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is ampacity?", "acceptedAnswer": {"@type": "Answer", "text": "Ampacity is the maximum current a conductor can carry under stated conditions without overheating. Canadian derating requires verified CEC Tables 5A and 5C data; this edition does not substitute NEC factors while that data and the conductor-counting rule remain unresolved."}}, {"@type": "Question", "name": "Which insulation temperature column should I use?", "acceptedAnswer": {"@type": "Answer", "text": "The insulation column and the termination temperature rating are separate inputs. Under CEC Rule 4-006, use 60°C for equipment rated 100 A or less or marked for #1 AWG and smaller, and 75°C above that; the limit applies to the first 1.2 m from the termination. This Canadian edition still does not produce a derated ampacity until CEC Tables 2, 4, 5A, and 5C and the Canadian conductor-counting rule are verified."}}, {"@type": "Question", "name": "How do I count current-carrying conductors?", "acceptedAnswer": {"@type": "Answer", "text": "This Canadian edition does not state a counting rule yet. Available sources disagree about whether CEC Table 5C counts all conductors or only current-carrying conductors, so no factor or ampacity result is shown until verified."}}, {"@type": "Question", "name": "Is the continuous-load rule part of derating?", "acceptedAnswer": {"@type": "Answer", "text": "No. Continuous-load sizing is a separate load-side calculation from conductor derating. This Canadian edition does not calculate either result because its required CEC derating data has not passed verification."}}]}</script>
 
   <section class="card explainer">
     <h2>What this checks</h2>

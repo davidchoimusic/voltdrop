@@ -152,6 +152,45 @@ const GENERATED_PATHS = [
   ...EDITIONS.flatMap((edition) =>
     [...SCOPED_PATHS, ...GUIDE_PATHS].map((path) => editionPath(edition.prefix, path))),
 ];
+const forbiddenAmpacityVerificationClaims = [
+  'verified the values match',
+  'Values verified against Canadian sources',
+  'harmonized with US values — verified',
+  'nous avons vérifié que les valeurs concordent',
+  'Valeurs vérifiées auprès de sources canadiennes',
+  'harmonisé avec les valeurs américaines — vérifié',
+  '我们逐个核对过，数值相同',
+  '数值已与加拿大资料核对',
+  '与美国数值保持一致——已核验',
+  'verified el values match',
+  'Values verified frente a canadiense sources',
+  'Harmonized con el US values — verified',
+  'verificamos que los valores coinciden con la tabla de US',
+  'nous avons vérifié que les valeurs correspondent au tableau US',
+  '已经核实这些数值与US表一致',
+];
+const ampacityClaimScanFiles = [
+  ...GENERATED_PATHS.map((path) => path ? `${path}index.html` : 'index.html'),
+  'i18n/country-packs/ca.json',
+  'i18n/guide-translations.json',
+  'i18n/strings/en.json',
+  'i18n/strings/es.json',
+  'i18n/strings/fr-CA.json',
+  'i18n/strings/zh-Hans.json',
+  'tools/generate-locales.mjs',
+];
+const staleAmpacityVerificationClaims = [];
+for (const file of ampacityClaimScanFiles) {
+  const source = readFileSync(file, 'utf8');
+  for (const claim of forbiddenAmpacityVerificationClaims) {
+    if (source.includes(claim)) staleAmpacityVerificationClaims.push(`${file}: ${claim}`);
+  }
+}
+checkBool('false Canadian ampacity verification claim is absent in every language',
+  staleAmpacityVerificationClaims.length === 0,
+  staleAmpacityVerificationClaims.length
+    ? staleAmpacityVerificationClaims.join(' | ')
+    : 'English, French, Chinese, and Spanish regression phrases absent');
 const sitemap = readFileSync('sitemap.xml', 'utf8');
 const missingGuideSitemapUrls = GENERATED_PATHS
   .filter((path) => path.includes('guides/'))
@@ -362,9 +401,21 @@ for (const edition of EDITIONS) {
   checkBool(`${edition.prefix || 'us-en'} ampacity page contains both new inputs`,
     html.includes('id="amp-ambient"') && html.includes('id="amp-conductors"'));
   if (edition.country === 'ca') {
-    checkBool(`${edition.prefix} ampacity page carries the CEC planning-only note`,
-      html.includes('class="ca-note"') && html.includes('CEC Tables 5A')
+    checkBool(`${edition.prefix} ampacity page names every unverified CEC ampacity grid`,
+      html.includes('class="ca-note"')
+        && html.includes('NEC Table 310.16')
+        && html.includes('CEC Table 2')
+        && html.includes('Table 4')
+        && html.includes('CEC Tables 5A')
         && html.includes('5C'));
+
+    const guidePath = editionPath(edition.prefix, 'guides/wire-ampacity-chart/');
+    const guideHtml = readFileSync(`${guidePath}index.html`, 'utf8');
+    checkBool(`${edition.prefix} ampacity guide carries the base-grid planning note`,
+      guideHtml.includes('class="ca-note"')
+        && guideHtml.includes('NEC Table 310.16')
+        && guideHtml.includes('CEC Table 2')
+        && guideHtml.includes('Table 4'));
   }
 }
 
