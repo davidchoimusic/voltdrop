@@ -45,17 +45,21 @@ the word-of-mouth. This decomposes into three commitments:
    biggest trust-builder: the user can check us against anything. It also
    keeps us honest; a formula you must display is a formula you must get right.
 
-3. **Territory is a first-class dimension, not a translation layer.** The
-   architecture assumes every table, preset, and code citation is swappable
-   per country (data-driven WIRE_TABLE / COUNTRIES / AMPACITY structures; the
-   US/Canada edition picker already swaps voltages and code names). The plan
-   is country-specific *versions* with their own URLs — native to each
-   electrician, not US tools with a units toggle. Crucially, "recent" is
+3. **Territory and language are separate first-class dimensions.** Country
+   chooses the safety rulebook; language chooses the words used to explain
+   it. Canada can therefore offer English and French over one CEC data pack,
+   while the US can offer English and Spanish over one NEC pack. The header
+   leads with country, always names the active code, and offers only languages
+   actually reviewed for that country. The architecture assumes every table,
+   preset, and citation is swappable by country, while copy is swappable by
+   language. Each valid pair has an edition URL prefix, but a separate
+   existence list prevents the picker and guide banners from linking to
+   editions before their reviewed pages ship. Crucially, "recent" is
    territory-relative: codes revise every ~3 years and jurisdictions adopt
-   editions unevenly. Today we can ship without an edition selector only
+   editions unevenly. Today we can ship without a code-year selector only
    because we verified our current tables are *identical across NEC
    2008–2023*; the moment we build edition-sensitive tools (the Article 220
-   load calculator), edition becomes explicit user-facing state.
+   load calculator), code year becomes explicit user-facing state too.
 
 ## Strategy
 
@@ -80,6 +84,10 @@ mobile Tools menu — navigation available from every page, per David) makes
 each landing page a doorway to the whole toolbox. The feedback system exists
 to let field electricians tell us which tool is next and where clarity fails —
 the roadmap deliberately pauses after the current tool batch to read it.
+Country/language URLs follow one computed prefix model rather than hand-wired
+page twins. That keeps the number of routing rules proportional to editions,
+not editions multiplied by every guide, while the page-existence list remains
+the release gate.
 
 ## Key Discoveries
 
@@ -95,7 +103,12 @@ the roadmap deliberately pauses after the current tool batch to read it.
   shown math) rather than a vague "be simpler" aspiration.
 - **Edition stability is checkable, not assumable.** We verified (not assumed)
   that our tables match across NEC editions — that check is what licenses the
-  current absence of an edition picker.
+  current absence of a code-year picker.
+- **A locale is not a country.** Treating `ca|fr` and `us|es` as explicit
+  country-language pairs keeps safety data attached to territory and prevents
+  translation from quietly changing which code applies. A dependent language
+  picker makes that model visible: impossible pairs are not offered, and
+  switching countries falls back visibly instead of serving mismatched copy.
 - **Same-specificity CSS ordering silently eats rules** (desktop tabs, brand
   sizing). Cosmetic, but the meta-lesson matches the data lesson: verify the
   discriminating observable (computed style, live measurement), never the
