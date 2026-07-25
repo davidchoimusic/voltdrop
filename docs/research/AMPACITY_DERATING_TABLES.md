@@ -107,3 +107,46 @@ a visible planning-only note — never with a borrowed NEC number wearing a mapl
   same standard as the NEC tables above.
 - **Queued**: CEC Table 5A + 5C verification, and resolution of the all-conductors vs
   current-carrying-conductors counting question.
+
+---
+
+# ⚠️ SUPERSEDED SECTION ABOVE — Canada resolved 2026-07-25 (later same day)
+
+The "Canada / CEC — NOT VERIFIED. DO NOT SHIP NUMBERS" section above is **out of date**.
+Left in place per the append-only convention; do not act on it.
+
+**What changed:** three further research runs (Grok, KIMI K3, ChatGPT) produced CEC Tables 2
+and 4 from a complete C22.1:24 (2024, 26th edition) copy. See `CEC_TABLES_2_4_VERIFIED.md` and
+the tail of `CEC_AMPACITY_DERATING.md`.
+
+**The headline finding: CEC Tables 2 and 4 are numerically IDENTICAL to NEC 310.16** in the
+60/75/90 °C columns, at every shared size. Verified independently here by diffing the research
+grids against VoltDrop's shipped `AMPACITY` table: **159 cells, zero mismatches**, and the two
+research runs agree with each other cell-for-cell.
+
+**The "14 AWG Cu 60 °C = 20 A vs NEC 15 A" difference recorded earlier was REAL but is from the
+2012 edition.** CSA harmonised those cells with the NEC around 2015–2018. In the current code
+they match. Any note claiming the base grids differ is describing a code edition from over a
+decade ago.
+
+**Consequence:** the Canadian ampacity page was never serving wrong base numbers. What was wrong
+was the *claim* — "we verified the values match" was asserted without verification. It is now
+verified, and can be stated properly with an edition citation.
+
+**What remains genuinely Canadian** (do NOT let the base-table harmonisation tempt anyone into
+reusing NEC logic wholesale):
+- **Table 5C bands differ sharply** — 0.70 at ten conductors where the NEC gives 0.50
+- **Table 5A** uses single-point ambient rows, not bands, and gives **no cool-ambient credit**
+  below 30 °C where the NEC gives factors above 1.00
+- **Rule 4-006** termination defaults and the 1.2 m rule
+- **Rule 8-104** continuous loads (80 % / 70 % / 100 % / 85 %, not a flat 125 %)
+- Six columns (60/75/90/110/125/200 °C) against the NEC's three
+- **Free-air Tables 1 and 3 still DIFFER** (300 kcmil Cu 60 °C: CEC 370 A vs NEC 375 A;
+  6 AWG Al 60 °C: CEC 65 A vs NEC 60 A). VoltDrop has no free-air tool, so this is not blocking
+  — but the harmonisation is NOT total, and nobody should assume it is.
+
+**Provenance, and whose decision it is:** the CEC text is a document-sharing-site copy of the
+copyrighted standard, not authorised CSA distribution. The evidence is three-way convergent,
+stable across twelve years of editions, and matches an independently verified NEC table.
+**David reviewed this and confirmed 2026-07-25 that the copy is genuine and to proceed.**
+That is an owner risk decision, recorded here so it is not silently re-litigated.
