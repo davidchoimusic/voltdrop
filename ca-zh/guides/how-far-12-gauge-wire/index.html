@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在加拿大，12 号线能拉多远？CEC Rule 8-102（米 + 英尺）| VoltDrop</title>
+<meta name="description" content="在 CEC 强制的 3% 限值下，按导线规格（线规）列出的距离上限，米和英尺都有——外加加拿大对「按断路器还是按实际负载」这个问题的官方答案，以及 Table 68。">
+<link rel="canonical" href="https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/how-far-12-gauge-wire/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="在加拿大，12 号线能拉多远？CEC Rule 8-102（米 + 英尺）| VoltDrop">
+<meta property="og:description" content="在 CEC 强制的 3% 限值下，按导线规格（线规）列出的距离上限，米和英尺都有——外加加拿大对「按断路器还是按实际负载」这个问题的官方答案，以及 Table 68。">
+<meta property="og:url" content="https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="在加拿大，12 号线能拉多远？CEC Rule 8-102（米 + 英尺）| VoltDrop">
+<meta name="twitter:description" content="在 CEC 强制的 3% 限值下，按导线规格（线规）列出的距离上限，米和英尺都有——外加加拿大对「按断路器还是按实际负载」这个问题的官方答案，以及 Table 68。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">加拿大的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📏 在加拿大，12 号线能拉多远？</h1>
+    <p class="tool-sub">按导线规格（线规）列出的距离上限，米和英尺都有——在这部规范里，这个限值是强制的。 <a class="inline-link" href="/guides/how-far-12-gauge-wire/" data-edition-country="us">🇺🇸 美国版本</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>简短答案</h2>
+    <p>在满载的 20 安、120 V 电路上， <strong>#12 铜线在单程约 14 m（46 ft）内都能保持在 3% 电压降限值内</strong>；240 V 时约 28 m（91 ft）。而且在加拿大，这个 3% 不是建议——CEC Rule 8-102 让它成为可强制执行的规定。完整表格见下方；你的具体情况： <a class="inline-link" href="/max-wire-length/">最大线长计算器</a>.</p>
+
+    <h2>距离表（3% 电压降、铜、满载）</h2>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>导线</th><th>电流</th><th>单程最大 @120 V</th><th>单程最大 @240 V</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15 A</td><td>12 m（38 ft）</td><td>23 m（76 ft）</td></tr>
+        <tr><td>12 AWG</td><td>15 A</td><td>19 m（61 ft）</td><td>37 m（121 ft）</td></tr>
+        <tr><td>12 AWG</td><td>20 A</td><td>14 m（46 ft）</td><td>28 m（91 ft）</td></tr>
+        <tr><td>10 AWG</td><td>30 A</td><td>15 m（48 ft）</td><td>30 m（97 ft）</td></tr>
+        <tr><td>8 AWG</td><td>40 A</td><td>18 m（58 ft）</td><td>35 m（115 ft）</td></tr>
+        <tr><td>6 AWG</td><td>50 A</td><td>22 m（73 ft）</td><td>45 m（146 ft）</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">由我们经过验证的计算引擎算出（铜的 K = 12.9）。距离均为单程距离（仅去程）；往返距离已经计入。</p>
+
+    <h2>按断路器电流还是按实际负载？加拿大真的给了答案</h2>
+    <p>计算器界那个永恒的争论——到底按断路器的额定值算，还是按负载的实际电流算——在加拿大有官方答案：2024 版 CEC 说要用 <strong>已连接负载（如果你知道的话），否则取断路器额定值的 80%</strong>。我们的表格按断路器的 100% 计算（多留一层余量）；若按 CEC 的 80% 基准，上面每一个距离都能再延长 25%——所以 #12/20 A 电路在 120 V 下大约能到 18 m（57 ft）。两种算法都落在规则以内；我们这套只是留了更多余量。 <a class="inline-link" href="/max-wire-length/">计算器</a> 你填多少电流它就按多少算。</p>
+
+    <h2>加拿大特例：住宅可以直接查表</h2>
+    <p>对住宅里普通的照明和插座电路（不超过 20 A、120 V），CEC 甚至直接给出了预先算好的最大长度（Rule 8-102(3) 配合 Table 68），电工完全不用自己算——还有个额外的好处：如果从供电进线到你家配电盘这一段很短（不到 20 m），分支电路可以自己把 5% 的额度全部用掉。专用电路——冰箱、厨房、供暖——享受不到这个捷径，要走标准计算，而这正是我们的工具在做的事。</p>
+
+    <h2>拉得太远会发生什么？</h2>
+    <p>物理规律不认国界：电机启动吃力、运行发烫，LED 闪烁，充电器变慢，电能还在墙里变成热量白白浪费。加拿大这边的区别在于行政层面——超出限值的线路还可能通不过检验，因为 8-102 是可强制执行的。</p>
+
+    <h2>算例</h2>
+    <p>#12 铜线，20 A，单程 24 m（80 ft），120 V：电压降 = 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong> ——超出强制限值。解决办法：改用 #10 导线（3.3%）、在负载允许时改走 240 V，或者缩短走线路径。 <a class="inline-link" href="/">电压降计算器</a> 会立刻把各种选项列给你看。</p>
+
+    <h2>相关内容</h2>
+    <p><a class="inline-link" href="/max-wire-length/">最大线长计算器</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">电压降 &amp; Rule 8-102</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">CEC 载流量表</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"在加拿大，12 号线接在 20 安断路器上能拉多远？","acceptedAnswer":{"@type":"Answer","text":"在 120 V 满载时，单程约 14 米（46 英尺），可保持在 CEC 强制的 3% 电压降限值内——240 V 时约 28 m（91 ft）。若按 CEC 的 80% 断路器计算基准，距离还能再延长约 25%。"}},{"@type":"Question","name":"在加拿大，电压降该按断路器额定值算还是按实际负载算？","acceptedAnswer":{"@type":"Answer","text":"2024 版 CEC 对此有直接答案：已知时用已连接负载，否则取过电流保护装置额定值的 80%。按断路器的 100% 计算只是更保守而已。"}},{"@type":"Question","name":"加拿大规范里有最大电路长度表吗？","acceptedAnswer":{"@type":"Answer","text":"有——对住宅照明和一般用途插座电路，在 120 V、不超过 20 A 的情况下，Rule 8-102(3) 配合 Table 68 给出了预先算好的最大长度。厨房、冰箱、供暖这类专用电路则要用标准的电压降计算。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

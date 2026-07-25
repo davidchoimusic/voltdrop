@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vérification du courant admissible — CEC Table 2 et Table 4 | VoltDrop</title>
+<meta name="description" content="Vérificateur canadien gratuit du courant admissible fondé sur CEC Table 2 et Table 4 : cuivre et aluminium, isolant de 60/75/90°C et limites de disjoncteur de Rule 14-104.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/ampacity-check/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/ampacity-check/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/ampacity-check/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/ampacity-check/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/ampacity-check/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/ampacity-check/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Vérification du courant admissible — CEC Table 2 et Table 4 | VoltDrop">
+<meta property="og:description" content="Vérificateur canadien gratuit du courant admissible fondé sur CEC Table 2 et Table 4 : cuivre et aluminium, isolant de 60/75/90°C et limites de disjoncteur de Rule 14-104.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/ampacity-check/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vérification du courant admissible — CEC Table 2 et Table 4 | VoltDrop">
+<meta name="twitter:description" content="Vérificateur canadien gratuit du courant admissible fondé sur CEC Table 2 et Table 4 : cuivre et aluminium, isolant de 60/75/90°C et limites de disjoncteur de Rule 14-104.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Vérification du courant admissible VoltDrop","url":"https://voltdrop.app/ca-fr/ampacity-check/","description":"Vérificateur canadien gratuit du courant admissible fondé sur CEC Table 2 et Table 4 : cuivre et aluminium, isolant de 60/75/90°C et limites de disjoncteur de Rule 14-104.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link active" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔥 Vérification du courant admissible</h1>
+    <p class="tool-sub">Courant admissible = le courant maximal qu’un conducteur peut transporter de façon sécuritaire sans surchauffer. Entrez le conducteur et la charge pour obtenir une réponse claire.</p>
+  </div>
+
+  <form id="amp-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">Matériau du conducteur</label>
+      <div class="seg" role="group" aria-label="Matériau du conducteur">
+        <button type="button" class="seg-btn active" data-material="cu">Cuivre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminium</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-size">Calibre du conducteur</label>
+      <select id="amp-size"></select>
+      <p class="hint">AWG = American Wire Gauge. Le calibre est imprimé sur l’isolant du conducteur.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Température nominale de l’isolant</label>
+      <div class="seg" role="group" aria-label="Température nominale de l’isolant">
+        <button type="button" class="seg-btn" data-temp="60">60°C</button>
+        <button type="button" class="seg-btn active" data-temp="75">75°C</button>
+        <button type="button" class="seg-btn" data-temp="90">90°C</button>
+      </div>
+      <p class="hint" id="amp-temp-hint">Vous hésitez? Utilisez <strong>75°C</strong> — utilisez-la seulement si les bornes du disjoncteur et les autres bornes sont marquées 75°C. L’équipement non marqué compte comme 60°C selon CEC Rule 4-006.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-load">Courant à transporter</label>
+      <div class="input-unit">
+        <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="p. ex. 20" required>
+        <span class="unit">ampères</span>
+      </div>
+    </div>
+
+    <button type="submit" class="calc-btn">Vérifier le courant admissible</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>Comment nous avons vérifié ceci</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qu’est-ce que le courant admissible?", "acceptedAnswer": {"@type": "Answer", "text": "Le courant admissible est le courant maximal, en ampères, qu’un conducteur peut transporter de façon continue sans surchauffer. Il dépend du calibre du conducteur, du matériau et de la température nominale de l’isolant, et il est établi par CEC Table 2 pour le cuivre ou Table 4 pour l’aluminium dans des conditions normales."}}, {"@type": "Question", "name": "Quelle colonne de température de l’isolant faut-il utiliser?", "acceptedAnswer": {"@type": "Answer", "text": "En cas de doute, utilisez la colonne de 75°C seulement si les bornes du disjoncteur et les autres bornes sont marquées 75°C. L’équipement non marqué compte comme 60°C selon CEC Rule 4-006. La température nominale des bornes, et non l’isolant NMD90 à lui seul, détermine la colonne utilisable."}}]}</script>
+  <section class="card explainer">
+    <h2>Ce que cet outil vérifie (et ne vérifie pas)</h2>
+    <p id="amp-exp-lookup">Nous repérons le conducteur dans les tableaux canadiens de courant admissible (CEC Table 2 pour le cuivre et Table 4 pour l’aluminium; les valeurs scellées sont harmonisées avec NEC Table 310.16). Pour les petits conducteurs, nous appliquons aussi la CEC Rule 14-104 : 14 AWG cuivre, maximum 15 A; 12 AWG, 20 A; 10 AWG, 30 A.</p>
+    <p><strong>Non inclus :</strong> les greniers chauds, les salles mécaniques, les groupes de plus de trois conducteurs porteurs de courant et les charges continues (3+ heures exigent une marge de 25%). Tout cela réduit le courant admissible. En cas de doute, utilisez un calibre du conducteur supérieur ou consultez un électricien.</p>
+    <p>Courant admissible et <a class="inline-link" href="/">chute de tension</a> sont des vérifications distinctes; le conducteur doit réussir <strong>les deux</strong>.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+<script src="/assets/ca-fr/ampacity.js?v=4d65f5570b"></script>
+</body>
+</html>

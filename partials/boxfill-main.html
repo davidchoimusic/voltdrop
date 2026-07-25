@@ -1,74 +1,74 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">📦 Box Fill</h1>
-    <p class="tool-sub">Is your junction or device box big enough? Count what's in it, get a clear fits / doesn't-fit answer.</p>
+    <h1 class="tool-title">{{boxFill.boxFillTitle}}</h1>
+    <p class="tool-sub">{{boxFill.isYourJunctionOrDeviceBoxBig}}</p>
   </div>
 
   <form id="bf-form" class="card" autocomplete="off">
 
     <div class="field">
-      <label class="field-label" for="bf-box">Box</label>
+      <label class="field-label" for="bf-box">{{boxFill.boxLabel}}</label>
       <select id="bf-box"></select>
       <div class="input-unit" id="bf-custom-wrap" hidden>
-        <input type="number" id="bf-custom" inputmode="decimal" min="1" step="any" placeholder="e.g. 18">
-        <span class="unit">cu in</span>
+        <input type="number" id="bf-custom" inputmode="decimal" min="1" step="any" placeholder="{{attr:boxFill.eGN18Placeholder}}">
+        <span class="unit">{{boxFill.cuIn}}</span>
       </div>
-      <p class="hint">Plastic boxes have their volume stamped inside (e.g. "18.0 CU IN") — pick Custom and type it. Metal box sizes use the standard code volumes.</p>
+      <p class="hint">{{boxFill.plasticBoxesHaveTheirVolumeStampedInside}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="bf-size">Wire size in the box</label>
+      <label class="field-label" for="bf-size">{{boxFill.wireSizeInTheBoxLabel}}</label>
       <select id="bf-size"></select>
-      <p class="hint">Most homes: 14 AWG (15 A circuits) or 12 AWG (20 A circuits). Mixed sizes coming — for now pick the size you have most of (or the largest, to be safe).</p>
+      <p class="hint">{{boxFill.mostHomesN14AWGN15ACircuits}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="bf-conductors">Insulated wires entering the box</label>
+      <label class="field-label" for="bf-conductors">{{boxFill.insulatedWiresEnteringTheBoxLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
-        <span class="unit">wires</span>
+        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="{{attr:boxFill.eGN6Placeholder}}" required>
+        <span class="unit">{{boxFill.wires}}</span>
       </div>
-      <p class="hint">Count every hot and neutral that enters the box — including any that pass straight through unbroken (those count too). Don't count ground wires here (next question), and don't count pigtails that start and end inside the box.</p>
+      <p class="hint">{{boxFill.countEveryHotAndNeutralThatEnters}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="bf-devices">Devices in the box</label>
+      <label class="field-label" for="bf-devices">{{boxFill.devicesInTheBoxLabel}}</label>
       <div class="input-unit">
         <input type="number" id="bf-devices" inputmode="numeric" min="0" max="10" step="1" value="0">
-        <span class="unit">devices</span>
+        <span class="unit">{{boxFill.devices}}</span>
       </div>
-      <p class="hint">Switches, receptacles/outlets, dimmers. Each one counts as two wires' worth of space.</p>
+      <p class="hint">{{boxFill.switchesReceptaclesOutletsDimmersEachOneCounts}}</p>
     </div>
 
     <div class="field" id="bf-field-marrettes" hidden>
-      <label class="field-label" for="bf-marrettes">Wire connectors (marrettes) in the box</label>
+      <label class="field-label" for="bf-marrettes">{{boxFill.wireConnectorsMarrettesInTheBoxLabel}}</label>
       <div class="input-unit">
         <input type="number" id="bf-marrettes" inputmode="numeric" min="0" max="30" step="1" value="0">
-        <span class="unit">connectors</span>
+        <span class="unit">{{boxFill.connectors}}</span>
       </div>
-      <p class="hint">Canadian rule: every pair of insulated wire connectors counts as one wire's worth of space (sized by the largest wire in them). Count all your marrettes.</p>
+      <p class="hint">{{boxFill.canadianRuleEveryPairOfInsulatedWire}}</p>
     </div>
 
     <div class="field" id="bf-field-grounds">
-      <label class="field-label">Any ground wires in the box?</label>
-      <div class="seg" role="group" aria-label="Ground wires">
-        <button type="button" class="seg-btn active" data-grounds="1">Yes</button>
-        <button type="button" class="seg-btn" data-grounds="0">No</button>
+      <label class="field-label">{{boxFill.anyGroundWiresInTheBoxLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:boxFill.groundWiresAriaLabel}}">
+        <button type="button" class="seg-btn active" data-grounds="1">{{boxFill.yesButton}}</button>
+        <button type="button" class="seg-btn" data-grounds="0">{{boxFill.noButton}}</button>
       </div>
-      <p class="hint">All the grounds together count as one wire's worth of space (that's the code rule — not one each).</p>
+      <p class="hint">{{boxFill.allTheGroundsTogetherCountAsOne}}</p>
     </div>
 
     <div class="field" id="bf-field-clamps">
-      <label class="field-label">Internal cable clamps?</label>
-      <div class="seg" role="group" aria-label="Cable clamps">
-        <button type="button" class="seg-btn" data-clamps="1">Yes</button>
-        <button type="button" class="seg-btn active" data-clamps="0">No</button>
+      <label class="field-label">{{boxFill.internalCableClampsLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:boxFill.cableClampsAriaLabel}}">
+        <button type="button" class="seg-btn" data-clamps="1">{{boxFill.yesButton}}</button>
+        <button type="button" class="seg-btn active" data-clamps="0">{{boxFill.noButton}}</button>
       </div>
-      <p class="hint">Clamps built inside the box (common in metal boxes) count as one wire's worth. Connectors that stay outside the box don't count.</p>
+      <p class="hint">{{boxFill.clampsBuiltInsideTheBoxCommonIn}}</p>
     </div>
 
-    <button type="submit" class="calc-btn">Check box fill</button>
+    <button type="submit" class="calc-btn">{{boxFill.checkBoxFillButton}}</button>
   </form>
 
   <section id="results" class="card results" hidden aria-live="polite">
@@ -82,17 +82,17 @@
     <div class="result-grid" id="result-grid"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
-      <summary>How we calculated this</summary>
+      <summary>{{boxFill.howWeCalculatedThisSummary}}</summary>
       <div class="math-body" id="math-body"></div>
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many wires can go in an electrical box?", "acceptedAnswer": {"@type": "Answer", "text": "NEC 314.16 assigns each wire size a volume allowance (for example 2.25 cubic inches for 12 AWG). Count each hot or neutral entering the box as one, each device such as a switch or receptacle as two, all ground wires together as one, and internal cable clamps as one — the total times the allowance must not exceed the box volume."}}, {"@type": "Question", "name": "Do pass-through wires count toward box fill?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — a wire that passes through the box unbroken counts once. Only pigtails that both start and end inside the box are free."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:boxFill.howManyWiresCanGoInAnQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:boxFill.nECN314N16AssignsEachWireSizeAnswer}}"}}, {"@type": "Question", "name": "{{json:boxFill.doPassThroughWiresCountTowardBoxQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:boxFill.yesAWireThatPassesThroughTheAnswer}}"}}]}</script>
   <section class="card explainer">
-    <h2>Why box fill matters</h2>
-    <p id="bf-exp-1">Cram too many wires into a box and connections get stressed, insulation gets nicked, and heat builds up — a classic cause of failed inspections and flickering circuits. The U.S. electrical code (NEC 314.16) assigns every wire a space allowance based on its size, and the box must have at least that much room.</p>
-    <h2>The counting rules, in plain English</h2>
-    <p id="bf-exp-2">Each hot or neutral entering the box = 1 count — including wires that pass straight through unbroken (those count once too). Each device (switch/outlet) = 2 counts. All ground wires together = 1 count (with more than four grounds, each extra adds a ¼ count under the 2020 rules). Built-in cable clamps = 1 count. Pigtails that live entirely inside the box are free. Multiply the counts by your wire size's space allowance and compare to the box volume — we do exactly that, and show the math.</p>
+    <h2>{{boxFill.whyBoxFillMattersHeading}}</h2>
+    <p id="bf-exp-1">{{boxFill.cramTooManyWiresIntoABox}}</p>
+    <h2>{{boxFill.theCountingRulesInPlainEnglishHeading}}</h2>
+    <p id="bf-exp-2">{{boxFill.eachHotOrNeutralEnteringTheBox}}</p>
   </section>
 
 </main>

@@ -1,38 +1,38 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔌 What Size Wire for 50 Amps in Canada?</h1>
-    <p class="tool-sub">The Canadian answer — where the cable is NMD90, not Romex, and the rules are subtly different. <a class="inline-link" href="/guides/50-amp-wire-size/">🇺🇸 US version</a></p>
+    <h1 class="tool-title">{{guides.ca.fiftyAmp.whatSizeWireForN50AmpsInTitle}}</h1>
+    <p class="tool-sub">{{guides.ca.fiftyAmp.theCanadianAnswerWhereTheCableIs}} <a class="inline-link" href="/guides/50-amp-wire-size/" data-edition-country="us">{{guides.ca.fiftyAmp.uSVersion}}</a></p>
   </div>
 
   <section class="card explainer">
-    <h2>The short answer</h2>
-    <p>For a 50 amp, 240 V circuit at ordinary distances in Canada: <strong>#6 copper NMD90</strong> is the common residential answer, and <strong>#8 copper T90/RW90 in conduit</strong> is acceptable where the terminations are 75°C-rated (#8 copper = exactly 50 A in the 75°C column of CEC Table 2). <strong>#6 aluminum</strong> works at 75°C. Past about 30 m, the mandatory drop limit pushes you bigger — table below.</p>
+    <h2>{{guides.ca.fiftyAmp.theShortAnswerHeading}}</h2>
+    <p>{{guides.ca.fiftyAmp.forAN50AmpN240VCircuit}} <strong>{{guides.ca.fiftyAmp.n6CopperNMD90}}</strong> {{guides.ca.fiftyAmp.isTheCommonResidentialAnswerAnd}} <strong>{{guides.ca.fiftyAmp.n8CopperT90RW90InConduit}}</strong> {{guides.ca.fiftyAmp.isAcceptableWhereTheTerminationsAreN75}} <strong>{{guides.ca.fiftyAmp.n6Aluminum}}</strong> {{guides.ca.fiftyAmp.worksAtN75CPastAboutN30}}</p>
 
-    <h2>The Canadian twist on the #6 vs #8 debate</h2>
-    <p>Americans argue #6 vs #8 because their code hard-caps Romex (NM-B) at the 60°C column. Canada's equivalent cable, <strong>NMD90</strong>, has no such blanket cap — what limits it is the <em>termination</em> rule (CEC 4-006): unmarked devices are treated as 60°C, breakers marked 75°C allow the 75°C column. In practice, Canadian electricians still commonly run <strong>#6 NMD90 for 50 A</strong> — it's unambiguous, inspector-friendly, and leaves margin — while #8 in conduit with 75°C-marked equipment is defensible by the book. When a rule has this much room for debate (and Canadian forums debate it plenty), the bigger wire is the quieter life. Check any combination in the <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a>.</p>
+    <h2>{{guides.ca.fiftyAmp.theCanadianTwistOnTheN6VsHeading}}</h2>
+    <p>{{guides.ca.fiftyAmp.americansArgueN6VsN8BecauseTheir}} <strong>{{guides.ca.fiftyAmp.nMD90}}</strong>{{guides.ca.fiftyAmp.hasNoSuchBlanketCapWhatLimitsContinuation}} <em>{{guides.ca.fiftyAmp.termination}}</em> {{guides.ca.fiftyAmp.ruleCECN4N006UnmarkedDevicesAre}} <strong>{{guides.ca.fiftyAmp.n6NMD90ForN50A}}</strong> {{guides.ca.fiftyAmp.itSUnambiguousInspectorFriendlyAndLeavesContinuation}} <a class="inline-link" href="/ampacity-check/">{{guides.ca.fiftyAmp.ampacityCheckTool}}</a>.</p>
 
-    <h2>Distance changes the answer — and in Canada it's enforceable</h2>
-    <p>CEC Rule 8-102 makes the 3% drop limit mandatory. Minimum size at 240 V and 50 A (one-way distance):</p>
+    <h2>{{guides.ca.fiftyAmp.distanceChangesTheAnswerAndInCanadaHeading}}</h2>
+    <p>{{guides.ca.fiftyAmp.cECRuleN8N102MakesTheN3%}}</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th>Material</th><th>15 m (50′)</th><th>30 m (100′)</th><th>46 m (150′)</th><th>61 m (200′)</th><th>76 m (250′)</th><th>91 m (300′)</th></tr></thead>
+      <thead><tr><th>{{guides.ca.fiftyAmp.material}}</th><th>{{guides.ca.fiftyAmp.n15MN50}}</th><th>{{guides.ca.fiftyAmp.n30MN100}}</th><th>{{guides.ca.fiftyAmp.n46MN150}}</th><th>{{guides.ca.fiftyAmp.n61MN200}}</th><th>{{guides.ca.fiftyAmp.n76MN250}}</th><th>{{guides.ca.fiftyAmp.n91MN300}}</th></tr></thead>
       <tbody>
-        <tr><td>Copper</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
-        <tr><td>Aluminum</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>{{guides.ca.fiftyAmp.copper}}</td><td>{{guides.ca.fiftyAmp.tdN8}}</td><td>{{guides.ca.fiftyAmp.tdN6}}</td><td>{{guides.ca.fiftyAmp.tdN4}}</td><td>{{guides.ca.fiftyAmp.tdN4}}</td><td>{{guides.ca.fiftyAmp.tdN3}}</td><td>{{guides.ca.fiftyAmp.tdN2}}</td></tr>
+        <tr><td>{{guides.ca.fiftyAmp.aluminum}}</td><td>{{guides.ca.fiftyAmp.tdN6}}</td><td>{{guides.ca.fiftyAmp.tdN4}}</td><td>{{guides.ca.fiftyAmp.tdN3}}</td><td>{{guides.ca.fiftyAmp.tdN2}}</td><td>{{guides.ca.fiftyAmp.tdN1}}</td><td>{{guides.ca.fiftyAmp.n1N0}}</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">AWG sizes (Canada uses AWG like the US), sized at the full 50 A. The 2024 CEC lets you calculate at connected load — or 80% of the breaker when unknown — so these sizes carry built-in margin. Exact run: <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a>.</p>
+    <p class="gnote">{{guides.ca.fiftyAmp.aWGSizesCanadaUsesAWGLikeThe}} <a class="inline-link" href="/wire-size-calculator/">{{guides.ca.fiftyAmp.wireSizeCalculator}}</a>.</p>
 
-    <h2>The common Canadian 50-amp jobs</h2>
-    <p><strong>Hot tub:</strong> 4-wire circuit with GFCI protection and a disconnect near the tub (CEC Section 68 governs pools and tubs) — #6 copper is the standard install. <strong>EV charger:</strong> charging is a continuous load, so a 50 A circuit delivers at most 40 A continuously under the CEC's continuous-load rules — conductors sized to the 50 A breaker, same table as above; many Canadian installs also use the 347/600 V commercial world at work sites, but home charging is 240 V. <strong>RV receptacle (14-50):</strong> same sizing; a pedestal 46 m out routinely needs #4 — and in Canada that upsize is code, not courtesy. <strong>Welder:</strong> CEC gives welders duty-cycle allowances similar to the US — the manual's smaller-than-expected wire spec can be legitimate.</p>
+    <h2>{{guides.ca.fiftyAmp.theCommonCanadianN50AmpJobsHeading}}</h2>
+    <p><strong>{{guides.ca.fiftyAmp.hotTub}}</strong> {{guides.ca.fiftyAmp.n4WireCircuitWithGFCIProtectionAnd}} <strong>{{guides.ca.fiftyAmp.eVCharger}}</strong> {{guides.ca.fiftyAmp.chargingIsAContinuousLoadSoA}} <strong>{{guides.ca.fiftyAmp.rVReceptacleN14N50}}</strong> {{guides.ca.fiftyAmp.sameSizingAPedestalN46MOut}} <strong>{{guides.ca.fiftyAmp.welder}}</strong> {{guides.ca.fiftyAmp.cECGivesWeldersDutyCycleAllowancesSimilar}}</p>
 
-    <h2>Worked example: 50 A hot tub at 24 m (80 ft)</h2>
-    <p>#6 copper (26,240 cmil): drop = 2 × 12.9 × 50 × 80 ÷ 26,240 = <strong>3.9 V = 1.6%</strong> of 240 V — comfortably inside the mandatory 3%. In #8 (16,510 cmil): 6.3 V = 2.6% — passes, with less headroom. Run yours in the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+    <h2>{{guides.ca.fiftyAmp.workedExampleN50AHotTubAtHeading}}</h2>
+    <p>{{guides.ca.fiftyAmp.n6CopperN26N240CmilDropN2}} <strong>{{guides.ca.fiftyAmp.n3N9VN1N6%}}</strong> {{guides.ca.fiftyAmp.ofN240VComfortablyInsideTheMandatory}} <a class="inline-link" href="/">{{guides.ca.fiftyAmp.voltageDropCalculator}}</a>.</p>
 
-    <h2>Related</h2>
-    <p><a class="inline-link" href="/ca/guides/sub-panel-wire-size/">Canadian sub-panel guide</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">CEC ampacity chart</a> · <a class="inline-link" href="/conduit-fill/">Conduit Fill calculator</a></p>
+    <h2>{{guides.ca.fiftyAmp.relatedHeading}}</h2>
+    <p><a class="inline-link" href="/ca/guides/sub-panel-wire-size/">{{guides.ca.fiftyAmp.canadianSubPanelGuide}}</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">{{guides.ca.fiftyAmp.cECAmpacityChart}}</a> · <a class="inline-link" href="/conduit-fill/">{{guides.ca.fiftyAmp.conduitFillCalculator}}</a></p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire do I need for a 50 amp breaker in Canada?","acceptedAnswer":{"@type":"Answer","text":"#6 copper NMD90 is the common residential answer; #8 copper T90/RW90 in conduit is acceptable where terminations are 75°C-rated (#8 copper = 50 A in the CEC Table 2 75°C column). #6 aluminum also works at 75°C. Long runs must be upsized — Canada's 3% voltage drop limit is mandatory."}},{"@type":"Question","name":"Is NMD90 limited to the 60°C column like American Romex?","acceptedAnswer":{"@type":"Answer","text":"No blanket cap — unlike NEC rules for NM-B, NMD90's usable ampacity is governed by the termination-temperature rule (CEC 4-006): 60°C for unmarked equipment, 75°C where breakers and lugs are marked 75°C. In residential practice the common answers land in the same place, and many electricians simply run #6 for 50 A."}},{"@type":"Question","name":"What size wire for a 50 amp hot tub in Canada?","acceptedAnswer":{"@type":"Answer","text":"#6 copper on a 4-wire circuit with GFCI protection and a disconnect near the tub, per CEC Section 68 practice. Long runs from the panel should be checked against the mandatory 3% voltage-drop limit."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.ca.fiftyAmp.whatSizeWireDoINeedForQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.fiftyAmp.n6CopperNMD90IsTheCommonResidentialAnswer}}"}},{"@type":"Question","name":"{{json:guides.ca.fiftyAmp.isNMD90LimitedToTheN60CQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.fiftyAmp.noBlanketCapUnlikeNECRulesForAnswer}}"}},{"@type":"Question","name":"{{json:guides.ca.fiftyAmp.whatSizeWireForAN50AmpQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.fiftyAmp.n6CopperOnAN4WireCircuitAnswer}}"}}]}</script>
 
 </main>

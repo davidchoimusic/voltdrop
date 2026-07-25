@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>子配电盘（工具房或独立车库）的导线规格——按 NEC 选型并附距离表 | VoltDrop</title>
+<meta name="description" content="50-300 英尺处的 50、60 或 100 安培子配电盘该用多大的线：经核验的铜和铝对照表、平息论坛争论的电压降算式，以及大家常忽略的 4 件事。">
+<link rel="canonical" href="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="子配电盘（工具房或独立车库）的导线规格——按 NEC 选型并附距离表 | VoltDrop">
+<meta property="og:description" content="50-300 英尺处的 50、60 或 100 安培子配电盘该用多大的线：经核验的铜和铝对照表、平息论坛争论的电压降算式，以及大家常忽略的 4 件事。">
+<meta property="og:url" content="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="子配电盘（工具房或独立车库）的导线规格——按 NEC 选型并附距离表 | VoltDrop">
+<meta name="twitter:description" content="50-300 英尺处的 50、60 或 100 安培子配电盘该用多大的线：经核验的铜和铝对照表、平息论坛争论的电压降算式，以及大家常忽略的 4 件事。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🏠 子配电盘（工具房或独立车库）的导线规格</h1>
+    <p class="tool-sub">每个论坛都在吵的问题，这里用真正的算式给出答案——还有别人从不给你看的距离表。</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>简短答案</h2>
+    <p>对于 <strong>150 英尺外的 100 安培子配电盘</strong>: <strong>#2 铜线</strong> 或 <strong>1/0 铝线</strong>。对于 <strong>100 英尺外的 60 安培子配电盘</strong>: <strong>#6 铜线</strong> 或 <strong>#4 铝线</strong>。下面是所有常见组合的完整表格——如果你的线路不在表里， <a class="inline-link" href="/wire-size-calculator/">导线规格计算器</a> 能算任意距离。</p>
+
+    
+    <figure class="gfig" role="img" aria-label="示意图：一条 4 线馈线从住宅内的主配电盘接到独立车库的子配电盘">
+      <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 15 60 L 60 25 L 105 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="25" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="60" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">主</text>
+        <text x="60" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">配电盘</text>
+        <path d="M 455 60 L 500 25 L 545 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="465" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="500" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">子</text>
+        <text x="500" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">配电盘</text>
+        <line x1="105" y1="78" x2="465" y2="78" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="86" x2="465" y2="86" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="94" x2="465" y2="94" stroke="var(--color-ink-soft)" stroke-width="3"/>
+        <line x1="105" y1="102" x2="465" y2="102" stroke="var(--verdict-good-bar)" stroke-width="3"/>
+        <text x="285" y="68" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">4 线馈线：2 根火线 · 中性线 · 接地线</text>
+        <path d="M 105 135 L 105 145 L 465 145 L 465 135" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="285" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">单程距离（仅去程）——这才是决定导线规格的因素</text>
+      </svg>
+    </figure>
+
+    <h2>为什么每个论坛帖子都各说各话</h2>
+    <p>在网上问这个问题，你会得到三种不同的“正确”答案。原因在于，这其实是 <em>两项</em> 检查叠在一起，不同的人回答的是不同的那一项。首先，导线本身必须够格承载这个电流（<strong>载流量</strong>）。其次，线路一长，导线就必须够粗，让沿途损失的电压保持在合理范围（<strong>电压降</strong> ——通常的规划目标是 3%）。距离短的时候，由载流量这项检查说了算；超过大约 100 英尺后，电压降就成了主导，逼你用比载流量表本身建议的更粗的线。只报载流量表的人和报按压降修正后规格的人，都是“对”的——只是针对的距离不同。</p>
+
+    <h2>对照表：240 V、3% 电压降下的最小规格</h2>
+    <p>按断路器额定值选线（偏保守）、75°C 端子、单程距离（仅去程）：</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>馈线</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <tbody>
+        <tr><td>50 A 铜</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>50 A 铝</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>60 A 铜</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><td>60 A 铝</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A 铜</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A 铝</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">AWG 规格；用与我们计算器相同的已核验引擎算出（K = 12.9 铜 / 21.2 铝，NEC Table 310.16 中 75°C 的载流量）。像 NM-B 这类成品电缆只能取 60°C 那一栏——参见 <a class="inline-link" href="/guides/wire-ampacity-chart/">载流量指南</a> ——这里说的铝是指现代 AA-8000 系列馈线电缆（SER/URD/MHF），安全且被规范认可。</p>
+
+    <h2>实算示例：150 英尺处的 100 A</h2>
+    <p>电压降 = 2 × K × 安培数 × 单程英尺数 ÷ 圆密耳。以 #2 铜线（66,360 cmil）为例：2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V</strong>，相当于 240 V 的 2.4%——在 3% 目标之内。再小一号（#3，52,620 cmil）是 7.4 V = 3.1%——刚好超出。整个争论到此了结： <strong>#3 在载流量上过得去，#2 在电压降上才胜出。</strong> 想核对自己的数字，请打开 <a class="inline-link" href="/">电压降计算器</a>.</p>
+
+    <h2>大家常忽略的四件事</h2>
+    <p><strong>1. 这是一条 4 线馈线。</strong> 两根火线、一根中性线，外加一根单独的设备接地线——而且在子配电盘处，中性线和接地线要分别接在各自独立的汇流排上（搭接螺钉不装）。 <strong>2. 大名鼎鼎的“2-2-2-4”铝电缆只有作为住宅供电进线时才按 100 A 定级。</strong> 用来给独立车库的子配电盘供电时，它就是一条 90 A 馈线——验收时的经典意外。 <strong>3. 电压降不会在子配电盘处“归零”重算。</strong> 馈线上的压降和它后面分支电路上的压降是累加的；常见做法是给馈线留约 2%，到最远负载合计约 3%。 <strong>4. 按你以后真正会用到的电流来选线。</strong> 如果车库以后要放电焊机或电动车充电桩，今天埋下去的铜线就是你能买到的最便宜的一次。</p>
+
+    <h2>相关内容</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">导线规格计算器</a> · <a class="inline-link" href="/">电压降计算器</a> · <a class="inline-link" href="/guides/50-amp-wire-size/">50 安培该用多大的线？</a> · <a class="inline-link" href="/conduit-fill/">导管填充计算器</a> 用于地埋段</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"150 英尺外的 100 安培子配电盘该用多大的线？","acceptedAnswer":{"@type":"Answer","text":"#2 铜线或 1/0 铝线，按 240 V、75°C 端子、3% 电压降目标计算。在这个距离上，决定线径的是电压降而不是载流量：#2 铜线在 100 A、150 英尺时压降为 5.8 V（2.4%）。"}},{"@type":"Question","name":"子配电盘会让电压降重新归零吗？","acceptedAnswer":{"@type":"Answer","text":"不会。到子配电盘这段馈线上的电压降，和它后面分支电路上的压降是累加的。常见的规划做法是馈线上约 2%，从主配电盘到最远负载合计不超过 3%。"}},{"@type":"Question","name":"子配电盘馈线的接地线该用多大规格？","acceptedAnswer":{"@type":"Answer","text":"设备接地导体按 NEC Table 250.122 根据馈线断路器来选定——例如 100 A 馈线用 #8 铜线——而且如果你为了电压降加大了火线，接地导体也必须按比例加大。"}},{"@type":"Question","name":"铝导线用作子配电盘馈线安全吗？","acceptedAnswer":{"@type":"Answer","text":"安全。现代 AA-8000 系列铝馈线电缆（SER、URD、MHF）已被规范认可，而且因为比铜便宜得多，被广泛用作馈线。1960s 那种危险名声属于早年用于分支电路的小线规铝线，而不是现代的馈线电缆。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remplissage de conduit — vérification préliminaire CEC | VoltDrop</title>
+<meta name="description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/conduit-fill/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/conduit-fill/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/conduit-fill/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/conduit-fill/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/conduit-fill/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/conduit-fill/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/conduit-fill/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/conduit-fill/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Remplissage de conduit — vérification préliminaire CEC | VoltDrop">
+<meta property="og:description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/conduit-fill/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Remplissage de conduit — vérification préliminaire CEC | VoltDrop">
+<meta name="twitter:description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de remplissage de conduit VoltDrop","url":"https://voltdrop.app/ca-fr/conduit-fill/","description":"Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link active" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🚇 Remplissage de conduit</h1>
+    <p class="tool-sub">Quel diamètre de conduit faut-il pour vos conducteurs? Entrez ce que vous tirez pour obtenir le plus petit diamètre permis.</p>
+  </div>
+<div class="ca-note"><strong>Note de planification Canada / CEC :</strong> la CEC Rule 12-910 et la Table 8 utilisent les mêmes pourcentages de remplissage de 53/31/40%. Toutefois, cet outil utilise encore les aires de conducteurs THHN/THWN et les dimensions commerciales NEC, car les valeurs canadiennes des Tables 6A–6K et 9 n’ont pas franchi notre vérification. N’utilisez pas le résultat de diamètre comme base finale d’une installation canadienne; confirmez-le dans le CEC ou auprès de l’autorité d’inspection.</div>
+
+  <form id="fill-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">Type de conduit</label>
+      <div class="seg" role="group" aria-label="Type de conduit">
+        <button type="button" class="seg-btn active" data-conduit="emt">EMT (métal)</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+      </div>
+      <p class="hint">EMT est le conduit métallique à paroi mince courant. PVC Sch 40 est le conduit de plastique gris.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="fill-size">Calibre du conducteur (THHN / THWN)</label>
+      <select id="fill-size"></select>
+      <p class="hint">Les dimensions correspondent aux conducteurs de bâtiment standards isolés THHN/THWN, le type de conducteur simple le plus souvent tiré dans un conduit.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="fill-count">Nombre de conducteurs</label>
+      <div class="input-unit">
+        <input type="number" id="fill-count" inputmode="numeric" min="1" max="60" step="1" placeholder="p. ex. 3" required>
+        <span class="unit">conducteurs</span>
+      </div>
+      <p class="hint">Comptez chaque conducteur isolé dans le conduit, y compris le neutre et tout conducteur de mise à la terre isolé. Tous les conducteurs doivent être du même calibre pour l’instant.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Trouver le diamètre du conduit</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>Comment nous avons calculé ceci</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel taux de remplissage un conduit peut-il avoir?", "acceptedAnswer": {"@type": "Answer", "text": "Selon CEC Rule 12-910 et Table 8, un conducteur peut occuper 53% de l’aire intérieure d’une canalisation; deux conducteurs, 31%; et trois conducteurs ou plus, 40%. Cet outil de planification applique ces pourcentages, mais les tableaux d’aires de conducteurs et de diamètres commerciaux demeurent propres au NEC et doivent être confirmés pour les travaux canadiens."}}]}</script>
+  <section class="card explainer">
+    <h2>Règles de remplissage en langage clair</h2>
+    <p>Les conducteurs ont besoin d’espace libre dans le conduit. Les limites de CEC Rule 12-910 et Table 8 sont les suivantes : un conducteur peut occuper <strong>53%</strong> de l’aire intérieure du conduit; deux conducteurs <strong>31%</strong>, et trois conducteurs ou plus <strong>40%</strong>. Nous faisons ce calcul d’aire avec les dimensions officielles du conducteur et du conduit.</p>
+    <p><strong>Bon à savoir :</strong> les longs parcours avec plusieurs coudes se tirent plus facilement dans un diamètre supérieur au minimum calculé. Pour les travaux canadiens, confirmez les aires de conducteurs et les diamètres commerciaux métriques dans CEC Tables 6A–6K et 9 avant l’installation.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+<script src="/assets/ca-fr/conduit.js?v=6099850a74"></script>
+</body>
+</html>

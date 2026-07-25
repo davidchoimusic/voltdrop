@@ -1,0 +1,100 @@
+{
+  "policy": {
+    "comparison": "case-sensitive",
+    "rule": "For each page, every token or pattern match present in the English source must appear verbatim in the localized output."
+  },
+  "brand": [
+    "VoltDrop",
+    "voltdrop.app"
+  ],
+  "standards": [
+    "NEC",
+    "CEC",
+    "NFPA 70",
+    "CSA C22.1",
+    "U.S. National Electrical Code",
+    "Canadian Electrical Code"
+  ],
+  "citations": [
+    "4-006",
+    "8-102",
+    "8-102(3)",
+    "14-104",
+    "240.4(D)",
+    "250.122",
+    "310.16",
+    "314.16",
+    "314.16(A)",
+    "314.16(B)",
+    "Chapter 9 Table 4",
+    "Chapter 9 Table 5",
+    "NEC Chapter 9",
+    "Rule 4-006",
+    "Rule 8-102",
+    "Rule 12-3034",
+    "Rule 14-104",
+    "Section 68",
+    "Table 2",
+    "Table 4",
+    "Table 5",
+    "Table 5C",
+    "Table 22",
+    "Table 68",
+    "Table D3",
+    "Tables 6A–6K"
+  ],
+  "wireAndCableDesignations": [
+    "AA-8000",
+    "AWG",
+    "EMT",
+    "GFCI",
+    "kcmil",
+    "MHF",
+    "NM-B",
+    "NMD90",
+    "PVC Sch 40",
+    "PVC Schedule 40",
+    "Romex",
+    "RW90",
+    "SER",
+    "T90",
+    "THHN",
+    "THWN",
+    "THWN-2",
+    "URD"
+  ],
+  "unitSymbols": [
+    "%",
+    "cm",
+    "cmil",
+    "cu in",
+    "ft",
+    "kVA",
+    "kW",
+    "m",
+    "mL",
+    "mm²",
+    "PF",
+    "sq in",
+    "VA",
+    "°C",
+    "√3"
+  ],
+  "protectedPatterns": [
+    {
+      "name": "numbers",
+      "flags": "gu",
+      "source": "(?<![\\p{Script=Latin}\\p{N}])#?\\d+(?:[.,/-]\\d+)*(?![\\p{Script=Latin}\\p{N}])"
+    },
+    {
+      "name": "wire-size-designations",
+      "flags": "giu",
+      "source": "(?<![\\p{Script=Latin}\\p{N}])#?(?:\\d+/0|\\d+(?:\\.\\d+)?)\\s*(?:AWG|kcmil|mm²)(?![\\p{Script=Latin}\\p{N}])"
+    },
+    {
+      "name": "electrical-values",
+      "flags": "gu",
+      "source": "(?<![\\p{Script=Latin}\\p{N}])\\d+(?:\\.\\d+)?\\s*(?:A|V|W|VA|kW|kVA|ft|m|cm|mL|%|°C)(?![\\p{Script=Latin}\\p{N}])"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50 安培该用多大的线？NEC 310.16、断路器、按摩浴缸、电动车、房车 | VoltDrop</title>
+<meta name="description" content="网上为什么对 50 安培既说 6 号线规又说 8 号线规——按导线类型给出真正的答案，附经核验的距离表，以及按摩浴缸、电动车充电桩和房车接电口的实算示例。">
+<link rel="canonical" href="https://voltdrop.app/zh/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/50-amp-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="50 安培该用多大的线？NEC 310.16、断路器、按摩浴缸、电动车、房车 | VoltDrop">
+<meta property="og:description" content="网上为什么对 50 安培既说 6 号线规又说 8 号线规——按导线类型给出真正的答案，附经核验的距离表，以及按摩浴缸、电动车充电桩和房车接电口的实算示例。">
+<meta property="og:url" content="https://voltdrop.app/zh/guides/50-amp-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="50 安培该用多大的线？NEC 310.16、断路器、按摩浴缸、电动车、房车 | VoltDrop">
+<meta name="twitter:description" content="网上为什么对 50 安培既说 6 号线规又说 8 号线规——按导线类型给出真正的答案，附经核验的距离表，以及按摩浴缸、电动车充电桩和房车接电口的实算示例。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔌 50 安培该用多大的线？</h1>
+    <p class="tool-sub">网上有人说 6 号线规，也有人说 8 号线规——两个都对，只是对应不同的导线类型。完整答案在这里。</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>简短答案</h2>
+    <p>对于常规距离上的 50 安培、240 V 电路： <strong>用 Romex/NM-B 电缆就选 #6 铜线</strong>, <strong>导管内的 THHN 就选 #8 铜线</strong> （配 75°C 端子），或者 <strong>#6 铝线</strong>。超过大约 100 英尺后，电压降会逼你加大线径——见下表。</p>
+
+    <h2>网上为什么自相矛盾</h2>
+    <p>网上最常见的两个答案是“#6”和“#8”，而争论真正的焦点其实是 <strong>导线类型</strong>。规范按绝缘温度栏给每根导线定一个安培额定值。#8 铜线在 75°C 那一栏正好额定 50 A——用作导管内的 THHN、接到标准 75°C 额定的断路器接线端上，完全没问题。但 Romex（NM-B 电缆）无论导体上印着什么都必须用 60°C 那一栏，而 #8 NM-B 只够 40 A——所以 Romex 得用 #6。说“永远用 #6”的网站是在往保险的一边靠；说“#8”的网站是假设你走导管。两边引的都是同一张表里真实存在的行——自己去查一下 <a class="inline-link" href="/guides/wire-ampacity-chart/">载流量对照表指南</a> 或 <a class="inline-link" href="/ampacity-check/">载流量检查工具</a>.</p>
+
+    
+    <figure class="gfig" role="img" aria-label="示意图：Romex NM-B 电缆必须用 60 度那一栏，所以 50 安培需要 6 号线；导管内的 THHN 可以用 75 度那一栏，所以 8 号线就够了">
+      <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="25" y="38" font-size="13" font-weight="700" fill="var(--color-ink)">Romex / NM-B 电缆</text>
+        <text x="25" y="58" font-size="12" fill="var(--color-ink-soft)">规范把它封顶在 60°C 那一栏</text>
+        <text x="420" y="38" font-size="13" font-weight="800" fill="var(--color-hazard)">50 A → #6 铜线</text>
+        <text x="420" y="58" font-size="12" fill="var(--color-ink-soft)">（#8 NM-B = 只有 40 A）</text>
+        <rect x="10" y="80" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="25" y="103" font-size="13" font-weight="700" fill="var(--color-ink)">导管内的 THHN</text>
+        <text x="25" y="123" font-size="12" fill="var(--color-ink-soft)">允许 75°C 端子</text>
+        <text x="420" y="103" font-size="13" font-weight="800" fill="var(--verdict-good-bar)">50 A → #8 铜线</text>
+        <text x="420" y="123" font-size="12" fill="var(--color-ink-soft)">（#8 @ 75°C = 正好 50 A）</text>
+      </svg>
+    </figure>
+
+    <h2>距离会改变答案</h2>
+    <p>240 V 下按 50 A 选线、把电压降控制在 3% 以内的最小规格，单程距离（仅去程）：</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>材质</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <tbody>
+        <tr><td>铜</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>铝</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">AWG 规格，用我们已核验的计算引擎算出。你的具体线路： <a class="inline-link" href="/wire-size-calculator/">导线规格计算器</a>.</p>
+
+    <h2>常见的 50 安培活儿</h2>
+    <p><strong>按摩浴缸：</strong> 通常是一条 4 线电路（两根火线、中性线、接地线），配 GFCI 断路器或 GFCI 水疗隔离开关，装在浴缸可见范围内——室内用 #6 铜线 NM-B、出到室外转成导管内的 THHN，是最经典的做法。 <strong>电动车充电桩：</strong> 接在 50 A 断路器上的硬接线充电桩最多只能连续输出 40 A（规范要求运行 3 小时以上的负载留 125% 余量），所以导体必须额定适用于这个 50 A 断路器——#6 NM-B 或 #8 THHN，跟上面一样；记得看一下充电桩的设置。 <strong>房车接电口（14-50）：</strong> 选线一样，但如果供电桩离配电盘很远，就用距离表——150 英尺以上的房车位经常需要 #4。 <strong>电焊机：</strong> 电焊机有特殊待遇（它的负载持续率在规范上允许用比断路器所暗示的更细的导线——确实反直觉），所以焊机说明书写的规格更小，也不用慌。</p>
+
+    <h2>实算示例：80 英尺处的 50 A 按摩浴缸</h2>
+    <p>#6 铜线（26,240 cmil）：电压降 = 2 × 12.9 × 50 × 80 ÷ 26,240 = <strong>3.9 V = 1.6%</strong> 相对于 240 V——舒舒服服地在 3% 以内。同一条线路改用 #8（16,510 cmil），压降是 6.3 V = 2.6%——对 THHN 来说依然合规，但离红线更近了。想算自己的数字，请打开 <a class="inline-link" href="/">电压降计算器</a>.</p>
+
+    <h2>相关内容</h2>
+    <p><a class="inline-link" href="/guides/sub-panel-wire-size/">子配电盘导线规格指南</a> · <a class="inline-link" href="/conduit-fill/">导管填充计算器</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">每种线规能拉多远？</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"50 安培断路器该用多大规格的导线？","acceptedAnswer":{"@type":"Answer","text":"Romex/NM-B 电缆用 #6 铜线，导管内的 THHN 配 75°C 端子用 #8 铜线，或者用 #6 铝线——这是 240 V 电路在常规距离下的答案。超过大约 100 英尺，就要为电压降加大线径。"}},{"@type":"Question","name":"50 安培断路器上能用 8 号线规的导线吗？","acceptedAnswer":{"@type":"Answer","text":"可以——前提是像导管内的 THHN 这种单根导线类型，而且端子是 75°C 额定：#8 铜线在 NEC 的 75°C 那一栏正好额定 50 A。如果是 NM-B（Romex）就不行，它只能用 60°C 那一栏，那里 #8 只有 40 A。"}},{"@type":"Question","name":"50 安培拉 100 英尺该用多大的线？","acceptedAnswer":{"@type":"Answer","text":"在 240 V、50 A、单程 100 英尺的条件下，#6 铜线或 #4 铝线能把电压降控制在 3% 的规划目标以内。"}},{"@type":"Question","name":"50 安培的按摩浴缸该用多大的线？","acceptedAnswer":{"@type":"Answer","text":"#6 铜线是标准答案，按 4 线电路敷设，带 GFCI 保护，并在浴缸可见范围内设一个隔离开关。从配电盘拉的长线路应核算电压降。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

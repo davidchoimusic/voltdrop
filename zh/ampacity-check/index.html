@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>载流量检查 — NEC Table 310.16 | VoltDrop</title>
+<meta name="description" content="基于NEC Table 310.16的免费载流量检查：铜和铝、60/75/90°C绝缘温度，并包括小导体断路器限值。">
+<link rel="canonical" href="https://voltdrop.app/zh/ampacity-check/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ampacity-check/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ampacity-check/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/ampacity-check/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/ampacity-check/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/ampacity-check/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/ampacity-check/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/ampacity-check/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="载流量检查 — NEC Table 310.16 | VoltDrop">
+<meta property="og:description" content="基于NEC Table 310.16的免费载流量检查：铜和铝、60/75/90°C绝缘温度，并包括小导体断路器限值。">
+<meta property="og:url" content="https://voltdrop.app/zh/ampacity-check/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="载流量检查 — NEC Table 310.16 | VoltDrop">
+<meta name="twitter:description" content="基于NEC Table 310.16的免费载流量检查：铜和铝、60/75/90°C绝缘温度，并包括小导体断路器限值。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop载流量检查","url":"https://voltdrop.app/zh/ampacity-check/","description":"基于NEC Table 310.16的免费载流量检查：铜和铝、60/75/90°C绝缘温度，并包括小导体断路器限值。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link active" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔥 载流量检查</h1>
+    <p class="tool-sub">载流量是导线在不过热的情况下可以安全承载的最大电流。请输入导线和负载，即可获得明确结果。</p>
+  </div>
+
+  <form id="amp-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">导线材料</label>
+      <div class="seg" role="group" aria-label="导线材料">
+        <button type="button" class="seg-btn active" data-material="cu">铜</button>
+        <button type="button" class="seg-btn" data-material="al">铝</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-size">导线规格（线规）</label>
+      <select id="amp-size"></select>
+      <p class="hint">AWG = American Wire Gauge。规格印在导线绝缘层上。</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">绝缘额定温度</label>
+      <div class="seg" role="group" aria-label="绝缘额定温度">
+        <button type="button" class="seg-btn" data-temp="60">60°C</button>
+        <button type="button" class="seg-btn active" data-temp="75">75°C</button>
+        <button type="button" class="seg-btn" data-temp="90">90°C</button>
+      </div>
+      <p class="hint" id="amp-temp-hint">不确定？请使用 <strong>75°C</strong> — 大多数断路器端子和接线端子的额定温度都是该值。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C。</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="amp-load">需要承载的电流</label>
+      <div class="input-unit">
+        <input type="number" id="amp-load" inputmode="decimal" min="0.01" step="any" placeholder="例如20" required>
+        <span class="unit">安培</span>
+      </div>
+    </div>
+
+    <button type="submit" class="calc-btn">检查载流量</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>检查方法</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "什么是载流量？", "acceptedAnswer": {"@type": "Answer", "text": "载流量是导线在不过热的情况下可以连续承载的最大电流（安培）。它取决于导线规格（线规）、材料（铜或铝）和绝缘额定温度；正常条件下的数值由NEC Table 310.16规定。"}}, {"@type": "Question", "name": "应该使用哪一列绝缘温度？", "acceptedAnswer": {"@type": "Answer", "text": "不确定时，请使用75°C列：大多数断路器端子和接线端子的额定温度为75°C。Romex/NM-B电缆必须使用60°C列。干燥场所中的THHN额定为90°C，但接线点通常仍将电路限制在75°C数值。"}}]}</script>
+  <section class="card explainer">
+    <h2>本工具检查什么（以及不检查什么）</h2>
+    <p id="amp-exp-lookup">我们根据美国标准载流量表查找导线（NEC Table 310.16；正常条件：导管内最多三根载流导体，且为正常室温）。小导体还适用NEC 240.4(D)：14 AWG铜导线最大15 A，12 AWG最大20 A，10 AWG最大30 A，即使原始表格给出更高数值。</p>
+    <p><strong>不包括：</strong> 炎热阁楼、机房、超过三根载流导体成束敷设以及连续负载（3+小时需要25%的余量）都会降低载流量。如有疑问，请增大导线规格（线规）或咨询电工。</p>
+    <p>载流量和 <a class="inline-link" href="/">电压降</a> 是两项独立检查；导线必须同时通过 <strong>两项</strong>.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
+<script src="/assets/us-zh/ampacity.js?v=74e5bd99da"></script>
+</body>
+</html>

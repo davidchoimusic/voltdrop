@@ -1,42 +1,42 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🏠 Wire Size for a Sub-Panel in Canada (Shed or Detached Garage)</h1>
-    <p class="tool-sub">Sized to the Canadian Electrical Code — where voltage drop isn't a suggestion, it's Rule 8-102. <a class="inline-link" href="/guides/sub-panel-wire-size/">🇺🇸 US version</a></p>
+    <h1 class="tool-title">{{guides.ca.subPanel.wireSizeForASubPanelInTitle}}</h1>
+    <p class="tool-sub">{{guides.ca.subPanel.sizedToTheCanadianElectricalCodeWhere}} <a class="inline-link" href="/guides/sub-panel-wire-size/" data-edition-country="us">{{guides.ca.subPanel.uSVersion}}</a></p>
   </div>
 
   <section class="card explainer">
-    <h2>The short answer</h2>
-    <p>For a <strong>100 amp sub-panel at 45 m (150 ft)</strong>: <strong>#2 copper</strong> or <strong>1/0 aluminum</strong>. For a <strong>60 amp sub-panel at 30 m (100 ft)</strong>: <strong>#6 copper</strong> or <strong>#4 aluminum</strong>. Full table below — and unlike in the US, staying inside the drop limit is <strong>mandatory in Canada</strong>: CEC Rule 8-102 caps voltage drop at 3% on a branch circuit, 3% on the feeder, 5% total, as enforceable code. Your exact run: <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a>.</p>
+    <h2>{{guides.ca.subPanel.theShortAnswerHeading}}</h2>
+    <p>{{guides.ca.subPanel.forA}} <strong>{{guides.ca.subPanel.n100AmpSubPanelAtN45M}}</strong>: <strong>{{guides.ca.subPanel.n2Copper}}</strong> {{guides.ca.subPanel.or}} <strong>{{guides.ca.subPanel.n1N0Aluminum}}</strong>{{guides.ca.subPanel.forAContinuation}} <strong>{{guides.ca.subPanel.n60AmpSubPanelAtN30M}}</strong>: <strong>{{guides.ca.subPanel.n6Copper}}</strong> {{guides.ca.subPanel.or}} <strong>{{guides.ca.subPanel.n4Aluminum}}</strong>{{guides.ca.subPanel.fullTableBelowAndUnlikeInTheContinuation}} <strong>{{guides.ca.subPanel.mandatoryInCanada}}</strong>{{guides.ca.subPanel.cECRuleN8N102CapsVoltageDropContinuation}} <a class="inline-link" href="/wire-size-calculator/">{{guides.ca.subPanel.wireSizeCalculator}}</a>.</p>
 
-    <h2>The two checks (and why Canada makes the second one law)</h2>
-    <p>Sizing a feeder is two stacked checks. First, <strong>ampacity</strong> — the wire must be rated for the current (CEC Table 2 for copper, Table 4 for aluminum; these are harmonized with the US tables, which is why cross-border answers on ampacity agree). Second, <strong>voltage drop</strong> — over a long run to a shed or garage, the wire must be fat enough that the far panel still sees healthy voltage. In the US that second check is a recommendation; in Canada, Rule 8-102 makes it a "shall." Past roughly 30 m, it's the drop check — not ampacity — that sets your wire size, and an inspector can hold you to it.</p>
+    <h2>{{guides.ca.subPanel.theTwoChecksAndWhyCanadaMakesHeading}}</h2>
+    <p>{{guides.ca.subPanel.sizingAFeederIsTwoStackedChecks}} <strong>{{guides.ca.subPanel.ampacity}}</strong> {{guides.ca.subPanel.theWireMustBeRatedForTheContinuation}} <strong>{{guides.ca.subPanel.voltageDrop}}</strong> {{guides.ca.subPanel.overALongRunToAShedContinuation}}</p>
 
-    <h2>The table: minimum size at 240 V, 3% drop</h2>
-    <p>Sized at the full breaker rating (conservative — the 2024 CEC lets you use the connected load, or 80% of the breaker if unknown, so these sizes have margin built in). One-way distance:</p>
+    <h2>{{guides.ca.subPanel.theTableMinimumSizeAtN240VHeading}}</h2>
+    <p>{{guides.ca.subPanel.sizedAtTheFullBreakerRatingConservative}}</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th>Feeder</th><th>15 m (50′)</th><th>30 m (100′)</th><th>46 m (150′)</th><th>61 m (200′)</th><th>76 m (250′)</th><th>91 m (300′)</th></tr></thead>
+      <thead><tr><th>{{guides.ca.subPanel.feeder}}</th><th>{{guides.ca.subPanel.n15MN50}}</th><th>{{guides.ca.subPanel.n30MN100}}</th><th>{{guides.ca.subPanel.n46MN150}}</th><th>{{guides.ca.subPanel.n61MN200}}</th><th>{{guides.ca.subPanel.n76MN250}}</th><th>{{guides.ca.subPanel.n91MN300}}</th></tr></thead>
       <tbody>
-        <tr><td>50 A copper</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
-        <tr><td>50 A aluminum</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
-        <tr><td>60 A copper</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
-        <tr><td>60 A aluminum</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
-        <tr><td>100 A copper</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
-        <tr><td>100 A aluminum</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+        <tr><td>{{guides.ca.subPanel.n50ACopper}}</td><td>{{guides.ca.subPanel.tdN8}}</td><td>{{guides.ca.subPanel.tdN6}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN3}}</td><td>{{guides.ca.subPanel.tdN2}}</td></tr>
+        <tr><td>{{guides.ca.subPanel.n50AAluminum}}</td><td>{{guides.ca.subPanel.tdN6}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN3}}</td><td>{{guides.ca.subPanel.tdN2}}</td><td>{{guides.ca.subPanel.tdN1}}</td><td>{{guides.ca.subPanel.n1N0}}</td></tr>
+        <tr><td>{{guides.ca.subPanel.n60ACopper}}</td><td>{{guides.ca.subPanel.tdN6}}</td><td>{{guides.ca.subPanel.tdN6}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN3}}</td><td>{{guides.ca.subPanel.tdN2}}</td><td>{{guides.ca.subPanel.tdN2}}</td></tr>
+        <tr><td>{{guides.ca.subPanel.n60AAluminum}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN4}}</td><td>{{guides.ca.subPanel.tdN2}}</td><td>{{guides.ca.subPanel.tdN1}}</td><td>{{guides.ca.subPanel.n1N0}}</td><td>{{guides.ca.subPanel.n2N0}}</td></tr>
+        <tr><td>{{guides.ca.subPanel.n100ACopper}}</td><td>{{guides.ca.subPanel.tdN3}}</td><td>{{guides.ca.subPanel.tdN3}}</td><td>{{guides.ca.subPanel.tdN2}}</td><td>{{guides.ca.subPanel.tdN1}}</td><td>{{guides.ca.subPanel.n1N0}}</td><td>{{guides.ca.subPanel.n2N0}}</td></tr>
+        <tr><td>{{guides.ca.subPanel.n100AAluminum}}</td><td>{{guides.ca.subPanel.tdN1}}</td><td>{{guides.ca.subPanel.tdN1}}</td><td>{{guides.ca.subPanel.n1N0}}</td><td>{{guides.ca.subPanel.n2N0}}</td><td>{{guides.ca.subPanel.n3N0}}</td><td>{{guides.ca.subPanel.n4N0}}</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">AWG sizes (Canada sizes wire in AWG, same as the US), 75°C terminations, computed with our verified engine (K = 12.9 copper / 21.2 aluminum). Aluminum means modern AA-8000 feeder cable — standard and code-recognized in Canada, where aluminum feeders are especially common for cost.</p>
+    <p class="gnote">{{guides.ca.subPanel.aWGSizesCanadaSizesWireInAWG}}</p>
 
-    <h2>Worked example: 100 A at 46 m</h2>
-    <p>Drop = 2 × K × amps × one-way feet ÷ circular mils. #2 copper (66,360 cmil) at 150 ft: 2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V = 2.4%</strong> of 240 V — inside the mandatory 3%. One size down (#3) gives 3.1% — over the line, and in Canada that's a code issue, not a judgment call. Check any run in the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+    <h2>{{guides.ca.subPanel.workedExampleN100AAtN46MHeading}}</h2>
+    <p>{{guides.ca.subPanel.dropN2KAmpsOneWayFeet}} <strong>{{guides.ca.subPanel.n5N8VN2N4%}}</strong> {{guides.ca.subPanel.ofN240VInsideTheMandatoryN3%}} <a class="inline-link" href="/">{{guides.ca.subPanel.voltageDropCalculator}}</a>.</p>
 
-    <h2>Canadian specifics people miss</h2>
-    <p><strong>1. It's a 4-wire feeder</strong> — two hots, neutral, and a separate bonding conductor, with neutral and bond on separate bars at the sub-panel. <strong>2. The cable will likely be NMD90, TECK90, or direct-burial (NMWU) / conduit</strong> — Canadian names for what Americans call Romex, armored cable, and UF; underground runs to outbuildings are commonly NMWU at proper burial depth or conductors in buried conduit. <strong>3. The drop budget is structured</strong>: 3% for the feeder, 3% for the branch beyond it, 5% total — drop doesn't "reset" at the sub-panel. <strong>4. Bury copper once</strong> — if the garage might someday charge an EV or run a welder, upsizing now is the cheapest it will ever be.</p>
+    <h2>{{guides.ca.subPanel.canadianSpecificsPeopleMissHeading}}</h2>
+    <p><strong>{{guides.ca.subPanel.n1ItSAN4WireFeeder}}</strong> {{guides.ca.subPanel.twoHotsNeutralAndASeparateBondingContinuation}} <strong>{{guides.ca.subPanel.n2TheCableWillLikelyBeNMD90}}</strong> {{guides.ca.subPanel.canadianNamesForWhatAmericansCallRomexContinuation}} <strong>{{guides.ca.subPanel.n3TheDropBudgetIsStructured}}</strong>{{guides.ca.subPanel.n3%ForTheFeederN3%ForTheContinuation}} <strong>{{guides.ca.subPanel.n4BuryCopperOnce}}</strong> {{guides.ca.subPanel.ifTheGarageMightSomedayChargeAnContinuation}}</p>
 
-    <h2>Related</h2>
-    <p><a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> · <a class="inline-link" href="/">Voltage Drop calculator</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">Voltage drop &amp; Rule 8-102, explained</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">CEC ampacity chart</a></p>
+    <h2>{{guides.ca.subPanel.relatedHeading}}</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">{{guides.ca.subPanel.wireSizeCalculator}}</a> · <a class="inline-link" href="/">{{guides.ca.subPanel.voltageDropCalculator}}</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">{{guides.ca.subPanel.voltageDropRuleN8N102Explained}}</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">{{guides.ca.subPanel.cECAmpacityChart}}</a></p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire for a 100 amp sub panel 150 feet away in Canada?","acceptedAnswer":{"@type":"Answer","text":"#2 copper or 1/0 aluminum at 240 V keeps voltage drop at 2.4% — inside the CEC Rule 8-102 mandatory 3% feeder limit. Canadian ampacity tables (CEC Table 2/4) are harmonized with US tables, so the sizing math matches; the difference is that in Canada the drop limit is enforceable code."}},{"@type":"Question","name":"Is voltage drop mandatory in the Canadian Electrical Code?","acceptedAnswer":{"@type":"Answer","text":"Yes. CEC Rule 8-102 is an enforceable requirement: maximum 3% on a branch circuit, 3% on the feeder, 5% combined. In the US NEC the equivalent figures are only an informational recommendation."}},{"@type":"Question","name":"Can I use aluminum wire for a sub panel feeder in Canada?","acceptedAnswer":{"@type":"Answer","text":"Yes — modern AA-8000 series aluminum feeder cable is code-recognized and very common in Canada for feeders because of cost. The old concerns belong to 1960s small-gauge branch-circuit aluminum, not modern feeder cable."}},{"@type":"Question","name":"Does a sub panel reset voltage drop in Canada?","acceptedAnswer":{"@type":"Answer","text":"No. The CEC structures the budget as 3% for the feeder and 3% for the branch circuit, with a 5% maximum combined from the service to the farthest load."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.ca.subPanel.whatSizeWireForAN100AmpQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.subPanel.n2CopperOrN1N0AluminumAtAnswer}}"}},{"@type":"Question","name":"{{json:guides.ca.subPanel.isVoltageDropMandatoryInTheCanadianQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.subPanel.yesCECRuleN8N102IsAnAnswer}}"}},{"@type":"Question","name":"{{json:guides.ca.subPanel.canIUseAluminumWireForAQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.subPanel.yesModernAAN8000SeriesAluminumFeederAnswer}}"}},{"@type":"Question","name":"{{json:guides.ca.subPanel.doesASubPanelResetVoltageDropQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ca.subPanel.noTheCECStructuresTheBudgetAsAnswer}}"}}]}</script>
 
 </main>

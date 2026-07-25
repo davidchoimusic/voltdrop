@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remplissage de boîte — CEC Rule 12-3034 et Table 22 | VoltDrop</title>
+<meta name="description" content="Calculateur canadien gratuit CEC de remplissage de boîte : volumes en millilitres de Table 22, comptage des conducteurs et marrettes selon Rule 12-3034, et verdict clair.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/box-fill/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/box-fill/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/box-fill/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/box-fill/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/box-fill/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/box-fill/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/box-fill/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/box-fill/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Remplissage de boîte — CEC Rule 12-3034 et Table 22 | VoltDrop">
+<meta property="og:description" content="Calculateur canadien gratuit CEC de remplissage de boîte : volumes en millilitres de Table 22, comptage des conducteurs et marrettes selon Rule 12-3034, et verdict clair.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/box-fill/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Remplissage de boîte — CEC Rule 12-3034 et Table 22 | VoltDrop">
+<meta name="twitter:description" content="Calculateur canadien gratuit CEC de remplissage de boîte : volumes en millilitres de Table 22, comptage des conducteurs et marrettes selon Rule 12-3034, et verdict clair.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de remplissage de boîte VoltDrop","url":"https://voltdrop.app/ca-fr/box-fill/","description":"Calculateur canadien gratuit CEC de remplissage de boîte : volumes en millilitres de Table 22, comptage des conducteurs et marrettes selon Rule 12-3034, et verdict clair.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link active" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📦 Remplissage de boîte</h1>
+    <p class="tool-sub">Votre boîte de jonction ou de dispositif est-elle assez grande? Comptez son contenu pour obtenir une réponse claire.</p>
+  </div>
+
+  <form id="bf-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label" for="bf-box">Boîte</label>
+      <select id="bf-box"></select>
+      <div class="input-unit" id="bf-custom-wrap" hidden>
+        <input type="number" id="bf-custom" inputmode="decimal" min="1" step="any" placeholder="e.g. 18">
+        <span class="unit">cu in</span>
+      </div>
+      <p class="hint">Le volume des boîtes en plastique est inscrit à l’intérieur (p. ex. « 18.0 CU IN »). Choisissez Personnalisé et entrez-le. Les boîtes métalliques utilisent les volumes standards du code.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-size">Calibre du conducteur dans la boîte</label>
+      <select id="bf-size"></select>
+      <p class="hint">Dans la plupart des maisons : 14 AWG (circuits de 15 A) ou 12 AWG (circuits de 20 A). Si plusieurs calibres sont présents, choisissez pour l’instant le plus gros afin de garder une marge sécuritaire.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-conductors">Conducteurs isolés entrant dans la boîte</label>
+      <div class="input-unit">
+        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
+        <span class="unit">conducteurs</span>
+      </div>
+      <p class="hint">Comptez chaque conducteur de phase et neutre qui entre dans la boîte, y compris ceux qui la traversent sans être coupés. Ne comptez pas ici les conducteurs de mise à la terre ni les queues de cochon qui commencent et se terminent dans la boîte.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="bf-devices">Dispositifs dans la boîte</label>
+      <div class="input-unit">
+        <input type="number" id="bf-devices" inputmode="numeric" min="0" max="10" step="1" value="0">
+        <span class="unit">dispositifs</span>
+      </div>
+      <p class="hint">Interrupteurs, prises et gradateurs. Chaque dispositif occupe le volume de deux conducteurs.</p>
+    </div>
+
+    <div class="field" id="bf-field-marrettes" hidden>
+      <label class="field-label" for="bf-marrettes">Connecteurs de conducteurs (marrettes) dans la boîte</label>
+      <div class="input-unit">
+        <input type="number" id="bf-marrettes" inputmode="numeric" min="0" max="30" step="1" value="0">
+        <span class="unit">connecteurs</span>
+      </div>
+      <p class="hint">Règle canadienne : chaque paire de connecteurs isolés occupe le volume d’un conducteur, selon le plus gros conducteur raccordé. Comptez toutes les marrettes.</p>
+    </div>
+
+    <div class="field" id="bf-field-grounds">
+      <label class="field-label">La boîte contient-elle des conducteurs de mise à la terre?</label>
+      <div class="seg" role="group" aria-label="Conducteurs de mise à la terre">
+        <button type="button" class="seg-btn active" data-grounds="1">Oui</button>
+        <button type="button" class="seg-btn" data-grounds="0">Non</button>
+      </div>
+      <p class="hint">Les conducteurs de continuité des masses nus ne comptent pas selon CEC Rule 12-3034.</p>
+    </div>
+
+    <div class="field" id="bf-field-clamps">
+      <label class="field-label">Serre-câbles internes?</label>
+      <div class="seg" role="group" aria-label="Serre-câbles">
+        <button type="button" class="seg-btn" data-clamps="1">Oui</button>
+        <button type="button" class="seg-btn active" data-clamps="0">Non</button>
+      </div>
+      <p class="hint">Les serre-câbles ne reçoivent aucun volume selon la règle de comptage canadienne.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Vérifier le remplissage de boîte</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>Comment nous avons calculé ceci</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Combien de conducteurs peut-on placer dans une boîte électrique?", "acceptedAnswer": {"@type": "Answer", "text": "CEC Rule 12-3034 et Table 22 attribuent un volume en millilitres à chaque calibre du conducteur. Comptez une fois chaque conducteur isolé, deux fois chaque dispositif et une fois chaque paire de connecteurs isolés. Les conducteurs de continuité des masses nus et les serre-câbles ne comptent pas. Le volume requis ne doit pas dépasser le volume de la boîte."}}, {"@type": "Question", "name": "Les conducteurs qui traversent la boîte comptent-ils dans le remplissage de boîte?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Un conducteur qui traverse la boîte sans être coupé compte une fois. Seules les queues de cochon qui commencent et se terminent dans la boîte ne comptent pas."}}]}</script>
+  <section class="card explainer">
+    <h2>Pourquoi le remplissage de boîte est important</h2>
+    <p id="bf-exp-1">Une boîte trop remplie force les raccords, endommage l’isolant et accumule de la chaleur. Canadian Electrical Code (Rule 12-3034 avec Table 22) attribue un volume en millilitres à chaque conducteur isolé, et la boîte doit offrir au moins ce volume.</p>
+    <h2>Règles de comptage en langage clair</h2>
+    <p id="bf-exp-2">Comptage canadien : chaque conducteur isolé qui entre dans la boîte compte une fois; les conducteurs de continuité des masses nus et les serre-câbles ne comptent pas. Chaque dispositif compte deux fois. Chaque paire de connecteurs isolés (marrettes) compte une fois, selon le plus gros conducteur raccordé.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+<script src="/assets/ca-fr/boxfill.js?v=71876714f2"></script>
+</body>
+</html>

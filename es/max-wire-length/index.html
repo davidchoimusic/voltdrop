@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Longitud máxima del conductor — recomendación NEC 3%/5% | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita de longitud máxima: ingrese calibre del conductor, amperios y tensión para obtener la mayor distancia en un solo sentido que mantiene la caída por debajo de 3% o 5%.">
+<link rel="canonical" href="https://voltdrop.app/es/max-wire-length/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/max-wire-length/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/max-wire-length/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/max-wire-length/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/max-wire-length/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/max-wire-length/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/max-wire-length/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/max-wire-length/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Longitud máxima del conductor — recomendación NEC 3%/5% | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita de longitud máxima: ingrese calibre del conductor, amperios y tensión para obtener la mayor distancia en un solo sentido que mantiene la caída por debajo de 3% o 5%.">
+<meta property="og:url" content="https://voltdrop.app/es/max-wire-length/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Longitud máxima del conductor — recomendación NEC 3%/5% | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita de longitud máxima: ingrese calibre del conductor, amperios y tensión para obtener la mayor distancia en un solo sentido que mantiene la caída por debajo de 3% o 5%.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de longitud máxima VoltDrop","url":"https://voltdrop.app/es/max-wire-length/","description":"Calculadora gratuita de longitud máxima: ingrese calibre del conductor, amperios y tensión para obtener la mayor distancia en un solo sentido que mantiene la caída por debajo de 3% o 5%.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-mode="length" data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">📏 Calculadora de longitud máxima del conductor</h1>
+    <p class="tool-sub" id="page-sub">¿Qué distancia puede recorrer el conductor antes de que la caída de tensión sea un problema? Obtenga la distancia máxima en un solo sentido para cualquier calibre y carga.</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="¿Qué desea calcular?">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">Caída de tensión</span>
+      <span class="mode-sub">Conozco mi conductor: ¿cuánto pierdo?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">Calibre del conductor</span>
+      <span class="mode-sub">¿Cuál es el calibre mínimo que funciona?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">Distancia máxima</span>
+      <span class="mode-sub">¿Qué distancia puede recorrer?</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">Tipo de alimentación</label>
+      <div class="seg" role="group" aria-label="Tipo de alimentación">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC monofásica</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC trifásica</button>
+      </div>
+      <p class="hint" id="system-hint">DC: baterías, sistemas solares, vehículos y tiras LED.</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">Tensión en la fuente</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">voltios</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">Corriente de la carga</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
+        <span class="unit">amperios</span>
+      </div>
+      <p class="hint">Los amperios que realmente consume su dispositivo o circuito. Si la etiqueta indica vatios, amperios = vatios ÷ voltios.</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">Material del conductor</label>
+      <div class="seg" role="group" aria-label="Material del conductor">
+        <button type="button" class="seg-btn active" data-material="cu">Cobre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminio</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">Calibre del conductor</label>
+      <select id="awg"></select>
+      <p class="hint">AWG = American Wire Gauge. Un número menor indica un conductor más grueso. El calibre está impreso en el aislamiento.</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">Distancia en un solo sentido</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 100" required>
+        <span class="unit">pies</span>
+      </div>
+      <p class="hint highlight-hint"><strong>Mida en un solo sentido</strong> — desde la fuente de alimentación hasta la carga. La corriente hace un recorrido de ida y vuelta, y <strong>nosotros duplicamos la distancia por usted</strong>. No la duplique usted.</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">Mayor caída de tensión aceptable</label>
+      <div class="seg" role="group" aria-label="Caída máxima aceptable">
+        <button type="button" class="seg-btn active" data-target="3">3% — recomendado</button>
+        <button type="button" class="seg-btn" data-target="5">5% — límite superior</button>
+        <button type="button" class="seg-btn" data-target="custom">Personalizado</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">%</span>
+      </div>
+      <p class="hint">3% es la recomendación habitual para un circuito. 5% es el límite exterior habitual para todo el recorrido.</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">Calcular</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>Cómo calculamos esto</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué 3% y 5% son los límites de caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"El conductor tiene resistencia, por lo que parte de la tensión se pierde como calor. Las notas informativas del U.S. National Electrical Code recomiendan un máximo de 3% para el circuito derivado y 5% en total. Son recomendaciones de funcionamiento, no requisitos legales generales. Los sistemas de baja tensión, como el solar de 12 V, suelen ser más estrictos."}},{"@type":"Question","name":"¿Por qué no coinciden las calculadoras de caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"Casi siempre se debe a una de dos cosas: algunos calculadores piden el recorrido de ida y vuelta y otros piden la distancia en un solo sentido (VoltDrop siempre usa la distancia en un solo sentido y la duplica internamente); otros usan valores de resistencia ligeramente distintos. VoltDrop muestra el cálculo completo para que pueda compararlo."}}]}</script>
+  <section class="card explainer">
+    <h2>¿Por qué 3% y 5%?</h2>
+    <p>El conductor tiene resistencia, por lo que parte de la tensión se pierde como calor antes de llegar al dispositivo. Una pérdida excesiva calienta motores, atenúa luces y perjudica cargadores.</p>
+    <p>La recomendación ampliamente usada del <span id="code-name">U.S. National Electrical Code</span> es mantener la caída de tensión de un <span id="code-basis">circuito derivado</span> en <strong>3%</strong> o menos, y el total desde el tablero hasta el dispositivo en <strong>5%</strong> o menos. Son recomendaciones de buen funcionamiento, no requisitos legales generales. Los sistemas de baja tensión, como el solar de 12&nbsp;V, suelen necesitar un objetivo más estricto porque 3% de 12&nbsp;V afecta mucho más que 3% de 240&nbsp;V.</p>
+    <h2>¿Por qué no coinciden otros calculadores?</h2>
+    <p>Casi siempre se debe a una de dos cosas: algunos calculadores usan valores de resistencia distintos, o algunos usan <strong>recorrido de ida y vuelta</strong> cuando otros piden la distancia en un solo sentido. Nosotros siempre pedimos la distancia en un solo sentido y mostramos el cálculo completo.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+<script src="/assets/us-es/app.js?v=bc6328b896"></script>
+</body>
+</html>

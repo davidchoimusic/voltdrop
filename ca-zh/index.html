@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEC 电压降计算器 — Rule 8-102 | VoltDrop</title>
+<meta name="description" content="免费CEC铜导线和铝导线电压降计算器。明确输入单程距离（仅去程），执行3%和5%强制限值并显示完整计算。">
+<link rel="canonical" href="https://voltdrop.app/ca-zh/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="CEC 电压降计算器 — Rule 8-102 | VoltDrop">
+<meta property="og:description" content="免费CEC铜导线和铝导线电压降计算器。明确输入单程距离（仅去程），执行3%和5%强制限值并显示完整计算。">
+<meta property="og:url" content="https://voltdrop.app/ca-zh/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CEC 电压降计算器 — Rule 8-102 | VoltDrop">
+<meta name="twitter:description" content="免费CEC铜导线和铝导线电压降计算器。明确输入单程距离（仅去程），执行3%和5%强制限值并显示完整计算。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop电压降计算器","url":"https://voltdrop.app/ca-zh/","description":"免费CEC铜导线和铝导线电压降计算器。明确输入单程距离（仅去程），按照Rule 8-102给出强制限值结果并显示完整计算。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">加拿大的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">⚡ 电压降计算器</h1>
+    <p class="tool-sub" id="page-sub">导线会损失多少电压？请输入电流、距离和导线规格（线规），即可获得清晰的绿/黄/红结果以及完整计算过程。</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="请选择要计算的内容">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">电压降</span>
+      <span class="mode-sub">已知导线：会损失多少电压？</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">导线规格（线规）</span>
+      <span class="mode-sub">可用的最小导线规格（线规）是多少？</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">最大距离</span>
+      <span class="mode-sub">这根导线最长可敷设多远？</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">供电类型</label>
+      <div class="seg" role="group" aria-label="供电类型">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC 单相</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC 三相</button>
+      </div>
+      <p class="hint" id="system-hint">DC：电池、太阳能、车辆和 LED 灯带。</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">电源端电压</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">伏特</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">负载电流</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
+        <span class="unit">安培</span>
+      </div>
+      <p class="hint">设备或电路实际使用的电流。如果铭牌标注瓦特，则安培 = 瓦特 ÷ 伏特。</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">导线材料</label>
+      <div class="seg" role="group" aria-label="导线材料">
+        <button type="button" class="seg-btn active" data-material="cu">铜</button>
+        <button type="button" class="seg-btn" data-material="al">铝</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">导线规格（线规）</label>
+      <select id="awg"></select>
+      <p class="hint">AWG = American Wire Gauge。数字越小，导线越粗。规格印在导线绝缘层上。</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">单程距离（仅去程）</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 100" required>
+        <span class="unit">英尺</span>
+      </div>
+      <p class="hint highlight-hint"><strong>请测量单程距离（仅去程）</strong> — 从电源到负载。电流会经过往返距离，因此 <strong>我们会自动将距离加倍</strong>。请勿自行加倍。</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">可接受的最大电压降</label>
+      <div class="seg" role="group" aria-label="可接受的最大电压降">
+        <button type="button" class="seg-btn active" data-target="3">3% — 分支电路强制限值</button>
+        <button type="button" class="seg-btn" data-target="5">5% — 上限</button>
+        <button type="button" class="seg-btn" data-target="custom">自定义</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">%</span>
+      </div>
+      <p class="hint">分支电路或馈线的强制最大值为3%。组合路径的强制最大值为5%。</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">计算</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>计算方法</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"为什么电压降限值是3%和5%？","acceptedAnswer":{"@type":"Answer","text":"导线具有电阻，因此一部分电压会在到达设备前以热量形式损失。CEC Rule 8-102 使限值具有强制性：分支电路或馈线最大3%，从供电进线到最远负载的组合路径最大5%。12 V太阳能等低压系统通常需要更严格的设计目标。"}},{"@type":"Question","name":"为什么不同电压降计算器的结果不一致？","acceptedAnswer":{"@type":"Answer","text":"通常有两个原因：有些计算器要求输入往返距离，另一些要求输入单程距离（仅去程）。VoltDrop 始终使用单程距离（仅去程），并在内部自动加倍。不同计算器也可能采用略有不同的导线电阻值。VoltDrop 会显示完整计算过程，便于核对。"}}]}</script>
+  <section class="card explainer">
+    <h2>为什么是3%和5%？</h2>
+    <p>导线具有电阻，因此一部分电压会在到达设备前以热量形式损失。电压损失过大会使电动机发热、灯光变暗，并影响充电器性能。</p>
+    <p>CEC Rule 8-102 规定了<strong>强制</strong>最大值：分支电路或馈线的电压降必须不高于<strong>3%</strong>，从供电进线到最远负载的组合电压降必须不高于<strong>5%</strong>。在加拿大，这些是可执行的限值，而不是可选的性能建议。12&nbsp;V 太阳能等低压系统通常还需要更严格的设计目标，因为12&nbsp;V的3%比240&nbsp;V的3%影响大得多。</p>
+    <h2>为什么其他计算器的结果不同？</h2>
+    <p>几乎总是以下两个原因之一：不同计算器采用了不同的电阻值，或者有些计算器使用 <strong>往返距离</strong> 而另一些要求单程距离（仅去程）。我们始终要求输入单程距离（仅去程），并显示完整计算。</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-zh/common.js?v=5fa38d459b"></script>
+<script src="/assets/ca-zh/app.js?v=5c77f85769"></script>
+</body>
+</html>

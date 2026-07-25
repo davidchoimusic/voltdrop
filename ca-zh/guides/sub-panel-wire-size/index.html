@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加拿大子配电盘的导线规格（棚屋或车库） — CEC Rule 8-102 | VoltDrop</title>
+<meta name="description" content="在加拿大，50、60 或 100 安培的子配电盘该用多大的线：在 CEC 强制的 3% 电压降限值下的公制+英制距离表、NMD90 与铝线说明、算例。">
+<link rel="canonical" href="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="加拿大子配电盘的导线规格（棚屋或车库） — CEC Rule 8-102 | VoltDrop">
+<meta property="og:description" content="在加拿大，50、60 或 100 安培的子配电盘该用多大的线：在 CEC 强制的 3% 电压降限值下的公制+英制距离表、NMD90 与铝线说明、算例。">
+<meta property="og:url" content="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="加拿大子配电盘的导线规格（棚屋或车库） — CEC Rule 8-102 | VoltDrop">
+<meta name="twitter:description" content="在加拿大，50、60 或 100 安培的子配电盘该用多大的线：在 CEC 强制的 3% 电压降限值下的公制+英制距离表、NMD90 与铝线说明、算例。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">加拿大的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🏠 加拿大子配电盘的导线规格（棚屋或独立车库）</h1>
+    <p class="tool-sub">按 Canadian Electrical Code 选线——在这里电压降不是建议，而是 Rule 8-102。 <a class="inline-link" href="/guides/sub-panel-wire-size/" data-edition-country="us">🇺🇸 美国版本</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>简短答案</h2>
+    <p>对于 <strong>45 m（150 ft）处的 100 安培子配电盘</strong>: <strong>#2 铜</strong> 或 <strong>1/0 铝</strong>。对于 <strong>30 m（100 ft）处的 60 安培子配电盘</strong>: <strong>#6 铜</strong> 或 <strong>#4 铝</strong>。完整表格见下——而且和美国不一样，把电压降压在限值以内 <strong>在加拿大是强制的</strong>：CEC Rule 8-102 把电压降限制在分支电路 3%、馈线 3%、合计 5%，这是可强制执行的规范。想查你自己的线路，用 <a class="inline-link" href="/wire-size-calculator/">导线规格计算器</a>.</p>
+
+    <h2>两道检查（以及为什么加拿大把第二道写成了法规）</h2>
+    <p>馈线选型要过两道叠在一起的检查。第一， <strong>载流量</strong> ——导线必须额定适用于这个电流（铜看 CEC Table 2，铝看 Table 4；这些表与美国的表格保持一致，所以两国在载流量上的答案是一样的）。第二， <strong>电压降</strong> ——拉到棚屋或车库的长线路，导线必须够粗，远端那块配电盘才能拿到够用的电压。在美国，第二道检查只是建议；在加拿大，Rule 8-102 把它写成了「必须」。超过大约 30 m 之后，决定导线规格的就是电压降这道检查，而不是载流量，而且检验员可以按这个要求你。</p>
+
+    <h2>表格：240 V、3% 电压降下的最小规格</h2>
+    <p>按断路器的满额定值选线（偏保守——2024 版 CEC 允许你按实际连接负载计算，负载不清楚时按断路器的 80%，所以这些规格本身就留了余量）。单程距离：</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>馈线</th><th>15 m（50′）</th><th>30 m（100′）</th><th>46 m（150′）</th><th>61 m（200′）</th><th>76 m（250′）</th><th>91 m（300′）</th></tr></thead>
+      <tbody>
+        <tr><td>50 A 铜</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>50 A 铝</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>60 A 铜</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><td>60 A 铝</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A 铜</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A 铝</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">AWG 规格（加拿大和美国一样，用 AWG 标注导线），75°C 端接，用我们核验过的计算引擎算出（K = 12.9 铜 / 21.2 铝）。铝指的是现代 AA-8000 馈线电缆——在加拿大是标准做法，也被规范认可，那里为了省钱用铝馈线特别常见。</p>
+
+    <h2>算例：46 m 处的 100 A</h2>
+    <p>电压降 = 2 × K × 电流（安） × 单程英尺数 ÷ 圆密耳。#2 铜（66,360 cmil）拉 150 ft：2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V = 2.4%</strong> （相对 240 V）——在强制的 3% 以内。往下降一个规格（#3）就是 3.1%——超出限值，而在加拿大这是规范问题，不是自己拿主意的事。任何线路都可以查一下，用 <a class="inline-link" href="/">电压降计算器</a>.</p>
+
+    <h2>加拿大这边容易被忽略的地方</h2>
+    <p><strong>1. 这是 4 线馈线</strong> ——两根火线、一根中性线，再加一根独立的搭接导体，而且在子配电盘处中性线和搭接线要接在各自单独的汇流排上。 <strong>2. 电缆多半是 NMD90、TECK90，或者直埋（NMWU）/ 穿导管</strong> ——美国人说的 Romex、铠装电缆和 UF，在加拿大就叫这些名字；通到附属建筑的地下线路，常见做法是按规定埋深直埋 NMWU，或者把导体穿在埋地导管里。 <strong>3. 电压降的额度是分段的</strong>：馈线 3%，往后的分支电路 3%，合计 5%——电压降不会在子配电盘那里「归零」。 <strong>4. 埋铜线，一次到位</strong> ——如果这个车库以后可能给电动车充电或者带电焊机，现在就把线加粗是最省钱的时候。</p>
+
+    <h2>相关内容</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">导线规格计算器</a> · <a class="inline-link" href="/">电压降计算器</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">电压降 &amp; Rule 8-102 详解</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">CEC 载流量表</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"在加拿大，150 英尺外的 100 安培子配电盘该用多大的线？","acceptedAnswer":{"@type":"Answer","text":"在 240 V 下，#2 铜或 1/0 铝可以把电压降控制在 2.4%——在 CEC Rule 8-102 强制的 3% 馈线限值以内。加拿大的载流量表（CEC Table 2/4）与美国的表格保持一致，所以选线的算法是一样的；区别在于，在加拿大电压降限值是可强制执行的规范。"}},{"@type":"Question","name":"在 Canadian Electrical Code 里，电压降是强制的吗？","acceptedAnswer":{"@type":"Answer","text":"是的。CEC Rule 8-102 是可强制执行的要求：分支电路最多 3%，馈线 3%，合计 5%。在美国的 NEC 里，对应的数值只是资料性的建议。"}},{"@type":"Question","name":"在加拿大，子配电盘的馈线可以用铝线吗？","acceptedAnswer":{"@type":"Answer","text":"可以——现代 AA-8000 系列铝馈线电缆是规范认可的，在加拿大因为成本原因，馈线用铝非常常见。以前那些担心针对的是 1960s 用在分支电路上的细规格铝线，不是现代的馈线电缆。"}},{"@type":"Question","name":"在加拿大，电压降会在子配电盘处重新归零吗？","acceptedAnswer":{"@type":"Answer","text":"不会。CEC 把额度分成馈线 3%、分支电路 3%，从供电进线到最远负载合计最多 5%。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

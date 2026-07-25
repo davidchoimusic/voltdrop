@@ -1,0 +1,1535 @@
+{
+  "common.js": [
+    {
+      "key": "runtime.common.uSEdition",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.unitedStates",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.uSNationalElectricalCodeNEC",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.canadaEdition",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.canada",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.canadianElectricalCodeCEC",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.languageLabelPattern",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.common.unavailableLanguagePattern",
+      "kind": "quoted",
+      "quote": "\""
+    }
+  ],
+  "app.js": [
+    {
+      "key": "runtime.drop.n18AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n16AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n14AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n12AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n10AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n8AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n6AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n4AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n3AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n2AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n1AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n1N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n2N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n3N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n4N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n250Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n300Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n350Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n400Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n500Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.copper",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.aluminum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.dCBatteriesSolarVehiclesLEDStrips",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.aCSinglePhase",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.singlePhaseNormalHouseholdAndLightCommercialCircuits",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n3N1N732",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.aCThreePhase",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.threePhaseCommercialAndIndustrialVoltageIsLine",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.calculateVoltageDrop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.findSmallestWire",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.findMaxDistance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.gOOD",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.withinTheN3%GuidelineThisRunShouldPerform",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.cAUTION",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.overTheN3%GuidelineButWithinTheN5%",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.tOOMUCH",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.overTheN5%OuterLimitExpectRealPerformance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.weUseTheStandardKFactorFormulaElectricians",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.kAmpsOneWayFeetCircularMils",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.accountsForThe",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.threePhaseGeometry",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.roundTripCurrentFlowsOutANDBackSo",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.isTheResistanceConstantFor",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.ohmCmilFtAtN75CCircularMils",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.voltageDropOn",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.voltsLostInTheWire",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.voltageAtTheLoad",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.startedWith",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.n3%GoodN5%Max",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.withYourNumbers",
+      "kind": "templateChunk",
+      "leading": "\n",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.circularMils",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.voltsDropped",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.vSource",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.%VoltageAtTheLoad",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.nOFIT",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.noSingleWireInOurTableKeepsThe",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.noListedSizeKeepsYouUnder",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.yourLimit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.largestSizeChecked",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.dropsMoreThan",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.%Over",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.oneWayFeetAt",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.weCheckedEverySizeFromSmallestToLargest",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.%Of",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.wireThatStaysUnder",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.actualDropAtThisSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.headsUpThisAnswersVoltageDropOnlyThe",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.aSafelyAmpacityCheckThatSeparatelyBeforeBuying",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.weTestedEachSizeSmallestFirstUntilOne",
+      "kind": "templateChunk",
+      "leading": "\n",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.%Limit",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.%UnderYourLimit",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.mAXRUN",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.atExactlyThisDistanceYouHit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.%DropStayShorterForMarginAndRemember",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.aAmpacityRegardlessOfDistance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.maxOneWayRunFor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.%Drop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.dropAtThatDistance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.weRearrangedTheFormulaToSolveForDistance",
+      "kind": "templateChunk",
+      "leading": "\n",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.vMaxOneWayFeet",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.drop.cmil",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.drop.evenPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.smallestPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.currentResult",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.guidelinesResult",
+      "kind": "quoted",
+      "quote": "'"
+    }
+  ],
+  "ampacity.js": [
+    {
+      "key": "runtime.ampacity.n14AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n12AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n10AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n8AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n6AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n4AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n3AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n2AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n1AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n1N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n2N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n3N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n4N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n250Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n300Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n350Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n400Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.n500Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.copper",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.aluminum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.nECTableN310N16",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.nECN240N4D",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.notSureUseN75CItSWhat",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.weLookUpYourWireInTheStandard",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.cECTableN2TableN4HarmonizedWithNEC",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.cECRuleN14N104",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.notSureUseN75CItSWhatMost",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.weLookUpYourWireInTheCanadian",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.oK",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.tIGHT",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.tOOSMALL",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.safeLimitFor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.yourLoad",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.tableAmpacity",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.breakerCapSmallWireRule",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.thisWireCanCarryYourLoadUnderNormal",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.aHere",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.itFitsButBarelyForContinuousLoadsN3",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.thisWireIsNOTRatedFor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.aGoUpInSizeUndersizedWireOverheats",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.atThe",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.ampacity.cColumnAs",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.ampacity.aUpToThreeCurrentCarryingWiresIn",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": "\n"
+    },
+    {
+      "key": "runtime.ampacity.theSmallConductorRule",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.ampacity.capsTheBreakerFor",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.ampacity.aSoThatSThePracticalLimitWe",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.ampacity.safeLimit",
+      "kind": "templateChunk",
+      "leading": "\n",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.ampacity.aVsYourLoad",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.ampacity.exceedsTheLimit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.atJoin",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.ampacity.headroom",
+      "kind": "quoted",
+      "quote": "'"
+    }
+  ],
+  "conduit.js": [
+    {
+      "key": "runtime.conduit.n14AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n12AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n10AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n8AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n6AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n4AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n3AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n2AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n1AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n1N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n2N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n3N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n4N0AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n250Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n300Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n350Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n400Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n500Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.pVCSchN40",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.tOOMANY",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.moreThanAN4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.canLegallyHold",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.splitTheRunAcrossMultipleConduitsOrReduce",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.tHHN",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.sqInOfWireWhichExceedsThe",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.%FillLimitOfEvenN4",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.fITS",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.sNUG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.fillAtThisSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.%Of",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.legalLimit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.%For",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.n3Wires",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.wireAreaTotal",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.sqIn",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.easierPullNextSizeUp",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.thisIsTheLargestSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.legalButCloseToTheLimitLongRuns",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.comfortableFitUnderThe",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.%Limit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.tHHNWireHasACrossSectionOf",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.conduit.sqInNECChapterN9TableN5",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.conduit.wires",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.sqInNeeded",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": "\n"
+    },
+    {
+      "key": "runtime.conduit.insideArea",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.sqInNECChapterN9TableN4Allowed",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.sqInVariant",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": "\n"
+    },
+    {
+      "key": "runtime.conduit.fitsAt",
+      "kind": "templateChunk",
+      "leading": "  ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.conduit.%Fill",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.conduit.smallestPrefix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.forJoin",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.oneWire",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.twoWires",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.eachPrefix",
+      "kind": "templateChunk",
+      "leading": "\n<p>",
+      "trailing": " "
+    }
+  ],
+  "boxfill.js": [
+    {
+      "key": "runtime.boxFill.n18AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n16AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n14AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n12AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n10AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n8AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n6AWG",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N1N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N2N1N4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N2N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N2N3N4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceBoxN3N2N3N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4RoundOctagonN1N1N4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4RoundOctagonN1N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4RoundOctagonN2N1N8",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4SquareN1N1N4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4SquareN1N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4SquareN2N1N8",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4N11N16SquareN1N1N4",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4N11N16SquareN1N1N2",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.n4N11N16SquareN2N1N8",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.cramTooManyWiresIntoABoxAnd",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.eachHotOrNeutralEnteringTheBoxN1",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.cramTooManyWiresIntoABoxAndConnections",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.mLEach",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.cuInEach",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.eGN310MLMarkedInTheBox",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.eGN18",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.cuIn",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.customVolumePrintedInTheBox",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.yourBox",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.forCanadianBoxFillUseSizesN14N6",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.fITS",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.tIGHT",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.tOOFULL",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.cuIn",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.neededVs",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.insulatedWires",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.devicesCountDouble",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.marrettePairs",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.boxUsage",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.wiresHotsNeutrals",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.groundsAllN1",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.none",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.clamps",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.thisBoxHasTheRoomTheCodeRequires",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.legalButRightAtTheLimitIfYou",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.overTheLimitUseADeeperBoxA",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.insulatedConductorRequires",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.mLOfBoxSpaceCECTableN22Rule",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.wires",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.boxFill.marrettePair",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.totalCounts",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.boxFill.mLNeeded",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": "\n"
+    },
+    {
+      "key": "runtime.boxFill.mLAvailable",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.boxFill.dOESNOTFIT",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.canadianFinePrintBareBondWiresAndCable",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.conductorRequires",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.cuInOfBoxSpaceNECTableN314",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.groundsN1",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.noGroundsN0",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.clampsN1",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.noClampsN0",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.cuInBlock",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.boxFill.cuInNeeded",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": "\n"
+    },
+    {
+      "key": "runtime.boxFill.cuInAvailable",
+      "kind": "templateChunk",
+      "leading": " ",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.boxFill.finePrintPigtailsThatStayEntirelyInsideThe",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.boxFill.availableSuffix",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.deviceSingular",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.devicesPlural",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.marrettePairsLower",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.boxFill.eachPrefix",
+      "kind": "templateChunk",
+      "leading": "\n<p>",
+      "trailing": " "
+    }
+  ],
+  "power.js": [
+    {
+      "key": "runtime.power.dCBatteriesSolarVehiclesLEDStrips",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.aCSinglePhase",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.singlePhaseNormalHouseholdAndLightCommercialCircuits",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.aCThreePhase",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.threePhaseCommercialAndIndustrialEnterLineTo",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.current",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.realPower",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.voltage",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.volts",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.amps",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.watts",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.apparentPower",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.powerFactor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.nextStepCheckThisCurrentAgainstWireSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.ampsWatts",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.power.wattsVariant",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    },
+    {
+      "key": "runtime.power.voltsAmps",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.power.voltsWatts",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": ""
+    },
+    {
+      "key": "runtime.power.withPowerFactor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.apparentPowerVariant",
+      "kind": "templateChunk",
+      "leading": "",
+      "trailing": " "
+    }
+  ]
+}

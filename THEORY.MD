@@ -1,132 +1,144 @@
-# Theory: VoltDrop — winning electricians' trust one verified number at a time
+# Theory: VoltDrop — winning trust one verified number at a time
 
 ## Problem
 
-Every electrician on earth has to size wire, check voltage drop, and stay
-inside their local code — and the existing tools make them work for it.
-Review-mining of the incumbents (Southwire's app, calculator.net) surfaced the
-same complaints on repeat: did the tool want one-way or round-trip distance?
-What does this field mean? Why does this calculator disagree with that one?
-The incumbents win on brand and on Google; nobody wins on clarity. That is the
-gap VoltDrop exists to fill.
+VoltDrop exists because electricians repeatedly face the same clarity failures:
+unclear one-way versus round-trip distance, unexplained inputs, and calculators
+that disagree without showing why. Competitors win on brand or search rank.
+VoltDrop wins only if a worker can understand and independently check the
+answer while standing on a jobsite.
 
-But clarity has a precondition that makes this product genuinely hard, and it
-is the load-bearing principle of the whole project: **a calculator for
-electricians is a safety instrument — if our numbers are wrong, people can get
-hurt or die.** A wrong ampacity number or a stale code table isn't a UX bug —
-it's overheated wire in someone's wall, a fire, an electrocution. Every process
-decision below follows from taking that literally. Electricians
-also work under *territorial* law: the US NEC, the Canadian CEC, the IEC world
-of mm² and meters, BS 7671, AS/NZS — different tables, different limits,
-different units, revised on multi-year cycles, adopted unevenly by
-jurisdiction. A tool that quietly serves one territory's numbers to another
-territory's electrician is worse than no tool.
+That clarity rests on safety. A wrong ampacity row or voltage-drop limit is not
+ordinary bad copy; it can put overheated wire in a wall. Electrical rules are
+also territorial. The physics crosses borders, but the NEC, CEC, wire names,
+limits, units, and legal force do not. A fluent page using the wrong country's
+rules is more dangerous than an untranslated page.
 
 ## Operating Theory
 
-Trust is the product. The UI's plain-English explanations earn the first
-visit; verified-correct, territory-correct numbers earn the return visits and
-the word-of-mouth. This decomposes into three commitments:
+Trust is the product. Four commitments make it concrete.
 
-1. **Every number traces to a source.** No electrical constant, table row, or
-   code limit ships from memory — mine, an AI's, or a blog's. Each data table
-   is cross-checked against at least two independent published sources,
-   anchored on verbatim reproductions of the code text itself, by a dedicated
-   verification pass before deploy. This has already paid for itself twice in
-   one day: the process caught a wrong draft value (8 AWG aluminum at 60°C:
-   35 A, not 30) and a backwards rule in explainer copy (unbroken pass-through
-   wires DO count toward box fill). The lesson generalizes: the verification
-   pass catches errors in *prose* as readily as in *data*, so it reviews both.
+1. **Every electrical fact has a source and a seal.** New tables are checked
+   against published code reproductions and independent sources before they
+   ship. The nine live data tables are fingerprinted, so ordinary copy or
+   localization work cannot alter a safety value unnoticed. This process has
+   already caught a wrong 8 AWG aluminum value and a backwards box-fill rule.
 
-2. **Show the math, always.** Every tool has a "How we calculated this" section
-   that substitutes the user's own numbers into the named formula or table
-   (with the NEC table number cited). This converts the incumbents' biggest
-   trust-killer — "why doesn't this match the other calculator?" — into our
-   biggest trust-builder: the user can check us against anything. It also
-   keeps us honest; a formula you must display is a formula you must get right.
+2. **Show the math.** Tools substitute the user's values into the named
+   formula or table. Guides use tables computed from the same sealed constants.
+   Explaining the answer is both the clarity advantage and a continuing audit
+   of the engine.
 
-3. **Territory and language are separate first-class dimensions.** Country
-   chooses the safety rulebook; language chooses the words used to explain
-   it. Canada can therefore offer English and French over one CEC data pack,
-   while the US can offer English and Spanish over one NEC pack. The header
-   leads with country, always names the active code, and offers only languages
-   actually reviewed for that country. The architecture assumes every table,
-   preset, and citation is swappable by country, while copy is swappable by
-   language. Each valid pair has an edition URL prefix, but a separate
-   existence list prevents the picker and guide banners from linking to
-   editions before their reviewed pages ship. Crucially, "recent" is
-   territory-relative: codes revise every ~3 years and jurisdictions adopt
-   editions unevenly. Today we can ship without a code-year selector only
-   because we verified our current tables are *identical across NEC
-   2008–2023*; the moment we build edition-sensitive tools (the Article 220
-   load calculator), code year becomes explicit user-facing state too.
+3. **Country and language are separate dimensions.** Country selects the
+   rulebook; language selects the explanation. Six explicit URL editions cover
+   US English, Spanish, and Simplified Chinese over the NEC pack, plus Canada
+   English, Quebec French, and Simplified Chinese over the CEC pack. There is
+   no automatic language or country redirect. Stage 3 applies this model to
+   guides: twelve country-correct English source pages now render as 36 pages,
+   without deriving the Canadian pack from the US pack or changing local
+   scenarios during translation.
+
+4. **English is an executable baseline.** The 21 generated English pages are
+   pinned by SHA-256, while electrical data has its independent nine-table
+   seal. The Stage-3 baseline change is narrow and reviewable: six-way guide
+   hreflang, explicit cross-country guide-link hints, corrected Canadian guide
+   picker chrome, and the new `common.js` asset stamp. No English guide prose
+   or computed table value changes.
 
 ## Strategy
 
-Depth before breadth, and honesty about scope at every step. The sequence —
-voltage drop first, then the adjacent lookups (ampacity, conduit fill, box
-fill, power math), then derating and grounding, then the load calculator —
-is ordered by (value × verifiability) ÷ risk. Simple bounded tables shipped
-first because they can be verified to near-certainty; the load calculator
-waits because Article 220 is where wrong answers are easiest to produce and
-hardest to notice.
+Depth comes before breadth. Tools progress from bounded, easily verified
+formulas and tables toward riskier code logic such as Article 220. Whenever a
+tool simplifies, the limitation is visible. Canadian conduit sizing remains a
+planning check because its conductor-area and metric trade-size tables have
+not passed the source gate; the country URL is not permission to relabel NEC
+dimensions as CEC data.
 
-Where a tool simplifies, it says so in the tool itself: the ampacity check
-names what it ignores (derating, continuous loads), box fill flags the >4
-grounds rule it approximates, every page carries the "planning aid, not an
-electrician" line, and the Terms make the legal version of that promise. The
-product never claims code certification — plain-language honesty about limits
-is itself a differentiator in this market.
+Localization uses stable template keys and locale-owned full thoughts.
+Country packs own territorial claims, citations, limits, and scenarios.
+Locale catalogs own visible words, metadata, FAQ answers, and complete runtime
+sentences with named value slots. Program-facing IDs, selectors, events, URL
+pieces, and data keys stay unchanged.
 
-Distribution follows the pitchchanger.io playbook: every tool gets its own URL
-so search engines rank each intent separately; the shared chrome (sidebar,
-mobile Tools menu — navigation available from every page, per David) makes
-each landing page a doorway to the whole toolbox. The feedback system exists
-to let field electricians tell us which tool is next and where clarity fails —
-the roadmap deliberately pauses after the current tool batch to read it.
-Country/language URLs follow one computed prefix model rather than hand-wired
-page twins. That keeps the number of routing rules proportional to editions,
-not editions multiplied by every guide, while the page-existence list remains
-the release gate.
+Terminology is safety data. A locked glossary fixes concepts such as one-way
+distance, round trip, ampacity, conductor, mandatory, termination, and
+current-carrying conductor. A protected registry keeps brands, citations,
+wire types, units, and source-formatted numbers unchanged. Safety text passes
+two stages: Pass A receives target-language text under opaque IDs without the
+English originals; Pass B introduces the originals and records a specific
+meaning verdict. Contamination, repeated boilerplate, changed force, numbers,
+units, or citations fail mechanically.
+
+Guides add one stronger invariant: every visible numeric token in a translated
+page must have the same value and multiplicity as its country-English twin.
+The static mirror strips scripts and markup; the browser pass repeats the
+comparison over rendered `body.innerText`. This covers prose, SVG labels, and
+computed tables without allowing a translator to localize digits, decimal
+separators, or unit spacing. Page existence is also a release gate: the picker,
+ordinary internal links, cross-country guide banners, sitemap, and llms.txt
+may expose only pages that actually ship.
 
 ## Key Discoveries
 
-- **Verification-by-independent-agent works.** Having a separate research pass
-  adversarially source-check tables before deploy caught real errors both
-  times it ran. This is now a mandatory gate for any tool that ships
-  electrical facts, and it must re-run whenever a table is touched — enforced
-  mechanically: verify.mjs fingerprints every electrical data table, so an
-  unreviewed change to any constant fails the test suite by construction.
-- **The clarity complaints are specific and finite.** One-way vs round-trip
-  distance, unexplained fields, disagreeing results. Each maps to a concrete
-  design commitment (explicit one-way language, hint text under every field,
-  shown math) rather than a vague "be simpler" aspiration.
-- **Edition stability is checkable, not assumable.** We verified (not assumed)
-  that our tables match across NEC editions — that check is what licenses the
-  current absence of a code-year picker.
-- **A locale is not a country.** Treating `ca|fr` and `us|es` as explicit
-  country-language pairs keeps safety data attached to territory and prevents
-  translation from quietly changing which code applies. A dependent language
-  picker makes that model visible: impossible pairs are not offered, and
-  switching countries falls back visibly instead of serving mismatched copy.
-- **Same-specificity CSS ordering silently eats rules** (desktop tabs, brand
-  sizing). Cosmetic, but the meta-lesson matches the data lesson: verify the
-  discriminating observable (computed style, live measurement), never the
-  intention.
+- **Verification needs independent oracles.** Source review caught real table
+  and prose errors. Test expectations now come from sealed constants and
+  explicit country counting rules rather than hand-typed answers.
+
+- **A locale is not a country.** The same Simplified Chinese language can sit
+  over either NEC or CEC facts. Conversely, US Spanish and Quebec French do
+  not imply that the other country has that language. Cross-country links keep
+  the reader's language where it exists and fall back visibly where it does
+  not.
+
+- **Territorial prose must move as a whole thought.** Token-level NEC-to-CEC
+  substitution created contradictions such as a mandatory limit followed by
+  “not laws.” Complete country-owned sentences prevent that class of error.
+
+- **Honest incompleteness is safer than false conformity.** Canadian voltage
+  drop, ampacity, box fill, and conduit percentages have source-backed
+  handling. Canadian conduit dimensions remain explicitly unverified instead
+  of being presented as local facts.
+
+- **Byte identity catches hidden extraction mistakes.** SVG text, JSON-LD,
+  metadata, table cells, and script strings are easy to miss visually. Hashes,
+  rendered parity, and runtime code-identity checks cover those surfaces.
+
+- **Independence must be enforced by data flow.** The first back-translation
+  attempt copied source English and produced a meaningless 100% match. The
+  sealed target-only pass dropped contamination to a credible rate and found
+  real defects. Stage 3 retains that separation and applies review only to the
+  country-language guide strings that actually ship.
+
+- **Numbers need their own page-level gate.** Per-string checks caught a
+  translation that shortened `1960` to `60`, but tables and fragmented prose
+  require a page-wide multiset. The final gate compares every visible digit
+  sequence and rejects decimal commas, localized numerals, dropped cells, and
+  rewordings that lose a gauge number.
+
+- **Rendered behavior is the release unit.** CSS ordering can defeat a correct
+  rule, controls can wrap without overflowing, and a localized asset can exist
+  without being loaded. Verification therefore opens all editions, exercises
+  the picker and calculators, and measures 360/390 px layout.
+
+- **Placeholders preserve values, not grammar.** Translating fragments such as
+  “voltage drop on” and “copper” retained English syntax and weakened
+  negations. Full locale-owned sentences allow natural Spanish, French, and
+  Chinese word order while named slots preserve exact live values.
 
 ## Open Questions
 
-- **Jurisdiction adoption**: when we add edition-sensitive tools, do we model
-  "NEC 2020 vs 2023" or the messier truth ("what does *your state* enforce")?
-  Evidence needed: whether field electricians actually think in editions.
-- **Canada fidelity**: the CEC's tables largely mirror the NEC's for our
-  current tools, but "largely" is not "verified row-for-row." Before marketing
-  the Canada edition hard, its tables deserve the same verification pass
-  against CSA sources — and honest divergence handling where they differ.
-- **Metric expansion cost**: IEC territories swap not just tables but method
-  (mV/A/m ratings, different derating philosophy). The data-driven
-  architecture assumes table-swapping suffices; the first non-AWG country
-  build will test whether that assumption holds or the calculators need
-  per-territory formula strategies too.
-- **What do users actually ask for?** The feedback channel is live but empty.
-  The roadmap's deliberate pause exists to let real field requests reorder it.
+- **Jurisdiction adoption:** edition-sensitive tools will need to decide
+  whether users select a code year or the code actually enforced by their
+  state or province.
+
+- **Canada conduit fidelity:** Tables 6A–6K and 9 still need row-by-row
+  verification before the planning warning can be removed.
+
+- **Metric expansion cost:** IEC territories may require different formula
+  strategies, not just replacement tables.
+
+- **External language review:** mechanical gates are strong, but a native
+  electrician in each language remains the best check of trade idiom.
+
+- **User demand:** the live feedback channel should reorder the roadmap before
+  the high-risk load calculator begins.

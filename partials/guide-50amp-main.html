@@ -1,54 +1,54 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔌 What Size Wire for 50 Amps?</h1>
-    <p class="tool-sub">The internet says 6 gauge AND 8 gauge — both are right, for different wire types. Here's the whole answer.</p>
+    <h1 class="tool-title">{{guides.fiftyAmp.whatSizeWireForN50AmpsTitle}}</h1>
+    <p class="tool-sub">{{guides.fiftyAmp.theInternetSaysN6GaugeANDN8}}</p>
   </div>
 
   <section class="card explainer">
-    <h2>The short answer</h2>
-    <p>For a 50 amp, 240 V circuit at ordinary distances: <strong>#6 copper if you're using Romex/NM-B cable</strong>, <strong>#8 copper THHN in conduit</strong> (with 75°C terminations), or <strong>#6 aluminum</strong>. Past about 100 feet, voltage drop pushes you bigger — table below.</p>
+    <h2>{{guides.fiftyAmp.theShortAnswerHeading}}</h2>
+    <p>{{guides.fiftyAmp.forAN50AmpN240VCircuit}} <strong>{{guides.fiftyAmp.n6CopperIfYouReUsingRomex}}</strong>, <strong>{{guides.fiftyAmp.n8CopperTHHNInConduit}}</strong> {{guides.fiftyAmp.withN75CTerminationsOr}} <strong>{{guides.fiftyAmp.n6Aluminum}}</strong>{{guides.fiftyAmp.pastAboutN100FeetVoltageDropPushesContinuation}}</p>
 
-    <h2>Why the internet contradicts itself</h2>
-    <p>The two most common answers online are "#6" and "#8," and the argument is really about <strong>wire type</strong>. The code assigns every wire an amp rating by its insulation temperature column. #8 copper is rated exactly 50 A in the 75°C column — fine for THHN in conduit landing on standard 75°C-rated breaker lugs. But Romex (NM-B cable) must use the 60°C column no matter what's printed on the conductors, and #8 NM-B is only good for 40 A — so Romex needs #6. Sites that say "always #6" are being safe; sites that say "#8" are assuming conduit. Both are quoting real rows of the same table — check it yourself in the <a class="inline-link" href="/guides/wire-ampacity-chart/">ampacity chart guide</a> or the <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a>.</p>
+    <h2>{{guides.fiftyAmp.whyTheInternetContradictsItselfHeading}}</h2>
+    <p>{{guides.fiftyAmp.theTwoMostCommonAnswersOnlineAre}} <strong>{{guides.fiftyAmp.wireType}}</strong>{{guides.fiftyAmp.theCodeAssignsEveryWireAnAmpContinuation}} <a class="inline-link" href="/guides/wire-ampacity-chart/">{{guides.fiftyAmp.ampacityChartGuide}}</a> {{guides.fiftyAmp.orThe}} <a class="inline-link" href="/ampacity-check/">{{guides.fiftyAmp.ampacityCheckTool}}</a>.</p>
 
     
-    <figure class="gfig" role="img" aria-label="Diagram: Romex NM-B cable must use the 60 degree column so 50 amps needs number 6; THHN in conduit may use the 75 degree column so number 8 suffices">
+    <figure class="gfig" role="img" aria-label="{{attr:guides.fiftyAmp.diagramRomexNMBCableMustUseAriaLabel}}">
       <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="15" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
-        <text x="25" y="38" font-size="13" font-weight="700" fill="var(--color-ink)">Romex / NM-B cable</text>
-        <text x="25" y="58" font-size="12" fill="var(--color-ink-soft)">code caps it at the 60°C column</text>
-        <text x="420" y="38" font-size="13" font-weight="800" fill="var(--color-hazard)">50 A → #6 copper</text>
-        <text x="420" y="58" font-size="12" fill="var(--color-ink-soft)">(#8 NM-B = only 40 A)</text>
+        <text x="25" y="38" font-size="13" font-weight="700" fill="var(--color-ink)">{{guides.fiftyAmp.romexNMBCable}}</text>
+        <text x="25" y="58" font-size="12" fill="var(--color-ink-soft)">{{guides.fiftyAmp.codeCapsItAtTheN60C}}</text>
+        <text x="420" y="38" font-size="13" font-weight="800" fill="var(--color-hazard)">{{guides.fiftyAmp.n50AN6Copper}}</text>
+        <text x="420" y="58" font-size="12" fill="var(--color-ink-soft)">{{guides.fiftyAmp.n8NMBOnlyN40A}}</text>
         <rect x="10" y="80" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
-        <text x="25" y="103" font-size="13" font-weight="700" fill="var(--color-ink)">THHN in conduit</text>
-        <text x="25" y="123" font-size="12" fill="var(--color-ink-soft)">75°C terminations allowed</text>
-        <text x="420" y="103" font-size="13" font-weight="800" fill="var(--verdict-good-bar)">50 A → #8 copper</text>
-        <text x="420" y="123" font-size="12" fill="var(--color-ink-soft)">(#8 @ 75°C = exactly 50 A)</text>
+        <text x="25" y="103" font-size="13" font-weight="700" fill="var(--color-ink)">{{guides.fiftyAmp.tHHNInConduit}}</text>
+        <text x="25" y="123" font-size="12" fill="var(--color-ink-soft)">{{guides.fiftyAmp.n75CTerminationsAllowed}}</text>
+        <text x="420" y="103" font-size="13" font-weight="800" fill="var(--verdict-good-bar)">{{guides.fiftyAmp.n50AN8Copper}}</text>
+        <text x="420" y="123" font-size="12" fill="var(--color-ink-soft)">{{guides.fiftyAmp.n8N75CExactlyN50A}}</text>
       </svg>
     </figure>
 
-    <h2>Distance changes the answer</h2>
-    <p>Minimum size at 240 V keeping voltage drop under 3%, sized at 50 A (one-way distance):</p>
+    <h2>{{guides.fiftyAmp.distanceChangesTheAnswerHeading}}</h2>
+    <p>{{guides.fiftyAmp.minimumSizeAtN240VKeepingVoltage}}</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th>Material</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <thead><tr><th>{{guides.fiftyAmp.material}}</th><th>{{guides.fiftyAmp.n50Ft}}</th><th>{{guides.fiftyAmp.n100Ft}}</th><th>{{guides.fiftyAmp.n150Ft}}</th><th>{{guides.fiftyAmp.n200Ft}}</th><th>{{guides.fiftyAmp.n250Ft}}</th><th>{{guides.fiftyAmp.n300Ft}}</th></tr></thead>
       <tbody>
-        <tr><td>Copper</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
-        <tr><td>Aluminum</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>{{guides.fiftyAmp.copper}}</td><td>{{guides.fiftyAmp.tdN8}}</td><td>{{guides.fiftyAmp.tdN6}}</td><td>{{guides.fiftyAmp.tdN4}}</td><td>{{guides.fiftyAmp.tdN4}}</td><td>{{guides.fiftyAmp.tdN3}}</td><td>{{guides.fiftyAmp.tdN2}}</td></tr>
+        <tr><td>{{guides.fiftyAmp.aluminum}}</td><td>{{guides.fiftyAmp.tdN6}}</td><td>{{guides.fiftyAmp.tdN4}}</td><td>{{guides.fiftyAmp.tdN3}}</td><td>{{guides.fiftyAmp.tdN2}}</td><td>{{guides.fiftyAmp.tdN1}}</td><td>{{guides.fiftyAmp.n1N0}}</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">AWG sizes, computed with our verified calculator engine. Your exact run: <a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a>.</p>
+    <p class="gnote">{{guides.fiftyAmp.aWGSizesComputedWithOurVerifiedCalculator}} <a class="inline-link" href="/wire-size-calculator/">{{guides.fiftyAmp.wireSizeCalculator}}</a>.</p>
 
-    <h2>The common 50-amp jobs</h2>
-    <p><strong>Hot tub:</strong> usually a 4-wire circuit (two hots, neutral, ground) with a GFCI breaker or GFCI spa disconnect within sight of the tub — #6 copper NM-B indoors transitioning to THHN in conduit outdoors is the classic setup. <strong>EV charger:</strong> a hardwired charger on a 50 A breaker may deliver at most 40 A continuously (the code requires 125% headroom for loads running 3+ hours), so the conductors must be rated for the 50 A breaker — #6 NM-B or #8 THHN, same as above; check your charger's settings. <strong>RV outlet (14-50):</strong> same sizing, but if the pedestal is far from the panel, use the distance table — RV pads at 150+ feet routinely need #4. <strong>Welder:</strong> welders get special treatment (their duty cycle legally allows smaller wire than the breaker suggests — genuinely counterintuitive), so don't panic if a welder manual specifies less.</p>
+    <h2>{{guides.fiftyAmp.theCommonN50AmpJobsHeading}}</h2>
+    <p><strong>{{guides.fiftyAmp.hotTub}}</strong> {{guides.fiftyAmp.usuallyAN4WireCircuitTwoHots}} <strong>{{guides.fiftyAmp.eVCharger}}</strong> {{guides.fiftyAmp.aHardwiredChargerOnAN50A}} <strong>{{guides.fiftyAmp.rVOutletN14N50}}</strong> {{guides.fiftyAmp.sameSizingButIfThePedestalIs}} <strong>{{guides.fiftyAmp.welder}}</strong> {{guides.fiftyAmp.weldersGetSpecialTreatmentTheirDutyCycle}}</p>
 
-    <h2>Worked example: 50 A hot tub at 80 feet</h2>
-    <p>#6 copper (26,240 cmil): drop = 2 × 12.9 × 50 × 80 ÷ 26,240 = <strong>3.9 V = 1.6%</strong> of 240 V — comfortably inside 3%. The same run in #8 (16,510 cmil) drops 6.3 V = 2.6% — still legal for THHN, but closer to the line. Run your own numbers in the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+    <h2>{{guides.fiftyAmp.workedExampleN50AHotTubAtHeading}}</h2>
+    <p>{{guides.fiftyAmp.n6CopperN26N240CmilDropN2}} <strong>{{guides.fiftyAmp.n3N9VN1N6%}}</strong> {{guides.fiftyAmp.ofN240VComfortablyInsideN3%The}} <a class="inline-link" href="/">{{guides.fiftyAmp.voltageDropCalculator}}</a>.</p>
 
-    <h2>Related</h2>
-    <p><a class="inline-link" href="/guides/sub-panel-wire-size/">Sub-panel wire size guide</a> · <a class="inline-link" href="/conduit-fill/">Conduit Fill calculator</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">How far can you run each gauge?</a></p>
+    <h2>{{guides.fiftyAmp.relatedHeading}}</h2>
+    <p><a class="inline-link" href="/guides/sub-panel-wire-size/">{{guides.fiftyAmp.subPanelWireSizeGuide}}</a> · <a class="inline-link" href="/conduit-fill/">{{guides.fiftyAmp.conduitFillCalculator}}</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">{{guides.fiftyAmp.howFarCanYouRunEachGauge}}</a></p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire do I need for a 50 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"#6 copper for Romex/NM-B cable, #8 copper THHN in conduit with 75°C terminations, or #6 aluminum — for a 240 V circuit at ordinary distances. Over about 100 feet, upsize for voltage drop."}},{"@type":"Question","name":"Can you use 8 gauge wire on a 50 amp breaker?","acceptedAnswer":{"@type":"Answer","text":"Yes, if it's an individual conductor type like THHN in conduit with 75°C-rated terminations — #8 copper is rated exactly 50 A in the NEC 75°C column. No, if it's NM-B (Romex), which is limited to the 60°C column where #8 is only 40 A."}},{"@type":"Question","name":"What size wire for 50 amps at 100 feet?","acceptedAnswer":{"@type":"Answer","text":"#6 copper or #4 aluminum keeps voltage drop under the 3% planning target at 240 V and 50 A over 100 one-way feet."}},{"@type":"Question","name":"What size wire for a 50 amp hot tub?","acceptedAnswer":{"@type":"Answer","text":"#6 copper is the standard answer, run as a 4-wire circuit with GFCI protection and a disconnect within sight of the tub. Long runs from the panel should be checked for voltage drop."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.fiftyAmp.whatSizeWireDoINeedForQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.fiftyAmp.n6CopperForRomexNMBCableAnswer}}"}},{"@type":"Question","name":"{{json:guides.fiftyAmp.canYouUseN8GaugeWireOnQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.fiftyAmp.yesIfItSAnIndividualConductorAnswer}}"}},{"@type":"Question","name":"{{json:guides.fiftyAmp.whatSizeWireForN50AmpsAtQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.fiftyAmp.n6CopperOrN4AluminumKeepsVoltageAnswer}}"}},{"@type":"Question","name":"{{json:guides.fiftyAmp.whatSizeWireForAN50AmpQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.fiftyAmp.n6CopperIsTheStandardAnswerRunAnswer}}"}}]}</script>
 
 </main>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabla de ampacidad de conductores — NEC Table 310.16, código vigente | VoltDrop</title>
+<meta name="description" content="Tabla completa de ampacidad de cobre y aluminio (60/75/90°C, verificada contra las tablas publicadas del NEC, idéntica 2017-2023) más la regla en lenguaje sencillo sobre cuál columna de temperatura puedes usar.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/wire-ampacity-chart/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Tabla de ampacidad de conductores — NEC Table 310.16, código vigente | VoltDrop">
+<meta property="og:description" content="Tabla completa de ampacidad de cobre y aluminio (60/75/90°C, verificada contra las tablas publicadas del NEC, idéntica 2017-2023) más la regla en lenguaje sencillo sobre cuál columna de temperatura puedes usar.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/wire-ampacity-chart/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tabla de ampacidad de conductores — NEC Table 310.16, código vigente | VoltDrop">
+<meta name="twitter:description" content="Tabla completa de ampacidad de cobre y aluminio (60/75/90°C, verificada contra las tablas publicadas del NEC, idéntica 2017-2023) más la regla en lenguaje sencillo sobre cuál columna de temperatura puedes usar.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔥 Tabla de ampacidad de conductores (NEC Table 310.16)</h1>
+    <p class="tool-sub">La tabla completa de cobre y aluminio — código vigente — más lo único que todo el mundo equivoca: cuál columna de temperatura te permiten usar.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La tabla</h2>
+    <p>Amperios que cada conductor puede llevar de forma continua (hasta tres conductores portadores de corriente en un cable o tubo conduit, a temperatura ambiente normal). Estos valores son idénticos en las ediciones 2017, 2020 y 2023 del NEC — lo verificamos contra las tablas publicadas, así que esta tabla está vigente por construcción:</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th rowspan="2">Calibre</th><th colspan="3">Cobre</th><th colspan="3">Aluminio</th></tr>
+      <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>12 AWG</td><td>20</td><td>25</td><td>30</td><td>15</td><td>20</td><td>25</td></tr>
+        <tr><td>10 AWG</td><td>30</td><td>35</td><td>40</td><td>25</td><td>30</td><td>35</td></tr>
+        <tr><td>8 AWG</td><td>40</td><td>50</td><td>55</td><td>35</td><td>40</td><td>45</td></tr>
+        <tr><td>6 AWG</td><td>55</td><td>65</td><td>75</td><td>40</td><td>50</td><td>55</td></tr>
+        <tr><td>4 AWG</td><td>70</td><td>85</td><td>95</td><td>55</td><td>65</td><td>75</td></tr>
+        <tr><td>3 AWG</td><td>85</td><td>100</td><td>115</td><td>65</td><td>75</td><td>85</td></tr>
+        <tr><td>2 AWG</td><td>95</td><td>115</td><td>130</td><td>75</td><td>90</td><td>100</td></tr>
+        <tr><td>1 AWG</td><td>110</td><td>130</td><td>145</td><td>85</td><td>100</td><td>115</td></tr>
+        <tr><td>1/0</td><td>125</td><td>150</td><td>170</td><td>100</td><td>120</td><td>135</td></tr>
+        <tr><td>2/0</td><td>145</td><td>175</td><td>195</td><td>115</td><td>135</td><td>150</td></tr>
+        <tr><td>3/0</td><td>165</td><td>200</td><td>225</td><td>130</td><td>155</td><td>175</td></tr>
+        <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
+        <tr><td>250 kcmil</td><td>215</td><td>255</td><td>290</td><td>170</td><td>205</td><td>230</td></tr>
+        <tr><td>300 kcmil</td><td>240</td><td>285</td><td>320</td><td>195</td><td>230</td><td>260</td></tr>
+        <tr><td>350 kcmil</td><td>260</td><td>310</td><td>350</td><td>210</td><td>250</td><td>280</td></tr>
+        <tr><td>400 kcmil</td><td>280</td><td>335</td><td>380</td><td>225</td><td>270</td><td>305</td></tr>
+        <tr><td>500 kcmil</td><td>320</td><td>380</td><td>430</td><td>260</td><td>310</td><td>350</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Verificado en la fuente contra dos reproducciones textuales de las tablas del NEC. Los límites de interruptor automático para conductores pequeños (NEC 240.4(D)) siguen aplicando: 14 Cu → interruptor de 15 A, 12 Cu → 20 A, 10 Cu → 30 A, 12 Al → 15 A, 10 Al → 25 A, sin importar la columna. Versión interactiva con los límites ya incorporados: <a class="inline-link" href="/ampacity-check/">Verificación de ampacidad</a>.</p>
+
+    <h2>¿Cuál columna me permiten usar?</h2>
+    <p>Esta es la pregunta de ampacidad más discutida en todos los foros de electricistas, y la regla es más simple que las discusiones: <strong>usa la columna de tu eslabón más débil.</strong> El aislamiento del conductor tiene una clasificación (el THHN es de 90°C), pero las zapatas del interruptor automático y las terminales del receptáculo donde aterriza suelen estar clasificadas a 75°C — y el cable Romex/NM-B queda limitado por código a la columna de 60°C sin importar lo que digan sus conductores. Así que en la práctica: <strong>NM-B → columna de 60°C. THHN en tubo conduit sobre equipo estándar → columna de 75°C.</strong> La columna de 90°C sirve sobre todo como <em>punto de partida</em> para cálculos de reducción de ampacidad (áticos calientes, cables agrupados), no como una capacidad nominal que le entregas a un interruptor automático.</p>
+
+    
+    <figure class="gfig" role="img" aria-label="Diagrama: el aislamiento del conductor está clasificado a 90 grados y las terminales del interruptor automático a 75 grados, así que aplica la columna de 75 grados — gana el eslabón más débil">
+      <svg viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="90" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">aislamiento THHN</text>
+        <text x="90" y="70" text-anchor="middle" font-size="13" fill="var(--color-ink-soft)">clasificado a 90°C</text>
+        <line x1="170" y1="55" x2="200" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
+        <rect x="200" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-accent)" stroke-width="3"/>
+        <text x="280" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-accent)">terminales del interruptor automático</text>
+        <text x="280" y="70" text-anchor="middle" font-size="13" fill="var(--color-accent)">clasificadas a 75°C ← el más débil</text>
+        <line x1="360" y1="55" x2="390" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
+        <rect x="390" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="470" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">debes usar</text>
+        <text x="470" y="70" text-anchor="middle" font-size="13" font-weight="800" fill="var(--color-hazard)">la columna de 75°C</text>
+        <text x="280" y="115" text-anchor="middle" font-size="12.5" fill="var(--color-ink-soft)">La cadena es tan fuerte como su eslabón más débil — usa la clasificación más baja del circuito.</text>
+      </svg>
+    </figure>
+
+    <h2>¿La tensión cambia la ampacidad?</h2>
+    <p>No — y esto sorprende a mucha gente del mundo de 12 volts. Un conductor #10 puede llevar los mismos ~30 A ya sea que alimente un motor de pesca de 12 V o un circuito de 240 V. Lo que cambia brutalmente con la tensión es <strong>caída de tensión</strong>: perder 3 volts significa perder 1.3% en un circuito de 240 V, pero un aplastante 25% en uno de 12 V. Por eso el cableado de baja tensión se corre mucho más grueso de lo que sus amperios sugieren — revisa el tuyo en la <a class="inline-link" href="/">calculadora de caída de tensión</a> (tiene un modo de corriente directa justo para esto).</p>
+
+    <h2>Lo que esta tabla no cubre</h2>
+    <p>Solo condiciones normales: los ambientes calientes, más de tres conductores portadores de corriente agrupados y las cargas continuas (3+ horas → regla del 80%) reducen todos estos números. Ya está en el plan de trabajo una mejora de reducción de ampacidad para nuestra herramienta de ampacidad.</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuántos amperios aguanta el conductor calibre 12?","acceptedAnswer":{"@type":"Answer","text":"20 amperios en la columna de 60°C (Romex/NM-B), 25 A a 75°C, 30 A a 90°C — pero el NEC 240.4(D) limita el 12 AWG de cobre a un interruptor automático de 20 amperios en circuitos comunes, sin importar la columna."}},{"@type":"Question","name":"¿La ampacidad del conductor cambia a 12 volts frente a 120 o 240 volts?","acceptedAnswer":{"@type":"Answer","text":"No — la ampacidad tiene que ver con el calor que genera la corriente y es la misma a cualquier tensión. Lo que cambia con la tensión es el impacto de la caída de tensión: la misma pérdida de 3 volts es 1.3% en un circuito de 240 V pero 25% en uno de 12 V, y por eso los sistemas de baja tensión necesitan conductor mucho más grueso por amperio."}},{"@type":"Question","name":"¿Por qué el Romex se limita a la columna de 60°C si sus conductores están clasificados a 90°C?","acceptedAnswer":{"@type":"Answer","text":"El NEC limita el cable NM-B a la columna de ampacidad de 60°C como regla general para ese tipo de cable. Los conductores individuales como el THHN sí pueden usar la columna de 75°C cuando las terminaciones están clasificadas a 75°C; la columna de 90°C sirve principalmente como punto de partida para los cálculos de reducción de ampacidad."}},{"@type":"Question","name":"¿Esta tabla de ampacidad está vigente para el NEC más reciente?","acceptedAnswer":{"@type":"Answer","text":"Sí — los valores mostrados de la Table 310.16 son idénticos en las ediciones 2017, 2020 y 2023 del NEC. Lo verificamos contra reproducciones textuales de las tablas publicadas."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+</body>
+</html>

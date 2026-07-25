@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quel calibre de conducteur pour 50 ampères au Canada? CEC, NMD90, spa, VÉ | VoltDrop</title>
+<meta name="description" content="La réponse canadienne pour 50 ampères : #6 NMD90 contre #8 T90 en conduit selon les règles du CEC sur la température des bornes, avec un tableau de distances vérifié et les cas du spa, du VÉ et du VR.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/50-amp-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/50-amp-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Quel calibre de conducteur pour 50 ampères au Canada? CEC, NMD90, spa, VÉ | VoltDrop">
+<meta property="og:description" content="La réponse canadienne pour 50 ampères : #6 NMD90 contre #8 T90 en conduit selon les règles du CEC sur la température des bornes, avec un tableau de distances vérifié et les cas du spa, du VÉ et du VR.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/guides/50-amp-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quel calibre de conducteur pour 50 ampères au Canada? CEC, NMD90, spa, VÉ | VoltDrop">
+<meta name="twitter:description" content="La réponse canadienne pour 50 ampères : #6 NMD90 contre #8 T90 en conduit selon les règles du CEC sur la température des bornes, avec un tableau de distances vérifié et les cas du spa, du VÉ et du VR.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔌 Quel calibre de conducteur pour 50 ampères au Canada?</h1>
+    <p class="tool-sub">La réponse canadienne — là où le câble est du NMD90, pas du Romex, et où les règles diffèrent subtilement. <a class="inline-link" href="/guides/50-amp-wire-size/" data-edition-country="us">🇺🇸 Version américaine</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La réponse courte</h2>
+    <p>Pour un circuit de 50 ampères à 240 V sur des distances ordinaires au Canada : <strong>#6 en cuivre NMD90</strong> est la réponse courante en résidentiel, et le <strong>#8 en cuivre T90/RW90 en conduit</strong> est acceptable là où les bornes sont homologuées pour 75°C (#8 en cuivre = exactement 50 A dans la colonne 75°C de la Table 2 du CEC). <strong>#6 en aluminium</strong> fonctionne à 75°C. Passé environ 30 m, la limite obligatoire de chute vous force à monter de calibre — voir le tableau ci-dessous.</p>
+
+    <h2>La nuance canadienne dans le débat #6 contre #8</h2>
+    <p>Les Américains débattent du #6 contre le #8 parce que leur code plafonne d’office le Romex (NM-B) à la colonne 60°C. Le câble équivalent au Canada, <strong>NMD90</strong>, n’a aucun plafond général de ce genre — ce qui le limite, c’est la règle de la température des <em>bornes</em> prévue au CEC 4-006 : les appareils non marqués sont traités comme du 60°C, les disjoncteurs marqués 75°C donnent droit à la colonne 75°C. Dans la pratique, les électriciens canadiens font encore couramment passer du <strong>#6 NMD90 pour 50 A</strong> — c’est sans ambiguïté, ça passe bien auprès de l’inspecteur et ça laisse de la marge — alors que le #8 en conduit avec de l’équipement marqué 75°C se défend selon le code. Quand une règle laisse autant de place au débat (et les forums canadiens en débattent en masse), le gros conducteur, c’est la tranquillité d’esprit. Vérifiez n’importe quelle combinaison dans l’ <a class="inline-link" href="/ampacity-check/">outil Vérification du courant admissible</a>.</p>
+
+    <h2>La distance change la réponse — et au Canada, c’est exigé par le code</h2>
+    <p>La Rule 8-102 du CEC rend obligatoire la limite de chute de 3%. Calibre minimal à 240 V et 50 A — distance à l’aller (un seul trajet) :</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Matériau</th><th>15 m (50′)</th><th>30 m (100′)</th><th>46 m (150′)</th><th>61 m (200′)</th><th>76 m (250′)</th><th>91 m (300′)</th></tr></thead>
+      <tbody>
+        <tr><td>Cuivre</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>Aluminium</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Calibres AWG (le Canada utilise l’AWG comme les États-Unis), dimensionnés pour les 50 A au complet. Le CEC 2024 permet de calculer selon la charge raccordée — ou 80% du disjoncteur quand elle est inconnue — donc ces calibres gardent une marge intégrée. Pour la longueur exacte : <a class="inline-link" href="/wire-size-calculator/">Calculateur de calibre de conducteur</a>.</p>
+
+    <h2>Les jobs de 50 ampères les plus courantes au Canada</h2>
+    <p><strong>Spa :</strong> circuit à 4 fils avec protection GFCI et un sectionneur près du spa (la Section 68 du CEC régit les piscines et les spas) — le #6 en cuivre est l’installation standard. <strong>Borne de recharge VÉ :</strong> la recharge est une charge continue, donc un circuit de 50 A fournit au plus 40 A en continu selon les règles du CEC sur la charge continue — conducteurs dimensionnés pour le disjoncteur de 50 A, même tableau que ci-dessus; beaucoup d’installations canadiennes utilisent aussi le 347/600 V commercial sur les chantiers, mais la recharge à la maison se fait à 240 V. <strong>Prise pour VR (14-50) :</strong> même dimensionnement; une borne de service à 46 m de distance demande couramment du #4 — et au Canada, ce surdimensionnement, c’est le code, pas une politesse. <strong>Soudeuse :</strong> Le CEC accorde aux soudeuses des allégements selon le facteur d’utilisation, comme aux États-Unis — le calibre plus petit que prévu indiqué dans le manuel peut être tout à fait légitime.</p>
+
+    <h2>Exemple concret : spa de 50 A à 24 m (80 ft)</h2>
+    <p>#6 en cuivre (26,240 cmil) : chute = 2 × 12.9 × 50 × 80 ÷ 26,240 = <strong>3.9 V = 1.6%</strong> de 240 V — confortablement dans la limite obligatoire de 3%. En #8 (16,510 cmil) : 6.3 V = 2.6% — ça passe, avec moins de marge. Calculez la vôtre dans le <a class="inline-link" href="/">Calculateur de chute de tension</a>.</p>
+
+    <h2>Liens connexes</h2>
+    <p><a class="inline-link" href="/ca/guides/sub-panel-wire-size/">Guide canadien du panneau secondaire</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">Tableau du courant admissible du CEC</a> · <a class="inline-link" href="/conduit-fill/">Calculateur de remplissage de conduit</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel calibre de conducteur faut-il pour un disjoncteur de 50 ampères au Canada?","acceptedAnswer":{"@type":"Answer","text":"Le #6 en cuivre NMD90 est la réponse courante en résidentiel; le #8 en cuivre T90/RW90 en conduit est acceptable là où les bornes sont homologuées pour 75°C (#8 en cuivre = 50 A dans la colonne 75°C de la Table 2 du CEC). Le #6 en aluminium fonctionne aussi à 75°C. Les longues distances doivent être surdimensionnées — au Canada, la limite de chute de tension de 3% est obligatoire."}},{"@type":"Question","name":"Le NMD90 est-il limité à la colonne 60°C comme le Romex américain?","acceptedAnswer":{"@type":"Answer","text":"Aucun plafond général — contrairement aux règles du NEC pour le NM-B, le courant admissible utilisable du NMD90 est régi par la règle de la température nominale des bornes (CEC 4-006) : 60°C pour un équipement non marqué, 75°C là où les disjoncteurs et les cosses sont marqués 75°C. Dans la pratique résidentielle, les réponses courantes aboutissent au même endroit, et bien des électriciens font simplement passer du #6 pour 50 A."}},{"@type":"Question","name":"Quel calibre de conducteur pour un spa de 50 ampères au Canada?","acceptedAnswer":{"@type":"Answer","text":"Du #6 en cuivre sur un circuit à 4 fils avec protection GFCI et un sectionneur près du spa, selon la pratique de la Section 68 du CEC. Les longues distances depuis le panneau devraient être vérifiées par rapport à la limite obligatoire de chute de tension de 3%."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+</body>
+</html>

@@ -1,67 +1,67 @@
 <main class="main-col guide">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🔥 Wire Ampacity Chart (NEC Table 310.16)</h1>
-    <p class="tool-sub">The full copper and aluminum table — current code — plus the one thing everyone gets wrong: which temperature column you're allowed to use.</p>
+    <h1 class="tool-title">{{guides.ampacityChart.wireAmpacityChartNECTableN310N16Title}}</h1>
+    <p class="tool-sub">{{guides.ampacityChart.theFullCopperAndAluminumTableCurrent}}</p>
   </div>
 
   <section class="card explainer">
-    <h2>The chart</h2>
-    <p>Amps each wire can carry continuously (up to three current-carrying wires in a cable or conduit, ordinary room temperature). These values are identical in the 2017, 2020, and 2023 NEC editions — we verified that against the published tables, so this chart is current by construction:</p>
+    <h2>{{guides.ampacityChart.theChartHeading}}</h2>
+    <p>{{guides.ampacityChart.ampsEachWireCanCarryContinuouslyUp}}</p>
     <div class="gtable-wrap"><table class="gtable">
-      <thead><tr><th rowspan="2">Size</th><th colspan="3">Copper</th><th colspan="3">Aluminum</th></tr>
-      <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
+      <thead><tr><th rowspan="2">{{guides.ampacityChart.size}}</th><th colspan="3">{{guides.ampacityChart.copper}}</th><th colspan="3">{{guides.ampacityChart.aluminum}}</th></tr>
+      <tr><th>{{guides.ampacityChart.n60C}}</th><th>{{guides.ampacityChart.n75C}}</th><th>{{guides.ampacityChart.n90C}}</th><th>{{guides.ampacityChart.n60C}}</th><th>{{guides.ampacityChart.n75C}}</th><th>{{guides.ampacityChart.n90C}}</th></tr></thead>
       <tbody>
-        <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>12 AWG</td><td>20</td><td>25</td><td>30</td><td>15</td><td>20</td><td>25</td></tr>
-        <tr><td>10 AWG</td><td>30</td><td>35</td><td>40</td><td>25</td><td>30</td><td>35</td></tr>
-        <tr><td>8 AWG</td><td>40</td><td>50</td><td>55</td><td>35</td><td>40</td><td>45</td></tr>
-        <tr><td>6 AWG</td><td>55</td><td>65</td><td>75</td><td>40</td><td>50</td><td>55</td></tr>
-        <tr><td>4 AWG</td><td>70</td><td>85</td><td>95</td><td>55</td><td>65</td><td>75</td></tr>
-        <tr><td>3 AWG</td><td>85</td><td>100</td><td>115</td><td>65</td><td>75</td><td>85</td></tr>
-        <tr><td>2 AWG</td><td>95</td><td>115</td><td>130</td><td>75</td><td>90</td><td>100</td></tr>
-        <tr><td>1 AWG</td><td>110</td><td>130</td><td>145</td><td>85</td><td>100</td><td>115</td></tr>
-        <tr><td>1/0</td><td>125</td><td>150</td><td>170</td><td>100</td><td>120</td><td>135</td></tr>
-        <tr><td>2/0</td><td>145</td><td>175</td><td>195</td><td>115</td><td>135</td><td>150</td></tr>
-        <tr><td>3/0</td><td>165</td><td>200</td><td>225</td><td>130</td><td>155</td><td>175</td></tr>
-        <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
-        <tr><td>250 kcmil</td><td>215</td><td>255</td><td>290</td><td>170</td><td>205</td><td>230</td></tr>
-        <tr><td>300 kcmil</td><td>240</td><td>285</td><td>320</td><td>195</td><td>230</td><td>260</td></tr>
-        <tr><td>350 kcmil</td><td>260</td><td>310</td><td>350</td><td>210</td><td>250</td><td>280</td></tr>
-        <tr><td>400 kcmil</td><td>280</td><td>335</td><td>380</td><td>225</td><td>270</td><td>305</td></tr>
-        <tr><td>500 kcmil</td><td>320</td><td>380</td><td>430</td><td>260</td><td>310</td><td>350</td></tr>
+        <tr><td>{{guides.ampacityChart.n14AWG}}</td><td>{{guides.ampacityChart.tdN15}}</td><td>{{guides.ampacityChart.tdN20}}</td><td>{{guides.ampacityChart.tdN25}}</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>{{guides.ampacityChart.n12AWG}}</td><td>{{guides.ampacityChart.tdN20}}</td><td>{{guides.ampacityChart.tdN25}}</td><td>{{guides.ampacityChart.tdN30}}</td><td>{{guides.ampacityChart.tdN15}}</td><td>{{guides.ampacityChart.tdN20}}</td><td>{{guides.ampacityChart.tdN25}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n10AWG}}</td><td>{{guides.ampacityChart.tdN30}}</td><td>{{guides.ampacityChart.tdN35}}</td><td>{{guides.ampacityChart.tdN40}}</td><td>{{guides.ampacityChart.tdN25}}</td><td>{{guides.ampacityChart.tdN30}}</td><td>{{guides.ampacityChart.tdN35}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n8AWG}}</td><td>{{guides.ampacityChart.tdN40}}</td><td>{{guides.ampacityChart.tdN50}}</td><td>{{guides.ampacityChart.tdN55}}</td><td>{{guides.ampacityChart.tdN35}}</td><td>{{guides.ampacityChart.tdN40}}</td><td>{{guides.ampacityChart.tdN45}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n6AWG}}</td><td>{{guides.ampacityChart.tdN55}}</td><td>{{guides.ampacityChart.tdN65}}</td><td>{{guides.ampacityChart.tdN75}}</td><td>{{guides.ampacityChart.tdN40}}</td><td>{{guides.ampacityChart.tdN50}}</td><td>{{guides.ampacityChart.tdN55}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n4AWG}}</td><td>{{guides.ampacityChart.tdN70}}</td><td>{{guides.ampacityChart.tdN85}}</td><td>{{guides.ampacityChart.tdN95}}</td><td>{{guides.ampacityChart.tdN55}}</td><td>{{guides.ampacityChart.tdN65}}</td><td>{{guides.ampacityChart.tdN75}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n3AWG}}</td><td>{{guides.ampacityChart.tdN85}}</td><td>{{guides.ampacityChart.tdN100}}</td><td>{{guides.ampacityChart.tdN115}}</td><td>{{guides.ampacityChart.tdN65}}</td><td>{{guides.ampacityChart.tdN75}}</td><td>{{guides.ampacityChart.tdN85}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n2AWG}}</td><td>{{guides.ampacityChart.tdN95}}</td><td>{{guides.ampacityChart.tdN115}}</td><td>{{guides.ampacityChart.tdN130}}</td><td>{{guides.ampacityChart.tdN75}}</td><td>{{guides.ampacityChart.tdN90}}</td><td>{{guides.ampacityChart.tdN100}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n1AWG}}</td><td>{{guides.ampacityChart.tdN110}}</td><td>{{guides.ampacityChart.tdN130}}</td><td>{{guides.ampacityChart.tdN145}}</td><td>{{guides.ampacityChart.tdN85}}</td><td>{{guides.ampacityChart.tdN100}}</td><td>{{guides.ampacityChart.tdN115}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n1N0}}</td><td>{{guides.ampacityChart.tdN125}}</td><td>{{guides.ampacityChart.tdN150}}</td><td>{{guides.ampacityChart.tdN170}}</td><td>{{guides.ampacityChart.tdN100}}</td><td>{{guides.ampacityChart.tdN120}}</td><td>{{guides.ampacityChart.tdN135}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n2N0}}</td><td>{{guides.ampacityChart.tdN145}}</td><td>{{guides.ampacityChart.tdN175}}</td><td>{{guides.ampacityChart.tdN195}}</td><td>{{guides.ampacityChart.tdN115}}</td><td>{{guides.ampacityChart.tdN135}}</td><td>{{guides.ampacityChart.tdN150}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n3N0}}</td><td>{{guides.ampacityChart.tdN165}}</td><td>{{guides.ampacityChart.tdN200}}</td><td>{{guides.ampacityChart.tdN225}}</td><td>{{guides.ampacityChart.tdN130}}</td><td>{{guides.ampacityChart.tdN155}}</td><td>{{guides.ampacityChart.tdN175}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n4N0}}</td><td>{{guides.ampacityChart.tdN195}}</td><td>{{guides.ampacityChart.tdN230}}</td><td>{{guides.ampacityChart.tdN260}}</td><td>{{guides.ampacityChart.tdN150}}</td><td>{{guides.ampacityChart.tdN180}}</td><td>{{guides.ampacityChart.tdN205}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n250Kcmil}}</td><td>{{guides.ampacityChart.tdN215}}</td><td>{{guides.ampacityChart.tdN255}}</td><td>{{guides.ampacityChart.tdN290}}</td><td>{{guides.ampacityChart.tdN170}}</td><td>{{guides.ampacityChart.tdN205}}</td><td>{{guides.ampacityChart.tdN230}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n300Kcmil}}</td><td>{{guides.ampacityChart.tdN240}}</td><td>{{guides.ampacityChart.tdN285}}</td><td>{{guides.ampacityChart.tdN320}}</td><td>{{guides.ampacityChart.tdN195}}</td><td>{{guides.ampacityChart.tdN230}}</td><td>{{guides.ampacityChart.tdN260}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n350Kcmil}}</td><td>{{guides.ampacityChart.tdN260}}</td><td>{{guides.ampacityChart.tdN310}}</td><td>{{guides.ampacityChart.tdN350}}</td><td>{{guides.ampacityChart.tdN210}}</td><td>{{guides.ampacityChart.tdN250}}</td><td>{{guides.ampacityChart.tdN280}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n400Kcmil}}</td><td>{{guides.ampacityChart.tdN280}}</td><td>{{guides.ampacityChart.tdN335}}</td><td>{{guides.ampacityChart.tdN380}}</td><td>{{guides.ampacityChart.tdN225}}</td><td>{{guides.ampacityChart.tdN270}}</td><td>{{guides.ampacityChart.tdN305}}</td></tr>
+        <tr><td>{{guides.ampacityChart.n500Kcmil}}</td><td>{{guides.ampacityChart.tdN320}}</td><td>{{guides.ampacityChart.tdN380}}</td><td>{{guides.ampacityChart.tdN430}}</td><td>{{guides.ampacityChart.tdN260}}</td><td>{{guides.ampacityChart.tdN310}}</td><td>{{guides.ampacityChart.tdN350}}</td></tr>
       </tbody>
     </table></div>
-    <p class="gnote">Source-verified against two verbatim NEC table reproductions. Small-conductor breaker caps (NEC 240.4(D)) still apply: 14 Cu → 15 A breaker, 12 Cu → 20 A, 10 Cu → 30 A, 12 Al → 15 A, 10 Al → 25 A, regardless of column. Interactive version with the caps built in: <a class="inline-link" href="/ampacity-check/">Ampacity Check</a>.</p>
+    <p class="gnote">{{guides.ampacityChart.sourceVerifiedAgainstTwoVerbatimNECTable}} <a class="inline-link" href="/ampacity-check/">{{guides.ampacityChart.ampacityCheck}}</a>.</p>
 
-    <h2>Which column am I allowed to use?</h2>
-    <p>This is the single most-argued ampacity question on every electrician forum, and the rule is simpler than the arguments: <strong>use the column of your weakest link.</strong> The wire's insulation has a rating (THHN is 90°C), but the breaker lugs and receptacle terminals it lands on are usually rated 75°C — and Romex/NM-B cable is capped at the 60°C column by code no matter what its conductors say. So in practice: <strong>NM-B → 60°C column. THHN in conduit on standard equipment → 75°C column.</strong> The 90°C column is mostly useful as the <em>starting point</em> for derating calculations (hot attics, bundled cables), not as a rating you deliver to a breaker.</p>
+    <h2>{{guides.ampacityChart.whichColumnAmIAllowedToUseHeading}}</h2>
+    <p>{{guides.ampacityChart.thisIsTheSingleMostArguedAmpacity}} <strong>{{guides.ampacityChart.useTheColumnOfYourWeakestLink}}</strong> {{guides.ampacityChart.theWireSInsulationHasARating}} <strong>{{guides.ampacityChart.nMBN60CColumnTHHNIn}}</strong> {{guides.ampacityChart.theN90CColumnIsMostlyUseful}} <em>{{guides.ampacityChart.startingPoint}}</em> {{guides.ampacityChart.forDeratingCalculationsHotAtticsBundledCables}}</p>
 
     
-    <figure class="gfig" role="img" aria-label="Diagram: the wire insulation is rated 90 degrees, the breaker terminals 75 degrees, so the 75 degree column applies — the weakest link wins">
+    <figure class="gfig" role="img" aria-label="{{attr:guides.ampacityChart.diagramTheWireInsulationIsRatedN90AriaLabel}}">
       <svg viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
-        <text x="90" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">THHN insulation</text>
-        <text x="90" y="70" text-anchor="middle" font-size="13" fill="var(--color-ink-soft)">rated 90°C</text>
+        <text x="90" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">{{guides.ampacityChart.tHHNInsulation}}</text>
+        <text x="90" y="70" text-anchor="middle" font-size="13" fill="var(--color-ink-soft)">{{guides.ampacityChart.ratedN90C}}</text>
         <line x1="170" y1="55" x2="200" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
         <rect x="200" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-accent)" stroke-width="3"/>
-        <text x="280" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-accent)">breaker terminals</text>
-        <text x="280" y="70" text-anchor="middle" font-size="13" fill="var(--color-accent)">rated 75°C ← weakest</text>
+        <text x="280" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-accent)">{{guides.ampacityChart.breakerTerminals}}</text>
+        <text x="280" y="70" text-anchor="middle" font-size="13" fill="var(--color-accent)">{{guides.ampacityChart.ratedN75CWeakest}}</text>
         <line x1="360" y1="55" x2="390" y2="55" stroke="var(--color-line-strong)" stroke-width="3"/>
         <rect x="390" y="25" width="160" height="60" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
-        <text x="470" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">you must use</text>
-        <text x="470" y="70" text-anchor="middle" font-size="13" font-weight="800" fill="var(--color-hazard)">the 75°C column</text>
-        <text x="280" y="115" text-anchor="middle" font-size="12.5" fill="var(--color-ink-soft)">The chain is only as strong as its weakest link — use the lowest rating in the circuit.</text>
+        <text x="470" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--color-ink)">{{guides.ampacityChart.youMustUse}}</text>
+        <text x="470" y="70" text-anchor="middle" font-size="13" font-weight="800" fill="var(--color-hazard)">{{guides.ampacityChart.theN75CColumn}}</text>
+        <text x="280" y="115" text-anchor="middle" font-size="12.5" fill="var(--color-ink-soft)">{{guides.ampacityChart.theChainIsOnlyAsStrongAs}}</text>
       </svg>
     </figure>
 
-    <h2>Does voltage change ampacity?</h2>
-    <p>No — and this surprises a lot of the 12-volt crowd. A #10 wire can carry the same ~30 A whether it's a 12 V trolling-motor feed or a 240 V circuit. What changes brutally with voltage is <strong>voltage drop</strong>: losing 3 volts means losing 1.3% of a 240 V circuit but a crushing 25% of a 12 V one. That's why low-voltage wiring runs so much fatter than its amps suggest — check yours in the <a class="inline-link" href="/">Voltage Drop calculator</a> (it has a DC mode for exactly this).</p>
+    <h2>{{guides.ampacityChart.doesVoltageChangeAmpacityHeading}}</h2>
+    <p>{{guides.ampacityChart.noAndThisSurprisesALotOf}} <strong>{{guides.ampacityChart.voltageDrop}}</strong>{{guides.ampacityChart.losingN3VoltsMeansLosingN1N3%Continuation}} <a class="inline-link" href="/">{{guides.ampacityChart.voltageDropCalculator}}</a> {{guides.ampacityChart.itHasADCModeForExactly}}</p>
 
-    <h2>What this chart doesn't cover</h2>
-    <p>Normal conditions only: hot environments, more than three current-carrying conductors bundled together, and continuous loads (3+ hours → 80% rule) all reduce these numbers. A derating upgrade to our Ampacity tool is on the roadmap.</p>
+    <h2>{{guides.ampacityChart.whatThisChartDoesnTCoverHeading}}</h2>
+    <p>{{guides.ampacityChart.normalConditionsOnlyHotEnvironmentsMoreThan}}</p>
   </section>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many amps can 12 gauge wire handle?","acceptedAnswer":{"@type":"Answer","text":"20 amps in the 60°C column (Romex/NM-B), 25 A at 75°C, 30 A at 90°C — but NEC 240.4(D) caps 12 AWG copper at a 20 amp breaker in ordinary circuits regardless of column."}},{"@type":"Question","name":"Does wire ampacity change at 12 volts vs 120 or 240 volts?","acceptedAnswer":{"@type":"Answer","text":"No — ampacity is about heat from current and is the same at any voltage. What changes with voltage is the impact of voltage drop: the same 3-volt loss is 1.3% of a 240 V circuit but 25% of a 12 V circuit, which is why low-voltage systems need much thicker wire per amp."}},{"@type":"Question","name":"Why is Romex limited to the 60°C column when its conductors are rated 90°C?","acceptedAnswer":{"@type":"Answer","text":"The NEC caps NM-B cable at the 60°C ampacity column as a blanket rule for that cable type. Individual conductors like THHN can use the 75°C column when the terminations are 75°C-rated; the 90°C column mainly serves as the starting point for derating calculations."}},{"@type":"Question","name":"Is this ampacity chart current for the latest NEC?","acceptedAnswer":{"@type":"Answer","text":"Yes — the Table 310.16 values shown are identical across the 2017, 2020, and 2023 NEC editions. We verified this against verbatim reproductions of the published tables."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.ampacityChart.howManyAmpsCanN12GaugeWireQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ampacityChart.n20AmpsInTheN60CColumnAnswer}}"}},{"@type":"Question","name":"{{json:guides.ampacityChart.doesWireAmpacityChangeAtN12VoltsQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ampacityChart.noAmpacityIsAboutHeatFromCurrentAnswer}}"}},{"@type":"Question","name":"{{json:guides.ampacityChart.whyIsRomexLimitedToTheN60Question}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ampacityChart.theNECCapsNMBCableAtAnswer}}"}},{"@type":"Question","name":"{{json:guides.ampacityChart.isThisAmpacityChartCurrentForTheQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.ampacityChart.yesTheTableN310N16ValuesShownAnswer}}"}}]}</script>
 
 </main>

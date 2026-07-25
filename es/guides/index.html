@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guías de cableado eléctrico — respuestas del NEC, cálculos verificados | VoltDrop</title>
+<meta name="description" content="Guías en lenguaje claro sobre calibre del conductor, caída de tensión, ampacidad y llenado de caja — cada número verificado en la fuente contra las tablas del código publicado, cada respuesta con los cálculos a la vista.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Guías de cableado eléctrico — respuestas del NEC, cálculos verificados | VoltDrop">
+<meta property="og:description" content="Guías en lenguaje claro sobre calibre del conductor, caída de tensión, ampacidad y llenado de caja — cada número verificado en la fuente contra las tablas del código publicado, cada respuesta con los cálculos a la vista.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guías de cableado eléctrico — respuestas del NEC, cálculos verificados | VoltDrop">
+<meta name="twitter:description" content="Guías en lenguaje claro sobre calibre del conductor, caída de tensión, ampacidad y llenado de caja — cada número verificado en la fuente contra las tablas del código publicado, cada respuesta con los cálculos a la vista.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📚 Guías</h1>
+    <p class="tool-sub">Respuestas en lenguaje claro a las preguntas de cableado que todos hacen — con números verificados, los cálculos a la vista y una calculadora a un clic.</p>
+  </div>
+
+  <nav class="card guide-list" aria-label="Guías">
+    <a class="guide-item" href="/guides/sub-panel-wire-size/">
+      <span class="guide-item-title">🏠 Calibre del conductor para un subtablero (cobertizo o garaje independiente)</span>
+      <span class="guide-item-sub">La respuesta completa con tablas de distancia — alimentadores de 50, 60 y 100 amperios de 50 a 300 pies.</span>
+    </a>
+    <a class="guide-item" href="/guides/50-amp-wire-size/">
+      <span class="guide-item-title">🔌 ¿Qué calibre de conductor para 50 amperios?</span>
+      <span class="guide-item-sub">Por qué internet no se pone de acuerdo (calibre 6 vs 8), y la respuesta correcta para interruptores automáticos, jacuzzis, cargadores de vehículos eléctricos y conexiones para casas rodantes.</span>
+    </a>
+    <a class="guide-item" href="/guides/wire-ampacity-chart/">
+      <span class="guide-item-title">🔥 Tabla de ampacidad de conductores (NEC 310.16)</span>
+      <span class="guide-item-sub">La tabla completa de cobre y aluminio, código vigente — y cómo elegir la columna de 60/75/90°C.</span>
+    </a>
+    <a class="guide-item" href="/guides/how-far-12-gauge-wire/">
+      <span class="guide-item-title">📏 ¿Hasta qué distancia se puede tender un conductor calibre 12?</span>
+      <span class="guide-item-sub">Límites de distancia para cada calibre común a 120 V y 240 V — y por qué las respuestas en internet nunca coinciden.</span>
+    </a>
+    <a class="guide-item" href="/guides/voltage-drop-formula/">
+      <span class="guide-item-title">⚡ La caída de tensión, explicada</span>
+      <span class="guide-item-sub">La fórmula, tres ejemplos resueltos y la verdad sobre la "regla" del 3%.</span>
+    </a>
+  </nav>
+
+  <nav class="card guide-list" aria-label="Guías canadienses">
+    <a class="guide-item" href="/ca/guides/" data-edition-country="ca">
+      <span class="guide-item-title">🇨🇦 Guías canadienses</span>
+      <span class="guide-item-sub">Las mismas cinco guías, escritas conforme al Canadian Electrical Code — Rule 8-102 obligatoria, NMD90, metros.</span>
+    </a>
+  </nav>
+
+  <section class="card explainer">
+    <h2>Cómo se hacen estas guías</h2>
+    <p>Cada número aquí sale de las mismas tablas de datos verificadas que alimentan nuestras calculadoras — contrastadas con reproducciones textuales del texto del código publicado antes de publicar nada, y selladas para que no puedan cambiar en silencio. Donde nuestras respuestas difieren de las de otro sitio, mostramos los cálculos para que puedas verificar ambas. Estas guías son referencias de planificación, no un sustituto de un electricista con licencia ni de tu código local.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+</body>
+</html>

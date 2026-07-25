@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加拿大导线载流量表 — CEC Table 2 & Table 4 | VoltDrop</title>
+<meta name="description" content="加拿大铜和铝的载流量表（CEC Tables 2 and 4，与美国数值一致——已核对），外加用大白话讲清 NMD90 的端子温度规则。">
+<link rel="canonical" href="https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/wire-ampacity-chart/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="加拿大导线载流量表 — CEC Table 2 & Table 4 | VoltDrop">
+<meta property="og:description" content="加拿大铜和铝的载流量表（CEC Tables 2 and 4，与美国数值一致——已核对），外加用大白话讲清 NMD90 的端子温度规则。">
+<meta property="og:url" content="https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="加拿大导线载流量表 — CEC Table 2 & Table 4 | VoltDrop">
+<meta name="twitter:description" content="加拿大铜和铝的载流量表（CEC Tables 2 and 4，与美国数值一致——已核对），外加用大白话讲清 NMD90 的端子温度规则。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">加拿大的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🔥 导线载流量表 — 加拿大（CEC Table 2 &amp; Table 4）</h1>
+    <p class="tool-sub">加拿大的铜和铝载流量表——数值与美国一致，但按加拿大的规则执行。 <a class="inline-link" href="/guides/wire-ampacity-chart/" data-edition-country="us">🇺🇸 美国版本</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>这张表</h2>
+    <p>在 CEC 下每种导线可以连续承载的安培数（线槽或电缆内最多三根载流导体，环境温度 30°C）。对边境两边都干活的人来说是个好消息： <strong>CEC Table 2（铜）和 Table 4（铝）与美国 NEC 的 Table 310.16 一致</strong> ——我们逐个核对过，数值相同，所以这一张表两国通用：</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th rowspan="2">规格</th><th colspan="3">铜（Table 2）</th><th colspan="3">铝（Table 4）</th></tr>
+      <tr><th>60°C</th><th>75°C</th><th>90°C</th><th>60°C</th><th>75°C</th><th>90°C</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15</td><td>20</td><td>25</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>12 AWG</td><td>20</td><td>25</td><td>30</td><td>15</td><td>20</td><td>25</td></tr>
+        <tr><td>10 AWG</td><td>30</td><td>35</td><td>40</td><td>25</td><td>30</td><td>35</td></tr>
+        <tr><td>8 AWG</td><td>40</td><td>50</td><td>55</td><td>35</td><td>40</td><td>45</td></tr>
+        <tr><td>6 AWG</td><td>55</td><td>65</td><td>75</td><td>40</td><td>50</td><td>55</td></tr>
+        <tr><td>4 AWG</td><td>70</td><td>85</td><td>95</td><td>55</td><td>65</td><td>75</td></tr>
+        <tr><td>3 AWG</td><td>85</td><td>100</td><td>115</td><td>65</td><td>75</td><td>85</td></tr>
+        <tr><td>2 AWG</td><td>95</td><td>115</td><td>130</td><td>75</td><td>90</td><td>100</td></tr>
+        <tr><td>1 AWG</td><td>110</td><td>130</td><td>145</td><td>85</td><td>100</td><td>115</td></tr>
+        <tr><td>1/0</td><td>125</td><td>150</td><td>170</td><td>100</td><td>120</td><td>135</td></tr>
+        <tr><td>2/0</td><td>145</td><td>175</td><td>195</td><td>115</td><td>135</td><td>150</td></tr>
+        <tr><td>3/0</td><td>165</td><td>200</td><td>225</td><td>130</td><td>155</td><td>175</td></tr>
+        <tr><td>4/0</td><td>195</td><td>230</td><td>260</td><td>150</td><td>180</td><td>205</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">数值已与加拿大资料核对（也和美国版本对照过——完全一致）。小截面导体的断路器上限在加拿大同样适用（CEC 14-104）：#14 铜芯 → 15 A 断路器，#12 → 20 A，#10 → 30 A，不管用哪一栏都一样。互动版本： <a class="inline-link" href="/ampacity-check/">载流量核对</a>.</p>
+
+    <h2>我可以用哪一栏？（NMD90 的来龙去脉）</h2>
+    <p>原则和别处一样： <strong>按最薄弱环节所在的那一栏来</strong> （CEC Rule 4-006）。导线绝缘可以是 90°C 额定——NMD90 和 T90 都是——但断路器接线端子和设备端子决定上限：未标注的设备按 60°C 算，标有 75°C 的设备才可以用 75°C 栏。下面这条和美国的差别，最容易让跨境读者栽跟头： <strong>美国的 Romex（NM-B）被一条通用规则死锁在 60°C 栏；加拿大的 NMD90 不是</strong> ——它和其他 90°C 导体一样，按端子温度规则来。日常住宅活儿里，答案还是落在熟悉的位置（#14 → 15 A，#12 → 20 A，#10 → 30 A），但 90°C 额定让 NMD90 在因高温或成束敷设而降容时有更好的起点。</p>
+
+    <h2>电压会改变载流量吗？</h2>
+    <p>不会。#10 导线在 12 V、120 V、240 V，或者加拿大商业场所用的 347/600 V 下，都同样是约 30 A。电压改变的，是电压降的 <em>杀伤力</em> ——损失 3 伏在 240 V 电路里是 1.3%，在 12 V 电路里却是 25%。还要记住：在加拿大，电压降限值是 <a class="inline-link" href="/ca/guides/voltage-drop-formula/">强制的（Rule 8-102）</a>.</p>
+
+    <h2>这张表没有覆盖的内容</h2>
+    <p>只适用于常规条件。高温环境、超过三根载流导体的成束敷设，以及连续负载，都会把这些数值拉低——还要注意，加拿大的成束降容表（Table 5C）和美国的不一样，所以跨境的降容建议不能照搬。降容工具已列入我们的开发计划。</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"加拿大的导线载流量表和美国的一样吗？","acceptedAnswer":{"@type":"Answer","text":"常见的建筑用规格是一样的——CEC Table 2（铜）和 Table 4（铝）与 NEC Table 310.16 一致，14 AWG 到 4/0 逐个数值核对过。不同的是外围规则：电缆类型的处理方式（NMD90 与 NM-B）、降容表，以及加拿大强制的电压降限值。"}},{"@type":"Question","name":"在加拿大，12 号线能承载多少安培？","acceptedAnswer":{"@type":"Answer","text":"普通电路上是 20 安培，配 20 A 断路器——CEC 14-104 把 #12 铜芯限制在 20 A 的过电流保护装置上，和美国的规定相同，尽管 75°C 和 90°C 栏列出的是 25 和 30 A。"}},{"@type":"Question","name":"NMD90 是否像美国的 NM-B 那样被限制在 60°C？","acceptedAnswer":{"@type":"Answer","text":"没有一刀切的上限。NMD90 用的是 90°C 绝缘，按端子温度规则执行（CEC 4-006）：未标注的设备按 60°C，设备有相应标注时按 75°C，90°C 栏主要用作降容的起点。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

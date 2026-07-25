@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电压降公式与 NEC 3% 建议详解 | VoltDrop</title>
+<meta name="description" content="K 系数电压降公式加三个算例（含 12 V 直流）、3% 规则到底算不算规范要求，以及如何解决过大的压降。">
+<link rel="canonical" href="https://voltdrop.app/zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="电压降公式与 NEC 3% 建议详解 | VoltDrop">
+<meta property="og:description" content="K 系数电压降公式加三个算例（含 12 V 直流）、3% 规则到底算不算规范要求，以及如何解决过大的压降。">
+<meta property="og:url" content="https://voltdrop.app/zh/guides/voltage-drop-formula/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="电压降公式与 NEC 3% 建议详解 | VoltDrop">
+<meta name="twitter:description" content="K 系数电压降公式加三个算例（含 12 V 直流）、3% 规则到底算不算规范要求，以及如何解决过大的压降。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ 电压降详解</h1>
+    <p class="tool-sub">电工真正在用的公式、三个算例，以及关于 3%“规则”的真相。</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>公式</h2>
+    <p>适用于直流和单相交流： <strong>电压降 = 2 × K × 安培数 × 单程英尺数 ÷ 圆密耳</strong>。三相时，把 2 换成 √3（1.732）。各部分含义： <strong>K</strong> 是导线材料的电阻常数 —— 铜为 12.9，铝为 21.2（75°C 下的 ohm·cmil/ft）。 <strong>圆密耳</strong> 是导线的截面积（#12 = 6,530；#6 = 26,240；#2/0 = 133,100）。其中的 <strong>2</strong> 代表往返距离 —— 电流有去有回，所以量距离时只量 <em>单程</em> 并让公式去加倍。（把这一点搞混，是两个计算器“结果对不上”的 #1 大原因。）</p>
+
+    
+    <figure class="gfig" role="img" aria-label="示意图：测量从配电盘到负载的单程距离（仅去程）；电流从一根导线流出，再从另一根流回">
+      <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="55" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">配电盘</text>
+        <rect x="460" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="505" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">负载</text>
+        <line x1="100" y1="48" x2="460" y2="48" stroke="var(--color-accent)" stroke-width="4"/>
+        <polygon points="440,42 460,48 440,54" fill="var(--color-accent)"/>
+        <line x1="100" y1="82" x2="460" y2="82" stroke="var(--color-ink-soft)" stroke-width="4"/>
+        <polygon points="120,76 100,82 120,88" fill="var(--color-ink-soft)"/>
+        <text x="280" y="38" text-anchor="middle" font-size="12" fill="var(--color-accent)">电流去程</text>
+        <text x="280" y="102" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">电流回程</text>
+        <path d="M 100 118 L 100 128 L 460 128 L 460 118" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="280" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">量的就是这一段：单程距离（仅去程）—— 公式会自动加倍</text>
+      </svg>
+    </figure>
+
+    <h2>三个算例</h2>
+    <p><strong>1. 车库插座：</strong> #12 铜线，20 A，单程 80 英尺（ft），120 V → 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong>。太大了 —— 改用 #10 或者缩短线路。</p>
+    <p><strong>2. 按摩浴缸馈线：</strong> #6 铜线，实际负载 40 A，150 ft，240 V → 2 × 12.9 × 40 × 150 ÷ 26,240 = <strong>5.9 V = 2.5%</strong>。在 3% 目标以内。</p>
+    <p><strong>3. 12 伏船用拖钓电机（直流）：</strong> #14 铜线，8 A，15 ft，12 V → 2 × 12.9 × 8 × 15 ÷ 4,110 = <strong>0.75 V = 6.3%</strong>。同样的公式，结果却很残酷 —— 在 12 V 下，又短又细的线路也会损失掉实打实的百分比。这就是为什么汽车、船舶、光伏和庭院照明的布线，要比电流看上去所需的粗得多，也是为什么我们的 <a class="inline-link" href="/">计算器</a> 有直流模式。</p>
+
+    <h2>3% 规则真的是规范要求吗？</h2>
+    <p>实话说： <strong>它是官方建议，不是可强制执行的要求</strong>  —— 在 NEC 里，它写在资料性注释（Informational Notes）中（分支电路 3%，从供电进线到最远负载合计 5%）。一般来说，常规检查不会仅凭电压降就判你不合格，但确实有例外：有些负载（比如消防泵）有硬性压降限值，有些地方管辖区和节能规范采用了更严格、可强制执行的版本，低压系统往往需要更紧的目标值，原因正如例 3 所示。把 3%/5% 当作“表现良好”和“等着接投诉”之间的分界线，而不是法律。</p>
+
+    <h2>“K”是怎么来的（以及为什么各家计算器结果不一致）</h2>
+    <p>K 把导线的电阻率打包成一个方便现场使用的数字。我们采用标准的保守取值（12.9/21.2）；有些工具改用规范里的直流电阻表，结果要乐观 ~20–25%。两者都没错 —— 保守取值给温度和现场实际条件留了余量。我们工具里的每个结果都以“我们是怎么算的”开头，方便你直接把常数和任何其他来源作对比。</p>
+
+    <h2>如何解决过大的电压降</h2>
+    <p>按通常的可行性排序： <strong>加大一档导线规格（线规）</strong> （每加大一个 AWG 档，压降减少 ~21%……加大两档减少 ~37%）， <strong>提高电压</strong> （同样的瓦数改在 240 V 而不是 120 V 下跑，电流减半，可容忍的压降还翻倍 —— 改善 4×）， <strong>缩短走线路径</strong>，或者对乡下的超长线路， <strong>用变压器升压</strong>。电机启动时打顿，罪魁祸首就是启动涌流期间的压降 —— 要按启动工况选线，不能只按运行工况。</p>
+
+    <h2>相关内容</h2>
+    <p><a class="inline-link" href="/">电压降计算器</a> · <a class="inline-link" href="/max-wire-length/">最大线长</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">子配电盘指南</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">各种导线规格（线规）能拉多远？</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"3% 电压降规则是规范强制要求还是指导性建议？","acceptedAnswer":{"@type":"Answer","text":"它是 NEC 资料性注释（Informational Notes）里的官方建议（分支电路 3%，合计 5%），不是普遍可强制执行的要求 —— 但有例外，比如消防泵、某些节能规范，以及采用更严格规则的地方管辖区。把它当作良好性能的门槛。"}},{"@type":"Question","name":"算电压降时，导线距离该量单程距离（仅去程）还是往返距离？","acceptedAnswer":{"@type":"Answer","text":"量单程，从电源量到负载。标准公式里的系数 2 已经把往返距离算进去了。把往返距离填进按单程计算的计算器，误差直接翻倍 —— 这是结果对不上的最常见原因。"}},{"@type":"Question","name":"交流和直流的电压降一样吗？","acceptedAnswer":{"@type":"Answer","text":"对常见的建筑用导线规格（线规）来说，同一个电阻公式对直流和单相交流都适用（三相用 1.732 代替 2）。差别在于影响大小：同样损失的伏数，在 12 V 系统里占的百分比远大于 240 V 系统。"}},{"@type":"Question","name":"电压降太大该怎么解决？","acceptedAnswer":{"@type":"Answer","text":"加大导线规格（线规）（每加大一个 AWG 档，压降约减少 21%）、提高系统电压（同样的瓦数下，240 V 比 120 V 改善 4x）、缩短线路，或者对非常长的距离使用升压变压器。"}},{"@type":"Question","name":"电压降危险吗？","acceptedAnswer":{"@type":"Answer","text":"多数情况下只是性能问题 —— 灯偏暗、电机发烫、充电变慢 —— 但长期欠压的电机可能过热损坏，损失的电能会在布线里变成热量。压降严重就说明这条电路需要重新设计。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

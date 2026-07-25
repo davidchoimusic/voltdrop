@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Hasta dónde llega el conductor calibre 12? Límites de distancia del 3% del NEC por calibre | VoltDrop</title>
+<meta name="description" content="Tablas de distancia verificadas para 14-6 AWG a 120 V y 240 V bajo el objetivo de 3% de caída de tensión — además de por qué otros sitios dicen 50, 57 o 100 pies para el mismo conductor.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/how-far-12-gauge-wire/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="¿Hasta dónde llega el conductor calibre 12? Límites de distancia del 3% del NEC por calibre | VoltDrop">
+<meta property="og:description" content="Tablas de distancia verificadas para 14-6 AWG a 120 V y 240 V bajo el objetivo de 3% de caída de tensión — además de por qué otros sitios dicen 50, 57 o 100 pies para el mismo conductor.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/how-far-12-gauge-wire/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="¿Hasta dónde llega el conductor calibre 12? Límites de distancia del 3% del NEC por calibre | VoltDrop">
+<meta name="twitter:description" content="Tablas de distancia verificadas para 14-6 AWG a 120 V y 240 V bajo el objetivo de 3% de caída de tensión — además de por qué otros sitios dicen 50, 57 o 100 pies para el mismo conductor.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">📏 ¿Hasta dónde llega el conductor calibre 12?</h1>
+    <p class="tool-sub">Límites reales de distancia para cada calibre común — y por qué cada sitio te da un número distinto.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La respuesta corta</h2>
+    <p>En un circuito de 20 amperios y 120 V a carga plena, <strong>#12 de cobre se mantiene dentro del objetivo de 3% de caída de tensión hasta unos 46 pies en un solo sentido</strong>. A 240 V el mismo conductor llega a unos 91 pies. Las cargas reales más ligeras llegan más lejos — un interruptor automático de 20 A que alimenta una carga de 10 A duplica la distancia. Tabla completa abajo; tu caso exacto: <a class="inline-link" href="/max-wire-length/">calculadora de Longitud Máxima de Conductor</a>.</p>
+
+    <h2>Tabla de distancias (3% de caída, cobre, a carga plena)</h2>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Conductor</th><th>Amperaje</th><th>Máx. en un solo sentido @120 V</th><th>Máx. en un solo sentido @240 V</th></tr></thead>
+      <tbody>
+        <tr><td>14 AWG</td><td>15 A</td><td>38 ft</td><td>76 ft</td></tr>
+        <tr><td>12 AWG</td><td>15 A</td><td>61 ft</td><td>121 ft</td></tr>
+        <tr><td>12 AWG</td><td>20 A</td><td>46 ft</td><td>91 ft</td></tr>
+        <tr><td>10 AWG</td><td>30 A</td><td>48 ft</td><td>97 ft</td></tr>
+        <tr><td>8 AWG</td><td>40 A</td><td>58 ft</td><td>115 ft</td></tr>
+        <tr><td>6 AWG</td><td>50 A</td><td>73 ft</td><td>146 ft</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Calculado con nuestro motor verificado (K = 12.9 ohm·cmil/ft para cobre). Las distancias son en un solo sentido — del tablero a la carga; el recorrido de ida y vuelta ya está considerado.</p>
+
+    
+    <figure class="gfig" role="img" aria-label="Gráfico de barras: el mismo conductor calibre 12 alcanza 46 pies a 20 amperios y 120 voltios, 61 pies a 15 amperios y 120 voltios, y 91 pies a 20 amperios y 240 voltios">
+      <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
+        <text x="12" y="20" font-size="13" font-weight="700" fill="var(--color-ink)">El mismo conductor #12, tres respuestas honestas (3% de caída)</text>
+        <text x="12" y="52" font-size="12" fill="var(--color-ink)">20 A @ 120 V</text>
+        <rect x="120" y="38" width="190" height="20" rx="4" fill="var(--color-accent)"/>
+        <text x="320" y="53" font-size="12" font-weight="700" fill="var(--color-ink)">46 ft</text>
+        <text x="12" y="92" font-size="12" fill="var(--color-ink)">15 A @ 120 V</text>
+        <rect x="120" y="78" width="252" height="20" rx="4" fill="var(--color-hazard)"/>
+        <text x="382" y="93" font-size="12" font-weight="700" fill="var(--color-ink)">61 ft</text>
+        <text x="12" y="132" font-size="12" fill="var(--color-ink)">20 A @ 240 V</text>
+        <rect x="120" y="118" width="376" height="20" rx="4" fill="var(--verdict-good-bar)"/>
+        <text x="506" y="133" font-size="12" font-weight="700" fill="var(--color-ink)">91 ft</text>
+        <text x="12" y="160" font-size="11.5" fill="var(--color-ink-soft)">Menos carga o más tensión = más alcance. Por eso los sitios "no coinciden".</text>
+      </svg>
+    </figure>
+
+    <h2>Por qué otros sitios dicen 50, 57 o 100 pies</h2>
+    <p>Tres razones honestas, sin conspiración. <strong>Primero — el supuesto de amperios.</strong> ¿Calculas con los 20 A del interruptor automático o con los amperios de la carga real? Los foros se dividen 50/50 en esto. Nuestra tabla usa la capacidad nominal del interruptor automático (el peor caso, seguro para planear); si conoces la carga real, úsala en la <a class="inline-link" href="/max-wire-length/">calculadora</a> y aprovecha la distancia extra. <strong>Segundo — la constante de resistencia.</strong> Usamos el K = 12.9 estándar en campo, que a propósito es un poco conservador; algunos sitios usan la tabla de resistencia en CD del código, que da distancias ~25% más largas (esos son los famosos "57 pies"). Ninguno está mal — el nuestro deja margen para las condiciones reales. <strong>Tercero — el objetivo.</strong> 3% es el objetivo común de planeación, pero es una recomendación, no una ley rígida (<a class="inline-link" href="/guides/voltage-drop-formula/">la historia completa aquí</a>) — los sitios que usan 5% citan tramos mucho más largos.</p>
+
+    <h2>¿Qué pasa si tiendes el tramo demasiado lejos?</h2>
+    <p>Nada dramático — y ahí está la trampa. El circuito funciona, pero el extremo lejano trabaja con menos tensión: los motores arrancan forzados y se calientan (un compresor que dispara con una extensión de 100 ft y no con una corta es pura caída de tensión), los LED parpadean, los cargadores se vuelven lentos, los calefactores rinden menos. Los tramos largos también desperdician energía real en forma de calor dentro de la pared.</p>
+
+    <h2>Ejemplo resuelto</h2>
+    <p>#12 de cobre, 20 A, 80 pies en un solo sentido, 120 V: caída = 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong> — supera tanto el objetivo de 3% como el límite exterior de 5%. Opciones: acortar el tramo, subir a #10 (cae 4.0 V = 3.3%), operarlo a 240 V si la carga lo permite, o aceptarlo para una carga no crítica. La <a class="inline-link" href="/">calculadora de Caída de Tensión</a> muestra todo esto al instante.</p>
+
+    <h2>Relacionado</h2>
+    <p><a class="inline-link" href="/max-wire-length/">calculadora de Longitud Máxima de Conductor</a> · <a class="inline-link" href="/guides/voltage-drop-formula/">Caída de tensión, explicada</a> · <a class="inline-link" href="/guides/wire-ampacity-chart/">Tabla de ampacidad</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Hasta dónde llega un conductor calibre 12 en un interruptor automático de 20 amperios?","acceptedAnswer":{"@type":"Answer","text":"Unos 46 pies en un solo sentido a 120 V con carga plena de 20 A, quedando dentro del objetivo de planeación de 3% de caída de tensión (unos 91 pies a 240 V). Las cargas reales más ligeras llegan proporcionalmente más lejos."}},{"@type":"Question","name":"¿Uso la capacidad nominal del interruptor automático o la carga real para la caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"Cualquiera de las dos se puede defender, y por eso las respuestas en internet no coinciden. Usar la capacidad nominal del interruptor automático es la opción conservadora para planear; usar la carga real conocida es exacto para esa carga. Si algún día el circuito pudiera llevar su capacidad completa, dimensiona para el interruptor automático."}},{"@type":"Question","name":"¿Hasta dónde llega el 12/2 sin caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"No hay distancia sin caída de tensión — cada pie de conductor pierde algo de tensión. La pregunta práctica es hasta dónde antes de que la caída supere el 3%: unos 46 pies en un solo sentido con 20 A plenos y 120 V para 12/2 de cobre."}},{"@type":"Question","name":"¿Qué pasa si un tramo de conductor es demasiado largo?","acceptedAnswer":{"@type":"Answer","text":"El circuito sigue funcionando, pero entrega menos tensión en el extremo lejano: los motores arrancan forzados y se sobrecalientan, los LED parpadean, los cargadores y los calefactores rinden menos, y se desperdicia energía en forma de calor en el conductor. Corrígelo con un conductor más grueso, una ruta más corta o una tensión más alta."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+</body>
+</html>

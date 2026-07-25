@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calibre del conductor para un subtablero (cobertizo o garaje independiente) — dimensionamiento NEC con tablas de distancia | VoltDrop</title>
+<meta name="description" content="Qué calibre de conductor para un subtablero de 50, 60 o 100 amperios a 50-300 pies: tablas verificadas de cobre y aluminio, los cálculos de caída de tensión que resuelven los debates de los foros, y las 4 cosas que la gente pasa por alto.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calibre del conductor para un subtablero (cobertizo o garaje independiente) — dimensionamiento NEC con tablas de distancia | VoltDrop">
+<meta property="og:description" content="Qué calibre de conductor para un subtablero de 50, 60 o 100 amperios a 50-300 pies: tablas verificadas de cobre y aluminio, los cálculos de caída de tensión que resuelven los debates de los foros, y las 4 cosas que la gente pasa por alto.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calibre del conductor para un subtablero (cobertizo o garaje independiente) — dimensionamiento NEC con tablas de distancia | VoltDrop">
+<meta name="twitter:description" content="Qué calibre de conductor para un subtablero de 50, 60 o 100 amperios a 50-300 pies: tablas verificadas de cobre y aluminio, los cálculos de caída de tensión que resuelven los debates de los foros, y las 4 cosas que la gente pasa por alto.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🏠 Calibre del conductor para un subtablero (cobertizo o garaje independiente)</h1>
+    <p class="tool-sub">La pregunta que todo foro discute, respondida con los cálculos reales — incluidas las tablas de distancia que nadie te muestra.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La respuesta corta</h2>
+    <p>Para un <strong>subtablero de 100 amperios a 150 pies</strong>: <strong>#2 de cobre</strong> o <strong>1/0 de aluminio</strong>. Para un <strong>subtablero de 60 amperios a 100 pies</strong>: <strong>#6 de cobre</strong> o <strong>#4 de aluminio</strong>. La tabla completa para cada combinación común está más abajo — y si tu tramo no aparece, la <a class="inline-link" href="/wire-size-calculator/">Calculadora de Calibre del Conductor</a> maneja cualquier distancia.</p>
+
+    
+    <figure class="gfig" role="img" aria-label="Diagrama: un alimentador de 4 conductores va desde el tablero principal de la casa hasta el subtablero del garaje independiente">
+      <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 15 60 L 60 25 L 105 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="25" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="60" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">PRINCIPAL</text>
+        <text x="60" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">TABLERO</text>
+        <path d="M 455 60 L 500 25 L 545 60 Z" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <rect x="465" y="60" width="70" height="60" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="500" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">SUB-</text>
+        <text x="500" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="var(--color-ink)">TABLERO</text>
+        <line x1="105" y1="78" x2="465" y2="78" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="86" x2="465" y2="86" stroke="var(--color-accent)" stroke-width="3"/>
+        <line x1="105" y1="94" x2="465" y2="94" stroke="var(--color-ink-soft)" stroke-width="3"/>
+        <line x1="105" y1="102" x2="465" y2="102" stroke="var(--verdict-good-bar)" stroke-width="3"/>
+        <text x="285" y="68" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">Alimentador de 4 conductores: 2 vivos · neutro · tierra</text>
+        <path d="M 105 135 L 105 145 L 465 145 L 465 135" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="285" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">distancia en un solo sentido — esto es lo que define el calibre del conductor</text>
+      </svg>
+    </figure>
+
+    <h2>Por qué cada hilo de foro dice algo distinto</h2>
+    <p>Haz esta pregunta en internet y recibirás tres respuestas "correctas" distintas. Eso pasa porque en realidad son <em>dos</em> verificaciones apiladas, y cada persona responde a una distinta. Primero, el conductor debe tener capacidad nominal para llevar la corriente (<strong>ampacidad</strong>). Segundo, en un tramo largo, el conductor debe ser lo bastante grueso para que la tensión perdida en el camino se mantenga razonable (<strong>caída de tensión</strong> — el objetivo habitual de planificación es 3%). En distancias cortas manda la verificación de ampacidad; pasados unos 100 pies, la caída de tensión toma el control y obliga a un conductor más grueso que el que sugiere la tabla de ampacidad por sí sola. Quienes citan sólo la tabla de ampacidad y quienes citan calibres ajustados por caída tienen "razón" ambos — para distancias diferentes.</p>
+
+    <h2>La tabla: calibre mínimo a 240 V, 3% de caída de tensión</h2>
+    <p>Dimensionado al valor nominal del interruptor automático (conservador), terminaciones de 75°C, distancia en un solo sentido:</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Alimentador</th><th>50 ft</th><th>100 ft</th><th>150 ft</th><th>200 ft</th><th>250 ft</th><th>300 ft</th></tr></thead>
+      <tbody>
+        <tr><td>50 A cobre</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>50 A aluminio</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>60 A cobre</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><td>60 A aluminio</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A cobre</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A aluminio</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Calibres AWG; calculados con el mismo motor verificado que nuestras calculadoras (K = 12.9 cobre / 21.2 aluminio, ampacidades de NEC Table 310.16 a 75°C). Los cables armados como NM-B están limitados a la columna de 60°C — consulta la <a class="inline-link" href="/guides/wire-ampacity-chart/">guía de ampacidad</a> — y aquí aluminio significa cable alimentador moderno de la serie AA-8000 (SER/URD/MHF), que es seguro y está reconocido por el código.</p>
+
+    <h2>Ejemplo resuelto: 100 A a 150 pies</h2>
+    <p>Caída de tensión = 2 × K × amperios × pies en un solo sentido ÷ mils circulares. Para #2 de cobre (66,360 cmil): 2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V</strong>, que es 2.4% de 240 V — dentro del objetivo de 3%. Un calibre más pequeño (#3, 52,620 cmil) da 7.4 V = 3.1% — apenas por encima. Ese es todo el desacuerdo, resuelto: <strong>El #3 cumple por ampacidad, el #2 gana por caída de tensión.</strong> Verifica tus propios números en la <a class="inline-link" href="/">Calculadora de Caída de Tensión</a>.</p>
+
+    <h2>Cuatro cosas que la gente pasa por alto</h2>
+    <p><strong>1. Es un alimentador de 4 conductores.</strong> Dos vivos, un neutro y una tierra de equipos separada — y en el subtablero, los neutros y las tierras van a barras separadas (el tornillo de puenteo se queda fuera). <strong>2. El famoso cable de aluminio "2-2-2-4" tiene capacidad nominal para 100 A sólo como acometida de vivienda.</strong> Alimentando un subtablero de garaje independiente, es un alimentador de 90 A — una sorpresa clásica en la inspección. <strong>3. La caída de tensión no se "reinicia" en el subtablero.</strong> La caída en el alimentador y la caída en el circuito derivado más allá se suman; una práctica común es presupuestar ~2% para el alimentador y ~3% en total hasta la carga más lejana. <strong>4. Dimensiona para lo que realmente vas a consumir algún día.</strong> Si algún día el garaje va a tener una soldadora o un cargador de vehículo eléctrico, el cobre que entierres hoy es el más barato que jamás será.</p>
+
+    <h2>Relacionado</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">Calculadora de Calibre del Conductor</a> · <a class="inline-link" href="/">Calculadora de Caída de Tensión</a> · <a class="inline-link" href="/guides/50-amp-wire-size/">¿Qué calibre de conductor para 50 amperios?</a> · <a class="inline-link" href="/conduit-fill/">Calculadora de Llenado de Tubo Conduit</a> para el tramo subterráneo</p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué calibre de conductor para un subtablero de 100 amperios a 150 pies de distancia?","acceptedAnswer":{"@type":"Answer","text":"#2 de cobre o 1/0 de aluminio, con un objetivo de 3% de caída de tensión a 240 V y terminaciones de 75°C. A esa distancia es la caída de tensión, no la ampacidad, la que define el calibre: el #2 de cobre cae 5.8 V (2.4%) a 100 A en 150 pies."}},{"@type":"Question","name":"¿Un subtablero reinicia la caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"No. La caída de tensión en el alimentador hasta el subtablero y la caída en el circuito derivado más allá se suman. Una práctica común de planificación es cerca de 2% en el alimentador y no más de 3% en total desde el tablero principal hasta la carga más lejana."}},{"@type":"Question","name":"¿Qué calibre de conductor de tierra para el alimentador de un subtablero?","acceptedAnswer":{"@type":"Answer","text":"El conductor de puesta a tierra de equipos se dimensiona a partir del interruptor automático del alimentador según NEC Table 250.122 — por ejemplo #8 de cobre para un alimentador de 100 A — y debe aumentarse proporcionalmente si aumentas el calibre de los conductores vivos por caída de tensión."}},{"@type":"Question","name":"¿Es seguro el conductor de aluminio para el alimentador de un subtablero?","acceptedAnswer":{"@type":"Answer","text":"Sí. El cable alimentador de aluminio moderno de la serie AA-8000 (SER, URD, MHF) está reconocido por el código y se usa mucho en alimentadores porque cuesta mucho menos que el cobre. La mala fama de peligro de los 1960s corresponde al aluminio antiguo de calibre pequeño en circuitos derivados, no al cable alimentador moderno."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de potencia eléctrica — edición US/NEC | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita de potencia eléctrica: convierta voltios, amperios, vatios, kW y kVA con factor de potencia para DC, AC monofásica y AC trifásica.">
+<link rel="canonical" href="https://voltdrop.app/es/power-calculator/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/power-calculator/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/power-calculator/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/power-calculator/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/power-calculator/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/power-calculator/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/power-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/power-calculator/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calculadora de potencia eléctrica — edición US/NEC | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita de potencia eléctrica: convierta voltios, amperios, vatios, kW y kVA con factor de potencia para DC, AC monofásica y AC trifásica.">
+<meta property="og:url" content="https://voltdrop.app/es/power-calculator/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de potencia eléctrica — edición US/NEC | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita de potencia eléctrica: convierta voltios, amperios, vatios, kW y kVA con factor de potencia para DC, AC monofásica y AC trifásica.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de potencia VoltDrop","url":"https://voltdrop.app/es/power-calculator/","description":"Calculadora gratuita de potencia eléctrica: convierta voltios, amperios, vatios, kW y kVA con factor de potencia para DC, AC monofásica y AC trifásica.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link active" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🧮 Calculadora de potencia</h1>
+    <p class="tool-sub">Voltios, amperios, vatios, kW y kVA: ingrese lo que conoce y obtenga el resto. DC, AC monofásica y AC trifásica.</p>
+  </div>
+
+  <form id="pw-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">¿Qué desea calcular?</label>
+      <div class="seg" role="group" aria-label="Valor que desea calcular">
+        <button type="button" class="seg-btn active" data-find="amps">Amperios</button>
+        <button type="button" class="seg-btn" data-find="watts">Vatios</button>
+        <button type="button" class="seg-btn" data-find="volts">Voltios</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Tipo de alimentación</label>
+      <div class="seg" role="group" aria-label="Tipo de alimentación">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC monofásica</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC trifásica</button>
+      </div>
+      <p class="hint" id="pw-system-hint">DC: baterías, sistemas solares, vehículos y tiras LED.</p>
+    </div>
+
+    <div class="field" id="pw-field-volts">
+      <label class="field-label" for="pw-volts">Tensión</label>
+      <div class="input-unit">
+        <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
+        <span class="unit">voltios</span>
+      </div>
+      <p class="hint">Trifásica: use la tensión entre líneas (p. ej., 208, 480).</p>
+    </div>
+
+    <div class="field" id="pw-field-amps" hidden>
+      <label class="field-label" for="pw-amps">Corriente</label>
+      <div class="input-unit">
+        <input type="number" id="pw-amps" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 15">
+        <span class="unit">amperios</span>
+      </div>
+    </div>
+
+    <div class="field" id="pw-field-watts">
+      <label class="field-label" for="pw-watts">Potencia</label>
+      <div class="input-unit">
+        <input type="number" id="pw-watts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 1500">
+        <span class="unit">vatios</span>
+      </div>
+      <p class="hint">Consejo: 1 kW = 1,000 W. Una etiqueta que indica «1.5 kW» equivale a 1500 vatios.</p>
+    </div>
+
+    <div class="field" id="pw-field-pf">
+      <label class="field-label" for="pw-pf">Factor de potencia</label>
+      <div class="input-unit">
+        <input type="number" id="pw-pf" inputmode="decimal" min="0.1" max="1" step="any" value="1.0">
+        <span class="unit">0–1</span>
+      </div>
+      <p class="hint">Indica qué tan eficientemente la carga usa la corriente. Calefactores y cargas simples: <strong>1.0</strong>. Motores y luces fluorescentes: a menudo <strong>0.8–0.9</strong>. Si tiene dudas, deje 1.0.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Calcular</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict good" id="verdict">
+      <div class="verdict-badge">RESULTADO</div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>Cómo calculamos esto</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cuál es la diferencia entre kW y kVA?", "acceptedAnswer": {"@type": "Answer", "text": "Los vatios (kW) miden la potencia real utilizable, mientras que kVA mide la potencia aparente que el cableado debe transportar. En calefactores y cargas simples son iguales; en motores y equipos electrónicos, kVA puede ser mayor. La relación entre ambas es el factor de potencia."}}, {"@type": "Question", "name": "¿Cómo convierto vatios a amperios?", "acceptedAnswer": {"@type": "Answer", "text": "Para DC, amperios = vatios ÷ voltios. Para AC monofásica, amperios = vatios ÷ (voltios × factor de potencia). Para AC trifásica, amperios = vatios ÷ (1.732 × voltios entre líneas × factor de potencia)."}}]}</script>
+  <section class="card explainer">
+    <h2>Vatios, kW y kVA en 30 segundos</h2>
+    <p><strong>Vatios (W)</strong> es la potencia real utilizable; <strong>1 kW = 1,000 W</strong>. <strong>kVA</strong> es la potencia aparente que el cableado debe transportar. Para calefactores y cargas simples, ambas son iguales. En motores y equipos electrónicos, parte de la corriente circula sin realizar trabajo útil; por eso kVA puede superar a kW. La relación entre ambas es el <strong>factor de potencia</strong>.</p>
+    <h2>Fórmulas utilizadas</h2>
+    <p>DC: vatios = voltios × amperios. AC monofásica: vatios = voltios × amperios × factor de potencia. AC trifásica: vatios = √3 (1.732) × voltios entre líneas × amperios × factor de potencia. Cada resultado muestra el cálculo; abra «Cómo calculamos esto».</p>
+    <p>¿Va a dimensionar el conductor para esta carga? Lleve los amperios obtenidos directamente a la herramienta de <a class="inline-link" href="/wire-size-calculator/">Calibre del conductor</a> y <a class="inline-link" href="/ampacity-check/">Verificación de ampacidad</a> herramientas.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+<script src="/assets/us-es/power.js?v=abe289abb1"></script>
+</body>
+</html>

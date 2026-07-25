@@ -1,37 +1,38 @@
 <main class="main-col">
 
   <div class="tool-intro card">
-    <h1 class="tool-title">🚇 Conduit Fill</h1>
-    <p class="tool-sub">How big a conduit do you need for your wires? Enter what you're pulling, get the smallest legal size.</p>
+    <h1 class="tool-title">{{conduit.conduitFillTitle}}</h1>
+    <p class="tool-sub">{{conduit.howBigAConduitDoYouNeed}}</p>
   </div>
+{{conduit.countryDataNoteHtml}}
 
   <form id="fill-form" class="card" autocomplete="off">
 
     <div class="field">
-      <label class="field-label">Conduit type</label>
-      <div class="seg" role="group" aria-label="Conduit type">
-        <button type="button" class="seg-btn active" data-conduit="emt">EMT (metal)</button>
-        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+      <label class="field-label">{{conduit.conduitTypeLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:conduit.conduitTypeLabel}}">
+        <button type="button" class="seg-btn active" data-conduit="emt">{{conduit.eMTMetalButton}}</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">{{conduit.pVCScheduleN40Button}}</button>
       </div>
-      <p class="hint">EMT is the common thin-wall metal tubing. PVC Sch 40 is the gray plastic conduit.</p>
+      <p class="hint">{{conduit.eMTIsTheCommonThinWallMetal}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="fill-size">Wire size (THHN / THWN)</label>
+      <label class="field-label" for="fill-size">{{conduit.wireSizeTHHNTHWNLabel}}</label>
       <select id="fill-size"></select>
-      <p class="hint">Sizes are for standard THHN/THWN insulated building wire — the most common single-conductor wire pulled in conduit.</p>
+      <p class="hint">{{conduit.sizesAreForStandardTHHNTHWNInsulated}}</p>
     </div>
 
     <div class="field">
-      <label class="field-label" for="fill-count">How many wires</label>
+      <label class="field-label" for="fill-count">{{conduit.howManyWiresLabel}}</label>
       <div class="input-unit">
-        <input type="number" id="fill-count" inputmode="numeric" min="1" max="60" step="1" placeholder="e.g. 3" required>
-        <span class="unit">wires</span>
+        <input type="number" id="fill-count" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:conduit.eGN3Placeholder}}" required>
+        <span class="unit">{{conduit.wires}}</span>
       </div>
-      <p class="hint">Count every insulated wire in the pipe, including the neutral and an insulated ground. All one size for now — mixed sizes coming.</p>
+      <p class="hint">{{conduit.countEveryInsulatedWireInThePipe}}</p>
     </div>
 
-    <button type="submit" class="calc-btn">Find conduit size</button>
+    <button type="submit" class="calc-btn">{{conduit.findConduitSizeButton}}</button>
   </form>
 
   <section id="results" class="card results" hidden aria-live="polite">
@@ -45,16 +46,16 @@
     <div class="result-grid" id="result-grid"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
-      <summary>How we calculated this</summary>
+      <summary>{{conduit.howWeCalculatedThisSummary}}</summary>
       <div class="math-body" id="math-body"></div>
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How full can a conduit be?", "acceptedAnswer": {"@type": "Answer", "text": "Under NEC Chapter 9, one wire may fill 53% of a conduit's internal area, two wires 31%, and three or more wires 40%. The calculation uses the official cross-section areas for the wire type and the conduit type."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:conduit.howFullCanAConduitBeQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:conduit.underNECChapterN9OneWireMayAnswer}}"}}]}</script>
   <section class="card explainer">
-    <h2>The fill rules, in plain English</h2>
-    <p>Wires need free space in a conduit — jam it full and you can't pull them through, and they can overheat. The standard U.S. limits (NEC Chapter 9): one wire may fill <strong>53%</strong> of the pipe's inside area, two wires <strong>31%</strong>, and three or more <strong>40%</strong>. We do that area math for you using the official wire and conduit dimensions.</p>
-    <p><strong>Good to know:</strong> long runs with lots of bends are easier with a size bigger than the legal minimum — many electricians upsize on purpose. This tool covers one wire size at a time; mixed-size pulls are coming.</p>
+    <h2>{{conduit.theFillRulesInPlainEnglishHeading}}</h2>
+    <p>{{conduit.wiresNeedFreeSpaceInAConduit}} <strong>{{conduit.n53%}}</strong> {{conduit.ofThePipeSInsideAreaTwo}} <strong>{{conduit.n31%}}</strong>{{conduit.andThreeOrMoreContinuation}} <strong>{{conduit.n40%}}</strong>{{conduit.weDoThatAreaMathForYouContinuation}}</p>
+    <p><strong>{{conduit.goodToKnow}}</strong> {{conduit.longRunsWithLotsOfBendsAre}}</p>
   </section>
 
 </main>

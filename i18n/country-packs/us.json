@@ -1,0 +1,49 @@
+{
+  "id": "nec",
+  "country": "us",
+  "standard": "NEC",
+  "verifiedFacts": {
+    "voltageDrop": "The 3% branch / 5% total figures are recommendations in NEC Informational Notes, not a generally enforceable requirement.",
+    "ampacity": "NEC Table 310.16 with NEC 240.4(D) small-conductor caps.",
+    "conduitFill": "NEC Chapter 9 Tables 4 and 5 with 53/31/40% fill limits.",
+    "boxFill": "NEC 314.16 cubic-inch allowances and counting rules."
+  },
+  "strings": {
+    "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC Voltage Drop Calculator — full math shown | VoltDrop",
+    "pages.us.wireSize.title": "Wire Size Calculator — NEC voltage drop sizing | VoltDrop",
+    "pages.us.maxLength.title": "Max Wire Length Calculator — NEC 3%/5% guidance | VoltDrop",
+    "pages.us.ampacity.title": "Ampacity Check — NEC Table 310.16 | VoltDrop",
+    "pages.us.conduit.title": "Conduit Fill Calculator — NEC Chapter 9 | VoltDrop",
+    "pages.us.boxFill.title": "Box Fill Calculator — NEC 314.16 | VoltDrop",
+    "pages.us.power.title": "Electrical Power Calculator — US/NEC edition | VoltDrop"
+  },
+  "localizedStrings": {
+    "es": {
+      "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "Calculadora de caída de tensión NEC — cálculo completo | VoltDrop",
+      "pages.us.wireSize.title": "Calculadora de calibre del conductor — caída de tensión NEC | VoltDrop",
+      "pages.us.maxLength.title": "Longitud máxima del conductor — recomendación NEC 3%/5% | VoltDrop",
+      "pages.us.ampacity.title": "Verificación de ampacidad — NEC Table 310.16 | VoltDrop",
+      "pages.us.conduit.title": "Llenado de tubo conduit — NEC Chapter 9 | VoltDrop",
+      "pages.us.boxFill.title": "Llenado de caja — NEC 314.16 | VoltDrop",
+      "pages.us.power.title": "Calculadora de potencia eléctrica — edición US/NEC | VoltDrop"
+    },
+    "fr-CA": {
+      "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC chute de tension calculateur — calcul complet affiché | VoltDrop",
+      "pages.us.wireSize.title": "calibre du conducteur calculateur — NEC chute de tension sizing | VoltDrop",
+      "pages.us.maxLength.title": "maximum conducteur longueur calculateur — NEC 3%/5% guidance | VoltDrop",
+      "pages.us.ampacity.title": "courant admissible vérifier — NEC tableau 310.16 | VoltDrop",
+      "pages.us.conduit.title": "remplissage de conduit calculateur — NEC Chapter 9 | VoltDrop",
+      "pages.us.boxFill.title": "remplissage de boîte calculateur — NEC 314.16 | VoltDrop",
+      "pages.us.power.title": "électrique puissance calculateur — US/NEC édition | VoltDrop"
+    },
+    "zh-Hans": {
+      "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC 电压降计算器 — 显示完整计算 | VoltDrop",
+      "pages.us.wireSize.title": "导线规格（线规）计算器 — NEC 电压降 | VoltDrop",
+      "pages.us.maxLength.title": "导线最大长度计算器 — NEC 3%/5% 建议 | VoltDrop",
+      "pages.us.ampacity.title": "载流量检查 — NEC Table 310.16 | VoltDrop",
+      "pages.us.conduit.title": "导管填充计算器 — NEC Chapter 9 | VoltDrop",
+      "pages.us.boxFill.title": "接线盒填充计算器 — NEC 314.16 | VoltDrop",
+      "pages.us.power.title": "电气功率计算器 — 美国/NEC 版本 | VoltDrop"
+    }
+  }
+}
