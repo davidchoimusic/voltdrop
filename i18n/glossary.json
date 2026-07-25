@@ -212,6 +212,12 @@
       "es": "con capacidad nominal para",
       "fr-CA": "homologué pour",
       "zh-Hans": "额定适用于"
+    },
+    "explain themselves": {
+      "gloss": "Brand promise that each calculator shows how its own result was obtained; it does not mean merely that the interface is self-explanatory.",
+      "es": "muestran cómo se obtiene cada resultado",
+      "fr-CA": "montrent comment chaque résultat est obtenu",
+      "zh-Hans": "展示每项结果的计算过程"
     }
   }
 }

@@ -232,6 +232,30 @@ for (const edition of EDITIONS) {
   }
 }
 
+// The homepage deliberately keeps the voltage-drop-specific brand promise.
+// Every other page must inherit the non-empty site-wide default.
+for (const edition of EDITIONS) {
+  const readTagline = (path) => {
+    const generated = editionPath(edition.prefix, path);
+    const html = readFileSync(generated ? `${generated}index.html` : 'index.html', 'utf8');
+    return html.match(/<p class="tagline">([^<]*)<\/p>/)?.[1]?.trim() || '';
+  };
+  const homepageTagline = readTagline('');
+  const nonHomepageTaglines = [
+    ...SCOPED_PATHS.filter(Boolean),
+    ...GUIDE_PATHS,
+  ].map(readTagline);
+  const defaultTagline = nonHomepageTaglines[0] || '';
+  const allNonHomepageUseDefault = nonHomepageTaglines.every((tagline) =>
+    tagline !== '' && tagline === defaultTagline);
+  checkBool(`${edition.prefix || 'us-en'} homepage and non-homepage taglines are distinct and non-empty`,
+    homepageTagline !== ''
+      && defaultTagline !== ''
+      && homepageTagline !== defaultTagline
+      && allNonHomepageUseDefault,
+    `${homepageTagline} | ${defaultTagline}`);
+}
+
 const oneWayTerms = {
   es: 'distancia en un solo sentido',
   'fr-CA': 'distance à l’aller (un seul trajet)',

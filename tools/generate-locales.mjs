@@ -43,6 +43,7 @@ for (const file of templateFiles) {
 for (const entries of Object.values(runtimeMap)) {
   for (const entry of entries) keys.add(entry.key);
 }
+keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
@@ -149,6 +150,7 @@ const words = {
     'runtime.boxFill.eachPrefix': 'Cada',
     'header.whichCodeApplies': '¿Qué código se aplica?',
     'header.languageInUnitedStates': 'Idioma en Estados Unidos',
+    'header.electricalCalculatorsThatExplainThemselves': 'Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.',
     'header.theVoltageDropCalculatorThatExplainsItself': 'La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.',
     'nav.electricalTools': 'Herramientas eléctricas',
     'nav.maxWireLength': 'Longitud máxima',
@@ -242,6 +244,7 @@ const words = {
     'runtime.boxFill.eachPrefix': 'Chaque',
     'header.whichCodeApplies': 'Quel code s’applique?',
     'header.languageInUnitedStates': 'Langue aux États-Unis',
+    'header.electricalCalculatorsThatExplainThemselves': 'Des calculateurs électriques qui montrent comment chaque résultat est obtenu. Sans inscription, sans deviner.',
     'header.theVoltageDropCalculatorThatExplainsItself': 'Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.',
     'nav.electricalTools': 'Outils électriques',
     'nav.maxWireLength': 'Longueur maximale',
@@ -332,6 +335,7 @@ const words = {
     'runtime.boxFill.eachPrefix': '每根',
     'header.whichCodeApplies': '适用哪部规范？',
     'header.languageInUnitedStates': '美国版本语言',
+    'header.electricalCalculatorsThatExplainThemselves': '电气计算器，展示每项结果的计算过程。无需注册，无需猜测。',
     'header.theVoltageDropCalculatorThatExplainsItself': '会解释每项结果的电压降计算器。无需注册，无需猜测。',
     'nav.electricalTools': '电气工具',
     'nav.maxWireLength': '导线最大长度',
@@ -1964,8 +1968,9 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
 }
 
 writeFileSync('i18n/safety-critical.json', `${JSON.stringify({
-  policy: 'Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review.',
+  policy: 'Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review. Selected high-exposure non-safety copy is listed separately for the same sealed review.',
   keys: safetyKeys,
+  extraReviewKeys: ['header.electricalCalculatorsThatExplainThemselves'],
 }, null, 2)}\n`);
 
 for (const [country, pack] of Object.entries(packs)) {

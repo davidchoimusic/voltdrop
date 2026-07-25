@@ -146,8 +146,13 @@ const makeAssets = (edition) => {
 };
 
 const templateSource = readFileSync('templates/index.html', 'utf8');
+const DEFAULT_TAGLINE_KEY = 'header.electricalCalculatorsThatExplainThemselves';
 
 const PAGES = [
+  {
+    dir: '',
+    taglineKey: 'header.theVoltageDropCalculatorThatExplainsItself',
+  },
   {
     dir: 'wire-size-calculator',
     mode: 'size',
@@ -326,7 +331,10 @@ const PAGES = [
   },
 ];
 
-const scopedPages = PAGES.filter((page) => !page.dir.startsWith('guides') && !page.dir.startsWith('ca/guides'));
+const homePage = PAGES.find((page) => page.dir === '');
+if (!homePage) throw new Error('PAGES must define the homepage');
+const scopedPages = PAGES.filter((page) =>
+  page.dir !== '' && !page.dir.startsWith('guides') && !page.dir.startsWith('ca/guides'));
 const guidePages = PAGES.filter((page) => page.dir.startsWith('guides') || page.dir.startsWith('ca/guides'));
 
 const editionPath = (edition, dir = '') => {
@@ -348,6 +356,14 @@ const applyMetadata = (html, { title, description, canonical, alternates }) => h
   .replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${description}$2`)
   .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${canonical}">\n${alternates}`)
   .replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${canonical}$2`);
+const applyTagline = (html, page, edition) => {
+  const tagline = text(page.taglineKey ?? DEFAULT_TAGLINE_KEY, edition);
+  if (!tagline) throw new Error(`Empty tagline for ${edition.id}/${page.dir || ''}`);
+  return html.replace(
+    /(<p class="tagline">)[^<]*(<\/p>)/,
+    `$1${tagline}$2`,
+  );
+};
 
 const writeEditionPage = (edition, dir, html) => {
   const outputDir = edition.prefix
@@ -371,12 +387,12 @@ for (const edition of EDITIONS) {
   const homeTitle = text('meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle', edition);
   const homeDescription = text('meta.home.freeVoltageDropCalculatorForCopperAndMeta', edition);
   const homeCanonical = absoluteUrl(edition);
-  let home = applyMetadata(src, {
+  let home = applyTagline(applyMetadata(src, {
     title: homeTitle,
     description: homeDescription,
     canonical: homeCanonical,
     alternates: hreflangMarkup(),
-  }).replace(
+  }), homePage, edition).replace(
     /<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>/,
     `<script type="application/ld+json" data-ld="app">${JSON.stringify({
       '@context': 'https://schema.org',
@@ -402,12 +418,12 @@ for (const edition of EDITIONS) {
       description: text(page.descriptionKey, edition),
     };
     const canonical = absoluteUrl(edition, p.dir);
-    let html = applyMetadata(src, {
+    let html = applyTagline(applyMetadata(src, {
       title: p.title,
       description: p.description,
       canonical,
       alternates: hreflangMarkup(p.dir),
-    });
+    }), page, edition);
 
     if (p.mode) {
       html = html.replace('<body ', `<body data-mode="${p.mode}" `);
@@ -460,12 +476,12 @@ for (const edition of EDITIONS) {
     const title = text(page.titleKey, edition);
     const description = text(page.descriptionKey, edition);
     const canonical = absoluteUrl(edition, dir);
-    let html = applyMetadata(src, {
+    let html = applyTagline(applyMetadata(src, {
       title,
       description,
       canonical,
       alternates: hreflangMarkup(dir),
-    });
+    }), page, edition);
     html = html.replace(/<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/, '');
     const main = renderTemplate(readFileSync(page.main, 'utf8'), page.main, edition);
     html = html

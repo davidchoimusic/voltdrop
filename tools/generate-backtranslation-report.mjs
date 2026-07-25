@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const english = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
+const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const passAInput = JSON.parse(readFileSync('i18n/backtranslation-input.json', 'utf8'));
 const passAOutput = JSON.parse(readFileSync('i18n/backtranslations.json', 'utf8'));
@@ -78,7 +79,7 @@ if (review.entries.length !== passAInput.entries.length || reviewById.size !== p
 const lines = [
   '# Safety-string back-translation report',
   '',
-  'Scope: every tool, legal, metadata, runtime, and Stage-3 guide string classified as an instruction, warning, or stated limit.',
+  'Scope: every tool, legal, metadata, runtime, and Stage-3 guide string classified as an instruction, warning, or stated limit, plus selected high-exposure copy.',
   '',
   'Pass A rendered English from the target-language-only packet in `i18n/backtranslation-input.json`.',
   'That packet contains no source English and uses opaque row IDs. Its saved output is',
@@ -94,7 +95,7 @@ let identical = 0;
 const verdictCounts = new Map();
 for (const edition of editions) {
   lines.push(`## ${edition.label}`, '', '| Key | Original English | Translation | Independent back-translation | Verdict |', '|---|---|---|---|---|');
-  for (const key of registry.keys) {
+  for (const key of reviewKeys) {
     if (!keyApplies(key, edition.country)) continue;
     const pack = packs[edition.country];
     const original = pack.strings[key] ?? valueAt(english, key);

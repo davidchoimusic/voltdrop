@@ -34,6 +34,7 @@ const oldByIdentity = new Map(oldComparison.entries.map((entry) => {
 }));
 
 const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
+const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
 const catalogs = Object.fromEntries(['es', 'fr-CA', 'zh-Hans'].map((locale) => [
   locale,
   JSON.parse(readFileSync(`i18n/strings/${locale}.json`, 'utf8')),
@@ -60,7 +61,7 @@ const valueAt = (source, key) => {
 const rows = [];
 let rowIndex = 0;
 for (const edition of editions) {
-  for (const key of registry.keys) {
+  for (const key of reviewKeys) {
     if (!keyApplies(key, edition.country)) continue;
     const pack = packs[edition.country];
     const targetText = pack.strings[key] !== undefined

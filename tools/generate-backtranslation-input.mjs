@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
+const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
 const catalogs = {
   es: JSON.parse(readFileSync('i18n/strings/es.json', 'utf8')),
   'fr-CA': JSON.parse(readFileSync('i18n/strings/fr-CA.json', 'utf8')),
@@ -30,7 +31,7 @@ const valueAt = (source, key) => {
 
 const entries = [];
 for (const edition of editions) {
-  for (const key of registry.keys) {
+  for (const key of reviewKeys) {
     if (!keyApplies(key, edition.country)) continue;
     const pack = packs[edition.country];
     const hasCountryString = pack.strings[key] !== undefined;
