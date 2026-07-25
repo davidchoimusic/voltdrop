@@ -225,6 +225,34 @@ checkBool('sitemap lists all 36 guide pages',
   missingGuideSitemapUrls.length === 0,
   missingGuideSitemapUrls.length ? missingGuideSitemapUrls.join(', ') : '36 guide URLs');
 
+// ---- Answer-engine companion: generated context, never a raw table dump.
+const llmsFullPath = 'llms-full.txt';
+const llmsFullExists = existsSync(llmsFullPath);
+const llmsFull = llmsFullExists ? readFileSync(llmsFullPath, 'utf8') : '';
+const llmsEditionPrefixes = ['`/`', '`/es/`', '`/zh/`', '`/ca/`', '`/ca-fr/`', '`/ca-zh/`'];
+const missingLlmsEditionPrefixes = llmsEditionPrefixes.filter((prefix) => !llmsFull.includes(prefix));
+const forbiddenLlmsTableValues = [
+  { name: '8 AWG copper 90°C ampacity', pattern: /\b55\s*A\b/i },
+  { name: '8 AWG THHN area', pattern: /\b0\.0366\b/i },
+  { name: '12 AWG box allowance', pattern: /\b2\.25\s+(?:cubic inches|cu in)\b/i },
+];
+const leakedLlmsTableValues = forbiddenLlmsTableValues
+  .filter(({ pattern }) => pattern.test(llmsFull))
+  .map(({ name }) => name);
+checkBool('llms-full.txt exists and is non-empty',
+  llmsFullExists && llmsFull.trim().length > 0,
+  llmsFullExists ? `${llmsFull.length} bytes` : 'missing');
+checkBool('llms-full.txt names all six edition prefixes',
+  missingLlmsEditionPrefixes.length === 0,
+  missingLlmsEditionPrefixes.length ? `missing ${missingLlmsEditionPrefixes.join(', ')}` : 'all six prefixes');
+checkBool('llms-full.txt contains no sampled electrical table values',
+  leakedLlmsTableValues.length === 0,
+  leakedLlmsTableValues.length ? leakedLlmsTableValues.join(', ') : 'ampacity, THHN-area, and box-allowance samples absent');
+checkBool('llms-full.txt is linked from llms.txt',
+  readFileSync('llms.txt', 'utf8').includes('https://voltdrop.app/llms-full.txt'));
+checkBool('llms-full.txt is not listed in sitemap.xml',
+  !sitemap.includes('llms-full.txt'));
+
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const protectedLiterals = [
@@ -487,6 +515,12 @@ for (const edition of EDITIONS) {
   }
 }
 
+const canadianConduitPage = readFileSync('ca/conduit-fill/index.html', 'utf8');
+checkBool('Canada conduit-fill planning note remains present',
+  canadianConduitPage.includes('Canada / CEC planning note:')
+    && canadianConduitPage.includes('Tables 6A–6K and 9')
+    && canadianConduitPage.includes('Do not use its conduit-size result as the final basis'));
+
 if (process.env.STATIC_ONLY === '1') {
   console.log(`\n${pass + dataPass} static checks passed (${dataPass} data-integrity), ${fail} failed.`);
   process.exit(fail ? 1 : 0);
@@ -540,9 +574,25 @@ const MATRIX_INPUTS = {
     ambient: 40,
     conductorCount: 6,
   },
-  conduit: { count: 10, wire: '12 AWG', family: 'emt' },
+  conduit: {
+    rows: [
+      { wire: '4 AWG', count: 3 },
+      { wire: '8 AWG', count: 1 },
+      { wire: '10 AWG', count: 2 },
+    ],
+    family: 'emt',
+  },
   power: { volts: 240, watts: 1500, powerFactor: 1 },
-  boxFill: { wire: '12 AWG', conductors: 6, devices: 1, grounds: 1, clamps: 0, marrettes: 0 },
+  boxFill: {
+    rows: [
+      { wire: '12 AWG', count: 6 },
+      { wire: '8 AWG', count: 1 },
+    ],
+    devices: 1,
+    grounds: 1,
+    clamps: 0,
+    marrettes: 2,
+  },
 };
 const circularMils = (wire) => {
   const row = TEST_WIRE_TABLE.find(([label]) => label === wire);
@@ -606,20 +656,24 @@ const tradeSizeInches = (label) => {
 const expectedConduitSize = (country) => {
   const input = MATRIX_INPUTS.conduit;
   const source = CONDUIT_DATA_BY_COUNTRY[country];
-  const needed = source.areas[input.wire] * input.count;
-  const fillLimit = input.count === 1 ? 0.53 : input.count === 2 ? 0.31 : 0.40;
+  const count = input.rows.reduce((sum, row) => sum + row.count, 0);
+  const needed = input.rows.reduce((sum, row) =>
+    sum + source.areas[row.wire] * row.count, 0);
+  const fillLimit = count === 1 ? 0.53 : count === 2 ? 0.31 : 0.40;
   const row = source.families[input.family].sizes.find(([, area]) => needed <= area * fillLimit);
   if (!row) throw new Error('Conduit-fill matrix input exceeds the sealed conduit table');
   return tradeSizeInches(row[0]);
 };
-const boxFillCounts = {
-  us: MATRIX_INPUTS.boxFill.conductors
-    + MATRIX_INPUTS.boxFill.devices * 2
-    + MATRIX_INPUTS.boxFill.grounds
-    + MATRIX_INPUTS.boxFill.clamps,
-  ca: MATRIX_INPUTS.boxFill.conductors
-    + MATRIX_INPUTS.boxFill.devices * 2
-    + Math.floor(MATRIX_INPUTS.boxFill.marrettes / 2),
+const expectedMixedBoxFill = (country) => {
+  const input = MATRIX_INPUTS.boxFill;
+  const source = country === 'ca' ? TEST_CEC_VOL_ML : TEST_VOL_PER_CONDUCTOR;
+  const conductorVolume = input.rows.reduce((sum, row) =>
+    sum + source[row.wire] * row.count, 0);
+  const largest = Math.max(...input.rows.map((row) => source[row.wire]));
+  const aggregateCounts = country === 'ca'
+    ? input.devices * 2 + Math.floor(input.marrettes / 2)
+    : input.devices * 2 + input.grounds + input.clamps;
+  return conductorVolume + aggregateCounts * largest;
 };
 const voltageDropLabels = {
   en: 'voltage drop on 12 AWG copper',
@@ -702,10 +756,19 @@ const calculatorCases = [
   {
     name: 'conduit fill',
     path: 'conduit-fill/',
+    expectsBreakdown: true,
     expected: (edition) => expectedConduitSize(edition.country),
     readNumber: (value) => tradeSizeInches(value.trim()),
     interact: async (targetPage) => {
-      await targetPage.fill('#fill-count', String(MATRIX_INPUTS.conduit.count));
+      const input = MATRIX_INPUTS.conduit;
+      await targetPage.selectOption('#fill-size', input.rows[0].wire);
+      await targetPage.fill('#fill-count', String(input.rows[0].count));
+      for (const row of input.rows.slice(1)) {
+        await targetPage.click('#fill-add-row');
+        const added = targetPage.locator('#fill-rows .mixed-wire-row').last();
+        await added.locator('.mixed-wire-size').selectOption(row.wire);
+        await added.locator('.mixed-wire-count').fill(String(row.count));
+      }
       await targetPage.click('#fill-form .calc-btn');
     },
   },
@@ -728,15 +791,24 @@ const calculatorCases = [
   {
     name: 'box fill',
     path: 'box-fill/',
-    expected: (edition) => edition.country === 'ca'
-      ? TEST_CEC_VOL_ML[MATRIX_INPUTS.boxFill.wire] * boxFillCounts.ca
-      : TEST_VOL_PER_CONDUCTOR[MATRIX_INPUTS.boxFill.wire] * boxFillCounts.us,
+    expectsBreakdown: true,
+    expected: (edition) => expectedMixedBoxFill(edition.country),
     readNumber: (value) => parseFloat(value.replace(/,/g, '')),
     interact: async (targetPage, edition) => {
       const input = MATRIX_INPUTS.boxFill;
       if (edition.country === 'ca') await targetPage.fill('#bf-custom', '400');
-      await targetPage.fill('#bf-conductors', String(input.conductors));
+      await targetPage.selectOption('#bf-size', input.rows[0].wire);
+      await targetPage.fill('#bf-conductors', String(input.rows[0].count));
+      for (const row of input.rows.slice(1)) {
+        await targetPage.click('#bf-add-row');
+        const added = targetPage.locator('#bf-rows .mixed-wire-row').last();
+        await added.locator('.mixed-wire-size').selectOption(row.wire);
+        await added.locator('.mixed-wire-count').fill(String(row.count));
+      }
       await targetPage.fill('#bf-devices', String(input.devices));
+      if (edition.country === 'ca') {
+        await targetPage.fill('#bf-marrettes', String(input.marrettes));
+      }
       await targetPage.click('#bf-form .calc-btn');
     },
   },
@@ -767,6 +839,7 @@ for (const edition of EDITIONS) {
           && getComputedStyle(results).display !== 'none',
         value: bigNumber?.textContent?.trim() || '',
         label: bigLabel?.textContent || '',
+        breakdown: document.getElementById('itemized-breakdown')?.textContent?.trim() || '',
       };
     });
     checkBool(`${label} renders #results and #big-number`,
@@ -785,6 +858,11 @@ for (const edition of EDITIONS) {
     checkBool(`${label} interaction has zero page errors`,
       interactionErrors.length === 0,
       interactionErrors.join(' | '));
+    if (calculator.expectsBreakdown) {
+      checkBool(`${label} renders an itemized mixed-size breakdown`,
+        render.breakdown.length > 0,
+        render.breakdown || 'no breakdown');
+    }
   }
 
   await editionPage.close();
@@ -840,6 +918,34 @@ for (const width of [360, 390]) {
   }
   checkBool(`header controls are one line + no overflow at ${width}px`, badPaths.length === 0,
     badPaths.length ? `failed on ${badPaths.join(', ')}` : `all ${GENERATED_PATHS.length} pages`);
+}
+
+// Repeatable rows are the narrow-layout risk: add two rows on both fill pages
+// in every edition, then measure the actual rendered document.
+for (const width of [360, 390]) {
+  await page.setViewportSize({ width, height: 844 });
+  const badFillPaths = [];
+  for (const edition of EDITIONS) {
+    for (const [path, addButton, rows] of [
+      ['conduit-fill/', '#fill-add-row', '#fill-rows .mixed-wire-row'],
+      ['box-fill/', '#bf-add-row', '#bf-rows .mixed-wire-row'],
+    ]) {
+      const generated = editionPath(edition.prefix, path);
+      await page.goto(BASE + generated);
+      await page.click(addButton);
+      await page.click(addButton);
+      const fit = await page.evaluate((rowSelector) => ({
+        noPageOverflow: document.documentElement.scrollWidth <= window.innerWidth,
+        rowsFit: [...document.querySelectorAll(rowSelector)].every((row) =>
+          row.getBoundingClientRect().right <= window.innerWidth
+          && row.scrollWidth <= row.clientWidth),
+      }), rows);
+      if (!fit.noPageOverflow || !fit.rowsFit) badFillPaths.push(`/${generated}`);
+    }
+  }
+  checkBool(`mixed-size rows have no horizontal overflow at ${width}px`,
+    badFillPaths.length === 0,
+    badFillPaths.length ? badFillPaths.join(', ') : 'all six editions × both fill pages');
 }
 
 // ---- Edition picker: deliberate navigation and honest guide fallback.
@@ -1237,6 +1343,40 @@ let fillCells = await page.textContent('#result-grid');
 console.log(fillCells.includes('25.0%') ? 'PASS fill % = 25.0%' : `FAIL fill %: "${fillCells.slice(0, 120)}"`); fillCells.includes('25.0%') ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/8-conduit.png`, fullPage: true });
 
+// Mixed conduit: 3×4 AWG + 1×8 AWG + 2×10 AWG
+// = 3×0.0824 + 1×0.0366 + 2×0.0211 = 0.3260 sq in.
+// Six total conductors select 40%, so 1" EMT allows 0.864×0.40=0.3456.
+await page.goto(BASE + 'conduit-fill/');
+await page.selectOption('#fill-size', '4 AWG');
+await page.fill('#fill-count', '3');
+await page.click('#fill-add-row');
+let addedFillRow = page.locator('#fill-rows .mixed-wire-row').last();
+await addedFillRow.locator('.mixed-wire-size').selectOption('8 AWG');
+await addedFillRow.locator('.mixed-wire-count').fill('1');
+await page.click('#fill-add-row');
+addedFillRow = page.locator('#fill-rows .mixed-wire-row').last();
+await addedFillRow.locator('.mixed-wire-size').selectOption('10 AWG');
+await addedFillRow.locator('.mixed-wire-count').fill('2');
+await page.click('#fill-form .calc-btn');
+fillBig = await page.textContent('#big-number');
+fillCells = await page.textContent('#result-grid');
+const mixedFillBreakdown = (await page.textContent('#itemized-breakdown')).replace(/\s+/g, ' ');
+const mixedFillMath = (await page.textContent('#math-body')).replace(/\s+/g, ' ');
+checkBool('mixed conduit uses 0.3260 sq in and the six-conductor 40% rule',
+  fillBig.trim() === '1"'
+    && fillCells.includes('0.326 sq in')
+    && fillCells.includes('40% for 3+ wires')
+    && mixedFillMath.includes('Allowed for 6 conductors')
+    && mixedFillMath.includes('0.864 × 40% = 0.3456 sq in'),
+  `${fillBig.trim()} | ${fillCells.replace(/\s+/g, ' ')} | ${mixedFillMath}`);
+checkBool('mixed conduit itemizes every conductor size',
+  mixedFillBreakdown.includes('3 × 4 AWG THHN')
+    && mixedFillBreakdown.includes('3 × 0.0824 = 0.2472 sq in')
+    && mixedFillBreakdown.includes('1 × 8 AWG THHN')
+    && mixedFillBreakdown.includes('2 × 10 AWG THHN')
+    && mixedFillBreakdown.includes('0.3260 sq in'),
+  mixedFillBreakdown);
+
 // ---- Power Calculator: 1φ 240V 1500W PF1 → 6.25 A; 3φ 480V 10000W PF0.85 → 14.15 A
 await page.goto(BASE + 'power-calculator/');
 await page.click('[data-system="ac1"]');
@@ -1273,6 +1413,55 @@ check('box fill 14 AWG exact fit', parseFloat(bfBig.replace(/,/g, '')), 18.0);
 cls = await page.getAttribute('#verdict', 'class');
 console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits' : `FAIL fit verdict: ${cls}`); (cls.includes('warn') || cls.includes('good')) ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
+
+// Mixed box: conductors = 6×2.25 + 1×3.00 = 16.50 cu in.
+// One device uses twice the largest listed conductor (8 AWG): 2×3.00 = 6.00.
+await page.goto(BASE + 'box-fill/');
+await page.fill('#bf-conductors', '6');
+await page.fill('#bf-devices', '1');
+await page.click('[data-grounds="0"]');
+await page.click('#bf-add-row');
+let addedBoxRow = page.locator('#bf-rows .mixed-wire-row').last();
+await addedBoxRow.locator('.mixed-wire-size').selectOption('8 AWG');
+await addedBoxRow.locator('.mixed-wire-count').fill('1');
+await page.click('#bf-form .calc-btn');
+bfBig = await page.textContent('#big-number');
+const mixedBoxBreakdown = (await page.textContent('#itemized-breakdown')).replace(/\s+/g, ' ');
+check('mixed box total with 8 AWG driving the device allowance',
+  parseFloat(bfBig.replace(/,/g, '')), 22.50);
+checkBool('mixed box itemizes the 8 AWG-driven device allowance',
+  mixedBoxBreakdown.includes('6 × 12 AWG')
+    && mixedBoxBreakdown.includes('6 × 2.25 = 13.50 cu in')
+    && mixedBoxBreakdown.includes('1 × 8 AWG')
+    && mixedBoxBreakdown.includes('1 × 3.00 = 3.00 cu in')
+    && mixedBoxBreakdown.includes('1 device (8 AWG largest)')
+    && mixedBoxBreakdown.includes('1 × 2 × 3.00 = 6.00 cu in')
+    && mixedBoxBreakdown.includes('TOTAL REQUIRED22.50 cu in'),
+  mixedBoxBreakdown);
+
+// Adding one larger conductor changes an 18 cu in box from passing to failing:
+// 6×12 + grounds = 15.75; add 1×8 and the ground allowance rises to 3.00,
+// giving 13.50 + 3.00 + 3.00 = 19.50. A 21.0 cu in box then passes.
+await page.goto(BASE + 'box-fill/');
+await page.fill('#bf-conductors', '6');
+await page.click('#bf-form .calc-btn');
+check('box before larger conductor', parseFloat((await page.textContent('#big-number')).replace(/,/g, '')), 15.75);
+cls = await page.getAttribute('#verdict', 'class');
+const beforeLargerFits = cls.includes('good') || cls.includes('warn');
+await page.click('#bf-add-row');
+addedBoxRow = page.locator('#bf-rows .mixed-wire-row').last();
+await addedBoxRow.locator('.mixed-wire-size').selectOption('8 AWG');
+await addedBoxRow.locator('.mixed-wire-count').fill('1');
+await page.click('#bf-form .calc-btn');
+check('box after one larger conductor', parseFloat((await page.textContent('#big-number')).replace(/,/g, '')), 19.50);
+cls = await page.getAttribute('#verdict', 'class');
+const eighteenFails = cls.includes('bad');
+await page.selectOption('#bf-box', '10');
+await page.click('#bf-form .calc-btn');
+cls = await page.getAttribute('#verdict', 'class');
+checkBool('one larger conductor changes the passing box from 18.0 to 21.0 cu in',
+  beforeLargerFits && eighteenFails && (cls.includes('good') || cls.includes('warn')),
+  `before=${beforeLargerFits} 18-after=${eighteenFails} 21-after=${cls}`);
 
 // ---- Guides: every edition loads, has an h1, highlights Guides, and carries translated FAQ data.
 for (const g of GENERATED_PATHS.filter((path) => path.includes('guides/'))) {

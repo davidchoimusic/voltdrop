@@ -492,3 +492,29 @@ for (const edition of EDITIONS) {
   }
   console.log(`edition ${edition.id}:`, Object.entries(assets.hashes).map(([k, v]) => `${k}?v=${v}`).join(' '));
 }
+
+// Build the answer-engine companion from the same catalogs and country packs
+// as the rendered pages. The template supplies only structure and scope
+// boundaries; substantive descriptions remain owned by page strings.
+const llmsEditions = {
+  us: EDITIONS.find((edition) => edition.id === 'us-en'),
+  ca: EDITIONS.find((edition) => edition.id === 'ca-en'),
+};
+const llmsTemplate = readFileSync('templates/llms-full.txt', 'utf8');
+const llmsFull = llmsTemplate.replace(
+  /\{\{(us|ca|usFact|caFact):([A-Za-z0-9.%]+)\}\}/g,
+  (_, source, key) => {
+    if (source === 'us') return text(key, llmsEditions.us);
+    if (source === 'ca') return text(key, llmsEditions.ca);
+    const pack = source === 'usFact' ? countryPacks.us : countryPacks.ca;
+    const value = valueAt(pack.verifiedFacts, key);
+    if (typeof value !== 'string') throw new Error(`Missing llms-full source string: ${source}:${key}`);
+    return value;
+  },
+);
+const unresolvedLlmsPlaceholder = llmsFull.match(/\{\{[^}]+\}\}/);
+if (unresolvedLlmsPlaceholder) {
+  throw new Error(`Unresolved llms-full placeholder: ${unresolvedLlmsPlaceholder[0]}`);
+}
+writeFileSync('llms-full.txt', `${llmsFull.trim()}\n`);
+console.log('built llms-full.txt');

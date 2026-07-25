@@ -39,6 +39,12 @@
       "fr-CA": "conducteur",
       "zh-Hans": "导体"
     },
+    "largest conductor": {
+      "gloss": "The physically largest conductor size present; in AWG, a smaller gauge number means a larger conductor.",
+      "es": "conductor más grande",
+      "fr-CA": "plus gros conducteur",
+      "zh-Hans": "最大导线"
+    },
     "wire size / gauge": {
       "gloss": "The standardized cross-sectional size designation of a wire.",
       "es": "calibre del conductor",

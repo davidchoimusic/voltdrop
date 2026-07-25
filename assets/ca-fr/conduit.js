@@ -25,29 +25,82 @@ const CONDUIT = {
 const fillLimit = (n) => (n === 1 ? 0.53 : n === 2 ? 0.31 : 0.40);
 const CONDUIT_RESULT_TEXT = {
   tooLarge: 'plus que ce qu’un conduit {conduit} de 4" peut contenir légalement',
-  tooLargeMath: '<p>{count} × {size} THHN = {area} sq in de conducteurs, ce qui dépasse la limite de remplissage de {percent}% même dans un conduit {conduit} de 4".</p>',
-  smallest: 'plus petit conduit {conduit} pour {count} × {size} THHN',
+  tooLargeMixed: '<p>L’aire combinée des conducteurs est de {area} sq in, ce qui dépasse la limite de remplissage de {percent}% même dans un conduit {conduit} de 4".</p>',
+  smallestMixed: 'plus petit conduit {conduit} pour {count} conducteurs',
   fillAtSize: '{percent}% de {size}',
   oneWireLimit: '{percent}% pour 1 conducteur',
   twoWireLimit: '{percent}% pour 2 conducteurs',
   manyWireLimit: '{percent}% pour 3+ conducteurs',
   squareInches: '{area} sq in',
   comfortable: 'Bon dégagement sous la limite de {percent}%.',
-  math: '\n<p>Chaque conducteur {size} THHN a une section de <strong>{wireArea} sq in</strong> (NEC Chapter 9, Table 5).</p>\n<div class="formula">{count} conducteurs × {wireArea} = {needed} sq in requis\nAire intérieure du conduit {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermis : {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  remplissage de {actualPercent}%</div>',
+  conductorBreakdown: '<span>{count} × {size} THHN</span><span>{count} × {wireArea} = {rowArea} sq in</span>',
+  conductorMathText: '{count} × {size} : {count} × {wireArea} = {rowArea} sq in',
+  totalBreakdown: '<span><strong>AIRE TOTALE DES CONDUCTEURS</strong></span><span><strong>{area} sq in</strong></span>',
+  mathMixed: '\n<p>Chaque ligne utilise la section du conducteur de NEC Chapter 9, Table 5.</p>\n<div class="formula">{breakdown}\nTOTAL = {needed} sq in\nAire intérieure du conduit {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermis pour {count} conducteurs : {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  remplissage réel de {actualPercent}%</div>',
 };
 
 let conduitType = 'emt';
 
 const $ = (id) => document.getElementById(id);
 
-const sel = $('fill-size');
-Object.keys(THHN_AREA).forEach((label) => {
-  const opt = document.createElement('option');
-  opt.value = label;
-  opt.textContent = label;
-  sel.appendChild(opt);
+function populateSizeSelect(select, selected = '12 AWG') {
+  Object.keys(THHN_AREA).forEach((label) => {
+    const opt = document.createElement('option');
+    opt.value = label;
+    opt.textContent = label;
+    select.appendChild(opt);
+  });
+  select.value = selected;
+}
+
+function updateRemoveButtons() {
+  const rows = document.querySelectorAll('#fill-rows .mixed-wire-row');
+  rows.forEach((row) => {
+    row.querySelector('.remove-size-btn').hidden = rows.length === 1;
+  });
+}
+
+function conductorRows() {
+  return [...document.querySelectorAll('#fill-rows .mixed-wire-row')].map((row) => {
+    const size = row.querySelector('.mixed-wire-size').value;
+    const count = Math.floor(Number(row.querySelector('.mixed-wire-count').value));
+    return { size, count, wireArea: THHN_AREA[size] };
+  });
+}
+
+function renderBreakdown(lines, total) {
+  const itemized = $('itemized-breakdown');
+  itemized.innerHTML = '';
+  lines.forEach((html) => {
+    const line = document.createElement('div');
+    line.className = 'breakdown-line';
+    line.innerHTML = html;
+    itemized.appendChild(line);
+  });
+  const totalLine = document.createElement('div');
+  totalLine.className = 'breakdown-line breakdown-total';
+  totalLine.innerHTML = total;
+  itemized.appendChild(totalLine);
+}
+
+populateSizeSelect($('fill-size'));
+
+$('fill-add-row').addEventListener('click', () => {
+  const fragment = $('fill-row-template').content.cloneNode(true);
+  const row = fragment.querySelector('.mixed-wire-row');
+  populateSizeSelect(row.querySelector('.mixed-wire-size'));
+  $('fill-rows').appendChild(fragment);
+  updateRemoveButtons();
+  row.querySelector('.mixed-wire-size').focus();
 });
-sel.value = '12 AWG';
+
+$('fill-rows').addEventListener('click', (event) => {
+  const button = event.target.closest('.remove-size-btn');
+  if (!button) return;
+  button.closest('.mixed-wire-row').remove();
+  updateRemoveButtons();
+  if (!$('results').hidden) calc();
+});
 
 document.querySelectorAll('.seg-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -62,13 +115,18 @@ document.querySelectorAll('.seg-btn').forEach((btn) => {
 $('fill-form').addEventListener('submit', (e) => { e.preventDefault(); calc(); });
 
 function calc() {
-  const count = Math.floor(Number($('fill-count').value));
-  if (!count || count < 1) return;
-  const label = $('fill-size').value;
-  const wireArea = THHN_AREA[label];
-  const needed = wireArea * count;
-  const limit = fillLimit(count);
+  const rows = conductorRows();
+  if (!rows.length || rows.some((row) => !Number.isFinite(row.count) || row.count < 1)) return;
+  const totalCount = rows.reduce((sum, row) => sum + row.count, 0);
+  const needed = rows.reduce((sum, row) => sum + row.wireArea * row.count, 0);
+  const limit = fillLimit(totalCount);
   const family = CONDUIT[conduitType];
+  const breakdown = rows.map((row) => vdFormat(CONDUIT_RESULT_TEXT.conductorBreakdown, {
+    count: row.count,
+    size: row.size,
+    wireArea: row.wireArea.toFixed(4),
+    rowArea: (row.wireArea * row.count).toFixed(4),
+  }));
 
   let pick = null;
   for (const [size, area] of family.sizes) {
@@ -83,9 +141,11 @@ function calc() {
     $('big-label').textContent = vdFormat(CONDUIT_RESULT_TEXT.tooLarge, { conduit: family.name });
     $('result-grid').innerHTML = '';
     $('verdict-note').textContent = 'Répartissez le parcours dans plusieurs conduits ou réduisez le nombre de conducteurs.';
-    $('math-body').innerHTML = vdFormat(CONDUIT_RESULT_TEXT.tooLargeMath, {
-      count,
-      size: label,
+    renderBreakdown(
+      breakdown,
+      vdFormat(CONDUIT_RESULT_TEXT.totalBreakdown, { area: needed.toFixed(4) }),
+    );
+    $('math-body').innerHTML = vdFormat(CONDUIT_RESULT_TEXT.tooLargeMixed, {
       area: needed.toFixed(3),
       percent: Math.round(limit * 100),
       conduit: family.name,
@@ -98,16 +158,15 @@ function calc() {
   verdict.className = 'verdict ' + (pct <= limit * 100 * 0.85 ? 'good' : 'warn');
   $('verdict-badge').textContent = pct <= limit * 100 * 0.85 ? 'convient' : 'JUSTE';
   $('big-number').textContent = pick.size;
-  $('big-label').textContent = vdFormat(CONDUIT_RESULT_TEXT.smallest, {
+  $('big-label').textContent = vdFormat(CONDUIT_RESULT_TEXT.smallestMixed, {
     conduit: family.name,
-    count,
-    size: label,
+    count: totalCount,
   });
 
   const nextUp = family.sizes[family.sizes.findIndex(([s]) => s === pick.size) + 1];
-  const limitPattern = count >= 3
+  const limitPattern = totalCount >= 3
     ? CONDUIT_RESULT_TEXT.manyWireLimit
-    : count === 1
+    : totalCount === 1
       ? CONDUIT_RESULT_TEXT.oneWireLimit
       : CONDUIT_RESULT_TEXT.twoWireLimit;
   $('result-grid').innerHTML = [
@@ -116,15 +175,23 @@ function calc() {
     ['aire totale des conducteurs', vdFormat(CONDUIT_RESULT_TEXT.squareInches, { area: needed.toFixed(3) })],
     nextUp ? ['Tirage plus facile : diamètre suivant', nextUp[0]] : ['ce est le plus grand calibre', '4"'],
   ].map(([k, v]) => `<div class="result-cell"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+  renderBreakdown(
+    breakdown,
+    vdFormat(CONDUIT_RESULT_TEXT.totalBreakdown, { area: needed.toFixed(4) }),
+  );
 
   $('verdict-note').textContent = pct > limit * 100 * 0.85
     ? 'Permis, mais près de la limite. Un diamètre supérieur facilite beaucoup le tirage sur les longs parcours ou avec plusieurs coudes.'
     : vdFormat(CONDUIT_RESULT_TEXT.comfortable, { percent: Math.round(limit * 100) });
 
-  $('math-body').innerHTML = vdFormat(CONDUIT_RESULT_TEXT.math, {
-    size: label,
-    wireArea,
-    count,
+  $('math-body').innerHTML = vdFormat(CONDUIT_RESULT_TEXT.mathMixed, {
+    breakdown: rows.map((row) => vdFormat(CONDUIT_RESULT_TEXT.conductorMathText, {
+      count: row.count,
+      size: row.size,
+      wireArea: row.wireArea.toFixed(4),
+      rowArea: (row.count * row.wireArea).toFixed(4),
+    })).join('\n'),
+    count: totalCount,
     needed: needed.toFixed(4),
     conduitSize: pick.size,
     conduit: family.name,

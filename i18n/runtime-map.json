@@ -604,24 +604,6 @@
       "quote": "'"
     },
     {
-      "key": "runtime.conduit.tHHN",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.sqInOfWireWhichExceedsThe",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.%FillLimitOfEvenN4",
-      "kind": "templateChunk",
-      "leading": "",
-      "trailing": " "
-    },
-    {
       "key": "runtime.conduit.fITS",
       "kind": "quoted",
       "quote": "'"
@@ -690,86 +672,6 @@
       "key": "runtime.conduit.%Limit",
       "kind": "quoted",
       "quote": "'"
-    },
-    {
-      "key": "runtime.conduit.tHHNWireHasACrossSectionOf",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.conduit.sqInNECChapterN9TableN5",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.conduit.wires",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.sqInNeeded",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": "\n"
-    },
-    {
-      "key": "runtime.conduit.insideArea",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.sqInNECChapterN9TableN4Allowed",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.sqInVariant",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": "\n"
-    },
-    {
-      "key": "runtime.conduit.fitsAt",
-      "kind": "templateChunk",
-      "leading": "  ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.conduit.%Fill",
-      "kind": "templateChunk",
-      "leading": "",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.conduit.smallestPrefix",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.conduit.forJoin",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.conduit.oneWire",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.conduit.twoWires",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.conduit.eachPrefix",
-      "kind": "templateChunk",
-      "leading": "\n<p>",
-      "trailing": " "
     }
   ],
   "boxfill.js": [
@@ -1027,115 +929,12 @@
       "quote": "'"
     },
     {
-      "key": "runtime.boxFill.insulatedConductorRequires",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.mLOfBoxSpaceCECTableN22Rule",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.wires",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
       "key": "runtime.boxFill.marrettePair",
       "kind": "quoted",
       "quote": "'"
     },
     {
-      "key": "runtime.boxFill.totalCounts",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.boxFill.mLNeeded",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": "\n"
-    },
-    {
-      "key": "runtime.boxFill.mLAvailable",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
       "key": "runtime.boxFill.dOESNOTFIT",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.canadianFinePrintBareBondWiresAndCable",
-      "kind": "templateChunk",
-      "leading": "",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.conductorRequires",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.cuInOfBoxSpaceNECTableN314",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.groundsN1",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.noGroundsN0",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.clampsN1",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.noClampsN0",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.cuInBlock",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.boxFill.cuInNeeded",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": "\n"
-    },
-    {
-      "key": "runtime.boxFill.cuInAvailable",
-      "kind": "templateChunk",
-      "leading": " ",
-      "trailing": " "
-    },
-    {
-      "key": "runtime.boxFill.finePrintPigtailsThatStayEntirelyInsideThe",
-      "kind": "templateChunk",
-      "leading": "",
-      "trailing": ""
-    },
-    {
-      "key": "runtime.boxFill.availableSuffix",
       "kind": "quoted",
       "quote": "'"
     },
@@ -1153,12 +952,6 @@
       "key": "runtime.boxFill.marrettePairsLower",
       "kind": "quoted",
       "quote": "'"
-    },
-    {
-      "key": "runtime.boxFill.eachPrefix",
-      "kind": "templateChunk",
-      "leading": "\n<p>",
-      "trailing": " "
     }
   ],
   "power.js": [
