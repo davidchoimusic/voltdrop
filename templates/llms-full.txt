@@ -1,0 +1,144 @@
+# VoltDrop: full site context
+
+This file is English-only. It summarizes the calculators and guides without reproducing electrical data tables. Use the linked calculator for a specific result and confirm the locally adopted code edition and amendments. `llms-full.txt` is a proposed convention; use by major crawlers is not confirmed.
+
+## What VoltDrop is
+
+{{us:meta.home.freeElectricalCalculatorsForElectriciansVoltageDropMeta}}
+
+{{us:drop.almostAlwaysOneOfTwoThingsSomeAnswer}}
+
+The defining input rule is simple: distance means one-way distance from source to load. VoltDrop doubles that distance internally for DC and single-phase round-trip current. Do not double the entered distance.
+
+## Editions
+
+US English uses the NEC at https://voltdrop.app/ with the URL prefix `/`.
+US Spanish uses the NEC at https://voltdrop.app/es/ with the URL prefix `/es/`.
+US Simplified Chinese uses the NEC at https://voltdrop.app/zh/ with the URL prefix `/zh/`.
+Canada English uses the CEC at https://voltdrop.app/ca/ with the URL prefix `/ca/`.
+Quebec French uses the CEC at https://voltdrop.app/ca-fr/ with the URL prefix `/ca-fr/`.
+Canada Simplified Chinese uses the CEC at https://voltdrop.app/ca-zh/ with the URL prefix `/ca-zh/`.
+
+The non-English editions contain localized versions of the same tools and guides. Their content is not duplicated here.
+
+## Tools
+
+### Voltage Drop Calculator
+
+URL: https://voltdrop.app/
+Question: How much voltage will a specified wire lose over a run?
+Answer: {{us:drop.howMuchVoltageDoesYourWireLose}}
+Does not answer: It does not establish that the wire can safely carry the load. Ampacity is an independent check.
+
+### Wire Size Calculator
+
+URL: https://voltdrop.app/wire-size-calculator/
+Question: What is the smallest copper or aluminum AWG that stays inside a selected voltage-drop limit?
+Answer: {{us:pages.us.wireSize.description}}
+Does not answer: It sizes for voltage drop only. It does not confirm ampacity, breaker protection, conduit fill, or box fill.
+
+### Max Wire Length Calculator
+
+URL: https://voltdrop.app/max-wire-length/
+Question: How far can a specified wire run before reaching a selected voltage-drop limit?
+Answer: {{us:pages.us.maxLength.description}}
+Does not answer: It does not confirm that the wire is safe for the current. The wire must pass a separate ampacity check at every distance.
+
+### Ampacity and Derating Check
+
+URL: https://voltdrop.app/ampacity-check/
+Question: How much current may this conductor carry after heat-related adjustments and code limits?
+Answer: {{us:pages.us.ampacity.description}}
+Does not answer: It does not calculate voltage drop. A conductor must pass both ampacity and voltage-drop checks, and either check can require the larger wire.
+
+### Conduit Fill Calculator
+
+URL: https://voltdrop.app/conduit-fill/
+Question: What is the smallest conduit that has legal physical space for the entered conductor mix?
+Answer: {{us:pages.us.conduit.description}}
+Does not answer: It does not check ampacity, voltage drop, box fill, pulling difficulty, or every installation condition. {{ca:pages.us.conduit.description}}
+
+### Box Fill Calculator
+
+URL: https://voltdrop.app/box-fill/
+Question: Is the selected junction or device box large enough for the entered conductor mix and fittings?
+US answer: {{us:pages.us.boxFill.description}}
+Canadian answer: {{ca:pages.us.boxFill.description}}
+Does not answer: It does not size conductors or conduit. US and Canadian box-fill rules are different calculations, not a language change.
+
+### Electrical Power Calculator
+
+URL: https://voltdrop.app/power-calculator/
+Question: What are the corresponding volts, amps, watts, kilowatts, or kilovolt-amperes for this DC or AC load?
+Answer: {{us:pages.us.power.description}}
+Does not answer: It does not select a wire, breaker, conduit, or box. Use its current result as an input to the separate safety checks.
+
+## Concepts that control the answer
+
+Ampacity and voltage drop answer different questions. Ampacity limits conductor heating. Voltage drop limits lost voltage and poor equipment performance. Passing one never proves the other.
+
+{{us:ampacity.deratingOrderExplanation}}
+
+The final permitted ampacity is the lowest of three results: the ampacity after ambient and conductor-count derating, the termination-temperature limit, or the small-conductor overcurrent-device cap. The lowest result is the binding limit.
+
+{{us:ampacity.continuousLoadSeparateExplanation}}
+
+Continuous-load sizing is a load-side rule for a load that runs a long time. Derating is a conductor-heat rule for ambient temperature and grouped current-carrying conductors. Do not combine them into one unexplained multiplier.
+
+## United States and Canada differences
+
+United States voltage drop: {{usFact:voltageDrop}}
+
+Canada voltage drop: {{caFact:voltageDrop}}
+
+At ten current-carrying conductors, the NEC adjustment factor is 0.50 and the CEC Table 5C factor is 0.70. Applying the US factor to Canadian work understates permitted ampacity; applying the Canadian factor to US work overstates it.
+
+Canada ambient correction: {{ca:ampacity.ambientTemperatureHint}}
+
+Box fill is a real country fork. The US calculation uses NEC cubic-inch allowances for conductors, devices, grounds, and clamps. The Canadian calculation uses CEC millilitre allowances and different counting for insulated conductors, bonding conductors, clamps, devices, and marrettes.
+
+## Guides
+
+### Wire size for a sub-panel
+
+URL: https://voltdrop.app/guides/sub-panel-wire-size/
+Question: What wire size does a shed or detached-garage sub-panel need after both ampacity and distance are considered?
+Summary: {{us:guides.index.theCompleteAnswerWithDistanceTablesN50}} Ampacity sets the safe current limit, while voltage drop can require a larger conductor on a long feeder; both checks apply.
+
+### What size wire for 50 amps
+
+URL: https://voltdrop.app/guides/50-amp-wire-size/
+Question: Why do correct 50-amp answers differ by wire type and installation?
+Summary: {{us:guides.index.whyTheInternetDisagreesN6VsN8}} The correct choice depends on the wire type, its permitted temperature column, the terminations, and the run length.
+
+### Wire ampacity chart
+
+URL: https://voltdrop.app/guides/wire-ampacity-chart/
+Question: Which ampacity temperature column applies to a conductor and its terminations?
+Summary: {{us:guides.index.theFullCopperAndAluminumTableCurrent}} {{us:guides.ampacityChart.theNECCapsNMBCableAtAnswer}}
+
+### How far can you run 12 gauge wire
+
+URL: https://voltdrop.app/guides/how-far-12-gauge-wire/
+Question: How does the maximum useful run change with voltage, load, and the chosen drop target?
+Summary: {{us:guides.index.distanceLimitsForEveryCommonGaugeAt}} {{us:guides.twelveGauge.computedWithOurVerifiedEngineKN12}}
+
+### Voltage drop formula
+
+URL: https://voltdrop.app/guides/voltage-drop-formula/
+Question: How is voltage drop calculated, why do calculators disagree, and what is the status of the 3% and 5% figures?
+Summary: {{us:guides.index.theFormulaThreeWorkedExamplesAndThe}} {{us:guides.voltageDrop.itSAnOfficialRecommendationInNECAnswer}}
+
+Canadian English versions use the same guide paths after `/ca/` and apply the Canadian rules. Spanish, Simplified Chinese, Quebec French, and Canadian Simplified Chinese versions use their edition prefixes listed above.
+
+## Code editions implemented
+
+{{us:terms.forUSCodeBasedCalculationsVoltDrop}}
+
+{{us:terms.forCanadianCodeBasedCalculationsVoltDrop}}
+
+{{us:terms.statesProvincesAndMunicipalitiesAdoptCodes}}
+
+## Deliberate exclusions
+
+This file does not reproduce ampacity grids, correction-factor tables, conductor cross-sectional areas, conduit dimensions, box volumes, or per-conductor box allowances. Those values belong in the calculators, where the surrounding rules and binding limits are applied. A quoted row without those rules can produce a wrong answer.

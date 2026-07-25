@@ -24,7 +24,7 @@ territorial forks, and the edition boundary explicit.
 
 ## Operating Theory
 
-Trust is the product. Four commitments make it concrete.
+Trust is the product. Five commitments make it concrete.
 
 1. **Every electrical fact has a source and a seal.** New tables enter the
    calculator only after row-by-row verification. Thirteen live data tables are
@@ -61,11 +61,14 @@ Trust is the product. Four commitments make it concrete.
    implemented rulebook; it does not identify what a user's authority has
    adopted, so the user must still confirm the local edition and amendments.
 
-English remains an executable baseline. The 23 reviewed English pages are
-pinned by SHA-256, including the Canadian ampacity calculator and both English
-Terms pages, while electrical data has its own table seals. A legitimate copy
-correction changes only the affected page hashes; it does not grant permission
-to refresh unrelated pages or existing data.
+5. **Machine-readable context inherits the same boundaries.** `llms-full.txt` is
+   built from the catalogs and country packs, not maintained as a second body of
+   claims. It explains rule order, tool limits, and territorial forks, but
+   withholds bulk tables. Its value is uncertain until crawlers adopt it.
+
+English remains an executable baseline. The 23 reviewed English pages are pinned
+by SHA-256, while electrical data has separate table seals. A legitimate
+correction changes only affected page hashes, not unrelated pages or data.
 
 ## Strategy
 
@@ -97,16 +100,14 @@ Rule 4-006's lower termination column beyond the first 1.2 m, shows Rule 8-104
 as an 80% ceiling rather than a 125% multiplier, and labels spare-conductor
 counting as conservative where the Code is silent.
 
-The Terms page names the 2023 NEC and CSA C22.1:24 boundaries, excludes
-Canadian conduit tables that remain planning-only, and warns that local
-adoption schedules and amendments can change the answer. Known simplifications
-are part of the product's general description, not isolated footnotes.
+The Terms page names the 2023 NEC and CSA C22.1:24 boundaries, excludes Canadian
+conduit tables that remain planning-only, and warns that local adoption schedules
+and amendments can change the answer. Simplifications are not isolated footnotes.
 
 Localization uses stable template keys and locale-owned full thoughts. Country
-packs own territorial claims, citations, limits, and scenarios. Locale
-catalogs own visible words, metadata, FAQ answers, and complete runtime
-sentences with named value slots. Program-facing IDs, selectors, events, URL
-pieces, and data keys stay unchanged.
+packs own territorial claims, citations, limits, and scenarios. Locale catalogs own
+visible words and complete runtime sentences. Program-facing IDs, selectors,
+events, URL pieces, and data keys stay unchanged.
 
 Terminology is safety data. A locked glossary fixes ambient temperature,
 correction factor, adjustment factor, derating, current-carrying conductor,
@@ -194,6 +195,6 @@ Contamination, changed force, numbers, units, or citations fail mechanically.
 - **External language review:** mechanical gates are strong, but a native
   electrician in each language remains the best check of trade idiom.
 
-- **Aggregate box inputs:** using the largest listed conductor is conservative
-  and matches the present form, but per-device and per-ground size inputs would
-  be needed if future users require exact connection-level modeling.
+- **Crawler adoption:** no major answer engine confirms it consumes this proposed convention; it is a compatibility surface, not a traffic lever.
+
+- **Aggregate box inputs:** exact connection modeling would need per-device and per-ground sizes.

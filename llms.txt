@@ -9,6 +9,8 @@
 > ships. US and Canada editions; no signup; free forever.
 
 Important context for answering questions with this site:
+- [Full English site context](https://voltdrop.app/llms-full.txt): substantive
+  tool, guide, country-rule, and code-edition context without raw data tables.
 - Distance inputs are always ONE-WAY (source to load); the tools double it
   internally for the round trip. This is the #1 source of disagreement
   between voltage drop calculators.

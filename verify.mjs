@@ -225,6 +225,34 @@ checkBool('sitemap lists all 36 guide pages',
   missingGuideSitemapUrls.length === 0,
   missingGuideSitemapUrls.length ? missingGuideSitemapUrls.join(', ') : '36 guide URLs');
 
+// ---- Answer-engine companion: generated context, never a raw table dump.
+const llmsFullPath = 'llms-full.txt';
+const llmsFullExists = existsSync(llmsFullPath);
+const llmsFull = llmsFullExists ? readFileSync(llmsFullPath, 'utf8') : '';
+const llmsEditionPrefixes = ['`/`', '`/es/`', '`/zh/`', '`/ca/`', '`/ca-fr/`', '`/ca-zh/`'];
+const missingLlmsEditionPrefixes = llmsEditionPrefixes.filter((prefix) => !llmsFull.includes(prefix));
+const forbiddenLlmsTableValues = [
+  { name: '8 AWG copper 90°C ampacity', pattern: /\b55\s*A\b/i },
+  { name: '8 AWG THHN area', pattern: /\b0\.0366\b/i },
+  { name: '12 AWG box allowance', pattern: /\b2\.25\s+(?:cubic inches|cu in)\b/i },
+];
+const leakedLlmsTableValues = forbiddenLlmsTableValues
+  .filter(({ pattern }) => pattern.test(llmsFull))
+  .map(({ name }) => name);
+checkBool('llms-full.txt exists and is non-empty',
+  llmsFullExists && llmsFull.trim().length > 0,
+  llmsFullExists ? `${llmsFull.length} bytes` : 'missing');
+checkBool('llms-full.txt names all six edition prefixes',
+  missingLlmsEditionPrefixes.length === 0,
+  missingLlmsEditionPrefixes.length ? `missing ${missingLlmsEditionPrefixes.join(', ')}` : 'all six prefixes');
+checkBool('llms-full.txt contains no sampled electrical table values',
+  leakedLlmsTableValues.length === 0,
+  leakedLlmsTableValues.length ? leakedLlmsTableValues.join(', ') : 'ampacity, THHN-area, and box-allowance samples absent');
+checkBool('llms-full.txt is linked from llms.txt',
+  readFileSync('llms.txt', 'utf8').includes('https://voltdrop.app/llms-full.txt'));
+checkBool('llms-full.txt is not listed in sitemap.xml',
+  !sitemap.includes('llms-full.txt'));
+
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const protectedLiterals = [
