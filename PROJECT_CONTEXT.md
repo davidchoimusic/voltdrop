@@ -43,10 +43,27 @@ notes are only the temporary state while a country's data awaits the verificatio
 Physics/standards/language three-layer model; NEVER translate articles — regenerate from
 templates + verified country packs; 5-stage pipeline with unskippable verification gate;
 subdirectory URLs + hreflang; rollout CA → UK/AU → EU metric. CEC difference map:
-docs/research/CEC_VS_NEC.md — base ampacity grids NOT verified (do not reuse as CEC),
-VD MANDATORY in Canada (fixed in product 2026-07-25), box fill is a real fork (mL,
-marrettes count). CA edition today = honest NEC-based with visible planning notes on
-unverified surfaces + country-aware recommendation/mandatory wording (code-basis span).
+docs/research/CEC_VS_NEC.md · CEC_AMPACITY_DERATING.md · CEC_TABLES_2_4_VERIFIED.md ·
+AMPACITY_DERATING_TABLES.md.
+**CANADA IS NOW A REAL EDITION (2026-07-25 evening) — the earlier "base ampacity grids
+NOT verified, do not reuse as CEC" warning is SUPERSEDED.** CEC Tables 2 and 4 were
+verified against CSA C22.1:24 (26th ed., 2024) and are **numerically identical to NEC
+310.16** in the 60/75/90 °C columns at every shared size (105 cells, zero mismatches).
+The old "14 AWG Cu 60 °C = 20 A" difference was real in the **2012** edition and was
+harmonised away ~2015–2018. The base grid is therefore **deliberately SHARED** between
+country packs — do not "fix" this by duplicating it.
+What IS genuinely Canadian and implemented: Table 5C bands (0.70 at ten conductors where
+NEC gives 0.50) · Table 5A single-point rows with NO cool-ambient credit below 30 °C ·
+Rule 4-004 counting (bonding never counts; neutral conditional) · Rule 4-006 terminations
+(60 °C ≤100 A/#1 AWG, 75 °C above; first 1.2 m — we take the lower rating throughout and
+label it a simplified method) · Rule 8-104 continuous at 80% not 125% · Rule 14-104 caps ·
+VD MANDATORY per Rule 8-102 · box fill a real fork (mL, marrettes).
+⚠️ STILL UNVERIFIED for Canada: **conduit fill** (CEC Tables 6A–6K, Table 8) — that page
+keeps its planning-only note. **Free-air Tables 1/3 DO still differ** from NEC 310.17
+(300 kcmil Cu 60 °C: 370 vs 375) — no free-air tool exists, but the harmonisation is NOT
+total; never assume it extends beyond Tables 2/4.
+Provenance: document-sharing copy of the standard, not authorised CSA distribution;
+David reviewed and confirmed 2026-07-25 to proceed. Owner decision, recorded.
 
 ## Product decisions (from David, 2026-07-24)
 - **Start US + Canada only** (AWG, feet, NEC 3%/5% guidelines). International later.

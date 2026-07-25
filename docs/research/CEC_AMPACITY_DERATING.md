@@ -15,7 +15,17 @@ Companion to `AMPACITY_DERATING_TABLES.md` (US/NEC side). This file covers CSA C
 
 Cross-checks: Google AI Overview values, r/electricians quote of the newer-edition Table 5C header, CanSIA PV course — all agree with the 2012 verbatim numbers.
 
-**Verification status:** Table values and rule texts below are verbatim from the 2012 code PDF, with function/numbering reconfirmed against 2024 sources. The one thing not yet confirmed from a 2021/2024 code book page is the Table 5A/5C cell grid itself — every independent source agrees it is unchanged, but a spot-check against the purchased 26th-edition PDF is still recommended before the verification gate is fully cleared.
+**Verification status:** CONFIRMED VERBATIM against the 26th edition (2024). David
+obtained a full C22.1:24 PDF on 2026-07-25 (`~/Desktop/cec-research/cec2024.pdf`);
+Table 5A's full 16×9 grid, Table 5C's five rows, and Rule 4-004(3)(4)(6) are
+word-for-word identical to the 2012/2015 texts below. One 2024 renumbering to note:
+the correction-factor subrule is restructured — 4-004(7) now routes Table 5A via
+7)b)i, 5B via 7)b)ii, 5C via 7)b)iii, 5D via 7)b)iv, and exempts auxiliary gutters
+(≤30 conductors) and conductors inside equipment; the old standalone "Table 5A where
+ambient > 30 °C" subrule (8) is absorbed into 7)b)i. The counting rules (3)/(4)/(6)
+are unchanged in wording and number. Table 5A's title now reads "Tables 1, 2, 3, 4,
+and 60" and adds the footnote "insulation temperature rating is the temperature marked
+on the conductor." For Tables 1–4 base values see `CEC_TABLES_2_4_VERIFIED.md`.
 
 ---
 

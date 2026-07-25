@@ -1,7 +1,12 @@
 # Ampacity Derating — source verification
 
 Research pass 2026-07-25, ahead of building the ampacity derating upgrade.
-Status: **US verified and buildable. Canada NOT verified — do not ship CEC numbers.**
+
+> ⚠️ **STATUS CHANGED LATER THE SAME DAY — read the SUPERSEDED section at the bottom of this
+> file before acting on anything here.** The original status line read "Canada NOT verified —
+> do not ship CEC numbers." That is no longer true: CEC Tables 2 and 4 were subsequently
+> verified and found identical to NEC 310.16 in the 60/75/90 columns. The US content below is
+> unchanged and still correct.
 
 ---
 
