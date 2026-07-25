@@ -119,6 +119,19 @@ LV/multi-point work below. Differentiation comes from country variation **OR** f
 technical difficulty competitors avoided. A universal tool that is genuinely hard and
 badly served elsewhere still beats a country-specific one that is easy.
 
+**"LEARN" / "RESOURCES" PAGE — NOT NEEDED (David raised it 2026-07-25, agreed `/guides/`
+already serves it).** `/guides/` IS the Learn section; a page called Learn would rename or
+duplicate it. A classic Resources page (outbound links to NFPA/CSA/code books) was
+recommended against for separate reasons: it sends users off-site, link dumps go unread,
+and it would cost 6 more pages to maintain. Don't re-propose either without a new angle.
+- PARKED IDEA (not approved): a **glossary page under /guides/**, built from the 34-term
+  `i18n/glossary.json` created for the translation work. Attractive because the content
+  already exists, is already translated into all four languages, and already passed the
+  back-translation gate — so it costs 1× instead of 6×. Would need a light editorial pass
+  (the glosses were written as translation controls, not reader copy) and belongs UNDER
+  Guides, not as another top-level nav item — the sidebar is already 7 tools + Guides +
+  Feedback. Raise with David before building.
+
 **⚠️ FRAMED-PAGE HONESTY RULE (2026-07-25, from the /ohms-law/ + solar discussion).**
 Framed SEO pages (a new URL pointing at an EXISTING engine with its own title/h1/FAQ)
 are near-free and will be tempting to mass-produce. The gate:
