@@ -136,29 +136,26 @@ const SCOPED_PATHS = [
   'terms/',
 ];
 const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
-const GENERATED_PATHS = [
-  ...EDITIONS.flatMap((edition) => SCOPED_PATHS.map((path) => editionPath(edition.prefix, path))),
+const GUIDE_PATHS = [
   'guides/',
   'guides/sub-panel-wire-size/',
   'guides/50-amp-wire-size/',
   'guides/wire-ampacity-chart/',
   'guides/how-far-12-gauge-wire/',
   'guides/voltage-drop-formula/',
-  'ca/guides/',
-  'ca/guides/sub-panel-wire-size/',
-  'ca/guides/50-amp-wire-size/',
-  'ca/guides/wire-ampacity-chart/',
-  'ca/guides/how-far-12-gauge-wire/',
-  'ca/guides/voltage-drop-formula/',
 ];
-const GUIDE_PATHS = [
-  '/guides/',
-  '/guides/sub-panel-wire-size/',
-  '/guides/50-amp-wire-size/',
-  '/guides/wire-ampacity-chart/',
-  '/guides/how-far-12-gauge-wire/',
-  '/guides/voltage-drop-formula/',
+const GUIDE_ROUTES = GUIDE_PATHS.map((path) => `/${path}`);
+const GENERATED_PATHS = [
+  ...EDITIONS.flatMap((edition) =>
+    [...SCOPED_PATHS, ...GUIDE_PATHS].map((path) => editionPath(edition.prefix, path))),
 ];
+const sitemap = readFileSync('sitemap.xml', 'utf8');
+const missingGuideSitemapUrls = GENERATED_PATHS
+  .filter((path) => path.includes('guides/'))
+  .filter((path) => !sitemap.includes(`<loc>https://voltdrop.app/${path}</loc>`));
+checkBool('sitemap lists all 36 guide pages',
+  missingGuideSitemapUrls.length === 0,
+  missingGuideSitemapUrls.length ? missingGuideSitemapUrls.join(', ') : '36 guide URLs');
 
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
@@ -205,7 +202,7 @@ for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
 }
 
 for (const edition of EDITIONS) {
-  for (const path of SCOPED_PATHS) {
+  for (const path of [...SCOPED_PATHS, ...GUIDE_PATHS]) {
     const generated = editionPath(edition.prefix, path);
     const expectedCanonical = `https://voltdrop.app/${generated}`;
     const html = readFileSync(generated ? `${generated}index.html` : 'index.html', 'utf8');
@@ -213,6 +210,9 @@ for (const edition of EDITIONS) {
     const chipOk = html.includes(`<span id="country-chip-text">${edition.chip}</span>`);
     const toolsAriaOk = /<button[^>]+id="tools-btn"[^>]+aria-label="[^"]+"/.test(html);
     const canonicalOk = html.includes(`<link rel="canonical" href="${expectedCanonical}">`);
+    const localStandard = edition.country === 'ca' ? 'CEC' : 'NEC';
+    const guideStandardOk = !GUIDE_PATHS.includes(path)
+      || new RegExp(`<title>[^<]*\\b${localStandard}\\b[^<]*</title>`).test(html);
     const runtimeAssetOk = runtimeEditionId(edition) === 'us-en'
       ? html.includes('<script src="/common.js?v=')
       : html.includes(`<script src="/assets/${runtimeEditionId(edition)}/common.js?v=`);
@@ -220,7 +220,8 @@ for (const edition of EDITIONS) {
       `hreflang="${alternate.hreflang}" href="https://voltdrop.app/${editionPath(alternate.prefix, path)}"`,
     )) && html.includes(`hreflang="x-default" href="https://voltdrop.app/${path}"`);
     checkBool(`${generated || '/'} metadata + short chip + Tools label`,
-      langOk && chipOk && toolsAriaOk && canonicalOk && runtimeAssetOk && alternatesOk);
+      langOk && chipOk && toolsAriaOk && canonicalOk && guideStandardOk
+        && runtimeAssetOk && alternatesOk);
 
     if (edition.locale === 'en') continue;
     const twinPath = editionPath(edition.twin, path);
@@ -239,6 +240,34 @@ const oneWayTerms = {
 for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
   const html = readFileSync(`${edition.prefix}/index.html`, 'utf8');
   checkBool(`${edition.prefix} one-way term is explicit`, html.includes(oneWayTerms[edition.locale]));
+}
+
+// Static mirror of the browser numeric gate. It strips non-rendered script and
+// style content, then compares every visible-text digit token. The browser pass
+// below repeats this against document.body.innerText.
+const visibleTextNumbers = (file) => {
+  const html = readFileSync(file, 'utf8');
+  const body = html.match(/<body[\s\S]*?<\/body>/i)?.[0] || html;
+  const text = body
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&(?:nbsp|#160);/gi, ' ')
+    .replace(/&(?:amp|#38);/gi, '&')
+    .replace(/\s+/g, ' ');
+  return (text.match(/#?\d+(?:[.,/-]\d+)*/g) || []).sort();
+};
+for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
+  const englishPrefix = edition.country === 'ca' ? 'ca' : '';
+  for (const guidePath of GUIDE_PATHS) {
+    const translatedPath = editionPath(edition.prefix, guidePath);
+    const englishPath = editionPath(englishPrefix, guidePath);
+    const translatedNumbers = visibleTextNumbers(`${translatedPath}index.html`);
+    const englishNumbers = visibleTextNumbers(`${englishPath}index.html`);
+    checkBool(`static numeric parity /${translatedPath}`,
+      JSON.stringify(translatedNumbers) === JSON.stringify(englishNumbers),
+      `${translatedNumbers.length} visible numeric tokens`);
+  }
 }
 
 if (process.env.STATIC_ONLY === '1') {
@@ -693,18 +722,40 @@ const editionPaths = await page.evaluate((paths) => paths.map((usPath) => ({
   usPath,
   caPath: VDEdition.pathFor('ca', 'en', usPath),
   roundTrip: VDEdition.pathFor('us', 'en', `/ca${usPath}`),
-})), GUIDE_PATHS);
+})), GUIDE_ROUTES);
 const twinsMatch = editionPaths.every(({ usPath, caPath, roundTrip }) =>
   caPath === `/ca${usPath}` && roundTrip === usPath);
 checkBool('edition helper matches all six US/CA guide twins', twinsMatch,
   `${editionPaths.length} paths checked both ways`);
+const guideEditionMatrix = await page.evaluate(({ editions, paths }) =>
+  editions.flatMap((edition) => paths.map((path) => ({
+    expected: `${edition.prefix ? `/${edition.prefix}` : ''}${path}`,
+    actual: VDEdition.pathFor(edition.country, edition.locale, path),
+  }))), { editions: EDITIONS, paths: GUIDE_ROUTES });
+checkBool('edition helper resolves every guide in all six editions',
+  guideEditionMatrix.every(({ expected, actual }) => expected === actual),
+  `${guideEditionMatrix.length} guide-edition paths`);
 const unavailableEditions = await page.evaluate(() => ({
   es: VDEdition.pathFor('us', 'es', '/guides/'),
   fr: VDEdition.pathFor('ca', 'fr-CA', '/guides/'),
   missing: VDEdition.pathFor('ca', 'en', '/not-built/'),
 }));
-checkBool('edition helper refuses unbuilt pages',
-  unavailableEditions.es === null && unavailableEditions.fr === null && unavailableEditions.missing === null);
+checkBool('edition helper exposes built guide editions and refuses unbuilt pages',
+  unavailableEditions.es === '/es/guides/'
+    && unavailableEditions.fr === '/ca-fr/guides/'
+    && unavailableEditions.missing === null);
+
+const twinLinkCases = [
+  ['zh/guides/', 'a[data-edition-country="ca"]', '/ca-zh/guides/'],
+  ['es/guides/', 'a[data-edition-country="ca"]', '/ca/guides/'],
+  ['ca-zh/guides/sub-panel-wire-size/', 'a[data-edition-country="us"]', '/zh/guides/sub-panel-wire-size/'],
+  ['ca-fr/guides/sub-panel-wire-size/', 'a[data-edition-country="us"]', '/guides/sub-panel-wire-size/'],
+];
+for (const [path, selector, expected] of twinLinkCases) {
+  await page.goto(BASE + path);
+  const href = await page.getAttribute(selector, 'href');
+  checkBool(`guide twin link /${path}`, href === expected, href);
+}
 
 await page.goto(BASE);
 
@@ -862,13 +913,51 @@ cls = await page.getAttribute('#verdict', 'class');
 console.log(cls.includes('warn') || cls.includes('good') ? 'PASS 18.0/18.0 fits' : `FAIL fit verdict: ${cls}`); (cls.includes('warn') || cls.includes('good')) ? pass++ : fail++;
 await page.screenshot({ path: `${shots}/14-boxfill.png`, fullPage: true });
 
-// ---- Guides: every page loads, has an h1, highlights Guides in sidebar
-for (const g of GENERATED_PATHS.filter((path) => path.startsWith('guides/') || path.startsWith('ca/guides/'))) {
+// ---- Guides: every edition loads, has an h1, highlights Guides, and carries translated FAQ data.
+for (const g of GENERATED_PATHS.filter((path) => path.includes('guides/'))) {
   await page.goto(BASE + g);
   const h1 = await page.textContent('h1').catch(() => null);
-  const active = await page.textContent('.sidebar .tool-link.active').catch(() => '');
-  const ok = h1 && h1.trim().length > 3 && active.includes('Guides');
-  console.log(ok ? `PASS guide /${g} (${h1.trim().slice(0, 30)}…)` : `FAIL guide /${g}: h1=${h1} active=${active}`); ok ? pass++ : fail++;
+  const active = await page.$('.sidebar .tool-link.active[data-tool="guides"]') !== null;
+  const faq = await page.evaluate(() => {
+    const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')];
+    return scripts.map((script) => {
+      try { return JSON.parse(script.textContent); } catch { return null; }
+    }).find((entry) => entry?.['@type'] === 'FAQPage') || null;
+  });
+  const faqOk = g.endsWith('guides/')
+    ? faq === null
+    : faq?.mainEntity?.every((entry) =>
+        entry?.['@type'] === 'Question'
+        && typeof entry.name === 'string'
+        && entry.name.length > 3
+        && typeof entry.acceptedAnswer?.text === 'string'
+        && entry.acceptedAnswer.text.length > 3);
+  const ok = h1 && h1.trim().length > 3 && active && faqOk;
+  console.log(ok ? `PASS guide /${g} (${h1.trim().slice(0, 30)}…)` : `FAIL guide /${g}: h1=${h1} active=${active} faq=${faqOk}`); ok ? pass++ : fail++;
+}
+
+// Every number visible in a translated guide must have the exact source
+// formatting and multiplicity of its country-specific English twin.
+const renderedNumberMultiset = async (path) => {
+  await page.goto(BASE + path);
+  return page.evaluate(() => {
+    const tokens = document.body.innerText.match(/(?<![\p{L}\p{N}])#?\d+(?:[.,/-]\d+)*(?![\p{L}\p{N}])/gu) || [];
+    return tokens.sort();
+  });
+};
+for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
+  const englishPrefix = edition.country === 'ca' ? 'ca' : '';
+  for (const guidePath of GUIDE_PATHS) {
+    const translatedPath = editionPath(edition.prefix, guidePath);
+    const englishPath = editionPath(englishPrefix, guidePath);
+    const [translatedNumbers, englishNumbers] = [
+      await renderedNumberMultiset(translatedPath),
+      await renderedNumberMultiset(englishPath),
+    ];
+    const same = JSON.stringify(translatedNumbers) === JSON.stringify(englishNumbers);
+    checkBool(`numeric parity /${translatedPath}`, same,
+      same ? `${translatedNumbers.length} rendered numeric tokens` : `translated=${JSON.stringify(translatedNumbers)} english=${JSON.stringify(englishNumbers)}`);
+  }
 }
 // Spot-check a computed table value: sub-panel guide, 100A Cu @150ft = 2 AWG
 await page.goto(BASE + 'guides/sub-panel-wire-size/');

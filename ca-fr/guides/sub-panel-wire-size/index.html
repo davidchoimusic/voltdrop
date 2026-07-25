@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calibre du conducteur pour un panneau secondaire au Canada (remise ou garage) — CEC Rule 8-102 | VoltDrop</title>
+<meta name="description" content="Quel calibre de conducteur pour un panneau secondaire de 50, 60 ou 100 ampères au Canada : tableaux de distances en métrique+impérial sous la limite obligatoire de 3% de chute de tension du CEC, notes sur le NMD90 et l’aluminium, exemples résolus.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/sub-panel-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calibre du conducteur pour un panneau secondaire au Canada (remise ou garage) — CEC Rule 8-102 | VoltDrop">
+<meta property="og:description" content="Quel calibre de conducteur pour un panneau secondaire de 50, 60 ou 100 ampères au Canada : tableaux de distances en métrique+impérial sous la limite obligatoire de 3% de chute de tension du CEC, notes sur le NMD90 et l’aluminium, exemples résolus.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calibre du conducteur pour un panneau secondaire au Canada (remise ou garage) — CEC Rule 8-102 | VoltDrop">
+<meta name="twitter:description" content="Quel calibre de conducteur pour un panneau secondaire de 50, 60 ou 100 ampères au Canada : tableaux de distances en métrique+impérial sous la limite obligatoire de 3% de chute de tension du CEC, notes sur le NMD90 et l’aluminium, exemples résolus.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🏠 Calibre du conducteur pour un panneau secondaire au Canada (remise ou garage détaché)</h1>
+    <p class="tool-sub">Dimensionné selon le Canadian Electrical Code — où la chute de tension n’est pas une suggestion, c’est la Rule 8-102. <a class="inline-link" href="/guides/sub-panel-wire-size/" data-edition-country="us">🇺🇸 Version américaine</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La réponse courte</h2>
+    <p>Pour un <strong>panneau secondaire de 100 ampères à 45 m (150 ft)</strong>: <strong>#2 cuivre</strong> ou <strong>1/0 aluminium</strong>. Pour un <strong>panneau secondaire de 60 ampères à 30 m (100 ft)</strong>: <strong>#6 cuivre</strong> ou <strong>#4 aluminium</strong>. Tableau complet ci-dessous — et contrairement aux États-Unis, rester dans la limite de chute est <strong>obligatoire au Canada</strong>: la Rule 8-102 du CEC plafonne la chute de tension à 3% sur un circuit de dérivation, 3% sur l’artère, 5% au total, et c’est du code applicable. Votre parcours exact : <a class="inline-link" href="/wire-size-calculator/">Calculateur de calibre de conducteur</a>.</p>
+
+    <h2>Les deux vérifications (et pourquoi le Canada fait de la deuxième une loi)</h2>
+    <p>Dimensionner une artère, c’est deux vérifications superposées. D’abord, <strong>le courant admissible</strong> — le conducteur doit être homologué pour le courant (CEC Table 2 pour le cuivre, Table 4 pour l’aluminium ; elles sont harmonisées avec les tableaux américains, ce qui explique pourquoi les réponses des deux côtés de la frontière concordent sur le courant admissible). Ensuite, <strong>la chute de tension</strong> — sur un long parcours vers une remise ou un garage, le conducteur doit être assez gros pour que le panneau éloigné voie encore une tension correcte. Aux États-Unis, cette deuxième vérification est une recommandation ; au Canada, la Rule 8-102 en fait un « doit ». Passé environ 30 m, c’est la vérification de chute — pas le courant admissible — qui détermine votre calibre de conducteur, et un inspecteur peut vous y obliger.</p>
+
+    <h2>Le tableau : calibre minimal à 240 V, chute de 3%</h2>
+    <p>Dimensionné selon le calibre plein du disjoncteur (conservateur — le CEC 2024 permet d’utiliser la charge raccordée, ou 80% du disjoncteur si elle est inconnue, donc ces calibres ont une marge intégrée). Distance à l’aller (un seul trajet) :</p>
+    <div class="gtable-wrap"><table class="gtable">
+      <thead><tr><th>Artère</th><th>15 m (50′)</th><th>30 m (100′)</th><th>46 m (150′)</th><th>61 m (200′)</th><th>76 m (250′)</th><th>91 m (300′)</th></tr></thead>
+      <tbody>
+        <tr><td>50 A cuivre</td><td>8</td><td>6</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+        <tr><td>50 A aluminium</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1/0</td></tr>
+        <tr><td>60 A cuivre</td><td>6</td><td>6</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><td>60 A aluminium</td><td>4</td><td>4</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A cuivre</td><td>3</td><td>3</td><td>2</td><td>1</td><td>1/0</td><td>2/0</td></tr>
+        <tr><td>100 A aluminium</td><td>1</td><td>1</td><td>1/0</td><td>2/0</td><td>3/0</td><td>4/0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote">Calibres AWG (le Canada calibre ses conducteurs en AWG, comme les États-Unis), bornes à 75°C, calculés avec notre moteur vérifié (K = 12.9 cuivre / 21.2 aluminium). Aluminium veut dire câble d’artère moderne AA-8000 — standard et reconnu par le code au Canada, où les artères en aluminium sont particulièrement courantes pour une question de coût.</p>
+
+    <h2>Exemple résolu : 100 A à 46 m</h2>
+    <p>Chute = 2 × K × ampères × pieds à l’aller ÷ mils circulaires. #2 cuivre (66,360 cmil) à 150 ft : 2 × 12.9 × 100 × 150 ÷ 66,360 = <strong>5.8 V = 2.4%</strong> de 240 V — dans la limite obligatoire de 3%. Un calibre plus petit (#3) donne 3.1% — au-dessus de la limite, et au Canada c’est un enjeu de code, pas une question de jugement. Vérifiez n’importe quel parcours dans le <a class="inline-link" href="/">Calculateur de chute de tension</a>.</p>
+
+    <h2>Les particularités canadiennes qu’on oublie</h2>
+    <p><strong>1. C’est une artère à 4 fils</strong> — deux fils sous tension, un neutre et un conducteur de continuité des masses distinct, avec le neutre et la mise à la masse sur des barres séparées au panneau secondaire. <strong>2. Le câble sera probablement du NMD90, du TECK90, ou de l’enfouissement direct (NMWU) / conduit</strong> — les noms canadiens de ce que les Américains appellent Romex, câble armé et UF ; les parcours souterrains vers les bâtiments annexes se font couramment en NMWU à la profondeur d’enfouissement requise, ou avec des conducteurs dans un conduit enterré. <strong>3. Le budget de chute est structuré</strong>: 3% pour l’artère, 3% pour le circuit de dérivation en aval, 5% au total — la chute ne « repart » pas à zéro au panneau secondaire. <strong>4. Enfouissez du cuivre une seule fois</strong> — si le garage doit un jour recharger un véhicule électrique ou faire tourner une soudeuse, sur-dimensionner maintenant ne coûtera jamais moins cher.</p>
+
+    <h2>Voir aussi</h2>
+    <p><a class="inline-link" href="/wire-size-calculator/">Calculateur de calibre de conducteur</a> · <a class="inline-link" href="/">Calculateur de chute de tension</a> · <a class="inline-link" href="/ca/guides/voltage-drop-formula/">Chute de tension &amp; Rule 8-102, expliquée</a> · <a class="inline-link" href="/ca/guides/wire-ampacity-chart/">Tableau des courants admissibles du CEC</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel calibre de conducteur pour un panneau secondaire de 100 ampères situé à 150 pieds au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Du #2 cuivre ou du 1/0 aluminium à 240 V maintient la chute de tension à 2.4% — dans la limite obligatoire de 3% pour l’artère de la Rule 8-102 du CEC. Les tableaux canadiens de courant admissible (CEC Table 2/4) sont harmonisés avec les tableaux américains, donc le calcul de calibre est le même ; la différence, c’est qu’au Canada la limite de chute est du code applicable."}},{"@type":"Question","name":"La limite de chute de tension est-elle obligatoire dans le Canadian Electrical Code ?","acceptedAnswer":{"@type":"Answer","text":"Oui. La Rule 8-102 du CEC est une exigence applicable : maximum 3% sur un circuit de dérivation, 3% sur l’artère, 5% au total. Dans le NEC américain, les chiffres équivalents ne sont qu’une recommandation informative."}},{"@type":"Question","name":"Puis-je utiliser du conducteur en aluminium pour l’artère d’un panneau secondaire au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Oui — le câble d’artère moderne en aluminium de série AA-8000 est reconnu par le code et très courant au Canada pour les artères, à cause du coût. Les vieilles inquiétudes visent l’aluminium de petit calibre des circuits de dérivation des 1960s, pas le câble d’artère moderne."}},{"@type":"Question","name":"Est-ce qu’un panneau secondaire remet la chute de tension à zéro au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le CEC structure le budget ainsi : 3% pour l’artère et 3% pour le circuit de dérivation, avec un maximum combiné de 5% depuis le branchement jusqu’à la charge la plus éloignée."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+</body>
+</html>

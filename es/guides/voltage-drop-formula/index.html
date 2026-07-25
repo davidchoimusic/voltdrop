@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fórmula de Caída de Tensión y la Recomendación del 3% del NEC, Explicadas | VoltDrop</title>
+<meta name="description" content="La fórmula de caída de tensión con factor K, con tres ejemplos resueltos (incluido 12 V CD), si la regla del 3% realmente es código, y cómo corregir una caída excesiva.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Fórmula de Caída de Tensión y la Recomendación del 3% del NEC, Explicadas | VoltDrop">
+<meta property="og:description" content="La fórmula de caída de tensión con factor K, con tres ejemplos resueltos (incluido 12 V CD), si la regla del 3% realmente es código, y cómo corregir una caída excesiva.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/voltage-drop-formula/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fórmula de Caída de Tensión y la Recomendación del 3% del NEC, Explicadas | VoltDrop">
+<meta name="twitter:description" content="La fórmula de caída de tensión con factor K, con tres ejemplos resueltos (incluido 12 V CD), si la regla del 3% realmente es código, y cómo corregir una caída excesiva.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">La calculadora de caída de tensión que explica cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ Caída de Tensión, Explicada</h1>
+    <p class="tool-sub">La fórmula que los electricistas realmente usan, tres ejemplos resueltos y la verdad sobre la "regla" del 3%.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La fórmula</h2>
+    <p>Para CD y CA monofásica: <strong>caída de tensión = 2 × K × amperios × pies en un solo sentido ÷ mils circulares</strong>. Para trifásica, reemplaza el 2 por √3 (1.732). Las piezas: <strong>K</strong> es la constante de resistencia del material del conductor — 12.9 para cobre, 21.2 para aluminio (ohm·cmil/ft a 75°C). <strong>Mils circulares</strong> son la sección transversal del conductor (#12 = 6,530; #6 = 26,240; #2/0 = 133,100). El <strong>2</strong> es el recorrido de ida y vuelta — la corriente va y regresa, así que mide tu distancia <em>en un solo sentido</em> y deja que la fórmula la duplique. (Confundir esto es la razón #1 por la que dos calculadoras "no coinciden".)</p>
+
+    
+    <figure class="gfig" role="img" aria-label="Diagrama: mide la distancia en un solo sentido del tablero a la carga; la corriente va por un conductor y regresa por el otro">
+      <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="55" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">TABLERO</text>
+        <rect x="460" y="30" width="90" height="70" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/>
+        <text x="505" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-ink)">CARGA</text>
+        <line x1="100" y1="48" x2="460" y2="48" stroke="var(--color-accent)" stroke-width="4"/>
+        <polygon points="440,42 460,48 440,54" fill="var(--color-accent)"/>
+        <line x1="100" y1="82" x2="460" y2="82" stroke="var(--color-ink-soft)" stroke-width="4"/>
+        <polygon points="120,76 100,82 120,88" fill="var(--color-ink-soft)"/>
+        <text x="280" y="38" text-anchor="middle" font-size="12" fill="var(--color-accent)">corriente de ida</text>
+        <text x="280" y="102" text-anchor="middle" font-size="12" fill="var(--color-ink-soft)">corriente de regreso</text>
+        <path d="M 100 118 L 100 128 L 460 128 L 460 118" fill="none" stroke="var(--color-hazard)" stroke-width="2"/>
+        <text x="280" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="var(--color-hazard)">mide ESTO: distancia en un solo sentido (la fórmula la duplica)</text>
+      </svg>
+    </figure>
+
+    <h2>Tres ejemplos resueltos</h2>
+    <p><strong>1. Tomacorriente de garaje:</strong> #12 de cobre, 20 A, 80 pies en un solo sentido (ft), 120 V → 2 × 12.9 × 20 × 80 ÷ 6,530 = <strong>6.3 V = 5.3%</strong>. Demasiado — sube a #10 o acorta el tramo.</p>
+    <p><strong>2. Alimentador de jacuzzi:</strong> #6 de cobre, 40 A de carga real, 150 ft, 240 V → 2 × 12.9 × 40 × 150 ÷ 26,240 = <strong>5.9 V = 2.5%</strong>. Dentro del objetivo de 3%.</p>
+    <p><strong>3. Motor eléctrico de pesca de 12 voltios (CD):</strong> #14 de cobre, 8 A, 15 ft, 12 V → 2 × 12.9 × 8 × 15 ÷ 4,110 = <strong>0.75 V = 6.3%</strong>. La misma fórmula, resultado brutal — a 12 V, hasta los tramos cortos y delgados pierden un porcentaje real. Por eso el cableado automotriz, marino, solar y de iluminación de jardín va mucho más grueso de lo que sugieren los amperios, y por eso nuestra <a class="inline-link" href="/">calculadora</a> tiene un modo CD.</p>
+
+    <h2>¿La regla del 3% realmente es código?</h2>
+    <p>Respuesta honesta: <strong>es una recomendación oficial, no un requisito exigible</strong> — en el NEC vive en las Notas Informativas (3% para un circuito derivado, 5% total desde la acometida hasta la carga más lejana). En general no repruebas una inspección estándar solo por caída de tensión, con excepciones reales: algunas cargas (como las bombas contra incendio) tienen límites de caída estrictos, algunas jurisdicciones locales y códigos de energía adoptan versiones más estrictas y exigibles, y los sistemas de baja tensión suelen necesitar objetivos más ajustados por la razón que muestra el ejemplo 3. Toma el 3%/5% como la línea entre "funciona bien" y "espera quejas", no como ley.</p>
+
+    <h2>De dónde viene la "K" (y por qué las calculadoras no coinciden)</h2>
+    <p>K agrupa la resistividad del conductor en un solo número práctico para el campo. Usamos los valores conservadores estándar (12.9/21.2); algunas herramientas usan en cambio la tabla de resistencia en CD del código, que es ~20–25% más optimista. Ninguno está mal — lo conservador deja margen para la temperatura y las condiciones reales. Cada resultado de nuestras herramientas abre con "Cómo lo calculamos" para que puedas comparar constantes directamente contra cualquier otra fuente.</p>
+
+    <h2>Cómo corregir una caída de tensión excesiva</h2>
+    <p>En orden de practicidad habitual: <strong>sube un calibre del conductor</strong> (cada paso de AWG reduce la caída ~21%... dos pasos la reducen ~37%), <strong>sube la tensión</strong> (mover los mismos watts a 240 V en lugar de 120 V reduce a la mitad los amperios Y duplica la caída tolerable — una mejora de 4×), <strong>acorta la ruta</strong>, o para tramos rurales muy largos, <strong>eleva con un transformador</strong>. Para los motores que se atoran al arrancar, la caída durante la corriente de arranque es la culpable — dimensiona para el arranque, no solo para la marcha.</p>
+
+    <h2>Relacionado</h2>
+    <p><a class="inline-link" href="/">calculadora de Caída de Tensión</a> · <a class="inline-link" href="/max-wire-length/">Longitud Máxima de Conductor</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">Guía de subtablero</a> · <a class="inline-link" href="/guides/how-far-12-gauge-wire/">¿Hasta dónde llega cada calibre del conductor?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿La regla del 3% de caída de tensión es código o una guía?","acceptedAnswer":{"@type":"Answer","text":"Es una recomendación oficial en las Notas Informativas del NEC (3% en el circuito derivado, 5% total), no un requisito exigible en general — con excepciones como las bombas contra incendio, ciertos códigos de energía y jurisdicciones locales que adoptan reglas más estrictas. Tómalo como el umbral del buen desempeño."}},{"@type":"Question","name":"¿Mido la distancia del conductor en un solo sentido o el recorrido de ida y vuelta para la caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"Mide en un solo sentido, de la fuente a la carga. El factor 2 de la fórmula estándar ya toma en cuenta el recorrido de ida y vuelta. Meter la longitud de ida y vuelta en una calculadora de un solo sentido duplica tu error — la causa más común de resultados que no coinciden."}},{"@type":"Question","name":"¿La caída de tensión es igual en CA y en CD?","acceptedAnswer":{"@type":"Answer","text":"Para los calibres del conductor comunes en edificios, la misma fórmula resistiva aplica a CD y a CA monofásica (la trifásica usa 1.732 en lugar de 2). La diferencia está en el impacto: los mismos voltios perdidos son un porcentaje mucho mayor en un sistema de 12 V que en uno de 240 V."}},{"@type":"Question","name":"¿Cómo corrijo una caída de tensión excesiva?","acceptedAnswer":{"@type":"Answer","text":"Aumenta el calibre del conductor (cada paso de AWG reduce la caída cerca de 21%), sube la tensión del sistema (240 V frente a 120 V es una mejora de 4x con los mismos watts), acorta el tramo, o usa un transformador elevador para distancias muy largas."}},{"@type":"Question","name":"¿Es peligrosa la caída de tensión?","acceptedAnswer":{"@type":"Answer","text":"En general es un problema de desempeño — luces tenues, motores calientes, cargadores lentos — pero los motores con tensión crónicamente baja pueden sobrecalentarse y fallar, y la energía perdida se convierte en calor en el cableado. Una caída severa es señal de que el circuito necesita rediseñarse."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=3d6ecd6277"></script>
+</body>
+</html>

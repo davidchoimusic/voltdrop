@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务条款 | VoltDrop</title>
+<meta name="description" content="VoltDrop服务条款：免费电气计算器仅提供规划估算，不构成专业建议；不提供保证，并设有评论规则。">
+<link rel="canonical" href="https://voltdrop.app/zh/terms/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/terms/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/terms/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/terms/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/terms/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/terms/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/terms/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/terms/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="服务条款 | VoltDrop">
+<meta property="og:description" content="VoltDrop服务条款：免费电气计算器仅提供规划估算，不构成专业建议；不提供保证，并设有评论规则。">
+<meta property="og:url" content="https://voltdrop.app/zh/terms/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="服务条款 | VoltDrop">
+<meta name="twitter:description" content="VoltDrop服务条款：免费电气计算器仅提供规划估算，不构成专业建议；不提供保证，并设有评论规则。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">会解释每项结果的电压降计算器。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">服务条款</h1>
+    <p class="tool-sub">最后更新：2026年七月24日</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>简要说明</h2>
+    <p>VoltDrop是一套免费电气计算器。结果仅为规划估算，不构成专业工程建议；您应对结果的使用负责。请文明发表评论。以上是概要，详情如下。</p>
+
+    <h2>1. 接受本条款</h2>
+    <p>使用voltdrop.app（“服务”）即表示您同意本条款及我们的 <a class="inline-link" href="/privacy/">隐私政策</a>。如果您不同意，请勿使用本服务。</p>
+
+    <h2>2. 服务的性质与限制</h2>
+    <p>本服务依据常用的公开公式和表格（例如U.S. National Electrical Code中的内容）提供电压降、导线规格（线规）、载流量、导管填充及相关电气估算工具。</p>
+    <p><strong>本服务不构成专业建议。</strong> 结果是正常条件下的简化估算，并未涵盖所有实际因素，例如温度、成束敷设、降容、连续负载、当地规范修订和设备认证等。本服务不能替代持证电工或专业工程师，使用本服务也不会形成任何专业关系。</p>
+    <p><strong>电气作业可能造成伤亡，错误还可能引发火灾。</strong> 请务必独立核验计算，遵守当地电气规范和许可要求，并在法律或安全常识要求时聘请持证专业人员。</p>
+
+    <h2>3. 不提供保证</h2>
+    <p>本服务按“现状”和“可用”状态提供，不作任何明示或默示保证，包括准确性、可靠性、特定用途适用性和不间断可用性。已发布的标准会变化，我们的内容可能滞后。我们可以随时修改或停止服务的任何部分。</p>
+
+    <h2>4. 责任限制</h2>
+    <p>在法律允许的最大范围内，VoltDrop及其运营者不对您使用或无法使用本服务造成的任何损害负责，包括财产损失、人身伤害、利润损失或返工费用，无论责任依据是保证、合同、侵权还是其他理论。如果责任无法完全排除，我们的总责任以$50 (USD)为限。某些地区不允许特定免责条款，因此部分内容可能不适用于您。</p>
+
+    <h2>5. 评论</h2>
+    <p>您可以使用Google或Facebook登录并发表评论。您保留所写内容的所有权，但授予我们在服务中展示该内容的全球性、免版税许可。请勿发布违法、仇恨、骚扰、欺骗或垃圾内容；请勿发布链接、他人个人信息或冒充他人。我们可以自行决定删除评论或暂停评论权限，无论是否另行通知。评论仅代表其他用户的意见，并非我们的意见，也绝不是专业电气建议的来源。</p>
+
+    <h2>6. 可接受的使用</h2>
+    <p>不得攻击服务、使其过载、以滥用频率抓取内容、为造成损害而进行逆向工程，或以其他方式干扰服务；也不得违法使用服务。</p>
+
+    <h2>7. 知识产权</h2>
+    <p>VoltDrop名称、标志、设计和网站内容归我们所有。公开的电气公式和标准数据归各自权利人所有；受保护的是我们对这些内容的呈现方式。服务的用途正是让用户以个人、非商业方式使用结果，包括在工地使用。</p>
+
+    <h2>8. 条款变更</h2>
+    <p>我们可能更新本条款；页面顶部日期为最新修订日期。条款变更后继续使用服务，即表示您接受新条款。</p>
+
+    <h2>9. 管辖法律</h2>
+    <p>本条款受美国法律及运营者居住州法律管辖，不适用法律冲突规则。</p>
+
+    <h2>10. 联系方式</h2>
+    <p>有关本条款的问题： <strong>support@voltdrop.app</strong>.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de calibre du conducteur — CEC Rule 8-102 | VoltDrop</title>
+<meta name="description" content="Calculateur canadien gratuit de calibre du conducteur : entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour trouver le plus petit AWG en cuivre ou en aluminium dans la limite obligatoire de CEC Rule 8-102.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/wire-size-calculator/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/wire-size-calculator/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/wire-size-calculator/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/wire-size-calculator/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/wire-size-calculator/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/wire-size-calculator/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/wire-size-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/wire-size-calculator/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calculateur de calibre du conducteur — CEC Rule 8-102 | VoltDrop">
+<meta property="og:description" content="Calculateur canadien gratuit de calibre du conducteur : entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour trouver le plus petit AWG en cuivre ou en aluminium dans la limite obligatoire de CEC Rule 8-102.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/wire-size-calculator/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculateur de calibre du conducteur — CEC Rule 8-102 | VoltDrop">
+<meta name="twitter:description" content="Calculateur canadien gratuit de calibre du conducteur : entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour trouver le plus petit AWG en cuivre ou en aluminium dans la limite obligatoire de CEC Rule 8-102.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de calibre du conducteur VoltDrop","url":"https://voltdrop.app/ca-fr/wire-size-calculator/","description":"Calculateur canadien gratuit de calibre du conducteur : entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour trouver le plus petit AWG en cuivre ou en aluminium dans la limite obligatoire de CEC Rule 8-102.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-mode="size" data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">🔌 Calculateur de calibre du conducteur</h1>
+    <p class="tool-sub" id="page-sub">Quel calibre du conducteur faut-il? Entrez les ampères, la tension et la distance à l’aller (un seul trajet) pour obtenir le plus petit calibre qui respecte la limite de chute de tension.</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="Que voulez-vous calculer?">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">Chute de tension</span>
+      <span class="mode-sub">Je connais mon conducteur : quelle est la perte?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">Calibre du conducteur</span>
+      <span class="mode-sub">Quel est le plus petit calibre acceptable?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">Distance maximale</span>
+      <span class="mode-sub">Quelle distance ce conducteur peut-il parcourir?</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">Type d’alimentation</label>
+      <div class="seg" role="group" aria-label="Type d’alimentation">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC monophasé</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC triphasé</button>
+      </div>
+      <p class="hint" id="system-hint">DC : batteries, solaire, véhicules et rubans LED.</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">Tension à la source</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">volts</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">Courant de la charge</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
+        <span class="unit">ampères</span>
+      </div>
+      <p class="hint">Les ampères réellement tirés par votre appareil ou votre circuit. Si l’étiquette indique des watts, ampères = watts ÷ volts.</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">Matériau du conducteur</label>
+      <div class="seg" role="group" aria-label="Matériau du conducteur">
+        <button type="button" class="seg-btn active" data-material="cu">Cuivre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminium</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">Calibre du conducteur</label>
+      <select id="awg"></select>
+      <p class="hint">AWG = American Wire Gauge. Un nombre plus petit désigne un conducteur plus gros. Le calibre est imprimé sur l’isolant.</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">Distance à l’aller (un seul trajet)</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 100" required>
+        <span class="unit">pieds</span>
+      </div>
+      <p class="hint highlight-hint"><strong>Mesurez la distance à l’aller (un seul trajet)</strong> — de la source d’alimentation jusqu’à la charge. Le courant fait le trajet aller-retour, et <strong>nous doublons la distance pour vous</strong>. Ne la doublez pas vous-même.</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">Chute de tension maximale acceptable</label>
+      <div class="seg" role="group" aria-label="Chute maximale acceptable">
+        <button type="button" class="seg-btn active" data-target="3">3% — limite obligatoire du circuit de dérivation</button>
+        <button type="button" class="seg-btn" data-target="5">5% — limite supérieure</button>
+        <button type="button" class="seg-btn" data-target="custom">Personnalisé</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">%</span>
+      </div>
+      <p class="hint">3% est le maximum obligatoire pour un circuit de dérivation ou une artère. 5% est le maximum obligatoire pour le trajet combiné.</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">Calculer</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>Comment nous avons calculé ceci</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi 3% et 5% sont-ils les limites de chute de tension?","acceptedAnswer":{"@type":"Answer","text":"Un conducteur a une résistance; une partie de la tension est donc perdue sous forme de chaleur avant d’atteindre l’appareil. La CEC Rule 8-102 rend les limites exécutoires : maximum de 3% sur un circuit de dérivation ou une artère et de 5% au total, du branchement à la charge la plus éloignée. Les systèmes à basse tension, comme le solaire 12 V, exigent souvent une cible encore plus serrée."}},{"@type":"Question","name":"Pourquoi les calculateurs de chute de tension ne concordent-ils pas?","acceptedAnswer":{"@type":"Answer","text":"C’est presque toujours l’une de deux causes : certains calculateurs demandent le trajet aller-retour, tandis que d’autres demandent la distance à l’aller (un seul trajet). VoltDrop utilise toujours la distance à l’aller et la double à l’interne. D’autres utilisent des valeurs de résistance légèrement différentes. VoltDrop affiche le calcul complet pour permettre la comparaison."}}]}</script>
+  <section class="card explainer">
+    <h2>Pourquoi 3% et 5%?</h2>
+    <p>Un conducteur a une résistance; une partie de la tension est donc perdue sous forme de chaleur avant d’atteindre l’appareil. Une perte excessive fait chauffer les moteurs, atténue les lampes et nuit aux chargeurs.</p>
+    <p>La CEC Rule 8-102 fixe un maximum <strong>obligatoire</strong> : la chute de tension d’un circuit de dérivation ou d’une artère doit être d’au plus <strong>3%</strong>, et la chute combinée du branchement à la charge la plus éloignée doit être d’au plus <strong>5%</strong>. Au Canada, ce sont des limites exécutoires, et non de simples recommandations de rendement. Les systèmes à basse tension, comme le solaire 12&nbsp;V, exigent souvent une cible encore plus serrée, car 3% de 12&nbsp;V a beaucoup plus d’effet que 3% de 240&nbsp;V.</p>
+    <h2>Pourquoi les autres calculateurs ne concordent-ils pas?</h2>
+    <p>C’est presque toujours l’une de deux causes : certains calculateurs utilisent des valeurs de résistance différentes, ou certains utilisent la <strong>trajet aller-retour</strong> alors que d’autres demandent la distance à l’aller (un seul trajet). Nous demandons toujours la distance à l’aller et affichons le calcul complet.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+<script src="/assets/ca-fr/app.js?v=4b5fa8ae18"></script>
+</body>
+</html>

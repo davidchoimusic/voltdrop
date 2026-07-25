@@ -452,39 +452,27 @@ for (const edition of EDITIONS) {
 
     writeEditionPage(edition, p.dir, html);
   }
-  console.log(`edition ${edition.id}:`, Object.entries(assets.hashes).map(([k, v]) => `${k}?v=${v}`).join(' '));
-}
 
-// Guides remain English-only in Stage 2. They keep their existing US/Canada
-// pairs and deliberately do not receive translated edition URLs.
-const englishEdition = EDITIONS[0];
-const guideAssets = makeAssets(englishEdition);
-const guideBase = guideAssets.stamp(renderTemplate(templateSource, 'templates/index.html', englishEdition, { allowEnglishFallback: true }));
-for (const page of guidePages) {
-  const isCanada = page.dir.startsWith('ca/');
-  const guideEdition = isCanada ? { ...englishEdition, country: 'ca', pack: countryPacks.ca } : englishEdition;
-  const p = {
-    ...page,
-    title: text(page.titleKey, guideEdition, { allowEnglishFallback: true }),
-    description: text(page.descriptionKey, guideEdition, { allowEnglishFallback: true }),
-  };
-  const canonical = `https://voltdrop.app/${p.dir}/`;
-  const alternates = p.hreflang
-    ? `${p.hreflang.map((h) => `<link rel="alternate" hreflang="${h.lang}" href="${h.href}">`).join('\n')}\n<link rel="alternate" hreflang="x-default" href="${p.hreflang[0].href}">`
-    : '';
-  let html = applyMetadata(
-    guideBase
-      .replace('<html lang="en">', '<html lang="en">')
-      .replace('<body>', `<body data-country="${isCanada ? 'ca' : 'us'}" data-locale="en">`),
-    { title: p.title, description: p.description, canonical, alternates },
-  );
-  html = html.replace(/<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/, '');
-  const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main, guideEdition, { allowEnglishFallback: true });
-  html = html
-    .replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim())
-    .replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '')
-    .replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
-  mkdirSync(p.dir, { recursive: true });
-  writeFileSync(`${p.dir}/index.html`, html);
-  console.log(`built ${p.dir}/index.html`);
+  const editionGuidePages = guidePages.filter((page) =>
+    (edition.country === 'ca') === page.dir.startsWith('ca/'));
+  for (const page of editionGuidePages) {
+    const dir = page.dir.replace(/^ca\//, '');
+    const title = text(page.titleKey, edition);
+    const description = text(page.descriptionKey, edition);
+    const canonical = absoluteUrl(edition, dir);
+    let html = applyMetadata(src, {
+      title,
+      description,
+      canonical,
+      alternates: hreflangMarkup(dir),
+    });
+    html = html.replace(/<script type="application\/ld\+json" data-ld="app">[\s\S]*?<\/script>\n?/, '');
+    const main = renderTemplate(readFileSync(page.main, 'utf8'), page.main, edition);
+    html = html
+      .replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim())
+      .replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '')
+      .replace(`class="tool-link" data-tool="${page.tool}"`, `class="tool-link active" data-tool="${page.tool}"`);
+    writeEditionPage(edition, dir, html);
+  }
+  console.log(`edition ${edition.id}:`, Object.entries(assets.hashes).map(([k, v]) => `${k}?v=${v}`).join(' '));
 }

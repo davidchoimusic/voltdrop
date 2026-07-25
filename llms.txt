@@ -79,6 +79,42 @@ that limitation whenever citing a Canadian conduit-fill result.
 - Run length: https://voltdrop.app/ca/guides/how-far-12-gauge-wire/
 - Rule 8-102 explained: https://voltdrop.app/ca/guides/voltage-drop-formula/
 
+## US Spanish guides (NEC)
+
+- Index: https://voltdrop.app/es/guides/
+- Sub-panel: https://voltdrop.app/es/guides/sub-panel-wire-size/
+- 50 amps: https://voltdrop.app/es/guides/50-amp-wire-size/
+- NEC 310.16 ampacity chart: https://voltdrop.app/es/guides/wire-ampacity-chart/
+- Run length: https://voltdrop.app/es/guides/how-far-12-gauge-wire/
+- Voltage-drop formula: https://voltdrop.app/es/guides/voltage-drop-formula/
+
+## US Simplified Chinese guides (NEC)
+
+- Index: https://voltdrop.app/zh/guides/
+- Sub-panel: https://voltdrop.app/zh/guides/sub-panel-wire-size/
+- 50 amps: https://voltdrop.app/zh/guides/50-amp-wire-size/
+- NEC 310.16 ampacity chart: https://voltdrop.app/zh/guides/wire-ampacity-chart/
+- Run length: https://voltdrop.app/zh/guides/how-far-12-gauge-wire/
+- Voltage-drop formula: https://voltdrop.app/zh/guides/voltage-drop-formula/
+
+## Canadian French guides (CEC)
+
+- Index: https://voltdrop.app/ca-fr/guides/
+- Sub-panel: https://voltdrop.app/ca-fr/guides/sub-panel-wire-size/
+- 50 amps: https://voltdrop.app/ca-fr/guides/50-amp-wire-size/
+- CEC ampacity chart: https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/
+- Run length: https://voltdrop.app/ca-fr/guides/how-far-12-gauge-wire/
+- Rule 8-102 explained: https://voltdrop.app/ca-fr/guides/voltage-drop-formula/
+
+## Canadian Simplified Chinese guides (CEC)
+
+- Index: https://voltdrop.app/ca-zh/guides/
+- Sub-panel: https://voltdrop.app/ca-zh/guides/sub-panel-wire-size/
+- 50 amps: https://voltdrop.app/ca-zh/guides/50-amp-wire-size/
+- CEC ampacity chart: https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/
+- Run length: https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/
+- Rule 8-102 explained: https://voltdrop.app/ca-zh/guides/voltage-drop-formula/
+
 ## Site
 
 - [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook

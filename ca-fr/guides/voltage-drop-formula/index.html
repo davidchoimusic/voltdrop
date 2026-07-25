@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La chute de tension au Canada — CEC Rule 8-102 expliquée | VoltDrop</title>
+<meta name="description" content="La Rule 8-102 du CEC en langage clair : les limites obligatoires de 3%/3%/5%, la base de calcul à 80% du disjoncteur, les longueurs pour logements de la Table 68, la formule et des exemples résolus.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/voltage-drop-formula/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/voltage-drop-formula/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="La chute de tension au Canada — CEC Rule 8-102 expliquée | VoltDrop">
+<meta property="og:description" content="La Rule 8-102 du CEC en langage clair : les limites obligatoires de 3%/3%/5%, la base de calcul à 80% du disjoncteur, les longueurs pour logements de la Table 68, la formule et des exemples résolus.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/guides/voltage-drop-formula/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La chute de tension au Canada — CEC Rule 8-102 expliquée | VoltDrop">
+<meta name="twitter:description" content="La Rule 8-102 du CEC en langage clair : les limites obligatoires de 3%/3%/5%, la base de calcul à 80% du disjoncteur, les longueurs pour logements de la Table 68, la formule et des exemples résolus.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Le calculateur de chute de tension qui explique chaque résultat. Sans inscription ni devinettes.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">⚡ La chute de tension au Canada : Rule 8-102, expliquée</h1>
+    <p class="tool-sub">La formule, des exemples résolus — et la grande différence canadienne : ici, la limite, c’est la loi. <a class="inline-link" href="/guides/voltage-drop-formula/" data-edition-country="us">🇺🇸 Version américaine</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>La différence canadienne, tout de suite</h2>
+    <p>Aux États-Unis, les fameux chiffres de chute de tension de 3%/5% sont officiellement une <em>recommandation</em>. Au Canada, c’est <strong>la Rule 8-102 du CEC — un « doit » applicable</strong>: maximum 3% sur un circuit de dérivation, 3% sur l’artère (y compris le branchement du consommateur), et 5% au total du branchement jusqu’au point le plus éloigné. Un inspecteur peut refuser un parcours au-dessus de la limite. Si vous ne retenez qu’un seul fait transfrontalier sur la chute de tension, que ce soit celui-là.</p>
+
+    <h2>La formule</h2>
+    <p>Pour le DC et l’AC monophasé : <strong>chute de tension = 2 × K × ampères × pieds à l’aller ÷ mils circulaires</strong> (le triphasé utilise √3 au lieu de 2). K est la constante du matériau — 12.9 pour le cuivre, 21.2 pour l’aluminium. Les mils circulaires, c’est la section du conducteur (#12 = 6,530; #6 = 26,240). Mesurez la distance <strong>à l’aller (un seul trajet)</strong>; le 2 gère le trajet aller-retour. La méthode de référence du CEC (Appendix D, Table D3) est publiée en métrique, mais c’est la même physique — mêmes réponses, unités différentes.</p>
+
+    <h2>Quels ampères entrez-vous ? Le Canada a une réponse officielle</h2>
+    <p>Utilisez la <strong>charge raccordée si vous la connaissez ; sinon 80% du calibre du disjoncteur</strong> (CEC 2024). Ça règle le débat qui divise tous les forums de calculateurs. Calculer à 100% du disjoncteur — comme le font nos tableaux conservateurs — est toujours acceptable et laisse de la marge.</p>
+
+    <h2>Trois exemples résolus</h2>
+    <p><strong>1. Prise de garage :</strong> #12 cuivre, 20 A, 24 m (80 ft), 120 V → 6.3 V = <strong>5.3%</strong>. Au-dessus de la limite obligatoire — passez au #10 (3.3%) ou raccourcissez le parcours.</p>
+    <p><strong>2. Artère de spa :</strong> #6 cuivre, charge de 40 A, 46 m (150 ft), 240 V → 5.9 V = <strong>2.5%</strong>. Passe la 8-102 avec de la marge.</p>
+    <p><strong>3. Moteur électrique de traîne 12 volts (DC) :</strong> #14 cuivre, 8 A, 4.6 m (15 ft), 12 V → 0.75 V = <strong>6.3%</strong>. Même formule, pourcentage brutal — le câblage basse tension sur les bateaux, les remorques et les installations solaires doit être bien plus gros que ses ampères le laissent croire. Notre <a class="inline-link" href="/">calculateur</a> a justement un mode DC pour ça.</p>
+
+    <h2>Le raccourci pour les logements : la Table 68</h2>
+    <p>Pour les circuits ordinaires d’éclairage et de prises à 120 V jusqu’à 20 A dans les maisons, le CEC fournit des longueurs maximales précalculées (Rule 8-102(3), Table 68) — et lorsque le parcours du branchement jusqu’au panneau fait moins de 20 m, le circuit de dérivation peut consommer à lui seul tout le 5%. Les circuits dédiés (cuisine, frigo, chauffage) sont exclus du raccourci et passent par le calcul standard.</p>
+
+    <h2>Comment corriger une chute de tension excessive</h2>
+    <p>Par ordre de praticité habituelle : <strong>monter d’un calibre de conducteur</strong> (chaque échelon AWG réduit la chute de ~21%), <strong>utiliser 240 V au lieu de 120 V</strong> quand la charge le permet (moitié moins d’ampères, deux fois plus de volts tolérables — une amélioration de 4×), <strong>raccourcir le parcours</strong>, ou pour de très longs parcours ruraux, <strong>élever la tension avec un transformateur</strong>. Les chantiers commerciaux canadiens ont un levier de plus que les Américains : le réseau 347/600 V, où les mêmes watts donnent un pourcentage de chute bien plus faible.</p>
+
+    <h2>Voir aussi</h2>
+    <p><a class="inline-link" href="/">Calculateur de chute de tension</a> · <a class="inline-link" href="/max-wire-length/">Longueur maximale</a> · <a class="inline-link" href="/ca/guides/sub-panel-wire-size/">Guide canadien du panneau secondaire</a> · <a class="inline-link" href="/ca/guides/how-far-12-gauge-wire/">Jusqu’où peut-on tirer chaque calibre au Canada ?</a></p>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"La règle de 3% de chute de tension est-elle obligatoire au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Oui. La Rule 8-102 du CEC est du code applicable : maximum 3% sur un circuit de dérivation, 3% sur l’artère, 5% au total. C’est différent des États-Unis, où les mêmes chiffres ne sont qu’une recommandation informative."}},{"@type":"Question","name":"Quelle charge dois-je utiliser pour calculer la chute de tension selon le CEC ?","acceptedAnswer":{"@type":"Answer","text":"Le CEC 2024 précise d’utiliser la charge raccordée si elle est connue, sinon 80% du calibre du dispositif de protection contre les surintensités. Calculer au calibre plein du disjoncteur est un choix conservateur, toujours acceptable."}},{"@type":"Question","name":"Le CEC utilise-t-il une formule de chute de tension différente de celle du NEC ?","acceptedAnswer":{"@type":"Answer","text":"Même physique. La méthode de référence du CEC (Appendix D, Table D3) est publiée en unités métriques, mais elle donne les mêmes réponses que la formule standard du facteur K utilisée sur le terrain des deux côtés de la frontière."}},{"@type":"Question","name":"Qu’est-ce que la Table 68 du CEC ?","acceptedAnswer":{"@type":"Answer","text":"Un tableau de référence de longueurs maximales de circuit précalculées, pour les circuits d’éclairage et les circuits de prises d’usage général des logements jusqu’à 20 A à 120 V, fourni par la Rule 8-102(3) pour que les circuits résidentiels courants n’exigent aucun calcul manuel. Les circuits dédiés en sont exclus et passent par la méthode standard."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=827ad44530"></script>
+</body>
+</html>

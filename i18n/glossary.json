@@ -189,6 +189,24 @@
       "fr-CA": "devrait",
       "zh-Hans": "应"
     },
+    "equipment grounding conductor": {
+      "gloss": "The conductor that carries equipment fault current back toward the source.",
+      "es": "conductor de puesta a tierra de equipos",
+      "fr-CA": "conducteur de mise à la terre de l’équipement",
+      "zh-Hans": "设备接地导体"
+    },
+    "current-carrying conductor": {
+      "gloss": "An insulated conductor that normally carries load current.",
+      "es": "conductor portador de corriente",
+      "fr-CA": "conducteur porteur de courant",
+      "zh-Hans": "载流导体"
+    },
+    "termination": {
+      "gloss": "A conductor connection point whose temperature rating can limit usable ampacity.",
+      "es": "terminación",
+      "fr-CA": "borne",
+      "zh-Hans": "端子"
+    },
     "rated for": {
       "gloss": "Having an approved nominal capacity for the stated duty.",
       "es": "con capacidad nominal para",

@@ -16,7 +16,12 @@
     "Canadian Electrical Code"
   ],
   "citations": [
+    "4-006",
+    "8-102",
+    "8-102(3)",
+    "14-104",
     "240.4(D)",
+    "250.122",
     "310.16",
     "314.16",
     "314.16(A)",
@@ -28,27 +33,35 @@
     "Rule 8-102",
     "Rule 12-3034",
     "Rule 14-104",
+    "Section 68",
     "Table 2",
     "Table 4",
     "Table 5",
+    "Table 5C",
     "Table 22",
     "Table 68",
+    "Table D3",
     "Tables 6A–6K"
   ],
   "wireAndCableDesignations": [
     "AA-8000",
     "AWG",
     "EMT",
+    "GFCI",
     "kcmil",
+    "MHF",
     "NM-B",
     "NMD90",
     "PVC Sch 40",
     "PVC Schedule 40",
+    "Romex",
     "RW90",
+    "SER",
     "T90",
     "THHN",
     "THWN",
-    "THWN-2"
+    "THWN-2",
+    "URD"
   ],
   "unitSymbols": [
     "%",
@@ -71,17 +84,17 @@
     {
       "name": "numbers",
       "flags": "gu",
-      "source": "(?<![A-Za-z0-9])#?\\d+(?:[.,/-]\\d+)*(?![A-Za-z0-9])"
+      "source": "(?<![\\p{Script=Latin}\\p{N}])#?\\d+(?:[.,/-]\\d+)*(?![\\p{Script=Latin}\\p{N}])"
     },
     {
       "name": "wire-size-designations",
       "flags": "giu",
-      "source": "(?<![A-Za-z0-9])#?(?:\\d+/0|\\d+(?:\\.\\d+)?)\\s*(?:AWG|kcmil|mm²)(?![A-Za-z0-9])"
+      "source": "(?<![\\p{Script=Latin}\\p{N}])#?(?:\\d+/0|\\d+(?:\\.\\d+)?)\\s*(?:AWG|kcmil|mm²)(?![\\p{Script=Latin}\\p{N}])"
     },
     {
       "name": "electrical-values",
       "flags": "gu",
-      "source": "(?<![A-Za-z0-9])\\d+(?:\\.\\d+)?\\s*(?:A|V|W|VA|kW|kVA|ft|m|cm|mL|%|°C)(?![A-Za-z0-9])"
+      "source": "(?<![\\p{Script=Latin}\\p{N}])\\d+(?:\\.\\d+)?\\s*(?:A|V|W|VA|kW|kVA|ft|m|cm|mL|%|°C)(?![\\p{Script=Latin}\\p{N}])"
     }
   ]
 }

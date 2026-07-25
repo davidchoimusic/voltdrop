@@ -107,9 +107,14 @@ Guide tables COMPUTED from the verified engine constants (script in git history 
 /tmp/guide-tables.mjs pattern) — re-derive, never hand-type. Topic research:
 docs/GUIDES_TOPIC_MAP.md (3-agent pass) + docs/research/ (KIMI autocomplete, incl.
 FAQ question bank per guide). Next guides = second five in the map (box fill counting,
-EV charger, well pump, NM-B 60°C, 200A service). NEW GUIDE checklist: partial in
-partials/, PAGES entry (tool:'guides', script:null), sitemap, llms.txt, FAQ LD,
-verify.mjs list. GSC + Bing: site verified, sitemaps submitted (2026-07-25).
+EV charger, well pump, NM-B 60°C, 200A service). NEW GUIDE checklist: separate verified
+US and Canadian source partials where country rules or scenarios differ; ship the guide
+in all six live editions with translated title, description, visible copy, and FAQ LD;
+add six-way hreflang + US English x-default, sitemap and llms.txt entries, existence-list
+paths, numeric parity against each country-English twin, never-translate parity, sealed
+two-pass back-translation review, and mobile layout coverage. If any edition is withheld,
+record the reason and keep it out of the existence list until reviewed. GSC + Bing: site
+verified, sitemaps submitted (2026-07-25).
 Technical SEO closed: www+http 301s via CF redirect rules, HSTS 6mo (David, CF dash).
 
 ## Comments system (2026-07-24, mirrors pitchchanger.io)

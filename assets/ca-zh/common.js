@@ -77,14 +77,14 @@ const GUIDE_PATHS = [
 ];
 const EDITION_PATHS = {
   'us|en': new Set([...TOOL_PATHS, ...GUIDE_PATHS]),
-  'us|es': new Set(TOOL_PATHS.map((path) => `/es${path}`)),
-  'us|zh-Hans': new Set(TOOL_PATHS.map((path) => `/zh${path}`)),
+  'us|es': new Set([...TOOL_PATHS, ...GUIDE_PATHS].map((path) => `/es${path}`)),
+  'us|zh-Hans': new Set([...TOOL_PATHS, ...GUIDE_PATHS].map((path) => `/zh${path}`)),
   'ca|en': new Set([
     ...TOOL_PATHS.map((path) => `/ca${path}`),
     ...GUIDE_PATHS.map((path) => `/ca${path}`),
   ]),
-  'ca|fr-CA': new Set(TOOL_PATHS.map((path) => `/ca-fr${path}`)),
-  'ca|zh-Hans': new Set(TOOL_PATHS.map((path) => `/ca-zh${path}`)),
+  'ca|fr-CA': new Set([...TOOL_PATHS, ...GUIDE_PATHS].map((path) => `/ca-fr${path}`)),
+  'ca|zh-Hans': new Set([...TOOL_PATHS, ...GUIDE_PATHS].map((path) => `/ca-zh${path}`)),
 };
 
 function vdEditionPath(country, lang, pathname = location.pathname) {
@@ -310,9 +310,11 @@ if (_chip && _editionPanel) {
 vdApplyCountry();
 
 // Keep internal links inside the current explicit edition when an equivalent
-// page exists. Untranslated guides intentionally remain at their current URL.
+// page exists.
 document.querySelectorAll('a[href^="/"]').forEach((link) => {
-  const target = vdEditionPath(_country, _lang, link.getAttribute('href'));
+  const targetCountry = link.dataset.editionCountry || _country;
+  const targetLanguage = COUNTRIES[targetCountry].langs[_lang] ? _lang : 'en';
+  const target = vdEditionPath(targetCountry, targetLanguage, link.getAttribute('href'));
   if (target) link.setAttribute('href', target);
 });
 
@@ -334,8 +336,7 @@ if (_toolsBtn && _mobileTools) {
   });
 }
 
-/* Country-aware guides: only the English US/Canada pairs exist in Stage 2.
-   The existence registry above prevents false Spanish/French/Chinese links. */
+/* Country-aware guide links use the same reviewed edition existence registry. */
 function vdCaNote() {
   const guidesPath = vdEditionPath(_country, _lang, '/guides/') || '/guides/';
   document.querySelectorAll('.tool-link[data-tool="guides"]').forEach((a) => {

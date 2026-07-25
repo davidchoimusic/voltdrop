@@ -32,4 +32,4 @@ if (failures) {
   process.exit(1);
 }
 
-console.log(`PASS byte-identical US English build: all ${entries.length} generated pages match the reviewed Stage-2 SHA-256 baseline.`);
+console.log(`PASS byte-identical English build: all ${entries.length} generated pages match the reviewed SHA-256 baseline.`);
