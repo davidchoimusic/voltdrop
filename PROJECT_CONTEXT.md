@@ -111,9 +111,49 @@ jobsite one. Zero country variation = zero differentiation + 6× translation cos
 If the keyword is wanted, ship `/ohms-law/` as a FRAMED VIEW of the power calculator
 (one PAGES entry, no new tool), not as a separate calculator.
 
-**New rule of thumb for the roadmap, post-i18n:** a tool's value is roughly how much
-it varies by country. Country-divergent tools exploit the moat; universal ones cost
-six translations and differentiate nothing.
+**Rule of thumb for the roadmap, post-i18n (REVISED same day — see below):** a tool's
+value tracks how much it varies by country. Country-divergent tools exploit the moat;
+universal ones cost six translations and differentiate nothing.
+→ **REVISION (2026-07-25):** that rule is incomplete and would have wrongly buried the
+LV/multi-point work below. Differentiation comes from country variation **OR** from
+technical difficulty competitors avoided. A universal tool that is genuinely hard and
+badly served elsewhere still beats a country-specific one that is easy.
+
+**⚠️ FRAMED-PAGE HONESTY RULE (2026-07-25, from the /ohms-law/ + solar discussion).**
+Framed SEO pages (a new URL pointing at an EXISTING engine with its own title/h1/FAQ)
+are near-free and will be tempting to mass-produce. The gate:
+> **A landing page is free when the engine already answers that question correctly.
+> It is a lie when it doesn't.**
+- `/ohms-law/` PASSES: the Power Calculator genuinely computes it.
+- `/solar-wire-size-calculator/` FAILS TODAY: the engine assumes one load at the end of
+  the run, so it would hand solar/landscape installers wrong numbers for multi-tap
+  wiring — while ranking for exactly those searches. Build the segment engine FIRST,
+  then the page is honest and worth having.
+- Applies to every future framed page: check what the engine actually computes before
+  minting a URL that promises something else. Never ship the page ahead of the maths.
+
+**⭐ THE LOW-VOLTAGE / MULTI-POINT GAP (David re-raised 2026-07-25) — one engine hole,
+two underserved audiences.** Was buried as a one-liner in "Don't rush" ("multi-fixture
+landscape daisy-chains"); it is bigger than that. Every calculator here assumes **one
+load at the far end of the run**. Both audiences break that:
+- **Landscape lighting**: N fixtures tapped along one cable. Segment 1 carries all
+  fixtures' current, the last segment carries one — true drop is the SUM OF SEGMENTS,
+  far less than modelling the whole load at full distance. Needs a real per-segment
+  engine, not a fudge. Layout is the actual user question: daisy chain (far fixtures
+  dim) vs split/T feed vs hub/star (equal drop, most copper) — comparing those three
+  IS the product.
+- **Solar / battery**: not segments but BUDGETS. 3%/5% is a branch-circuit convention;
+  solar practice is tighter (~2% PV source circuits, ~1% battery-to-inverter) because
+  drop is lost yield and lost low-voltage-cutout margin. Also pushes current far past
+  branch-circuit range — a 3000 W inverter at 12 V draws 250 A — so check the wire
+  table and ampacity range actually cover it before building.
+- Shared root, already stated in our own copy: **3% of 12 V is 0.36 V.** At low voltage
+  there is no headroom, so assumptions that survive at 240 V collapse.
+- Country layer: the MATH is universal (cheap to translate); the LIMITS and scenarios
+  are local. Fits the three-layer model cleanly.
+- ⚠️ Existing note said "powerful niche later / don't rush" — placement vs the current
+  NEXT order is OPEN, awaiting David (asked 2026-07-25, together with wire-colour
+  placement). Do not silently reorder.
 
 ## Math (so nobody re-derives it wrong)
 K-factor method: `Vd = mult × K × I × L_oneway / CM`. mult = 2 (DC & single-phase round trip),
@@ -197,6 +237,40 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
+- **A CHECK THAT RUNS ON ONE EDITION CANNOT PROTECT SIX (2026-07-25, the expensive one).**
+  During the i18n build, `verify.mjs` reported **178 passed / 0 failed** while the primary
+  voltage-drop calculator was **completely dead in four of the six editions** — click
+  Calculate, nothing happened. The suite drove the calculators against `BASE` only, so it
+  tested English and pronounced the whole build healthy.
+  **Rule: any check that asserts behaviour must run against EVERY edition, not one.**
+  Specifically: fill real inputs, submit, assert the numeric result, and assert zero page
+  errors *during interaction* (not just on load) — for all 6 editions × all tool pages.
+  The maths is identical across editions, so the expected values are the same; only the
+  words differ. There is no excuse for single-edition behavioural coverage.
+  Generalises beyond i18n: whenever a build multiplies output (editions, locales, themes,
+  countries), coverage must multiply with it or the pass count becomes theatre.
+
+- **NEVER LET THE TRANSLATION PASS SEE CODE (2026-07-25).** The string extraction treated
+  `$('volts')` as translatable text and produced `$('tensión')` / `$('courant')` /
+  `$('电压')` in the localized bundles. The markup still used `id="volts"`, so the lookup
+  returned null, the script threw on the first `addEventListener`, and every listener after
+  it never attached. Eight identifiers across four editions; flagship tool dead in all four.
+  - **Do NOT fix this class with a blocklist.** `never-translate.json` is for domain tokens
+    in prose (NEC, THHN, units). "Volts" genuinely MUST translate as a visible label while
+    being untouchable as an identifier — the same word, two roles. The distinction has to be
+    STRUCTURAL: element IDs, class names, dataset keys, event names (`vd:country`, `vd:lang`),
+    localStorage keys, selectors and URL fragments must never enter the string catalog at all.
+  - Sweep for this whole class after any extraction change, not just the crashing instance.
+
+- **BACK-TRANSLATION GATES CAN BE FAKED, AND WILL BE (2026-07-25).** The first accuracy pass
+  reported 353 PASS verdicts; **350 of 353 back-translations were character-identical to the
+  source English** because the English was in context and got echoed. Every verdict was void.
+  The honest two-pass version (source sealed out of the back-translation step) came back at
+  7.7% identical and immediately caught 4 real defects — including the Canadian box-fill
+  marrette instruction "pick the largest present to be safe" missing in ES, FR and ZH.
+  **A contamination alarm is now wired into verify.mjs: >60% identical = the pass is void.**
+  A gate that cannot fail is not a gate — always verify the verifier fired.
+
 - **ELECTRICAL DATA TRIPWIRE (2026-07-25, David's mandate: wrong numbers can kill).**
   verify.mjs fingerprints every electrical data table (WIRE_TABLE, K_FACTOR, AMPACITY,
   SMALL_CAP, THHN_AREA, CONDUIT, VOL_PER_CONDUCTOR, BOXES) against `data-golden.json`
