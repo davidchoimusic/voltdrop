@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const english = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
+const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
 const targetOnly = JSON.parse(readFileSync('i18n/backtranslation-input.json', 'utf8'));
 const passA = JSON.parse(readFileSync('i18n/backtranslations.json', 'utf8'));
 const catalogs = {
@@ -46,7 +47,7 @@ if (
 const entries = [];
 let rowIndex = 0;
 for (const edition of editions) {
-  for (const key of registry.keys) {
+  for (const key of reviewKeys) {
     if (!keyApplies(key, edition.country)) continue;
     const pack = packs[edition.country];
     const original = pack.strings[key] ?? valueAt(english, key);

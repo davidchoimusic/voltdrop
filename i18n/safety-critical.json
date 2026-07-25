@@ -1,5 +1,8 @@
 {
-  "policy": "Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review.",
+  "policy": "Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review. Selected high-exposure non-safety copy is listed separately for the same sealed review.",
+  "extraReviewKeys": [
+    "header.electricalCalculatorsThatExplainThemselves"
+  ],
   "keys": [
     "ampacity.ampacityIsTheMaximumCurrentInAmpsAnswer",
     "ampacity.areSeparateChecksAWireMustPass",

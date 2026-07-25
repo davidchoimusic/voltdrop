@@ -27,7 +27,8 @@ Trust is the product. Four commitments make it concrete.
 2. **Show the math.** Tools substitute the user's values into the named
    formula or table. Guides use tables computed from the same sealed constants.
    Explaining the answer is both the clarity advantage and a continuing audit
-   of the engine.
+   of the engine. It is also the site-wide brand promise: every calculator
+   explains its own result, not merely that the interface is self-explanatory.
 
 3. **Country and language are separate dimensions.** Country selects the
    rulebook; language selects the explanation. Six explicit URL editions cover
@@ -40,10 +41,9 @@ Trust is the product. Four commitments make it concrete.
 
 4. **English is an executable baseline.** The 21 generated English pages are
    pinned by SHA-256, while electrical data has its independent nine-table
-   seal. The Stage-3 baseline change is narrow and reviewable: six-way guide
-   hreflang, explicit cross-country guide-link hints, corrected Canadian guide
-   picker chrome, and the new `common.js` asset stamp. No English guide prose
-   or computed table value changes.
+   seal. Legitimate copy changes update only the affected page hashes and must
+   name the scope. The site-wide tagline change updates 20 non-home pages while
+   the voltage-drop homepage stays byte-identical.
 
 ## Strategy
 
@@ -60,6 +60,13 @@ Locale catalogs own visible words, metadata, FAQ answers, and complete runtime
 sentences with named value slots. Program-facing IDs, selectors, events, URL
 pieces, and data keys stay unchanged.
 
+Shared copy follows the same explicit data model as page headings. `PAGES`
+inherits a site-wide default unless a page declares an override. The homepage
+declares the voltage-drop-specific tagline because that accurately describes
+its engine and preserves its strongest search phrase; every other page inherits
+the broader electrical-calculators promise. Tests assert that both values exist
+and differ in all six editions.
+
 Terminology is safety data. A locked glossary fixes concepts such as one-way
 distance, round trip, ampacity, conductor, mandatory, termination, and
 current-carrying conductor. A protected registry keeps brands, citations,
@@ -67,7 +74,9 @@ wire types, units, and source-formatted numbers unchanged. Safety text passes
 two stages: Pass A receives target-language text under opaque IDs without the
 English originals; Pass B introduces the originals and records a specific
 meaning verdict. Contamination, repeated boilerplate, changed force, numbers,
-units, or citations fail mechanically.
+units, or citations fail mechanically. High-exposure marketing copy can enter
+the same sealed review through a separate extra-review list without falsely
+classifying it as safety-critical.
 
 Guides add one stronger invariant: every visible numeric token in a translated
 page must have the same value and multiplicity as its country-English twin.
@@ -124,6 +133,12 @@ may expose only pages that actually ship.
   “voltage drop on” and “copper” retained English syntax and weakened
   negations. Full locale-owned sentences allow natural Spanish, French, and
   Chinese word order while named slots preserve exact live values.
+
+- **Brand idioms must be translated as product behavior.** A literal rendering
+  of “calculators that explain themselves” can imply self-explanatory software
+  or machines speaking to one another. Spanish, French, and Chinese instead
+  state that each result shows how it was obtained. This is the verifiable
+  promise the tools actually keep.
 
 ## Open Questions
 

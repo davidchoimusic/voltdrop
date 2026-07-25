@@ -1139,6 +1139,7 @@
   "guides.voltageDrop.whereKComesFromAndWhyCalculatorsHeading": "où \"K\" comes depuis (et pourquoi calculateurs disagree)",
   "header.appContinuation": ".app",
   "header.changeCountryOrLanguageTitle": "Changer de pays ou de langue",
+  "header.electricalCalculatorsThatExplainThemselves": "Des calculateurs électriques qui montrent comment chaque résultat est obtenu. Sans inscription, sans deviner.",
   "header.electricalToolsMenuAriaLabel": "Menu des outils électriques",
   "header.feedback": "Commentaires",
   "header.languageInUnitedStates": "Langue aux États-Unis",

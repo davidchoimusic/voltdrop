@@ -1139,6 +1139,7 @@
   "guides.voltageDrop.whereKComesFromAndWhyCalculatorsHeading": "“K”是怎么来的（以及为什么各家计算器结果不一致）",
   "header.appContinuation": ".app",
   "header.changeCountryOrLanguageTitle": "更改国家或语言",
+  "header.electricalCalculatorsThatExplainThemselves": "电气计算器，展示每项结果的计算过程。无需注册，无需猜测。",
   "header.electricalToolsMenuAriaLabel": "电气工具菜单",
   "header.feedback": "反馈",
   "header.languageInUnitedStates": "美国版本语言",
