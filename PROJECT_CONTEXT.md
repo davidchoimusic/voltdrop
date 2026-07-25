@@ -80,6 +80,41 @@ Also still open: split-phase/240 helper · mm² for non-US · share link + print
 Don't rush: multi-fixture landscape daisy-chains (powerful niche later) · any
 "NEC certified" claims (never claim that).
 
+**⭐ WIRE COLOUR CODE TOOL (David, 2026-07-25) — high priority, best country fit yet.**
+Conductor colour by country + system, with **navigation by panel circuit number**:
+circuit no. → phase (standard panelboard A-B-C rotation, odd=left/even=right) →
+required or conventional colour for that system voltage. Why it ranks high: colour
+rules are the MOST country-divergent topic in the trade (US vs CEC already differ;
+UK/EU/AU are a different system entirely: brown/blue/green-yellow), so it exploits
+the six-edition machinery instead of paying 6× for nothing. High search volume
+("what colour is the neutral wire").
+- **SAFETY CONSTRAINT, NON-NEGOTIABLE**: the tool states what a conductor SHOULD be
+  for NEW work. It must never read as a way to identify an EXISTING conductor —
+  legacy installs, non-compliant work and faded insulation all break colour
+  assumptions. Every screen carries "verify with a meter before touching anything."
+- Honesty layer, same pattern as voltage drop's mandatory-vs-recommendation span:
+  NEC barely mandates ungrounded colours (restricts white/grey/green; orange = high
+  leg per 110.15) — the rest is convention/job spec. CEC is more prescriptive. The
+  tool must label which is which per country, never present convention as code.
+- Colour + phase tables go through the standard verification gate and into
+  data-golden.json like every other electrical table.
+
+**OHM'S LAW — APPROVED as a PAGE, not a tool (David, 2026-07-25).** Ship `/ohms-law/`
+as a FRAMED VIEW of the existing Power Calculator: one PAGES entry in build.mjs, own
+title/description/h1/FAQ JSON-LD, `script: power.js`, no new calculator code and no
+new electrical data. Captures a high-volume commodity keyword without adding a sixth
+tool to maintain across six editions. Ships in all six editions like everything else.
+Reasoning that led here — the existing Power Calculator
+already covers volts/amps/watts/kW/kVA across DC + 1φ + 3φ with power factor; Ohm's
+law only adds resistance, which is an electronics/troubleshooting quantity, not a
+jobsite one. Zero country variation = zero differentiation + 6× translation cost.
+If the keyword is wanted, ship `/ohms-law/` as a FRAMED VIEW of the power calculator
+(one PAGES entry, no new tool), not as a separate calculator.
+
+**New rule of thumb for the roadmap, post-i18n:** a tool's value is roughly how much
+it varies by country. Country-divergent tools exploit the moat; universal ones cost
+six translations and differentiate nothing.
+
 ## Math (so nobody re-derives it wrong)
 K-factor method: `Vd = mult × K × I × L_oneway / CM`. mult = 2 (DC & single-phase round trip),
 √3 = 1.732 (three-phase, line-to-line). K = 12.9 Cu, 21.2 Al (ohm·cmil/ft, ~75°C).
