@@ -193,6 +193,32 @@ and it would cost 6 more pages to maintain. Don't re-propose either without a ne
   Guides, not as another top-level nav item — the sidebar is already 7 tools + Guides +
   Feedback. Raise with David before building.
 
+**⭐ "HOW WE VERIFY OUR DATA" PAGE (David approved 2026-07-26) — highest-value discovery
+item, and the only one a competitor cannot copy.** Came out of a ChatGPT strategy review on
+getting cited by answer engines. Their advice was "add an author with credentials and a
+reviewer" — **REJECT that framing**: VoltDrop has no licensed electrician reviewing it, and
+claiming one on a safety calculator would be a serious lie. What VoltDrop DOES have is
+unusual and completely true:
+- every electrical table verified against **two independent sources** before shipping
+- sealed in `data-golden.json` with a hash that **fails the build** if a digit changes
+- a documented gate that blocks unverified data — which is why `/ca/conduit-fill/` still
+  carries a planning note instead of a plausible-looking number
+- translations run through a two-pass back-translation gate with a contamination alarm
+Write it as the honest answer to "why should I trust this number", not as a trust badge.
+The content is already in `docs/research/` and PROJECT_CONTEXT — it is a writing job, not a
+research job. Ships in all six editions. Also add: per-guide "last reviewed" dates and a
+correction/contact route (the Feedback page already exists — name it as the channel).
+Second-best from the same review: publish the **NEC-vs-CEC difference research** generated
+2026-07-25 (when the codes harmonised, the 0.70-vs-0.50 conductor-count split, Canada's
+absent cool-ambient credit). Genuinely original — it does not exist in one place publicly.
+⚠️ Must describe DIFFERENCES, never reproduce the tables (see the copyright note under the
+CEC provenance decision). Skipped from that review as bad fits: an "electrician workforce
+dataset" (outside our competence) and "benchmark competitor calculator accuracy" (a fight
+not worth picking — you must be certain before publicly calling Southwire wrong).
+**Already confirmed clean 2026-07-26:** OAI-SearchBot, ChatGPT-User, GPTBot, PerplexityBot
+and ClaudeBot all get HTTP 200 through Cloudflare, and answer text is in the served HTML
+without JS. Do not re-litigate crawler access; it works.
+
 **⚠️ FRAMED-PAGE HONESTY RULE (2026-07-25, from the /ohms-law/ + solar discussion).**
 Framed SEO pages (a new URL pointing at an EXISTING engine with its own title/h1/FAQ)
 are near-free and will be tempting to mass-produce. The gate:
