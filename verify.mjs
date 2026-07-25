@@ -170,6 +170,20 @@ const GENERATED_PATHS = [
   ...EDITIONS.flatMap((edition) =>
     [...SCOPED_PATHS, ...GUIDE_PATHS].map((path) => editionPath(edition.prefix, path))),
 ];
+const CEC_EDITION_NAME = 'CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)';
+const TERMS_JURISDICTION_WARNING = {
+  en: 'You must confirm the edition adopted by your own authority.',
+  es: 'Debe confirmar la edición adoptada por su propia autoridad competente.',
+  'fr-CA': 'Vous devez confirmer l’édition adoptée par votre propre autorité compétente.',
+  'zh-Hans': '您必须确认您所在地区的主管机构所采用的版本。',
+};
+for (const edition of EDITIONS) {
+  const path = editionPath(edition.prefix, 'terms/');
+  const html = readFileSync(`${path}index.html`, 'utf8');
+  checkBool(`${edition.prefix || 'us-en'} Terms names the CEC edition and warns that jurisdiction varies`,
+    html.includes(CEC_EDITION_NAME)
+      && html.includes(TERMS_JURISDICTION_WARNING[edition.locale]));
+}
 const staleCanadianAmpacityClaims = [
   'planning only',
   'planning note',
@@ -352,6 +366,13 @@ for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
       JSON.stringify(translatedNumbers) === JSON.stringify(englishNumbers),
       `${translatedNumbers.length} visible numeric tokens`);
   }
+  const translatedTermsPath = editionPath(edition.prefix, 'terms/');
+  const englishTermsPath = editionPath(englishPrefix, 'terms/');
+  const translatedTermsNumbers = visibleTextNumbers(`${translatedTermsPath}index.html`);
+  const englishTermsNumbers = visibleTextNumbers(`${englishTermsPath}index.html`);
+  checkBool(`static numeric parity /${translatedTermsPath}`,
+    JSON.stringify(translatedTermsNumbers) === JSON.stringify(englishTermsNumbers),
+    `${translatedTermsNumbers.length} visible numeric tokens`);
 }
 
 // Sealed, browser-independent ampacity oracles. These run even when the
@@ -1298,6 +1319,17 @@ for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
     checkBool(`numeric parity /${translatedPath}`, same,
       same ? `${translatedNumbers.length} rendered numeric tokens` : `translated=${JSON.stringify(translatedNumbers)} english=${JSON.stringify(englishNumbers)}`);
   }
+  const translatedTermsPath = editionPath(edition.prefix, 'terms/');
+  const englishTermsPath = editionPath(englishPrefix, 'terms/');
+  const [translatedTermsNumbers, englishTermsNumbers] = [
+    await renderedNumberMultiset(translatedTermsPath),
+    await renderedNumberMultiset(englishTermsPath),
+  ];
+  const termsSame = JSON.stringify(translatedTermsNumbers) === JSON.stringify(englishTermsNumbers);
+  checkBool(`numeric parity /${translatedTermsPath}`, termsSame,
+    termsSame
+      ? `${translatedTermsNumbers.length} rendered numeric tokens`
+      : `translated=${JSON.stringify(translatedTermsNumbers)} english=${JSON.stringify(englishTermsNumbers)}`);
 }
 // Spot-check a computed table value: sub-panel guide, 100A Cu @150ft = 2 AWG
 await page.goto(BASE + 'guides/sub-panel-wire-size/');

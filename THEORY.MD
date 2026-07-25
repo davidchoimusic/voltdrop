@@ -12,8 +12,10 @@ precise because the missing conditions are hidden.
 Electrical rules are also territorial. The physics crosses borders, but the
 NEC, CEC, wire names, limits, and counting rules do not. Some current NEC and
 CEC base values are deliberately harmonized while the rules applied to those
-values remain different. Trust therefore depends on making both the shared
-data and the territorial forks explicit.
+values remain different. Adoption is territorial too: a correct result under
+the implemented edition can still be wrong where an earlier edition or local
+amendment is in force. Trust therefore depends on making the shared data, the
+territorial forks, and the edition boundary explicit.
 
 ## Operating Theory
 
@@ -51,13 +53,15 @@ Trust is the product. Four commitments make it concrete.
    fork begins after the shared base lookup: CEC Table 5A uses point rows and no
    cool-ambient credit, Table 5C uses Canadian conductor-count bands, Rule
    4-004 supplies Canadian counting, and Rules 4-006, 8-104, and 14-104 supply
-   Canadian caps and load checks.
+   Canadian caps and load checks. Country selection identifies VoltDrop's
+   implemented rulebook; it does not identify what a user's authority has
+   adopted, so the user must still confirm the local edition and amendments.
 
-English remains an executable baseline. The 22 reviewed English pages are
-pinned by SHA-256, including the Canadian ampacity calculator itself, while
-electrical data has its own table seals. A legitimate ampacity copy correction
-changes only the affected page hashes; it does not grant permission to refresh
-unrelated pages or existing data.
+English remains an executable baseline. The 23 reviewed English pages are
+pinned by SHA-256, including the Canadian ampacity calculator and both English
+Terms pages, while electrical data has its own table seals. A legitimate copy
+correction changes only the affected page hashes; it does not grant permission
+to refresh unrelated pages or existing data.
 
 ## Strategy
 
@@ -84,6 +88,14 @@ Rule 8-104 is displayed as an 80% continuous-load ceiling for standard
 80%-rated equipment, never combined with a 125% multiplier. Installed
 power/lighting spares count by default, explicitly labeled as a conservative
 reading because the Code is silent and the local authority may differ.
+
+The Terms page carries the same honesty at service level. It names the 2023
+NEC and CSA C22.1:24 implementation boundaries, includes every fully
+implemented calculator citation, and excludes Canadian conduit tables that
+remain planning-only. It also explains that states, provinces, and
+municipalities adopt on different schedules, and that a local amendment or
+older edition can change the answer. Known simplifications are therefore not
+isolated footnotes: they are part of the product's general description.
 
 Localization uses stable template keys and locale-owned full thoughts. Country
 packs own territorial claims, citations, limits, and scenarios. Locale
@@ -158,11 +170,17 @@ for fragmented labels and generated table output.
   15 A and matches the NEC. The old difference was evidence about the wrong
   edition, not evidence that the current grids differ.
 
+- **An edition citation is not an adoption claim.** Naming 2023 NEC or
+  CSA C22.1:24 tells the user what VoltDrop computes. It does not tell them what
+  their state, province, or municipality enforces. The product needs both
+  statements to avoid turning source precision into false local certainty.
+
 ## Open Questions
 
 - **Jurisdiction adoption:** edition-sensitive tools will need to decide
   whether users select a code year or the code actually enforced by their
-  state or province.
+  state or province. The Terms now state the limitation, but they do not solve
+  edition selection in the calculators.
 
 - **Canada conduit fidelity:** Tables 6A–6K and 9 still need row-by-row
   verification before that planning warning can be removed.
