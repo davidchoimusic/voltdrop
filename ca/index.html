@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEC Voltage Drop Calculator — Rule 8-102 | VoltDrop</title>
+<meta name="description" content="Free CEC voltage drop calculator for copper and aluminum wire. One-way distance, mandatory 3% and 5% limits, and the full math shown.">
+<link rel="canonical" href="https://voltdrop.app/ca/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="CEC Voltage Drop Calculator — Rule 8-102 | VoltDrop">
+<meta property="og:description" content="Free CEC voltage drop calculator for copper and aluminum wire. One-way distance, mandatory 3% and 5% limits, and the full math shown.">
+<meta property="og:url" content="https://voltdrop.app/ca/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CEC Voltage Drop Calculator — Rule 8-102 | VoltDrop">
+<meta name="twitter:description" content="Free CEC voltage drop calculator for copper and aluminum wire. One-way distance, mandatory 3% and 5% limits, and the full math shown.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Voltage Drop Calculator","url":"https://voltdrop.app/ca/","description":"Free CEC voltage drop calculator for copper and aluminum wire. Plain-English inputs, one-way distance, mandatory Rule 8-102 verdict, full math shown.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="en">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Electrical tools menu" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country or language" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · EN</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Feedback</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Which code applies?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Language in Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">The voltage drop calculator that explains itself. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title" id="page-h1">⚡ Voltage Drop Calculator</h1>
+    <p class="tool-sub" id="page-sub">How much voltage does your wire lose? Enter amps, distance, and wire size — get a clear green/yellow/red verdict with the math shown.</p>
+  </div>
+
+  <!-- Mode tabs -->
+  <div class="mode-tabs" role="tablist" aria-label="What do you want to find?">
+    <button class="mode-tab active" role="tab" aria-selected="true" data-mode="drop" id="tab-drop">
+      <span class="mode-title">Voltage drop</span>
+      <span class="mode-sub">I know my wire — how much do I lose?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="size" id="tab-size">
+      <span class="mode-title">Wire size</span>
+      <span class="mode-sub">What's the smallest wire that works?</span>
+    </button>
+    <button class="mode-tab" role="tab" aria-selected="false" data-mode="length" id="tab-length">
+      <span class="mode-title">Max distance</span>
+      <span class="mode-sub">How far can this wire run?</span>
+    </button>
+  </div>
+
+  <form id="calc-form" class="card" autocomplete="off">
+
+    <!-- System type -->
+    <div class="field">
+      <label class="field-label" for="system">Power type</label>
+      <div class="seg" role="group" aria-label="Power type">
+        <button type="button" class="seg-btn active" data-system="dc">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1">AC single-phase</button>
+        <button type="button" class="seg-btn" data-system="ac3">AC three-phase</button>
+      </div>
+      <p class="hint" id="system-hint">DC: batteries, solar, vehicles, LED strips.</p>
+    </div>
+
+    <!-- Voltage -->
+    <div class="field">
+      <label class="field-label" for="voltage">Voltage at the source</label>
+      <div class="preset-row" id="voltage-presets"></div>
+      <div class="input-unit">
+        <input type="number" id="voltage" inputmode="decimal" min="0.1" step="any" value="12" required>
+        <span class="unit">volts</span>
+      </div>
+    </div>
+
+    <!-- Current -->
+    <div class="field">
+      <label class="field-label" for="current">Current (load)</label>
+      <div class="input-unit">
+        <input type="number" id="current" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 20" required>
+        <span class="unit">amps</span>
+      </div>
+      <p class="hint">The amps your device or circuit actually draws. If a label says watts, amps = watts ÷ volts.</p>
+    </div>
+
+    <!-- Material -->
+    <div class="field">
+      <label class="field-label">Wire material</label>
+      <div class="seg" role="group" aria-label="Wire material">
+        <button type="button" class="seg-btn active" data-material="cu">Copper</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminum</button>
+      </div>
+    </div>
+
+    <!-- Wire size (hidden in "size" mode) -->
+    <div class="field" id="field-size">
+      <label class="field-label" for="awg">Wire size</label>
+      <select id="awg"></select>
+      <p class="hint">AWG = American Wire Gauge. Smaller number = thicker wire. It's printed on the wire jacket.</p>
+    </div>
+
+    <!-- Distance (hidden in "length" mode) -->
+    <div class="field" id="field-distance">
+      <label class="field-label" for="distance">One-way distance</label>
+      <div class="input-unit">
+        <input type="number" id="distance" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 100" required>
+        <span class="unit">feet</span>
+      </div>
+      <p class="hint highlight-hint"><strong>Measure one way</strong> — from the power source to the load. Electricity makes a round trip, and <strong>we double it for you</strong>. Don't double it yourself.</p>
+    </div>
+
+    <!-- Max drop target (only in "size" and "length" modes) -->
+    <div class="field" id="field-target" hidden>
+      <label class="field-label" for="target">Biggest voltage drop you'll accept</label>
+      <div class="seg" role="group" aria-label="Maximum acceptable drop">
+        <button type="button" class="seg-btn active" data-target="3">3% — mandatory branch limit</button>
+        <button type="button" class="seg-btn" data-target="5">5% — upper limit</button>
+        <button type="button" class="seg-btn" data-target="custom">Custom</button>
+      </div>
+      <div class="input-unit" id="target-custom-wrap" hidden>
+        <input type="number" id="target" inputmode="decimal" min="0.1" max="50" step="any" value="3">
+        <span class="unit">%</span>
+      </div>
+      <p class="hint">3% is the mandatory maximum for a branch circuit or feeder. 5% is the mandatory maximum for the combined path.</p>
+    </div>
+
+    <button type="submit" class="calc-btn" id="calc-btn">Calculate</button>
+  </form>
+
+  <!-- Results -->
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+
+    <details class="math-details" id="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <!-- Guideline explainer -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why are 3% and 5% the voltage drop limits?","acceptedAnswer":{"@type":"Answer","text":"Wire has resistance, so some voltage is lost as heat before reaching the device. CEC Rule 8-102 makes the limits enforceable: maximum 3% on a branch circuit or feeder and 5% combined from the service to the farthest load. Low-voltage systems like 12 V solar often need an even tighter design target."}},{"@type":"Question","name":"Why don't voltage drop calculators agree with each other?","acceptedAnswer":{"@type":"Answer","text":"Almost always one of two things: some tools want round-trip wire length where others want one-way distance (VoltDrop always uses one-way and doubles it internally), and some use slightly different resistance values for the wire. VoltDrop shows its full calculation so you can check its numbers against any other tool."}}]}</script>
+  <section class="card explainer">
+    <h2>Why 3% and 5%?</h2>
+    <p>Wire has resistance, so some voltage is lost as heat before it reaches your device. Lose too much and motors run hot, LEDs dim or flicker, chargers underperform, and breakers can trip for no obvious reason.</p>
+    <p>CEC Rule 8-102 sets a <strong>mandatory</strong> maximum: keep the voltage drop on a branch circuit or feeder at or under <strong>3%</strong>, and the combined drop from the service to the farthest load at or under <strong>5%</strong>. These are enforceable limits in Canada, not optional performance guidelines. Low-voltage systems like 12&nbsp;V solar often need an even tighter design target because 3% of 12&nbsp;V hurts much more than 3% of 240&nbsp;V.</p>
+    <h2>Why don't other calculators agree with each other?</h2>
+    <p>Almost always one of two things: some tools want <strong>round-trip</strong> length where others want one-way (we always use one-way and double it for you), and some use slightly different resistance values for the wire. Open "How we calculated this" above and you can check our numbers against anything.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-en/common.js?v=d3b64342ae"></script>
+<script src="/assets/ca-en/app.js?v=16e905e600"></script>
+</body>
+</html>
