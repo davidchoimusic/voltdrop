@@ -49,8 +49,14 @@ const BOX_RESULT_TEXT = {
   doubleCountVolume: '{count} × 2 × {unit} = {volume}',
   usage: '{percent}%',
   oneCountVolume: '1 × {unit} = {volume}',
-  caMath: '\n<p>每根{size}绝缘导线需要<strong>{unit} mL</strong>接线盒空间（CEC Table 22，Rule 12-3034）。</p>\n<div class="formula">{conductors}根导线 + {devices}个{deviceWord} × 2 + {pairs}{pairWord}\n= {counts}个总计数 × {unit} mL\n= 需要{needed} mL\n{box}：可用{available} mL → {status}</div>\n<p>加拿大细则：裸露的接地跨接导体和电缆夹不预留容积（与US不同）；每对marrettes按其中最大导线计一个容积（我们使用您选择的规格；为保留安全余量，请选择现场最大的导线）；深度超过2.54 cm的器件，每cm深度还要额外扣除32 mL，本简化检查未包括这项扣除。</p>',
-  usMath: '\n<p>每根{size}导线需要<strong>{unit} cu in</strong>接线盒空间（NEC Table 314.16(B)）。</p>\n<div class="formula">{conductors}根导线 + {devices}个{deviceWord} × 2 + {grounds} + {clamps}\n= {counts}个总计数 × {unit} cu in\n= 需要{needed} cu in\n{box}：可用{available} cu in → {status}</div>\n<p>细则：完全留在接线盒内的引线不计数，但未断开而穿过接线盒的导线必须计一次，请将其包括在上方。如果超过四根接地导线进入接线盒，从第五根开始每根增加¼个计数（2020规范规则）；为保留安全余量，可按大约多一根导线计算。混合导线规格需要按规格分别完整计算（即将提供）；在此之前，选择现场最大的规格是使用本工具的安全方法。</p>',
+  conductorBreakdown: '<span>{count} × {size}</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  deviceBreakdown: '<span>{count}个{deviceWord}（最大{size}）</span><span>{count} × 2 × {allowance} = {volume} {measure}</span>',
+  groundsBreakdown: '<span>接地导线（最大{size}）</span><span>1 × {allowance} = {volume} {measure}</span>',
+  clampsBreakdown: '<span>电缆夹（最大{size}）</span><span>1 × {allowance} = {volume} {measure}</span>',
+  marretteBreakdown: '<span>{count}{pairWord}（最大{size}）</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  totalBreakdown: '<span><strong>总需求容积</strong></span><span><strong>{volume} {measure}</strong></span>',
+  caMathMixed: '\n<p>每一行均使用CEC Table 22、Rule 12-3034中对应规格的容积。</p>\n<div class="formula">{breakdown}\n{box}：可用{available} mL → {status}</div>\n<p>加拿大细则：裸露的接地跨接导线和电缆夹不计容积。器件和marrettes对均按列出的最大导线计算，因为这些合并输入未关联到某一行。深度超过2.54 cm的器件，每cm还需额外扣除32 mL，本检查未包括此项。</p>',
+  usMathMixed: '\n<p>每一行均使用NEC Table 314.16(B)中对应规格的容积。</p>\n<div class="formula">{breakdown}\n{box}：可用{available} cu in → {status}</div>\n<p>细则：完全留在接线盒内的引线不计，但未断开而穿过接线盒的导线计一次。器件、接地导线和电缆夹均按列出的最大导线计算，因为这些合并输入未关联到某一行。如果超过四根接地导线，从第五根起每根增加¼个计数（2020规则）；可多按约一根导线保留余量。</p>',
 };
 
 function bfCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
@@ -58,11 +64,11 @@ function bfCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? '
 const BF_TEXT = {
   us: {
     exp1: '接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格和电路闪断。NEC 314.16按导线规格（线规）规定所需空间，接线盒必须至少提供该容积。',
-    exp2: '进入接线盒的每根相线或中性线 = 1，包括未断开而穿过盒体的导线。每个器件 = 2。所有接地导体合计 = 1；超过四根后，根据2020规则，每增加一根加¼。内部电缆夹 = 1。始终留在盒内的引出短线不计。总数乘以相应导线规格（线规）的空间，再与接线盒容积比较。',
+    exp2: '每根进入接线盒的相线或中性线都按其自身规格计算，包括未断开而穿过接线盒的导线。每个器件按其连接的最大导线容积计两次。所有接地导线合计一次，按最大接地导线计算。内部电缆夹按接线盒内最大导线计一次。完全留在接线盒内的引线不计。',
   },
   ca: {
     exp1: '接线盒过满会使连接点受力、损伤绝缘层并积聚热量，常导致检查不合格。Canadian Electrical Code（Rule 12-3034和Table 22）按毫升为每根绝缘导线规定空间，接线盒必须至少提供该容积。',
-    exp2: '加拿大计数规则（Rule 12-3034）：每根进入接线盒的绝缘导线 = 1；裸露的接地跨接导体不计。每个器件 = 2。每对绝缘导线连接器（marrettes）= 1，并按其中最大的导线计算；此规则在US没有对应规定。加拿大不为电缆夹预留容积。始终留在盒内的引出短线不计。总数乘以Table 22规定的容积，再与接线盒的毫升容积比较。',
+    exp2: '加拿大计数规则（Rule 12-3034）：每根进入接线盒的绝缘导线按自身规格计一次。裸露的接地跨接导线不计。每个器件计两次。每对绝缘导线连接器（marrettes）计一次。器件和marrettes对均按列出的最大导线计算。加拿大不计电缆夹。完全留在接线盒内的引线不计。',
   },
 };
 
@@ -72,20 +78,10 @@ function applyBfCountry() {
   if (fm) fm.hidden = !ca;
   if (fg) fg.hidden = ca;   // bare bonds aren't counted in Canada; insulated entering wires go in the main count
   if (fc) fc.hidden = ca;   // CEC gives clamps no allowance
-  // size dropdown speaks the local units and (for CA) only Table 22 sizes
-  const prev = sizeSel.value;
-  sizeSel.innerHTML = '';
-  const src = ca ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
-  Object.keys(src).forEach((label) => {
-    const opt = document.createElement('option');
-    opt.value = label;
-    opt.textContent = vdFormat(ca ? BOX_RESULT_TEXT.mlOption : BOX_RESULT_TEXT.cubicInchOption, {
-      size: label,
-      volume: src[label],
-    });
-    sizeSel.appendChild(opt);
+  // Every row speaks the local units and (for CA) only Table 22 sizes.
+  document.querySelectorAll('#bf-rows .mixed-wire-size').forEach((select) => {
+    populateSizeSelect(select, ca);
   });
-  sizeSel.value = (prev in src) ? prev : '12 AWG';
   const e1 = $('bf-exp-1'), e2 = $('bf-exp-2');
   if (e1) e1.textContent = BF_TEXT[bfCountry()].exp1;
   if (e2) e2.textContent = BF_TEXT[bfCountry()].exp2;
@@ -104,6 +100,7 @@ window.addEventListener('vd:country', applyBfCountry);
 
 const $ = (id) => document.getElementById(id);
 const fmt = (n, d = 2) => Number(n.toFixed(d)).toLocaleString('en-US', { maximumFractionDigits: d });
+const fixed = (n, d) => Number(n).toFixed(d);
 
 const boxSel = $('bf-box');
 BOXES.forEach(([label, vol], i) => {
@@ -123,17 +120,71 @@ boxSel.addEventListener('change', () => {
   if (!$('results').hidden) calc();
 });
 
-const sizeSel = $('bf-size');
-Object.keys(VOL_PER_CONDUCTOR).forEach((label) => {
-  const opt = document.createElement('option');
-  opt.value = label;
-  opt.textContent = vdFormat(BOX_RESULT_TEXT.cubicInchOption, {
-    size: label,
-    volume: VOL_PER_CONDUCTOR[label],
+function populateSizeSelect(select, ca = bfCountry() === 'ca') {
+  const previous = select.value;
+  const source = ca ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
+  select.innerHTML = '';
+  Object.keys(source).forEach((label) => {
+    const opt = document.createElement('option');
+    opt.value = label;
+    opt.textContent = vdFormat(ca ? BOX_RESULT_TEXT.mlOption : BOX_RESULT_TEXT.cubicInchOption, {
+      size: label,
+      volume: source[label],
+    });
+    select.appendChild(opt);
   });
-  sizeSel.appendChild(opt);
+  select.value = (previous in source) ? previous : '12 AWG';
+}
+
+function updateRemoveButtons() {
+  const rows = document.querySelectorAll('#bf-rows .mixed-wire-row');
+  rows.forEach((row) => {
+    row.querySelector('.remove-size-btn').hidden = rows.length === 1;
+  });
+}
+
+function conductorRows() {
+  const source = bfCountry() === 'ca' ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
+  return [...document.querySelectorAll('#bf-rows .mixed-wire-row')].map((row) => {
+    const size = row.querySelector('.mixed-wire-size').value;
+    const count = Math.floor(Number(row.querySelector('.mixed-wire-count').value));
+    return { size, count, allowance: source[size] };
+  });
+}
+
+function renderBreakdown(lines, total) {
+  const itemized = $('itemized-breakdown');
+  itemized.innerHTML = '';
+  lines.forEach((html) => {
+    const line = document.createElement('div');
+    line.className = 'breakdown-line';
+    line.innerHTML = html;
+    itemized.appendChild(line);
+  });
+  const totalLine = document.createElement('div');
+  totalLine.className = 'breakdown-line breakdown-total';
+  totalLine.innerHTML = total;
+  itemized.appendChild(totalLine);
+}
+
+populateSizeSelect($('bf-size'), false);
+
+$('bf-add-row').addEventListener('click', () => {
+  const fragment = $('bf-row-template').content.cloneNode(true);
+  const row = fragment.querySelector('.mixed-wire-row');
+  populateSizeSelect(row.querySelector('.mixed-wire-size'));
+  $('bf-rows').appendChild(fragment);
+  updateRemoveButtons();
+  row.querySelector('.mixed-wire-size').focus();
 });
-sizeSel.value = '12 AWG';
+
+$('bf-rows').addEventListener('click', (event) => {
+  const button = event.target.closest('.remove-size-btn');
+  if (!button) return;
+  button.closest('.mixed-wire-row').remove();
+  updateRemoveButtons();
+  if (!$('results').hidden) calc();
+});
 
 document.querySelectorAll('.seg-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -149,8 +200,10 @@ document.querySelectorAll('.seg-btn').forEach((btn) => {
 $('bf-form').addEventListener('submit', (e) => { e.preventDefault(); calc(); });
 
 function calc() {
-  const conductors = Math.floor(Number($('bf-conductors').value));
-  if (!Number.isFinite(conductors) || conductors < 0) return;
+  const conductorEntries = conductorRows();
+  if (!conductorEntries.length
+      || conductorEntries.some((row) => !Number.isFinite(row.count) || row.count < 0)) return;
+  const conductors = conductorEntries.reduce((sum, row) => sum + row.count, 0);
   const devices = Math.floor(Number($('bf-devices').value)) || 0;
   const ca = bfCountry() === 'ca';
   const marrettes = ca ? (Math.floor(Number($('bf-marrettes').value)) || 0) : 0;
@@ -166,13 +219,17 @@ function calc() {
     boxVol = vol;
   }
 
-  const size = sizeSel.value;
-  const unit = ca ? CEC_VOL_ML[size] : VOL_PER_CONDUCTOR[size];
-  if (unit === undefined) { alert('用于加拿大接线盒填充,使用sizes 14-6 AWG (CEC Table 22 coverage).'); return; }
-  const counts = ca
-    ? conductors + devices * 2 + Math.floor(marrettes / 2)
-    : conductors + devices * 2 + (grounds ? 1 : 0) + (clamps ? 1 : 0);
-  const needed = counts * unit;
+  const largest = conductorEntries.reduce((current, row) =>
+    row.allowance > current.allowance ? row : current);
+  if (largest.allowance === undefined) { alert('用于加拿大接线盒填充,使用sizes 14-6 AWG (CEC Table 22 coverage).'); return; }
+  const conductorVolume = conductorEntries.reduce((sum, row) =>
+    sum + row.count * row.allowance, 0);
+  const pairs = Math.floor(marrettes / 2);
+  const deviceVolume = devices * 2 * largest.allowance;
+  const groundVolume = !ca && grounds ? largest.allowance : 0;
+  const clampVolume = !ca && clamps ? largest.allowance : 0;
+  const marretteVolume = ca ? pairs * largest.allowance : 0;
+  const needed = conductorVolume + deviceVolume + groundVolume + clampVolume + marretteVolume;
   const ok = needed <= boxVol;
   const pct = (needed / boxVol) * 100;
 
@@ -191,19 +248,64 @@ function calc() {
 
   const rows = ca
     ? [
-        ['绝缘导线', vdFormat(BOX_RESULT_TEXT.countVolume, { count: conductors, unit, volume: fmt(conductors * unit, 1) })],
-        ['器件（按两倍计）', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit, volume: fmt(devices * 2 * unit, 1) })],
-        ['marrettes对数', vdFormat(BOX_RESULT_TEXT.countVolume, { count: Math.floor(marrettes / 2), unit, volume: fmt(Math.floor(marrettes / 2) * unit, 1) })],
+        ['绝缘导线', vdFormat(BOX_RESULT_TEXT.needed, { volume: fmt(conductorVolume, 1), unit: u })],
+        ['器件（按两倍计）', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit: largest.allowance, volume: fmt(deviceVolume, 1) })],
+        ['marrettes对数', vdFormat(BOX_RESULT_TEXT.countVolume, { count: pairs, unit: largest.allowance, volume: fmt(marretteVolume, 1) })],
         ['接线盒使用率', vdFormat(BOX_RESULT_TEXT.usage, { percent: fmt(pct, 0) })],
       ]
     : [
-        ['导线(hots + neutrals)', vdFormat(BOX_RESULT_TEXT.countVolume, { count: conductors, unit, volume: fmt(conductors * unit, 2) })],
-        ['器件（按两倍计）', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit, volume: fmt(devices * 2 * unit, 2) })],
-        ['接地线(全部= 1)', grounds ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit, volume: fmt(unit, 2) }) : '无'],
-        ['电缆夹', clamps ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit, volume: fmt(unit, 2) }) : '无'],
+        ['导线(hots + neutrals)', vdFormat(BOX_RESULT_TEXT.needed, { volume: fmt(conductorVolume, 2), unit: u })],
+        ['器件（按两倍计）', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit: largest.allowance, volume: fmt(deviceVolume, 2) })],
+        ['接地线(全部= 1)', grounds ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit: largest.allowance, volume: fmt(groundVolume, 2) }) : '无'],
+        ['电缆夹', clamps ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit: largest.allowance, volume: fmt(clampVolume, 2) }) : '无'],
         ['接线盒使用率', vdFormat(BOX_RESULT_TEXT.usage, { percent: fmt(pct, 0) })],
       ];
   $('result-grid').innerHTML = rows.map(([k, v]) => `<div class="result-cell"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+
+  const breakdown = conductorEntries
+    .filter((row) => row.count > 0)
+    .map((row) => vdFormat(BOX_RESULT_TEXT.conductorBreakdown, {
+      count: row.count,
+      size: row.size,
+      allowance: fixed(row.allowance, ca ? 1 : 2),
+      volume: fixed(row.count * row.allowance, ca ? 1 : 2),
+      measure: u,
+    }));
+  if (devices > 0) breakdown.push(vdFormat(BOX_RESULT_TEXT.deviceBreakdown, {
+    count: devices,
+    deviceWord: devices === 1 ? '器件' : '器件',
+    size: largest.size,
+    allowance: fixed(largest.allowance, ca ? 1 : 2),
+    volume: fixed(deviceVolume, ca ? 1 : 2),
+    measure: u,
+  }));
+  if (!ca && grounds) breakdown.push(vdFormat(BOX_RESULT_TEXT.groundsBreakdown, {
+    size: largest.size,
+    allowance: fixed(largest.allowance, 2),
+    volume: fixed(groundVolume, 2),
+    measure: u,
+  }));
+  if (!ca && clamps) breakdown.push(vdFormat(BOX_RESULT_TEXT.clampsBreakdown, {
+    size: largest.size,
+    allowance: fixed(largest.allowance, 2),
+    volume: fixed(clampVolume, 2),
+    measure: u,
+  }));
+  if (ca && pairs > 0) breakdown.push(vdFormat(BOX_RESULT_TEXT.marretteBreakdown, {
+    count: pairs,
+    pairWord: pairs === 1 ? '对marrettes' : '对marrettes',
+    size: largest.size,
+    allowance: fixed(largest.allowance, 1),
+    volume: fixed(marretteVolume, 1),
+    measure: u,
+  }));
+  renderBreakdown(
+    breakdown,
+    vdFormat(BOX_RESULT_TEXT.totalBreakdown, {
+      volume: fixed(needed, ca ? 1 : 2),
+      measure: u,
+    }),
+  );
 
   $('verdict-note').textContent = ok
     ? (pct <= 90
@@ -211,19 +313,11 @@ function calc() {
         : '合规，但正好达到限值。如果以后可能增加器件或电缆，现在就应使用更大的接线盒。')
     : '超出限值。请使用更深的接线盒、扩展盒或减少导线数量。接线盒过满通常会导致检查不合格并产生发热风险。';
 
-  const pairs = Math.floor(marrettes / 2);
-  $('math-body').innerHTML = vdFormat(ca ? BOX_RESULT_TEXT.caMath : BOX_RESULT_TEXT.usMath, {
-    size,
-    unit,
-    conductors,
-    devices,
-    deviceWord: devices === 1 ? '器件' : '器件',
-    pairs,
-    pairWord: pairs === 1 ? '对marrettes' : '对marrettes',
-    grounds: grounds ? '接地线(1)' : '否接地线(0)',
-    clamps: clamps ? '电缆夹(1)' : '否电缆夹(0)',
-    counts,
-    needed: fmt(needed, ca ? 1 : 2),
+  const breakdownText = [...$('itemized-breakdown').querySelectorAll('.breakdown-line')]
+    .map((line) => line.textContent.trim())
+    .join('\n');
+  $('math-body').innerHTML = vdFormat(ca ? BOX_RESULT_TEXT.caMathMixed : BOX_RESULT_TEXT.usMathMixed, {
+    breakdown: breakdownText,
     box: boxName,
     available: fmt(boxVol, 1),
     status: ok ? '合适' : '不符合',

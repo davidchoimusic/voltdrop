@@ -9,6 +9,11 @@ conditions and still be too high in a hot space, a crowded raceway, or at an
 equipment termination with a lower temperature rating. The unsafe answer looks
 precise because the missing conditions are hidden.
 
+The same trust failure appears when an interface forces a mixed job into one
+conductor size. Raceways and boxes are sums of line items, not a single
+size-and-count fact. A plausible one-size shortcut can select the wrong conduit
+percentage or understate the allowance driven by the largest conductor.
+
 Electrical rules are also territorial. The physics crosses borders, but the
 NEC, CEC, wire names, limits, and counting rules do not. Some current NEC and
 CEC base values are deliberately harmonized while the rules applied to those
@@ -31,13 +36,12 @@ Trust is the product. Four commitments make it concrete.
    mismatches.
 
 2. **Show the calculation in the order the rule operates.** Ampacity begins in
-   the conductor's insulation temperature column, then applies ambient
-   correction and conductor-count adjustment together. Termination and
-   small-conductor limits are caps applied afterward. The result must name the
-   binding limit because that tells the worker what actually controls the
-   circuit. A dash in a source table is a refusal state. Canadian Table 5A
-   points create an additional conservative rule: an in-between ambient uses
-   the next higher published row, never interpolation or rounding down.
+   the insulation column, applies both derating factors, then applies its caps.
+   Fill begins with one contribution per conductor row. Conduit fill chooses
+   53%, 31%, or 40% from the combined row count; box fill applies every row's
+   own allowance before adding largest-conductor device, ground, clamp, or
+   marrette allowances. A dash in a source table remains a refusal state, and
+   an in-between Canadian ambient uses the next higher Table 5A row.
 
 3. **Keep different safety questions separate.** Derating asks how much current
    the conductor can safely carry under heat-producing conditions. The
@@ -81,21 +85,22 @@ Counting guidance sits beside the input because a mathematically perfect result
 is still wrong when a neutral, spare, bond, or control conductor is classified
 incorrectly.
 
-The Canadian interface also states its simplifications. Rule 4-006 applies the
-termination constraint to the first 1.2 m and permits a transition beyond it;
-VoltDrop conservatively applies the lower termination column throughout.
-Rule 8-104 is displayed as an 80% continuous-load ceiling for standard
-80%-rated equipment, never combined with a 125% multiplier. Installed
-power/lighting spares count by default, explicitly labeled as a conservative
-reading because the Code is silent and the local authority may differ.
+The fill interfaces mirror their sums without penalizing the common case. One
+row is ready by default; extra sizes are opt-in. Each result itemizes the rows
+and the aggregate allowances so the worker can see both the arithmetic and
+which conductor drove the largest-size rule. Because devices, grounds, clamps,
+and marrettes remain aggregate inputs, they conservatively use the largest
+listed conductor rather than inventing a connection to a particular row.
 
-The Terms page carries the same honesty at service level. It names the 2023
-NEC and CSA C22.1:24 implementation boundaries, includes every fully
-implemented calculator citation, and excludes Canadian conduit tables that
-remain planning-only. It also explains that states, provinces, and
-municipalities adopt on different schedules, and that a local amendment or
-older edition can change the answer. Known simplifications are therefore not
-isolated footnotes: they are part of the product's general description.
+The Canadian interface states its simplifications. It conservatively applies
+Rule 4-006's lower termination column beyond the first 1.2 m, shows Rule 8-104
+as an 80% ceiling rather than a 125% multiplier, and labels spare-conductor
+counting as conservative where the Code is silent.
+
+The Terms page names the 2023 NEC and CSA C22.1:24 boundaries, excludes
+Canadian conduit tables that remain planning-only, and warns that local
+adoption schedules and amendments can change the answer. Known simplifications
+are part of the product's general description, not isolated footnotes.
 
 Localization uses stable template keys and locale-owned full thoughts. Country
 packs own territorial claims, citations, limits, and scenarios. Locale
@@ -110,12 +115,12 @@ keeps citations, wire types, and units unchanged. The standalone letter `A`
 needs contextual protection as a unit after a number or placeholder; treating
 every article “A” as an ampere symbol would create false failures.
 
-Every ampacity string passes two translation stages. Pass A receives only
-target-language text under opaque IDs. Pass B compares that independent
+Every safety-critical string passes two translation stages. Pass A receives
+only target-language text under opaque IDs. Pass B compares that independent
 back-translation with the sealed English source and records a specific meaning
-verdict. Contamination, repeated boilerplate, changed force, numbers, units, or
-citations fail mechanically. Page-wide numeric parity adds a second defense
-for fragmented labels and generated table output.
+verdict. The reviewed registry is cumulative: regeneration may replace
+obsolete patterns, but it cannot silently drop still-live safety copy.
+Contamination, changed force, numbers, units, or citations fail mechanically.
 
 ## Key Discoveries
 
@@ -145,8 +150,14 @@ for fragmented labels and generated table output.
 
 - **Verification needs independent oracles.** Hand-checkable cases cover
   derating, termination, the small-conductor cap, continuous load separation,
-  and the null-cell refusal. These examples protect the rule order rather than
-  merely repeating the production function.
+  the null-cell refusal, mixed-area addition, the combined conduit count, and a
+  larger conductor changing the passing box. These examples protect rule order
+  and selection boundaries rather than merely repeating production totals.
+
+- **“Largest” is a physical rule, not a label sort.** AWG text sorts in the
+  wrong direction and includes `1/0` forms. The sealed per-size allowance is
+  the reliable comparison: the row with the greatest allowance is the
+  physically largest supported conductor and drives aggregate box allowances.
 
 - **Text boundaries are script-specific.** A digit beside a Latin letter can
   belong to an identifier such as `COVID19`, but a digit beside a Chinese
@@ -165,11 +176,6 @@ for fragmented labels and generated table output.
   gate selects CEC point-row ambient logic, CEC conductor bands, Canadian
   counting copy, Canadian cap citations, and the 80% continuous-load display.
 
-- **Edition history can reverse a true claim.** The 2012 CEC really did list
-  14 AWG copper at 20 A in the 60°C column, but the current 2024 edition lists
-  15 A and matches the NEC. The old difference was evidence about the wrong
-  edition, not evidence that the current grids differ.
-
 - **An edition citation is not an adoption claim.** Naming 2023 NEC or
   CSA C22.1:24 tells the user what VoltDrop computes. It does not tell them what
   their state, province, or municipality enforces. The product needs both
@@ -187,3 +193,7 @@ for fragmented labels and generated table output.
 
 - **External language review:** mechanical gates are strong, but a native
   electrician in each language remains the best check of trade idiom.
+
+- **Aggregate box inputs:** using the largest listed conductor is conservative
+  and matches the present form, but per-device and per-ground size inputs would
+  be needed if future users require exact connection-level modeling.

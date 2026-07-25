@@ -49,8 +49,14 @@ const BOX_RESULT_TEXT = {
   doubleCountVolume: '{count} × 2 × {unit} = {volume}',
   usage: '{percent}%',
   oneCountVolume: '1 × {unit} = {volume}',
-  caMath: '\n<p>Cada conductor aislado {size} requiere <strong>{unit} mL</strong> de espacio en la caja (CEC Table 22, Rule 12-3034).</p>\n<div class="formula">{conductors} conductores + {devices} {deviceWord} × 2 + {pairs} {pairWord}\n= {counts} cuentas totales × {unit} mL\n= {needed} mL necesarios\n{box}: {available} mL disponibles → {status}</div>\n<p>Detalle canadiense: los conductores de continuidad de masa desnudos y las abrazaderas no reciben volumen (a diferencia de US); cada par de marrettes cuenta una vez según el conductor más grande conectado (usamos el calibre seleccionado; elija el mayor presente para conservar un margen seguro); los dispositivos con más de 2.54 cm de profundidad necesitan una deducción adicional de 32 mL por cm de profundidad, que esta verificación sencilla no incluye.</p>',
-  usMath: '\n<p>Cada conductor {size} requiere <strong>{unit} cu in</strong> de espacio en la caja (NEC Table 314.16(B)).</p>\n<div class="formula">{conductors} conductores + {devices} {deviceWord} × 2 + {grounds} + {clamps}\n= {counts} cuentas totales × {unit} cu in\n= {needed} cu in necesarios\n{box}: {available} cu in disponibles → {status}</div>\n<p>Detalle: las colas de conexión que permanecen por completo dentro de la caja no cuentan, pero un conductor que la atraviesa sin cortarse SÍ cuenta una vez; inclúyalo arriba. Si entran más de cuatro conductores de puesta a tierra, cada uno después del cuarto suma ¼ de cuenta (regla de 2020); agregue aproximadamente un conductor extra para conservar un margen seguro. Con varios calibres se necesita el cálculo completo por calibre (próximamente); hasta entonces, seleccionar el calibre mayor es la forma segura de usar esta herramienta.</p>',
+  conductorBreakdown: '<span>{count} × {size}</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  deviceBreakdown: '<span>{count} {deviceWord} (mayor: {size})</span><span>{count} × 2 × {allowance} = {volume} {measure}</span>',
+  groundsBreakdown: '<span>tierras (mayor: {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  clampsBreakdown: '<span>abrazaderas (mayor: {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  marretteBreakdown: '<span>{count} {pairWord} (mayor: {size})</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  totalBreakdown: '<span><strong>TOTAL NECESARIO</strong></span><span><strong>{volume} {measure}</strong></span>',
+  caMathMixed: '\n<p>Cada fila usa su propio volumen de CEC Table 22, Rule 12-3034.</p>\n<div class="formula">{breakdown}\n{box}: {available} mL disponibles → {status}</div>\n<p>Detalle canadiense: los conductores de continuidad de masa desnudos y las abrazaderas no reciben volumen. Los dispositivos y pares de marrettes usan el conductor más grande indicado porque esas entradas conjuntas no están vinculadas a una fila. Los dispositivos con más de 2.54 cm de profundidad necesitan una deducción adicional de 32 mL por cm, que esta verificación no incluye.</p>',
+  usMathMixed: '\n<p>Cada fila usa su propio volumen de NEC Table 314.16(B).</p>\n<div class="formula">{breakdown}\n{box}: {available} cu in disponibles → {status}</div>\n<p>Detalle: las colas de conexión internas no cuentan, pero un conductor que atraviesa la caja sin cortarse cuenta una vez. Los dispositivos, tierras y abrazaderas usan el conductor más grande indicado porque esas entradas conjuntas no están vinculadas a una fila. Si entran más de cuatro tierras, cada una después de la cuarta suma ¼ según la regla de 2020; agregue aproximadamente un conductor para conservar margen.</p>',
 };
 
 function bfCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
@@ -58,11 +64,11 @@ function bfCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? '
 const BF_TEXT = {
   us: {
     exp1: 'Una caja sobrecargada fuerza las conexiones, daña el aislamiento y acumula calor. Es una causa habitual de inspecciones fallidas y circuitos intermitentes. NEC 314.16 asigna un volumen a cada calibre del conductor, y la caja debe ofrecer al menos ese espacio.',
-    exp2: 'Cada conductor de fase o neutro que entra en la caja = 1, incluidos los que la atraviesan sin cortarse. Cada dispositivo = 2. Todos los conductores de puesta a tierra juntos = 1; si hay más de cuatro, cada adicional suma ¼ según las reglas de 2020. Las abrazaderas internas = 1. Las colas de conexión que permanecen dentro de la caja no cuentan. Multiplicamos el total por el volumen del calibre del conductor y lo comparamos con el volumen de la caja.',
+    exp2: 'Cada conductor de fase o neutro que entra en la caja cuenta según su propio calibre, incluidos los que la atraviesan sin cortarse. Cada dispositivo cuenta dos veces según el volumen de su conductor conectado más grande. Todos los conductores de puesta a tierra juntos cuentan una vez según el mayor. Las abrazaderas internas cuentan una vez según el conductor más grande de la caja. Las colas de conexión internas no cuentan.',
   },
   ca: {
     exp1: 'Una caja sobrecargada fuerza las conexiones, daña el aislamiento y acumula calor. Es una causa habitual de inspecciones fallidas. Canadian Electrical Code (Rule 12-3034 con Table 22) asigna a cada conductor aislado un volumen en mililitros, y la caja debe ofrecer al menos ese espacio.',
-    exp2: 'Conteo canadiense (Rule 12-3034): cada conductor aislado que entra en la caja = 1; los conductores de continuidad de masa desnudos NO cuentan. Cada dispositivo (interruptor/tomacorriente) = 2. Cada PAR de conectores aislados (marrettes) = 1, según el conductor más grande conectado. Es una regla canadiense sin equivalente en US. Las abrazaderas no reciben volumen en Canadá. Las colas de conexión que permanecen dentro de la caja no cuentan. Multiplicamos el total por el volumen de Table 22 y lo comparamos con el volumen de la caja en mililitros.',
+    exp2: 'Conteo canadiense (Rule 12-3034): cada conductor aislado que entra en la caja cuenta una vez según su propio calibre. Los conductores de continuidad de masa desnudos NO cuentan. Cada dispositivo cuenta dos veces. Cada PAR de conectores aislados (marrettes) cuenta una vez. Los dispositivos y pares de marrettes usan el conductor más grande indicado. Las abrazaderas NO reciben volumen en Canadá. Las colas de conexión internas no cuentan.',
   },
 };
 
@@ -72,20 +78,10 @@ function applyBfCountry() {
   if (fm) fm.hidden = !ca;
   if (fg) fg.hidden = ca;   // bare bonds aren't counted in Canada; insulated entering wires go in the main count
   if (fc) fc.hidden = ca;   // CEC gives clamps no allowance
-  // size dropdown speaks the local units and (for CA) only Table 22 sizes
-  const prev = sizeSel.value;
-  sizeSel.innerHTML = '';
-  const src = ca ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
-  Object.keys(src).forEach((label) => {
-    const opt = document.createElement('option');
-    opt.value = label;
-    opt.textContent = vdFormat(ca ? BOX_RESULT_TEXT.mlOption : BOX_RESULT_TEXT.cubicInchOption, {
-      size: label,
-      volume: src[label],
-    });
-    sizeSel.appendChild(opt);
+  // Every row speaks the local units and (for CA) only Table 22 sizes.
+  document.querySelectorAll('#bf-rows .mixed-wire-size').forEach((select) => {
+    populateSizeSelect(select, ca);
   });
-  sizeSel.value = (prev in src) ? prev : '12 AWG';
   const e1 = $('bf-exp-1'), e2 = $('bf-exp-2');
   if (e1) e1.textContent = BF_TEXT[bfCountry()].exp1;
   if (e2) e2.textContent = BF_TEXT[bfCountry()].exp2;
@@ -104,6 +100,7 @@ window.addEventListener('vd:country', applyBfCountry);
 
 const $ = (id) => document.getElementById(id);
 const fmt = (n, d = 2) => Number(n.toFixed(d)).toLocaleString('en-US', { maximumFractionDigits: d });
+const fixed = (n, d) => Number(n).toFixed(d);
 
 const boxSel = $('bf-box');
 BOXES.forEach(([label, vol], i) => {
@@ -123,17 +120,71 @@ boxSel.addEventListener('change', () => {
   if (!$('results').hidden) calc();
 });
 
-const sizeSel = $('bf-size');
-Object.keys(VOL_PER_CONDUCTOR).forEach((label) => {
-  const opt = document.createElement('option');
-  opt.value = label;
-  opt.textContent = vdFormat(BOX_RESULT_TEXT.cubicInchOption, {
-    size: label,
-    volume: VOL_PER_CONDUCTOR[label],
+function populateSizeSelect(select, ca = bfCountry() === 'ca') {
+  const previous = select.value;
+  const source = ca ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
+  select.innerHTML = '';
+  Object.keys(source).forEach((label) => {
+    const opt = document.createElement('option');
+    opt.value = label;
+    opt.textContent = vdFormat(ca ? BOX_RESULT_TEXT.mlOption : BOX_RESULT_TEXT.cubicInchOption, {
+      size: label,
+      volume: source[label],
+    });
+    select.appendChild(opt);
   });
-  sizeSel.appendChild(opt);
+  select.value = (previous in source) ? previous : '12 AWG';
+}
+
+function updateRemoveButtons() {
+  const rows = document.querySelectorAll('#bf-rows .mixed-wire-row');
+  rows.forEach((row) => {
+    row.querySelector('.remove-size-btn').hidden = rows.length === 1;
+  });
+}
+
+function conductorRows() {
+  const source = bfCountry() === 'ca' ? CEC_VOL_ML : VOL_PER_CONDUCTOR;
+  return [...document.querySelectorAll('#bf-rows .mixed-wire-row')].map((row) => {
+    const size = row.querySelector('.mixed-wire-size').value;
+    const count = Math.floor(Number(row.querySelector('.mixed-wire-count').value));
+    return { size, count, allowance: source[size] };
+  });
+}
+
+function renderBreakdown(lines, total) {
+  const itemized = $('itemized-breakdown');
+  itemized.innerHTML = '';
+  lines.forEach((html) => {
+    const line = document.createElement('div');
+    line.className = 'breakdown-line';
+    line.innerHTML = html;
+    itemized.appendChild(line);
+  });
+  const totalLine = document.createElement('div');
+  totalLine.className = 'breakdown-line breakdown-total';
+  totalLine.innerHTML = total;
+  itemized.appendChild(totalLine);
+}
+
+populateSizeSelect($('bf-size'), false);
+
+$('bf-add-row').addEventListener('click', () => {
+  const fragment = $('bf-row-template').content.cloneNode(true);
+  const row = fragment.querySelector('.mixed-wire-row');
+  populateSizeSelect(row.querySelector('.mixed-wire-size'));
+  $('bf-rows').appendChild(fragment);
+  updateRemoveButtons();
+  row.querySelector('.mixed-wire-size').focus();
 });
-sizeSel.value = '12 AWG';
+
+$('bf-rows').addEventListener('click', (event) => {
+  const button = event.target.closest('.remove-size-btn');
+  if (!button) return;
+  button.closest('.mixed-wire-row').remove();
+  updateRemoveButtons();
+  if (!$('results').hidden) calc();
+});
 
 document.querySelectorAll('.seg-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -149,8 +200,10 @@ document.querySelectorAll('.seg-btn').forEach((btn) => {
 $('bf-form').addEventListener('submit', (e) => { e.preventDefault(); calc(); });
 
 function calc() {
-  const conductors = Math.floor(Number($('bf-conductors').value));
-  if (!Number.isFinite(conductors) || conductors < 0) return;
+  const conductorEntries = conductorRows();
+  if (!conductorEntries.length
+      || conductorEntries.some((row) => !Number.isFinite(row.count) || row.count < 0)) return;
+  const conductors = conductorEntries.reduce((sum, row) => sum + row.count, 0);
   const devices = Math.floor(Number($('bf-devices').value)) || 0;
   const ca = bfCountry() === 'ca';
   const marrettes = ca ? (Math.floor(Number($('bf-marrettes').value)) || 0) : 0;
@@ -166,13 +219,17 @@ function calc() {
     boxVol = vol;
   }
 
-  const size = sizeSel.value;
-  const unit = ca ? CEC_VOL_ML[size] : VOL_PER_CONDUCTOR[size];
-  if (unit === undefined) { alert('para canadiense llenado de caja, use sizes 14-6 AWG (CEC Table 22 coverage).'); return; }
-  const counts = ca
-    ? conductors + devices * 2 + Math.floor(marrettes / 2)
-    : conductors + devices * 2 + (grounds ? 1 : 0) + (clamps ? 1 : 0);
-  const needed = counts * unit;
+  const largest = conductorEntries.reduce((current, row) =>
+    row.allowance > current.allowance ? row : current);
+  if (largest.allowance === undefined) { alert('para canadiense llenado de caja, use sizes 14-6 AWG (CEC Table 22 coverage).'); return; }
+  const conductorVolume = conductorEntries.reduce((sum, row) =>
+    sum + row.count * row.allowance, 0);
+  const pairs = Math.floor(marrettes / 2);
+  const deviceVolume = devices * 2 * largest.allowance;
+  const groundVolume = !ca && grounds ? largest.allowance : 0;
+  const clampVolume = !ca && clamps ? largest.allowance : 0;
+  const marretteVolume = ca ? pairs * largest.allowance : 0;
+  const needed = conductorVolume + deviceVolume + groundVolume + clampVolume + marretteVolume;
   const ok = needed <= boxVol;
   const pct = (needed / boxVol) * 100;
 
@@ -191,19 +248,64 @@ function calc() {
 
   const rows = ca
     ? [
-        ['aislados conductores', vdFormat(BOX_RESULT_TEXT.countVolume, { count: conductors, unit, volume: fmt(conductors * unit, 1) })],
-        ['Dispositivos (cuentan doble)', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit, volume: fmt(devices * 2 * unit, 1) })],
-        ['Pares de marrettes', vdFormat(BOX_RESULT_TEXT.countVolume, { count: Math.floor(marrettes / 2), unit, volume: fmt(Math.floor(marrettes / 2) * unit, 1) })],
+        ['aislados conductores', vdFormat(BOX_RESULT_TEXT.needed, { volume: fmt(conductorVolume, 1), unit: u })],
+        ['Dispositivos (cuentan doble)', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit: largest.allowance, volume: fmt(deviceVolume, 1) })],
+        ['Pares de marrettes', vdFormat(BOX_RESULT_TEXT.countVolume, { count: pairs, unit: largest.allowance, volume: fmt(marretteVolume, 1) })],
         ['Uso de la caja', vdFormat(BOX_RESULT_TEXT.usage, { percent: fmt(pct, 0) })],
       ]
     : [
-        ['conductores (hots + neutrals)', vdFormat(BOX_RESULT_TEXT.countVolume, { count: conductors, unit, volume: fmt(conductors * unit, 2) })],
-        ['Dispositivos (cuentan doble)', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit, volume: fmt(devices * 2 * unit, 2) })],
-        ['tierras (todos = 1)', grounds ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit, volume: fmt(unit, 2) }) : 'ninguno'],
-        ['abrazaderas', clamps ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit, volume: fmt(unit, 2) }) : 'ninguno'],
+        ['conductores (hots + neutrals)', vdFormat(BOX_RESULT_TEXT.needed, { volume: fmt(conductorVolume, 2), unit: u })],
+        ['Dispositivos (cuentan doble)', vdFormat(BOX_RESULT_TEXT.doubleCountVolume, { count: devices, unit: largest.allowance, volume: fmt(deviceVolume, 2) })],
+        ['tierras (todos = 1)', grounds ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit: largest.allowance, volume: fmt(groundVolume, 2) }) : 'ninguno'],
+        ['abrazaderas', clamps ? vdFormat(BOX_RESULT_TEXT.oneCountVolume, { unit: largest.allowance, volume: fmt(clampVolume, 2) }) : 'ninguno'],
         ['Uso de la caja', vdFormat(BOX_RESULT_TEXT.usage, { percent: fmt(pct, 0) })],
       ];
   $('result-grid').innerHTML = rows.map(([k, v]) => `<div class="result-cell"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+
+  const breakdown = conductorEntries
+    .filter((row) => row.count > 0)
+    .map((row) => vdFormat(BOX_RESULT_TEXT.conductorBreakdown, {
+      count: row.count,
+      size: row.size,
+      allowance: fixed(row.allowance, ca ? 1 : 2),
+      volume: fixed(row.count * row.allowance, ca ? 1 : 2),
+      measure: u,
+    }));
+  if (devices > 0) breakdown.push(vdFormat(BOX_RESULT_TEXT.deviceBreakdown, {
+    count: devices,
+    deviceWord: devices === 1 ? 'dispositivo' : 'dispositivos',
+    size: largest.size,
+    allowance: fixed(largest.allowance, ca ? 1 : 2),
+    volume: fixed(deviceVolume, ca ? 1 : 2),
+    measure: u,
+  }));
+  if (!ca && grounds) breakdown.push(vdFormat(BOX_RESULT_TEXT.groundsBreakdown, {
+    size: largest.size,
+    allowance: fixed(largest.allowance, 2),
+    volume: fixed(groundVolume, 2),
+    measure: u,
+  }));
+  if (!ca && clamps) breakdown.push(vdFormat(BOX_RESULT_TEXT.clampsBreakdown, {
+    size: largest.size,
+    allowance: fixed(largest.allowance, 2),
+    volume: fixed(clampVolume, 2),
+    measure: u,
+  }));
+  if (ca && pairs > 0) breakdown.push(vdFormat(BOX_RESULT_TEXT.marretteBreakdown, {
+    count: pairs,
+    pairWord: pairs === 1 ? 'par de marrettes' : 'pares de marrettes',
+    size: largest.size,
+    allowance: fixed(largest.allowance, 1),
+    volume: fixed(marretteVolume, 1),
+    measure: u,
+  }));
+  renderBreakdown(
+    breakdown,
+    vdFormat(BOX_RESULT_TEXT.totalBreakdown, {
+      volume: fixed(needed, ca ? 1 : 2),
+      measure: u,
+    }),
+  );
 
   $('verdict-note').textContent = ok
     ? (pct <= 90
@@ -211,19 +313,11 @@ function calc() {
         : 'Permitido, pero justo en el límite. Si más adelante pudiera agregar un dispositivo u otro cable, use ahora una caja mayor.')
     : 'Supera el límite. Use una caja más profunda, una extensión o menos conductores. Las cajas sobrecargadas suelen fallar la inspección y presentan riesgo de calor.';
 
-  const pairs = Math.floor(marrettes / 2);
-  $('math-body').innerHTML = vdFormat(ca ? BOX_RESULT_TEXT.caMath : BOX_RESULT_TEXT.usMath, {
-    size,
-    unit,
-    conductors,
-    devices,
-    deviceWord: devices === 1 ? 'dispositivo' : 'dispositivos',
-    pairs,
-    pairWord: pairs === 1 ? 'par de marrettes' : 'pares de marrettes',
-    grounds: grounds ? 'tierras (1)' : 'no tierras (0)',
-    clamps: clamps ? 'abrazaderas (1)' : 'no abrazaderas (0)',
-    counts,
-    needed: fmt(needed, ca ? 1 : 2),
+  const breakdownText = [...$('itemized-breakdown').querySelectorAll('.breakdown-line')]
+    .map((line) => line.textContent.trim())
+    .join('\n');
+  $('math-body').innerHTML = vdFormat(ca ? BOX_RESULT_TEXT.caMathMixed : BOX_RESULT_TEXT.usMathMixed, {
+    breakdown: breakdownText,
     box: boxName,
     available: fmt(boxVol, 1),
     status: ok ? 'cabe' : 'NO CABE',

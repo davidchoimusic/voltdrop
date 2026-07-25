@@ -90,6 +90,85 @@
   </nav>
 </aside>
 
+<style>
+  .mixed-wire-head,
+  .mixed-wire-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(76px, 0.48fr) 48px;
+    gap: var(--space-2);
+  }
+  .mixed-wire-head .field-label { margin-bottom: 0; }
+  .mixed-wire-head .field-label:last-child { grid-column: 2; }
+  .mixed-wire-rows { display: grid; gap: var(--space-2); margin-top: var(--space-2); }
+  .mixed-wire-row select,
+  .mixed-wire-row input { min-width: 0; min-height: 52px; }
+  .mixed-wire-row input {
+    width: 100%;
+    padding: var(--space-2);
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+  }
+  .mixed-wire-row input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .remove-size-btn,
+  .add-size-btn {
+    min-height: 48px;
+    font-family: inherit;
+    font-weight: 750;
+    color: var(--color-ink);
+    background: var(--color-surface-2);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .remove-size-btn { width: 48px; padding: 0; font-size: 28px; line-height: 1; }
+  .add-size-btn {
+    width: 100%;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: 14px;
+  }
+  .remove-size-btn:hover,
+  .add-size-btn:hover { border-color: var(--color-accent); }
+  .remove-size-btn:focus-visible,
+  .add-size-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+  .remove-size-btn:active,
+  .add-size-btn:active { transform: translateY(1px); }
+  .remove-size-btn:disabled,
+  .add-size-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .itemized-breakdown {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid var(--color-line);
+    font-size: 14px;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .breakdown-line { display: flex; justify-content: space-between; gap: var(--space-3); }
+  .breakdown-line span:last-child { text-align: right; font-weight: 700; }
+  .breakdown-total {
+    margin-top: var(--space-1);
+    padding-top: var(--space-2);
+    border-top: 2px solid var(--color-line-strong);
+    font-weight: 800;
+  }
+  @media (max-width: 640px) {
+    .mixed-wire-head,
+    .mixed-wire-row { grid-template-columns: minmax(0, 1fr) 82px 48px; }
+    .mixed-wire-row select { padding-inline: var(--space-2); font-size: 15px; }
+    .itemized-breakdown { padding: var(--space-4); }
+    .breakdown-line { display: grid; gap: 0; }
+    .breakdown-line span:last-child { text-align: left; }
+  }
+</style>
 <main class="main-col">
 
   <div class="tool-intro card">
@@ -110,17 +189,26 @@
     </div>
 
     <div class="field">
-      <label class="field-label" for="bf-size">接线盒内的导线规格（线规）</label>
-      <select id="bf-size"></select>
-      <p class="hint">大多数住宅使用14 AWG（15 A电路）或12 AWG（20 A电路）。如果盒内有多个规格，目前请选择最大的导线规格（线规）以保留安全余量。</p>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="bf-conductors">进入接线盒的绝缘导线</label>
-      <div class="input-unit">
-        <input type="number" id="bf-conductors" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
-        <span class="unit">导线</span>
+      <div class="mixed-wire-head">
+        <span class="field-label" id="bf-size-heading">接线盒内的导线规格（线规）</span>
+        <span class="field-label" id="bf-count-heading">数量</span>
       </div>
+      <div class="mixed-wire-rows" id="bf-rows">
+        <div class="mixed-wire-row">
+          <select id="bf-size" class="mixed-wire-size" aria-labelledby="bf-size-heading"></select>
+          <input type="number" id="bf-conductors" class="mixed-wire-count" aria-labelledby="bf-count-heading" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
+          <button type="button" class="remove-size-btn" aria-label="删除此规格" title="删除此规格" hidden>×</button>
+        </div>
+      </div>
+      <template id="bf-row-template">
+        <div class="mixed-wire-row">
+          <select class="mixed-wire-size" aria-label="接线盒内的导线规格（线规）"></select>
+          <input type="number" class="mixed-wire-count" aria-label="进入接线盒的绝缘导线" inputmode="numeric" min="0" max="60" step="1" placeholder="e.g. 6" required>
+          <button type="button" class="remove-size-btn" aria-label="删除此规格" title="删除此规格">×</button>
+        </div>
+      </template>
+      <button type="button" class="add-size-btn" id="bf-add-row">+ 添加另一种规格</button>
+      <p class="hint">每种导线规格（线规）使用一行。住宅中最常见的是14 AWG（15 A电路）或12 AWG（20 A电路）。</p>
       <p class="hint">请计算进入接线盒的每根相线和中性线，包括未断开而穿过接线盒的导线。此处不要计算接地导体，也不要计算始终留在盒内的引出短线。</p>
     </div>
 
@@ -130,7 +218,7 @@
         <input type="number" id="bf-devices" inputmode="numeric" min="0" max="10" step="1" value="0">
         <span class="unit">器件</span>
       </div>
-      <p class="hint">开关、插座和调光器。每个器件按两根导线的空间计算。</p>
+      <p class="hint">开关、插座和调光器各计两个导线容积。此合并输入按上方列出的最大导线计算。</p>
     </div>
 
     <div class="field" id="bf-field-marrettes" hidden>
@@ -139,7 +227,7 @@
         <input type="number" id="bf-marrettes" inputmode="numeric" min="0" max="30" step="1" value="0">
         <span class="unit">连接器</span>
       </div>
-      <p class="hint">加拿大规则：每对绝缘导线连接器按一根导线的空间计算，并按其中最大的导线确定。请计算所有marrettes。</p>
+      <p class="hint">加拿大规则：每对绝缘导线连接器计一个导线容积。此合并输入按上方列出的最大导线计算。</p>
     </div>
 
     <div class="field" id="bf-field-grounds">
@@ -157,7 +245,7 @@
         <button type="button" class="seg-btn" data-clamps="1">是</button>
         <button type="button" class="seg-btn active" data-clamps="0">否</button>
       </div>
-      <p class="hint">接线盒内部自带的电缆夹（常见于金属盒）按一根导线的空间计算。留在盒外的连接器不计。</p>
+      <p class="hint">接线盒内部的电缆夹按上方列出的最大导线计一个容积。接线盒外的连接器不计。</p>
     </div>
 
     <button type="submit" class="calc-btn">检查接线盒填充</button>
@@ -172,6 +260,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="itemized-breakdown" id="itemized-breakdown"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
       <summary>计算方法</summary>
@@ -210,6 +299,6 @@
 </footer>
 
 <script src="/assets/us-zh/common.js?v=5fa38d459b"></script>
-<script src="/assets/us-zh/boxfill.js?v=8742f4f9c1"></script>
+<script src="/assets/us-zh/boxfill.js?v=8eec7af591"></script>
 </body>
 </html>

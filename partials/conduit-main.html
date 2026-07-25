@@ -1,3 +1,82 @@
+<style>
+  .mixed-wire-head,
+  .mixed-wire-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(76px, 0.48fr) 48px;
+    gap: var(--space-2);
+  }
+  .mixed-wire-head .field-label { margin-bottom: 0; }
+  .mixed-wire-head .field-label:last-child { grid-column: 2; }
+  .mixed-wire-rows { display: grid; gap: var(--space-2); margin-top: var(--space-2); }
+  .mixed-wire-row select,
+  .mixed-wire-row input { min-width: 0; min-height: 52px; }
+  .mixed-wire-row input {
+    width: 100%;
+    padding: var(--space-2);
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+  }
+  .mixed-wire-row input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .remove-size-btn,
+  .add-size-btn {
+    min-height: 48px;
+    font-family: inherit;
+    font-weight: 750;
+    color: var(--color-ink);
+    background: var(--color-surface-2);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .remove-size-btn { width: 48px; padding: 0; font-size: 28px; line-height: 1; }
+  .add-size-btn {
+    width: 100%;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: 14px;
+  }
+  .remove-size-btn:hover,
+  .add-size-btn:hover { border-color: var(--color-accent); }
+  .remove-size-btn:focus-visible,
+  .add-size-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+  .remove-size-btn:active,
+  .add-size-btn:active { transform: translateY(1px); }
+  .remove-size-btn:disabled,
+  .add-size-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .itemized-breakdown {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid var(--color-line);
+    font-size: 14px;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .breakdown-line { display: flex; justify-content: space-between; gap: var(--space-3); }
+  .breakdown-line span:last-child { text-align: right; font-weight: 700; }
+  .breakdown-total {
+    margin-top: var(--space-1);
+    padding-top: var(--space-2);
+    border-top: 2px solid var(--color-line-strong);
+    font-weight: 800;
+  }
+  @media (max-width: 640px) {
+    .mixed-wire-head,
+    .mixed-wire-row { grid-template-columns: minmax(0, 1fr) 82px 48px; }
+    .mixed-wire-row select { padding-inline: var(--space-2); font-size: 15px; }
+    .itemized-breakdown { padding: var(--space-4); }
+    .breakdown-line { display: grid; gap: 0; }
+    .breakdown-line span:last-child { text-align: left; }
+  }
+</style>
 <main class="main-col">
 
   <div class="tool-intro card">
@@ -18,17 +97,26 @@
     </div>
 
     <div class="field">
-      <label class="field-label" for="fill-size">{{conduit.wireSizeTHHNTHWNLabel}}</label>
-      <select id="fill-size"></select>
-      <p class="hint">{{conduit.sizesAreForStandardTHHNTHWNInsulated}}</p>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="fill-count">{{conduit.howManyWiresLabel}}</label>
-      <div class="input-unit">
-        <input type="number" id="fill-count" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:conduit.eGN3Placeholder}}" required>
-        <span class="unit">{{conduit.wires}}</span>
+      <div class="mixed-wire-head">
+        <span class="field-label" id="fill-size-heading">{{conduit.wireSizeTHHNTHWNLabel}}</span>
+        <span class="field-label" id="fill-count-heading">{{conduit.quantityLabel}}</span>
       </div>
+      <div class="mixed-wire-rows" id="fill-rows">
+        <div class="mixed-wire-row">
+          <select id="fill-size" class="mixed-wire-size" aria-labelledby="fill-size-heading"></select>
+          <input type="number" id="fill-count" class="mixed-wire-count" aria-labelledby="fill-count-heading" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:conduit.eGN3Placeholder}}" required>
+          <button type="button" class="remove-size-btn" aria-label="{{attr:conduit.removeThisSizeButton}}" title="{{attr:conduit.removeThisSizeButton}}" hidden>×</button>
+        </div>
+      </div>
+      <template id="fill-row-template">
+        <div class="mixed-wire-row">
+          <select class="mixed-wire-size" aria-label="{{attr:conduit.wireSizeTHHNTHWNLabel}}"></select>
+          <input type="number" class="mixed-wire-count" aria-label="{{attr:conduit.howManyWiresLabel}}" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:conduit.eGN3Placeholder}}" required>
+          <button type="button" class="remove-size-btn" aria-label="{{attr:conduit.removeThisSizeButton}}" title="{{attr:conduit.removeThisSizeButton}}">×</button>
+        </div>
+      </template>
+      <button type="button" class="add-size-btn" id="fill-add-row">{{conduit.addAnotherSizeButton}}</button>
+      <p class="hint">{{conduit.sizesAreForStandardTHHNTHWNInsulated}}</p>
       <p class="hint">{{conduit.countEveryInsulatedWireInThePipe}}</p>
     </div>
 
@@ -44,6 +132,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="itemized-breakdown" id="itemized-breakdown"></div>
     <p class="verdict-note" id="verdict-note"></p>
     <details class="math-details">
       <summary>{{conduit.howWeCalculatedThisSummary}}</summary>

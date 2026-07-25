@@ -9,6 +9,7 @@ const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const glossary = JSON.parse(readFileSync('i18n/glossary.json', 'utf8')).terms;
 const guideTranslations = JSON.parse(readFileSync('i18n/guide-translations.json', 'utf8'));
+const existingSafetyRegistry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
 const packs = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
   ca: JSON.parse(readFileSync('i18n/country-packs/ca.json', 'utf8')),
@@ -73,11 +74,40 @@ for (const key of [
   'drop.donTDoubleItYourselfContinuation',
   'drop.countryVoltageDropRuleHtml',
   'conduit.countryDataNoteHtml',
+  'conduit.addAnotherSizeButton',
+  'conduit.quantityLabel',
+  'conduit.removeThisSizeButton',
+  'boxFill.addAnotherSizeButton',
+  'boxFill.canadianRuleEveryPairOfInsulatedWire',
+  'boxFill.mostHomesN14AWGN15ACircuits',
+  'boxFill.quantityLabel',
+  'boxFill.removeThisSizeButton',
+  'boxFill.switchesReceptaclesOutletsDimmersEachOneCounts',
+  'runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire',
   'terms.electricalWorkCanInjureOrKillAnd',
   'runtime.ampacity.thisWireIsNOTRatedFor',
   'runtime.conduit.splitTheRunAcrossMultipleConduitsOrReduce',
   'runtime.boxFill.overTheLimitUseADeeperBoxA',
+  'runtimePatterns.conduit.tooLargeMixed',
+  'runtimePatterns.conduit.smallestMixed',
+  'runtimePatterns.conduit.conductorBreakdown',
+  'runtimePatterns.conduit.conductorMathText',
+  'runtimePatterns.conduit.totalBreakdown',
+  'runtimePatterns.conduit.mathMixed',
+  'runtimePatterns.boxFill.conductorBreakdown',
+  'runtimePatterns.boxFill.deviceBreakdown',
+  'runtimePatterns.boxFill.groundsBreakdown',
+  'runtimePatterns.boxFill.clampsBreakdown',
+  'runtimePatterns.boxFill.marretteBreakdown',
+  'runtimePatterns.boxFill.totalBreakdown',
+  'runtimePatterns.boxFill.caMathMixed',
+  'runtimePatterns.boxFill.usMathMixed',
 ]) {
+  if (keys.has(key) && !safetyKeys.includes(key)) safetyKeys.push(key);
+}
+// The reviewed registry is intentionally broader than a keyword scan. Never
+// let regeneration silently remove strings that already passed the gate.
+for (const key of existingSafetyRegistry.keys) {
   if (keys.has(key) && !safetyKeys.includes(key)) safetyKeys.push(key);
 }
 safetyKeys.sort();
@@ -1888,6 +1918,117 @@ Object.assign(packKeyedExact['zh-Hans'], {
   'ca.terms.theServiceProvidesCalculatorsForVoltageDrop': '本服务依据常用公开公式和表格（包括Canadian Electrical Code中的内容）提供电压降、导线规格（线规）、载流量、导管填充及相关电气估算工具。如果某项加拿大数据表尚未通过验证，页面会直接说明该限制。',
 });
 
+Object.assign(keyedExact.es, {
+  'boxFill.addAnotherSizeButton': '+ Agregar otro calibre',
+  'boxFill.quantityLabel': 'Cantidad',
+  'boxFill.removeThisSizeButton': 'Quitar este calibre',
+  'boxFill.mostHomesN14AWGN15ACircuits': 'Agregue una fila por cada calibre del conductor. La mayoría de las viviendas usa 14 AWG (circuitos de 15 A) o 12 AWG (circuitos de 20 A).',
+  'boxFill.switchesReceptaclesOutletsDimmersEachOneCounts': 'Interruptores, tomacorrientes y reguladores de luz cuentan cada uno como dos volúmenes de conductor. Esta entrada conjunta usa el conductor más grande indicado arriba.',
+  'boxFill.canadianRuleEveryPairOfInsulatedWire': 'Regla canadiense: cada par de conectores aislados cuenta como un volumen de conductor. Esta entrada conjunta usa el conductor más grande indicado arriba.',
+  'boxFill.clampsBuiltInsideTheBoxCommonIn': 'Las abrazaderas internas cuentan como un volumen del conductor más grande indicado arriba. Los conectores fuera de la caja no cuentan.',
+  'conduit.addAnotherSizeButton': '+ Agregar otro calibre',
+  'conduit.quantityLabel': 'Cantidad',
+  'conduit.removeThisSizeButton': 'Quitar este calibre',
+  'conduit.countEveryInsulatedWireInThePipe': 'Cuente cada conductor aislado dentro del tubo conduit, incluidos el neutro y todo conductor de puesta a tierra aislado. Use una fila distinta para cada calibre.',
+  'conduit.longRunsWithLotsOfBendsAre': 'los recorridos largos con muchas curvas son más fáciles con un tamaño mayor que el mínimo permitido; muchos electricistas aumentan el tamaño a propósito.',
+});
+Object.assign(keyedExact['fr-CA'], {
+  'boxFill.addAnotherSizeButton': '+ Ajouter un autre calibre',
+  'boxFill.quantityLabel': 'Quantité',
+  'boxFill.removeThisSizeButton': 'Retirer ce calibre',
+  'boxFill.mostHomesN14AWGN15ACircuits': 'Ajoutez une ligne pour chaque calibre du conducteur. La plupart des habitations utilisent 14 AWG (circuits de 15 A) ou 12 AWG (circuits de 20 A).',
+  'boxFill.switchesReceptaclesOutletsDimmersEachOneCounts': 'Chaque interrupteur, prise ou gradateur compte pour deux volumes de conducteur. Cette entrée groupée utilise le plus gros conducteur indiqué ci-dessus.',
+  'boxFill.canadianRuleEveryPairOfInsulatedWire': 'Règle canadienne : chaque paire de connecteurs isolés compte pour un volume de conducteur. Cette entrée groupée utilise le plus gros conducteur indiqué ci-dessus.',
+  'boxFill.clampsBuiltInsideTheBoxCommonIn': 'Les serre-câbles internes comptent pour le volume du plus gros conducteur indiqué ci-dessus. Les connecteurs hors de la boîte ne comptent pas.',
+  'conduit.addAnotherSizeButton': '+ Ajouter un autre calibre',
+  'conduit.quantityLabel': 'Quantité',
+  'conduit.removeThisSizeButton': 'Retirer ce calibre',
+  'conduit.countEveryInsulatedWireInThePipe': 'Comptez chaque conducteur isolé dans le conduit, y compris le neutre et tout conducteur de mise à la terre isolé. Utilisez une ligne distincte pour chaque calibre.',
+  'conduit.longRunsWithLotsOfBendsAre': 'les longs parcours avec plusieurs coudes se tirent plus facilement dans un diamètre supérieur au minimum permis; plusieurs électriciens augmentent volontairement le diamètre.',
+});
+Object.assign(keyedExact['zh-Hans'], {
+  'boxFill.addAnotherSizeButton': '+ 添加另一种规格',
+  'boxFill.quantityLabel': '数量',
+  'boxFill.removeThisSizeButton': '删除此规格',
+  'boxFill.mostHomesN14AWGN15ACircuits': '每种导线规格（线规）使用一行。住宅中最常见的是14 AWG（15 A电路）或12 AWG（20 A电路）。',
+  'boxFill.switchesReceptaclesOutletsDimmersEachOneCounts': '开关、插座和调光器各计两个导线容积。此合并输入按上方列出的最大导线计算。',
+  'boxFill.canadianRuleEveryPairOfInsulatedWire': '加拿大规则：每对绝缘导线连接器计一个导线容积。此合并输入按上方列出的最大导线计算。',
+  'boxFill.clampsBuiltInsideTheBoxCommonIn': '接线盒内部的电缆夹按上方列出的最大导线计一个容积。接线盒外的连接器不计。',
+  'conduit.addAnotherSizeButton': '+ 添加另一种规格',
+  'conduit.quantityLabel': '数量',
+  'conduit.removeThisSizeButton': '删除此规格',
+  'conduit.countEveryInsulatedWireInThePipe': '请计算导管内的每根绝缘导线，包括中性线和绝缘接地导线。每种规格单独使用一行。',
+  'conduit.longRunsWithLotsOfBendsAre': '线路较长或弯头较多时，使用比合规最小值大一档的导管更容易穿线；许多电工会主动增大规格。',
+});
+
+Object.assign(reviewedSafety.es, {
+  'runtime.boxFill.eachHotOrNeutralEnteringTheBoxN1': 'Cada conductor de fase o neutro que entra en la caja cuenta según su propio calibre, incluidos los que la atraviesan sin cortarse. Cada dispositivo cuenta dos veces según el volumen de su conductor conectado más grande. Todos los conductores de puesta a tierra juntos cuentan una vez según el mayor. Las abrazaderas internas cuentan una vez según el conductor más grande de la caja. Las colas de conexión internas no cuentan.',
+  'runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire': 'Conteo canadiense (Rule 12-3034): cada conductor aislado que entra en la caja cuenta una vez según su propio calibre. Los conductores de continuidad de masa desnudos NO cuentan. Cada dispositivo cuenta dos veces. Cada PAR de conectores aislados (marrettes) cuenta una vez. Los dispositivos y pares de marrettes usan el conductor más grande indicado. Las abrazaderas NO reciben volumen en Canadá. Las colas de conexión internas no cuentan.',
+});
+Object.assign(reviewedSafety['fr-CA'], {
+  'runtime.boxFill.eachHotOrNeutralEnteringTheBoxN1': 'Chaque conducteur de phase ou neutre qui entre dans la boîte compte selon son propre calibre, y compris un conducteur qui la traverse sans être coupé. Chaque dispositif compte deux fois selon le volume de son plus gros conducteur raccordé. Tous les conducteurs de mise à la terre comptent ensemble une fois selon le plus gros. Les serre-câbles internes comptent une fois selon le plus gros conducteur de la boîte. Les queues de cochon internes ne comptent pas.',
+  'runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire': 'Comptage canadien (Rule 12-3034) : chaque conducteur isolé entrant dans la boîte compte une fois selon son propre calibre. Les conducteurs de continuité des masses nus NE comptent PAS. Chaque dispositif compte deux fois. Chaque PAIRE de connecteurs isolés (marrettes) compte une fois. Les dispositifs et les paires de marrettes utilisent le plus gros conducteur indiqué. Les serre-câbles ne reçoivent AUCUN volume au Canada. Les queues de cochon internes ne comptent pas.',
+});
+Object.assign(reviewedSafety['zh-Hans'], {
+  'runtime.boxFill.eachHotOrNeutralEnteringTheBoxN1': '每根进入接线盒的相线或中性线都按其自身规格计算，包括未断开而穿过接线盒的导线。每个器件按其连接的最大导线容积计两次。所有接地导线合计一次，按最大接地导线计算。内部电缆夹按接线盒内最大导线计一次。完全留在接线盒内的引线不计。',
+  'runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire': '加拿大计数规则（Rule 12-3034）：每根进入接线盒的绝缘导线按自身规格计一次。裸露的接地跨接导线不计。每个器件计两次。每对绝缘导线连接器（marrettes）计一次。器件和marrettes对均按列出的最大导线计算。加拿大不计电缆夹。完全留在接线盒内的引线不计。',
+});
+
+Object.assign(reviewedPatterns.es, {
+  'runtimePatterns.ampacity.atMostDegrees': '≤{max}°C',
+  'runtimePatterns.ampacity.degreeRange': '{min}–{max}°C',
+  'runtimePatterns.conduit.tooLargeMixed': '<p>El área combinada de los conductores es {area} sq in, lo que supera el límite de llenado de {percent}% incluso en un {conduit} de 4".</p>',
+  'runtimePatterns.conduit.smallestMixed': 'menor {conduit} para {count} conductores',
+  'runtimePatterns.conduit.conductorBreakdown': '<span>{count} × {size} THHN</span><span>{count} × {wireArea} = {rowArea} sq in</span>',
+  'runtimePatterns.conduit.conductorMathText': '{count} × {size}: {count} × {wireArea} = {rowArea} sq in',
+  'runtimePatterns.conduit.totalBreakdown': '<span><strong>ÁREA TOTAL DE CONDUCTORES</strong></span><span><strong>{area} sq in</strong></span>',
+  'runtimePatterns.conduit.mathMixed': '\n<p>Cada fila usa la sección transversal del conductor de NEC Chapter 9, Table 5.</p>\n<div class="formula">{breakdown}\nTOTAL = {needed} sq in\nÁrea interior de {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermitido para {count} conductores: {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  llenado real de {actualPercent}%</div>',
+  'runtimePatterns.boxFill.conductorBreakdown': '<span>{count} × {size}</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.deviceBreakdown': '<span>{count} {deviceWord} (mayor: {size})</span><span>{count} × 2 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.groundsBreakdown': '<span>tierras (mayor: {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.clampsBreakdown': '<span>abrazaderas (mayor: {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.marretteBreakdown': '<span>{count} {pairWord} (mayor: {size})</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.totalBreakdown': '<span><strong>TOTAL NECESARIO</strong></span><span><strong>{volume} {measure}</strong></span>',
+  'runtimePatterns.boxFill.caMathMixed': '\n<p>Cada fila usa su propio volumen de CEC Table 22, Rule 12-3034.</p>\n<div class="formula">{breakdown}\n{box}: {available} mL disponibles → {status}</div>\n<p>Detalle canadiense: los conductores de continuidad de masa desnudos y las abrazaderas no reciben volumen. Los dispositivos y pares de marrettes usan el conductor más grande indicado porque esas entradas conjuntas no están vinculadas a una fila. Los dispositivos con más de 2.54 cm de profundidad necesitan una deducción adicional de 32 mL por cm, que esta verificación no incluye.</p>',
+  'runtimePatterns.boxFill.usMathMixed': '\n<p>Cada fila usa su propio volumen de NEC Table 314.16(B).</p>\n<div class="formula">{breakdown}\n{box}: {available} cu in disponibles → {status}</div>\n<p>Detalle: las colas de conexión internas no cuentan, pero un conductor que atraviesa la caja sin cortarse cuenta una vez. Los dispositivos, tierras y abrazaderas usan el conductor más grande indicado porque esas entradas conjuntas no están vinculadas a una fila. Si entran más de cuatro tierras, cada una después de la cuarta suma ¼ según la regla de 2020; agregue aproximadamente un conductor para conservar margen.</p>',
+});
+Object.assign(reviewedPatterns['fr-CA'], {
+  'runtimePatterns.ampacity.atMostDegrees': '≤{max}°C',
+  'runtimePatterns.ampacity.degreeRange': '{min}–{max}°C',
+  'runtimePatterns.conduit.tooLargeMixed': '<p>L’aire combinée des conducteurs est de {area} sq in, ce qui dépasse la limite de remplissage de {percent}% même dans un conduit {conduit} de 4".</p>',
+  'runtimePatterns.conduit.smallestMixed': 'plus petit conduit {conduit} pour {count} conducteurs',
+  'runtimePatterns.conduit.conductorBreakdown': '<span>{count} × {size} THHN</span><span>{count} × {wireArea} = {rowArea} sq in</span>',
+  'runtimePatterns.conduit.conductorMathText': '{count} × {size} : {count} × {wireArea} = {rowArea} sq in',
+  'runtimePatterns.conduit.totalBreakdown': '<span><strong>AIRE TOTALE DES CONDUCTEURS</strong></span><span><strong>{area} sq in</strong></span>',
+  'runtimePatterns.conduit.mathMixed': '\n<p>Chaque ligne utilise la section du conducteur de NEC Chapter 9, Table 5.</p>\n<div class="formula">{breakdown}\nTOTAL = {needed} sq in\nAire intérieure du conduit {conduitSize} {conduit} = {conduitArea} sq in (NEC Chapter 9, Table 4)\nPermis pour {count} conducteurs : {conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  remplissage réel de {actualPercent}%</div>',
+  'runtimePatterns.boxFill.conductorBreakdown': '<span>{count} × {size}</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.deviceBreakdown': '<span>{count} {deviceWord} (plus gros : {size})</span><span>{count} × 2 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.groundsBreakdown': '<span>mises à la terre (plus gros : {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.clampsBreakdown': '<span>serre-câbles (plus gros : {size})</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.marretteBreakdown': '<span>{count} {pairWord} (plus gros : {size})</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.totalBreakdown': '<span><strong>TOTAL REQUIS</strong></span><span><strong>{volume} {measure}</strong></span>',
+  'runtimePatterns.boxFill.caMathMixed': '\n<p>Chaque ligne utilise son propre volume de CEC Table 22, Rule 12-3034.</p>\n<div class="formula">{breakdown}\n{box} : {available} mL disponibles → {status}</div>\n<p>Détail canadien : les conducteurs de continuité des masses nus et les serre-câbles ne reçoivent aucun volume. Les dispositifs et les paires de marrettes utilisent le plus gros conducteur indiqué parce que ces entrées groupées ne sont pas liées à une ligne. Les dispositifs de plus de 2.54 cm de profondeur exigent une déduction supplémentaire de 32 mL par cm, que cette vérification n’inclut pas.</p>',
+  'runtimePatterns.boxFill.usMathMixed': '\n<p>Chaque ligne utilise son propre volume de NEC Table 314.16(B).</p>\n<div class="formula">{breakdown}\n{box} : {available} cu in disponibles → {status}</div>\n<p>Détail : les queues de cochon internes ne comptent pas, mais un conducteur qui traverse la boîte sans être coupé compte une fois. Les dispositifs, mises à la terre et serre-câbles utilisent le plus gros conducteur indiqué parce que ces entrées groupées ne sont pas liées à une ligne. Si plus de quatre mises à la terre entrent, chacune après la quatrième ajoute ¼ selon la règle de 2020; ajoutez environ un conducteur pour conserver une marge.</p>',
+});
+Object.assign(reviewedPatterns['zh-Hans'], {
+  'runtimePatterns.ampacity.atMostDegrees': '≤{max}°C',
+  'runtimePatterns.ampacity.degreeRange': '{min}–{max}°C',
+  'runtimePatterns.conduit.tooLargeMixed': '<p>导线总面积为{area} sq in，超过了4" {conduit}在{percent}%填充限值下可容纳的面积。</p>',
+  'runtimePatterns.conduit.smallestMixed': '容纳{count}根导线的最小{conduit}',
+  'runtimePatterns.conduit.conductorBreakdown': '<span>{count} × {size} THHN</span><span>{count} × {wireArea} = {rowArea} sq in</span>',
+  'runtimePatterns.conduit.conductorMathText': '{count} × {size}：{count} × {wireArea} = {rowArea} sq in',
+  'runtimePatterns.conduit.totalBreakdown': '<span><strong>导线总面积</strong></span><span><strong>{area} sq in</strong></span>',
+  'runtimePatterns.conduit.mathMixed': '\n<p>每一行均采用NEC Chapter 9, Table 5中的导线横截面积。</p>\n<div class="formula">{breakdown}\n总计 = {needed} sq in\n{conduitSize} {conduit}内部面积 = {conduitArea} sq in（NEC Chapter 9, Table 4）\n{count}根导线允许面积：{conduitArea} × {percent}% = {allowed} sq in\n{needed} ≤ {allowed}  →  实际填充率{actualPercent}%</div>',
+  'runtimePatterns.boxFill.conductorBreakdown': '<span>{count} × {size}</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.deviceBreakdown': '<span>{count}个{deviceWord}（最大{size}）</span><span>{count} × 2 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.groundsBreakdown': '<span>接地导线（最大{size}）</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.clampsBreakdown': '<span>电缆夹（最大{size}）</span><span>1 × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.marretteBreakdown': '<span>{count}{pairWord}（最大{size}）</span><span>{count} × {allowance} = {volume} {measure}</span>',
+  'runtimePatterns.boxFill.totalBreakdown': '<span><strong>总需求容积</strong></span><span><strong>{volume} {measure}</strong></span>',
+  'runtimePatterns.boxFill.caMathMixed': '\n<p>每一行均使用CEC Table 22、Rule 12-3034中对应规格的容积。</p>\n<div class="formula">{breakdown}\n{box}：可用{available} mL → {status}</div>\n<p>加拿大细则：裸露的接地跨接导线和电缆夹不计容积。器件和marrettes对均按列出的最大导线计算，因为这些合并输入未关联到某一行。深度超过2.54 cm的器件，每cm还需额外扣除32 mL，本检查未包括此项。</p>',
+  'runtimePatterns.boxFill.usMathMixed': '\n<p>每一行均使用NEC Table 314.16(B)中对应规格的容积。</p>\n<div class="formula">{breakdown}\n{box}：可用{available} cu in → {status}</div>\n<p>细则：完全留在接线盒内的引线不计，但未断开而穿过接线盒的导线计一次。器件、接地导线和电缆夹均按列出的最大导线计算，因为这些合并输入未关联到某一行。如果超过四根接地导线，从第五根起每根增加¼个计数（2020规则）；可多按约一根导线保留余量。</p>',
+});
+
 const protect = (source) => {
   const saved = [];
   const save = (value) => {
@@ -1970,7 +2111,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
 writeFileSync('i18n/safety-critical.json', `${JSON.stringify({
   policy: 'Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review. Selected high-exposure non-safety copy is listed separately for the same sealed review.',
   keys: safetyKeys,
-  extraReviewKeys: ['header.electricalCalculatorsThatExplainThemselves'],
+  extraReviewKeys: existingSafetyRegistry.extraReviewKeys,
 }, null, 2)}\n`);
 
 for (const [country, pack] of Object.entries(packs)) {
