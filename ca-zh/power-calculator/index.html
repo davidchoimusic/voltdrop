@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop功率计算器","url":"https://voltdrop.app/ca-zh/power-calculator/","description":"免费电气功率计算器：使用功率因数换算伏特、安培、瓦特、kW和kVA，支持DC、AC单相和AC三相。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=97541c8de2">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -114,25 +114,35 @@
     <p class="tool-sub">伏特、安培、瓦特、kW和kVA：输入已知值，即可求出其余结果。支持DC、AC单相和AC三相。</p>
   </div>
 
-  <form id="pw-form" class="card" autocomplete="off">
+  <form id="pw-form" class="card" autocomplete="off" novalidate>
 
     <div class="field">
       <label class="field-label">要计算什么？</label>
       <div class="seg" role="group" aria-label="要计算的值">
-        <button type="button" class="seg-btn active" data-find="amps">安培</button>
-        <button type="button" class="seg-btn" data-find="watts">瓦特</button>
-        <button type="button" class="seg-btn" data-find="volts">伏特</button>
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">安培</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">瓦特</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">伏特</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">欧姆</button>
       </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>三相系统不能使用欧姆模式。负载采用星形连接还是三角形连接会改变答案，而本计算器未询问该信息。</p>
     </div>
 
     <div class="field">
       <label class="field-label">供电类型</label>
       <div class="seg" role="group" aria-label="供电类型">
-        <button type="button" class="seg-btn active" data-system="dc">DC</button>
-        <button type="button" class="seg-btn" data-system="ac1">AC 单相</button>
-        <button type="button" class="seg-btn" data-system="ac3">AC 三相</button>
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">AC 单相</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">AC 三相</button>
       </div>
       <p class="hint" id="pw-system-hint">DC：电池、太阳能、车辆和LED灯带。</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">已知：</label>
+      <div class="seg" role="group" aria-label="已知：">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">瓦特</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">欧姆</button>
+      </div>
     </div>
 
     <div class="field" id="pw-field-volts">
@@ -161,6 +171,14 @@
       <p class="hint">提示：1 kW = 1,000 W。标有“1.5 kW”的设备等于1500瓦特。</p>
     </div>
 
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">电阻（Ω）</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="例如10">
+        <span class="unit">Ω</span>
+      </div>
+    </div>
+
     <div class="field" id="pw-field-pf">
       <label class="field-label" for="pw-pf">功率因数</label>
       <div class="input-unit">
@@ -175,7 +193,7 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">结果</div>
+      <div class="verdict-badge" id="pw-result-badge">结果</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>
@@ -221,6 +239,6 @@
 </footer>
 
 <script src="/assets/ca-zh/common.js?v=95abe3b15a"></script>
-<script src="/assets/ca-zh/power.js?v=18c69415a6"></script>
+<script src="/assets/ca-zh/power.js?v=cd9adc9041"></script>
 </body>
 </html>

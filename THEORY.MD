@@ -14,6 +14,12 @@ conductor size. Raceways and boxes are sums of line items, not a single
 size-and-count fact. A plausible one-size shortcut can select the wrong conduit
 percentage or understate the allowance driven by the largest conductor.
 
+It also appears when a search page promises a calculation the shared engine
+does not actually perform. A new title and explanation cannot turn a
+watts/volts/amps calculator into an Ohm's law calculator. The landing page is
+honest only after the engine owns the promised quantity, its physical limits,
+and its refusal states.
+
 Electrical rules are also territorial. The physics crosses borders, but the
 NEC, CEC, wire names, limits, and counting rules do not. Some current NEC and
 CEC base values are deliberately harmonized while the rules applied to those
@@ -48,7 +54,9 @@ Trust is the product. Five commitments make it concrete.
    continuous-load rule asks how large a circuit a long-running load requires.
    They can appear in one result, but they remain two calculations with two
    reasons. Combining them into one multiplier would conceal the direction and
-   meaning of each rule.
+   meaning of each rule. The same separation applies to Ohm's law: `V/I` is
+   resistance on DC, impedance on AC, and not a complete three-phase load answer
+   without knowing whether the load is wye or delta connected.
 
 4. **Country and language are separate dimensions.** Country selects the
    rulebook; language selects the explanation. Six explicit URL editions cover
@@ -80,6 +88,13 @@ data, the limitation is visible at the point of use. Canadian conduit sizing
 still carries its planning limitation. Canadian ampacity no longer does:
 CSA C22.1:24, 26th edition (2024) now supplies the verified base, ambient,
 conductor-count, termination, continuous-load, and small-conductor rules.
+
+Search entry points follow the engine rather than leading it. The Power
+Calculator earns an Ohm's law frame by solving resistance on DC, reporting
+impedance and its power-factor-derived resistive part on single-phase AC, and
+disabling every ohms path on three-phase. Watts and ohms are alternate known
+inputs rather than simultaneous fields, so contradictory facts cannot produce a
+plausible-looking answer.
 
 The ampacity interface mirrors the electrical model. Insulation temperature
 and termination temperature are distinct inputs because they play different
@@ -140,6 +155,12 @@ Contamination, changed force, numbers, units, or citations fail mechanically.
 - **A refusal is a real result state.** Null cells in Table 310.15(B)(1) carry
   meaning. The engine, interface, and tests must preserve that state all the
   way to a visible “not permitted” message with no numeric ampacity.
+
+- **A universal formula still has a domain boundary.** `120 V ÷ 10 A` is
+  `12 Ω` of resistance on DC but `12 Ω` of impedance on single-phase AC. With a
+  0.8 power factor, the resistive part is about `9.6 Ω`. Applying that same
+  quotient to an unspecified three-phase load would hide the missing wye/delta
+  connection, so refusing is more accurate than returning a number.
 
 - **Verified sharing is different from accidental reuse.** Current CEC Tables
   2 and 4 match NEC Table 310.16 in the supported 60/75/90°C cells, so one

@@ -619,9 +619,14 @@ input, select, .big-number, .result-cell .v {
   white-space: normal;
 }
 
-.seg-btn:hover { border-color: var(--color-accent); }
+.seg-btn:hover:not(:disabled) { border-color: var(--color-accent); }
 .seg-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
 .seg-btn:active { transform: translateY(1px); }
+
+.seg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .seg-btn.active {
   background: var(--color-accent);

@@ -1,22 +1,32 @@
-<form id="pw-form" class="card" autocomplete="off">
+<form id="pw-form" class="card" autocomplete="off" novalidate>
 
     <div class="field">
       <label class="field-label">{{power.whatDoYouWantToFindLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:power.whatToFindAriaLabel}}">
-        <button type="button" class="seg-btn active" data-find="amps">{{power.ampsButton}}</button>
-        <button type="button" class="seg-btn" data-find="watts">{{power.wattsButton}}</button>
-        <button type="button" class="seg-btn" data-find="volts">{{power.voltsButton}}</button>
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">{{power.ampsButton}}</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">{{power.wattsButton}}</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">{{power.voltsButton}}</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">{{power.ohmsButton}}</button>
       </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>{{power.ohmsUnavailableForThreePhaseTheAnswerChanges}}</p>
     </div>
 
     <div class="field">
       <label class="field-label">{{power.powerTypeLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:power.powerTypeLabel}}">
-        <button type="button" class="seg-btn active" data-system="dc">{{power.dCButton}}</button>
-        <button type="button" class="seg-btn" data-system="ac1">{{power.aCSinglePhaseButton}}</button>
-        <button type="button" class="seg-btn" data-system="ac3">{{power.aCThreePhaseButton}}</button>
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">{{power.dCButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">{{power.aCSinglePhaseButton}}</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">{{power.aCThreePhaseButton}}</button>
       </div>
       <p class="hint" id="pw-system-hint">{{power.dCBatteriesSolarVehiclesLEDStrips}}</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">{{power.iKnowLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:power.iKnowLabel}}">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">{{power.wattsButton}}</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">{{power.ohmsButton}}</button>
+      </div>
     </div>
 
     <div class="field" id="pw-field-volts">
@@ -45,6 +55,14 @@
       <p class="hint">{{power.tipN1KWN1N000WA}}</p>
     </div>
 
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">{{power.resistanceOhmsLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="{{attr:power.eGN10Placeholder}}">
+        <span class="unit">{{power.ohmsUnit}}</span>
+      </div>
+    </div>
+
     <div class="field" id="pw-field-pf">
       <label class="field-label" for="pw-pf">{{power.powerFactorLabel}}</label>
       <div class="input-unit">
@@ -59,7 +77,7 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">{{power.rESULT}}</div>
+      <div class="verdict-badge" id="pw-result-badge">{{power.rESULT}}</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>

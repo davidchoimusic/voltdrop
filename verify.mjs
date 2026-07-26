@@ -1434,7 +1434,7 @@ checkBool('mixed conduit itemizes every conductor size',
     && mixedFillBreakdown.includes('0.3260 sq in'),
   mixedFillBreakdown);
 
-// ---- Power Calculator: 1φ 240V 1500W PF1 → 6.25 A; 3φ 480V 10000W PF0.85 → 14.15 A
+// ---- Power Calculator: legacy watts paths plus resistance/impedance honesty cases
 await page.goto(BASE + 'power-calculator/');
 await page.click('[data-system="ac1"]');
 await page.fill('#pw-volts', '240');
@@ -1450,6 +1450,48 @@ await page.fill('#pw-pf', '0.85');
 await page.click('#pw-form .calc-btn');
 pwBig = await page.textContent('#big-number');
 check('power amps (480V 10kW 3φ PF0.85)', parseFloat(pwBig), 14.15);
+
+await page.click('[data-system="dc"]');
+await page.click('[data-find="ohms"]');
+await page.fill('#pw-volts', '120');
+await page.fill('#pw-amps', '10');
+await page.click('#pw-form .calc-btn');
+pwBig = await page.textContent('#big-number');
+check('power DC resistance (120V 10A)', parseFloat(pwBig), 12);
+
+await page.click('[data-system="ac1"]');
+await page.fill('#pw-pf', '0.8');
+await page.click('#pw-form .calc-btn');
+pwBig = await page.textContent('#big-number');
+const pwCells = (await page.textContent('#result-grid')).replace(/\s+/g, ' ');
+check('power 1φ impedance (120V 10A)', parseFloat(pwBig), 12);
+checkBool('power 1φ labels the 9.6 ohm resistive part',
+  pwCells.includes('Resistive part') && pwCells.includes('9.6 Ω'),
+  pwCells);
+
+await page.click('[data-system="ac3"]');
+checkBool('power refuses three-phase ohms without wye/delta',
+  await page.isDisabled('[data-find="ohms"]')
+    && (await page.textContent('#pw-ohms-unavailable')).includes('wye or delta')
+    && (await page.textContent('#big-label')).includes('wye or delta'),
+  `${await page.textContent('#pw-ohms-unavailable')} | ${await page.textContent('#big-label')}`);
+
+await page.click('[data-system="dc"]');
+await page.click('[data-known="ohms"]');
+await page.fill('#pw-volts', '120');
+await page.fill('#pw-ohms', '10');
+await page.click('#pw-form .calc-btn');
+pwBig = await page.textContent('#big-number');
+check('power amps from resistance (120V 10Ω)', parseFloat(pwBig), 12);
+
+await page.click('[data-find="ohms"]');
+await page.fill('#pw-volts', '120');
+await page.fill('#pw-amps', '0');
+await page.click('#pw-form .calc-btn');
+checkBool('power zero amps shows a readable error, not Infinity',
+  !(await page.textContent('#results')).includes('Infinity')
+    && (await page.textContent('#big-label')).includes('greater than zero'),
+  (await page.textContent('#results')).replace(/\s+/g, ' '));
 await page.screenshot({ path: `${shots}/13-power.png`, fullPage: true });
 
 // ---- Box Fill: 18 cu in box, 12 AWG, 6 wires + 1 device + grounds = 9 × 2.25 = 20.25 → TOO FULL
