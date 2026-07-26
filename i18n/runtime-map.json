@@ -996,6 +996,26 @@
       "quote": "'"
     },
     {
+      "key": "runtime.power.resistance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.impedance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.resistanceOhmsLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.impedanceOhmsLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.power.volts",
       "kind": "quoted",
       "quote": "'"
@@ -1011,12 +1031,47 @@
       "quote": "'"
     },
     {
+      "key": "runtime.power.resistanceR",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.impedanceZ",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.resistivePartResistance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.power.apparentPower",
       "kind": "quoted",
       "quote": "'"
     },
     {
       "key": "runtime.power.powerFactor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.checkInput",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.enterPositiveValues",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.currentMustBeGreaterThanZero",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.power.ohmsMustBeGreaterThanZero",
       "kind": "quoted",
       "quote": "'"
     },

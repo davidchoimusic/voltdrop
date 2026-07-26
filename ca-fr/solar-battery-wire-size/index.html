@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur VoltDrop de calibre pour solaire et batteries","url":"https://voltdrop.app/ca-fr/solar-battery-wire-size/","description":"Calculateur gratuit de calibre de conducteur en courant continu pour le solaire et les batteries. Cibles de chute plus serrées que le câblage résidentiel, le bon courant pour chaque circuit, et une réponse honnête hors plage plutôt que le plus gros calibre du tableau. Sans inscription.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -107,33 +107,6 @@
   </nav>
 </aside>
 
-<style>
-  .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
-  .scenario-btn {
-    display: block;
-    width: 100%;
-    min-height: 52px;
-    text-align: left;
-    padding: var(--space-3);
-    background: var(--color-surface-2);
-    color: var(--color-ink);
-    border: 1px solid var(--color-line-strong);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-  }
-  .scenario-btn.active {
-    border-color: var(--color-accent);
-    box-shadow: inset 0 0 0 1px var(--color-accent);
-  }
-  .scenario-btn .sc-name { display: block; font-weight: 700; }
-  .scenario-btn .sc-why { display: block; margin-top: 2px; color: var(--color-ink-soft); }
-  .sol-caution {
-    margin-top: var(--space-3);
-    padding: var(--space-3);
-    border-left: 3px solid var(--color-hazard);
-  }
-  .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
-</style>
 <main class="main-col">
 
   <div class="tool-intro card">
@@ -254,6 +227,7 @@
     <p id="sol-exp-2">Chacun des trois circuits tire son courant d’un endroit différent, et se tromper est la façon la plus simple d’obtenir une réponse gravement fausse. Les panneaux ressemblent davantage à une source de courant, alors leur courant de fonctionnement bouge à peine. Un régulateur de charge est caractérisé par ce qu’il peut sortir, ce qui n’est pas ce que les panneaux y entrent. Et la consommation d’un onduleur grimpe à mesure que la batterie baisse, alors diviser les watts par la tension nominale du parc la sous-estime précisément quand le câble peut le moins se le permettre.</p>
     <h2>Ce que cet outil ne fait pas</h2>
     <p id="sol-exp-3">Ceci répond à la chute de tension et à rien d’autre. Il n’évalue pas le courant admissible, la température, la protection contre les surintensités, les sectionneurs, la mise à la terre ni la conformité au code, et il ne traite pas la sortie en courant alternatif d’un onduleur — utilisez pour cela le calculateur de chute de tension, qui connaît le monophasé et le triphasé. Traitez le calibre obtenu ici comme l’une des deux réponses nécessaires, et retenez la plus grosse.</p>
+    <p>Vous voulez savoir pourquoi faire confiance à ce résultat? <a class="inline-link" href="/how-we-verify/">Voyez comment VoltDrop vérifie ses chiffres</a>.</p>
   </section>
 
 </main>
@@ -270,6 +244,7 @@
     </div>
     <nav class="footer-links" aria-label="Pied de page">
       <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/how-we-verify/">Notre méthode de vérification</a>
       <a class="footer-link" href="/privacy/">Confidentialité</a>
       <a class="footer-link" href="/terms/">Conditions</a>
     </nav>
@@ -278,7 +253,7 @@
   </div>
 </footer>
 
-<script src="/assets/ca-fr/common.js?v=59dd3dc220"></script>
+<script src="/assets/ca-fr/common.js?v=e1f07ce4f0"></script>
 <script src="/assets/ca-fr/solar.js?v=ff0fa6b32f"></script>
 </body>
 </html>

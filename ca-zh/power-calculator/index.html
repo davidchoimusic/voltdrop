@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop功率计算器","url":"https://voltdrop.app/ca-zh/power-calculator/","description":"免费电气功率计算器：使用功率因数换算伏特、安培、瓦特、kW和kVA，支持DC、AC单相和AC三相。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -114,25 +114,35 @@
     <p class="tool-sub">伏特、安培、瓦特、kW和kVA：输入已知值，即可求出其余结果。支持DC、AC单相和AC三相。</p>
   </div>
 
-  <form id="pw-form" class="card" autocomplete="off">
+  <form id="pw-form" class="card" autocomplete="off" novalidate>
 
     <div class="field">
       <label class="field-label">要计算什么？</label>
       <div class="seg" role="group" aria-label="要计算的值">
-        <button type="button" class="seg-btn active" data-find="amps">安培</button>
-        <button type="button" class="seg-btn" data-find="watts">瓦特</button>
-        <button type="button" class="seg-btn" data-find="volts">伏特</button>
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">安培</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">瓦特</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">伏特</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">欧姆</button>
       </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>三相系统不能使用欧姆模式。负载采用星形连接还是三角形连接会改变答案，而本计算器未询问该信息。</p>
     </div>
 
     <div class="field">
       <label class="field-label">供电类型</label>
       <div class="seg" role="group" aria-label="供电类型">
-        <button type="button" class="seg-btn active" data-system="dc">DC</button>
-        <button type="button" class="seg-btn" data-system="ac1">AC 单相</button>
-        <button type="button" class="seg-btn" data-system="ac3">AC 三相</button>
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">AC 单相</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">AC 三相</button>
       </div>
       <p class="hint" id="pw-system-hint">DC：电池、太阳能、车辆和LED灯带。</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">已知：</label>
+      <div class="seg" role="group" aria-label="已知：">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">瓦特</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">欧姆</button>
+      </div>
     </div>
 
     <div class="field" id="pw-field-volts">
@@ -141,7 +151,7 @@
         <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
         <span class="unit">伏特</span>
       </div>
-      <p class="hint">三相：请输入线电压（例如208、480）。</p>
+      <p class="hint" id="pw-voltage-hint" hidden>三相：请输入线电压（例如208、480）。</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>
@@ -161,6 +171,14 @@
       <p class="hint">提示：1 kW = 1,000 W。标有“1.5 kW”的设备等于1500瓦特。</p>
     </div>
 
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">电阻（Ω）</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="例如10">
+        <span class="unit">Ω</span>
+      </div>
+    </div>
+
     <div class="field" id="pw-field-pf">
       <label class="field-label" for="pw-pf">功率因数</label>
       <div class="input-unit">
@@ -175,7 +193,7 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">结果</div>
+      <div class="verdict-badge" id="pw-result-badge">结果</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>
@@ -196,6 +214,7 @@
     <h2>使用的公式</h2>
     <p>DC：瓦特 = 伏特 × 安培。AC单相：瓦特 = 伏特 × 安培 × 功率因数。AC三相：瓦特 = √3 (1.732) × 线电压 × 安培 × 功率因数。每个结果都会显示计算过程；请展开“计算方法”。</p>
     <p>要为此负载选择导线吗？请将这里的安培值直接带入 <a class="inline-link" href="/wire-size-calculator/">导线规格（线规）</a> 和 <a class="inline-link" href="/ampacity-check/">载流量检查</a> 工具。</p>
+    <p>想知道为什么可以信任这个结果吗？ <a class="inline-link" href="/how-we-verify/">了解 VoltDrop 如何核查计算数据</a>.</p>
   </section>
 
 </main>
@@ -212,6 +231,7 @@
     </div>
     <nav class="footer-links" aria-label="页脚">
       <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/how-we-verify/">我们的核查方法</a>
       <a class="footer-link" href="/privacy/">隐私</a>
       <a class="footer-link" href="/terms/">条款</a>
     </nav>
@@ -220,7 +240,7 @@
   </div>
 </footer>
 
-<script src="/assets/ca-zh/common.js?v=95abe3b15a"></script>
-<script src="/assets/ca-zh/power.js?v=18c69415a6"></script>
+<script src="/assets/ca-zh/common.js?v=a9a7b11990"></script>
+<script src="/assets/ca-zh/power.js?v=a5cc40112a"></script>
 </body>
 </html>

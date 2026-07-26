@@ -81,7 +81,11 @@
     "pages.us.landscape.title": "Landscape Lighting Voltage Drop Calculator — Canada/CEC edition | VoltDrop",
     "pages.us.landscape.description": "Canadian low-voltage landscape lighting calculator. Several fixtures on one cable, worked out stretch by stretch, with the voltage at every light and three wiring layouts compared. Code compliance is not evaluated.",
     "landscape.noCodeSetsALimitForLowVoltageAnswer": "This tool does not evaluate code compliance, and it does not set a limit of its own. CEC Rule 8-102 makes voltage-drop limits mandatory for branch circuits and feeders. Whether those limits reach a low-voltage lighting system on the load side of a transformer is not something this tool has verified, so it makes no claim either way — ask your inspector. The acceptable voltage window for your fixtures comes from the manufacturer's data sheet. That is why this calculator reports the voltage at each fixture instead of stamping a pass or fail on it. Enter the minimum and maximum from your data sheet and every tap will be checked against those numbers.",
-    "landscape.thisAnswersVoltageDropOnlyItDoesNot": "This answers voltage drop only. It does not check that your cable is rated to carry the current, it does not check your transformer's capacity, and it does not evaluate CEC compliance or your fixture manufacturer's requirements. Use the Canadian ampacity check for the current-carrying question, and your fixture's data sheet for the voltage window."
+    "landscape.thisAnswersVoltageDropOnlyItDoesNot": "This answers voltage drop only. It does not check that your cable is rated to carry the current, it does not check your transformer's capacity, and it does not evaluate CEC compliance or your fixture manufacturer's requirements. Use the Canadian ampacity check for the current-carrying question, and your fixture's data sheet for the voltage window.",
+    "howVerify.reviewedDate": "Last reviewed: July 27, 2026",
+    "howVerify.notAffiliatedOrCertified": "VoltDrop is not affiliated with, endorsed by, or approved by CSA. No calculator is “CEC certified,” including this one. That isn't a thing.",
+    "howVerify.localAuthorityDecides": "Your local inspection authority decides, not us. Confirm the result against the rules actually adopted in your area before you install anything.",
+    "howVerify.dataEdition": "Canadian data reflects CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A, and 5C, with Rules 4-004, 4-006, 8-104, and 14-104. Provincial and municipal adoption varies; confirm the edition adopted locally."
   },
   "localizedStrings": {
     "fr-CA": {
@@ -156,7 +160,11 @@
       "pages.us.landscape.title": "Calculateur de chute de tension pour éclairage paysager — édition Canada/CEC | VoltDrop",
       "pages.us.landscape.description": "Calculateur canadien d’éclairage paysager à basse tension. Plusieurs luminaires sur un même câble, calculés section par section, avec la tension à chaque luminaire et trois dispositions comparées. La conformité au code n’est pas évaluée.",
       "landscape.noCodeSetsALimitForLowVoltageAnswer": "Cet outil n’évalue pas la conformité au code et ne fixe aucune limite de son cru. La CEC Rule 8-102 rend obligatoires les limites de chute de tension pour les circuits de dérivation et les artères. Savoir si ces limites s’appliquent à un système d’éclairage à basse tension du côté charge d’un transformateur n’a pas été vérifié par cet outil, qui ne prétend donc rien dans un sens ni dans l’autre : demandez à votre inspecteur. La plage de tension acceptable pour vos luminaires provient de la fiche technique du fabricant. C’est pourquoi ce calculateur indique la tension à chaque luminaire au lieu d’y apposer une réussite ou un échec. Entrez le minimum et le maximum de votre fiche technique et chaque dérivation sera vérifiée par rapport à ces valeurs.",
-      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "Ceci répond uniquement à la chute de tension. Il ne vérifie pas que votre câble est homologué pour porter le courant, il ne vérifie pas la capacité de votre transformateur et il n’évalue ni la conformité au CEC ni les exigences du fabricant de votre luminaire. Utilisez la vérification canadienne du courant admissible pour la question du transport du courant, et la fiche technique de votre luminaire pour la plage de tension."
+      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "Ceci répond uniquement à la chute de tension. Il ne vérifie pas que votre câble est homologué pour porter le courant, il ne vérifie pas la capacité de votre transformateur et il n’évalue ni la conformité au CEC ni les exigences du fabricant de votre luminaire. Utilisez la vérification canadienne du courant admissible pour la question du transport du courant, et la fiche technique de votre luminaire pour la plage de tension.",
+      "howVerify.reviewedDate": "Dernière révision : 27 juillet 2026",
+      "howVerify.notAffiliatedOrCertified": "VoltDrop n’est ni affilié à CSA, ni appuyé ou approuvé par cet organisme. Aucun calculateur n’est « certifié CEC », y compris celui-ci. Une telle certification n’existe pas.",
+      "howVerify.localAuthorityDecides": "Votre autorité d’inspection locale décide, pas nous. Avant toute installation, confirmez le résultat selon les règles réellement adoptées dans votre secteur.",
+      "howVerify.dataEdition": "Les données canadiennes reflètent CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024) : Tables 2/4, 5A et 5C, avec Rules 4-004, 4-006, 8-104 et 14-104. L’adoption varie selon la province et la municipalité; confirmez l’édition adoptée localement."
     },
     "zh-Hans": {
       "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "CEC 电压降计算器 — Rule 8-102 | VoltDrop",
@@ -230,7 +238,11 @@
       "pages.us.landscape.title": "景观照明电压降计算器 — 加拿大/CEC 版 | VoltDrop",
       "pages.us.landscape.description": "加拿大低压景观照明计算器。同一根电缆上多个灯具，逐段计算，显示每个灯具处的电压，并对三种布线方式进行对比。不评估规范合规性。",
       "landscape.noCodeSetsALimitForLowVoltageAnswer": "本工具不评估规范合规性，也不自行设定任何限值。CEC Rule 8-102 对分支回路和馈线规定了强制性的电压降限值。这些限值是否适用于变压器负载侧的低压照明系统，本工具尚未核实，因此不作任何肯定或否定的结论 — 请咨询您的检查人员。灯具可接受的电压范围来自制造商的规格书。因此本计算器只报告每个灯具处的电压，而不给出合格或不合格的判定。请输入规格书上的最低值和最高值，我们会据此检查每个分接点。",
-      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "本工具只回答电压降。它不检查您的电缆是否具备承载该电流的额定值，不检查变压器容量，也不评估 CEC 合规性或灯具制造商的要求。载流能力问题请使用加拿大载流量检查，电压范围请查看灯具规格书。"
+      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "本工具只回答电压降。它不检查您的电缆是否具备承载该电流的额定值，不检查变压器容量，也不评估 CEC 合规性或灯具制造商的要求。载流能力问题请使用加拿大载流量检查，电压范围请查看灯具规格书。",
+      "howVerify.reviewedDate": "最后审查：2026年7月27日",
+      "howVerify.notAffiliatedOrCertified": "VoltDrop 与 CSA 没有隶属关系，也未获得其背书或认可。任何计算器都不存在“CEC 认证”，本页面也不例外。根本没有这种认证。",
+      "howVerify.localAuthorityDecides": "最终决定权在您当地的检查机构，不在我们。安装前，请按您所在地区实际采用的规则核对结果。",
+      "howVerify.dataEdition": "加拿大版数据采用 CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)：Tables 2/4、5A 和 5C，以及 Rules 4-004、4-006、8-104 和 14-104。各省和市政地区的采用情况不同；请确认当地采用的版本。"
     },
     "es": {
       "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "CEC caída de tensión calculadora — Rule 8-102 | VoltDrop",
@@ -274,7 +286,11 @@
       "pages.us.landscape.title": "Calculadora de caída de tensión para iluminación exterior — edición Canadá/CEC | VoltDrop",
       "pages.us.landscape.description": "Calculadora canadiense de iluminación exterior de baja tensión. Varias luminarias en un mismo cable, calculadas tramo por tramo, con la tensión en cada luminaria y tres disposiciones comparadas. No se evalúa el cumplimiento normativo.",
       "landscape.noCodeSetsALimitForLowVoltageAnswer": "Esta herramienta no evalúa el cumplimiento normativo y no fija ningún límite propio. La CEC Rule 8-102 hace obligatorios los límites de caída de tensión para circuitos derivados y alimentadores. Si esos límites alcanzan a un sistema de iluminación de baja tensión en el lado de carga de un transformador es algo que esta herramienta no ha verificado, así que no afirma nada en ningún sentido: consulte a su inspector. El intervalo de tensión aceptable para sus luminarias procede de la ficha técnica del fabricante. Por eso esta calculadora indica la tensión en cada luminaria en lugar de sellar un apto o no apto. Introduzca el mínimo y el máximo de su ficha técnica y comprobaremos cada derivación con esos valores.",
-      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "Esto responde únicamente a la caída de tensión. No comprueba que su cable esté clasificado para conducir la corriente, no comprueba la capacidad de su transformador y no evalúa el cumplimiento del CEC ni los requisitos del fabricante de su luminaria. Use la comprobación canadiense de ampacidad para la cuestión de la conducción de corriente, y la ficha técnica de su luminaria para el intervalo de tensión."
+      "landscape.thisAnswersVoltageDropOnlyItDoesNot": "Esto responde únicamente a la caída de tensión. No comprueba que su cable esté clasificado para conducir la corriente, no comprueba la capacidad de su transformador y no evalúa el cumplimiento del CEC ni los requisitos del fabricante de su luminaria. Use la comprobación canadiense de ampacidad para la cuestión de la conducción de corriente, y la ficha técnica de su luminaria para el intervalo de tensión.",
+      "howVerify.reviewedDate": "Última revisión: 27 de julio de 2026",
+      "howVerify.notAffiliatedOrCertified": "VoltDrop no está afiliado, respaldado ni aprobado por CSA. Ninguna calculadora tiene una “certificación CEC”, incluida esta. Esa certificación no existe.",
+      "howVerify.localAuthorityDecides": "La decisión corresponde a la autoridad de inspección local, no a nosotros. Antes de instalar, confirme el resultado con las reglas realmente adoptadas en su zona.",
+      "howVerify.dataEdition": "Los datos canadienses reflejan CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A y 5C, con Rules 4-004, 4-006, 8-104 y 14-104. La adopción provincial y municipal varía; confirme la edición adoptada localmente."
     }
   }
 }

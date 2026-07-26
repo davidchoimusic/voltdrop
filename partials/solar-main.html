@@ -1,30 +1,3 @@
-<style>
-  .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
-  .scenario-btn {
-    display: block;
-    width: 100%;
-    min-height: 52px;
-    text-align: left;
-    padding: var(--space-3);
-    background: var(--color-surface-2);
-    color: var(--color-ink);
-    border: 1px solid var(--color-line-strong);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-  }
-  .scenario-btn.active {
-    border-color: var(--color-accent);
-    box-shadow: inset 0 0 0 1px var(--color-accent);
-  }
-  .scenario-btn .sc-name { display: block; font-weight: 700; }
-  .scenario-btn .sc-why { display: block; margin-top: 2px; color: var(--color-ink-soft); }
-  .sol-caution {
-    margin-top: var(--space-3);
-    padding: var(--space-3);
-    border-left: 3px solid var(--color-hazard);
-  }
-  .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
-</style>
 <main class="main-col">
 
   <div class="tool-intro card">
@@ -32,109 +5,7 @@
     <p class="tool-sub">{{solar.solarCircuitsAreTighterThanHouseWiring}}</p>
   </div>
 
-  <form id="sol-form" class="card" autocomplete="off">
-
-    <div class="field">
-      <label class="field-label">{{solar.whichCircuitLabel}}</label>
-      <div class="scenario-list" role="group" aria-label="{{attr:solar.whichCircuitAriaLabel}}">
-        <button type="button" class="scenario-btn active" data-scenario="pv">
-          <span class="sc-name">{{solar.scenarioPvName}}</span>
-          <span class="sc-why">{{solar.scenarioPvWhy}}</span>
-        </button>
-        <button type="button" class="scenario-btn" data-scenario="controller">
-          <span class="sc-name">{{solar.scenarioControllerName}}</span>
-          <span class="sc-why">{{solar.scenarioControllerWhy}}</span>
-        </button>
-        <button type="button" class="scenario-btn" data-scenario="battery">
-          <span class="sc-name">{{solar.scenarioBatteryName}}</span>
-          <span class="sc-why">{{solar.scenarioBatteryWhy}}</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="sol-volts" id="sol-volts-label">{{solar.systemVoltageLabel}}</label>
-      <div class="input-unit">
-        <input type="number" id="sol-volts" inputmode="decimal" min="1" step="any" value="48" required>
-        <span class="unit">{{solar.volts}}</span>
-      </div>
-      <p class="hint" id="sol-volts-hint"></p>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="sol-amps" id="sol-amps-label">{{solar.currentLabel}}</label>
-      <div class="input-unit">
-        <input type="number" id="sol-amps" inputmode="decimal" min="0" step="any" placeholder="{{attr:solar.egN95Placeholder}}" required>
-        <span class="unit">{{solar.amps}}</span>
-      </div>
-      <p class="hint" id="sol-amps-hint"></p>
-    </div>
-
-    <details class="math-details" id="sol-helper" hidden>
-      <summary>{{solar.workItOutFromMyInverterSummary}}</summary>
-      <div class="quick-fill">
-        <div>
-          <label class="field-label" for="sol-inv-watts">{{solar.inverterContinuousWattsLabel}}</label>
-          <input type="number" class="input-plain" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="{{attr:solar.egN3000Placeholder}}">
-        </div>
-        <div>
-          <label class="field-label" for="sol-inv-eff">{{solar.inverterEfficiencyLabel}}</label>
-          <input type="number" class="input-plain" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:solar.egN09Placeholder}}">
-        </div>
-        <div>
-          <label class="field-label" for="sol-inv-min">{{solar.lowestBatteryVoltageLabel}}</label>
-          <input type="number" class="input-plain" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="{{attr:solar.egN105Placeholder}}">
-        </div>
-      </div>
-      <button type="button" class="add-size-btn" id="sol-helper-apply">{{solar.useThisCurrentButton}}</button>
-      <p class="hint">{{solar.nominalVoltageUnderstatesTheCurrentHint}}</p>
-    </details>
-
-    <div class="field">
-      <label class="field-label" for="sol-feet">{{solar.oneWayDistanceLabel}}</label>
-      <div class="input-unit">
-        <input type="number" id="sol-feet" inputmode="decimal" min="0" step="any" placeholder="{{attr:solar.egN20Placeholder}}" required>
-        <span class="unit">{{solar.feet}}</span>
-      </div>
-      <p class="hint">{{solar.measureOneWayWeDoubleItHint}}</p>
-    </div>
-
-    <div class="field">
-      <label class="field-label">{{solar.conductorLabel}}</label>
-      <div class="seg" role="group" aria-label="{{attr:solar.conductorMaterialAriaLabel}}">
-        <button type="button" class="seg-btn active" data-material="cu">{{solar.copperButton}}</button>
-        <button type="button" class="seg-btn" data-material="al">{{solar.aluminumButton}}</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="sol-target">{{solar.dropTargetLabel}}</label>
-      <div class="input-unit">
-        <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
-        <span class="unit">{{solar.percent}}</span>
-      </div>
-      <p class="hint" id="sol-target-hint"></p>
-      <p class="hint">{{solar.thisIsAStartingPointNotAStandardHint}}</p>
-    </div>
-
-    <button type="submit" class="calc-btn">{{solar.findTheWireSizeButton}}</button>
-  </form>
-
-  <section id="results" class="card results" hidden aria-live="polite">
-    <div class="verdict" id="verdict">
-      <div class="verdict-badge" id="verdict-badge"></div>
-      <div class="verdict-main">
-        <div class="big-number" id="big-number"></div>
-        <div class="big-label" id="big-label"></div>
-      </div>
-    </div>
-    <div class="result-grid" id="result-grid"></div>
-    <div id="sol-cautions"></div>
-    <details class="math-details">
-      <summary>{{solar.howWeCalculatedThisSummary}}</summary>
-      <div class="math-body" id="math-body"></div>
-    </details>
-  </section>
+  {{> fragments/solar-form.html }}
 
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:solar.whyIsN3%TooLooseForSolarQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:solar.becauseTheLossIsContinuousAnswer}}"}}, {"@type": "Question", "name": "{{json:solar.whatCurrentShouldIUseQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:solar.itDependsOnTheCircuitAnswer}}"}}, {"@type": "Question", "name": "{{json:solar.whyDoesMyN12VInverterNeedSuchHugeCableQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:solar.becauseLowVoltageMeansHugeCurrentAnswer}}"}}, {"@type": "Question", "name": "{{json:solar.doesThisSizeMyFusesQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:solar.noItAnswersVoltageDropOnlyAnswer}}"}}]}</script>
 
@@ -145,6 +16,7 @@
     <p id="sol-exp-2">{{solar.eachOfTheThreeCircuitsTakesItsCurrent}}</p>
     <h2>{{solar.whatThisToolDoesNotDoHeading}}</h2>
     <p id="sol-exp-3">{{solar.thisAnswersVoltageDropOnlyAndNothingElse}}</p>
+    {{> fragments/verify-link.html }}
   </section>
 
 </main>

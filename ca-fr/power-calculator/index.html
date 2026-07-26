@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de puissance VoltDrop","url":"https://voltdrop.app/ca-fr/power-calculator/","description":"Calculateur gratuit de puissance électrique : convertissez volts, ampères, watts, kW et kVA avec le facteur de puissance pour DC, AC monophasé et AC triphasé.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -114,25 +114,35 @@
     <p class="tool-sub">Volts, ampères, watts, kW et kVA : entrez ce que vous connaissez pour obtenir le reste. DC, AC monophasé et AC triphasé.</p>
   </div>
 
-  <form id="pw-form" class="card" autocomplete="off">
+  <form id="pw-form" class="card" autocomplete="off" novalidate>
 
     <div class="field">
       <label class="field-label">Que voulez-vous calculer?</label>
       <div class="seg" role="group" aria-label="Valeur à calculer">
-        <button type="button" class="seg-btn active" data-find="amps">Ampères</button>
-        <button type="button" class="seg-btn" data-find="watts">Watts</button>
-        <button type="button" class="seg-btn" data-find="volts">Volts</button>
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">Ampères</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">Watts</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">Volts</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
       </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>Les modes en ohms ne sont pas disponibles en triphasé. La réponse change selon que la charge est raccordée en étoile ou en triangle, et ce calculateur ne demande pas ce renseignement.</p>
     </div>
 
     <div class="field">
       <label class="field-label">Type d’alimentation</label>
       <div class="seg" role="group" aria-label="Type d’alimentation">
-        <button type="button" class="seg-btn active" data-system="dc">DC</button>
-        <button type="button" class="seg-btn" data-system="ac1">AC monophasé</button>
-        <button type="button" class="seg-btn" data-system="ac3">AC triphasé</button>
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">AC monophasé</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">AC triphasé</button>
       </div>
       <p class="hint" id="pw-system-hint">DC : batteries, solaire, véhicules et rubans LED.</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">Je connais :</label>
+      <div class="seg" role="group" aria-label="Je connais :">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">Watts</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
+      </div>
     </div>
 
     <div class="field" id="pw-field-volts">
@@ -141,7 +151,7 @@
         <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
         <span class="unit">volts</span>
       </div>
-      <p class="hint">Triphasé : utilisez la tension entre phases (p. ex. 208, 480).</p>
+      <p class="hint" id="pw-voltage-hint" hidden>Triphasé : utilisez la tension entre phases (p. ex. 208, 480).</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>
@@ -161,6 +171,14 @@
       <p class="hint">Conseil : 1 kW = 1,000 W. Une plaque indiquant « 1.5 kW » correspond à 1500 watts.</p>
     </div>
 
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">Résistance (Ω)</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="p. ex. 10">
+        <span class="unit">Ω</span>
+      </div>
+    </div>
+
     <div class="field" id="pw-field-pf">
       <label class="field-label" for="pw-pf">Facteur de puissance</label>
       <div class="input-unit">
@@ -175,7 +193,7 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">RÉSULTAT</div>
+      <div class="verdict-badge" id="pw-result-badge">RÉSULTAT</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>
@@ -196,6 +214,7 @@
     <h2>Formules utilisées</h2>
     <p>DC : watts = volts × ampères. AC monophasé : watts = volts × ampères × facteur de puissance. AC triphasé : watts = √3 (1.732) × volts entre phases × ampères × facteur de puissance. Chaque résultat montre le calcul; ouvrez « Comment nous avons calculé ceci ».</p>
     <p>Vous choisissez un conducteur pour cette charge? Reportez directement les ampères obtenus dans l’outil de <a class="inline-link" href="/wire-size-calculator/">Calibre du conducteur</a> et <a class="inline-link" href="/ampacity-check/">Vérification du courant admissible</a> outils.</p>
+    <p>Vous voulez savoir pourquoi faire confiance à ce résultat? <a class="inline-link" href="/how-we-verify/">Voyez comment VoltDrop vérifie ses chiffres</a>.</p>
   </section>
 
 </main>
@@ -212,6 +231,7 @@
     </div>
     <nav class="footer-links" aria-label="Pied de page">
       <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/how-we-verify/">Notre méthode de vérification</a>
       <a class="footer-link" href="/privacy/">Confidentialité</a>
       <a class="footer-link" href="/terms/">Conditions</a>
     </nav>
@@ -220,7 +240,7 @@
   </div>
 </footer>
 
-<script src="/assets/ca-fr/common.js?v=59dd3dc220"></script>
-<script src="/assets/ca-fr/power.js?v=24d73b8792"></script>
+<script src="/assets/ca-fr/common.js?v=e1f07ce4f0"></script>
+<script src="/assets/ca-fr/power.js?v=b9e0006c91"></script>
 </body>
 </html>

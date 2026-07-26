@@ -33,7 +33,13 @@ const templateFiles = [
   'partials/landscape-main.html',
   'partials/solar-main.html',
   'partials/power-main.html',
+  'partials/ohms-law-main.html',
+  'partials/solar-wire-size-main.html',
+  'partials/fragments/power-form.html',
+  'partials/fragments/solar-form.html',
+  'partials/fragments/verify-link.html',
   'partials/privacy-main.html',
+  'partials/how-we-verify-main.html',
   'partials/terms-main.html',
   'partials/guides-index-main.html',
   'partials/guide-subpanel-main.html',
@@ -60,7 +66,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'landscape', 'solar', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'ohmsLaw', 'boxFill', 'landscape', 'solar', 'solarWireSize', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {
@@ -1984,6 +1990,79 @@ Object.assign(keyedExact['zh-Hans'], {
   'conduit.longRunsWithLotsOfBendsAre': '线路较长或弯头较多时，使用比合规最小值大一档的导管更容易穿线；许多电工会主动增大规格。',
 });
 
+Object.assign(keyedExact.es, {
+  'power.eGN10Placeholder': 'p. ej. 10',
+  'power.iKnowLabel': 'Conozco:',
+  'power.ohmsButton': 'Ohmios',
+  'power.ohmsUnavailableForThreePhaseTheAnswerChanges': 'Los modos con ohmios no están disponibles para sistemas trifásicos. La respuesta cambia según la carga esté conectada en estrella o en triángulo, y esta calculadora no solicita ese dato.',
+  'power.ohmsUnit': 'Ω',
+  'power.resistanceOhmsLabel': 'Resistencia (Ω)',
+  'runtime.power.checkInput': 'REVISE LOS DATOS',
+  'runtime.power.currentMustBeGreaterThanZero': 'La corriente debe ser mayor que cero para calcular la resistencia o la impedancia. Ingrese los amperios medidos.',
+  'runtime.power.enterPositiveValues': 'Ingrese un valor mayor que cero en cada campo visible.',
+  'runtime.power.impedance': 'impedancia',
+  'runtime.power.impedanceOhmsLabel': 'Impedancia (Ω)',
+  'runtime.power.impedanceZ': 'Impedancia (Z)',
+  'runtime.power.ohmsMustBeGreaterThanZero': 'Ingrese un valor superior a 0 Ω. 0 Ω es un cortocircuito y haría infinita la corriente calculada.',
+  'runtime.power.resistance': 'resistencia',
+  'runtime.power.resistanceOhmsLabel': 'Resistencia (Ω)',
+  'runtime.power.resistanceR': 'Resistencia (R)',
+  'runtime.power.resistivePartResistance': 'Parte resistiva — Resistencia (R ≈ Z × factor de potencia)',
+  'runtimePatterns.power.ampsOhmsFormula': 'Amperios = voltios ÷ {quantity}\n     = {volts} ÷ {ohms}\n     = {amps} A',
+  'runtimePatterns.power.impedanceFormula': 'Impedancia = voltios ÷ amperios\n           = {volts} ÷ {amps}\n           = {ohms} Ω\nParte resistiva ≈ impedancia × PF\n                 = {ohms} × {pf}\n                 ≈ {resistance} Ω',
+  'runtimePatterns.power.ohms': '{ohms} Ω',
+  'runtimePatterns.power.resistanceFormula': 'Resistencia = voltios ÷ amperios\n            = {volts} ÷ {amps}\n            = {ohms} Ω',
+  'runtimePatterns.power.voltsOhmsFormula': 'Voltios = amperios × {quantity}\n        = {amps} × {ohms}\n        = {volts} V',
+});
+Object.assign(keyedExact['fr-CA'], {
+  'power.eGN10Placeholder': 'p. ex. 10',
+  'power.iKnowLabel': 'Je connais :',
+  'power.ohmsButton': 'Ohms',
+  'power.ohmsUnavailableForThreePhaseTheAnswerChanges': 'Les modes en ohms ne sont pas disponibles en triphasé. La réponse change selon que la charge est raccordée en étoile ou en triangle, et ce calculateur ne demande pas ce renseignement.',
+  'power.ohmsUnit': 'Ω',
+  'power.resistanceOhmsLabel': 'Résistance (Ω)',
+  'runtime.power.checkInput': 'VÉRIFIEZ LES DONNÉES',
+  'runtime.power.currentMustBeGreaterThanZero': 'Le courant doit être supérieur à zéro pour calculer la résistance ou l’impédance. Entrez les ampères mesurés.',
+  'runtime.power.enterPositiveValues': 'Entrez une valeur supérieure à zéro dans chaque champ affiché.',
+  'runtime.power.impedance': 'impédance',
+  'runtime.power.impedanceOhmsLabel': 'Impédance (Ω)',
+  'runtime.power.impedanceZ': 'Impédance (Z)',
+  'runtime.power.ohmsMustBeGreaterThanZero': 'Entrez une valeur supérieure à 0 Ω. Une valeur de 0 Ω est un court-circuit franc et rendrait le courant calculé infini.',
+  'runtime.power.resistance': 'résistance',
+  'runtime.power.resistanceOhmsLabel': 'Résistance (Ω)',
+  'runtime.power.resistanceR': 'Résistance (R)',
+  'runtime.power.resistivePartResistance': 'Partie résistive — Résistance (R ≈ Z × facteur de puissance)',
+  'runtimePatterns.power.ampsOhmsFormula': 'Ampères = volts ÷ {quantity}\n        = {volts} ÷ {ohms}\n        = {amps} A',
+  'runtimePatterns.power.impedanceFormula': 'Impédance = volts ÷ ampères\n          = {volts} ÷ {amps}\n          = {ohms} Ω\nPartie résistive ≈ impédance × PF\n                  = {ohms} × {pf}\n                  ≈ {resistance} Ω',
+  'runtimePatterns.power.ohms': '{ohms} Ω',
+  'runtimePatterns.power.resistanceFormula': 'Résistance = volts ÷ ampères\n           = {volts} ÷ {amps}\n           = {ohms} Ω',
+  'runtimePatterns.power.voltsOhmsFormula': 'Volts = ampères × {quantity}\n      = {amps} × {ohms}\n      = {volts} V',
+});
+Object.assign(keyedExact['zh-Hans'], {
+  'power.eGN10Placeholder': '例如10',
+  'power.iKnowLabel': '已知：',
+  'power.ohmsButton': '欧姆',
+  'power.ohmsUnavailableForThreePhaseTheAnswerChanges': '三相系统不能使用欧姆模式。负载采用星形连接还是三角形连接会改变答案，而本计算器未询问该信息。',
+  'power.ohmsUnit': 'Ω',
+  'power.resistanceOhmsLabel': '电阻（Ω）',
+  'runtime.power.checkInput': '请检查输入',
+  'runtime.power.currentMustBeGreaterThanZero': '电流必须大于零，才能计算电阻或阻抗。请输入测得的安培数。',
+  'runtime.power.enterPositiveValues': '请在每个显示的字段中输入大于零的数值。',
+  'runtime.power.impedance': '阻抗',
+  'runtime.power.impedanceOhmsLabel': '阻抗（Ω）',
+  'runtime.power.impedanceZ': '阻抗（Z）',
+  'runtime.power.ohmsMustBeGreaterThanZero': '请输入大于0 Ω的数值。0 Ω表示短路，会使计算出的电流变为无穷大。',
+  'runtime.power.resistance': '电阻',
+  'runtime.power.resistanceOhmsLabel': '电阻（Ω）',
+  'runtime.power.resistanceR': '电阻（R）',
+  'runtime.power.resistivePartResistance': '电阻分量 — 电阻（R ≈ Z × 功率因数）',
+  'runtimePatterns.power.ampsOhmsFormula': '安培 = 伏特 ÷ {quantity}\n     = {volts} ÷ {ohms}\n     = {amps} A',
+  'runtimePatterns.power.impedanceFormula': '阻抗 = 伏特 ÷ 安培\n     = {volts} ÷ {amps}\n     = {ohms} Ω\n电阻分量 ≈ 阻抗 × PF\n         = {ohms} × {pf}\n         ≈ {resistance} Ω',
+  'runtimePatterns.power.ohms': '{ohms} Ω',
+  'runtimePatterns.power.resistanceFormula': '电阻 = 伏特 ÷ 安培\n     = {volts} ÷ {amps}\n     = {ohms} Ω',
+  'runtimePatterns.power.voltsOhmsFormula': '伏特 = 安培 × {quantity}\n     = {amps} × {ohms}\n     = {volts} V',
+});
+
 Object.assign(reviewedSafety.es, {
   'runtime.boxFill.eachHotOrNeutralEnteringTheBoxN1': 'Cada conductor de fase o neutro que entra en la caja cuenta según su propio calibre, incluidos los que la atraviesan sin cortarse. Cada dispositivo cuenta dos veces según el volumen de su conductor conectado más grande. Todos los conductores de puesta a tierra juntos cuentan una vez según el mayor. Las abrazaderas internas cuentan una vez según el conductor más grande de la caja. Las colas de conexión internas no cuentan.',
   'runtime.boxFill.canadianCountingRuleN12N3034EachInsulatedWire': 'Conteo canadiense (Rule 12-3034): cada conductor aislado que entra en la caja cuenta una vez según su propio calibre. Los conductores de continuidad de masa desnudos NO cuentan. Cada dispositivo cuenta dos veces. Cada PAR de conectores aislados (marrettes) cuenta una vez. Los dispositivos y pares de marrettes usan el conductor más grande indicado. Las abrazaderas NO reciben volumen en Canadá. Las colas de conexión internas no cuentan.',
@@ -2158,6 +2237,12 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
     },
   };
   for (const key of [...keys].sort()) {
+    const englishValue = valueAt(english, key);
+    const packOwned = Object.values(packs).some((pack) => typeof pack.strings?.[key] === 'string');
+    if (englishValue === undefined && packOwned) continue;
+    if (typeof englishValue !== 'string') {
+      throw new Error(`Missing English catalog string discovered from templates: ${key}`);
+    }
     catalog[key] = legacyExact[locale]?.[key]
       ?? reviewedPatterns[locale]?.[key]
       ?? reviewedRuntime[locale]?.[key]
@@ -2170,7 +2255,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       ?? landscapeExact[locale]?.[key]
       ?? guideExact[locale]?.[key]
       ?? words[locale]?.[key]
-      ?? translate(valueAt(english, key), locale);
+      ?? translate(englishValue, locale);
   }
   /* Carry forward any key that exists in the committed catalog but that this
      generator does not know how to produce. Dropping them looked like harmless

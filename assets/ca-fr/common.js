@@ -64,9 +64,12 @@ const TOOL_PATHS = [
   '/conduit-fill/',
   '/box-fill/',
   '/power-calculator/',
+  '/ohms-law/',
   '/landscape-lighting-calculator/',
   '/solar-battery-wire-size/',
+  '/solar-wire-size-calculator/',
   '/privacy/',
+  '/how-we-verify/',
   '/terms/',
 ];
 const GUIDE_PATHS = [

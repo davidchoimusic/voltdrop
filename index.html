@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Voltage Drop Calculator","url":"https://voltdrop.app/","description":"Free voltage drop calculator for copper and aluminum wire. Plain-English inputs, one-way distance, instant verdict against the 3% and 5% guidelines, full math shown.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -233,6 +233,7 @@
     <p>The widely used rule of thumb (<span id="code-basis">based on a recommendation in the</span> <span id="code-name">U.S. National Electrical Code</span>): keep the drop on a branch circuit at or under <strong>3%</strong>, and the total from your panel to the device at or under <strong>5%</strong>. These are guidelines for good performance, not laws — low-voltage systems like 12&nbsp;V solar are often even stricter, because 3% of 12&nbsp;V hurts a lot more than 3% of 240&nbsp;V.</p>
     <h2>Why don't other calculators agree with each other?</h2>
     <p>Almost always one of two things: some tools want <strong>round-trip</strong> length where others want one-way (we always use one-way and double it for you), and some use slightly different resistance values for the wire. Open "How we calculated this" above and you can check our numbers against anything.</p>
+    <p>Want to know why you should trust this result? <a class="inline-link" href="/how-we-verify/">Read how VoltDrop checks its numbers</a>.</p>
   </section>
 
 </main>
@@ -249,6 +250,7 @@
     </div>
     <nav class="footer-links" aria-label="Footer">
       <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/how-we-verify/">How we verify</a>
       <a class="footer-link" href="/privacy/">Privacy</a>
       <a class="footer-link" href="/terms/">Terms</a>
     </nav>
@@ -257,7 +259,7 @@
   </div>
 </footer>
 
-<script src="/common.js?v=e726583fcf"></script>
+<script src="/common.js?v=5235937ab1"></script>
 <script src="/app.js?v=359cf6acfa"></script>
 </body>
 </html>

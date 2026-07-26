@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohm's Law Calculator — volts, amps, ohms and power | VoltDrop</title>
+<meta name="description" content="Free Ohm's law calculator for volts, amps, ohms and power. Correctly distinguishes DC resistance from AC impedance and refuses to guess three-phase resistance.">
+<link rel="canonical" href="https://voltdrop.app/ohms-law/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/ohms-law/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/ohms-law/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/ohms-law/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/ohms-law/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/ohms-law/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/ohms-law/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/ohms-law/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Ohm's Law Calculator — volts, amps, ohms and power | VoltDrop">
+<meta property="og:description" content="Free Ohm's law calculator for volts, amps, ohms and power. Correctly distinguishes DC resistance from AC impedance and refuses to guess three-phase resistance.">
+<meta property="og:url" content="https://voltdrop.app/ohms-law/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ohm's Law Calculator — volts, amps, ohms and power | VoltDrop">
+<meta name="twitter:description" content="Free Ohm's law calculator for volts, amps, ohms and power. Correctly distinguishes DC resistance from AC impedance and refuses to guess three-phase resistance.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Ohm's Law Calculator","url":"https://voltdrop.app/ohms-law/","description":"Free Ohm's law calculator for volts, amps, ohms and power. Correctly distinguishes DC resistance from AC impedance and refuses to guess three-phase resistance.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="en">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Electrical tools menu" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country or language" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · EN</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Feedback</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Which code applies?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Language in United States</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">Electrical calculators that explain themselves. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link active" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Landscape Lighting</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar & Battery</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">Ohm's Law Calculator</h1>
+    <p class="tool-sub">V = I × R. Enter any two and get the third, plus the power. And the part most calculators get wrong: on AC, volts ÷ amps is impedance, not resistance.</p>
+  </div>
+
+  <form id="pw-form" class="card" autocomplete="off" novalidate>
+
+    <div class="field">
+      <label class="field-label">What do you want to find?</label>
+      <div class="seg" role="group" aria-label="What to find">
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">Amps</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">Watts</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">Volts</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
+      </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>Ohms modes are unavailable for three-phase. The answer changes depending on whether the load is wye or delta connected, and this calculator does not ask for that.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Power type</label>
+      <div class="seg" role="group" aria-label="Power type">
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">AC single-phase</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">AC three-phase</button>
+      </div>
+      <p class="hint" id="pw-system-hint">DC: batteries, solar, vehicles, LED strips.</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">I know:</label>
+      <div class="seg" role="group" aria-label="I know:">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">Watts</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
+      </div>
+    </div>
+
+    <div class="field" id="pw-field-volts">
+      <label class="field-label" for="pw-volts">Voltage</label>
+      <div class="input-unit">
+        <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
+        <span class="unit">volts</span>
+      </div>
+      <p class="hint" id="pw-voltage-hint" hidden>Three-phase: use the line-to-line voltage (e.g. 208, 480).</p>
+    </div>
+
+    <div class="field" id="pw-field-amps" hidden>
+      <label class="field-label" for="pw-amps">Current</label>
+      <div class="input-unit">
+        <input type="number" id="pw-amps" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 15">
+        <span class="unit">amps</span>
+      </div>
+    </div>
+
+    <div class="field" id="pw-field-watts">
+      <label class="field-label" for="pw-watts">Power</label>
+      <div class="input-unit">
+        <input type="number" id="pw-watts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 1500">
+        <span class="unit">watts</span>
+      </div>
+      <p class="hint">Tip: 1 kW = 1,000 W. A label that says "1.5 kW" is 1500 watts.</p>
+    </div>
+
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">Resistance (Ω)</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 10">
+        <span class="unit">Ω</span>
+      </div>
+    </div>
+
+    <div class="field" id="pw-field-pf">
+      <label class="field-label" for="pw-pf">Power factor</label>
+      <div class="input-unit">
+        <input type="number" id="pw-pf" inputmode="decimal" min="0.1" max="1" step="any" value="1.0">
+        <span class="unit">0–1</span>
+      </div>
+      <p class="hint">How efficiently the load uses current. Heaters and simple loads: <strong>1.0</strong>. Motors and fluorescent lighting: often <strong>0.8–0.9</strong>. If unsure, leave 1.0.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Calculate</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict good" id="verdict">
+      <div class="verdict-badge" id="pw-result-badge">RESULT</div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <p class="verdict-note" id="verdict-note"></p>
+    <details class="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <section class="card explainer framed-explainer">
+    <h2>What this page answers</h2>
+    <p>Ohm's law ties three quantities together:</p>
+    <ul class="definition-list">
+      <li><strong>V</strong> — volts, the push</li>
+      <li><strong>I</strong> — amps, the flow</li>
+      <li><strong>R</strong> — ohms, the resistance to that flow</li>
+    </ul>
+    <p>Know any two and the third follows: V = I × R, I = V ÷ R, R = V ÷ I. Add power and you get P = V × I, P = I² × R, P = V² ÷ R.</p>
+
+    <h2>The AC trap — this is the one that matters</h2>
+    <p>On a DC circuit, volts ÷ amps is resistance. Straightforward.</p>
+    <p>On AC it is not. The result is impedance (Z): resistance plus the opposition from anything inductive or capacitive on the circuit, such as a motor winding or ballast. Resistance and impedance are different quantities and are not interchangeable.</p>
+    <p>The resistive part is roughly R = Z × power factor. A load pulling 10 A at 120 V with a power factor of 0.8 has an impedance of 12 Ω, but a resistive part nearer 9.6 Ω.</p>
+    <p>This calculator labels which quantity it is giving you every time. Many Ohm's law calculators simply print “resistance” and move on.</p>
+
+    <h2>Three-phase: why this tool says no</h2>
+    <p>Ask for ohms on a three-phase circuit and this calculator declines, on purpose. A single resistance figure depends on whether the load is wye or delta connected, and that changes the answer. This form does not ask, and many people wiring a motor do not know off the top of their head. Printing a number anyway would be a guess dressed up as a result.</p>
+    <p>Three-phase power — volts, amps, watts, and kVA — works normally in the <a class="inline-link" href="/power-calculator/">Power Calculator</a>.</p>
+
+    <h2>Worked example</h2>
+    <p>A 120 V circuit is pulling 10 A on DC. R = V ÷ I = 120 ÷ 10 = 12 Ω, and P = V × I = 1,200 W.</p>
+    <p>With the same numbers on single-phase AC at 0.8 power factor: Z = 120 ÷ 10 = 12 Ω, resistive part ≈ 12 × 0.8 = 9.6 Ω, and real power = 120 × 10 × 0.8 = 960 W. Same volts, same amps, different answers — that is the AC trap in one line.</p>
+
+    <h2>What this doesn't do</h2>
+    <p>Ohm's law describes a circuit; it does not size a conductor. Wire size depends on ampacity (heat) and voltage drop (distance), neither of which is in this equation. For those, use <a class="inline-link" href="/wire-size-calculator/">Wire Size</a>, <a class="inline-link" href="/ampacity-check/">Ampacity Check</a> and the <a class="inline-link" href="/">Voltage Drop calculator</a>.</p>
+    <p>Want to know why you should trust this result? <a class="inline-link" href="/how-we-verify/">Read how VoltDrop checks its numbers</a>.</p>
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="ohms-law-faq-heading">
+    <h2 id="ohms-law-faq-heading">Frequently asked questions</h2>
+    <dl>
+      <div>
+        <dt>What is Ohm's law?</dt>
+        <dd>Voltage equals current times resistance: V = I × R. Rearranged, I = V ÷ R and R = V ÷ I. Know any two and you have the third.</dd>
+      </div>
+      <div>
+        <dt>How do I calculate resistance from volts and amps?</dt>
+        <dd>Divide volts by amps. 120 V at 10 A is 12 Ω on DC. On AC, that same division gives impedance, not resistance.</dd>
+      </div>
+      <div>
+        <dt>Is Ohm's law the same for AC?</dt>
+        <dd>The relationship holds, but the ohms are impedance rather than plain resistance. Impedance includes inductive and capacitive opposition, not just resistance. The resistive part is roughly impedance × power factor.</dd>
+      </div>
+      <div>
+        <dt>How do I find watts from ohms?</dt>
+        <dd>Use P = I² × R if you know current, or P = V² ÷ R if you know voltage.</dd>
+      </div>
+      <div>
+        <dt>Why won't this calculate ohms for a three-phase circuit?</dt>
+        <dd>Because the answer depends on whether the load is wye or delta connected, and this form does not ask. Rather than guess, it declines. Three-phase power calculations work normally.</dd>
+      </div>
+      <div>
+        <dt>Does Ohm's law tell me what size wire to use?</dt>
+        <dd>No. Wire size comes from ampacity and voltage drop over distance. Ohm's law does not consider either.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Ohm's law?","acceptedAnswer":{"@type":"Answer","text":"Voltage equals current times resistance: V = I × R. Rearranged, I = V ÷ R and R = V ÷ I. Know any two and you have the third."}},{"@type":"Question","name":"How do I calculate resistance from volts and amps?","acceptedAnswer":{"@type":"Answer","text":"Divide volts by amps. 120 V at 10 A is 12 Ω on DC. On AC, that same division gives impedance, not resistance."}},{"@type":"Question","name":"Is Ohm's law the same for AC?","acceptedAnswer":{"@type":"Answer","text":"The relationship holds, but the ohms are impedance rather than plain resistance. Impedance includes inductive and capacitive opposition, not just resistance. The resistive part is roughly impedance × power factor."}},{"@type":"Question","name":"How do I find watts from ohms?","acceptedAnswer":{"@type":"Answer","text":"Use P = I² × R if you know current, or P = V² ÷ R if you know voltage."}},{"@type":"Question","name":"Why won't this calculate ohms for a three-phase circuit?","acceptedAnswer":{"@type":"Answer","text":"Because the answer depends on whether the load is wye or delta connected, and this form does not ask. Rather than guess, it declines. Three-phase power calculations work normally."}},{"@type":"Question","name":"Does Ohm's law tell me what size wire to use?","acceptedAnswer":{"@type":"Answer","text":"No. Wire size comes from ampacity and voltage drop over distance. Ohm's law does not consider either."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/how-we-verify/">How we verify</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=5235937ab1"></script>
+<script src="/power.js?v=f8a7aab188"></script>
+</body>
+</html>

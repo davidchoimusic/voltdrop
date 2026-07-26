@@ -1,0 +1,71 @@
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">{{ohmsLaw.title}}</h1>
+    <p class="tool-sub">{{ohmsLaw.sub}}</p>
+  </div>
+
+  {{> fragments/power-form.html }}
+
+  <section class="card explainer framed-explainer">
+    <h2>{{ohmsLaw.whatThisPageAnswersHeading}}</h2>
+    <p>{{ohmsLaw.ohmsLawTiesThreeQuantities}}</p>
+    <ul class="definition-list">
+      <li><strong>V</strong> — {{ohmsLaw.voltsDefinition}}</li>
+      <li><strong>I</strong> — {{ohmsLaw.ampsDefinition}}</li>
+      <li><strong>R</strong> — {{ohmsLaw.resistanceDefinition}}</li>
+    </ul>
+    <p>{{ohmsLaw.equations}}</p>
+
+    <h2>{{ohmsLaw.acTrapHeading}}</h2>
+    <p>{{ohmsLaw.dcIsResistance}}</p>
+    <p>{{ohmsLaw.acIsImpedance}}</p>
+    <p>{{ohmsLaw.resistivePartExample}}</p>
+    <p>{{ohmsLaw.labelsEveryResult}}</p>
+
+    <h2>{{ohmsLaw.threePhaseHeading}}</h2>
+    <p>{{ohmsLaw.threePhaseRefusal}}</p>
+    <p>{{ohmsLaw.threePhasePower}} <a class="inline-link" href="/power-calculator/">{{ohmsLaw.powerCalculatorLink}}</a>.</p>
+
+    <h2>{{ohmsLaw.workedExampleHeading}}</h2>
+    <p>{{ohmsLaw.workedDc}}</p>
+    <p>{{ohmsLaw.workedAc}}</p>
+
+    <h2>{{ohmsLaw.whatThisDoesntDoHeading}}</h2>
+    <p>{{ohmsLaw.doesntSizeWire}} <a class="inline-link" href="/wire-size-calculator/">{{ohmsLaw.wireSizeLink}}</a>, <a class="inline-link" href="/ampacity-check/">{{ohmsLaw.ampacityCheckLink}}</a> {{ohmsLaw.andThe}} <a class="inline-link" href="/">{{ohmsLaw.voltageDropLink}}</a>.</p>
+    {{> fragments/verify-link.html }}
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="ohms-law-faq-heading">
+    <h2 id="ohms-law-faq-heading">{{ohmsLaw.faqHeading}}</h2>
+    <dl>
+      <div>
+        <dt>{{ohmsLaw.whatIsOhmsLawQuestion}}</dt>
+        <dd>{{ohmsLaw.whatIsOhmsLawAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{ohmsLaw.calculateResistanceQuestion}}</dt>
+        <dd>{{ohmsLaw.calculateResistanceAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{ohmsLaw.sameForAcQuestion}}</dt>
+        <dd>{{ohmsLaw.sameForAcAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{ohmsLaw.findWattsQuestion}}</dt>
+        <dd>{{ohmsLaw.findWattsAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{ohmsLaw.threePhaseQuestion}}</dt>
+        <dd>{{ohmsLaw.threePhaseAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{ohmsLaw.wireSizeQuestion}}</dt>
+        <dd>{{ohmsLaw.wireSizeAnswer}}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:ohmsLaw.whatIsOhmsLawQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.whatIsOhmsLawAnswer}}"}},{"@type":"Question","name":"{{json:ohmsLaw.calculateResistanceQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.calculateResistanceAnswer}}"}},{"@type":"Question","name":"{{json:ohmsLaw.sameForAcQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.sameForAcAnswer}}"}},{"@type":"Question","name":"{{json:ohmsLaw.findWattsQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.findWattsAnswer}}"}},{"@type":"Question","name":"{{json:ohmsLaw.threePhaseQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.threePhaseAnswer}}"}},{"@type":"Question","name":"{{json:ohmsLaw.wireSizeQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:ohmsLaw.wireSizeAnswer}}"}}]}</script>
+
+</main>

@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Power Calculator","url":"https://voltdrop.app/ca/power-calculator/","description":"Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=967a42b24b">
+<link rel="stylesheet" href="/styles.css?v=9e79c80005">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -114,25 +114,35 @@
     <p class="tool-sub">Volts, amps, watts, kW and kVA — enter what you know, get the rest. DC, single-phase, and three-phase.</p>
   </div>
 
-  <form id="pw-form" class="card" autocomplete="off">
+  <form id="pw-form" class="card" autocomplete="off" novalidate>
 
     <div class="field">
       <label class="field-label">What do you want to find?</label>
       <div class="seg" role="group" aria-label="What to find">
-        <button type="button" class="seg-btn active" data-find="amps">Amps</button>
-        <button type="button" class="seg-btn" data-find="watts">Watts</button>
-        <button type="button" class="seg-btn" data-find="volts">Volts</button>
+        <button type="button" class="seg-btn active" data-find="amps" aria-pressed="true">Amps</button>
+        <button type="button" class="seg-btn" data-find="watts" aria-pressed="false">Watts</button>
+        <button type="button" class="seg-btn" data-find="volts" aria-pressed="false">Volts</button>
+        <button type="button" class="seg-btn" data-find="ohms" id="pw-find-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
       </div>
+      <p class="hint" id="pw-ohms-unavailable" hidden>Ohms modes are unavailable for three-phase. The answer changes depending on whether the load is wye or delta connected, and this calculator does not ask for that.</p>
     </div>
 
     <div class="field">
       <label class="field-label">Power type</label>
       <div class="seg" role="group" aria-label="Power type">
-        <button type="button" class="seg-btn active" data-system="dc">DC</button>
-        <button type="button" class="seg-btn" data-system="ac1">AC single-phase</button>
-        <button type="button" class="seg-btn" data-system="ac3">AC three-phase</button>
+        <button type="button" class="seg-btn active" data-system="dc" aria-pressed="true">DC</button>
+        <button type="button" class="seg-btn" data-system="ac1" aria-pressed="false">AC single-phase</button>
+        <button type="button" class="seg-btn" data-system="ac3" aria-pressed="false">AC three-phase</button>
       </div>
       <p class="hint" id="pw-system-hint">DC: batteries, solar, vehicles, LED strips.</p>
+    </div>
+
+    <div class="field" id="pw-known-field">
+      <label class="field-label">I know:</label>
+      <div class="seg" role="group" aria-label="I know:">
+        <button type="button" class="seg-btn active" data-known="watts" aria-pressed="true">Watts</button>
+        <button type="button" class="seg-btn" data-known="ohms" id="pw-known-ohms" aria-pressed="false" aria-describedby="pw-ohms-unavailable">Ohms</button>
+      </div>
     </div>
 
     <div class="field" id="pw-field-volts">
@@ -141,7 +151,7 @@
         <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
         <span class="unit">volts</span>
       </div>
-      <p class="hint">Three-phase: use the line-to-line voltage (e.g. 208, 480).</p>
+      <p class="hint" id="pw-voltage-hint" hidden>Three-phase: use the line-to-line voltage (e.g. 208, 480).</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>
@@ -161,6 +171,14 @@
       <p class="hint">Tip: 1 kW = 1,000 W. A label that says "1.5 kW" is 1500 watts.</p>
     </div>
 
+    <div class="field" id="pw-field-ohms" hidden>
+      <label class="field-label" for="pw-ohms" id="pw-ohms-label">Resistance (Ω)</label>
+      <div class="input-unit">
+        <input type="number" id="pw-ohms" inputmode="decimal" min="0.01" step="any" placeholder="e.g. 10">
+        <span class="unit">Ω</span>
+      </div>
+    </div>
+
     <div class="field" id="pw-field-pf">
       <label class="field-label" for="pw-pf">Power factor</label>
       <div class="input-unit">
@@ -175,7 +193,7 @@
 
   <section id="results" class="card results" hidden aria-live="polite">
     <div class="verdict good" id="verdict">
-      <div class="verdict-badge">RESULT</div>
+      <div class="verdict-badge" id="pw-result-badge">RESULT</div>
       <div class="verdict-main">
         <div class="big-number" id="big-number"></div>
         <div class="big-label" id="big-label"></div>
@@ -196,6 +214,7 @@
     <h2>The formulas we use</h2>
     <p>DC: watts = volts × amps. Single-phase AC: watts = volts × amps × power factor. Three-phase AC: watts = √3 (1.732) × line-to-line volts × amps × power factor. Every result shows its math — open "How we calculated this."</p>
     <p>Sizing wire for this load? Take the amps from here straight into the <a class="inline-link" href="/wire-size-calculator/">Wire Size</a> and <a class="inline-link" href="/ampacity-check/">Ampacity Check</a> tools.</p>
+    <p>Want to know why you should trust this result? <a class="inline-link" href="/how-we-verify/">Read how VoltDrop checks its numbers</a>.</p>
   </section>
 
 </main>
@@ -212,6 +231,7 @@
     </div>
     <nav class="footer-links" aria-label="Footer">
       <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/how-we-verify/">How we verify</a>
       <a class="footer-link" href="/privacy/">Privacy</a>
       <a class="footer-link" href="/terms/">Terms</a>
     </nav>
@@ -220,7 +240,7 @@
   </div>
 </footer>
 
-<script src="/assets/ca-en/common.js?v=e726583fcf"></script>
-<script src="/assets/ca-en/power.js?v=eb1d01430a"></script>
+<script src="/assets/ca-en/common.js?v=5235937ab1"></script>
+<script src="/assets/ca-en/power.js?v=f8a7aab188"></script>
 </body>
 </html>

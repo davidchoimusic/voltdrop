@@ -21,6 +21,30 @@ Canada Simplified Chinese uses the CEC at https://voltdrop.app/ca-zh/ with the U
 
 The non-English editions contain localized versions of the same tools and guides. Their content is not duplicated here.
 
+## How VoltDrop checks its numbers
+
+URL: https://voltdrop.app/how-we-verify/
+
+{{us:howVerify.voltDropDoesnTTypeNumbersInFromMemory}}
+
+{{us:howVerify.afterATablePassesWeTakeAFingerprint}}
+
+{{us:howVerify.beClearAboutWhatThisDoesAndDoesnTProve}}
+
+If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
+
+US data basis: {{us:howVerify.dataEdition}}
+
+Canadian data basis: {{ca:howVerify.dataEdition}}
+
+{{us:howVerify.noLicensedElectricianReviewsOrApproves}}
+
+US institutional limit: {{us:howVerify.notAffiliatedOrCertified}}
+
+Canadian institutional limit: {{ca:howVerify.notAffiliatedOrCertified}}
+
+Automated checks catch named kinds of change and translation error. They do not prove that an original value was correct or that a planning estimate covers real installation conditions.
+
 ## Tools
 
 ### Voltage Drop Calculator
@@ -73,6 +97,14 @@ Question: What are the corresponding volts, amps, watts, kilowatts, or kilovolt-
 Answer: {{us:pages.us.power.description}}
 Does not answer: It does not select a wire, breaker, conduit, or box. Use its current result as an input to the separate safety checks.
 
+### Ohm's Law Calculator
+
+URL: https://voltdrop.app/ohms-law/
+Question: Given any two of volts, amps, and ohms, what is the third quantity and the corresponding power?
+Answer: {{us:pages.us.ohmsLaw.description}}
+Method: DC volts divided by amps is resistance. On single-phase AC it is impedance, with the resistive part estimated from impedance times power factor.
+Does not answer: It refuses to print one three-phase resistance value because the answer depends on a wye or delta connection. It does not size conductors; ampacity and voltage drop are separate questions.
+
 ### Landscape Lighting Calculator
 
 URL: https://voltdrop.app/landscape-lighting-calculator/
@@ -89,6 +121,15 @@ Answer: {{us:pages.us.solar.description}}
 Method: Same K-factor arithmetic as the other tools, but the CURRENT differs per circuit and that is where wrong answers come from. Panel circuits use the array operating current Imp at Vmp. Charge-controller-to-battery uses the controller's maximum output current, not the panel rating. Battery-to-inverter uses maximum continuous DC input current; deriving it from watts divides by the lowest allowed battery voltage and the inverter efficiency, because nominal battery voltage understates the current exactly when the cable can least afford it.
 Targets: tighter than the 3%/5% branch-circuit convention because the loss is continuous and, on a battery cable, eats low-voltage-cutout margin. The pre-filled values are labelled starting points, not code requirements, and are user-editable.
 Does not answer: no ampacity result, no temperature correction, no PV sizing factors, no overcurrent protection or disconnect sizing, and no inverter AC output (that belongs to the voltage drop calculator). When the drop target needs more copper than the table holds, it says OUT OF RANGE and reports the area required rather than returning the largest listed size.
+
+### Solar Wire Size Calculator
+
+URL: https://voltdrop.app/solar-wire-size-calculator/
+Question: What size panel-to-controller DC conductor keeps a solar array inside a chosen voltage-drop target?
+Answer: {{us:pages.us.solarWireSize.description}}
+Method: Uses the array operating current Imp at Vmp and the same per-circuit solar engine as the full Solar & Battery calculator.
+Targets: Common solar-practice starting points, not code requirements. The target is visible and editable.
+Does not answer: Battery-to-inverter and controller-to-battery runs belong in the full Solar & Battery calculator. This is voltage-drop sizing only, not ampacity, and it does not handle inverter AC output.
 
 ## Concepts that control the answer
 

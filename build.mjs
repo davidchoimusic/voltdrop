@@ -3,7 +3,9 @@
 // Then commit the outputs.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
+import { dirname, resolve } from 'path';
 import { localizeRuntimeSource } from './tools/runtime-code-boundary.mjs';
+import { checkRegistries } from './tools/check-registries.mjs';
 
 /* Sealed electrical data that exists in more than one file must stay IDENTICAL.
    landscape.js carries its own copy of WIRE_TABLE and K_FACTOR because each page
@@ -108,8 +110,27 @@ const text = (key, edition, { allowEnglishFallback = false } = {}) => {
   return value;
 };
 
+const expandFragments = (template, label) => {
+  const expanded = template.replace(/\{\{>\s*([^{}\s]+)\s*\}\}/g, (_, fragmentName) => {
+    const fragmentFile = resolve(dirname(label), fragmentName);
+    if (!existsSync(fragmentFile)) {
+      throw new Error(`Missing fragment ${fragmentName} referenced by ${label}`);
+    }
+    const fragment = readFileSync(fragmentFile, 'utf8');
+    const nested = fragment.match(/\{\{>[^}]*\}\}/);
+    if (nested) {
+      throw new Error(`Nested fragment directive in ${fragmentName} referenced by ${label}: ${nested[0]}`);
+    }
+    return fragment.replace(/\r?\n$/, '');
+  });
+  const unresolved = expanded.match(/\{\{>[^}]*\}\}/);
+  if (unresolved) throw new Error(`Unresolved fragment directive in ${label}: ${unresolved[0]}`);
+  return expanded;
+};
+
 const renderTemplate = (template, label, edition, options) => {
-  const rendered = template.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
+  const composed = expandFragments(template, label);
+  const rendered = composed.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
     const value = text(key, edition, options);
     if (format === 'json') return JSON.stringify(value).slice(1, -1);
     return value;
@@ -232,6 +253,14 @@ const PAGES = [
     descriptionKey: 'pages.us.privacy.description',
   },
   {
+    dir: 'how-we-verify',
+    tool: 'how-we-verify',
+    script: null, // methodology page — common.js alone is enough
+    main: 'partials/how-we-verify-main.html',
+    titleKey: 'pages.us.howWeVerify.title',
+    descriptionKey: 'pages.us.howWeVerify.description',
+  },
+  {
     dir: 'power-calculator',
     ldNameKey: 'pages.us.power.ldName',
     tool: 'power',
@@ -239,6 +268,16 @@ const PAGES = [
     main: 'partials/power-main.html',
     titleKey: 'pages.us.power.title',
     descriptionKey: 'pages.us.power.description',
+  },
+  {
+    dir: 'ohms-law',
+    ldNameKey: 'pages.us.ohmsLaw.ldName',
+    tool: 'power',
+    script: 'power.js',
+    main: 'partials/ohms-law-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.ohmsLaw.title',
+    descriptionKey: 'pages.us.ohmsLaw.description',
   },
   {
     dir: 'box-fill',
@@ -257,6 +296,16 @@ const PAGES = [
     main: 'partials/solar-main.html',
     titleKey: 'pages.us.solar.title',
     descriptionKey: 'pages.us.solar.description',
+  },
+  {
+    dir: 'solar-wire-size-calculator',
+    ldNameKey: 'pages.us.solarWireSize.ldName',
+    tool: 'solar',
+    script: 'solar.js',
+    main: 'partials/solar-wire-size-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.solarWireSize.title',
+    descriptionKey: 'pages.us.solarWireSize.description',
   },
   {
     dir: 'landscape-lighting-calculator',
@@ -427,6 +476,34 @@ const writeEditionPage = (edition, dir, html) => {
   console.log(`built ${output}`);
 };
 
+const assertVisibleFaq = (html, label) => {
+  const faqScripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => {
+      try {
+        return JSON.parse(match[1]);
+      } catch (error) {
+        throw new Error(`Invalid JSON-LD in ${label}: ${error.message}`);
+      }
+    })
+    .filter((entry) => entry?.['@type'] === 'FAQPage');
+  if (faqScripts.length !== 1) {
+    throw new Error(`${label} must contain exactly one FAQPage JSON-LD block`);
+  }
+  const visibleText = html
+    .replace(/<script[\s\S]*?<\/script>/g, ' ')
+    .replace(/<style[\s\S]*?<\/style>/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ');
+  for (const entry of faqScripts[0].mainEntity ?? []) {
+    const question = entry?.name;
+    const answer = entry?.acceptedAnswer?.text;
+    if (typeof question !== 'string' || typeof answer !== 'string'
+        || !visibleText.includes(question) || !visibleText.includes(answer)) {
+      throw new Error(`FAQ structured data is not visible in ${label}: ${question ?? 'missing question'}`);
+    }
+  }
+};
+
 for (const edition of EDITIONS) {
   if (!edition.catalog) throw new Error(`Missing locale catalog: i18n/strings/${edition.locale}.json`);
   const assets = makeAssets(edition);
@@ -518,6 +595,7 @@ for (const edition of EDITIONS) {
       html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
     }
 
+    if (p.visibleFaq) assertVisibleFaq(html, `${edition.id}/${p.dir}`);
     writeEditionPage(edition, p.dir, html);
   }
 
@@ -570,3 +648,4 @@ if (unresolvedLlmsPlaceholder) {
 }
 writeFileSync('llms-full.txt', `${llmsFull.trim()}\n`);
 console.log('built llms-full.txt');
+checkRegistries();
