@@ -12,9 +12,33 @@ results that don't match other calculators, clutter, forced signups. VoltDrop's 
 Domain purchased: **voltdrop.app**. Primary users: working electricians, contractors, apprentices,
 plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 
-## Current state (2026-07-26) — READ THIS FIRST
+## Current state (2026-07-26, evening) — READ THIS FIRST
 
-**LIVE at voltdrop.app in SIX EDITIONS**, ~100 pages. Static site with a build step.
+**LIVE at voltdrop.app in SIX EDITIONS.** Static site with a build step.
+**NINE calculators** as of this session: the seven below plus **Landscape Lighting**
+(`/landscape-lighting-calculator/`) and **Solar & Battery** (`/solar-battery-wire-size/`).
+Both are built and merged to main but **NOT YET PUSHED OR DEPLOYED** — awaiting `YES PUSH`.
+
+### The two new tools (2026-07-26) — what makes them different
+They close the gap recorded below as "THE LOW-VOLTAGE / MULTI-POINT GAP": every other
+calculator here assumes ONE LOAD AT THE FAR END OF ONE RUN.
+- **Landscape** solves a TREE: loads hang off nodes, cable runs are edges, an edge carries
+  the sum of everything in its subtree. Compares daisy chain vs hub vs star on worst-case
+  voltage, spread and cable used. It is AC (a landscape transformer outputs low-voltage AC),
+  nameplate-current, and asserts NO code drop limit in any edition.
+  Counter-intuitive finding locked in as a test: **a hub placed part-way along the run beats
+  a star on BOTH evenness and cable used** — the trunk drop is common to every fixture, so it
+  shifts them together instead of spreading them apart. "Star is the most even" is false.
+  Independent check: for N evenly spaced equal fixtures, `daisy ÷ naive == (N+1)/2N` exactly.
+- **Solar** derives current PER CIRCUIT — Imp at Vmp for panels, controller max OUTPUT for
+  controller-to-battery, and max continuous DC input at the LOW-VOLTAGE CUTOUT for
+  battery-to-inverter (nominal understates it by ~14%). Reports an explicit OUT OF RANGE
+  rather than the largest listed conductor, never claims an ampacity result, and excludes AC
+  output. Drop targets live in `i18n/solar-drop-targets.json`, unsealed on purpose and
+  recorded as UNSOURCED starting points.
+
+Test counts after this session: **629 verify checks**, 75 landscape engine tests, 35 solar
+engine tests, 27 byte-identical English pages.
 
 | Edition | Path | Code | Language |
 |---|---|---|---|
@@ -25,8 +49,9 @@ plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 | Quebec French | `/ca-fr/` | CEC | fr-CA |
 | Canada Chinese | `/ca-zh/` | CEC | zh-Hans |
 
-**7 calculators** (voltage drop 3 modes · wire size · max length · ampacity+derating ·
-conduit fill · box fill · power) **and 6 guides**, in every edition.
+**9 calculators** (voltage drop 3 modes · wire size · max length · ampacity+derating ·
+conduit fill · box fill · power · landscape lighting · solar & battery) **and 6 guides**,
+in every edition.
 
 ### The things that will bite you if you don't know them
 
@@ -56,7 +81,14 @@ conduit fill · box fill · power) **and 6 guides**, in every edition.
 ### Still open
 - `/ca/conduit-fill/` carries a planning-only note — CEC Tables 6A–6K and 9 unverified
 - Roadmap items awaiting placement: "how we verify" page · ground wire size · wire colour ·
-  `/ohms-law/` · offline/PWA · low-voltage multi-point · "Build this circuit"
+  `/ohms-law/` · offline/PWA · "Build this circuit"
+  (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.)
+- **T/split layout is DEFERRED from the landscape tool.** Daisy, hub and star all derive from
+  one distance column; a T needs per-fixture branch assignment plus a trunk-to-split length,
+  and both Codex passes judged an invented T geometry worse than no T. The tree engine already
+  supports it, so it is a pure add: collect branch + distance-along-branch and call solveTree.
+- **`/solar-wire-size-calculator/` as a framed page is now HONEST to mint** — the framed-page
+  rule below said to build the engine first, and it is built. Point it at the solar tool.
 - GSC: watch Sitemaps "Discovered pages" move 16 → 91, then leave it a few weeks
 
 ---
