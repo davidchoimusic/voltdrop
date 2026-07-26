@@ -125,15 +125,15 @@
       </div>
       <div class="fixture-rows" id="ls-rows">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
-          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <input type="number" class="ls-ft input-plain" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
+          <input type="number" class="ls-load input-plain" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
           <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}" hidden>×</button>
         </div>
       </div>
       <template id="ls-row-template">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-label="{{attr:landscape.distanceAlongThePathLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
-          <input type="number" class="ls-load" aria-label="{{attr:landscape.loadPerFixtureLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <input type="number" class="ls-ft input-plain" aria-label="{{attr:landscape.distanceAlongThePathLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
+          <input type="number" class="ls-load input-plain" aria-label="{{attr:landscape.loadPerFixtureLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
           <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}">×</button>
         </div>
       </template>
@@ -153,7 +153,7 @@
 
     <div class="field" id="ls-field-pf">
       <label class="field-label" for="ls-pf">{{landscape.powerFactorLabel}}</label>
-      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:landscape.egN09Placeholder}}">
+      <input type="number" class="input-plain" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:landscape.egN09Placeholder}}">
       <p class="hint">{{landscape.leaveBlankAndWeAssumeUnityHint}}</p>
     </div>
 
@@ -162,19 +162,19 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-qf-count">{{landscape.howManyFixturesLabel}}</label>
-          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:landscape.egN6Placeholder}}">
+          <input type="number" class="input-plain" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:landscape.egN6Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="ls-qf-first">{{landscape.firstOneIsThisFarLabel}}</label>
-          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}">
+          <input type="number" class="input-plain" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="ls-qf-spacing">{{landscape.spacingBetweenThemLabel}}</label>
-          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
+          <input type="number" class="input-plain" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="ls-qf-load">{{landscape.loadEachLabel}}</label>
-          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}">
+          <input type="number" class="input-plain" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="ls-qf-apply">{{landscape.fillTheRowsButton}}</button>
@@ -186,11 +186,11 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-min-volts">{{landscape.minimumVoltageLabel}}</label>
-          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN105Placeholder}}">
+          <input type="number" class="input-plain" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN105Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="ls-max-volts">{{landscape.maximumVoltageLabel}}</label>
-          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
+          <input type="number" class="input-plain" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
         </div>
       </div>
       <p class="hint">{{landscape.weDoNotInventAVoltageLimitHint}}</p>

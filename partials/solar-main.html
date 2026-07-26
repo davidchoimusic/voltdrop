@@ -3,6 +3,7 @@
   .scenario-btn {
     display: block;
     width: 100%;
+    min-height: 52px;
     text-align: left;
     padding: var(--space-3);
     background: var(--color-surface-2);
@@ -23,8 +24,6 @@
     border-left: 3px solid var(--color-hazard);
   }
   .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
-  .target-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); align-items: end; }
-  .target-row input { min-width: 0; }
 </style>
 <main class="main-col">
 
@@ -76,15 +75,15 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="sol-inv-watts">{{solar.inverterContinuousWattsLabel}}</label>
-          <input type="number" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="{{attr:solar.egN3000Placeholder}}">
+          <input type="number" class="input-plain" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="{{attr:solar.egN3000Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="sol-inv-eff">{{solar.inverterEfficiencyLabel}}</label>
-          <input type="number" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:solar.egN09Placeholder}}">
+          <input type="number" class="input-plain" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:solar.egN09Placeholder}}">
         </div>
         <div>
           <label class="field-label" for="sol-inv-min">{{solar.lowestBatteryVoltageLabel}}</label>
-          <input type="number" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="{{attr:solar.egN105Placeholder}}">
+          <input type="number" class="input-plain" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="{{attr:solar.egN105Placeholder}}">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="sol-helper-apply">{{solar.useThisCurrentButton}}</button>
@@ -110,7 +109,7 @@
 
     <div class="field">
       <label class="field-label" for="sol-target">{{solar.dropTargetLabel}}</label>
-      <div class="target-row">
+      <div class="input-unit">
         <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
         <span class="unit">{{solar.percent}}</span>
       </div>

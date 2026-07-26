@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur canadien d’éclairage paysager VoltDrop","url":"https://voltdrop.app/ca-fr/landscape-lighting-calculator/","description":"Calculateur canadien d’éclairage paysager à basse tension. Plusieurs luminaires sur un même câble, calculés section par section, avec la tension à chaque luminaire et trois dispositions comparées. La conformité au code n’est pas évaluée.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<link rel="stylesheet" href="/styles.css?v=c57d534d85">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -219,15 +219,15 @@
       </div>
       <div class="fixture-rows" id="ls-rows">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20" required>
-          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7" required>
+          <input type="number" class="ls-ft input-plain" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20" required>
+          <input type="number" class="ls-load input-plain" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7" required>
           <button type="button" class="remove-size-btn" aria-label="Retirer ce luminaire" title="Retirer ce luminaire" hidden>×</button>
         </div>
       </div>
       <template id="ls-row-template">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-label="Distance le long du parcours (ft)" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20" required>
-          <input type="number" class="ls-load" aria-label="Charge par luminaire" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7" required>
+          <input type="number" class="ls-ft input-plain" aria-label="Distance le long du parcours (ft)" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20" required>
+          <input type="number" class="ls-load input-plain" aria-label="Charge par luminaire" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7" required>
           <button type="button" class="remove-size-btn" aria-label="Retirer ce luminaire" title="Retirer ce luminaire">×</button>
         </div>
       </template>
@@ -247,7 +247,7 @@
 
     <div class="field" id="ls-field-pf">
       <label class="field-label" for="ls-pf">Facteur de puissance</label>
-      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="p. ex. 0.9">
+      <input type="number" class="input-plain" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="p. ex. 0.9">
       <p class="hint">Laissez ce champ vide et nous supposons 1.0, ce qui est le meilleur cas : le courant réel est plus élevé, et la chute réelle aussi.</p>
     </div>
 
@@ -256,19 +256,19 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-qf-count">Combien de luminaires?</label>
-          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="p. ex. 6">
+          <input type="number" class="input-plain" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="p. ex. 6">
         </div>
         <div>
           <label class="field-label" for="ls-qf-first">Le premier est à</label>
-          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20">
+          <input type="number" class="input-plain" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20">
         </div>
         <div>
           <label class="field-label" for="ls-qf-spacing">Espacement entre eux</label>
-          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="p. ex. 15">
+          <input type="number" class="input-plain" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="p. ex. 15">
         </div>
         <div>
           <label class="field-label" for="ls-qf-load">Charge de chacun</label>
-          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7">
+          <input type="number" class="input-plain" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="p. ex. 7">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="ls-qf-apply">Remplir les lignes</button>
@@ -280,11 +280,11 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-min-volts">Tension minimale</label>
-          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="p. ex. 10.5">
+          <input type="number" class="input-plain" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="p. ex. 10.5">
         </div>
         <div>
           <label class="field-label" for="ls-max-volts">Tension maximale</label>
-          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="p. ex. 15">
+          <input type="number" class="input-plain" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="p. ex. 15">
         </div>
       </div>
       <p class="hint">Nous n’inventons aucune limite de tension. Entrez la plage indiquée sur la fiche technique de votre luminaire et chaque dérivation sera vérifiée par rapport à elle.</p>
