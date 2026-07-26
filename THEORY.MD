@@ -74,7 +74,18 @@ Depth comes before breadth. Tools progress from bounded formulas and verified
 tables toward riskier code logic. Search pages follow the engine rather than
 promising capabilities the engine does not own. The Power Calculator earns an
 Ohm's law frame only because it now distinguishes DC resistance, single-phase
-impedance, and the three-phase refusal state.
+impedance, and the three-phase refusal state. The solar engine earns a focused
+panel-to-controller frame because it derives the array current from Imp at Vmp
+and keeps controller, battery, and inverter current bases separate.
+
+An honest framed page shares behavior but not purpose. Its form is composed
+from the parent's exact fragment and loads the parent's exact content-hashed
+script, so there is no second implementation to drift. Its surrounding copy
+must still solve a distinct reader problem. The Ohm's law frame explains the
+resistance-versus-impedance boundary and three-phase refusal. The solar-wire
+frame explains why low-voltage panel runs use a tighter loss budget and the
+array operating current rather than a house-wiring rule of thumb. A new title,
+heading, and search phrase alone do not create a new page.
 
 The interface mirrors the electrical model. Ampacity keeps insulation and
 termination temperatures separate. Fill tools itemize mixed conductor sizes.
@@ -89,6 +100,12 @@ seal, refusal behavior, translation screen, automatic checks, code editions,
 local-adoption boundary, and absence of a licensed reviewer. A footer link
 makes it globally available; one shared fragment puts it beside every
 calculator's explanation, where the trust question actually arises.
+
+Structured data follows the same visibility rule. FAQ schema is generated from
+the same catalog keys as the questions and answers a visitor can read. The
+build parses each framed FAQ block and stops if an entry is absent from visible
+text. Search metadata therefore cannot become a second, hidden version of the
+page's claims.
 
 Localization uses stable template keys and locale-owned full thoughts.
 Program-facing IDs, selectors, events, URL pieces, data keys, and storage keys
@@ -125,6 +142,17 @@ confirms country copy, localization, and fragment composition.
   English, and a static hint can describe three-phase input while DC is active.
   Source correctness is not enough; the release unit is the behavior a worker
   sees.
+
+- **Engine reuse and page duplication are different questions.** Byte-identical
+  form markup and script URLs are desirable because they prevent calculator
+  drift. Byte-identical surrounding explanations are undesirable because they
+  create renamed copies that compete for the same reader job. Composition is
+  the lever that enforces both sides at once.
+
+- **Visible schema needs one source of truth.** Repeating FAQ prose once in
+  markup and again as independently written JSON-LD creates a quiet drift path.
+  Reusing the same locale keys and checking the rendered result turns visibility
+  into a build invariant.
 
 - **An edition citation is not an adoption claim.** Naming 2023 NEC or
   CSA C22.1:24 states what VoltDrop computes. The local authority still decides

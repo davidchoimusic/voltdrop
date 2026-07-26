@@ -1167,6 +1167,47 @@
     "whatToFindAriaLabel": "What to find",
     "wireSize": "Wire Size"
   },
+  "ohmsLaw": {
+    "acIsImpedance": "On AC it is not. The result is impedance (Z): resistance plus the opposition from anything inductive or capacitive on the circuit, such as a motor winding or ballast. Resistance and impedance are different quantities and are not interchangeable.",
+    "acTrapHeading": "The AC trap — this is the one that matters",
+    "ampsDefinition": "amps, the flow",
+    "ampacityCheckLink": "Ampacity Check",
+    "andThe": "and the",
+    "calculateResistanceAnswer": "Divide volts by amps. 120 V at 10 A is 12 Ω on DC. On AC, that same division gives impedance, not resistance.",
+    "calculateResistanceQuestion": "How do I calculate resistance from volts and amps?",
+    "dcIsResistance": "On a DC circuit, volts ÷ amps is resistance. Straightforward.",
+    "doesntSizeWire": "Ohm's law describes a circuit; it does not size a conductor. Wire size depends on ampacity (heat) and voltage drop (distance), neither of which is in this equation. For those, use",
+    "equations": "Know any two and the third follows: V = I × R, I = V ÷ R, R = V ÷ I. Add power and you get P = V × I, P = I² × R, P = V² ÷ R.",
+    "faqHeading": "Frequently asked questions",
+    "findWattsAnswer": "Use P = I² × R if you know current, or P = V² ÷ R if you know voltage.",
+    "findWattsQuestion": "How do I find watts from ohms?",
+    "labelsEveryResult": "This calculator labels which quantity it is giving you every time. Many Ohm's law calculators simply print “resistance” and move on.",
+    "ohmsLawTiesThreeQuantities": "Ohm's law ties three quantities together:",
+    "powerCalculatorLink": "Power Calculator",
+    "resistanceDefinition": "ohms, the resistance to that flow",
+    "resistivePartExample": "The resistive part is roughly R = Z × power factor. A load pulling 10 A at 120 V with a power factor of 0.8 has an impedance of 12 Ω, but a resistive part nearer 9.6 Ω.",
+    "sameForAcAnswer": "The relationship holds, but the ohms are impedance rather than plain resistance. Impedance includes inductive and capacitive opposition, not just resistance. The resistive part is roughly impedance × power factor.",
+    "sameForAcQuestion": "Is Ohm's law the same for AC?",
+    "sub": "V = I × R. Enter any two and get the third, plus the power. And the part most calculators get wrong: on AC, volts ÷ amps is impedance, not resistance.",
+    "threePhaseAnswer": "Because the answer depends on whether the load is wye or delta connected, and this form does not ask. Rather than guess, it declines. Three-phase power calculations work normally.",
+    "threePhaseHeading": "Three-phase: why this tool says no",
+    "threePhasePower": "Three-phase power — volts, amps, watts, and kVA — works normally in the",
+    "threePhaseQuestion": "Why won't this calculate ohms for a three-phase circuit?",
+    "threePhaseRefusal": "Ask for ohms on a three-phase circuit and this calculator declines, on purpose. A single resistance figure depends on whether the load is wye or delta connected, and that changes the answer. This form does not ask, and many people wiring a motor do not know off the top of their head. Printing a number anyway would be a guess dressed up as a result.",
+    "title": "Ohm's Law Calculator",
+    "voltageDropLink": "Voltage Drop calculator",
+    "voltsDefinition": "volts, the push",
+    "whatIsOhmsLawAnswer": "Voltage equals current times resistance: V = I × R. Rearranged, I = V ÷ R and R = V ÷ I. Know any two and you have the third.",
+    "whatIsOhmsLawQuestion": "What is Ohm's law?",
+    "whatThisDoesntDoHeading": "What this doesn't do",
+    "whatThisPageAnswersHeading": "What this page answers",
+    "wireSizeAnswer": "No. Wire size comes from ampacity and voltage drop over distance. Ohm's law does not consider either.",
+    "wireSizeLink": "Wire Size",
+    "wireSizeQuestion": "Does Ohm's law tell me what size wire to use?",
+    "workedAc": "With the same numbers on single-phase AC at 0.8 power factor: Z = 120 ÷ 10 = 12 Ω, resistive part ≈ 12 × 0.8 = 9.6 Ω, and real power = 120 × 10 × 0.8 = 960 W. Same volts, same amps, different answers — that is the AC trap in one line.",
+    "workedDc": "A 120 V circuit is pulling 10 A on DC. R = V ÷ I = 120 ÷ 10 = 12 Ω, and P = V × I = 1,200 W.",
+    "workedExampleHeading": "Worked example"
+  },
   "privacy": {
     "analytics": "Analytics:",
     "calculatorUse": "Calculator use:",
@@ -1267,11 +1308,16 @@
         "title": "How VoltDrop verifies its electrical data | VoltDrop",
         "description": "How VoltDrop checks calculator data: two independent reproductions, sealed table fingerprints, six-edition tests, translation screening, and plain limits."
       },
-      "power": {
-        "ldName": "VoltDrop Power Calculator",
-        "title": "Power Calculator — volts, amps, watts, kW & kVA | VoltDrop",
-        "description": "Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup."
-      },
+    "power": {
+      "ldName": "VoltDrop Power Calculator",
+      "title": "Power Calculator — volts, amps, watts, kW & kVA | VoltDrop",
+      "description": "Free electrical power calculator: convert between volts, amps, watts, kW and kVA with power factor — DC, single-phase, and three-phase. Full math shown, no signup."
+    },
+    "ohmsLaw": {
+      "ldName": "VoltDrop Ohm's Law Calculator",
+      "title": "Ohm's Law Calculator — volts, amps, ohms and power | VoltDrop",
+      "description": "Free Ohm's law calculator for volts, amps, ohms and power. Correctly distinguishes DC resistance from AC impedance and refuses to guess three-phase resistance."
+    },
       "boxFill": {
         "ldName": "VoltDrop Box Fill Calculator",
         "title": "Box Fill Calculator — is my electrical box big enough? | VoltDrop",
@@ -1312,11 +1358,16 @@
         "title": "Landscape Lighting Voltage Drop Calculator — daisy chain vs hub vs star | VoltDrop",
         "description": "Free low-voltage landscape lighting calculator. Several fixtures on one cable, worked out stretch by stretch, with the voltage at every light and three wiring layouts compared. No signup."
       },
-      "solar": {
-        "ldName": "VoltDrop Solar & Battery Wire Size Calculator",
-        "title": "Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop",
-        "description": "Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup."
-      }
+    "solar": {
+      "ldName": "VoltDrop Solar & Battery Wire Size Calculator",
+      "title": "Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop",
+      "description": "Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup."
+    },
+    "solarWireSize": {
+      "ldName": "VoltDrop Solar Wire Size Calculator",
+      "title": "Solar Wire Size Calculator — panel to charge controller | VoltDrop",
+      "description": "Free solar wire size calculator for the panel-to-controller run. Uses array Imp at Vmp, explains low-voltage drop, and labels solar targets as conventions, not code."
+    }
     },
     "ca": {
       "guides": {
@@ -1955,5 +2006,44 @@
     "whyIsN3%TooLooseForSolarQuestion": "Why is 3% too loose for solar?",
     "whySolarWiringIsDifferentHeading": "Why solar wiring is different",
     "workItOutFromMyInverterSummary": "Work the current out from my inverter"
+  },
+  "solarWireSize": {
+    "acOutput": "Neither page covers the AC output side of an inverter. That is ordinary branch-circuit work:",
+    "acceptableDropAnswer": "Common practice is around 2% on panel circuits and tighter between battery and inverter — tighter than the 3% branch-circuit convention, because at 12 or 24 volts there is very little headroom. These are conventions, not code requirements.",
+    "acceptableDropQuestion": "What voltage drop is acceptable for solar?",
+    "ampacityAnswer": "No. This is voltage drop only. The conductor still has to be rated to carry the current, including any derating for temperature and how it is installed.",
+    "ampacityBody": "This sizes wire for voltage drop. The conductor also has to be rated to carry the current without overheating, which is a different calculation with different tables. Outdoors, in conduit, and in sunlight, derating matters. Check it:",
+    "ampacityCheckLink": "Ampacity Check",
+    "ampacityHeading": "Ampacity is a separate question",
+    "ampacityQuestion": "Does this check ampacity?",
+    "and": "and",
+    "biggerWireAnswer": "Because the voltage is low. The same watts at 12 V draw twenty times the current they would at 240 V, and voltage drop scales with current.",
+    "biggerWireQuestion": "Why does solar need bigger wire than I expected?",
+    "coverageHeading": "What this page covers, and what it doesn't",
+    "derivedCurrentBody": "The calculator derives the current per circuit rather than asking you to work it out, which is where most manual attempts go wrong.",
+    "faqHeading": "Frequently asked questions",
+    "fullCalculatorLink": "Solar & Battery Wire Size calculator",
+    "inverterRunAnswer": "Not on this page. That run is sized differently, on maximum continuous DC input at the low-voltage cutout. Use the full Solar & Battery calculator.",
+    "inverterRunQuestion": "Does this size the wire from my battery to my inverter?",
+    "lostYieldBody": "Every volt dropped in the wire is a volt that never reaches the controller. On a battery system it also eats the margin before the low-voltage cutout trips.",
+    "lostYieldHeading": "2. Array voltage drop is lost yield",
+    "lowVoltageBody": "3% of 240 V is 7.2 V — plenty of room. 3% of 12 V is 0.36 V. There is no headroom at low voltage, which is why solar practice runs tighter than the branch-circuit convention: roughly 2% on panel circuits, tighter still between battery and inverter.",
+    "lowVoltageHeading": "1. The voltage is tiny, so the margin is tiny",
+    "otherDcRuns": "For controller-to-battery, size on the controller's maximum output, not its input. For battery-to-inverter, size on maximum continuous DC input at the low-voltage cutout. Nominal voltage understates that current because the inverter still has to deliver its rated watts when the bank has sagged; on a 12 V bank cutting out at 10.5 V, that is around 14% more current before inverter efficiency is counted. For those runs, use the full",
+    "outOfRangeBody": "If the result is out of range, the tool says so explicitly rather than handing back the largest conductor it happens to know about.",
+    "panelCoverage": "This page is about the panel-to-controller run.",
+    "rightCurrentBody": "For the panel-to-controller run, the current that matters is the array's Imp at Vmp — the current at the maximum power point — not the short-circuit rating and not a figure worked back from the panel's watt rating at nominal voltage. Nominal understates it.",
+    "rightCurrentHeading": "Use the right current, not the nameplate",
+    "sameEngineAllCircuits": "same engine, all three circuits.",
+    "shortCircuitAnswer": "Not for voltage drop. Use the current at maximum power (Imp), which is what the array actually delivers in operation. Short-circuit current has its own uses in overcurrent sizing.",
+    "shortCircuitQuestion": "Should I use the panel's short-circuit current?",
+    "sub": "Wire size for a solar array, where the usual 3% rule of thumb quietly stops working. Panel current is not the number on the label, and 3% of 12 volts is a third of a volt.",
+    "targetsBody": "The drop targets this tool uses are starting points from common solar practice, not code requirements. There is no code rule that says 2%. Your equipment manufacturer may specify something tighter, and their number wins. The tool shows the target it used so you can change it knowingly rather than inherit it silently.",
+    "targetsHeading": "An honest note on the targets",
+    "title": "Solar Wire Size Calculator",
+    "voltageDropLink": "Voltage Drop",
+    "whatSizeAnswer": "It depends on the array's current at maximum power, the one-way distance to the controller, and how much voltage drop you are willing to lose. Enter those and this tool sizes it. There is no single answer that fits every array.",
+    "whatSizeQuestion": "What size wire do I need for my solar panels?",
+    "whySolarIsntHouseWiringHeading": "Why solar wiring isn't house wiring"
   }
 }

@@ -60,6 +60,9 @@ that limitation whenever citing a Canadian conduit-fill result.
   check — wires, devices (double count), grounds (one count), clamps.
 - [Power Calculator](https://voltdrop.app/power-calculator/): volts / amps /
   watts / kW / kVA with power factor, DC and AC.
+- [Ohm's Law Calculator](https://voltdrop.app/ohms-law/): volts, amps and
+  ohms with DC resistance, single-phase AC impedance, and an explicit refusal
+  to guess three-phase resistance without a wye/delta connection.
 - [Landscape Lighting Calculator](https://voltdrop.app/landscape-lighting-calculator/):
   low-voltage lighting with SEVERAL FIXTURES TAPPED ALONG ONE CABLE, solved as a
   tree so each stretch carries only the fixtures beyond it — not one load at the
@@ -77,6 +80,10 @@ that limitation whenever citing a Canadian conduit-fill result.
   not code requirements. Reports an explicit OUT OF RANGE rather than the
   largest conductor in the table. Never reports an ampacity-driven size, and
   does not handle inverter AC output.
+- [Solar Wire Size Calculator](https://voltdrop.app/solar-wire-size-calculator/):
+  a focused panel-to-controller view of the same solar engine. Uses array Imp
+  at Vmp, explains why low-voltage drop costs solar yield, and labels its
+  targets as conventions rather than code requirements.
 
 ## Guides (verified reference articles)
 

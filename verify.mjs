@@ -159,9 +159,11 @@ const SCOPED_PATHS = [
   'privacy/',
   'how-we-verify/',
   'power-calculator/',
+  'ohms-law/',
   'box-fill/',
   'landscape-lighting-calculator/',
   'solar-battery-wire-size/',
+  'solar-wire-size-calculator/',
   'terms/',
 ];
 const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
@@ -805,12 +807,43 @@ const calculatorCases = [
     },
   },
   {
+    name: 'ohms law frame',
+    path: 'ohms-law/',
+    expected: () => {
+      const input = MATRIX_INPUTS.power;
+      return input.watts / (input.volts * input.powerFactor);
+    },
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.power;
+      await targetPage.click('[data-system="ac1"]');
+      await targetPage.fill('#pw-volts', String(input.volts));
+      await targetPage.fill('#pw-watts', String(input.watts));
+      await targetPage.click('#pw-form .calc-btn');
+    },
+  },
+  {
     name: 'solar and battery',
     path: 'solar-battery-wire-size/',
     /* #big-number reads "at least 8 AWG" (and its translations), so stripping to
        digits asserts the AWG SIZE — which is the actual answer. Identical in every
        edition, because the arithmetic is country-independent and AWG designations
        are protected from translation. */
+    expected: () => 8,
+    tolerance: 0,
+    readNumber: (value) => parseFloat(String(value).replace(/[^0-9.]/g, '')),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.solar;
+      await targetPage.fill('#sol-volts', String(input.volts));
+      await targetPage.fill('#sol-amps', String(input.amps));
+      await targetPage.fill('#sol-feet', String(input.feet));
+      await targetPage.fill('#sol-target', String(input.targetPercent));
+      await targetPage.click('#sol-form .calc-btn');
+    },
+  },
+  {
+    name: 'solar wire size frame',
+    path: 'solar-wire-size-calculator/',
     expected: () => 8,
     tolerance: 0,
     readNumber: (value) => parseFloat(String(value).replace(/[^0-9.]/g, '')),

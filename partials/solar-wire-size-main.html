@@ -1,0 +1,67 @@
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">{{solarWireSize.title}}</h1>
+    <p class="tool-sub">{{solarWireSize.sub}}</p>
+  </div>
+
+  {{> fragments/solar-form.html }}
+
+  <section class="card explainer framed-explainer">
+    <h2>{{solarWireSize.whySolarIsntHouseWiringHeading}}</h2>
+    <h3>{{solarWireSize.lowVoltageHeading}}</h3>
+    <p>{{solarWireSize.lowVoltageBody}}</p>
+    <h3>{{solarWireSize.lostYieldHeading}}</h3>
+    <p>{{solarWireSize.lostYieldBody}}</p>
+
+    <h2>{{solarWireSize.rightCurrentHeading}}</h2>
+    <p>{{solarWireSize.rightCurrentBody}}</p>
+    <p>{{solarWireSize.derivedCurrentBody}}</p>
+
+    <h2>{{solarWireSize.coverageHeading}}</h2>
+    <p>{{solarWireSize.panelCoverage}}</p>
+    <p>{{solarWireSize.otherDcRuns}} <a class="inline-link" href="/solar-battery-wire-size/">{{solarWireSize.fullCalculatorLink}}</a> — {{solarWireSize.sameEngineAllCircuits}}</p>
+    <p>{{solarWireSize.acOutput}} <a class="inline-link" href="/">{{solarWireSize.voltageDropLink}}</a> {{solarWireSize.and}} <a class="inline-link" href="/ampacity-check/">{{solarWireSize.ampacityCheckLink}}</a>.</p>
+
+    <h2>{{solarWireSize.targetsHeading}}</h2>
+    <p>{{solarWireSize.targetsBody}}</p>
+
+    <h2>{{solarWireSize.ampacityHeading}}</h2>
+    <p>{{solarWireSize.ampacityBody}} <a class="inline-link" href="/ampacity-check/">{{solarWireSize.ampacityCheckLink}}</a>.</p>
+    <p>{{solarWireSize.outOfRangeBody}}</p>
+    {{> fragments/verify-link.html }}
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="solar-wire-faq-heading">
+    <h2 id="solar-wire-faq-heading">{{solarWireSize.faqHeading}}</h2>
+    <dl>
+      <div>
+        <dt>{{solarWireSize.whatSizeQuestion}}</dt>
+        <dd>{{solarWireSize.whatSizeAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{solarWireSize.acceptableDropQuestion}}</dt>
+        <dd>{{solarWireSize.acceptableDropAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{solarWireSize.biggerWireQuestion}}</dt>
+        <dd>{{solarWireSize.biggerWireAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{solarWireSize.shortCircuitQuestion}}</dt>
+        <dd>{{solarWireSize.shortCircuitAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{solarWireSize.inverterRunQuestion}}</dt>
+        <dd>{{solarWireSize.inverterRunAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{solarWireSize.ampacityQuestion}}</dt>
+        <dd>{{solarWireSize.ampacityAnswer}}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:solarWireSize.whatSizeQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.whatSizeAnswer}}"}},{"@type":"Question","name":"{{json:solarWireSize.acceptableDropQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.acceptableDropAnswer}}"}},{"@type":"Question","name":"{{json:solarWireSize.biggerWireQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.biggerWireAnswer}}"}},{"@type":"Question","name":"{{json:solarWireSize.shortCircuitQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.shortCircuitAnswer}}"}},{"@type":"Question","name":"{{json:solarWireSize.inverterRunQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.inverterRunAnswer}}"}},{"@type":"Question","name":"{{json:solarWireSize.ampacityQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:solarWireSize.ampacityAnswer}}"}}]}</script>
+
+</main>

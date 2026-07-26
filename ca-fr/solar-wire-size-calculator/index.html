@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de calibre solaire — panneaux au régulateur de charge | VoltDrop</title>
+<meta name="description" content="Calculateur gratuit du calibre entre les panneaux et le régulateur. Il utilise l’Imp du champ à Vmp, explique la chute à basse tension et présente les cibles solaires comme des conventions, non comme le code.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/solar-wire-size-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/solar-wire-size-calculator/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calculateur de calibre solaire — panneaux au régulateur de charge | VoltDrop">
+<meta property="og:description" content="Calculateur gratuit du calibre entre les panneaux et le régulateur. Il utilise l’Imp du champ à Vmp, explique la chute à basse tension et présente les cibles solaires comme des conventions, non comme le code.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/solar-wire-size-calculator/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculateur de calibre solaire — panneaux au régulateur de charge | VoltDrop">
+<meta name="twitter:description" content="Calculateur gratuit du calibre entre les panneaux et le régulateur. Il utilise l’Imp du champ à Vmp, explique la chute à basse tension et présente les cibles solaires comme des conventions, non comme le code.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de calibre de conducteur solaire VoltDrop","url":"https://voltdrop.app/ca-fr/solar-wire-size-calculator/","description":"Calculateur gratuit du calibre entre les panneaux et le régulateur. Il utilise l’Imp du champ à Vmp, explique la chute à basse tension et présente les cibles solaires comme des conventions, non comme le code.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=a4f981d8c1">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Des calculateurs électriques qui montrent comment chaque résultat est obtenu. Sans inscription, sans deviner.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Éclairage paysager</a>
+    <a href="/solar-battery-wire-size/" class="tool-link active" data-tool="solar"><span aria-hidden="true">☀️</span>Solaire et batteries</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">Calculateur de calibre de conducteur solaire</h1>
+    <p class="tool-sub">Calibre du conducteur pour un champ solaire, là où la règle pratique de 3% cesse discrètement de fonctionner. Le courant du panneau n’est pas le nombre sur l’étiquette, et 3% de 12 volts vaut un tiers de volt.</p>
+  </div>
+
+  <form id="sol-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">Quel circuit calculez-vous?</label>
+      <div class="scenario-list" role="group" aria-label="Type de circuit">
+        <button type="button" class="scenario-btn active" data-scenario="pv">
+          <span class="sc-name">Panneaux → régulateur ou onduleur</span>
+          <span class="sc-why">Ici la chute est du rendement perdu, chaque heure d’ensoleillement.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="controller">
+          <span class="sc-name">Régulateur de charge → batterie</span>
+          <span class="sc-why">Ici la chute fait mal lire la batterie au régulateur.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="battery">
+          <span class="sc-name">Batterie → onduleur</span>
+          <span class="sc-why">Le plus serré. Ici la chute coûte de la puissance et de la marge de coupure.</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-volts" id="sol-volts-label">Tension du système</label>
+      <div class="input-unit">
+        <input type="number" id="sol-volts" inputmode="decimal" min="1" step="any" value="48" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint" id="sol-volts-hint"></p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-amps" id="sol-amps-label">Courant</label>
+      <div class="input-unit">
+        <input type="number" id="sol-amps" inputmode="decimal" min="0" step="any" placeholder="p. ex. 9.5" required>
+        <span class="unit">A</span>
+      </div>
+      <p class="hint" id="sol-amps-hint"></p>
+    </div>
+
+    <details class="math-details" id="sol-helper" hidden>
+      <summary>Calculer le courant à partir de mon onduleur</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="sol-inv-watts">Watts continus de l’onduleur</label>
+          <input type="number" class="input-plain" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="p. ex. 3000">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-eff">Rendement de l’onduleur</label>
+          <input type="number" class="input-plain" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="p. ex. 0.9">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-min">Tension minimale de la batterie</label>
+          <input type="number" class="input-plain" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="p. ex. 10.5">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="sol-helper-apply">Utiliser ce courant</button>
+      <p class="hint">Nous divisons par la tension MINIMALE de la batterie, pas par les 12 ou 24 V nominaux. L’onduleur doit livrer sa pleine puissance même quand le parc a chuté, et c’est justement là que le courant — et la chute — est au pire.</p>
+    </details>
+
+    <div class="field">
+      <label class="field-label" for="sol-feet">Distance à l’aller</label>
+      <div class="input-unit">
+        <input type="number" id="sol-feet" inputmode="decimal" min="0" step="any" placeholder="p. ex. 20" required>
+        <span class="unit">ft</span>
+      </div>
+      <p class="hint">Mesurez la distance à l’aller seulement. Nous la doublons, parce que le courant part et revient.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Conducteur</label>
+      <div class="seg" role="group" aria-label="Matériau du conducteur">
+        <button type="button" class="seg-btn active" data-material="cu">Cuivre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminium</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-target">Cible de chute de tension</label>
+      <div class="input-unit">
+        <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
+        <span class="unit">%</span>
+      </div>
+      <p class="hint" id="sol-target-hint"></p>
+      <p class="hint">Le nombre affiché est un point de départ courant, pas une exigence du code. Remplacez-le par celui que votre conception exige.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Trouver le calibre</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <div id="sol-cautions"></div>
+    <details class="math-details">
+      <summary>Comment nous avons calculé</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <section class="card explainer framed-explainer">
+    <h2>Pourquoi le câblage solaire diffère du câblage résidentiel</h2>
+    <h3>1. La tension est minuscule, donc la marge aussi</h3>
+    <p>3% de 240 V donne 7.2 V — une bonne marge. 3% de 12 V donne 0.36 V. Il n’y a aucune marge à basse tension; la pratique solaire vise donc plus serré que la convention des circuits de dérivation : environ 2% sur les circuits de panneaux, et encore moins entre la batterie et l’onduleur.</p>
+    <h3>2. La chute de tension du champ réduit le rendement</h3>
+    <p>Chaque volt perdu dans le conducteur est un volt qui n’atteint jamais le régulateur. Dans un système à batterie, cette perte réduit aussi la marge avant le déclenchement de la coupure basse tension.</p>
+
+    <h2>Utilisez le bon courant, pas celui de la plaque</h2>
+    <p>Pour le trajet des panneaux au régulateur, le courant qui compte est l’Imp à Vmp du champ — le courant au point de puissance maximale — et non le courant de court-circuit ni une valeur recalculée à partir de la puissance nominale du panneau et de la tension nominale. La tension nominale le sous-estime.</p>
+    <p>Le calculateur détermine le courant de chaque circuit au lieu de vous demander de le calculer, car c’est là que la plupart des calculs manuels dérapent.</p>
+
+    <h2>Ce que cette page couvre — et ne couvre pas</h2>
+    <p>Cette page porte sur le trajet des panneaux au régulateur.</p>
+    <p>Pour le trajet du régulateur à la batterie, dimensionnez selon la sortie maximale du régulateur, non son entrée. Pour le trajet de la batterie à l’onduleur, utilisez l’entrée DC continue maximale au seuil de coupure basse tension. La tension nominale sous-estime ce courant, car l’onduleur doit encore livrer sa puissance nominale quand le parc a baissé; sur un parc de 12 V qui coupe à 10.5 V, cela représente environ 14% de courant en plus avant même de compter le rendement de l’onduleur. Pour ces trajets, utilisez le <a class="inline-link" href="/solar-battery-wire-size/">calculateur de calibre solaire et batterie</a> — le même moteur de calcul pour les trois circuits.</p>
+    <p>Aucune des deux pages ne couvre la sortie AC d’un onduleur. Il s’agit d’un travail ordinaire de circuit de dérivation : <a class="inline-link" href="/">Chute de tension</a> et <a class="inline-link" href="/ampacity-check/">Vérification du courant admissible</a>.</p>
+
+    <h2>Une note franche sur les cibles</h2>
+    <p>Les cibles de chute utilisées par cet outil sont des points de départ issus de la pratique solaire courante, non des exigences du code. Aucune règle du code n’impose 2%. Le fabricant de votre équipement peut exiger une valeur plus serrée, et sa valeur l’emporte. L’outil affiche la cible utilisée pour que vous puissiez la modifier en connaissance de cause plutôt que de l’accepter sans le savoir.</p>
+
+    <h2>Le courant admissible est une autre question</h2>
+    <p>Cet outil dimensionne le conducteur selon la chute de tension. Le conducteur doit aussi être homologué pour transporter le courant sans surchauffer, ce qui exige un autre calcul et d’autres tableaux. À l’extérieur, dans un conduit et au soleil, les facteurs de correction comptent. Vérifiez-les : <a class="inline-link" href="/ampacity-check/">Vérification du courant admissible</a>.</p>
+    <p>Si le résultat dépasse la plage, l’outil le dit clairement au lieu de retourner le plus gros conducteur qu’il connaît.</p>
+    <p>Vous voulez savoir pourquoi faire confiance à ce résultat? <a class="inline-link" href="/how-we-verify/">Voyez comment VoltDrop vérifie ses chiffres</a>.</p>
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="solar-wire-faq-heading">
+    <h2 id="solar-wire-faq-heading">Questions fréquentes</h2>
+    <dl>
+      <div>
+        <dt>Quel calibre de conducteur faut-il pour mes panneaux solaires?</dt>
+        <dd>Cela dépend du courant du champ au point de puissance maximale, de la distance aller simple jusqu’au régulateur et de la chute de tension que vous acceptez de perdre. Entrez ces valeurs et l’outil dimensionnera le conducteur. Aucune réponse unique ne convient à tous les champs.</dd>
+      </div>
+      <div>
+        <dt>Quelle chute de tension est acceptable pour une installation solaire?</dt>
+        <dd>La pratique courante vise environ 2% sur les circuits de panneaux et encore moins entre la batterie et l’onduleur — plus serré que la convention de 3% des circuits de dérivation, car à 12 ou 24 volts la marge est très faible. Ce sont des conventions, non des exigences du code.</dd>
+      </div>
+      <div>
+        <dt>Pourquoi une installation solaire exige-t-elle un conducteur plus gros que prévu?</dt>
+        <dd>Parce que la tension est basse. La même puissance à 12 V tire vingt fois le courant qu’elle tirerait à 240 V, et la chute de tension augmente avec le courant.</dd>
+      </div>
+      <div>
+        <dt>Dois-je utiliser le courant de court-circuit du panneau?</dt>
+        <dd>Pas pour la chute de tension. Utilisez le courant au point de puissance maximale (Imp), celui que le champ fournit réellement en fonctionnement. Le courant de court-circuit sert notamment au dimensionnement de la protection contre les surintensités.</dd>
+      </div>
+      <div>
+        <dt>Cet outil dimensionne-t-il le conducteur de ma batterie à mon onduleur?</dt>
+        <dd>Pas sur cette page. Ce trajet se dimensionne autrement, selon l’entrée DC continue maximale au seuil de coupure basse tension. Utilisez le calculateur solaire et batterie complet.</dd>
+      </div>
+      <div>
+        <dt>Cet outil vérifie-t-il le courant admissible?</dt>
+        <dd>Non. Ce calcul porte seulement sur la chute de tension. Le conducteur doit aussi être homologué pour transporter le courant, y compris toute correction liée à la température et au mode d’installation.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quel calibre de conducteur faut-il pour mes panneaux solaires?","acceptedAnswer":{"@type":"Answer","text":"Cela dépend du courant du champ au point de puissance maximale, de la distance aller simple jusqu’au régulateur et de la chute de tension que vous acceptez de perdre. Entrez ces valeurs et l’outil dimensionnera le conducteur. Aucune réponse unique ne convient à tous les champs."}},{"@type":"Question","name":"Quelle chute de tension est acceptable pour une installation solaire?","acceptedAnswer":{"@type":"Answer","text":"La pratique courante vise environ 2% sur les circuits de panneaux et encore moins entre la batterie et l’onduleur — plus serré que la convention de 3% des circuits de dérivation, car à 12 ou 24 volts la marge est très faible. Ce sont des conventions, non des exigences du code."}},{"@type":"Question","name":"Pourquoi une installation solaire exige-t-elle un conducteur plus gros que prévu?","acceptedAnswer":{"@type":"Answer","text":"Parce que la tension est basse. La même puissance à 12 V tire vingt fois le courant qu’elle tirerait à 240 V, et la chute de tension augmente avec le courant."}},{"@type":"Question","name":"Dois-je utiliser le courant de court-circuit du panneau?","acceptedAnswer":{"@type":"Answer","text":"Pas pour la chute de tension. Utilisez le courant au point de puissance maximale (Imp), celui que le champ fournit réellement en fonctionnement. Le courant de court-circuit sert notamment au dimensionnement de la protection contre les surintensités."}},{"@type":"Question","name":"Cet outil dimensionne-t-il le conducteur de ma batterie à mon onduleur?","acceptedAnswer":{"@type":"Answer","text":"Pas sur cette page. Ce trajet se dimensionne autrement, selon l’entrée DC continue maximale au seuil de coupure basse tension. Utilisez le calculateur solaire et batterie complet."}},{"@type":"Question","name":"Cet outil vérifie-t-il le courant admissible?","acceptedAnswer":{"@type":"Answer","text":"Non. Ce calcul porte seulement sur la chute de tension. Le conducteur doit aussi être homologué pour transporter le courant, y compris toute correction liée à la température et au mode d’installation."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/how-we-verify/">Notre méthode de vérification</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=e1f07ce4f0"></script>
+<script src="/assets/ca-fr/solar.js?v=ff0fa6b32f"></script>
+</body>
+</html>

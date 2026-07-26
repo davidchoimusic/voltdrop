@@ -270,6 +270,16 @@ const PAGES = [
     descriptionKey: 'pages.us.power.description',
   },
   {
+    dir: 'ohms-law',
+    ldNameKey: 'pages.us.ohmsLaw.ldName',
+    tool: 'power',
+    script: 'power.js',
+    main: 'partials/ohms-law-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.ohmsLaw.title',
+    descriptionKey: 'pages.us.ohmsLaw.description',
+  },
+  {
     dir: 'box-fill',
     ldNameKey: 'pages.us.boxFill.ldName',
     tool: 'boxfill',
@@ -286,6 +296,16 @@ const PAGES = [
     main: 'partials/solar-main.html',
     titleKey: 'pages.us.solar.title',
     descriptionKey: 'pages.us.solar.description',
+  },
+  {
+    dir: 'solar-wire-size-calculator',
+    ldNameKey: 'pages.us.solarWireSize.ldName',
+    tool: 'solar',
+    script: 'solar.js',
+    main: 'partials/solar-wire-size-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.solarWireSize.title',
+    descriptionKey: 'pages.us.solarWireSize.description',
   },
   {
     dir: 'landscape-lighting-calculator',
@@ -456,6 +476,34 @@ const writeEditionPage = (edition, dir, html) => {
   console.log(`built ${output}`);
 };
 
+const assertVisibleFaq = (html, label) => {
+  const faqScripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => {
+      try {
+        return JSON.parse(match[1]);
+      } catch (error) {
+        throw new Error(`Invalid JSON-LD in ${label}: ${error.message}`);
+      }
+    })
+    .filter((entry) => entry?.['@type'] === 'FAQPage');
+  if (faqScripts.length !== 1) {
+    throw new Error(`${label} must contain exactly one FAQPage JSON-LD block`);
+  }
+  const visibleText = html
+    .replace(/<script[\s\S]*?<\/script>/g, ' ')
+    .replace(/<style[\s\S]*?<\/style>/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ');
+  for (const entry of faqScripts[0].mainEntity ?? []) {
+    const question = entry?.name;
+    const answer = entry?.acceptedAnswer?.text;
+    if (typeof question !== 'string' || typeof answer !== 'string'
+        || !visibleText.includes(question) || !visibleText.includes(answer)) {
+      throw new Error(`FAQ structured data is not visible in ${label}: ${question ?? 'missing question'}`);
+    }
+  }
+};
+
 for (const edition of EDITIONS) {
   if (!edition.catalog) throw new Error(`Missing locale catalog: i18n/strings/${edition.locale}.json`);
   const assets = makeAssets(edition);
@@ -547,6 +595,7 @@ for (const edition of EDITIONS) {
       html = html.replace(`class="tool-link" data-tool="${p.tool}"`, `class="tool-link active" data-tool="${p.tool}"`);
     }
 
+    if (p.visibleFaq) assertVisibleFaq(html, `${edition.id}/${p.dir}`);
     writeEditionPage(edition, p.dir, html);
   }
 

@@ -33,6 +33,8 @@ const templateFiles = [
   'partials/landscape-main.html',
   'partials/solar-main.html',
   'partials/power-main.html',
+  'partials/ohms-law-main.html',
+  'partials/solar-wire-size-main.html',
   'partials/fragments/power-form.html',
   'partials/fragments/solar-form.html',
   'partials/fragments/verify-link.html',
@@ -64,7 +66,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'boxFill', 'landscape', 'solar', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'ohmsLaw', 'boxFill', 'landscape', 'solar', 'solarWireSize', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {
@@ -2235,6 +2237,12 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
     },
   };
   for (const key of [...keys].sort()) {
+    const englishValue = valueAt(english, key);
+    const packOwned = Object.values(packs).some((pack) => typeof pack.strings?.[key] === 'string');
+    if (englishValue === undefined && packOwned) continue;
+    if (typeof englishValue !== 'string') {
+      throw new Error(`Missing English catalog string discovered from templates: ${key}`);
+    }
     catalog[key] = legacyExact[locale]?.[key]
       ?? reviewedPatterns[locale]?.[key]
       ?? reviewedRuntime[locale]?.[key]
@@ -2247,7 +2255,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       ?? landscapeExact[locale]?.[key]
       ?? guideExact[locale]?.[key]
       ?? words[locale]?.[key]
-      ?? translate(valueAt(english, key), locale);
+      ?? translate(englishValue, locale);
   }
   /* Carry forward any key that exists in the committed catalog but that this
      generator does not know how to produce. Dropping them looked like harmless
