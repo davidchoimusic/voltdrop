@@ -185,6 +185,7 @@ function solveTree(tree) {
     .map((n) => ({
       id: n.id,
       ft: n.ft,
+      branch: n.branch,
       fixtures: n.loads.length,
       amps: (n.loads ?? []).reduce((s, l) => s + (Number(l.amps) || 0), 0),
       volts: volts.get(n.id),
@@ -288,7 +289,42 @@ function buildHub(fixtures, cm, hubFt) {
   return { nodes, edges };
 }
 
-/* All three layouts from one fixture table.
+
+/* T / SPLIT: one trunk out to a split point, then TWO branches running opposite
+   ways from it. This is the layout that could not be derived from a single
+   distance column — the tool has to be told which side of the split each fixture
+   is on, because "40 ft from the transformer" says nothing about direction. So
+   the fixture rows carry a branch (A or B) and their distance is measured along
+   that branch FROM THE SPLIT, not from the transformer.
+
+   Each branch is its own daisy chain hanging off the split, which is why the tree
+   engine needed no change to support it: the split is just another node.
+
+   Both branches share the trunk, so the trunk carries every fixture's current -
+   the same reason a mid-path hub does well. The difference from a hub is that a
+   branch is tapped in turn (like a daisy chain) rather than given its own spoke. */
+function buildTSplit(fixtures, cm, trunkFt) {
+  const nodes = [{ id: SOURCE_ID, loads: [] }, { id: 'split', loads: [] }];
+  const edges = [{ from: SOURCE_ID, to: 'split', lengthFt: Number(trunkFt) || 0, cm }];
+  let index = 0;
+  for (const branch of ['a', 'b']) {
+    const onBranch = fixtures.filter((f) => (f.branch ?? 'a') === branch);
+    if (!onBranch.length) continue;
+    let prevId = 'split';
+    let prevFt = 0;
+    for (const tap of groupByDistance(onBranch)) {
+      index += 1;
+      const id = String(index);
+      nodes.push({ id, ft: tap.ft, branch, loads: tap.loads });
+      edges.push({ from: prevId, to: id, lengthFt: tap.ft - prevFt, cm });
+      prevId = id;
+      prevFt = tap.ft;
+    }
+  }
+  return { nodes, edges };
+}
+
+/* All four layouts from one fixture table.
 
    THE ASSUMPTION, stated because the comparison depends on it: the fixtures run
    along ONE path and each distance is measured along that path. That is the
@@ -296,13 +332,37 @@ function buildHub(fixtures, cm, hubFt) {
    only one where these three layouts are genuinely comparable from a single
    column of numbers. Fixtures scattered in different directions need their own
    real geometry, and this tool does not pretend to know it. */
-function compareLayouts(fixtures, cm, hubFt, sourceVolts, k) {
+function branchToAbsolute(fixtures, trunkFt) {
+  const trunk = Number(trunkFt) || 0;
+  return fixtures.map((f) => ({
+    ...f,
+    ft: (f.branch ?? 'a') === 'b' ? trunk + f.ft : Math.abs(trunk - f.ft),
+  }));
+}
+
+function compareLayouts(fixtures, cm, hubFt, sourceVolts, k, distancesAreBranchRelative = false) {
   const solve = (tree) => solveTree({ sourceVolts, k, ...tree });
+  // The three path layouts always work in absolute distance from the transformer.
+  const along = distancesAreBranchRelative ? branchToAbsolute(fixtures, hubFt) : fixtures;
   return {
-    daisy: solve(buildDaisy(fixtures, cm)),
-    hub: solve(buildHub(fixtures, cm, hubFt)),
-    star: solve(buildStar(fixtures, cm)),
+    daisy: solve(buildDaisy(along, cm)),
+    tsplit: solve(buildTSplit(
+      distancesAreBranchRelative ? fixtures : absoluteToBranch(fixtures, hubFt), cm, hubFt)),
+    hub: solve(buildHub(along, cm, hubFt)),
+    star: solve(buildStar(along, cm)),
   };
+}
+
+/* And the mirror image: when the user is NOT in T mode their distances are
+   absolute, so the T row has to be expressed relative to the split — fixtures
+   nearer than the split go on branch A, the rest on branch B. */
+function absoluteToBranch(fixtures, trunkFt) {
+  const trunk = Number(trunkFt) || 0;
+  return fixtures.map((f) => ({
+    ...f,
+    branch: f.ft < trunk ? 'a' : 'b',
+    ft: Math.abs(f.ft - trunk),
+  }));
 }
 
 /* This engine is a NAMEPLATE-CURRENT calculation: each fixture's current is
@@ -351,8 +411,12 @@ const LS_TEXT = {
   fixtureCount: '{count} luminarias',
   oneFixture: '1 luminaria',
   tapLine: '{label} — {count}',
+  tapLineBranch: '{branch} {label} — {count}',
+  branchAShort: 'A',
+  branchBShort: 'B',
   tapVolts: '{volts} V  ({percent}% de caída)',
   layoutDaisy: 'En cadena',
+  layoutTsplit: 'T / derivación',
   layoutHub: 'Hub',
   layoutStar: 'Estrella',
   yoursSuffix: ' — el suyo',
@@ -371,10 +435,15 @@ const LS_TEXT = {
   hubSuggestedNote: 'No ha fijado una distancia de hub, así que la fila del hub se calcula en el punto medio de su recorrido, que suele estar cerca del mejor sitio. Fije su propia distancia para comparar otra.',
   noResultDash: '—',
   tapsHeading: 'Tensión en cada luminaria',
-  compareHeading: 'Las mismas luminarias, cableadas de tres maneras',
+  compareHeading: 'Las mismas luminarias, cableadas de cuatro maneras',
   assumption: 'Esta comparación supone que sus luminarias siguen un solo recorrido y que todas las distancias se miden a lo largo de él: un arriate, un paseo o una entrada. Las luminarias repartidas en direcciones distintas tienen su propia geometría, que esta herramienta no puede conocer.',
   hubIsStar: 'Un hub a 0 ft es el mismo circuito que una estrella, así que esas dos filas coinciden.',
   hintDaisy: 'Un solo cable, derivando cada luminaria por orden. Las distancias se miden a lo largo del cable.',
+  splitDistanceLabel: 'La derivación está a esta distancia del transformador',
+  splitDistanceHint: 'Hasta dónde llega el tronco antes de dividirse en dos ramales. Después, la distancia de cada luminaria se mide a lo largo de su propio ramal, desde esa derivación.',
+  hubDistanceLabel: 'El hub está a esta distancia del recorrido',
+  hubDistanceHint: 'Hasta dónde llega el tronco antes de repartirse. Un hub a 0 ft es el mismo circuito que una estrella.',
+  hintTsplit: 'Un tronco hasta una derivación y de ahí dos ramales en sentidos opuestos. Las distancias se miden a lo largo de cada ramal DESDE LA DERIVACIÓN, no desde el transformador.',
   hintHub: 'Un tronco hasta un hub y de ahí un ramal separado a cada luminaria.',
   hintStar: 'Un cable separado desde el transformador hasta cada luminaria.',
   cautionUnityPf: 'Los vatios por sí solos no dan la corriente. Al no introducir factor de potencia hemos supuesto 1.0, que es el mejor caso: la corriente real es mayor y también la caída de tensión real. Use los amperios nominales o los VA de la luminaria para obtener una respuesta firme.',
@@ -420,13 +489,22 @@ WIRE_TABLE.forEach(([label], index) => {
 sizeSelect.value = '3'; // 12 AWG — the common landscape cable
 
 function layoutHint() {
+  if (layout === 'tsplit') return LS_TEXT.hintTsplit;
   if (layout === 'hub') return LS_TEXT.hintHub;
   if (layout === 'star') return LS_TEXT.hintStar;
   return LS_TEXT.hintDaisy;
 }
 
 function refreshLayoutUi() {
-  $('ls-field-hub').hidden = layout !== 'hub';
+  // The trunk field serves the hub AND the T split — both need a distance out to
+  // the point where the run divides, so it is one input with two labels.
+  const needsTrunk = layout === 'hub' || layout === 'tsplit';
+  $('ls-field-hub').hidden = !needsTrunk;
+  $('ls-hub-label').textContent = layout === 'tsplit' ? LS_TEXT.splitDistanceLabel : LS_TEXT.hubDistanceLabel;
+  $('ls-hub-hint').textContent = layout === 'tsplit' ? LS_TEXT.splitDistanceHint : LS_TEXT.hubDistanceHint;
+  // One class drives the branch column so the header and every row stay in step.
+  $('ls-form').classList.toggle('is-tsplit', layout === 'tsplit');
+  document.querySelectorAll('.ls-branch-col').forEach((node) => { node.hidden = layout !== 'tsplit'; });
   $('ls-layout-hint').textContent = layoutHint();
 }
 
@@ -449,6 +527,7 @@ function readRows() {
     .map((row) => ({
       ft: Number(row.querySelector('.ls-ft').value),
       load: Number(row.querySelector('.ls-load').value),
+      branch: row.querySelector('.ls-branch')?.value ?? 'a',
       unit,
       pf,
       ratedVolts,
@@ -461,6 +540,7 @@ function addRow(ft = '', load = '') {
   fragment.querySelector('.ls-ft').value = ft;
   fragment.querySelector('.ls-load').value = load;
   $('ls-rows').appendChild(fragment);
+  document.querySelectorAll('.ls-branch-col').forEach((node) => { node.hidden = layout !== 'tsplit'; });
   updateRemoveButtons();
 }
 
@@ -556,7 +636,7 @@ function calc() {
 
   let all;
   try {
-    all = compareLayouts(fixtures, cm, hubFt, sourceVolts, k);
+    all = compareLayouts(fixtures, cm, hubFt, sourceVolts, k, layout === 'tsplit');
   } catch (error) {
     console.error('landscape engine rejected the input:', error);
     $('verdict-badge').textContent = LS_TEXT.badgeCheck;
@@ -613,7 +693,12 @@ function calc() {
       ? LS_TEXT.oneFixture
       : vdFormat(LS_TEXT.fixtureCount, { count: tap.fixtures });
     const row = el('li', out ? 'out-of-range' : undefined);
-    row.appendChild(el('span', undefined, vdFormat(LS_TEXT.tapLine, { label: feetLabel(tap.ft), count })));
+    const branchTag = tap.branch
+      ? (tap.branch === 'b' ? LS_TEXT.branchBShort : LS_TEXT.branchAShort)
+      : null;
+    row.appendChild(el('span', undefined, branchTag
+      ? vdFormat(LS_TEXT.tapLineBranch, { branch: branchTag, label: feetLabel(tap.ft), count })
+      : vdFormat(LS_TEXT.tapLine, { label: feetLabel(tap.ft), count })));
     row.appendChild(el('span', undefined, vdFormat(LS_TEXT.tapVolts, {
       volts: tap.volts.toFixed(2), percent: tap.percent.toFixed(1),
     })));
@@ -622,6 +707,7 @@ function calc() {
 
   const names = {
     daisy: LS_TEXT.layoutDaisy,
+    tsplit: LS_TEXT.layoutTsplit,
     hub: vdFormat(hubSet ? LS_TEXT.hubAtFt : LS_TEXT.hubSuggested, { feet: hubFt.toFixed(0) }),
     star: LS_TEXT.layoutStar,
   };
@@ -636,7 +722,7 @@ function calc() {
   head.appendChild(headRow);
   table.appendChild(head);
   const body = document.createElement('tbody');
-  for (const key of ['daisy', 'hub', 'star']) {
+  for (const key of ['daisy', 'tsplit', 'hub', 'star']) {
     const result = all[key];
     const row = el('tr', key === layout ? 'is-yours' : undefined);
     row.appendChild(el('td', undefined, key === layout ? names[key] + LS_TEXT.yoursSuffix : names[key]));

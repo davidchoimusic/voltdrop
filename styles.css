@@ -673,6 +673,70 @@ input, select, .big-number, .result-cell .v {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
+/* Repeater controls, shared by conduit fill, box fill and landscape lighting.
+   These lived duplicated (byte-identical) inside two partials' own <style> blocks,
+   which meant a third tool using the same class names silently got NO styling —
+   exactly what happened to landscape lighting. Promoted here so the classes and
+   their looks travel together. No conflicting rule existed, and partial styles
+   still load after this file, so nothing can regress. */
+.remove-size-btn,
+.add-size-btn {
+  min-height: 48px;
+  font-family: inherit;
+  font-weight: 750;
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.remove-size-btn { width: 48px; padding: 0; font-size: 28px; line-height: 1; }
+
+.add-size-btn {
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: 14px;
+}
+
+.remove-size-btn:hover,
+.add-size-btn:hover { border-color: var(--color-accent); }
+
+.remove-size-btn:focus-visible,
+.add-size-btn:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+
+.remove-size-btn:active,
+.add-size-btn:active { transform: translateY(1px); }
+
+.remove-size-btn:disabled,
+.add-size-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Tall input for a field that carries no unit chip. Mirrors `.input-unit input`
+   so a tool never has to restyle a number box — and so a field without a unit
+   cannot silently render as the browser default. */
+.input-plain {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  border: 2px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+}
+
+.input-plain:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.input-plain::placeholder { color: #7a8087; font-weight: 500; }
+
 select {
   width: 100%;
   min-height: 52px;

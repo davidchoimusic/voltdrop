@@ -2,7 +2,7 @@
 // reviewed electrical phrase bank. This is intentionally deterministic:
 // decimals, units, citations, designations, HTML, and brand tokens are masked
 // before translation and restored byte-for-byte afterward.
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 const english = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
@@ -15,6 +15,10 @@ const guideTranslations = JSON.parse(readFileSync('i18n/guide-translations.json'
 // is currently stale and must not be run.
 const landscapeTranslations = JSON.parse(readFileSync('i18n/landscape-translations.json', 'utf8'));
 const solarTranslations = JSON.parse(readFileSync('i18n/solar-translations.json', 'utf8'));
+// Reviewed values recovered from the committed catalogs (see the file's _meta).
+// Without this the generator overwrites ~96 good translations per locale with
+// mechanical half-English, because its phrase banks were never updated to match.
+const reviewedLegacy = JSON.parse(readFileSync('i18n/reviewed-legacy.json', 'utf8'));
 const existingSafetyRegistry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
 const packs = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -73,6 +77,11 @@ for (const [job, translations] of Object.entries(guideTranslations)) {
   if (job.startsWith('us-zh-Hans-') || job.startsWith('ca-zh-Hans-')) {
     Object.assign(guideExact['zh-Hans'], translations);
   }
+}
+
+const legacyExact = { es: {}, 'fr-CA': {}, 'zh-Hans': {} };
+for (const locale of Object.keys(legacyExact)) {
+  Object.assign(legacyExact[locale], reviewedLegacy[locale] ?? {});
 }
 
 const landscapeExact = { es: {}, 'fr-CA': {}, 'zh-Hans': {} };
@@ -2096,6 +2105,42 @@ function translate(source, locale) {
   return value;
 }
 
+
+/* ---------------------------------------------------------------- the guard --
+   This generator was, until 2026-07-26, silently destructive: it rewrote ~96
+   reviewed translations per locale and ~40 Canadian pack values into mechanical
+   half-English, because its phrase banks were never updated to match the
+   catalogs. Nothing detected that. A warning in PROJECT_CONTEXT.md is not a
+   mechanism, so this is one.
+
+   Rule: a value that already exists in a committed catalog may not be CHANGED by
+   a generator run. New keys are fine. Removals are reported. To change a reviewed
+   value on purpose, edit i18n/reviewed-legacy.json (or the tool's own reviewed
+   bank) — the place the value actually comes from — not the generated file.
+
+   Set VD_ALLOW_LOCALE_OVERWRITE=1 to override, which should essentially never
+   happen and will print exactly what it is about to destroy. */
+const guardExisting = {};
+for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
+  const file = `i18n/strings/${locale}.json`;
+  guardExisting[locale] = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {};
+}
+const guardPacks = {};
+for (const country of ['us', 'ca']) {
+  guardPacks[country] = JSON.parse(readFileSync(`i18n/country-packs/${country}.json`, 'utf8'));
+}
+const guardViolations = [];
+const guardCheck = (label, existing, next) => {
+  for (const [key, value] of Object.entries(next)) {
+    if (key === '_meta') continue;
+    const was = existing[key];
+    if (typeof was === 'string' && was !== value) {
+      guardViolations.push({ label, key, was, now: value });
+    }
+  }
+};
+
+const pendingCatalogs = {};
 for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
   const catalog = {
     _meta: {
@@ -2103,11 +2148,18 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       generatedBy: 'tools/generate-locales.mjs',
       terminology: 'i18n/glossary.json',
       numberFormat: 'Source periods and unit formatting are preserved intentionally.',
-      safetyCriticalKeys: safetyKeys,
+      /* PRESERVED, not recomputed. This list is a reviewed artifact: the
+         back-translation report pipeline aligns its rows to it, and
+         tools/apply-tool-translations.mjs maintains it when a tool adds safety
+         copy. Recomputing it from an English keyword scan grew it 215 -> 315 and
+         broke the report on ampacity.passBadge. Same lesson as the values and the
+         pack strings: this generator must not clobber reviewed state. */
+      safetyCriticalKeys: guardExisting[locale]?._meta?.safetyCriticalKeys ?? safetyKeys,
     },
   };
   for (const key of [...keys].sort()) {
-    catalog[key] = reviewedPatterns[locale]?.[key]
+    catalog[key] = legacyExact[locale]?.[key]
+      ?? reviewedPatterns[locale]?.[key]
       ?? reviewedRuntime[locale]?.[key]
       ?? reviewedMeta[locale]?.[key]
       ?? reviewedSafety[locale]?.[key]
@@ -2120,25 +2172,86 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       ?? words[locale]?.[key]
       ?? translate(valueAt(english, key), locale);
   }
+  /* Carry forward any key that exists in the committed catalog but that this
+     generator does not know how to produce. Dropping them looked like harmless
+     cleanup — it is not: 44 such keys exist, and the back-translation report
+     pipeline reads some of them (it died on ampacity.passBadge). A generator
+     should no more silently DELETE a reviewed translation than overwrite one.
+     Pruning a genuinely dead key stays a deliberate, separate act. */
+  const carried = [];
+  for (const [key, value] of Object.entries(guardExisting[locale])) {
+    if (key === '_meta') continue;
+    if (!(key in catalog)) { catalog[key] = value; carried.push(key); }
+  }
+  if (carried.length) console.log(`${locale}: carried forward ${carried.length} key(s) this generator cannot produce`);
+
+  guardCheck(`strings/${locale}`, guardExisting[locale], catalog);
+  pendingCatalogs[locale] = Object.fromEntries(
+    Object.entries(catalog).sort(([a], [b]) => (a === '_meta' ? -1 : b === '_meta' ? 1 : a.localeCompare(b))),
+  );
+}
+
+if (guardViolations.length) {
+  console.error(`\nREFUSING TO WRITE — this run would overwrite ${guardViolations.length} reviewed value(s).`);
+  console.error(`This is the failure that silently mangled five editions. Nothing has been written.\n`);
+  for (const v of guardViolations.slice(0, 12)) {
+    console.error(`  ${v.label} ${v.key}`);
+    console.error(`    reviewed: ${JSON.stringify(v.was).slice(0, 120)}`);
+    console.error(`    would be: ${JSON.stringify(v.now).slice(0, 120)}`);
+  }
+  if (guardViolations.length > 12) console.error(`  … and ${guardViolations.length - 12} more`);
+  console.error(`\nTo change a reviewed value on purpose, edit i18n/reviewed-legacy.json`);
+  console.error(`or the tool's own reviewed bank — not the generated catalog.`);
+  if (process.env.VD_ALLOW_LOCALE_OVERWRITE !== '1') process.exit(1);
+  console.error(`\nVD_ALLOW_LOCALE_OVERWRITE=1 — proceeding anyway.`);
+}
+
+for (const [locale, catalog] of Object.entries(pendingCatalogs)) {
   writeFileSync(`i18n/strings/${locale}.json`, `${JSON.stringify(catalog, null, 2)}\n`);
 }
 
+/* keys is PRESERVED for the same reason as _meta.safetyCriticalKeys: the
+   back-translation pipeline aligns to it, and recomputing from an English keyword
+   scan silently changed 296 -> 315 and broke the report. */
+const existingSafetyKeys = existingSafetyRegistry.keys ?? safetyKeys;
 writeFileSync('i18n/safety-critical.json', `${JSON.stringify({
   policy: 'Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review. Selected high-exposure non-safety copy is listed separately for the same sealed review.',
-  keys: safetyKeys,
+  keys: existingSafetyKeys,
   extraReviewKeys: existingSafetyRegistry.extraReviewKeys,
 }, null, 2)}\n`);
 
+/* Only the locales a real edition actually serves for that country. Generating
+   all three produced ~30 mechanical Spanish strings inside the CANADIAN pack for
+   a /ca-es/ edition that does not exist — unused, but it is exactly the kind of
+   machine output that should not accumulate in a reviewed file. */
+const PACK_LOCALES = { us: ['es', 'zh-Hans'], ca: ['fr-CA', 'zh-Hans'] };
 for (const [country, pack] of Object.entries(packs)) {
+  const existingLocalized = pack.localizedStrings ?? {};
   pack.localizedStrings = {};
-  for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
+  for (const locale of PACK_LOCALES[country]) {
     pack.localizedStrings[locale] = Object.fromEntries(
       Object.entries(pack.strings).map(([key, value]) => [
         key,
-        packKeyedExact[locale]?.[`${country}.${key}`]
+        // Reviewed pack values win over anything mechanical. Without this the
+        // generator re-translated correct Canadian metadata into stale wording.
+        reviewedLegacy.packs?.[country]?.[locale]?.[key]
+          ?? packKeyedExact[locale]?.[`${country}.${key}`]
           ?? translate(value, locale),
       ]),
     );
+  }
+  for (const [locale, values] of Object.entries(existingLocalized)) {
+    pack.localizedStrings[locale] = { ...values, ...(pack.localizedStrings[locale] ?? {}) };
+  }
+  for (const locale of Object.keys(pack.localizedStrings)) {
+    guardCheck(`packs/${country}/${locale}`,
+      guardPacks[country].localizedStrings?.[locale] ?? {},
+      pack.localizedStrings[locale]);
+  }
+  if (guardViolations.length && process.env.VD_ALLOW_LOCALE_OVERWRITE !== '1') {
+    console.error(`\nREFUSING TO WRITE country packs — ${guardViolations.length} reviewed value(s) would change.`);
+    for (const v of guardViolations.slice(0, 8)) console.error(`  ${v.label} ${v.key}`);
+    process.exit(1);
   }
   writeFileSync(`i18n/country-packs/${country}.json`, `${JSON.stringify(pack, null, 2)}\n`);
 }

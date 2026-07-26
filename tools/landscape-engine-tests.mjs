@@ -19,12 +19,13 @@ const src = whole.slice(0, whole.indexOf(MARKER));
 // Expose the top-level declarations. The engine half is DOM-free by design.
 const api = Function(`"use strict";
 ${src}
-return { WIRE_TABLE, K_FACTOR, SOURCE_ID, fixtureAmps, solveTree, groupByDistance,
-         buildDaisy, buildStar, buildHub, compareLayouts, nameplateCaution };`)();
+return { WIRE_TABLE, K_FACTOR, SOURCE_ID, fixtureAmps, solveTree, groupByDistance, branchToAbsolute, absoluteToBranch,
+         buildDaisy, buildStar, buildHub, buildTSplit, compareLayouts, nameplateCaution };`)();
 
 const {
   WIRE_TABLE, K_FACTOR, fixtureAmps, solveTree,
-  buildDaisy, buildStar, buildHub, compareLayouts, nameplateCaution,
+  buildDaisy, buildStar, buildHub, buildTSplit, compareLayouts, nameplateCaution,
+  branchToAbsolute, absoluteToBranch,
 } = api;
 
 let pass = 0, fail = 0;
@@ -245,6 +246,83 @@ try {
     edges: [{ from: 'source', to: 'a', lengthFt: 10, cm: CM }] });
 } catch { dupIdThrew = true; }
 ok('duplicate node id rejected', dupIdThrew);
+
+console.log('\n--- T/split: two branches off one shared trunk ---');
+// Trunk 40 ft, then 2 fixtures each way at 20 and 40 ft FROM THE SPLIT.
+const tRows = [
+  { ft: 20, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'a' },
+  { ft: 40, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'a' },
+  { ft: 20, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'b' },
+  { ft: 40, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'b' },
+];
+const t = solve(buildTSplit(tRows, CM, 40));
+ok('four taps across the two branches', t.taps.length === 4, String(t.taps.length));
+ok('the trunk carries every fixture', near(t.edgeDrops[0].amps, 4 * (7 / 12)));
+ok('trunk length is the split distance', near(t.edgeDrops[0].lengthFt, 40));
+ok('cable = trunk + both branches', near(t.cableFt, 40 + 40 + 40), String(t.cableFt));
+// Symmetry: the two branches are identical, so their far taps must match exactly.
+const farA = t.taps.filter((x) => x.ft === 40);
+ok('symmetric branches give identical far-tap voltages',
+  farA.length === 2 && near(farA[0].volts, farA[1].volts));
+ok('no tap is below the trunk-only voltage', t.taps.every((x) => x.volts < 12));
+
+/* What a T actually buys, checked rather than assumed. My first guess here was
+   that a T beats a daisy chain outright; it does not, and the reason is worth
+   keeping: a T pays the ENTIRE load over its trunk, while a daisy chain's near
+   segments are short. So for an evenly spaced line the daisy chain can win the
+   worst-case voltage. What the T reliably buys is EVENNESS — both branches are
+   short, so the fixtures sit close together. Same shape as the hub-vs-star
+   surprise: there is no single winner, which is why the tool shows all four. */
+const longDaisy = solve(buildDaisy(
+  [20, 40, 60, 80].map((ft) => fx(ft, 7)), CM));
+ok('T/split spread is far tighter than one long daisy chain',
+  t.spreadVolts < longDaisy.spreadVolts / 2,
+  `${t.spreadVolts} vs ${longDaisy.spreadVolts}`);
+ok('but the shared trunk can cost it the worst-case voltage',
+  t.lowestVolts < longDaisy.lowestVolts,
+  `${t.lowestVolts} vs ${longDaisy.lowestVolts}`);
+
+// All fixtures on one branch must reduce EXACTLY to a daisy chain with a lead-in.
+const oneSided = solve(buildTSplit(
+  [{ ft: 20, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'a' },
+   { ft: 40, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'a' }], CM, 0));
+const plainDaisy = solve(buildDaisy([fx(20, 7), fx(40, 7)], CM));
+ok('one branch with a zero trunk == a plain daisy chain',
+  near(oneSided.lowestVolts, plainDaisy.lowestVolts),
+  `${oneSided.lowestVolts} vs ${plainDaisy.lowestVolts}`);
+ok('missing branch defaults to A rather than throwing',
+  (() => { try { solve(buildTSplit([fx(20, 7)], CM, 10)); return true; } catch { return false; } })());
+
+console.log('\n--- compareLayouts now returns all four ---');
+const four = compareLayouts(layoutRows, CM, 50, V, K);
+ok('four layouts present', ['daisy','tsplit','hub','star'].every((k) => four[k]));
+ok('every layout reports the same total load',
+  ['tsplit','hub','star'].every((k) => near(four[k].totalAmps, four.daisy.totalAmps)));
+
+console.log('\n--- branch <-> absolute conversion is lossless ---');
+/* The comparison table shows all four layouts from one fixture table, but the T
+   measures along each branch from the split while the others measure from the
+   transformer. If these conversions were not exact inverses, the four rows would
+   quietly describe DIFFERENT physical runs and the comparison would be a lie. */
+const abs = [20, 40, 60, 80].map((ft) => fx(ft, 7));
+const TRUNK = 50;
+const roundTrip = branchToAbsolute(absoluteToBranch(abs, TRUNK), TRUNK);
+ok('absolute -> branch -> absolute returns the same positions',
+  abs.every((f, i) => near(f.ft, roundTrip[i].ft)),
+  roundTrip.map((f) => f.ft).join(','));
+ok('fixtures nearer than the split land on branch A',
+  absoluteToBranch(abs, TRUNK).filter((f) => f.branch === 'a').length === 2);
+ok('fixtures beyond the split land on branch B',
+  absoluteToBranch(abs, TRUNK).filter((f) => f.branch === 'b').length === 2);
+const bRel = [
+  { ft: 20, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'a' },
+  { ft: 30, load: 7, unit: 'w', pf: 1, ratedVolts: 12, branch: 'b' },
+];
+ok('branch -> absolute places A back toward the transformer and B beyond it',
+  near(branchToAbsolute(bRel, TRUNK)[0].ft, 30) && near(branchToAbsolute(bRel, TRUNK)[1].ft, 80));
+ok('a comparison from either input describes the same daisy chain',
+  near(compareLayouts(abs, CM, TRUNK, V, K, false).daisy.lowestVolts,
+       compareLayouts(absoluteToBranch(abs, TRUNK), CM, TRUNK, V, K, true).daisy.lowestVolts));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

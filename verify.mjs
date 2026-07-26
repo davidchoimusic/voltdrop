@@ -1641,6 +1641,47 @@ for (const edition of EDITIONS) {
   ok ? pass++ : fail++;
 }
 
+/* ---- Landscape T/split: the layout that needs per-fixture branch assignment.
+   Driven in EVERY edition, because the branch selector is the one control that
+   only appears for this layout — a dead select would otherwise show up as a
+   plausible number rather than an error. */
+for (const edition of EDITIONS) {
+  const generated = editionPath(edition.prefix, 'landscape-lighting-calculator/');
+  const tPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(tPage);
+  const tErrors = [];
+  tPage.on('pageerror', (error) => tErrors.push(String(error)));
+  await tPage.goto(BASE + generated);
+  await tPage.click('button[data-layout="tsplit"]');
+  const branchVisible = await tPage.locator('#ls-branch-heading').isVisible();
+  await tPage.fill('#ls-pf', '1');
+  await tPage.fill('#ls-hub-ft', '40');
+  const tRows = [[20, 7, 'a'], [40, 7, 'a'], [20, 7, 'b'], [40, 7, 'b']];
+  for (let i = 0; i < tRows.length; i++) {
+    if (i > 0) await tPage.click('#ls-add-row');
+    const row = tPage.locator('#ls-rows .fixture-row').nth(i);
+    await row.locator('.ls-ft').fill(String(tRows[i][0]));
+    await row.locator('.ls-load').fill(String(tRows[i][1]));
+    await row.locator('.ls-branch').selectOption(tRows[i][2]);
+  }
+  await tPage.click('#ls-form .calc-btn');
+  await tPage.waitForTimeout(30);
+  const shown = await tPage.evaluate(() => ({
+    value: document.getElementById('big-number')?.textContent?.trim() || '',
+    rows: document.querySelectorAll('#ls-compare tbody tr').length,
+    taps: document.querySelectorAll('#ls-taps li').length,
+  }));
+  // Trunk 40 ft carrying all four, then 20+20 ft per branch: 11.49 V, hand-checked.
+  const value = parseFloat(shown.value);
+  const label = edition.prefix || 'us-en';
+  checkBool(`${label} T/split branch column appears`, branchVisible, String(branchVisible));
+  check(`${label} T/split numeric result`, value, 11.49, 0.01);
+  checkBool(`${label} T/split compares four layouts`, shown.rows === 4, String(shown.rows));
+  checkBool(`${label} T/split lists both branches`, shown.taps === 4, String(shown.taps));
+  checkBool(`${label} T/split has zero page errors`, tErrors.length === 0, tErrors.join(' | '));
+  await tPage.close();
+}
+
 // ---- Landscape: the sealed copies must stay identical to the canonical tables.
 // Deep AND positional: the wire selector picks by INDEX, so a reordered table
 // silently changes what "12 AWG" means. build.mjs enforces this too, so a deploy

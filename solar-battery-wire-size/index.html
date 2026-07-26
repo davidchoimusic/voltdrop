@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Solar & Battery Wire Size Calculator","url":"https://voltdrop.app/solar-battery-wire-size/","description":"Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<link rel="stylesheet" href="/styles.css?v=c57d534d85">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -97,6 +97,7 @@
   .scenario-btn {
     display: block;
     width: 100%;
+    min-height: 52px;
     text-align: left;
     padding: var(--space-3);
     background: var(--color-surface-2);
@@ -117,8 +118,6 @@
     border-left: 3px solid var(--color-hazard);
   }
   .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
-  .target-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); align-items: end; }
-  .target-row input { min-width: 0; }
 </style>
 <main class="main-col">
 
@@ -170,15 +169,15 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="sol-inv-watts">Inverter continuous watts</label>
-          <input type="number" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="e.g. 3000">
+          <input type="number" class="input-plain" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="e.g. 3000">
         </div>
         <div>
           <label class="field-label" for="sol-inv-eff">Inverter efficiency</label>
-          <input type="number" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="e.g. 0.9">
+          <input type="number" class="input-plain" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="e.g. 0.9">
         </div>
         <div>
           <label class="field-label" for="sol-inv-min">Lowest battery voltage</label>
-          <input type="number" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="e.g. 10.5">
+          <input type="number" class="input-plain" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="e.g. 10.5">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="sol-helper-apply">Use this current</button>
@@ -204,7 +203,7 @@
 
     <div class="field">
       <label class="field-label" for="sol-target">Voltage drop target</label>
-      <div class="target-row">
+      <div class="input-unit">
         <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
         <span class="unit">%</span>
       </div>

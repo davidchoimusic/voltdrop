@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Landscape Lighting Calculator","url":"https://voltdrop.app/landscape-lighting-calculator/","description":"Free low-voltage landscape lighting calculator. Several fixtures on one cable, worked out stretch by stretch, with the voltage at every light and three wiring layouts compared. No signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<link rel="stylesheet" href="/styles.css?v=c57d534d85">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -99,6 +99,13 @@
     gap: var(--space-2);
     margin-bottom: var(--space-1);
   }
+  /* The T layout needs one more column per row, for the branch. Driven by a
+     class on the form so the head and every row stay in step. */
+  .is-tsplit .fixture-head,
+  .is-tsplit .fixture-row { grid-template-columns: 1fr 1fr 84px auto; }
+  .ls-branch-col { display: none; }
+  .is-tsplit .ls-branch-col { display: block; }
+  .is-tsplit select.ls-branch-col { min-height: 52px; font-size: 15px; padding-inline: var(--space-2); }
   .fixture-rows { display: flex; flex-direction: column; gap: var(--space-2); }
   .fixture-row {
     display: grid;
@@ -159,7 +166,7 @@
 
   <div class="tool-intro card">
     <h1 class="tool-title">🌿 Landscape Lighting Calculator</h1>
-    <p class="tool-sub">Several fixtures on one cable, not one load at the end. See the voltage at every light, and how three wiring layouts compare.</p>
+    <p class="tool-sub">Several fixtures on one cable, not one load at the end. See the voltage at every light, and how four wiring layouts compare.</p>
   </div>
 
   <form id="ls-form" class="card" autocomplete="off">
@@ -196,6 +203,7 @@
       <label class="field-label">How is it wired?</label>
       <div class="seg" role="group" aria-label="Wiring layout">
         <button type="button" class="seg-btn active" data-layout="daisy">Daisy chain</button>
+        <button type="button" class="seg-btn" data-layout="tsplit">T / split</button>
         <button type="button" class="seg-btn" data-layout="hub">Hub</button>
         <button type="button" class="seg-btn" data-layout="star">Star</button>
       </div>
@@ -203,31 +211,40 @@
     </div>
 
     <div class="field" id="ls-field-hub" hidden>
-      <label class="field-label" for="ls-hub-ft">Hub is this far along the path</label>
+      <label class="field-label" for="ls-hub-ft" id="ls-hub-label">Hub is this far along the path</label>
       <div class="input-unit">
         <input type="number" id="ls-hub-ft" inputmode="decimal" min="0" step="any" value="0">
         <span class="unit">ft</span>
       </div>
-      <p class="hint">How far the trunk runs before it splits. A hub at 0 ft is the same circuit as a star.</p>
+      <p class="hint" id="ls-hub-hint">How far the trunk runs before it splits. A hub at 0 ft is the same circuit as a star.</p>
     </div>
 
     <div class="field">
       <div class="fixture-head">
         <span class="field-label" id="ls-ft-heading">Distance along the path (ft)</span>
         <span class="field-label" id="ls-load-heading">Load per fixture</span>
+        <span class="field-label ls-branch-col" id="ls-branch-heading" hidden>Branch</span>
         <span aria-hidden="true"></span>
       </div>
       <div class="fixture-rows" id="ls-rows">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" required>
-          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="e.g. 7" required>
+          <input type="number" class="ls-ft input-plain" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" required>
+          <input type="number" class="ls-load input-plain" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="e.g. 7" required>
+          <select class="ls-branch ls-branch-col" aria-labelledby="ls-branch-heading" hidden>
+            <option value="a">A</option>
+            <option value="b">B</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="Remove this fixture" title="Remove this fixture" hidden>×</button>
         </div>
       </div>
       <template id="ls-row-template">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-label="Distance along the path (ft)" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" required>
-          <input type="number" class="ls-load" aria-label="Load per fixture" inputmode="decimal" min="0" step="any" placeholder="e.g. 7" required>
+          <input type="number" class="ls-ft input-plain" aria-label="Distance along the path (ft)" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" required>
+          <input type="number" class="ls-load input-plain" aria-label="Load per fixture" inputmode="decimal" min="0" step="any" placeholder="e.g. 7" required>
+          <select class="ls-branch ls-branch-col" aria-label="Branch" hidden>
+            <option value="a">A</option>
+            <option value="b">B</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="Remove this fixture" title="Remove this fixture">×</button>
         </div>
       </template>
@@ -247,7 +264,7 @@
 
     <div class="field" id="ls-field-pf">
       <label class="field-label" for="ls-pf">Power factor</label>
-      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="e.g. 0.9">
+      <input type="number" class="input-plain" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="e.g. 0.9">
       <p class="hint">Leave this blank and we assume 1.0, which is a best case — the real current is higher, and so is the real drop.</p>
     </div>
 
@@ -256,19 +273,19 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-qf-count">How many fixtures?</label>
-          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="e.g. 6">
+          <input type="number" class="input-plain" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="e.g. 6">
         </div>
         <div>
           <label class="field-label" for="ls-qf-first">First one is this far</label>
-          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="e.g. 20">
+          <input type="number" class="input-plain" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="e.g. 20">
         </div>
         <div>
           <label class="field-label" for="ls-qf-spacing">Spacing between them</label>
-          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="e.g. 15">
+          <input type="number" class="input-plain" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="e.g. 15">
         </div>
         <div>
           <label class="field-label" for="ls-qf-load">Load each</label>
-          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="e.g. 7">
+          <input type="number" class="input-plain" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="e.g. 7">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="ls-qf-apply">Fill the rows</button>
@@ -280,11 +297,11 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-min-volts">Minimum voltage</label>
-          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="e.g. 10.5">
+          <input type="number" class="input-plain" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="e.g. 10.5">
         </div>
         <div>
           <label class="field-label" for="ls-max-volts">Maximum voltage</label>
-          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="e.g. 15">
+          <input type="number" class="input-plain" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="e.g. 15">
         </div>
       </div>
       <p class="hint">We do not invent a voltage limit. Enter the window from your fixture's data sheet and every tap gets checked against it.</p>
@@ -320,13 +337,13 @@
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why do my far lights look dimmer than the near ones?", "acceptedAnswer": {"@type": "Answer", "text": "On a daisy chain the cable nearest the transformer carries the current of every fixture on the run, while the last stretch carries only one. The drops add up along the way, so each fixture sees a little less voltage than the one before it. Moving to a hub or a star layout, going up a cable size, or lifting the transformer tap all reduce the gap."}}, {"@type": "Question", "name": "Is an ordinary voltage drop calculator wrong for landscape lighting?", "acceptedAnswer": {"@type": "Answer", "text": "It overstates the drop, because it puts the whole load at the far end of the run. In reality the load is spread along the cable, so most of it travels a shorter distance. For fixtures spaced evenly, the ordinary method is too pessimistic by a factor of 2N/(N+1) for N fixtures — about 60% too high for four lights. That pushes you toward heavier cable than the job needs."}}, {"@type": "Question", "name": "Which layout should I use?", "acceptedAnswer": {"@type": "Answer", "text": "There is no single winner, which is why this tool shows all three. A daisy chain uses the least cable and gives the widest spread between fixtures. A star gives the highest voltage at the worst fixture but uses the most cable. A hub placed part-way along the run often gives the tightest spread of all while using less cable than a star, because the trunk drop is shared by every fixture instead of pulling them apart."}}, {"@type": "Question", "name": "How much voltage drop is acceptable?", "acceptedAnswer": {"@type": "Answer", "text": "No code sets a mandatory voltage-drop limit for a low-voltage lighting system, and the acceptable window belongs to the fixture manufacturer, not to a rule of thumb. That is why this calculator reports the voltage at each fixture instead of stamping a pass or fail on it. Enter the minimum and maximum from your fixture's data sheet and every tap will be checked against those numbers."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why do my far lights look dimmer than the near ones?", "acceptedAnswer": {"@type": "Answer", "text": "On a daisy chain the cable nearest the transformer carries the current of every fixture on the run, while the last stretch carries only one. The drops add up along the way, so each fixture sees a little less voltage than the one before it. Moving to a hub or a star layout, going up a cable size, or lifting the transformer tap all reduce the gap."}}, {"@type": "Question", "name": "Is an ordinary voltage drop calculator wrong for landscape lighting?", "acceptedAnswer": {"@type": "Answer", "text": "It overstates the drop, because it puts the whole load at the far end of the run. In reality the load is spread along the cable, so most of it travels a shorter distance. For fixtures spaced evenly, the ordinary method is too pessimistic by a factor of 2N/(N+1) for N fixtures — about 60% too high for four lights. That pushes you toward heavier cable than the job needs."}}, {"@type": "Question", "name": "Which layout should I use?", "acceptedAnswer": {"@type": "Answer", "text": "There is no single winner, which is why this tool shows all four. A daisy chain uses the least cable and gives the widest spread between fixtures. A star gives the highest voltage at the worst fixture but uses the most cable. A T split and a hub both send one trunk out and then divide, so they even the fixtures out — but that shared trunk carries the whole load, which can cost them the worst-case voltage even while it wins on evenness. Compare the numbers for your own run rather than trusting a rule of thumb."}}, {"@type": "Question", "name": "How much voltage drop is acceptable?", "acceptedAnswer": {"@type": "Answer", "text": "No code sets a mandatory voltage-drop limit for a low-voltage lighting system, and the acceptable window belongs to the fixture manufacturer, not to a rule of thumb. That is why this calculator reports the voltage at each fixture instead of stamping a pass or fail on it. Enter the minimum and maximum from your fixture's data sheet and every tap will be checked against those numbers."}}]}</script>
 
   <section class="card explainer">
     <h2>Why one cable with several lights is different</h2>
     <p id="ls-exp-1">Every other calculator here, including ours, assumes one load at the far end of one run. A landscape run taps fixtures along the cable, so the stretch nearest the transformer carries all of them and the last stretch carries one. The true drop is the sum of the stretches, which is far less than pretending the whole load sits at the end. This tool works it out stretch by stretch.</p>
-    <h2>The three layouts in plain English</h2>
-    <p id="ls-exp-2">A daisy chain runs one cable and taps each fixture in turn — least cable, biggest difference between first and last. A star runs a separate cable from the transformer to every fixture — most cable, best worst-case voltage. A hub runs one trunk out to a junction point and then a short spoke to each fixture — a middle path that often gives the most even result of the three.</p>
+    <h2>The four layouts in plain English</h2>
+    <p id="ls-exp-2">A daisy chain runs one cable and taps each fixture in turn — least cable, biggest difference between first and last. A T split runs one trunk to a dividing point and then two branches in opposite directions, so each branch carries about half the load. A star runs a separate cable from the transformer to every fixture — most cable, best worst-case voltage. A hub runs one trunk out to a junction point and then a short spoke to each fixture. There is no single winner, which is why all four are shown.</p>
     <h2>What this tool does not do</h2>
     <p id="ls-exp-3">This answers voltage drop only. It does not check that your cable is rated to carry the current, it does not check your transformer's capacity, and it does not evaluate code compliance or your fixture manufacturer's requirements. Use the ampacity check for the current-carrying question, and your fixture's data sheet for the voltage window.</p>
   </section>
@@ -354,6 +371,6 @@
 </footer>
 
 <script src="/common.js?v=e726583fcf"></script>
-<script src="/landscape.js?v=b70ca2f3df"></script>
+<script src="/landscape.js?v=d8cf4e2c8f"></script>
 </body>
 </html>

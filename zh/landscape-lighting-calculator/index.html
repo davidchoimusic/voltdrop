@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop 景观照明计算器","url":"https://voltdrop.app/zh/landscape-lighting-calculator/","description":"免费的低压景观照明计算器。同一根电缆上多个灯具，逐段计算，显示每个灯具处的电压，并对三种布线方式进行对比。无需注册。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<link rel="stylesheet" href="/styles.css?v=c57d534d85">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
 <script>
@@ -99,6 +99,13 @@
     gap: var(--space-2);
     margin-bottom: var(--space-1);
   }
+  /* The T layout needs one more column per row, for the branch. Driven by a
+     class on the form so the head and every row stay in step. */
+  .is-tsplit .fixture-head,
+  .is-tsplit .fixture-row { grid-template-columns: 1fr 1fr 84px auto; }
+  .ls-branch-col { display: none; }
+  .is-tsplit .ls-branch-col { display: block; }
+  .is-tsplit select.ls-branch-col { min-height: 52px; font-size: 15px; padding-inline: var(--space-2); }
   .fixture-rows { display: flex; flex-direction: column; gap: var(--space-2); }
   .fixture-row {
     display: grid;
@@ -159,7 +166,7 @@
 
   <div class="tool-intro card">
     <h1 class="tool-title">🌿 景观照明计算器</h1>
-    <p class="tool-sub">同一根电缆上有多个灯具，而不是末端只有一个负载。查看每个灯具处的电压，以及三种布线方式的对比。</p>
+    <p class="tool-sub">同一根电缆上有多个灯具，而不是末端只有一个负载。查看每个灯具处的电压，以及四种布线方式的对比。</p>
   </div>
 
   <form id="ls-form" class="card" autocomplete="off">
@@ -196,6 +203,7 @@
       <label class="field-label">如何布线？</label>
       <div class="seg" role="group" aria-label="布线方式">
         <button type="button" class="seg-btn active" data-layout="daisy">串联</button>
+        <button type="button" class="seg-btn" data-layout="tsplit">T 形分支</button>
         <button type="button" class="seg-btn" data-layout="hub">集线</button>
         <button type="button" class="seg-btn" data-layout="star">星形</button>
       </div>
@@ -203,31 +211,40 @@
     </div>
 
     <div class="field" id="ls-field-hub" hidden>
-      <label class="field-label" for="ls-hub-ft">集线点在路径上的距离</label>
+      <label class="field-label" for="ls-hub-ft" id="ls-hub-label">集线点在路径上的距离</label>
       <div class="input-unit">
         <input type="number" id="ls-hub-ft" inputmode="decimal" min="0" step="any" value="0">
         <span class="unit">ft</span>
       </div>
-      <p class="hint">主干延伸多远后开始分支。集线点在 0 ft 处时，与星形是同一个电路。</p>
+      <p class="hint" id="ls-hub-hint">主干延伸多远后开始分支。集线点在 0 ft 处时，与星形是同一个电路。</p>
     </div>
 
     <div class="field">
       <div class="fixture-head">
         <span class="field-label" id="ls-ft-heading">沿路径的距离（ft）</span>
         <span class="field-label" id="ls-load-heading">每个灯具的负载</span>
+        <span class="field-label ls-branch-col" id="ls-branch-heading" hidden>分支</span>
         <span aria-hidden="true"></span>
       </div>
       <div class="fixture-rows" id="ls-rows">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="例如 20" required>
-          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="例如 7" required>
+          <input type="number" class="ls-ft input-plain" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="例如 20" required>
+          <input type="number" class="ls-load input-plain" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="例如 7" required>
+          <select class="ls-branch ls-branch-col" aria-labelledby="ls-branch-heading" hidden>
+            <option value="a">A</option>
+            <option value="b">B</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="删除此灯具" title="删除此灯具" hidden>×</button>
         </div>
       </div>
       <template id="ls-row-template">
         <div class="fixture-row">
-          <input type="number" class="ls-ft" aria-label="沿路径的距离（ft）" inputmode="decimal" min="0" step="any" placeholder="例如 20" required>
-          <input type="number" class="ls-load" aria-label="每个灯具的负载" inputmode="decimal" min="0" step="any" placeholder="例如 7" required>
+          <input type="number" class="ls-ft input-plain" aria-label="沿路径的距离（ft）" inputmode="decimal" min="0" step="any" placeholder="例如 20" required>
+          <input type="number" class="ls-load input-plain" aria-label="每个灯具的负载" inputmode="decimal" min="0" step="any" placeholder="例如 7" required>
+          <select class="ls-branch ls-branch-col" aria-label="分支" hidden>
+            <option value="a">A</option>
+            <option value="b">B</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="删除此灯具" title="删除此灯具">×</button>
         </div>
       </template>
@@ -247,7 +264,7 @@
 
     <div class="field" id="ls-field-pf">
       <label class="field-label" for="ls-pf">功率因数</label>
-      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="例如 0.9">
+      <input type="number" class="input-plain" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="例如 0.9">
       <p class="hint">留空则按 1.0 计算，这是最理想的情况：实际电流更大，实际电压降也更大。</p>
     </div>
 
@@ -256,19 +273,19 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-qf-count">有多少个灯具？</label>
-          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="例如 6">
+          <input type="number" class="input-plain" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="例如 6">
         </div>
         <div>
           <label class="field-label" for="ls-qf-first">第一个的距离</label>
-          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="例如 20">
+          <input type="number" class="input-plain" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="例如 20">
         </div>
         <div>
           <label class="field-label" for="ls-qf-spacing">彼此间距</label>
-          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="例如 15">
+          <input type="number" class="input-plain" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="例如 15">
         </div>
         <div>
           <label class="field-label" for="ls-qf-load">每个的负载</label>
-          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="例如 7">
+          <input type="number" class="input-plain" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="例如 7">
         </div>
       </div>
       <button type="button" class="add-size-btn" id="ls-qf-apply">填入各行</button>
@@ -280,11 +297,11 @@
       <div class="quick-fill">
         <div>
           <label class="field-label" for="ls-min-volts">最低电压</label>
-          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="例如 10.5">
+          <input type="number" class="input-plain" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="例如 10.5">
         </div>
         <div>
           <label class="field-label" for="ls-max-volts">最高电压</label>
-          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="例如 15">
+          <input type="number" class="input-plain" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="例如 15">
         </div>
       </div>
       <p class="hint">我们不会自行设定电压限值。请输入灯具规格书上的范围，我们会据此检查每个分接点。</p>
@@ -320,13 +337,13 @@
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "为什么远处的灯看起来比近处的暗？", "acceptedAnswer": {"@type": "Answer", "text": "在串联布线中，最靠近变压器的那段电缆承载回路上所有灯具的电流，而最后一段只承载一个灯具的电流。电压降沿途累加，因此每个灯具的电压都比前一个略低。改用集线或星形布线、加大一档电缆规格，或提高变压器分接电压，都能缩小这个差距。"}}, {"@type": "Question", "name": "普通的电压降计算器用于景观照明会算错吗？", "acceptedAnswer": {"@type": "Answer", "text": "它会把电压降算得过大，因为它把全部负载都放在回路的最远端。实际上负载沿电缆分布，大部分电流走的距离更短。对于均匀分布的灯具，普通方法对 N 个灯具偏保守的倍数为 2N/(N+1) — 四盏灯时大约高出 60%。这会让您选用比实际需要更粗的电缆。"}}, {"@type": "Question", "name": "我该采用哪种布线方式？", "acceptedAnswer": {"@type": "Answer", "text": "没有唯一的最优方案，这也是本工具同时显示三种方式的原因。串联用线最少，但灯具之间的电压差最大。星形在最不利灯具处的电压最高，但用线最多。集线点设在回路中段时，往往能获得三者中最小的电压差，同时用线比星形更少，因为主干上的电压降由所有灯具共同承担，而不是把它们拉开。"}}, {"@type": "Question", "name": "多大的电压降是可以接受的？", "acceptedAnswer": {"@type": "Answer", "text": "本工具不评估规范合规性，也不自行设定任何限值。灯具可接受的电压范围来自制造商的规格书，而适用于供电回路的任何限值则来自当地规范和您的检查人员。因此本计算器只报告每个灯具处的电压，而不给出合格或不合格的判定。请输入灯具规格书上的最低值和最高值，我们会据此检查每个分接点。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "为什么远处的灯看起来比近处的暗？", "acceptedAnswer": {"@type": "Answer", "text": "在串联布线中，最靠近变压器的那段电缆承载回路上所有灯具的电流，而最后一段只承载一个灯具的电流。电压降沿途累加，因此每个灯具的电压都比前一个略低。改用集线或星形布线、加大一档电缆规格，或提高变压器分接电压，都能缩小这个差距。"}}, {"@type": "Question", "name": "普通的电压降计算器用于景观照明会算错吗？", "acceptedAnswer": {"@type": "Answer", "text": "它会把电压降算得过大，因为它把全部负载都放在回路的最远端。实际上负载沿电缆分布，大部分电流走的距离更短。对于均匀分布的灯具，普通方法对 N 个灯具偏保守的倍数为 2N/(N+1) — 四盏灯时大约高出 60%。这会让您选用比实际需要更粗的电缆。"}}, {"@type": "Question", "name": "我该采用哪种布线方式？", "acceptedAnswer": {"@type": "Answer", "text": "没有唯一的最优方案，这也是本工具同时显示四种方式的原因。串联用线最少，但灯具之间的电压差最大。星形在最不利灯具处的电压最高，但用线最多。T 形分支和集线都是先走主干再分开，因此能让各灯具更均匀 — 但这条共用主干承载全部负载，即使在均匀性上取胜，也可能牺牲最不利情况下的电压。请比较您自己回路的数值，而不要依赖经验法则。"}}, {"@type": "Question", "name": "多大的电压降是可以接受的？", "acceptedAnswer": {"@type": "Answer", "text": "本工具不评估规范合规性，也不自行设定任何限值。灯具可接受的电压范围来自制造商的规格书，而适用于供电回路的任何限值则来自当地规范和您的检查人员。因此本计算器只报告每个灯具处的电压，而不给出合格或不合格的判定。请输入灯具规格书上的最低值和最高值，我们会据此检查每个分接点。"}}]}</script>
 
   <section class="card explainer">
     <h2>为什么一根电缆带多盏灯不一样</h2>
     <p id="ls-exp-1">本站其他所有计算器，包括我们自己的，都假设一个回路的最远端只有一个负载。景观回路是沿电缆逐个分接灯具的，所以最靠近变压器的那段承载全部灯具，最后一段只承载一个。真实的电压降是各段之和，远小于把全部负载都当作位于末端。本工具逐段计算。</p>
-    <h2>三种布线方式的通俗说明</h2>
-    <p id="ls-exp-2">串联只走一根电缆，依次分接每个灯具：用线最少，首尾差别最大。星形从变压器单独走一根电缆到每个灯具：用线最多，最不利情况下的电压最好。集线先走一条主干到一个接线点，再由此用短支线接到各个灯具：这是一条折中路线，往往能得到三者中最均匀的结果。</p>
+    <h2>四种布线方式的通俗说明</h2>
+    <p id="ls-exp-2">串联只走一根电缆，依次分接每个灯具：用线最少，首尾差别最大。T 形分支先走一条主干到分点，再分成两条方向相反的支路，因此每条支路承担约一半负载。星形从变压器单独走一根电缆到每个灯具：用线最多，最不利情况下的电压最好。集线先走一条主干到接线点，再由此用短支线接到各个灯具。没有唯一的最优方案，因此四种都会显示。</p>
     <h2>本工具不做什么</h2>
     <p id="ls-exp-3">本工具只回答电压降。它不检查您的电缆是否具备承载该电流的额定值，不检查变压器容量，也不评估规范合规性或灯具制造商的要求。载流能力问题请使用载流量检查，电压范围请查看灯具规格书。</p>
   </section>
@@ -354,6 +371,6 @@
 </footer>
 
 <script src="/assets/us-zh/common.js?v=95abe3b15a"></script>
-<script src="/assets/us-zh/landscape.js?v=578a3ee5ba"></script>
+<script src="/assets/us-zh/landscape.js?v=dd08d88540"></script>
 </body>
 </html>

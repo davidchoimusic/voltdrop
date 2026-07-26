@@ -83,10 +83,19 @@ in every edition.
 - Roadmap items awaiting placement: "how we verify" page · ground wire size · wire colour ·
   `/ohms-law/` · offline/PWA · "Build this circuit"
   (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.)
-- **T/split layout is DEFERRED from the landscape tool.** Daisy, hub and star all derive from
-  one distance column; a T needs per-fixture branch assignment plus a trunk-to-split length,
-  and both Codex passes judged an invented T geometry worse than no T. The tree engine already
-  supports it, so it is a pure add: collect branch + distance-along-branch and call solveTree.
+- **T/split layout SHIPPED 2026-07-27** (was deferred). The landscape tool now compares FOUR
+  layouts. The T needed the one thing the others did not: per-fixture branch assignment, because
+  "40 ft from the transformer" says nothing about direction. A branch column appears only for that
+  layout, and its distances are measured along each branch FROM THE SPLIT.
+  ⚠️ The subtle part, worth not breaking: the comparison table shows all four layouts from one
+  fixture table, but the T measures from the split while the other three measure from the
+  transformer. Feeding the same numbers to both meanings would have made the four rows describe
+  DIFFERENT physical runs — a comparison that looks authoritative and is a lie. `branchToAbsolute`
+  / `absoluteToBranch` convert between the two, and an engine test asserts the round trip is
+  lossless. Branch A runs back toward the transformer, branch B runs away from it.
+  Finding: a T pays the ENTIRE load over its trunk, so for an evenly spaced line a plain daisy
+  chain can beat it on worst-case voltage. What a T reliably buys is evenness. Same shape as the
+  hub-vs-star surprise — there is no single winner, which is the product.
 - **`/solar-wire-size-calculator/` as a framed page is now HONEST to mint** — the framed-page
   rule below said to build the engine first, and it is built. Point it at the solar tool.
 - GSC: watch Sitemaps "Discovered pages" move 16 → 91, then leave it a few weeks
@@ -471,23 +480,42 @@ shared country/chip logic in common.js.
   verify.mjs uses index 11 = 1/0 AWG, index 4 = 10 AWG). Inserting rows into WIRE_TABLE
   shifts these — update defaults and verify.mjs together.
 
-- **🚨 `tools/generate-locales.mjs` IS STALE AND DESTRUCTIVE — DO NOT RUN IT (found 2026-07-26).**
-  The documented workflow says "add strings, run the locale generator". Doing that today
-  **overwrites reviewed translations with mechanical garbage.** Proven on a DETACHED PRISTINE
-  main with no other changes: `node tools/generate-locales.mjs` alone produces a
-  869-insertion / 680-deletion diff, changing ~96 values per locale and dropping 44 keys
-  that exist only in the committed catalogs. Examples of what it replaces good text with:
-  - `ampacity.ambientCorrectionLabel` es: `"Corrección por temperatura ambiente"` → `"Ambient correction"` (untranslated)
-  - `ampacity.ambientTableRowLabel` fr-CA: `"Ligne de température ambiante utilisée"` → `"Ambient tableau row used"`
-  - `ampacity.ambientTableRowMethod` zh-Hans: `"采用包含输入温度的已公布环境温度区间。"` → `" published ambient band containing  entered温度是used."`
-  The COMMITTED catalogs are the good ones; the generator is no longer their source of truth
-  (its reviewed banks were never updated for those keys, or the output was hand-corrected
-  after generation). **Until it is fixed, add new strings by patching
-  `i18n/strings/{es,fr-CA,zh-Hans}.json` surgically — only the new keys — and seed the same
-  values into the generator's reviewed banks so a future fixed run reproduces them.**
-  Fixing the generator properly is its own task; it is a live landmine, not a cleanup chore.
-  Related: this is the same class of failure as the faked back-translation gate — a step that
-  LOOKS like it maintains quality while silently removing it.
+- **`tools/generate-locales.mjs` WAS STALE AND DESTRUCTIVE — FIXED 2026-07-26 (evening).**
+  Superseded: the earlier "DO NOT RUN IT" warning no longer applies. Running it is now a
+  **perfect no-op** — every catalog, both country packs and `safety-critical.json` come back
+  byte-identical. What was wrong, in three layers, each found only after fixing the one above it:
+  1. **Values**: it rewrote ~96 reviewed translations per locale into mechanical half-English
+     (`"Corrección por temperatura ambiente"` → `"Ambient correction"`), because its phrase banks
+     were never updated to match the catalogs.
+  2. **Country packs**: it *also* regenerates `i18n/country-packs/*.json` `localizedStrings` from
+     the same mechanical translator. Fixing only layer 1 left this half live, and it silently
+     replaced correct Canadian French metadata with superseded pre-verification wording.
+  3. **Reviewed key registries**: it recomputed `_meta.safetyCriticalKeys` (215→315) and
+     `safety-critical.json` `keys` (296→315) from an English keyword scan, which broke the
+     back-translation report (`Target-only row alignment failed at us-es:ampacity.passBadge`).
+  It also **dropped 44 keys** it cannot produce. That looked like harmless cleanup and was not —
+  the back-translation pipeline reads some of them.
+  **The fix:** the live reviewed values are captured in `i18n/reviewed-legacy.json` (289 catalog
+  values + 98 pack values, extracted from what was already committed and reviewed) and resolve at
+  TOP precedence; reviewed key registries are preserved rather than recomputed; unknown existing
+  keys are carried forward instead of deleted; pack locales are scoped to editions that actually
+  exist (`PACK_LOCALES`) so no mechanical Spanish accumulates in the Canadian pack.
+  **And there is now a GUARD**: the generator refuses to write if a run would CHANGE any existing
+  reviewed value, in catalogs or packs — prints what it would have destroyed, exits 1, writes
+  nothing. Proven to fire on both paths. Override is `VD_ALLOW_LOCALE_OVERWRITE=1` and should
+  essentially never be used. To change a reviewed value, edit `i18n/reviewed-legacy.json` or the
+  tool's own reviewed bank — the place the value comes from — not the generated file.
+  Lesson worth keeping: **a warning in a doc is not a mechanism.** This sat as prose for hours and
+  I nearly shipped the pack-level half of it because the prose only described layer 1.
+
+- **PARTIAL-SCOPED CSS MAKES CLASS NAMES LIE (2026-07-26).** `.add-size-btn` / `.remove-size-btn`
+  were styled *inside* `partials/boxfill-main.html` and `partials/conduit-main.html` (byte-identical
+  copies). A third tool using those exact class names got **no styling at all** — which is what
+  happened to landscape lighting, and it shipped that way. Same shape as `.input-unit`: it styles
+  its `input`, so any field WITHOUT a unit chip silently fell back to the browser default — thin,
+  pale, tiny next to everything else. Now: repeater buttons live in `styles.css`, and there is an
+  `.input-plain` class for unit-less fields. **If a class name is shared, its CSS belongs in
+  `styles.css`.** Caught by David looking at the live page, not by 629 assertions.
 
 - **A NEW TOOL TOUCHES ELEVEN PLACES, NOT SEVEN (2026-07-26, landscape build).** The
   new-tool checklist in the Site-structure section above is incomplete. Missing any of the
