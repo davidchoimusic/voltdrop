@@ -60,6 +60,7 @@ const DATA_TABLES = [
   ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
   ['boxfill.js', 'CEC_VOL_ML'],
   ['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
+  ['solar.js', 'WIRE_TABLE'], ['solar.js', 'K_FACTOR'],
 ];
 const GOLDEN = JSON.parse(readFileSync('data-golden.json', 'utf8'));
 let dataPass = 0, dataFail = 0;
@@ -156,6 +157,7 @@ const SCOPED_PATHS = [
   'power-calculator/',
   'box-fill/',
   'landscape-lighting-calculator/',
+  'solar-battery-wire-size/',
   'terms/',
 ];
 const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
@@ -568,6 +570,10 @@ const MATRIX_INPUTS = {
   // Hand-calculated: segment drops sum to 0.46095 V, so the last tap sits at
   // 11.539 V. An ordinary one-load-at-the-end calculator would say 11.262 V.
   landscape: { fixtures: [[20, 7], [40, 7], [60, 7], [80, 7]], lastTapVolts: 11.54 },
+  /* 9.5 A array at 48 V Vmp over 60 ft of copper, 2% target.
+     Allowed = 0.96 V. Required cmil = 2*12.9*9.5*60/0.96 = 15318.75, so the
+     smallest listed conductor that works is 8 AWG (16510 cmil). Hand-checked. */
+  solar: { volts: 48, amps: 9.5, feet: 60, targetPercent: 2, expectSize: '8 AWG' },
   voltageDrop: { volts: 12, amps: 20, feet: 25, wire: '12 AWG', material: 'cu' },
   wireSize: { volts: 240, amps: 40, feet: 150, targetPercent: 3, material: 'cu' },
   maxLength: { volts: 12, amps: 10, targetPercent: 3, wire: '10 AWG', material: 'cu' },
@@ -792,6 +798,25 @@ const calculatorCases = [
       await targetPage.fill('#pw-volts', String(input.volts));
       await targetPage.fill('#pw-watts', String(input.watts));
       await targetPage.click('#pw-form .calc-btn');
+    },
+  },
+  {
+    name: 'solar and battery',
+    path: 'solar-battery-wire-size/',
+    /* #big-number reads "at least 8 AWG" (and its translations), so stripping to
+       digits asserts the AWG SIZE — which is the actual answer. Identical in every
+       edition, because the arithmetic is country-independent and AWG designations
+       are protected from translation. */
+    expected: () => 8,
+    tolerance: 0,
+    readNumber: (value) => parseFloat(String(value).replace(/[^0-9.]/g, '')),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.solar;
+      await targetPage.fill('#sol-volts', String(input.volts));
+      await targetPage.fill('#sol-amps', String(input.amps));
+      await targetPage.fill('#sol-feet', String(input.feet));
+      await targetPage.fill('#sol-target', String(input.targetPercent));
+      await targetPage.click('#sol-form .calc-btn');
     },
   },
   {
@@ -1560,6 +1585,60 @@ for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
   const logoOk = await page.$eval('.brand-logo', (img) => img.complete && img.naturalWidth > 0);
   const favOk = await page.$('link[rel="icon"]') !== null;
   console.log(logoOk && favOk ? `PASS logo+favicon on /${path}` : `FAIL logo on /${path}: img=${logoOk} fav=${favOk}`); logoOk && favOk ? pass++ : fail++;
+}
+
+// ---- Solar: the sealed copies must stay identical to the canonical tables.
+for (const name of ['WIRE_TABLE', 'K_FACTOR']) {
+  const canonical = JSON.stringify(readSealedConstant('app.js', name));
+  const copy = JSON.stringify(readSealedConstant('solar.js', name));
+  console.log(canonical === copy
+    ? `PASS solar.js ${name} is value- and order-identical to app.js`
+    : `FAIL solar.js ${name} DIVERGED from app.js`);
+  canonical === copy ? pass++ : fail++;
+}
+
+/* ---- Solar: an impossible target must say OUT OF RANGE, never hand back the
+   largest conductor in the table as though it were the answer. This is the
+   failure mode that would quietly under-size a 12 V inverter cable. */
+await page.goto(BASE + 'solar-battery-wire-size/');
+const outOfRange = await page.evaluate(() => {
+  // 3000 W inverter at a 10.5 V cutout, 8 ft, 1% target — needs more than
+  // 500 kcmil, which the table does not hold.
+  const amps = inverterCurrent(3000, 0.9, 10.5);
+  const sized = sizeForDrop({ k: K_FACTOR.cu, amps, feetOneWay: 8, systemVolts: 10.5, targetPercent: 1 });
+  return {
+    flagged: sized.wire.outOfRange === true,
+    noLabel: sized.wire.label === undefined,
+    noDrop: sized.actualDropVolts === null,
+    suggestsParallel: Number.isFinite(sized.parallelLargest) && sized.parallelLargest >= 1,
+    ampsAboveNominal: amps > 3000 / (0.9 * 12),
+  };
+});
+for (const [name, ok] of Object.entries({
+  'flags out of range': outOfRange.flagged,
+  'returns no wire label when out of range': outOfRange.noLabel,
+  'invents no drop figure when out of range': outOfRange.noDrop,
+  'still reports what it would take in parallel': outOfRange.suggestsParallel,
+  'derives inverter current above the nominal-voltage figure': outOfRange.ampsAboveNominal,
+})) {
+  console.log(ok ? `PASS solar ${name}` : `FAIL solar ${name}`);
+  ok ? pass++ : fail++;
+}
+
+/* ---- Solar: every edition must say the ampacity was NOT evaluated, and must
+   not claim to have sized overcurrent protection. */
+for (const edition of EDITIONS) {
+  await page.goto(BASE + editionPath(edition.prefix, 'solar-battery-wire-size/'));
+  await page.fill('#sol-amps', '9.5');
+  await page.fill('#sol-feet', '60');
+  await page.click('#sol-form .calc-btn');
+  await page.waitForTimeout(20);
+  const shown = await page.evaluate(() => document.getElementById('sol-cautions')?.innerText || '');
+  const ok = shown.length > 0;
+  console.log(ok
+    ? `PASS ${edition.prefix || 'us-en'} solar shows its limitation notices`
+    : `FAIL ${edition.prefix || 'us-en'} solar shows no limitation notices`);
+  ok ? pass++ : fail++;
 }
 
 // ---- Landscape: the sealed copies must stay identical to the canonical tables.

@@ -13,5 +13,7 @@
   "boxfill.js:BOXES": "4340e7749fc1870da820f1b6272dba41",
   "boxfill.js:CEC_VOL_ML": "baecdebad442afce4763350c0fc84678",
   "landscape.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
-  "landscape.js:K_FACTOR": "852a41e6d003b0da882761c141a67852"
+  "landscape.js:K_FACTOR": "852a41e6d003b0da882761c141a67852",
+  "solar.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
+  "solar.js:K_FACTOR": "852a41e6d003b0da882761c141a67852"
 }

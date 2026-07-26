@@ -65,6 +65,7 @@ const TOOL_PATHS = [
   '/box-fill/',
   '/power-calculator/',
   '/landscape-lighting-calculator/',
+  '/solar-battery-wire-size/',
   '/privacy/',
   '/terms/',
 ];

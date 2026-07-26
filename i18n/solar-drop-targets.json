@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "policy": "Voltage-drop DESIGN TARGETS for solar and battery circuits. These are performance and economics choices, NOT safety limits and NOT code requirements. They are pre-filled starting points that the user can and should change.",
+    "whyNotSealed": "The sealed tables in data-golden.json hold published electrical FACTS (ampacities, conductor areas, volume allowances) where a wrong digit is dangerous. These numbers are design preferences: a wrong one costs yield or copper, not safety. They live here, version-controlled and test-protected, so a change is visible in a diff — but they deliberately do NOT claim the authority of a sealed code table.",
+    "sourcingStatus": "UNSOURCED. Each value below is a commonly used starting point, not a figure traced to a standard. No page asserts that any standard requires them, and the UI labels them as starting points. Tracing them to citable sources (or replacing them with equipment-manufacturer guidance) is outstanding work — until then the honest presentation is 'starting point, set your own'.",
+    "reviewedOn": "2026-07-26",
+    "nonCode": true
+  },
+  "scenarios": [
+    {
+      "id": "pv",
+      "percent": 2,
+      "currentBasis": "imp",
+      "reason": "On a panel circuit, voltage drop is lost yield for the life of the system. A tighter target than a branch circuit is normal because the loss is continuous rather than occasional.",
+      "voltageBasis": "vmp"
+    },
+    {
+      "id": "controller",
+      "percent": 2,
+      "currentBasis": "controllerMax",
+      "reason": "Drop between the charge controller and the battery makes the controller read a lower battery voltage than the real one, which can end a charge cycle early and leave the bank undercharged.",
+      "voltageBasis": "batteryNominal"
+    },
+    {
+      "id": "battery",
+      "percent": 1,
+      "currentBasis": "inverterContinuous",
+      "reason": "This is the tightest target of the three. Drop here is both lost power and lost low-voltage-cutout margin: the inverter sees battery voltage minus the cable drop, so a sagging cable can shut it down while the bank still holds charge.",
+      "voltageBasis": "batteryMinimum"
+    }
+  ]
+}

@@ -1257,5 +1257,187 @@
       "kind": "quoted",
       "quote": "'"
     }
+  ],
+  "solar.js": [
+    {
+      "key": "runtime.solar.ampsHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeCheck",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeOutOfRange",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeSized",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionAcOutput",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionAmpacity",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionBatteryFault",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionOutOfRange",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionTargetUnsourced",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colActualDrop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colActualPercent",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colAllowance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colCurrentUsed",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colLargestListed",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colRequiredCm",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.materialAluminum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.materialCopper",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.mathFormula",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.mathIntro",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.needInputs",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.outOfRangeLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelPv",
+      "kind": "quoted",
+      "quote": "'"
+    }
   ]
 }

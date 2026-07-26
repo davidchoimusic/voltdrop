@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop</title>
+<meta name="description" content="Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup.">
+<link rel="canonical" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/solar-battery-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop">
+<meta property="og:description" content="Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup.">
+<meta property="og:url" content="https://voltdrop.app/solar-battery-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop">
+<meta name="twitter:description" content="Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Solar & Battery Wire Size Calculator","url":"https://voltdrop.app/solar-battery-wire-size/","description":"Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="en">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Electrical tools menu" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country or language" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · EN</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Feedback</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Which code applies?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Language in United States</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">Electrical calculators that explain themselves. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Landscape Lighting</a>
+    <a href="/solar-battery-wire-size/" class="tool-link active" data-tool="solar"><span aria-hidden="true">☀️</span>Solar & Battery</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<style>
+  .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
+  .scenario-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3);
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .scenario-btn.active {
+    border-color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .scenario-btn .sc-name { display: block; font-weight: 700; }
+  .scenario-btn .sc-why { display: block; margin-top: 2px; color: var(--color-ink-soft); }
+  .sol-caution {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-hazard);
+  }
+  .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
+  .target-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); align-items: end; }
+  .target-row input { min-width: 0; }
+</style>
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">☀️ Solar & Battery Wire Size</h1>
+    <p class="tool-sub">Solar circuits are tighter than house wiring, and each one takes its current from a different place. Pick the circuit and we ask for the right number.</p>
+  </div>
+
+  <form id="sol-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">Which circuit are you sizing?</label>
+      <div class="scenario-list" role="group" aria-label="Circuit type">
+        <button type="button" class="scenario-btn active" data-scenario="pv">
+          <span class="sc-name">Panels → controller or inverter</span>
+          <span class="sc-why">Drop here is lost yield, every hour the sun is up.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="controller">
+          <span class="sc-name">Charge controller → battery</span>
+          <span class="sc-why">Drop here makes the controller misread the battery.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="battery">
+          <span class="sc-name">Battery → inverter</span>
+          <span class="sc-why">The tightest one. Drop here costs power and cutout margin.</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-volts" id="sol-volts-label">System voltage</label>
+      <div class="input-unit">
+        <input type="number" id="sol-volts" inputmode="decimal" min="1" step="any" value="48" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint" id="sol-volts-hint"></p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-amps" id="sol-amps-label">Current</label>
+      <div class="input-unit">
+        <input type="number" id="sol-amps" inputmode="decimal" min="0" step="any" placeholder="e.g. 9.5" required>
+        <span class="unit">A</span>
+      </div>
+      <p class="hint" id="sol-amps-hint"></p>
+    </div>
+
+    <details class="math-details" id="sol-helper" hidden>
+      <summary>Work the current out from my inverter</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="sol-inv-watts">Inverter continuous watts</label>
+          <input type="number" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="e.g. 3000">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-eff">Inverter efficiency</label>
+          <input type="number" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="e.g. 0.9">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-min">Lowest battery voltage</label>
+          <input type="number" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="e.g. 10.5">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="sol-helper-apply">Use this current</button>
+      <p class="hint">We divide by the LOWEST battery voltage, not the nominal 12 or 24 V. The inverter still has to deliver its full output when the bank has sagged, so that is when the current — and the drop — is worst.</p>
+    </details>
+
+    <div class="field">
+      <label class="field-label" for="sol-feet">One-way distance</label>
+      <div class="input-unit">
+        <input type="number" id="sol-feet" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" required>
+        <span class="unit">ft</span>
+      </div>
+      <p class="hint">Measure the distance one way only. We double it, because the current goes out and comes back.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Conductor</label>
+      <div class="seg" role="group" aria-label="Conductor material">
+        <button type="button" class="seg-btn active" data-material="cu">Copper</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminum</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-target">Voltage drop target</label>
+      <div class="target-row">
+        <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
+        <span class="unit">%</span>
+      </div>
+      <p class="hint" id="sol-target-hint"></p>
+      <p class="hint">The pre-filled number is a commonly used starting point, not a code requirement. Change it to whatever your design calls for.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Find the wire size</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <div id="sol-cautions"></div>
+    <details class="math-details">
+      <summary>How we calculated this</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is 3% too loose for solar?", "acceptedAnswer": {"@type": "Answer", "text": "The 3% figure is a house-wiring convention, where the load runs occasionally. A panel circuit loses that voltage every hour the sun is up, for the life of the system, so the same percentage costs far more. On a battery-to-inverter cable it is worse than a cost: the inverter sees battery voltage minus the cable drop, so a sagging cable can trip its low-voltage cutout while the bank still holds usable charge. That is why the pre-filled targets here are tighter — though they are starting points you should set yourself, not requirements."}}, {"@type": "Question", "name": "What current should I use?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the circuit, which is why this tool asks differently for each one. For a panel circuit use the array's operating current, Imp, from the data sheet — not the short-circuit figure. For a charge controller to a battery, use the controller's maximum output current, not the panel rating. For a battery to an inverter, use the maximum continuous DC input current — and if you work it out from watts, divide by the lowest battery voltage you will allow rather than the nominal 12 or 24 V, because the current rises as the bank sags."}}, {"@type": "Question", "name": "Why does my 12 V inverter need such huge cable?", "acceptedAnswer": {"@type": "Answer", "text": "Because low voltage means enormous current, and a tight percentage of a small voltage is a tiny number of volts. A 3000 W inverter on a 12 V bank draws around 250 A at nominal voltage and more as the bank sags. Meanwhile 1% of 12 V is 0.12 V — that is the entire budget for the whole out-and-back trip. Short cables and high system voltage are the two things that help most, which is why larger installations use 24 or 48 V."}}, {"@type": "Question", "name": "Does this size my fuses or breakers?", "acceptedAnswer": {"@type": "Answer", "text": "No. This answers voltage drop only. It does not size overcurrent protection, it does not check that the conductor can carry the current, it applies no temperature correction, and it applies no PV sizing factors. Battery systems in particular can deliver extremely high fault current, so the protection and disconnect arrangements need to follow the battery and equipment manufacturer's instructions. Check the ampacity separately and use whichever size is larger."}}]}</script>
+
+  <section class="card explainer">
+    <h2>Why solar wiring is different</h2>
+    <p id="sol-exp-1">On a branch circuit a 3% drop is a rule of thumb for a load that runs now and then. Solar changes both halves of that. The loss is continuous, so it compounds into real lost energy, and the voltages are low, so a small percentage is a very small number of volts to spend. 1% of 12 V is 0.12 V for the entire out-and-back trip.</p>
+    <h2>Getting the current right</h2>
+    <p id="sol-exp-2">Each of the three circuits takes its current from a different place, and using the wrong one is the easiest way to get a badly wrong answer. Panels are closer to a current source, so their operating current barely moves. A charge controller is rated by what it can put out, which is not what the panels put in. And an inverter's draw climbs as the battery falls, so dividing watts by the nominal bank voltage understates it exactly when the cable can least afford it.</p>
+    <h2>What this tool does not do</h2>
+    <p id="sol-exp-3">This answers voltage drop and nothing else. It does not evaluate ampacity, temperature, overcurrent protection, disconnects, grounding, or code compliance, and it does not handle an inverter's AC output — use the voltage drop calculator for that, which knows about single- and three-phase. Treat the size here as one of two answers you need, and use whichever is larger.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=e726583fcf"></script>
+<script src="/solar.js?v=47fb7600ca"></script>
+</body>
+</html>

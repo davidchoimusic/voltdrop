@@ -81,6 +81,15 @@ Answer: {{us:pages.us.landscape.description}}
 Method: The run is solved as a tree, not as one load at the end. Each stretch of cable carries the current of every fixture beyond it, so the drop is summed stretch by stretch along the path to each fixture. Modelling the whole load at full distance overstates the drop by a factor of 2N/(N+1) for N evenly spaced equal fixtures.
 Does not answer: It does not check that the cable is rated to carry the current, it does not check the transformer's capacity, and it asserts no code voltage-drop limit for a low-voltage lighting system. Fixture voltage windows come from the manufacturer's data sheet, never invented by the tool. Current is taken from the fixture nameplate at its rated voltage; entering watts without a power factor is a best case that understates the drop.
 
+### Solar & Battery Wire Size
+
+URL: https://voltdrop.app/solar-battery-wire-size/
+Question: What size DC conductor does a panel circuit, a charge-controller output, or a battery-to-inverter cable need to stay inside a voltage-drop target?
+Answer: {{us:pages.us.solar.description}}
+Method: Same K-factor arithmetic as the other tools, but the CURRENT differs per circuit and that is where wrong answers come from. Panel circuits use the array operating current Imp at Vmp. Charge-controller-to-battery uses the controller's maximum output current, not the panel rating. Battery-to-inverter uses maximum continuous DC input current; deriving it from watts divides by the lowest allowed battery voltage and the inverter efficiency, because nominal battery voltage understates the current exactly when the cable can least afford it.
+Targets: tighter than the 3%/5% branch-circuit convention because the loss is continuous and, on a battery cable, eats low-voltage-cutout margin. The pre-filled values are labelled starting points, not code requirements, and are user-editable.
+Does not answer: no ampacity result, no temperature correction, no PV sizing factors, no overcurrent protection or disconnect sizing, and no inverter AC output (that belongs to the voltage drop calculator). When the drop target needs more copper than the table holds, it says OUT OF RANGE and reports the area required rather than returning the largest listed size.
+
 ## Concepts that control the answer
 
 Ampacity and voltage drop answer different questions. Ampacity limits conductor heating. Voltage drop limits lost voltage and poor equipment performance. Passing one never proves the other.

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>光伏与电池线径计算器 — 组件、控制器与逆变器回路 | VoltDrop</title>
+<meta name="description" content="免费的光伏与电池直流线径计算器。电压降目标比住宅布线更严格，为每种回路取用正确的电流，超出范围时如实告知，而不是返回表中最大的线径。无需注册。">
+<link rel="canonical" href="https://voltdrop.app/ca-zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/solar-battery-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="光伏与电池线径计算器 — 组件、控制器与逆变器回路 | VoltDrop">
+<meta property="og:description" content="免费的光伏与电池直流线径计算器。电压降目标比住宅布线更严格，为每种回路取用正确的电流，超出范围时如实告知，而不是返回表中最大的线径。无需注册。">
+<meta property="og:url" content="https://voltdrop.app/ca-zh/solar-battery-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="光伏与电池线径计算器 — 组件、控制器与逆变器回路 | VoltDrop">
+<meta name="twitter:description" content="免费的光伏与电池直流线径计算器。电压降目标比住宅布线更严格，为每种回路取用正确的电流，超出范围时如实告知，而不是返回表中最大的线径。无需注册。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop 光伏与电池线径计算器","url":"https://voltdrop.app/ca-zh/solar-battery-wire-size/","description":"免费的光伏与电池直流线径计算器。电压降目标比住宅布线更严格，为每种回路取用正确的电流，超出范围时如实告知，而不是返回表中最大的线径。无需注册。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="ca" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">加拿大的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">电气计算器，展示每项结果的计算过程。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>景观照明</a>
+    <a href="/solar-battery-wire-size/" class="tool-link active" data-tool="solar"><span aria-hidden="true">☀️</span>光伏与电池</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<style>
+  .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
+  .scenario-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3);
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .scenario-btn.active {
+    border-color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .scenario-btn .sc-name { display: block; font-weight: 700; }
+  .scenario-btn .sc-why { display: block; margin-top: 2px; color: var(--color-ink-soft); }
+  .sol-caution {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-hazard);
+  }
+  .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
+  .target-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); align-items: end; }
+  .target-row input { min-width: 0; }
+</style>
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">☀️ 光伏与电池线径</h1>
+    <p class="tool-sub">光伏回路比住宅布线更严格，而且每种回路的电流取自不同的地方。选择回路，我们会向您索取正确的数值。</p>
+  </div>
+
+  <form id="sol-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">您要计算哪种回路？</label>
+      <div class="scenario-list" role="group" aria-label="回路类型">
+        <button type="button" class="scenario-btn active" data-scenario="pv">
+          <span class="sc-name">组件 → 控制器或逆变器</span>
+          <span class="sc-why">这里的电压降就是损失的发电量，每个有太阳的小时都在损失。</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="controller">
+          <span class="sc-name">充电控制器 → 电池</span>
+          <span class="sc-why">这里的电压降会让控制器误判电池电压。</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="battery">
+          <span class="sc-name">电池 → 逆变器</span>
+          <span class="sc-why">最严格的一种。这里的电压降损失功率，也损失切断余量。</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-volts" id="sol-volts-label">系统电压</label>
+      <div class="input-unit">
+        <input type="number" id="sol-volts" inputmode="decimal" min="1" step="any" value="48" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint" id="sol-volts-hint"></p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-amps" id="sol-amps-label">电流</label>
+      <div class="input-unit">
+        <input type="number" id="sol-amps" inputmode="decimal" min="0" step="any" placeholder="例如 9.5" required>
+        <span class="unit">A</span>
+      </div>
+      <p class="hint" id="sol-amps-hint"></p>
+    </div>
+
+    <details class="math-details" id="sol-helper" hidden>
+      <summary>根据我的逆变器推算电流</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="sol-inv-watts">逆变器持续功率（W）</label>
+          <input type="number" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="例如 3000">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-eff">逆变器效率</label>
+          <input type="number" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="例如 0.9">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-min">电池最低电压</label>
+          <input type="number" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="例如 10.5">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="sol-helper-apply">使用此电流</button>
+      <p class="hint">我们除以电池的最低电压，而不是标称的 12 或 24 V。电池组电压下降时逆变器仍需输出满功率，而那正是电流和电压降最严重的时候。</p>
+    </details>
+
+    <div class="field">
+      <label class="field-label" for="sol-feet">单程距离</label>
+      <div class="input-unit">
+        <input type="number" id="sol-feet" inputmode="decimal" min="0" step="any" placeholder="例如 20" required>
+        <span class="unit">ft</span>
+      </div>
+      <p class="hint">只需测量单程距离。我们会自动乘以二，因为电流有去有回。</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">导体</label>
+      <div class="seg" role="group" aria-label="导体材质">
+        <button type="button" class="seg-btn active" data-material="cu">铜</button>
+        <button type="button" class="seg-btn" data-material="al">铝</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-target">电压降目标</label>
+      <div class="target-row">
+        <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
+        <span class="unit">%</span>
+      </div>
+      <p class="hint" id="sol-target-hint"></p>
+      <p class="hint">预填的数值是常用的起点，不是规范要求。请改为您的设计所需的数值。</p>
+    </div>
+
+    <button type="submit" class="calc-btn">计算线径</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <div id="sol-cautions"></div>
+    <details class="math-details">
+      <summary>计算方法</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "为什么 3% 对光伏来说太宽松？", "acceptedAnswer": {"@type": "Answer", "text": "3% 这个数字是住宅布线的惯例，那里的负载只是偶尔运行。而组件回路在每个有太阳的小时都在损失这部分电压，贯穿系统的整个寿命，因此同样的百分比代价要高得多。在电池到逆变器的电缆上，问题不只是成本：逆变器看到的是电池电压减去电缆上的电压降，因此电缆压降过大可能在电池组仍有可用电量时就触发低压切断。这就是本页预填目标更严格的原因 — 不过它们只是起点，应由您自行设定，并非要求。"}}, {"@type": "Question", "name": "我该使用哪个电流？", "acceptedAnswer": {"@type": "Answer", "text": "这取决于回路，因此本工具对每种回路的提问方式都不同。组件回路请使用规格书上的阵列工作电流 Imp，而不是短路电流。充电控制器到电池，请使用控制器的最大输出电流，而不是组件的额定值。电池到逆变器，请使用最大持续直流输入电流 — 如果由功率推算，请除以您允许的最低电池电压，而不是标称的 12 或 24 V，因为电池组电压下降时电流会上升。"}}, {"@type": "Question", "name": "为什么我的 12 V 逆变器需要这么粗的电缆？", "acceptedAnswer": {"@type": "Answer", "text": "因为低电压意味着巨大的电流，而小电压的一个很严格的百分比只有极少的伏数。3000 W 逆变器在 12 V 电池组上，标称电压时约消耗 250 A，电池组电压下降时更高。同时 12 V 的 1% 只有 0.12 V — 这就是整个往返路径的全部预算。缩短电缆和提高系统电压是最有效的两个办法，这也是较大型系统采用 24 或 48 V 的原因。"}}, {"@type": "Question", "name": "这会帮我选择保险丝或断路器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。本工具只回答电压降。它不选择过流保护，不检查导体能否承载该电流，不做温度校正，也不应用光伏容量系数。带电池的系统尤其可能产生极高的故障电流，因此保护和隔离装置必须遵照电池及设备制造商的说明。请另行检查载流量，并采用两者中较大的线径。"}}]}</script>
+
+  <section class="card explainer">
+    <h2>为什么光伏布线不一样</h2>
+    <p id="sol-exp-1">在分支回路上，3% 的电压降是针对偶尔运行的负载的经验法则。光伏把这两个前提都改变了。损失是持续的，会累积成实实在在的电能损失；而电压很低，因此一个小百分比只有极少的伏数可用。12 V 的 1% 是 0.12 V，这要覆盖整个往返路径。</p>
+    <h2>把电流取对</h2>
+    <p id="sol-exp-2">这三种回路的电流各自取自不同的地方，取错是得到严重错误结果最容易的方式。组件更接近恒流源，其工作电流几乎不变。充电控制器是按其输出能力标定的，而不是按组件的输入。而逆变器的取流随电池电压下降而上升，因此用功率除以标称电池电压，恰恰在电缆最吃紧的时候低估了电流。</p>
+    <h2>本工具不做什么</h2>
+    <p id="sol-exp-3">本工具只回答电压降，别无其他。它不评估载流量、温度、过流保护、隔离开关、接地或规范合规性，也不处理逆变器的交流输出 — 交流请使用电压降计算器，它支持单相和三相。请把这里得到的线径视为您需要的两个答案之一，并采用较大的那个。</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-zh/common.js?v=95abe3b15a"></script>
+<script src="/assets/ca-zh/solar.js?v=a532be82ff"></script>
+</body>
+</html>

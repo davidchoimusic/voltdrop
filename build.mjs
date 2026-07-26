@@ -23,13 +23,14 @@ const readLiteral = (file, name) => {
   if (!match) throw new Error(`Cannot read sealed constant ${name} from ${file}`);
   return Function(`"use strict"; return (${match[1]});`)();
 };
-for (const name of ['WIRE_TABLE', 'K_FACTOR']) {
+for (const [file, name] of [['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
+                            ['solar.js', 'WIRE_TABLE'], ['solar.js', 'K_FACTOR']]) {
   const canonical = JSON.stringify(readLiteral('app.js', name));
-  const copy = JSON.stringify(readLiteral('landscape.js', name));
+  const copy = JSON.stringify(readLiteral(file, name));
   if (canonical !== copy) {
-    console.error(`\nSEALED DATA DIVERGED: ${name} in landscape.js no longer matches app.js.`);
+    console.error(`\nSEALED DATA DIVERGED: ${name} in ${file} no longer matches app.js.`);
     console.error(`  app.js       ${canonical}`);
-    console.error(`  landscape.js ${copy}`);
+    console.error(`  ${file} ${copy}`);
     console.error(`  These are electrical constants. Fix the copy to match, or if the change is`);
     console.error(`  intended, change BOTH deliberately and re-verify against an independent source.`);
     process.exit(1);
@@ -45,6 +46,7 @@ const runtimePatternGroups = {
   'boxfill.js': 'boxFill',
   'power.js': 'power',
   'landscape.js': 'landscape',
+  'solar.js': 'solar',
 };
 const countryPacks = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -246,6 +248,15 @@ const PAGES = [
     main: 'partials/boxfill-main.html',
     titleKey: 'pages.us.boxFill.title',
     descriptionKey: 'pages.us.boxFill.description',
+  },
+  {
+    dir: 'solar-battery-wire-size',
+    ldNameKey: 'pages.us.solar.ldName',
+    tool: 'solar',
+    script: 'solar.js',
+    main: 'partials/solar-main.html',
+    titleKey: 'pages.us.solar.title',
+    descriptionKey: 'pages.us.solar.description',
   },
   {
     dir: 'landscape-lighting-calculator',

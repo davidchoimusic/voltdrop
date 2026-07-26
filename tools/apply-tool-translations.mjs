@@ -1,4 +1,8 @@
-/* Merge the REVIEWED landscape translations into the locale catalogs.
+/* Merge REVIEWED tool translations into the locale catalogs.
+
+   Shared by the landscape and solar tools:
+     node tools/apply-tool-translations.mjs landscape [--check]
+     node tools/apply-tool-translations.mjs solar     [--check]
 
    Why this exists instead of `node tools/generate-locales.mjs`: that generator is
    currently stale and destructive — on a pristine main it rewrites ~96 reviewed
@@ -12,27 +16,35 @@
    once on this project (the Canadian marrette instruction), which is why the
    checks are hard failures and not warnings.
 
-   Usage:  node tools/apply-landscape-translations.mjs [--check]
-           --check validates and reports without writing.
+   --check validates and reports without writing.
 */
 import { readFileSync, writeFileSync } from 'fs';
 
 const LOCALES = ['es', 'fr-CA', 'zh-Hans'];
 const checkOnly = process.argv.includes('--check');
+const tool = process.argv[2];
+const TOOLS = {
+  landscape: { bank: 'i18n/landscape-translations.json', navKey: 'nav.landscapeLighting' },
+  solar: { bank: 'i18n/solar-translations.json', navKey: 'nav.solarBattery' },
+};
+if (!TOOLS[tool]) {
+  console.error(`Usage: node tools/apply-tool-translations.mjs <${Object.keys(TOOLS).join('|')}> [--check]`);
+  process.exit(1);
+}
 
 const en = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
-const reviewed = JSON.parse(readFileSync('i18n/landscape-translations.json', 'utf8'));
+const reviewed = JSON.parse(readFileSync(TOOLS[tool].bank, 'utf8'));
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 
 const valueAt = (source, key) => key.split('.').reduce((cursor, part) => cursor?.[part], source);
 
 // Every landscape-owned key in the English catalog.
 const englishKeys = [
-  ...Object.keys(en.landscape).map((k) => `landscape.${k}`),
-  ...Object.keys(en.runtimePatterns.landscape).map((k) => `runtimePatterns.landscape.${k}`),
-  ...Object.keys(en.runtime.landscape).map((k) => `runtime.landscape.${k}`),
-  ...Object.keys(en.pages.us.landscape).map((k) => `pages.us.landscape.${k}`),
-  'nav.landscapeLighting',
+  ...Object.keys(en[tool]).map((k) => `${tool}.${k}`),
+  ...Object.keys(en.runtimePatterns[tool]).map((k) => `runtimePatterns.${tool}.${k}`),
+  ...Object.keys(en.runtime[tool]).map((k) => `runtime.${tool}.${k}`),
+  ...Object.keys(en.pages.us[tool]).map((k) => `pages.us.${tool}.${k}`),
+  TOOLS[tool].navKey,
 ];
 
 // Tokens that must survive verbatim into every language.
@@ -111,7 +123,7 @@ if (problems.length) {
   process.exit(1);
 }
 
-console.log(`validated ${englishKeys.length} keys × ${LOCALES.length} locales — no problems`);
+console.log(`${tool}: validated ${englishKeys.length} keys × ${LOCALES.length} locales — no problems`);
 
 if (checkOnly) {
   console.log('--check: nothing written');

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de calibre para solar y baterías — circuitos PV, controlador e inversor | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita de calibre de conductor en corriente continua para solar y baterías. Objetivos de caída más estrictos que en instalaciones domésticas, la corriente correcta para cada circuito y una respuesta honesta de fuera de rango en lugar del calibre más grande de la tabla. Sin registro.">
+<link rel="canonical" href="https://voltdrop.app/es/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/solar-battery-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/solar-battery-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/solar-battery-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/solar-battery-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calculadora de calibre para solar y baterías — circuitos PV, controlador e inversor | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita de calibre de conductor en corriente continua para solar y baterías. Objetivos de caída más estrictos que en instalaciones domésticas, la corriente correcta para cada circuito y una respuesta honesta de fuera de rango en lugar del calibre más grande de la tabla. Sin registro.">
+<meta property="og:url" content="https://voltdrop.app/es/solar-battery-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de calibre para solar y baterías — circuitos PV, controlador e inversor | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita de calibre de conductor en corriente continua para solar y baterías. Objetivos de caída más estrictos que en instalaciones domésticas, la corriente correcta para cada circuito y una respuesta honesta de fuera de rango en lugar del calibre más grande de la tabla. Sin registro.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora VoltDrop de calibre para solar y baterías","url":"https://voltdrop.app/es/solar-battery-wire-size/","description":"Calculadora gratuita de calibre de conductor en corriente continua para solar y baterías. Objetivos de caída más estrictos que en instalaciones domésticas, la corriente correcta para cada circuito y una respuesta honesta de fuera de rango en lugar del calibre más grande de la tabla. Sin registro.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Iluminación exterior</a>
+    <a href="/solar-battery-wire-size/" class="tool-link active" data-tool="solar"><span aria-hidden="true">☀️</span>Solar y baterías</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<style>
+  .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
+  .scenario-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3);
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .scenario-btn.active {
+    border-color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .scenario-btn .sc-name { display: block; font-weight: 700; }
+  .scenario-btn .sc-why { display: block; margin-top: 2px; color: var(--color-ink-soft); }
+  .sol-caution {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-hazard);
+  }
+  .sol-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
+  .target-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); align-items: end; }
+  .target-row input { min-width: 0; }
+</style>
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">☀️ Calibre para solar y baterías</h1>
+    <p class="tool-sub">Los circuitos solares son más estrictos que las instalaciones domésticas, y cada uno toma su corriente de un sitio distinto. Elija el circuito y le pediremos el número correcto.</p>
+  </div>
+
+  <form id="sol-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label">¿Qué circuito está calculando?</label>
+      <div class="scenario-list" role="group" aria-label="Tipo de circuito">
+        <button type="button" class="scenario-btn active" data-scenario="pv">
+          <span class="sc-name">Paneles → controlador o inversor</span>
+          <span class="sc-why">Aquí la caída es producción perdida, cada hora que hay sol.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="controller">
+          <span class="sc-name">Controlador de carga → batería</span>
+          <span class="sc-why">Aquí la caída hace que el controlador lea mal la batería.</span>
+        </button>
+        <button type="button" class="scenario-btn" data-scenario="battery">
+          <span class="sc-name">Batería → inversor</span>
+          <span class="sc-why">El más estricto. Aquí la caída cuesta potencia y margen de corte.</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-volts" id="sol-volts-label">Tensión del sistema</label>
+      <div class="input-unit">
+        <input type="number" id="sol-volts" inputmode="decimal" min="1" step="any" value="48" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint" id="sol-volts-hint"></p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-amps" id="sol-amps-label">Corriente</label>
+      <div class="input-unit">
+        <input type="number" id="sol-amps" inputmode="decimal" min="0" step="any" placeholder="p. ej. 9.5" required>
+        <span class="unit">A</span>
+      </div>
+      <p class="hint" id="sol-amps-hint"></p>
+    </div>
+
+    <details class="math-details" id="sol-helper" hidden>
+      <summary>Calcular la corriente a partir de mi inversor</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="sol-inv-watts">Vatios continuos del inversor</label>
+          <input type="number" id="sol-inv-watts" inputmode="decimal" min="0" step="any" placeholder="p. ej. 3000">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-eff">Rendimiento del inversor</label>
+          <input type="number" id="sol-inv-eff" inputmode="decimal" min="0.1" max="1" step="any" placeholder="p. ej. 0.9">
+        </div>
+        <div>
+          <label class="field-label" for="sol-inv-min">Tensión mínima de la batería</label>
+          <input type="number" id="sol-inv-min" inputmode="decimal" min="1" step="any" placeholder="p. ej. 10.5">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="sol-helper-apply">Usar esta corriente</button>
+      <p class="hint">Dividimos por la tensión MÍNIMA de la batería, no por los 12 o 24 V nominales. El inversor tiene que entregar toda su potencia también cuando el banco ha caído, y es justo entonces cuando la corriente — y la caída — es peor.</p>
+    </details>
+
+    <div class="field">
+      <label class="field-label" for="sol-feet">Distancia en un solo sentido</label>
+      <div class="input-unit">
+        <input type="number" id="sol-feet" inputmode="decimal" min="0" step="any" placeholder="p. ej. 20" required>
+        <span class="unit">ft</span>
+      </div>
+      <p class="hint">Mida la distancia en un solo sentido. Nosotros la duplicamos, porque la corriente va y vuelve.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Conductor</label>
+      <div class="seg" role="group" aria-label="Material del conductor">
+        <button type="button" class="seg-btn active" data-material="cu">Cobre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminio</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="sol-target">Objetivo de caída de tensión</label>
+      <div class="target-row">
+        <input type="number" id="sol-target" inputmode="decimal" min="0.1" max="10" step="any" value="2" required>
+        <span class="unit">%</span>
+      </div>
+      <p class="hint" id="sol-target-hint"></p>
+      <p class="hint">El número que aparece es un punto de partida habitual, no un requisito normativo. Cámbielo por el que exija su diseño.</p>
+    </div>
+
+    <button type="submit" class="calc-btn">Calcular el calibre</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <div id="sol-cautions"></div>
+    <details class="math-details">
+      <summary>Cómo lo hemos calculado</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Por qué el 3% es demasiado holgado para la solar?", "acceptedAnswer": {"@type": "Answer", "text": "La cifra del 3% es una convención de instalaciones domésticas, donde la carga funciona de vez en cuando. Un circuito de paneles pierde esa tensión cada hora que hay sol, durante toda la vida del sistema, así que el mismo porcentaje cuesta mucho más. En un cable de batería a inversor es peor que un coste: el inversor ve la tensión de la batería menos la caída del cable, así que un cable que se hunde puede activar su corte por baja tensión mientras el banco todavía tiene carga utilizable. Por eso los objetivos que aparecen aquí son más estrictos, aunque son puntos de partida que usted debe fijar, no requisitos."}}, {"@type": "Question", "name": "¿Qué corriente debo usar?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del circuito, y por eso esta herramienta pregunta de forma distinta en cada caso. Para un circuito de paneles use la corriente de operación del generador, Imp, de la ficha técnica, no la de cortocircuito. Para un controlador de carga a una batería, use la corriente máxima de salida del controlador, no la de los paneles. Para una batería a un inversor, use la corriente continua máxima de entrada en corriente continua; y si la calcula a partir de los vatios, divida por la tensión mínima de batería que vaya a permitir en lugar de los 12 o 24 V nominales, porque la corriente sube a medida que el banco cae."}}, {"@type": "Question", "name": "¿Por qué mi inversor de 12 V necesita un cable tan grande?", "acceptedAnswer": {"@type": "Answer", "text": "Porque una tensión baja significa una corriente enorme, y un porcentaje estricto de una tensión pequeña son muy pocos voltios. Un inversor de 3000 W en un banco de 12 V consume unos 250 A a tensión nominal, y más a medida que el banco cae. Mientras tanto, el 1% de 12 V es 0.12 V: ese es todo el presupuesto para el recorrido completo de ida y vuelta. Cables cortos y una tensión de sistema alta son las dos cosas que más ayudan, y por eso las instalaciones grandes usan 24 o 48 V."}}, {"@type": "Question", "name": "¿Esto dimensiona mis fusibles o interruptores?", "acceptedAnswer": {"@type": "Answer", "text": "No. Esto responde únicamente a la caída de tensión. No dimensiona la protección contra sobrecorriente, no comprueba que el conductor pueda conducir la corriente, no aplica corrección por temperatura y no aplica los factores de dimensionamiento PV. Los sistemas con baterías en particular pueden entregar corrientes de falla muy elevadas, así que la protección y los medios de desconexión deben seguir las instrucciones del fabricante de la batería y del equipo. Compruebe la ampacidad por separado y use el calibre mayor de los dos."}}]}</script>
+
+  <section class="card explainer">
+    <h2>Por qué el cableado solar es distinto</h2>
+    <p id="sol-exp-1">En un circuito derivado, una caída del 3% es una regla general para una carga que funciona de vez en cuando. La solar cambia las dos mitades de eso. La pérdida es continua, así que se acumula en energía realmente perdida, y las tensiones son bajas, así que un porcentaje pequeño son muy pocos voltios que gastar. El 1% de 12 V es 0.12 V para todo el recorrido de ida y vuelta.</p>
+    <h2>Acertar con la corriente</h2>
+    <p id="sol-exp-2">Cada uno de los tres circuitos toma su corriente de un sitio distinto, y usar la equivocada es la forma más fácil de obtener un resultado muy erróneo. Los paneles se parecen más a una fuente de corriente, así que su corriente de operación apenas se mueve. Un controlador de carga se caracteriza por lo que puede entregar, que no es lo que entran los paneles. Y el consumo de un inversor sube a medida que la batería baja, así que dividir los vatios por la tensión nominal del banco lo subestima justo cuando el cable menos se lo puede permitir.</p>
+    <h2>Lo que esta herramienta no hace</h2>
+    <p id="sol-exp-3">Esto responde a la caída de tensión y a nada más. No evalúa ampacidad, temperatura, protección contra sobrecorriente, medios de desconexión, puesta a tierra ni cumplimiento normativo, y no trata la salida en corriente alterna de un inversor: para eso use la calculadora de caída de tensión, que conoce el monofásico y el trifásico. Considere el calibre de aquí como una de las dos respuestas que necesita, y use la mayor.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=32cb57ccfe"></script>
+<script src="/assets/us-es/solar.js?v=f7c3b4ca28"></script>
+</body>
+</html>

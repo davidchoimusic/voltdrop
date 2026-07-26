@@ -14,6 +14,7 @@ const guideTranslations = JSON.parse(readFileSync('i18n/guide-translations.json'
 // than mechanically re-translating them. See PROJECT_CONTEXT.md: this generator
 // is currently stale and must not be run.
 const landscapeTranslations = JSON.parse(readFileSync('i18n/landscape-translations.json', 'utf8'));
+const solarTranslations = JSON.parse(readFileSync('i18n/solar-translations.json', 'utf8'));
 const existingSafetyRegistry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
 const packs = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -26,6 +27,7 @@ const templateFiles = [
   'partials/conduit-main.html',
   'partials/boxfill-main.html',
   'partials/landscape-main.html',
+  'partials/solar-main.html',
   'partials/power-main.html',
   'partials/privacy-main.html',
   'partials/terms-main.html',
@@ -54,7 +56,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'landscape', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'landscape', 'solar', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {
@@ -76,6 +78,7 @@ for (const [job, translations] of Object.entries(guideTranslations)) {
 const landscapeExact = { es: {}, 'fr-CA': {}, 'zh-Hans': {} };
 for (const locale of Object.keys(landscapeExact)) {
   Object.assign(landscapeExact[locale], landscapeTranslations[locale] ?? {});
+  Object.assign(landscapeExact[locale], solarTranslations[locale] ?? {});
 }
 
 const valueAt = (source, key) => key.split('.').reduce((cursor, part) => cursor?.[part], source);
