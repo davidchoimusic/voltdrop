@@ -3,7 +3,9 @@
 // Then commit the outputs.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
+import { dirname, resolve } from 'path';
 import { localizeRuntimeSource } from './tools/runtime-code-boundary.mjs';
+import { checkRegistries } from './tools/check-registries.mjs';
 
 /* Sealed electrical data that exists in more than one file must stay IDENTICAL.
    landscape.js carries its own copy of WIRE_TABLE and K_FACTOR because each page
@@ -108,8 +110,27 @@ const text = (key, edition, { allowEnglishFallback = false } = {}) => {
   return value;
 };
 
+const expandFragments = (template, label) => {
+  const expanded = template.replace(/\{\{>\s*([^{}\s]+)\s*\}\}/g, (_, fragmentName) => {
+    const fragmentFile = resolve(dirname(label), fragmentName);
+    if (!existsSync(fragmentFile)) {
+      throw new Error(`Missing fragment ${fragmentName} referenced by ${label}`);
+    }
+    const fragment = readFileSync(fragmentFile, 'utf8');
+    const nested = fragment.match(/\{\{>[^}]*\}\}/);
+    if (nested) {
+      throw new Error(`Nested fragment directive in ${fragmentName} referenced by ${label}: ${nested[0]}`);
+    }
+    return fragment.replace(/\r?\n$/, '');
+  });
+  const unresolved = expanded.match(/\{\{>[^}]*\}\}/);
+  if (unresolved) throw new Error(`Unresolved fragment directive in ${label}: ${unresolved[0]}`);
+  return expanded;
+};
+
 const renderTemplate = (template, label, edition, options) => {
-  const rendered = template.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
+  const composed = expandFragments(template, label);
+  const rendered = composed.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
     const value = text(key, edition, options);
     if (format === 'json') return JSON.stringify(value).slice(1, -1);
     return value;
@@ -570,3 +591,4 @@ if (unresolvedLlmsPlaceholder) {
 }
 writeFileSync('llms-full.txt', `${llmsFull.trim()}\n`);
 console.log('built llms-full.txt');
+checkRegistries();

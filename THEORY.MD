@@ -64,7 +64,9 @@ Trust is the product. Five commitments make it concrete.
 5. **Machine-readable context inherits the same boundaries.** `llms-full.txt` is
    built from the catalogs and country packs, not maintained as a second body of
    claims. It explains rule order, tool limits, and territorial forks, but
-   withholds bulk tables. Its value is uncertain until crawlers adopt it.
+   withholds bulk tables. `PAGES` likewise owns static URLs; the sitemap,
+   browser-side edition routing, verification scope, and generated directories
+   must agree with it in both directions. Its crawler value remains uncertain.
 
 English remains an executable baseline. The 23 reviewed English pages are pinned
 by SHA-256, while electrical data has separate table seals. A legitimate
@@ -104,10 +106,11 @@ The Terms page names the 2023 NEC and CSA C22.1:24 boundaries, excludes Canadian
 conduit tables that remain planning-only, and warns that local adoption schedules
 and amendments can change the answer. Simplifications are not isolated footnotes.
 
-Localization uses stable template keys and locale-owned full thoughts. Country
-packs own territorial claims, citations, limits, and scenarios. Locale catalogs own
-visible words and complete runtime sentences. Program-facing IDs, selectors,
-events, URL pieces, and data keys stay unchanged.
+Localization uses stable template keys and locale-owned full thoughts. New
+search entry points compose page-owned explanations with shallow form-and-result
+fragments before catalog lookup; they never rewrite rendered HTML. Country packs
+own territorial claims, while locale catalogs own visible full thoughts.
+Program-facing IDs, selectors, events, URL pieces, and data keys stay unchanged.
 
 Terminology is safety data. A locked glossary fixes ambient temperature,
 correction factor, adjustment factor, derating, current-carrying conductor,

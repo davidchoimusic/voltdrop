@@ -8,11 +8,14 @@ import { existsSync, readFileSync, statSync } from 'fs';
 import { createHash } from 'crypto';
 import { spawnSync } from 'node:child_process';
 import { extname, join } from 'node:path';
+import { checkRegistries } from './tools/check-registries.mjs';
 
 const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
 import { mkdirSync } from 'fs';
 mkdirSync(shots, { recursive: true });
+
+checkRegistries();
 
 // ---- Byte-identical English build gate ----
 const identical = spawnSync(process.execPath, ['tools/check-build-identical.mjs'], {
