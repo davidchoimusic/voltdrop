@@ -1287,6 +1287,7 @@
   "landscape.whichLayoutShouldIUseQuestion": "¿Qué disposición debería usar?",
   "landscape.whyDoMyFarLightsLookDimmerQuestion": "¿Por qué mis luces lejanas parecen más débiles que las cercanas?",
   "landscape.whyOneCableWithSeveralLightsIsHeading": "Por qué un cable con varias luces es distinto",
+  "landscape.wireMaterialLabel": "Material del conductor",
   "landscape.yourLayoutAriaLabel": "Disposición del cableado",
   "landscape.yourLayoutLabel": "¿Cómo está cableado?",
   "meta.home.freeElectricalCalculatorsForElectriciansVoltageDropMeta": "Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia.",

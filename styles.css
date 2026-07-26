@@ -737,17 +737,27 @@ input, select, .big-number, .result-cell .v {
 
 .input-plain::placeholder { color: #7a8087; font-weight: 500; }
 
+/* appearance:none or macOS paints its own grey native control, which is why
+   every select on the site looked like a different design system from the dark
+   inputs sitting right above it. The chevron is an inline SVG data URI so the
+   strict no-external-requests rule still holds. */
 select {
   width: 100%;
   min-height: 52px;
   padding: var(--space-2) var(--space-3);
+  padding-right: var(--space-6);
   font-family: inherit;
   font-size: 18px;
   font-weight: 700;
   color: var(--color-ink);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   border: 2px solid var(--color-line-strong);
   border-radius: var(--radius-sm);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23b0b5bb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
 }
 
 select:focus {
