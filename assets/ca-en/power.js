@@ -111,6 +111,7 @@ function applyMode() {
   $('pw-known-ohms').disabled = ohmsUnavailable;
   $('pw-ohms-unavailable').hidden = !ohmsUnavailable;
   $('pw-system-hint').textContent = SYSTEMS[system].hint;
+  $('pw-voltage-hint').hidden = system !== 'ac3';
   $('pw-known-field').hidden = !needsKnownChoice;
   $('pw-ohms-label').textContent = system === 'dc' ? 'Resistance (Ω)' : 'Impedance (Ω)';
 

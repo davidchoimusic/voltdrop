@@ -151,7 +151,7 @@
         <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="e.g. 120" required>
         <span class="unit">伏特</span>
       </div>
-      <p class="hint">三相：请输入线电压（例如208、480）。</p>
+      <p class="hint" id="pw-voltage-hint" hidden>三相：请输入线电压（例如208、480）。</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>
@@ -214,6 +214,7 @@
     <h2>使用的公式</h2>
     <p>DC：瓦特 = 伏特 × 安培。AC单相：瓦特 = 伏特 × 安培 × 功率因数。AC三相：瓦特 = √3 (1.732) × 线电压 × 安培 × 功率因数。每个结果都会显示计算过程；请展开“计算方法”。</p>
     <p>要为此负载选择导线吗？请将这里的安培值直接带入 <a class="inline-link" href="/wire-size-calculator/">导线规格（线规）</a> 和 <a class="inline-link" href="/ampacity-check/">载流量检查</a> 工具。</p>
+    <p>想知道为什么可以信任这个结果吗？ <a class="inline-link" href="/how-we-verify/">了解 VoltDrop 如何核查计算数据</a>.</p>
   </section>
 
 </main>
@@ -230,6 +231,7 @@
     </div>
     <nav class="footer-links" aria-label="页脚">
       <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/how-we-verify/">我们的核查方法</a>
       <a class="footer-link" href="/privacy/">隐私</a>
       <a class="footer-link" href="/terms/">条款</a>
     </nav>
@@ -238,7 +240,7 @@
   </div>
 </footer>
 
-<script src="/assets/us-zh/common.js?v=95abe3b15a"></script>
-<script src="/assets/us-zh/power.js?v=cd9adc9041"></script>
+<script src="/assets/us-zh/common.js?v=e672308290"></script>
+<script src="/assets/us-zh/power.js?v=a5cc40112a"></script>
 </body>
 </html>

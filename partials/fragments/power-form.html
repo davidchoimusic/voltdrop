@@ -35,7 +35,7 @@
         <input type="number" id="pw-volts" inputmode="decimal" min="0.1" step="any" placeholder="{{attr:power.eGN120Placeholder}}" required>
         <span class="unit">{{power.volts}}</span>
       </div>
-      <p class="hint">{{power.threePhaseUseTheLineToLine}}</p>
+      <p class="hint" id="pw-voltage-hint" hidden>{{power.threePhaseUseTheLineToLine}}</p>
     </div>
 
     <div class="field" id="pw-field-amps" hidden>

@@ -21,6 +21,30 @@ Canada Simplified Chinese uses the CEC at https://voltdrop.app/ca-zh/ with the U
 
 The non-English editions contain localized versions of the same tools and guides. Their content is not duplicated here.
 
+## How VoltDrop checks its numbers
+
+URL: https://voltdrop.app/how-we-verify/
+
+VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against two independently produced reproductions of the published table before it goes live, row by row. Both have to agree, on every cell, or it doesn't ship.
+
+After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.
+
+The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the two-source check is for. They're separate protections and they do separate jobs.
+
+If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
+
+US data basis: US ampacity data reflects NEC Table 310.16 and the 310.15(B)(1) correction factors as published in the 2023 edition (NFPA 70). Small-conductor caps come from 240.4(D), conduit fill from Chapter 9 Tables 4 and 5, and box fill from 314.16. These particular tables have been stable across editions. That is why a slightly different adopted edition usually does not change the answer. State and municipal adoption varies; confirm the edition adopted locally.
+
+Canadian data basis: Canadian data reflects CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A, and 5C, with Rules 4-004, 4-006, 8-104, and 14-104. Provincial and municipal adoption varies; confirm the edition adopted locally.
+
+No licensed electrician reviews or approves VoltDrop. Nobody here is holding a licence over this work. If a page ever claims otherwise, it's wrong — tell us.
+
+US institutional limit: VoltDrop is not affiliated with, endorsed by, or approved by NFPA. No calculator is “NEC certified,” including this one. That isn't a thing.
+
+Canadian institutional limit: VoltDrop is not affiliated with, endorsed by, or approved by CSA. No calculator is “CEC certified,” including this one. That isn't a thing.
+
+Automated checks catch named kinds of change and translation error. They do not prove that an original value was correct or that a planning estimate covers real installation conditions.
+
 ## Tools
 
 ### Voltage Drop Calculator

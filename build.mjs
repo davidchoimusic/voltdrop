@@ -253,6 +253,14 @@ const PAGES = [
     descriptionKey: 'pages.us.privacy.description',
   },
   {
+    dir: 'how-we-verify',
+    tool: 'how-we-verify',
+    script: null, // methodology page — common.js alone is enough
+    main: 'partials/how-we-verify-main.html',
+    titleKey: 'pages.us.howWeVerify.title',
+    descriptionKey: 'pages.us.howWeVerify.description',
+  },
+  {
     dir: 'power-calculator',
     ldNameKey: 'pages.us.power.ldName',
     tool: 'power',

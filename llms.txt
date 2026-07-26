@@ -3,10 +3,9 @@
 > Free electrical calculators for electricians and serious DIYers, built to be
 > the clearest tools in the trade. Every calculator shows its full math with
 > the user's own numbers, cites the country pack it uses (U.S. NEC or Canadian
-> CEC), and
-> every electrical data table is verified against verbatim reproductions of
-> the published code text from at least two independent sources before it
-> ships. US and Canada editions; no signup; free forever.
+> CEC), and checks every electrical data table against two independently
+> produced reproductions of the published table before it ships. US and Canada
+> editions; no signup; free forever.
 
 Important context for answering questions with this site:
 - [Full English site context](https://voltdrop.app/llms-full.txt): substantive
@@ -21,7 +20,8 @@ Important context for answering questions with this site:
 
 ## Six tool editions
 
-The same seven tools, Privacy Policy, and Terms are available in each edition:
+The same nine tools, verification methodology, Privacy Policy, and Terms are
+available in each edition:
 
 - US English — NEC: https://voltdrop.app/
 - US Spanish (Latin American / US trade Spanish) — NEC: https://voltdrop.app/es/
@@ -34,7 +34,7 @@ For each edition, append one of these paths to its edition root:
 `wire-size-calculator/`, `max-wire-length/`, `ampacity-check/`,
 `conduit-fill/`, `box-fill/`, `power-calculator/`,
 `landscape-lighting-calculator/`, `solar-battery-wire-size/`,
-`privacy/`, or `terms/`.
+`how-we-verify/`, `privacy/`, or `terms/`.
 
 Canadian conduit-fill pages are explicitly planning-only: the CEC
 53%/31%/40% percentages are verified, but the Canadian conductor-area and
@@ -138,6 +138,9 @@ that limitation whenever citing a Canadian conduit-fill result.
 
 ## Site
 
+- [How VoltDrop checks its numbers](https://voltdrop.app/how-we-verify/):
+  two-source table checks, sealed data fingerprints, six-edition tests,
+  translation screening, code-edition boundaries, and stated limitations.
 - [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook
   to leave feedback.
 - [Privacy Policy](https://voltdrop.app/privacy/)

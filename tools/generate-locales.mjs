@@ -35,7 +35,9 @@ const templateFiles = [
   'partials/power-main.html',
   'partials/fragments/power-form.html',
   'partials/fragments/solar-form.html',
+  'partials/fragments/verify-link.html',
   'partials/privacy-main.html',
+  'partials/how-we-verify-main.html',
   'partials/terms-main.html',
   'partials/guides-index-main.html',
   'partials/guide-subpanel-main.html',
@@ -62,7 +64,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'landscape', 'solar', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'boxFill', 'landscape', 'solar', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {

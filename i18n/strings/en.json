@@ -215,12 +215,49 @@
     "eachToolSHowWeCalculatedThisContinuation": "; each tool's \"How we calculated this\" shows its exact math.",
     "footerAriaLabel": "Footer",
     "freeElectricalCalculatorsNoSignupForever": "· free electrical calculators · no signup, forever",
+    "howWeVerify": "How we verify",
     "leaveFeedback": "💬 Leave feedback",
     "privacy": "Privacy",
     "terms": "Terms",
     "unitedStatesButton": "🇺🇸 United States",
     "voltDrop": "VoltDrop",
     "weLlRememberYourChoiceOnThis": "We'll remember your choice on this device. More countries coming."
+  },
+  "howVerify": {
+    "afterATablePassesWeTakeAFingerprint": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.",
+    "backTranslationCatchesMissingWarnings": "Back-translation catches missing warnings and mangled meaning. It is a screen, not proof.",
+    "beClearAboutWhatThisDoesAndDoesnTProve": "The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the two-source check is for. They're separate protections and they do separate jobs.",
+    "codesAreAdoptedLocally": "Codes are adopted locally and amended locally. The edition in force where you're standing may not be the one a table came from.",
+    "correctionsComeThrough": "The correction route is",
+    "dataEditionHeading": "The data edition",
+    "everyCalculatorIsDrivenInAllSixEditions": "Every calculator is driven in all six editions, not just English, with the answer checked against a hand-worked value. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
+    "everyNumberShownOnATranslatedPage": "Every number shown on a translated page must match the same number on its English twin.",
+    "feedbackLink": "Feedback",
+    "howVoltDropChecksItsNumbersTitle": "How VoltDrop checks its numbers",
+    "ifANumberHereLooksWrong": "If a number here looks wrong to you, say so. You don't need to be polite about it. Corrections to safety data get priority over everything else on the roadmap.",
+    "ifAPageHereShowsYouAResult": "If a page here shows you a result, the data behind it passed. If it didn't pass, you get the note instead.",
+    "methodologyAttribution": "VoltDrop methodology",
+    "noLicensedElectricianReviewsOrApproves": "No licensed electrician reviews or approves VoltDrop. Nobody here is holding a licence over this work. If a page ever claims otherwise, it's wrong — tell us.",
+    "ourCanadianConduitFillPageCarriesAPlanningNote": "Our Canadian conduit-fill page carries a planning-only note instead of results, because the Canadian tables behind it haven't passed the two-source check yet. It has sat like that for weeks. A blank is honest. A confident wrong number is dangerous.",
+    "readHowVoltDropChecksItsNumbers": "Read how VoltDrop checks its numbers",
+    "resultsArePlanningEstimates": "Results are planning estimates using simplified, normal-conditions methods. Real installations have conditions our inputs don't ask about.",
+    "sealedSoTheyCanTDriftHeading": "Sealed, so they can't drift",
+    "tellUsWeDRatherKnowHeading": "Tell us — we'd rather know",
+    "termsThatMustNeverBeTranslated": "Terms that must never be translated — code names, wire types, and units — are checked for survival in every language.",
+    "theEasiestThingWouldBeToFillEveryGap": "The easiest thing in the world would be to fill every gap with a plausible-looking number. We don't.",
+    "theEnglishPagesAreComparedByteForByte": "The English pages are compared byte-for-byte against the previous build, so nothing changes by accident.",
+    "theLimitsPlainlyHeading": "The limits, plainly",
+    "thisIsNotTheatreOneDraftAmpacity": "This is not theatre. One draft ampacity value in an early build disagreed between the two sources. The check caught it, the value was corrected before it shipped, and that is the whole reason the step exists.",
+    "translationsGetReadBackHeading": "Translations get read back",
+    "twoSourcesBeforeItShipsHeading": "Two sources, before it ships",
+    "voltDropDoesnTTypeNumbersInFromMemory": "VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against two independently produced reproductions of the published table before it goes live, row by row. Both have to agree, on every cell, or it doesn't ship.",
+    "voltDropShipsInSixEditionsAcrossFourLanguages": "VoltDrop ships in six editions across four languages. A safety warning that quietly loses its meaning in translation is a real hazard, so we screen for it: the translated text is turned back into English on its own, without the original in view, and the result is compared against what we actually meant.",
+    "wantToKnowWhyYouShouldTrustThisResult": "Want to know why you should trust this result?",
+    "weAlsoWatchTheScreenItself": "We also watch the screen itself. An early version of this check reported almost everything as perfect because the English original had leaked into the process and was simply being echoed back. That run was thrown out. The check was rebuilt so the source is sealed out of it. Runs that show signs of leakage are rejected rather than trusted.",
+    "weVeTestedThatTheSealFires": "We've tested that the seal fires on a one-digit edit.",
+    "whatRunsAutomaticallyHeading": "What runs automatically",
+    "whenWeDonTKnowWeSaySoHeading": "When we don't know, we say so",
+    "youReAboutToSizeAConductor": "You're about to size a conductor from a number on a screen. Here's exactly where that number came from, and what we do to stop it being wrong."
   },
   "guides": {
     "ampacityChart": {
@@ -1225,6 +1262,10 @@
       "privacy": {
         "title": "Privacy Policy | VoltDrop",
         "description": "VoltDrop privacy policy: calculator inputs never leave your browser; optional sign-in data for comments only; no data sales; deletion on request."
+      },
+      "howWeVerify": {
+        "title": "How VoltDrop verifies its electrical data | VoltDrop",
+        "description": "How VoltDrop checks calculator data: two independent reproductions, sealed table fingerprints, six-edition tests, translation screening, and plain limits."
       },
       "power": {
         "ldName": "VoltDrop Power Calculator",

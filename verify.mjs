@@ -157,6 +157,7 @@ const SCOPED_PATHS = [
   'ampacity-check/',
   'conduit-fill/',
   'privacy/',
+  'how-we-verify/',
   'power-calculator/',
   'box-fill/',
   'landscape-lighting-calculator/',

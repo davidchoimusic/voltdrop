@@ -21,6 +21,30 @@ Canada Simplified Chinese uses the CEC at https://voltdrop.app/ca-zh/ with the U
 
 The non-English editions contain localized versions of the same tools and guides. Their content is not duplicated here.
 
+## How VoltDrop checks its numbers
+
+URL: https://voltdrop.app/how-we-verify/
+
+{{us:howVerify.voltDropDoesnTTypeNumbersInFromMemory}}
+
+{{us:howVerify.afterATablePassesWeTakeAFingerprint}}
+
+{{us:howVerify.beClearAboutWhatThisDoesAndDoesnTProve}}
+
+If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
+
+US data basis: {{us:howVerify.dataEdition}}
+
+Canadian data basis: {{ca:howVerify.dataEdition}}
+
+{{us:howVerify.noLicensedElectricianReviewsOrApproves}}
+
+US institutional limit: {{us:howVerify.notAffiliatedOrCertified}}
+
+Canadian institutional limit: {{ca:howVerify.notAffiliatedOrCertified}}
+
+Automated checks catch named kinds of change and translation error. They do not prove that an original value was correct or that a planning estimate covers real installation conditions.
+
 ## Tools
 
 ### Voltage Drop Calculator
