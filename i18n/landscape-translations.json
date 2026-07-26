@@ -140,7 +140,8 @@
     "runtime.landscape.hintTsplit": "Un tronco hasta una derivación y de ahí dos ramales en sentidos opuestos. Las distancias se miden a lo largo de cada ramal DESDE LA DERIVACIÓN, no desde el transformador.",
     "runtimePatterns.landscape.tapLineBranch": "{branch} {label} — {count}",
     "runtime.landscape.hubDistanceLabel": "El hub está a esta distancia del recorrido",
-    "runtime.landscape.hubDistanceHint": "Hasta dónde llega el tronco antes de repartirse. Un hub a 0 ft es el mismo circuito que una estrella."
+    "runtime.landscape.hubDistanceHint": "Hasta dónde llega el tronco antes de repartirse. Un hub a 0 ft es el mismo circuito que una estrella.",
+    "landscape.wireMaterialLabel": "Material del conductor"
   },
   "fr-CA": {
     "nav.landscapeLighting": "Éclairage paysager",
@@ -278,7 +279,8 @@
     "runtime.landscape.hintTsplit": "Un tronc jusqu’à une dérivation, puis deux branches en sens opposés. Les distances se mesurent le long de chaque branche À PARTIR DE LA DÉRIVATION, non du transformateur.",
     "runtimePatterns.landscape.tapLineBranch": "{branch} {label} — {count}",
     "runtime.landscape.hubDistanceLabel": "Le moyeu est à cette distance sur le parcours",
-    "runtime.landscape.hubDistanceHint": "Jusqu’où va le tronc avant de se diviser. Un moyeu à 0 ft est le même circuit qu’une étoile."
+    "runtime.landscape.hubDistanceHint": "Jusqu’où va le tronc avant de se diviser. Un moyeu à 0 ft est le même circuit qu’une étoile.",
+    "landscape.wireMaterialLabel": "Matériau du conducteur"
   },
   "zh-Hans": {
     "nav.landscapeLighting": "景观照明",
@@ -416,6 +418,7 @@
     "runtime.landscape.hintTsplit": "一条主干接到分支点，然后分成两条方向相反的支路。距离沿各自支路、从分支点起测量，而不是从变压器起测量。",
     "runtimePatterns.landscape.tapLineBranch": "{branch} {label} — {count}",
     "runtime.landscape.hubDistanceLabel": "集线点在路径上的距离",
-    "runtime.landscape.hubDistanceHint": "主干延伸多远后开始分支。集线点在 0 ft 处时，与星形是同一个电路。"
+    "runtime.landscape.hubDistanceHint": "主干延伸多远后开始分支。集线点在 0 ft 处时，与星形是同一个电路。",
+    "landscape.wireMaterialLabel": "导线材料"
   }
 }

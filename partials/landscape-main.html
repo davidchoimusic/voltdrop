@@ -98,11 +98,15 @@
     <div class="field">
       <label class="field-label" for="ls-size">{{landscape.cableSizeLabel}}</label>
       <select id="ls-size"></select>
+      <p class="hint">{{landscape.landscapeCableIsAlmostAlwaysCopperHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{landscape.wireMaterialLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:landscape.conductorMaterialAriaLabel}}">
         <button type="button" class="seg-btn active" data-material="cu">{{landscape.copperButton}}</button>
         <button type="button" class="seg-btn" data-material="al">{{landscape.aluminumButton}}</button>
       </div>
-      <p class="hint">{{landscape.landscapeCableIsAlmostAlwaysCopperHint}}</p>
     </div>
 
     <div class="field">

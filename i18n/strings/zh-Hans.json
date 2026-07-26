@@ -1287,6 +1287,7 @@
   "landscape.whichLayoutShouldIUseQuestion": "我该采用哪种布线方式？",
   "landscape.whyDoMyFarLightsLookDimmerQuestion": "为什么远处的灯看起来比近处的暗？",
   "landscape.whyOneCableWithSeveralLightsIsHeading": "为什么一根电缆带多盏灯不一样",
+  "landscape.wireMaterialLabel": "导线材料",
   "landscape.yourLayoutAriaLabel": "布线方式",
   "landscape.yourLayoutLabel": "如何布线？",
   "meta.home.freeElectricalCalculatorsForElectriciansVoltageDropMeta": "免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。",

@@ -1836,6 +1836,7 @@
     "whichLayoutShouldIUseQuestion": "Which layout should I use?",
     "whyDoMyFarLightsLookDimmerQuestion": "Why do my far lights look dimmer than the near ones?",
     "whyOneCableWithSeveralLightsIsHeading": "Why one cable with several lights is different",
+    "wireMaterialLabel": "Wire material",
     "yourLayoutAriaLabel": "Wiring layout",
     "yourLayoutLabel": "How is it wired?"
   },

@@ -420,6 +420,17 @@ Pages generated from partials/ by build.mjs; page scripts ampacity.js / conduit.
 shared country/chip logic in common.js.
 
 ## EDGE CASES & GOTCHAS
+
+- **GA4 IS GATED — DO NOT UNGATE IT (2026-07-27).** `templates/index.html` loads
+  `gtag/js` only when `location.hostname` is `voltdrop.app`/`www.voltdrop.app` AND
+  `navigator.webdriver` is false. Gated at the LOADER, not at the config call.
+  Why it matters here more than most sites: `verify.mjs` drives ~102 pages per run and is
+  routinely pointed at production (`BASE=https://voltdrop.app/`). Every Playwright context is a
+  fresh client ID, so an ungated tag turns one e2e run into a crowd of fake "users". This site's
+  tag WAS ungated until 2026-07-27 and two full production runs went through it that night, so
+  expect a spike in GA around then that is not real traffic. See CLAUDE.md
+  "Analytics & Ad Tags — production hosts only".
+
 - **Cloudflare caches .js/.css at the edge** — a deploy once served new HTML with stale app.js
   (sidebar highlight broke live while passing locally). Fix: build.mjs stamps `?v=<content-hash>`
   on asset links. Never add an asset link without the `?v=` stamp.
