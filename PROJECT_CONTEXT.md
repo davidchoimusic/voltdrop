@@ -438,3 +438,49 @@ shared country/chip logic in common.js.
 - Select index for wire sizes is positional (`awgSelect.value = 3` = 12 AWG default;
   verify.mjs uses index 11 = 1/0 AWG, index 4 = 10 AWG). Inserting rows into WIRE_TABLE
   shifts these — update defaults and verify.mjs together.
+
+- **🚨 `tools/generate-locales.mjs` IS STALE AND DESTRUCTIVE — DO NOT RUN IT (found 2026-07-26).**
+  The documented workflow says "add strings, run the locale generator". Doing that today
+  **overwrites reviewed translations with mechanical garbage.** Proven on a DETACHED PRISTINE
+  main with no other changes: `node tools/generate-locales.mjs` alone produces a
+  869-insertion / 680-deletion diff, changing ~96 values per locale and dropping 44 keys
+  that exist only in the committed catalogs. Examples of what it replaces good text with:
+  - `ampacity.ambientCorrectionLabel` es: `"Corrección por temperatura ambiente"` → `"Ambient correction"` (untranslated)
+  - `ampacity.ambientTableRowLabel` fr-CA: `"Ligne de température ambiante utilisée"` → `"Ambient tableau row used"`
+  - `ampacity.ambientTableRowMethod` zh-Hans: `"采用包含输入温度的已公布环境温度区间。"` → `" published ambient band containing  entered温度是used."`
+  The COMMITTED catalogs are the good ones; the generator is no longer their source of truth
+  (its reviewed banks were never updated for those keys, or the output was hand-corrected
+  after generation). **Until it is fixed, add new strings by patching
+  `i18n/strings/{es,fr-CA,zh-Hans}.json` surgically — only the new keys — and seed the same
+  values into the generator's reviewed banks so a future fixed run reproduces them.**
+  Fixing the generator properly is its own task; it is a live landmine, not a cleanup chore.
+  Related: this is the same class of failure as the faked back-translation gate — a step that
+  LOOKS like it maintains quality while silently removing it.
+
+- **A NEW TOOL TOUCHES ELEVEN PLACES, NOT SEVEN (2026-07-26, landscape build).** The
+  new-tool checklist in the Site-structure section above is incomplete. Missing any of the
+  four undocumented ones fails in a different way, and two of them fail SILENTLY:
+  1. `build.mjs` PAGES entry · 2. `templates/index.html` sidebar link · 3. FAQ JSON-LD in the
+  partial · 4. `sitemap.xml` · 5. `llms.txt` + `llms-full.txt` · 6. `en.json` page copy +
+  `pages.us.<tool>` meta · 7. `data-golden.json` for any sealed table — **plus:**
+  8. **`build.mjs` `runtimePatternGroups`** — without it the tool's JS result strings never
+     localize at all (silent: English text on five editions).
+  9. **`i18n/runtime-map.json`** — hand-maintained, nothing generates it. Placeholder patterns
+     (`{volts} V`) are auto-registered from `runtimePatterns`; PLAIN strings must be listed
+     individually. A `landscape.js` key must exist or `...runtimeMap[file]` throws on undefined.
+  10. **`tools/generate-locales.mjs` `templateFiles`** — if the partial is not listed, its
+      `{{keys}}` are never even DISCOVERED (silent) — **and** its hardcoded meta-page array
+      (`['wireSize', 'maxLength', …]`) needs the tool name or the title/description keys are missed.
+  11. **`common.js` `TOOL_PATHS`** — the existence list the country/language switcher uses.
+      Omit it and the edition picker cannot map the new URL between editions.
+  Good news found while doing this: **`build.mjs` hard-fails with `Missing catalog string:`
+  on any key absent from a locale catalog.** It refuses to ship English text on a Spanish
+  page. Do not weaken that check — it is the reason the six editions stay honest.
+
+- **THE FIRST SCREENSHOT BEATS THE TEST SUITE FOR LAYOUT AND MEANING (2026-07-26).** 23
+  passing browser interaction checks on the landscape page missed all three of: an empty
+  grid cell rendering as a grey box, a comparison table whose last column was clipped on a
+  phone, and — the real one — **Hub and Star printing identical rows** because the hub
+  distance defaulted to 0 and a hub at 0 ft IS a star. Assertions confirm the numbers are
+  right; they do not notice that two identical rows explain nothing to a reader. Screenshot
+  the result panel at phone width and LOOK at it before calling a tool finished.
