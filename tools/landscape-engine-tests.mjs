@@ -3,7 +3,18 @@
 import { readFileSync } from 'fs';
 
 const WT = process.cwd();
-const src = readFileSync(`${WT}/landscape.js`, 'utf8');
+const whole = readFileSync(`${WT}/landscape.js`, 'utf8');
+
+/* Test the engine half only. The UI half below the marker does top-level DOM
+   work like every other tool here, which cannot run in node. Missing marker is a
+   hard failure rather than a silent full-file eval. */
+const MARKER = '/* ===== END OF PURE ENGINE';
+if (!whole.includes(MARKER)) {
+  console.error(`FAIL: engine/DOM boundary marker missing from landscape.js.\n`
+    + `Expected a line beginning: ${MARKER}`);
+  process.exit(1);
+}
+const src = whole.slice(0, whole.indexOf(MARKER));
 
 // Expose the top-level declarations. The engine half is DOM-free by design.
 const api = Function(`"use strict";

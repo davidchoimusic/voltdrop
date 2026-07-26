@@ -13,6 +13,7 @@ const runtimePatternGroups = {
   'conduit.js': 'conduit',
   'boxfill.js': 'boxFill',
   'power.js': 'power',
+  'landscape.js': 'landscape',
 };
 const countryPacks = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -214,6 +215,15 @@ const PAGES = [
     main: 'partials/boxfill-main.html',
     titleKey: 'pages.us.boxFill.title',
     descriptionKey: 'pages.us.boxFill.description',
+  },
+  {
+    dir: 'landscape-lighting-calculator',
+    ldNameKey: 'pages.us.landscape.ldName',
+    tool: 'landscape',
+    script: 'landscape.js',
+    main: 'partials/landscape-main.html',
+    titleKey: 'pages.us.landscape.title',
+    descriptionKey: 'pages.us.landscape.description',
   },
   {
     dir: 'guides',

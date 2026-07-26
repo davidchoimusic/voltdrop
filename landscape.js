@@ -325,3 +325,345 @@ function nameplateCaution(p) {
   if (p >= 0.05) return 'watch';
   return 'none';
 }
+
+/* ===== END OF PURE ENGINE — everything below this line touches the DOM =====
+   tools/landscape-engine-tests.mjs splits this file on the line above so the
+   engine can be tested in node with no browser. It fails loudly if the marker
+   goes missing, so this is a contract, not a comment. */
+
+/* ------------------------------------------------------------------- text ----
+   Result copy with {placeholder} slots, filled by vdFormat from common.js.
+   Every string in this object is display text and is listed in
+   i18n/runtime-map.json so build.mjs can swap it per edition. NOTHING here may
+   be an element id, class, selector, dataset key or event name — those are
+   program wiring and must never enter the string catalog. */
+const LS_TEXT = {
+  volts: '{volts} V',
+  voltsAt: '{volts} V at {label}',
+  feet: '{feet} ft',
+  amps: '{amps} A',
+  percent: '{percent}%',
+  lowestLabel: 'lowest voltage, at {label}',
+  fixtureCount: '{count} fixtures',
+  oneFixture: '1 fixture',
+  tapLine: '{label} — {count}',
+  tapVolts: '{volts} V  ({percent}% drop)',
+  layoutDaisy: 'Daisy chain',
+  layoutHub: 'Hub',
+  layoutStar: 'Star',
+  yoursSuffix: ' — yours',
+  colLayout: 'Layout',
+  colLowest: 'Lowest',
+  colHighest: 'Highest',
+  colSpread: 'Spread',
+  colCable: 'Cable',
+  colLowestVolts: 'Lowest V',
+  colSpreadVolts: 'Spread V',
+  colCableFeet: 'Cable ft',
+  colTotalLoad: 'Total load',
+  colWorstDrop: 'Worst drop',
+  hubAtFt: 'Hub (at {feet} ft)',
+  hubSuggested: 'Hub (suggested at {feet} ft)',
+  hubSuggestedNote: 'You have not set a hub distance, so the hub row is costed at the middle of your run — that is usually near the best spot. Set your own distance to compare a different one.',
+  noResultDash: '—',
+  tapsHeading: 'Voltage at each fixture',
+  compareHeading: 'The same fixtures, wired three ways',
+  assumption: 'This comparison assumes your fixtures run along one path and every distance is measured along it — a bed, walkway or driveway. Fixtures scattered in different directions have their own geometry, which this tool cannot know.',
+  hubIsStar: 'A hub at 0 ft is the same circuit as a star, so those two rows match.',
+  hintDaisy: 'One cable, tapping each fixture in turn. Distances are measured along the cable.',
+  hintHub: 'One trunk out to a hub, then a separate spoke to each fixture.',
+  hintStar: 'A separate cable from the transformer to every fixture.',
+  cautionUnityPf: 'Watts alone cannot give current. With no power factor entered we assumed 1.0, which is a best case — the real current is higher and so is the real voltage drop. Use the fixture’s rated amps or VA for a firm answer.',
+  cautionWatch: 'The drop here is big enough to be worth a second look before you bury the cable.',
+  cautionUnreliable: 'At this much drop the fixed-current method stops being trustworthy: an LED driver pulls more current as its voltage sags, so the real drop is worse than shown. Size up, shorten the run, or split the load.',
+  cautionCollapse: 'This design cannot work. The cable cannot deliver this load over this distance at all — the voltage collapses. Change the wire size, the distance, or the number of fixtures.',
+  cautionAmpacity: 'This answers voltage drop only. It does not check that the cable is rated to carry the current, and it does not check your transformer’s rating.',
+  cautionLimitsUnset: 'Not evaluated against manufacturer limits. Enter your fixture’s minimum and maximum voltage to have every tap checked.',
+  cautionBelowMin: '{count} of your taps fall below the {volts} V minimum you entered.',
+  cautionAboveMax: '{count} of your taps sit above the {volts} V maximum you entered. Overvoltage shortens fixture life, especially halogen.',
+  needTwoRows: 'Enter a distance and a load for at least one fixture.',
+  mathIntro: 'Each stretch of cable carries the current of every fixture beyond it, so the drop is worked out stretch by stretch and added up along the path to each fixture.',
+  mathFormula: 'drop per stretch = 2 × K × amps × feet ÷ circular mils',
+  mathConstants: 'K = {k} for {material}. Cable = {size} ({cm} circular mils). Distances are one-way; the 2 is the out-and-back pair.',
+  mathNaive: 'For comparison, putting all {amps} A at the full {feet} ft — the way an ordinary calculator would — gives {volts} V of drop, which overstates it.',
+  materialCopper: 'copper',
+  materialAluminum: 'aluminum',
+  badgeOk: 'OK',
+  badgeCheck: 'CHECK',
+  badgeStop: 'WILL NOT WORK',
+};
+
+/* --------------------------------------------------------------------- ui ----
+   Everything below touches the DOM. The engine above stays pure so verify.mjs
+   can call it directly. */
+const $ = (id) => document.getElementById(id);
+
+function lsCountry() { return (window.VDCountry && VDCountry.get() === 'ca') ? 'ca' : 'us'; }
+
+let material = 'cu';
+let layout = 'daisy';
+
+// Wire size choices come from the sealed table, so the option order is the
+// table order. verify.mjs relies on that being positional.
+const sizeSelect = $('ls-size');
+WIRE_TABLE.forEach(([label], index) => {
+  const option = document.createElement('option');
+  option.value = String(index);
+  option.textContent = label;
+  sizeSelect.appendChild(option);
+});
+sizeSelect.value = '3'; // 12 AWG — the common landscape cable
+
+function layoutHint() {
+  if (layout === 'hub') return LS_TEXT.hintHub;
+  if (layout === 'star') return LS_TEXT.hintStar;
+  return LS_TEXT.hintDaisy;
+}
+
+function refreshLayoutUi() {
+  $('ls-field-hub').hidden = layout !== 'hub';
+  $('ls-layout-hint').textContent = layoutHint();
+}
+
+function refreshUnitUi() {
+  $('ls-field-pf').hidden = $('ls-unit').value !== 'w';
+}
+
+function updateRemoveButtons() {
+  const rows = document.querySelectorAll('#ls-rows .fixture-row');
+  rows.forEach((row) => {
+    row.querySelector('.remove-size-btn').hidden = rows.length <= 1;
+  });
+}
+
+function readRows() {
+  const unit = $('ls-unit').value;
+  const ratedVolts = Number($('ls-rated-volts').value);
+  const pf = $('ls-pf').value === '' ? null : Number($('ls-pf').value);
+  return [...document.querySelectorAll('#ls-rows .fixture-row')]
+    .map((row) => ({
+      ft: Number(row.querySelector('.ls-ft').value),
+      load: Number(row.querySelector('.ls-load').value),
+      unit,
+      pf,
+      ratedVolts,
+    }))
+    .filter((row) => Number.isFinite(row.ft) && row.ft >= 0 && row.load > 0);
+}
+
+function addRow(ft = '', load = '') {
+  const fragment = $('ls-row-template').content.cloneNode(true);
+  fragment.querySelector('.ls-ft').value = ft;
+  fragment.querySelector('.ls-load').value = load;
+  $('ls-rows').appendChild(fragment);
+  updateRemoveButtons();
+}
+
+$('ls-add-row').addEventListener('click', () => addRow());
+
+$('ls-rows').addEventListener('click', (event) => {
+  const button = event.target.closest('.remove-size-btn');
+  if (!button) return;
+  if (document.querySelectorAll('#ls-rows .fixture-row').length <= 1) return;
+  button.closest('.fixture-row').remove();
+  updateRemoveButtons();
+  if (!$('results').hidden) calc();
+});
+
+// Quick fill POPULATES the rows rather than being a second engine — one input
+// model, one code path, and the installer can correct any row afterwards.
+$('ls-qf-apply').addEventListener('click', () => {
+  const count = Math.floor(Number($('ls-qf-count').value));
+  const first = Number($('ls-qf-first').value);
+  const spacing = Number($('ls-qf-spacing').value);
+  const load = Number($('ls-qf-load').value);
+  if (!(count >= 1) || !(first >= 0) || !(spacing >= 0) || !(load > 0)) return;
+  $('ls-rows').innerHTML = '';
+  for (let i = 0; i < count; i++) addRow(first + spacing * i, load);
+  updateRemoveButtons();
+  calc();
+});
+
+document.querySelectorAll('.seg-btn').forEach((button) => {
+  button.addEventListener('click', () => {
+    const group = button.parentElement;
+    group.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
+    button.classList.add('active');
+    if ('material' in button.dataset) material = button.dataset.material;
+    if ('layout' in button.dataset) { layout = button.dataset.layout; refreshLayoutUi(); }
+    if (!$('results').hidden) calc();
+  });
+});
+
+$('ls-unit').addEventListener('change', () => {
+  refreshUnitUi();
+  if (!$('results').hidden) calc();
+});
+
+$('ls-form').addEventListener('submit', (event) => { event.preventDefault(); calc(); });
+
+function caution(text, stop = false) {
+  return `<p class="ls-caution${stop ? ' is-stop' : ''}">${text}</p>`;
+}
+
+function calc() {
+  const fixtures = readRows();
+  const results = $('results');
+  const cautions = $('ls-cautions');
+
+  if (!fixtures.length) {
+    $('verdict-badge').textContent = LS_TEXT.badgeCheck;
+    $('big-number').textContent = '';
+    $('big-label').textContent = LS_TEXT.needTwoRows;
+    $('result-grid').innerHTML = '';
+    $('ls-taps').innerHTML = '';
+    $('ls-compare').innerHTML = '';
+    cautions.innerHTML = '';
+    results.hidden = false;
+    return;
+  }
+
+  const sizeIndex = Number(sizeSelect.value);
+  const [sizeLabel, cm] = WIRE_TABLE[sizeIndex];
+  const k = K_FACTOR[material];
+  const sourceVolts = Number($('ls-source-volts').value);
+
+  /* The comparison table always shows a hub row, so a hub distance of 0 would
+     print a row identical to the star with nothing explaining why. When the
+     installer has not set one, cost the hub at the MIDDLE of the run — usually
+     near the best spot — and say so in the row label and a note. Suggesting a
+     distance out loud is honest; silently showing a duplicate row is not. */
+  const distances = fixtures.map((f) => f.ft);
+  const midpointFt = (Math.min(...distances) + Math.max(...distances)) / 2;
+  const hubSet = $('ls-hub-ft').value !== '' && Number($('ls-hub-ft').value) > 0;
+  const hubFt = hubSet ? Number($('ls-hub-ft').value) : midpointFt;
+
+  let all;
+  try {
+    all = compareLayouts(fixtures, cm, hubFt, sourceVolts, k);
+  } catch (error) {
+    $('verdict-badge').textContent = LS_TEXT.badgeCheck;
+    $('big-number').textContent = '';
+    $('big-label').textContent = String(error.message);
+    $('result-grid').innerHTML = '';
+    $('ls-taps').innerHTML = '';
+    $('ls-compare').innerHTML = '';
+    cautions.innerHTML = '';
+    results.hidden = false;
+    return;
+  }
+
+  const mine = all[layout];
+  const worstPercent = sourceVolts > 0 ? (sourceVolts - mine.lowestVolts) / sourceVolts : 0;
+  const grade = mine.collapsed ? 'collapse' : nameplateCaution(worstPercent);
+  const lowestTap = mine.taps.reduce((worst, tap) => (tap.volts < worst.volts ? tap : worst), mine.taps[0]);
+
+  // Verdict wording never claims a fixture is dim or bright — an LED driver
+  // holds steady and then drops out, so brightness is not ours to assert.
+  $('verdict-badge').textContent = grade === 'collapse'
+    ? LS_TEXT.badgeStop
+    : (grade === 'none' ? LS_TEXT.badgeOk : LS_TEXT.badgeCheck);
+  $('big-number').textContent = mine.collapsed
+    ? LS_TEXT.noResultDash
+    : vdFormat(LS_TEXT.volts, { volts: mine.lowestVolts.toFixed(2) });
+  $('big-label').textContent = vdFormat(LS_TEXT.lowestLabel, { label: lowestTap.label });
+
+  const grid = [
+    [LS_TEXT.colLowest, vdFormat(LS_TEXT.volts, { volts: mine.lowestVolts.toFixed(2) })],
+    [LS_TEXT.colHighest, vdFormat(LS_TEXT.volts, { volts: mine.highestVolts.toFixed(2) })],
+    [LS_TEXT.colSpread, vdFormat(LS_TEXT.volts, { volts: mine.spreadVolts.toFixed(2) })],
+    [LS_TEXT.colTotalLoad, vdFormat(LS_TEXT.amps, { amps: mine.totalAmps.toFixed(2) })],
+    [LS_TEXT.colCable, vdFormat(LS_TEXT.feet, { feet: mine.cableFt.toFixed(0) })],
+    [LS_TEXT.colWorstDrop, vdFormat(LS_TEXT.percent, { percent: (worstPercent * 100).toFixed(1) })],
+  ];
+  $('result-grid').innerHTML = grid
+    .map(([key, value]) => `<div class="result-cell"><div class="k">${key}</div><div class="v">${value}</div></div>`)
+    .join('');
+
+  const minVolts = $('ls-min-volts').value === '' ? null : Number($('ls-min-volts').value);
+  const maxVolts = $('ls-max-volts').value === '' ? null : Number($('ls-max-volts').value);
+  const below = minVolts === null ? [] : mine.taps.filter((tap) => tap.volts < minVolts);
+  const above = maxVolts === null ? [] : mine.taps.filter((tap) => tap.volts > maxVolts);
+
+  $('ls-taps-heading').textContent = LS_TEXT.tapsHeading;
+  $('ls-taps').innerHTML = mine.taps.map((tap) => {
+    const out = (minVolts !== null && tap.volts < minVolts) || (maxVolts !== null && tap.volts > maxVolts);
+    const count = tap.fixtures === 1 ? LS_TEXT.oneFixture : vdFormat(LS_TEXT.fixtureCount, { count: tap.fixtures });
+    return `<li${out ? ' class="out-of-range"' : ''}>`
+      + `<span>${vdFormat(LS_TEXT.tapLine, { label: tap.label, count })}</span>`
+      + `<span>${vdFormat(LS_TEXT.tapVolts, { volts: tap.volts.toFixed(2), percent: tap.percent.toFixed(1) })}</span>`
+      + '</li>';
+  }).join('');
+
+  const names = {
+    daisy: LS_TEXT.layoutDaisy,
+    hub: vdFormat(hubSet ? LS_TEXT.hubAtFt : LS_TEXT.hubSuggested, { feet: hubFt.toFixed(0) }),
+    star: LS_TEXT.layoutStar,
+  };
+  $('ls-compare-heading').textContent = LS_TEXT.compareHeading;
+  $('ls-compare').innerHTML = `<thead><tr>`
+    + `<th>${LS_TEXT.colLayout}</th><th>${LS_TEXT.colLowestVolts}</th>`
+    + `<th>${LS_TEXT.colSpreadVolts}</th><th>${LS_TEXT.colCableFeet}</th>`
+    + `</tr></thead><tbody>`
+    + ['daisy', 'hub', 'star'].map((key) => {
+      const r = all[key];
+      return `<tr${key === layout ? ' class="is-yours"' : ''}>`
+        + `<td>${names[key]}${key === layout ? LS_TEXT.yoursSuffix : ''}</td>`
+        + `<td>${r.collapsed ? LS_TEXT.noResultDash : r.lowestVolts.toFixed(2)}</td>`
+        + `<td>${r.spreadVolts.toFixed(2)}</td>`
+        + `<td>${r.cableFt.toFixed(0)}</td>`
+        + '</tr>';
+    }).join('')
+    + '</tbody>';
+
+  // The hub notes attach to the comparison table, so they show whatever layout
+  // is selected — the table always has a hub row to explain.
+  $('ls-assumption').textContent = [
+    LS_TEXT.assumption,
+    hubSet ? '' : LS_TEXT.hubSuggestedNote,
+    hubSet && hubFt === 0 ? LS_TEXT.hubIsStar : '',
+  ].filter(Boolean).join(' ');
+
+  const notes = [];
+  if (grade === 'collapse') notes.push(caution(LS_TEXT.cautionCollapse, true));
+  else if (grade === 'unreliable') notes.push(caution(LS_TEXT.cautionUnreliable, true));
+  else if (grade === 'watch') notes.push(caution(LS_TEXT.cautionWatch));
+  if (fixtures.some((f) => fixtureAmps(f).assumedUnityPf)) notes.push(caution(LS_TEXT.cautionUnityPf));
+  if (below.length) {
+    notes.push(caution(vdFormat(LS_TEXT.cautionBelowMin, { count: below.length, volts: minVolts }), true));
+  }
+  if (above.length) {
+    notes.push(caution(vdFormat(LS_TEXT.cautionAboveMax, { count: above.length, volts: maxVolts }), true));
+  }
+  // A blank limits box must read as "not checked", never as a quiet pass.
+  if (minVolts === null && maxVolts === null) notes.push(caution(LS_TEXT.cautionLimitsUnset));
+  notes.push(caution(LS_TEXT.cautionAmpacity));
+  cautions.innerHTML = notes.join('');
+  $('verdict-note').textContent = '';
+
+  const farthest = Math.max(...fixtures.map((f) => f.ft));
+  const naiveDrop = (2 * k * mine.totalAmps * farthest) / cm;
+  $('math-body').innerHTML = `<p>${LS_TEXT.mathIntro}</p>`
+    + `<div class="formula">${LS_TEXT.mathFormula}</div>`
+    + `<p>${vdFormat(LS_TEXT.mathConstants, {
+      k: String(k),
+      material: material === 'cu' ? LS_TEXT.materialCopper : LS_TEXT.materialAluminum,
+      size: sizeLabel,
+      cm: String(cm),
+    })}</p>`
+    + `<p>${vdFormat(LS_TEXT.mathNaive, {
+      amps: mine.totalAmps.toFixed(2),
+      feet: String(farthest),
+      volts: naiveDrop.toFixed(2),
+    })}</p>`;
+
+  results.hidden = false;
+}
+
+refreshLayoutUi();
+refreshUnitUi();
+updateRemoveButtons();
+
+// Country switches only change words on this page: the physics is the same in
+// both, and no code limit is claimed for a low-voltage lighting system.
+window.addEventListener('vd:country', () => { if (!$('results').hidden) calc(); });

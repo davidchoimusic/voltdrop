@@ -20,6 +20,7 @@ const templateFiles = [
   'partials/ampacity-main.html',
   'partials/conduit-main.html',
   'partials/boxfill-main.html',
+  'partials/landscape-main.html',
   'partials/power-main.html',
   'partials/privacy-main.html',
   'partials/terms-main.html',
@@ -48,7 +49,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'power', 'boxFill', 'landscape', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {
