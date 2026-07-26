@@ -12,7 +12,56 @@ results that don't match other calculators, clutter, forced signups. VoltDrop's 
 Domain purchased: **voltdrop.app**. Primary users: working electricians, contractors, apprentices,
 plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 
-## Current state (2026-07-24)
+## Current state (2026-07-26) — READ THIS FIRST
+
+**LIVE at voltdrop.app in SIX EDITIONS**, ~100 pages. Static site with a build step.
+
+| Edition | Path | Code | Language |
+|---|---|---|---|
+| US English | `/` | NEC | en |
+| US Spanish | `/es/` | NEC | es |
+| US Chinese | `/zh/` | NEC | zh-Hans |
+| Canada English | `/ca/` | CEC | en |
+| Quebec French | `/ca-fr/` | CEC | fr-CA |
+| Canada Chinese | `/ca-zh/` | CEC | zh-Hans |
+
+**7 calculators** (voltage drop 3 modes · wire size · max length · ampacity+derating ·
+conduit fill · box fill · power) **and 6 guides**, in every edition.
+
+### The things that will bite you if you don't know them
+
+1. **`node build.mjs` after ANY edit** to markup, CSS, JS or strings — then commit the
+   generated pages. Nothing is hand-edited in the output directories.
+2. **Strings live in `i18n/strings/*.json`, NOT in the markup.** Editing a page's text means
+   editing the catalog. `i18n/never-translate.json` lists tokens (NEC, CEC, rule numbers, wire
+   types, units) that must survive verbatim in every language.
+3. **`verify.mjs` is now ~542 checks, not 7.** Run: `python3 -m http.server 8643` then
+   `BASE=http://localhost:8643/ node verify.mjs`. Start the server, run verify, READ the
+   output — never chain them into one command whose exit code you can't see.
+4. **13 sealed electrical tables** fingerprinted in `data-golden.json`. The build hard-fails on
+   any change. Changing one legitimately = independent source verification FIRST, then
+   regenerate the golden file deliberately. Never regenerate to make a failure go away.
+5. **Base ampacity is deliberately SHARED between the US and Canada** — CEC Tables 2/4 were
+   verified identical to NEC 310.16 in the 60/75/90 columns. Do not "fix" this by duplicating.
+   See the country-expansion section below for what genuinely differs.
+
+### Verification machinery that exists (do not weaken it)
+- **Data tripwire** — 13 sealed tables, proven to fire on a single-digit edit
+- **Byte-identical gate** — English output must not change unintentionally
+- **Two-pass back-translation** — safety strings re-rendered into English from the target
+  language alone, with a contamination alarm that fails if results look copied
+- **Numeric parity** — every number on a translated page must match its English twin
+- **Per-edition interaction checks** — all 42 edition×calculator combinations actually driven
+
+### Still open
+- `/ca/conduit-fill/` carries a planning-only note — CEC Tables 6A–6K and 9 unverified
+- Roadmap items awaiting placement: "how we verify" page · ground wire size · wire colour ·
+  `/ohms-law/` · offline/PWA · low-voltage multi-point · "Build this circuit"
+- GSC: watch Sitemaps "Discovered pages" move 16 → 91, then leave it a few weeks
+
+---
+
+## Day-one state (2026-07-24) — historical, superseded by the section above
 Day-one MVP built and verified. Pure static site — 3 files, no framework, no build step:
 - `index.html` — single page, 3 modes (voltage drop / min wire size / max distance)
 - `styles.css` — all theme tokens at top; committed dark "power tool" theme
