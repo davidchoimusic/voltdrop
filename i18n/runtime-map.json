@@ -1088,6 +1088,16 @@
       "quote": "'"
     },
     {
+      "key": "runtime.landscape.branchAShort",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.branchBShort",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.landscape.cautionAmpacity",
       "kind": "quoted",
       "quote": "'"
@@ -1188,6 +1198,21 @@
       "quote": "'"
     },
     {
+      "key": "runtime.landscape.hintTsplit",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hubDistanceHint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hubDistanceLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.landscape.hubIsStar",
       "kind": "quoted",
       "quote": "'"
@@ -1209,6 +1234,11 @@
     },
     {
       "key": "runtime.landscape.layoutStar",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.layoutTsplit",
       "kind": "quoted",
       "quote": "'"
     },
@@ -1244,6 +1274,16 @@
     },
     {
       "key": "runtime.landscape.oneFixture",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.splitDistanceHint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.splitDistanceLabel",
       "kind": "quoted",
       "quote": "'"
     },

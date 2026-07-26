@@ -83,10 +83,19 @@ in every edition.
 - Roadmap items awaiting placement: "how we verify" page · ground wire size · wire colour ·
   `/ohms-law/` · offline/PWA · "Build this circuit"
   (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.)
-- **T/split layout is DEFERRED from the landscape tool.** Daisy, hub and star all derive from
-  one distance column; a T needs per-fixture branch assignment plus a trunk-to-split length,
-  and both Codex passes judged an invented T geometry worse than no T. The tree engine already
-  supports it, so it is a pure add: collect branch + distance-along-branch and call solveTree.
+- **T/split layout SHIPPED 2026-07-27** (was deferred). The landscape tool now compares FOUR
+  layouts. The T needed the one thing the others did not: per-fixture branch assignment, because
+  "40 ft from the transformer" says nothing about direction. A branch column appears only for that
+  layout, and its distances are measured along each branch FROM THE SPLIT.
+  ⚠️ The subtle part, worth not breaking: the comparison table shows all four layouts from one
+  fixture table, but the T measures from the split while the other three measure from the
+  transformer. Feeding the same numbers to both meanings would have made the four rows describe
+  DIFFERENT physical runs — a comparison that looks authoritative and is a lie. `branchToAbsolute`
+  / `absoluteToBranch` convert between the two, and an engine test asserts the round trip is
+  lossless. Branch A runs back toward the transformer, branch B runs away from it.
+  Finding: a T pays the ENTIRE load over its trunk, so for an evenly spaced line a plain daisy
+  chain can beat it on worst-case voltage. What a T reliably buys is evenness. Same shape as the
+  hub-vs-star surprise — there is no single winner, which is the product.
 - **`/solar-wire-size-calculator/` as a framed page is now HONEST to mint** — the framed-page
   rule below said to build the engine first, and it is built. Point it at the solar tool.
 - GSC: watch Sitemaps "Discovered pages" move 16 → 91, then leave it a few weeks

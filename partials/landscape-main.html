@@ -5,6 +5,13 @@
     gap: var(--space-2);
     margin-bottom: var(--space-1);
   }
+  /* The T layout needs one more column per row, for the branch. Driven by a
+     class on the form so the head and every row stay in step. */
+  .is-tsplit .fixture-head,
+  .is-tsplit .fixture-row { grid-template-columns: 1fr 1fr 84px auto; }
+  .ls-branch-col { display: none; }
+  .is-tsplit .ls-branch-col { display: block; }
+  .is-tsplit select.ls-branch-col { min-height: 52px; font-size: 15px; padding-inline: var(--space-2); }
   .fixture-rows { display: flex; flex-direction: column; gap: var(--space-2); }
   .fixture-row {
     display: grid;
@@ -102,6 +109,7 @@
       <label class="field-label">{{landscape.yourLayoutLabel}}</label>
       <div class="seg" role="group" aria-label="{{attr:landscape.yourLayoutAriaLabel}}">
         <button type="button" class="seg-btn active" data-layout="daisy">{{landscape.daisyChainButton}}</button>
+        <button type="button" class="seg-btn" data-layout="tsplit">{{landscape.tSplitButton}}</button>
         <button type="button" class="seg-btn" data-layout="hub">{{landscape.hubButton}}</button>
         <button type="button" class="seg-btn" data-layout="star">{{landscape.starButton}}</button>
       </div>
@@ -109,24 +117,29 @@
     </div>
 
     <div class="field" id="ls-field-hub" hidden>
-      <label class="field-label" for="ls-hub-ft">{{landscape.hubDistanceLabel}}</label>
+      <label class="field-label" for="ls-hub-ft" id="ls-hub-label">{{landscape.hubDistanceLabel}}</label>
       <div class="input-unit">
         <input type="number" id="ls-hub-ft" inputmode="decimal" min="0" step="any" value="0">
         <span class="unit">{{landscape.feet}}</span>
       </div>
-      <p class="hint">{{landscape.hubDistanceHint}}</p>
+      <p class="hint" id="ls-hub-hint">{{landscape.hubDistanceHint}}</p>
     </div>
 
     <div class="field">
       <div class="fixture-head">
         <span class="field-label" id="ls-ft-heading">{{landscape.distanceAlongThePathLabel}}</span>
         <span class="field-label" id="ls-load-heading">{{landscape.loadPerFixtureLabel}}</span>
+        <span class="field-label ls-branch-col" id="ls-branch-heading" hidden>{{landscape.branchLabel}}</span>
         <span aria-hidden="true"></span>
       </div>
       <div class="fixture-rows" id="ls-rows">
         <div class="fixture-row">
           <input type="number" class="ls-ft input-plain" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
           <input type="number" class="ls-load input-plain" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <select class="ls-branch ls-branch-col" aria-labelledby="ls-branch-heading" hidden>
+            <option value="a">{{landscape.branchAOption}}</option>
+            <option value="b">{{landscape.branchBOption}}</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}" hidden>×</button>
         </div>
       </div>
@@ -134,6 +147,10 @@
         <div class="fixture-row">
           <input type="number" class="ls-ft input-plain" aria-label="{{attr:landscape.distanceAlongThePathLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
           <input type="number" class="ls-load input-plain" aria-label="{{attr:landscape.loadPerFixtureLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <select class="ls-branch ls-branch-col" aria-label="{{attr:landscape.branchLabel}}" hidden>
+            <option value="a">{{landscape.branchAOption}}</option>
+            <option value="b">{{landscape.branchBOption}}</option>
+          </select>
           <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}">×</button>
         </div>
       </template>
