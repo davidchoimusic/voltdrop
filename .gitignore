@@ -1,4 +1,9 @@
-node_modules/
+# No trailing slash on purpose: 'node_modules/' matches only a DIRECTORY, so a
+# SYMLINK named node_modules walks straight past it. That happened twice while
+# working in git worktrees (which get no node_modules of their own), and the
+# second time the merge replaced the real directory in the main repo with a
+# symlink pointing at itself, deleting Playwright.
+node_modules
 verify-shots/
 verify-output.txt
 verify-live.txt
