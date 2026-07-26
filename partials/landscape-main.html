@@ -1,0 +1,240 @@
+<style>
+  .fixture-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+  .fixture-rows { display: flex; flex-direction: column; gap: var(--space-2); }
+  .fixture-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--space-2);
+    align-items: center;
+  }
+  /* min-width:0 or the number inputs refuse to shrink and blow out the grid. */
+  .fixture-row input { min-width: 0; }
+  .quick-fill {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    align-items: end;
+  }
+  .result-heading {
+    font-size: 1rem;
+    margin: var(--space-5) 0 var(--space-2);
+    color: var(--color-ink);
+  }
+  /* Wide content scrolls inside its own box so the page never scrolls sideways. */
+  .layout-scroll { overflow-x: auto; }
+  .layout-table { width: 100%; border-collapse: collapse; margin-top: var(--space-1); }
+  .layout-table th, .layout-table td {
+    padding: var(--space-2) var(--space-1);
+    text-align: right;
+    border-bottom: 1px solid var(--color-line);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .layout-table th:first-child, .layout-table td:first-child { text-align: left; }
+  .layout-table tr.is-yours { background: var(--color-surface-2); }
+  .layout-table tr.is-yours td { font-weight: 700; }
+  .tap-list { list-style: none; padding: 0; margin: 0; }
+  .tap-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .tap-list li.out-of-range { color: var(--verdict-bad-ink); font-weight: 700; }
+  .assumption {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-line-strong);
+    color: var(--color-ink-soft);
+  }
+  .ls-caution {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-hazard);
+  }
+  .ls-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
+</style>
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">{{landscape.landscapeLightingTitle}}</h1>
+    <p class="tool-sub">{{landscape.severalFixturesOnOneCableNotOne}}</p>
+  </div>
+
+  <form id="ls-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label" for="ls-source-volts">{{landscape.transformerTapLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="ls-source-volts" inputmode="decimal" min="1" max="60" step="any" value="12" required>
+        <span class="unit">{{landscape.volts}}</span>
+      </div>
+      <p class="hint">{{landscape.mostTransformersHaveSeveralTapsHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-rated-volts">{{landscape.fixtureRatedVoltageLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="ls-rated-volts" inputmode="decimal" min="1" max="60" step="any" value="12" required>
+        <span class="unit">{{landscape.volts}}</span>
+      </div>
+      <p class="hint">{{landscape.ratedVoltageIsNotTheTapHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-size">{{landscape.cableSizeLabel}}</label>
+      <select id="ls-size"></select>
+      <div class="seg" role="group" aria-label="{{attr:landscape.conductorMaterialAriaLabel}}">
+        <button type="button" class="seg-btn active" data-material="cu">{{landscape.copperButton}}</button>
+        <button type="button" class="seg-btn" data-material="al">{{landscape.aluminumButton}}</button>
+      </div>
+      <p class="hint">{{landscape.landscapeCableIsAlmostAlwaysCopperHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{landscape.yourLayoutLabel}}</label>
+      <div class="seg" role="group" aria-label="{{attr:landscape.yourLayoutAriaLabel}}">
+        <button type="button" class="seg-btn active" data-layout="daisy">{{landscape.daisyChainButton}}</button>
+        <button type="button" class="seg-btn" data-layout="hub">{{landscape.hubButton}}</button>
+        <button type="button" class="seg-btn" data-layout="star">{{landscape.starButton}}</button>
+      </div>
+      <p class="hint" id="ls-layout-hint"></p>
+    </div>
+
+    <div class="field" id="ls-field-hub" hidden>
+      <label class="field-label" for="ls-hub-ft">{{landscape.hubDistanceLabel}}</label>
+      <div class="input-unit">
+        <input type="number" id="ls-hub-ft" inputmode="decimal" min="0" step="any" value="0">
+        <span class="unit">{{landscape.feet}}</span>
+      </div>
+      <p class="hint">{{landscape.hubDistanceHint}}</p>
+    </div>
+
+    <div class="field">
+      <div class="fixture-head">
+        <span class="field-label" id="ls-ft-heading">{{landscape.distanceAlongThePathLabel}}</span>
+        <span class="field-label" id="ls-load-heading">{{landscape.loadPerFixtureLabel}}</span>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="fixture-rows" id="ls-rows">
+        <div class="fixture-row">
+          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
+          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}" hidden>×</button>
+        </div>
+      </div>
+      <template id="ls-row-template">
+        <div class="fixture-row">
+          <input type="number" class="ls-ft" aria-label="{{attr:landscape.distanceAlongThePathLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}" required>
+          <input type="number" class="ls-load" aria-label="{{attr:landscape.loadPerFixtureLabel}}" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}" required>
+          <button type="button" class="remove-size-btn" aria-label="{{attr:landscape.removeThisFixtureButton}}" title="{{attr:landscape.removeThisFixtureButton}}">×</button>
+        </div>
+      </template>
+      <button type="button" class="add-size-btn" id="ls-add-row">{{landscape.addAnotherFixtureButton}}</button>
+      <p class="hint">{{landscape.twoFixturesAtTheSameDistanceHint}}</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-unit">{{landscape.howIsThatLoadStatedLabel}}</label>
+      <select id="ls-unit">
+        <option value="a">{{landscape.ratedAmpsOption}}</option>
+        <option value="va">{{landscape.voltAmperesOption}}</option>
+        <option value="w" selected>{{landscape.wattsOption}}</option>
+      </select>
+      <p class="hint">{{landscape.ratedAmpsIsTheMostAccurateHint}}</p>
+    </div>
+
+    <div class="field" id="ls-field-pf">
+      <label class="field-label" for="ls-pf">{{landscape.powerFactorLabel}}</label>
+      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="{{attr:landscape.egN09Placeholder}}">
+      <p class="hint">{{landscape.leaveBlankAndWeAssumeUnityHint}}</p>
+    </div>
+
+    <details class="math-details">
+      <summary>{{landscape.fillManyFixturesAtOnceSummary}}</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="ls-qf-count">{{landscape.howManyFixturesLabel}}</label>
+          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="{{attr:landscape.egN6Placeholder}}">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-first">{{landscape.firstOneIsThisFarLabel}}</label>
+          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN20Placeholder}}">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-spacing">{{landscape.spacingBetweenThemLabel}}</label>
+          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-load">{{landscape.loadEachLabel}}</label>
+          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN7Placeholder}}">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="ls-qf-apply">{{landscape.fillTheRowsButton}}</button>
+      <p class="hint">{{landscape.thisJustFillsTheRowsHint}}</p>
+    </details>
+
+    <details class="math-details">
+      <summary>{{landscape.checkAgainstYourFixtureSLimitsSummary}}</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="ls-min-volts">{{landscape.minimumVoltageLabel}}</label>
+          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN105Placeholder}}">
+        </div>
+        <div>
+          <label class="field-label" for="ls-max-volts">{{landscape.maximumVoltageLabel}}</label>
+          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="{{attr:landscape.egN15Placeholder}}">
+        </div>
+      </div>
+      <p class="hint">{{landscape.weDoNotInventAVoltageLimitHint}}</p>
+    </details>
+
+    <button type="submit" class="calc-btn">{{landscape.checkThisRunButton}}</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+
+    <h2 class="result-heading" id="ls-taps-heading"></h2>
+    <ul class="tap-list" id="ls-taps"></ul>
+
+    <h2 class="result-heading" id="ls-compare-heading"></h2>
+    <div class="layout-scroll">
+      <table class="layout-table" id="ls-compare"></table>
+    </div>
+    <p class="assumption" id="ls-assumption"></p>
+
+    <p class="verdict-note" id="verdict-note"></p>
+    <div id="ls-cautions"></div>
+    <details class="math-details">
+      <summary>{{landscape.howWeCalculatedThisSummary}}</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "{{json:landscape.whyDoMyFarLightsLookDimmerQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:landscape.onADaisyChainTheCableNearestAnswer}}"}}, {"@type": "Question", "name": "{{json:landscape.isAnOrdinaryVoltageDropCalculatorWrongQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:landscape.itOverstatesTheDropBecauseItPutsAnswer}}"}}, {"@type": "Question", "name": "{{json:landscape.whichLayoutShouldIUseQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:landscape.thereIsNoSingleWinnerAnswer}}"}}, {"@type": "Question", "name": "{{json:landscape.howMuchVoltageDropIsAcceptableQuestion}}", "acceptedAnswer": {"@type": "Answer", "text": "{{json:landscape.noCodeSetsALimitForLowVoltageAnswer}}"}}]}</script>
+
+  <section class="card explainer">
+    <h2>{{landscape.whyOneCableWithSeveralLightsIsHeading}}</h2>
+    <p id="ls-exp-1">{{landscape.everyOtherCalculatorPutsOneLoadAt}}</p>
+    <h2>{{landscape.theThreeLayoutsInPlainEnglishHeading}}</h2>
+    <p id="ls-exp-2">{{landscape.aDaisyChainRunsOneCableAndTaps}}</p>
+    <h2>{{landscape.whatThisToolDoesNotDoHeading}}</h2>
+    <p id="ls-exp-3">{{landscape.thisAnswersVoltageDropOnlyItDoesNot}}</p>
+  </section>
+
+</main>

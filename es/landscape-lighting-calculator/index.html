@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de caída de tensión para iluminación exterior — cadena, hub o estrella | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita de iluminación exterior de baja tensión. Varias luminarias en un mismo cable, calculadas tramo por tramo, con la tensión en cada luminaria y tres disposiciones comparadas. Sin registro.">
+<link rel="canonical" href="https://voltdrop.app/es/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/landscape-lighting-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/landscape-lighting-calculator/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calculadora de caída de tensión para iluminación exterior — cadena, hub o estrella | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita de iluminación exterior de baja tensión. Varias luminarias en un mismo cable, calculadas tramo por tramo, con la tensión en cada luminaria y tres disposiciones comparadas. Sin registro.">
+<meta property="og:url" content="https://voltdrop.app/es/landscape-lighting-calculator/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de caída de tensión para iluminación exterior — cadena, hub o estrella | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita de iluminación exterior de baja tensión. Varias luminarias en un mismo cable, calculadas tramo por tramo, con la tensión en cada luminaria y tres disposiciones comparadas. Sin registro.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de iluminación exterior VoltDrop","url":"https://voltdrop.app/es/landscape-lighting-calculator/","description":"Calculadora gratuita de iluminación exterior de baja tensión. Varias luminarias en un mismo cable, calculadas tramo por tramo, con la tensión en cada luminaria y tres disposiciones comparadas. Sin registro.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=22c499be4f">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NC7ETLY8Q1');
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link active" data-tool="landscape"><span aria-hidden="true">🌿</span>Iluminación exterior</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar y baterías</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<style>
+  .fixture-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+  .fixture-rows { display: flex; flex-direction: column; gap: var(--space-2); }
+  .fixture-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--space-2);
+    align-items: center;
+  }
+  /* min-width:0 or the number inputs refuse to shrink and blow out the grid. */
+  .fixture-row input { min-width: 0; }
+  .quick-fill {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    align-items: end;
+  }
+  .result-heading {
+    font-size: 1rem;
+    margin: var(--space-5) 0 var(--space-2);
+    color: var(--color-ink);
+  }
+  /* Wide content scrolls inside its own box so the page never scrolls sideways. */
+  .layout-scroll { overflow-x: auto; }
+  .layout-table { width: 100%; border-collapse: collapse; margin-top: var(--space-1); }
+  .layout-table th, .layout-table td {
+    padding: var(--space-2) var(--space-1);
+    text-align: right;
+    border-bottom: 1px solid var(--color-line);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .layout-table th:first-child, .layout-table td:first-child { text-align: left; }
+  .layout-table tr.is-yours { background: var(--color-surface-2); }
+  .layout-table tr.is-yours td { font-weight: 700; }
+  .tap-list { list-style: none; padding: 0; margin: 0; }
+  .tap-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .tap-list li.out-of-range { color: var(--verdict-bad-ink); font-weight: 700; }
+  .assumption {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-line-strong);
+    color: var(--color-ink-soft);
+  }
+  .ls-caution {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-left: 3px solid var(--color-hazard);
+  }
+  .ls-caution.is-stop { border-left-color: var(--verdict-bad-bar); }
+</style>
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">🌿 Calculadora de iluminación exterior</h1>
+    <p class="tool-sub">Varias luminarias en un mismo cable, no una sola carga al final. Vea la tensión en cada luminaria y cómo se comparan tres disposiciones de cableado.</p>
+  </div>
+
+  <form id="ls-form" class="card" autocomplete="off">
+
+    <div class="field">
+      <label class="field-label" for="ls-source-volts">Tensión de la toma del transformador</label>
+      <div class="input-unit">
+        <input type="number" id="ls-source-volts" inputmode="decimal" min="1" max="60" step="any" value="12" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint">Muchos transformadores ofrecen varias tomas — 12, 13, 14, 15 V — para poder elevar todo el circuito y compensar la caída.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-rated-volts">Tensión nominal de la luminaria</label>
+      <div class="input-unit">
+        <input type="number" id="ls-rated-volts" inputmode="decimal" min="1" max="60" step="any" value="12" required>
+        <span class="unit">V</span>
+      </div>
+      <p class="hint">Es la tensión para la que está diseñada la luminaria, que no es la misma que la toma desde la que la alimenta. Es la que usamos para calcular la corriente.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-size">Calibre del cable</label>
+      <select id="ls-size"></select>
+      <div class="seg" role="group" aria-label="Material del conductor">
+        <button type="button" class="seg-btn active" data-material="cu">Cobre</button>
+        <button type="button" class="seg-btn" data-material="al">Aluminio</button>
+      </div>
+      <p class="hint">El cable de enterramiento directo para exteriores es casi siempre de cobre. 12 AWG es la opción habitual.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label">¿Cómo está cableado?</label>
+      <div class="seg" role="group" aria-label="Disposición del cableado">
+        <button type="button" class="seg-btn active" data-layout="daisy">En cadena</button>
+        <button type="button" class="seg-btn" data-layout="hub">Hub</button>
+        <button type="button" class="seg-btn" data-layout="star">Estrella</button>
+      </div>
+      <p class="hint" id="ls-layout-hint"></p>
+    </div>
+
+    <div class="field" id="ls-field-hub" hidden>
+      <label class="field-label" for="ls-hub-ft">El hub está a esta distancia del recorrido</label>
+      <div class="input-unit">
+        <input type="number" id="ls-hub-ft" inputmode="decimal" min="0" step="any" value="0">
+        <span class="unit">ft</span>
+      </div>
+      <p class="hint">Hasta dónde llega el tronco antes de repartirse. Un hub a 0 ft es el mismo circuito que una estrella.</p>
+    </div>
+
+    <div class="field">
+      <div class="fixture-head">
+        <span class="field-label" id="ls-ft-heading">Distancia a lo largo del recorrido (ft)</span>
+        <span class="field-label" id="ls-load-heading">Carga por luminaria</span>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="fixture-rows" id="ls-rows">
+        <div class="fixture-row">
+          <input type="number" class="ls-ft" aria-labelledby="ls-ft-heading" inputmode="decimal" min="0" step="any" placeholder="p. ej. 20" required>
+          <input type="number" class="ls-load" aria-labelledby="ls-load-heading" inputmode="decimal" min="0" step="any" placeholder="p. ej. 7" required>
+          <button type="button" class="remove-size-btn" aria-label="Quitar esta luminaria" title="Quitar esta luminaria" hidden>×</button>
+        </div>
+      </div>
+      <template id="ls-row-template">
+        <div class="fixture-row">
+          <input type="number" class="ls-ft" aria-label="Distancia a lo largo del recorrido (ft)" inputmode="decimal" min="0" step="any" placeholder="p. ej. 20" required>
+          <input type="number" class="ls-load" aria-label="Carga por luminaria" inputmode="decimal" min="0" step="any" placeholder="p. ej. 7" required>
+          <button type="button" class="remove-size-btn" aria-label="Quitar esta luminaria" title="Quitar esta luminaria">×</button>
+        </div>
+      </template>
+      <button type="button" class="add-size-btn" id="ls-add-row">+ Añadir otra luminaria</button>
+      <p class="hint">Dos luminarias a la misma distancia se tratan como dos luces en una sola derivación. Las filas pueden ir en cualquier orden.</p>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="ls-unit">¿Cómo está indicada esa carga?</label>
+      <select id="ls-unit">
+        <option value="a">Amperios nominales</option>
+        <option value="va">Voltamperios (VA)</option>
+        <option value="w" selected>Vatios</option>
+      </select>
+      <p class="hint">Los amperios nominales son el dato más firme. Los vatios son el más débil, porque los vatios por sí solos no indican la corriente.</p>
+    </div>
+
+    <div class="field" id="ls-field-pf">
+      <label class="field-label" for="ls-pf">Factor de potencia</label>
+      <input type="number" id="ls-pf" inputmode="decimal" min="0.1" max="1" step="any" placeholder="p. ej. 0.9">
+      <p class="hint">Si lo deja en blanco suponemos 1.0, que es el mejor caso: la corriente real es mayor, y también la caída real.</p>
+    </div>
+
+    <details class="math-details">
+      <summary>Rellenar varias luminarias a la vez</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="ls-qf-count">¿Cuántas luminarias?</label>
+          <input type="number" id="ls-qf-count" inputmode="numeric" min="1" max="60" step="1" placeholder="p. ej. 6">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-first">La primera está a</label>
+          <input type="number" id="ls-qf-first" inputmode="decimal" min="0" step="any" placeholder="p. ej. 20">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-spacing">Separación entre ellas</label>
+          <input type="number" id="ls-qf-spacing" inputmode="decimal" min="0" step="any" placeholder="p. ej. 15">
+        </div>
+        <div>
+          <label class="field-label" for="ls-qf-load">Carga de cada una</label>
+          <input type="number" id="ls-qf-load" inputmode="decimal" min="0" step="any" placeholder="p. ej. 7">
+        </div>
+      </div>
+      <button type="button" class="add-size-btn" id="ls-qf-apply">Rellenar las filas</button>
+      <p class="hint">Esto solo rellena las filas de abajo. Después puede corregir cualquiera de ellas.</p>
+    </details>
+
+    <details class="math-details">
+      <summary>Comprobar con los límites de su luminaria</summary>
+      <div class="quick-fill">
+        <div>
+          <label class="field-label" for="ls-min-volts">Tensión mínima</label>
+          <input type="number" id="ls-min-volts" inputmode="decimal" min="0" step="any" placeholder="p. ej. 10.5">
+        </div>
+        <div>
+          <label class="field-label" for="ls-max-volts">Tensión máxima</label>
+          <input type="number" id="ls-max-volts" inputmode="decimal" min="0" step="any" placeholder="p. ej. 15">
+        </div>
+      </div>
+      <p class="hint">No inventamos ningún límite de tensión. Introduzca el intervalo de la ficha técnica de su luminaria y comprobaremos cada derivación con él.</p>
+    </details>
+
+    <button type="submit" class="calc-btn">Comprobar este circuito</button>
+  </form>
+
+  <section id="results" class="card results" hidden aria-live="polite">
+    <div class="verdict" id="verdict">
+      <div class="verdict-badge" id="verdict-badge"></div>
+      <div class="verdict-main">
+        <div class="big-number" id="big-number"></div>
+        <div class="big-label" id="big-label"></div>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+
+    <h2 class="result-heading" id="ls-taps-heading"></h2>
+    <ul class="tap-list" id="ls-taps"></ul>
+
+    <h2 class="result-heading" id="ls-compare-heading"></h2>
+    <div class="layout-scroll">
+      <table class="layout-table" id="ls-compare"></table>
+    </div>
+    <p class="assumption" id="ls-assumption"></p>
+
+    <p class="verdict-note" id="verdict-note"></p>
+    <div id="ls-cautions"></div>
+    <details class="math-details">
+      <summary>Cómo lo hemos calculado</summary>
+      <div class="math-body" id="math-body"></div>
+    </details>
+  </section>
+
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Por qué mis luces lejanas parecen más débiles que las cercanas?", "acceptedAnswer": {"@type": "Answer", "text": "En una conexión en cadena, el cable más cercano al transformador lleva la corriente de todas las luminarias del circuito, mientras que el último tramo lleva solo una. Las caídas se van sumando por el camino, así que cada luminaria recibe algo menos de tensión que la anterior. Pasar a una disposición de hub o de estrella, subir un calibre de cable o elevar la toma del transformador reducen esa diferencia."}}, {"@type": "Question", "name": "¿Se equivoca una calculadora de caída de tensión normal con la iluminación exterior?", "acceptedAnswer": {"@type": "Answer", "text": "Exagera la caída, porque coloca toda la carga en el extremo más alejado del circuito. En realidad la carga está repartida a lo largo del cable, así que la mayor parte recorre una distancia menor. Con luminarias separadas de forma uniforme, el método normal es demasiado pesimista por un factor de 2N/(N+1) para N luminarias: alrededor de un 60% de más con cuatro luces. Eso le empuja a usar un cable más grueso del que necesita el trabajo."}}, {"@type": "Question", "name": "¿Qué disposición debería usar?", "acceptedAnswer": {"@type": "Answer", "text": "No hay un único ganador, y por eso esta herramienta muestra las tres. La conexión en cadena usa menos cable y da la mayor diferencia entre luminarias. La estrella da la tensión más alta en la luminaria peor situada, pero usa más cable. Un hub colocado a media distancia del recorrido suele dar la diferencia más pequeña de todas usando menos cable que la estrella, porque la caída del tronco la comparten todas las luminarias en lugar de separarlas."}}, {"@type": "Question", "name": "¿Cuánta caída de tensión es aceptable?", "acceptedAnswer": {"@type": "Answer", "text": "Esta herramienta no evalúa el cumplimiento normativo y no fija ningún límite propio. El intervalo de tensión aceptable para sus luminarias procede de la ficha técnica del fabricante, y cualquier límite aplicable al circuito que las alimenta procede de la normativa local y de su inspector. Por eso esta calculadora indica la tensión en cada luminaria en lugar de sellar un apto o no apto. Introduzca el mínimo y el máximo de la ficha técnica de su luminaria y comprobaremos cada derivación con esos valores."}}]}</script>
+
+  <section class="card explainer">
+    <h2>Por qué un cable con varias luces es distinto</h2>
+    <p id="ls-exp-1">Todas las demás calculadoras de este sitio, incluida la nuestra, suponen una sola carga en el extremo más alejado de un circuito. Un circuito de exterior deriva las luminarias a lo largo del cable, así que el tramo más cercano al transformador lleva todas y el último lleva una. La caída real es la suma de los tramos, que es mucho menor que suponer que toda la carga está al final. Esta herramienta lo calcula tramo por tramo.</p>
+    <h2>Las tres disposiciones en lenguaje sencillo</h2>
+    <p id="ls-exp-2">La conexión en cadena tiende un solo cable y deriva cada luminaria por orden: menos cable, mayor diferencia entre la primera y la última. La estrella tiende un cable separado desde el transformador hasta cada luminaria: más cable, mejor tensión en el peor caso. El hub tiende un tronco hasta un punto de unión y de ahí un ramal corto a cada luminaria: un camino intermedio que a menudo da el resultado más uniforme de los tres.</p>
+    <h2>Lo que esta herramienta no hace</h2>
+    <p id="ls-exp-3">Esto responde únicamente a la caída de tensión. No comprueba que su cable esté clasificado para conducir la corriente, no comprueba la capacidad de su transformador y no evalúa el cumplimiento normativo ni los requisitos del fabricante de su luminaria. Use la comprobación de ampacidad para la cuestión de la conducción de corriente, y la ficha técnica de su luminaria para el intervalo de tensión.</p>
+  </section>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=32cb57ccfe"></script>
+<script src="/assets/us-es/landscape.js?v=6d72043414"></script>
+</body>
+</html>

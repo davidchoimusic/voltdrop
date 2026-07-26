@@ -1060,5 +1060,384 @@
       "leading": "",
       "trailing": " "
     }
+  ],
+  "landscape.js": [
+    {
+      "key": "runtime.landscape.assumption",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.badInput",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.badgeCheck",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.badgeOk",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.badgeStop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionAmpacity",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionCollapse",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionLimitsUnset",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionUnityPf",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionUnreliable",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.cautionWatch",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colCable",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colCableFeet",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colHighest",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colLayout",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colLowest",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colLowestVolts",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colSpread",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colSpreadVolts",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colTotalLoad",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.colWorstDrop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.compareHeading",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hintDaisy",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hintHub",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hintStar",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hubIsStar",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.hubSuggestedNote",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.layoutDaisy",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.layoutHub",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.layoutStar",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.materialAluminum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.materialCopper",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.mathFormula",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.mathIntro",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.needTwoRows",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.noResultDash",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.oneFixture",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.tapsHeading",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.landscape.yoursSuffix",
+      "kind": "quoted",
+      "quote": "'"
+    }
+  ],
+  "solar.js": [
+    {
+      "key": "runtime.solar.ampsHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.ampsLabelPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeCheck",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeOutOfRange",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.badgeSized",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionAcOutput",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionAmpacity",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionBatteryFault",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionOutOfRange",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.cautionTargetUnsourced",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colActualDrop",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colActualPercent",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colAllowance",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colCurrentUsed",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colLargestListed",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colRequiredCm",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.colSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.materialAluminum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.materialCopper",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.mathFormula",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.mathIntro",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.needInputs",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.outOfRangeLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.targetHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsHintPv",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelBattery",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelController",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.solar.voltsLabelPv",
+      "kind": "quoted",
+      "quote": "'"
+    }
   ]
 }

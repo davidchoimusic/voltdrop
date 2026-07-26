@@ -59,6 +59,8 @@ const DATA_TABLES = [
   ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
   ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
   ['boxfill.js', 'CEC_VOL_ML'],
+  ['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
+  ['solar.js', 'WIRE_TABLE'], ['solar.js', 'K_FACTOR'],
 ];
 const GOLDEN = JSON.parse(readFileSync('data-golden.json', 'utf8'));
 let dataPass = 0, dataFail = 0;
@@ -154,6 +156,8 @@ const SCOPED_PATHS = [
   'privacy/',
   'power-calculator/',
   'box-fill/',
+  'landscape-lighting-calculator/',
+  'solar-battery-wire-size/',
   'terms/',
 ];
 const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
@@ -562,6 +566,14 @@ await page.goto(BASE);
 // Each case installs its error listeners before navigation, so both script
 // initialization and the actual interaction are covered.
 const MATRIX_INPUTS = {
+  // Four 7 W fixtures at 20/40/60/80 ft on 12 AWG copper from a 12 V tap.
+  // Hand-calculated: segment drops sum to 0.46095 V, so the last tap sits at
+  // 11.539 V. An ordinary one-load-at-the-end calculator would say 11.262 V.
+  landscape: { fixtures: [[20, 7], [40, 7], [60, 7], [80, 7]], lastTapVolts: 11.54 },
+  /* 9.5 A array at 48 V Vmp over 60 ft of copper, 2% target.
+     Allowed = 0.96 V. Required cmil = 2*12.9*9.5*60/0.96 = 15318.75, so the
+     smallest listed conductor that works is 8 AWG (16510 cmil). Hand-checked. */
+  solar: { volts: 48, amps: 9.5, feet: 60, targetPercent: 2, expectSize: '8 AWG' },
   voltageDrop: { volts: 12, amps: 20, feet: 25, wire: '12 AWG', material: 'cu' },
   wireSize: { volts: 240, amps: 40, feet: 150, targetPercent: 3, material: 'cu' },
   maxLength: { volts: 12, amps: 10, targetPercent: 3, wire: '10 AWG', material: 'cu' },
@@ -789,6 +801,47 @@ const calculatorCases = [
     },
   },
   {
+    name: 'solar and battery',
+    path: 'solar-battery-wire-size/',
+    /* #big-number reads "at least 8 AWG" (and its translations), so stripping to
+       digits asserts the AWG SIZE — which is the actual answer. Identical in every
+       edition, because the arithmetic is country-independent and AWG designations
+       are protected from translation. */
+    expected: () => 8,
+    tolerance: 0,
+    readNumber: (value) => parseFloat(String(value).replace(/[^0-9.]/g, '')),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.solar;
+      await targetPage.fill('#sol-volts', String(input.volts));
+      await targetPage.fill('#sol-amps', String(input.amps));
+      await targetPage.fill('#sol-feet', String(input.feet));
+      await targetPage.fill('#sol-target', String(input.targetPercent));
+      await targetPage.click('#sol-form .calc-btn');
+    },
+  },
+  {
+    name: 'landscape lighting',
+    path: 'landscape-lighting-calculator/',
+    /* The physics is country-independent, so EVERY edition must produce the same
+       number — only the words differ. That is exactly what makes this a useful
+       six-edition check: a dead script in one locale shows up as a missing or
+       wrong number, not as a silent pass. */
+    expected: () => MATRIX_INPUTS.landscape.lastTapVolts,
+    tolerance: 0.01,
+    readNumber: (value) => parseFloat(value),
+    interact: async (targetPage) => {
+      const input = MATRIX_INPUTS.landscape;
+      await targetPage.fill('#ls-pf', '1');
+      for (let index = 0; index < input.fixtures.length; index++) {
+        if (index > 0) await targetPage.click('#ls-add-row');
+        const row = targetPage.locator('#ls-rows .fixture-row').nth(index);
+        await row.locator('.ls-ft').fill(String(input.fixtures[index][0]));
+        await row.locator('.ls-load').fill(String(input.fixtures[index][1]));
+      }
+      await targetPage.click('#ls-form .calc-btn');
+    },
+  },
+  {
     name: 'box fill',
     path: 'box-fill/',
     expectsBreakdown: true,
@@ -929,6 +982,7 @@ for (const width of [360, 390]) {
     for (const [path, addButton, rows] of [
       ['conduit-fill/', '#fill-add-row', '#fill-rows .mixed-wire-row'],
       ['box-fill/', '#bf-add-row', '#bf-rows .mixed-wire-row'],
+      ['landscape-lighting-calculator/', '#ls-add-row', '#ls-rows .fixture-row'],
     ]) {
       const generated = editionPath(edition.prefix, path);
       await page.goto(BASE + generated);
@@ -1531,6 +1585,135 @@ for (const path of ['', 'ampacity-check/', 'conduit-fill/']) {
   const logoOk = await page.$eval('.brand-logo', (img) => img.complete && img.naturalWidth > 0);
   const favOk = await page.$('link[rel="icon"]') !== null;
   console.log(logoOk && favOk ? `PASS logo+favicon on /${path}` : `FAIL logo on /${path}: img=${logoOk} fav=${favOk}`); logoOk && favOk ? pass++ : fail++;
+}
+
+// ---- Solar: the sealed copies must stay identical to the canonical tables.
+for (const name of ['WIRE_TABLE', 'K_FACTOR']) {
+  const canonical = JSON.stringify(readSealedConstant('app.js', name));
+  const copy = JSON.stringify(readSealedConstant('solar.js', name));
+  console.log(canonical === copy
+    ? `PASS solar.js ${name} is value- and order-identical to app.js`
+    : `FAIL solar.js ${name} DIVERGED from app.js`);
+  canonical === copy ? pass++ : fail++;
+}
+
+/* ---- Solar: an impossible target must say OUT OF RANGE, never hand back the
+   largest conductor in the table as though it were the answer. This is the
+   failure mode that would quietly under-size a 12 V inverter cable. */
+await page.goto(BASE + 'solar-battery-wire-size/');
+const outOfRange = await page.evaluate(() => {
+  // 3000 W inverter at a 10.5 V cutout, 8 ft, 1% target — needs more than
+  // 500 kcmil, which the table does not hold.
+  const amps = inverterCurrent(3000, 0.9, 10.5);
+  const sized = sizeForDrop({ k: K_FACTOR.cu, amps, feetOneWay: 8, systemVolts: 10.5, targetPercent: 1 });
+  return {
+    flagged: sized.wire.outOfRange === true,
+    noLabel: sized.wire.label === undefined,
+    noDrop: sized.actualDropVolts === null,
+    suggestsParallel: Number.isFinite(sized.parallelLargest) && sized.parallelLargest >= 1,
+    ampsAboveNominal: amps > 3000 / (0.9 * 12),
+  };
+});
+for (const [name, ok] of Object.entries({
+  'flags out of range': outOfRange.flagged,
+  'returns no wire label when out of range': outOfRange.noLabel,
+  'invents no drop figure when out of range': outOfRange.noDrop,
+  'still reports what it would take in parallel': outOfRange.suggestsParallel,
+  'derives inverter current above the nominal-voltage figure': outOfRange.ampsAboveNominal,
+})) {
+  console.log(ok ? `PASS solar ${name}` : `FAIL solar ${name}`);
+  ok ? pass++ : fail++;
+}
+
+/* ---- Solar: every edition must say the ampacity was NOT evaluated, and must
+   not claim to have sized overcurrent protection. */
+for (const edition of EDITIONS) {
+  await page.goto(BASE + editionPath(edition.prefix, 'solar-battery-wire-size/'));
+  await page.fill('#sol-amps', '9.5');
+  await page.fill('#sol-feet', '60');
+  await page.click('#sol-form .calc-btn');
+  await page.waitForTimeout(20);
+  const shown = await page.evaluate(() => document.getElementById('sol-cautions')?.innerText || '');
+  const ok = shown.length > 0;
+  console.log(ok
+    ? `PASS ${edition.prefix || 'us-en'} solar shows its limitation notices`
+    : `FAIL ${edition.prefix || 'us-en'} solar shows no limitation notices`);
+  ok ? pass++ : fail++;
+}
+
+// ---- Landscape: the sealed copies must stay identical to the canonical tables.
+// Deep AND positional: the wire selector picks by INDEX, so a reordered table
+// silently changes what "12 AWG" means. build.mjs enforces this too, so a deploy
+// that skips this suite still cannot ship diverged electrical data.
+for (const name of ['WIRE_TABLE', 'K_FACTOR']) {
+  const canonical = JSON.stringify(readSealedConstant('app.js', name));
+  const copy = JSON.stringify(readSealedConstant('landscape.js', name));
+  console.log(canonical === copy
+    ? `PASS landscape.js ${name} is value- and order-identical to app.js`
+    : `FAIL landscape.js ${name} DIVERGED from app.js`);
+  canonical === copy ? pass++ : fail++;
+}
+
+// ---- Landscape: the engine's own arithmetic, checked against an INDEPENDENT
+// closed form rather than against numbers the engine produced.
+// For N evenly spaced equal fixtures, daisy-chain drop / naive one-load drop
+// must equal (N+1)/2N exactly. Derived by hand; holds for any N.
+await page.goto(BASE + 'landscape-lighting-calculator/');
+const closedForm = await page.evaluate(() => {
+  const K = K_FACTOR.cu, CM = WIRE_TABLE[3][1], V = 12, L = 20, W = 7;
+  const out = [];
+  for (const N of [2, 3, 4, 6, 10]) {
+    const fixtures = Array.from({ length: N }, (_, i) => ({
+      ft: L * (i + 1), load: W, unit: 'w', pf: 1, ratedVolts: V,
+    }));
+    const solved = solveTree({ sourceVolts: V, k: K, ...buildDaisy(fixtures, CM) });
+    const naive = (2 * K * ((N * W) / V) * (L * N)) / CM;
+    out.push({ N, ratio: solved.taps.at(-1).drop / naive, expected: (N + 1) / (2 * N) });
+  }
+  return out;
+});
+for (const row of closedForm) {
+  const ok = Math.abs(row.ratio - row.expected) < 1e-12;
+  console.log(ok
+    ? `PASS landscape closed form N=${row.N}: ratio == (N+1)/2N`
+    : `FAIL landscape closed form N=${row.N}: ${row.ratio} != ${row.expected}`);
+  ok ? pass++ : fail++;
+}
+
+// ---- Landscape: a single fixture must agree EXACTLY with the existing
+// calculator. If these ever disagree, one of the two engines is wrong.
+const parityOk = await page.evaluate(() => {
+  const K = K_FACTOR.cu, CM = WIRE_TABLE[3][1];
+  const solved = solveTree({
+    sourceVolts: 12, k: K,
+    ...buildDaisy([{ ft: 80, load: 7, unit: 'w', pf: 1, ratedVolts: 12 }], CM),
+  });
+  return Math.abs(solved.taps[0].drop - (2 * K * (7 / 12) * 80) / CM) < 1e-12;
+});
+console.log(parityOk
+  ? 'PASS landscape single fixture matches the existing single-load formula'
+  : 'FAIL landscape single fixture disagrees with the existing calculator');
+parityOk ? pass++ : fail++;
+
+// ---- Landscape: no edition may claim a code voltage-drop limit for a
+// low-voltage lighting system. That has NOT been verified against either
+// standard, so asserting it either way would be inventing a rule. The Canadian
+// pages may NAME CEC Rule 8-102, but only alongside "not verified".
+for (const edition of EDITIONS) {
+  const generated = editionPath(edition.prefix, 'landscape-lighting-calculator/');
+  await page.goto(BASE + generated);
+  const claim = await page.evaluate(() => document.body.innerText);
+  // English-only phrasings; the translated pages are covered by the reviewed
+  // bank plus the never-translate parity checks above.
+  const assertsALimit = /(?:NEC|CEC)[^.]{0,80}(?:requires|mandates|sets a mandatory)[^.]{0,60}(?:voltage drop|drop limit)/i.test(claim);
+  const namesRuleWithoutCaveat = edition.country === 'ca'
+    && /Rule 8-102/.test(claim)
+    && !/(not.{0,20}verified|non vérifié|no ha verificado|尚未核实)/i.test(claim);
+  const ok = !assertsALimit && !namesRuleWithoutCaveat;
+  console.log(ok
+    ? `PASS ${edition.prefix || 'us-en'} landscape asserts no code drop limit`
+    : `FAIL ${edition.prefix || 'us-en'} landscape makes an unverified code claim`);
+  ok ? pass++ : fail++;
 }
 
 // Desktop screenshot too

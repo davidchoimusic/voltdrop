@@ -32,7 +32,9 @@ The same seven tools, Privacy Policy, and Terms are available in each edition:
 
 For each edition, append one of these paths to its edition root:
 `wire-size-calculator/`, `max-wire-length/`, `ampacity-check/`,
-`conduit-fill/`, `box-fill/`, `power-calculator/`, `privacy/`, or `terms/`.
+`conduit-fill/`, `box-fill/`, `power-calculator/`,
+`landscape-lighting-calculator/`, `solar-battery-wire-size/`,
+`privacy/`, or `terms/`.
 
 Canadian conduit-fill pages are explicitly planning-only: the CEC
 53%/31%/40% percentages are verified, but the Canadian conductor-area and
@@ -58,6 +60,23 @@ that limitation whenever citing a Canadian conduit-fill result.
   check — wires, devices (double count), grounds (one count), clamps.
 - [Power Calculator](https://voltdrop.app/power-calculator/): volts / amps /
   watts / kW / kVA with power factor, DC and AC.
+- [Landscape Lighting Calculator](https://voltdrop.app/landscape-lighting-calculator/):
+  low-voltage lighting with SEVERAL FIXTURES TAPPED ALONG ONE CABLE, solved as a
+  tree so each stretch carries only the fixtures beyond it — not one load at the
+  end of the run. Reports the voltage at every fixture plus the highest, lowest
+  and spread, and compares daisy chain vs hub vs star on worst-case voltage,
+  spread and cable used. Nameplate-current method; no code limit is asserted and
+  no fixture voltage window is invented.
+- [Solar & Battery Wire Size](https://voltdrop.app/solar-battery-wire-size/):
+  DC wire sizing for three distinct circuits, each with its OWN current basis —
+  panel circuits use array Imp at Vmp; charge-controller-to-battery uses the
+  controller's maximum output current; battery-to-inverter uses maximum
+  continuous DC input current derived at the LOW-VOLTAGE CUTOUT, because
+  nominal battery voltage understates the current. Drop targets are tighter
+  than the 3%/5% branch-circuit convention and are labelled starting points,
+  not code requirements. Reports an explicit OUT OF RANGE rather than the
+  largest conductor in the table. Never reports an ampacity-driven size, and
+  does not handle inverter AC output.
 
 ## Guides (verified reference articles)
 

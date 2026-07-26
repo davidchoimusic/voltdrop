@@ -13,6 +13,8 @@ const patternGroups = {
   'conduit.js': 'conduit',
   'boxfill.js': 'boxFill',
   'power.js': 'power',
+  'landscape.js': 'landscape',
+  'solar.js': 'solar',
 };
 const toolFiles = readdirSync('.')
   .filter((file) => file.endsWith('.js') && file !== 'common.js')

@@ -11,5 +11,9 @@
   "conduit.js:CONDUIT": "59ffae62a59c83646bdd6a9a75db25bf",
   "boxfill.js:VOL_PER_CONDUCTOR": "94fde8ccf746df6275d4f58534b0b08a",
   "boxfill.js:BOXES": "4340e7749fc1870da820f1b6272dba41",
-  "boxfill.js:CEC_VOL_ML": "baecdebad442afce4763350c0fc84678"
+  "boxfill.js:CEC_VOL_ML": "baecdebad442afce4763350c0fc84678",
+  "landscape.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
+  "landscape.js:K_FACTOR": "852a41e6d003b0da882761c141a67852",
+  "solar.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
+  "solar.js:K_FACTOR": "852a41e6d003b0da882761c141a67852"
 }
