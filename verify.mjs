@@ -147,6 +147,14 @@ const EDITIONS = [
   { prefix: 'ca-fr', country: 'ca', locale: 'fr-CA', lang: 'fr-CA', hreflang: 'fr-CA', twin: 'ca', chip: '🇨🇦 CEC · FR' },
   { prefix: 'ca-zh', country: 'ca', locale: 'zh-Hans', lang: 'zh-Hans', hreflang: 'zh-Hans-CA', twin: 'ca', chip: '🇨🇦 CEC · ZH' },
 ];
+const CATALOGS = Object.fromEntries(['en', 'es', 'fr-CA', 'zh-Hans'].map((locale) => [
+  locale,
+  JSON.parse(readFileSync(`i18n/strings/${locale}.json`, 'utf8')),
+]));
+const catalogText = (locale, key) => {
+  const catalog = CATALOGS[locale];
+  return catalog[key] ?? key.split('.').reduce((cursor, part) => cursor?.[part], catalog);
+};
 const runtimeEditionId = (edition) => edition.country === 'ca'
   ? (edition.locale === 'fr-CA' ? 'ca-fr' : edition.locale === 'zh-Hans' ? 'ca-zh' : 'ca-en')
   : (edition.locale === 'es' ? 'us-es' : edition.locale === 'zh-Hans' ? 'us-zh' : 'us-en');
@@ -176,6 +184,20 @@ const GUIDE_PATHS = [
   'guides/voltage-drop-formula/',
 ];
 const GUIDE_ROUTES = GUIDE_PATHS.map((path) => `/${path}`);
+const NEW_PAGE_PATHS = [
+  'how-we-verify/',
+  'ohms-law/',
+  'solar-wire-size-calculator/',
+];
+const FRAMED_PAGE_CASES = [
+  { path: 'ohms-law/', parent: 'power-calculator/', script: 'power.js', tool: 'power' },
+  { path: 'solar-wire-size-calculator/', parent: 'solar-battery-wire-size/', script: 'solar.js', tool: 'solar' },
+];
+const TRANSLATION_PARITY_PATHS = [...GUIDE_PATHS, ...NEW_PAGE_PATHS];
+const SCREENSHOT_VIEWPORTS = [
+  { name: 'phone', width: 390, height: 844 },
+  { name: 'desktop', width: 1280, height: 900 },
+];
 const GENERATED_PATHS = [
   ...EDITIONS.flatMap((edition) =>
     [...SCOPED_PATHS, ...GUIDE_PATHS].map((path) => editionPath(edition.prefix, path))),
@@ -263,6 +285,13 @@ checkBool('llms-full.txt is linked from llms.txt',
 checkBool('llms-full.txt is not listed in sitemap.xml',
   !sitemap.includes('llms-full.txt'));
 
+// Numeric parity exemptions are opt-in markup boundaries. Every static check
+// that compares page text removes the marked element, not the number itself.
+const stripParityExemptElements = (html) => html.replace(
+  /<([a-z][\w:-]*)\b(?=[^>]*\bdata-parity-exempt(?:\s|=|>))[^>]*>[\s\S]*?<\/\1\s*>/gi,
+  ' ',
+);
+
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const protectedLiterals = [
@@ -331,14 +360,32 @@ for (const edition of EDITIONS) {
     const alternatesOk = EDITIONS.every((alternate) => html.includes(
       `hreflang="${alternate.hreflang}" href="https://voltdrop.app/${editionPath(alternate.prefix, path)}"`,
     )) && html.includes(`hreflang="x-default" href="https://voltdrop.app/${path}"`);
+    const h1Count = (html.match(/<h1\b/g) || []).length;
+    const rawPlaceholder = html.match(/\{\{[^}]+\}\}/)?.[0] || '';
+    let jsonLdError = '';
+    const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+    for (const block of jsonLdBlocks) {
+      try {
+        JSON.parse(block[1]);
+      } catch (error) {
+        jsonLdError = error.message;
+        break;
+      }
+    }
     checkBool(`${generated || '/'} metadata + short chip + Tools label`,
       langOk && chipOk && toolsAriaOk && canonicalOk && guideStandardOk
         && runtimeAssetOk && alternatesOk);
+    checkBool(`${generated || '/'} has one h1, no raw placeholder, and valid JSON-LD`,
+      h1Count === 1 && !rawPlaceholder && !jsonLdError,
+      `h1=${h1Count}${rawPlaceholder ? ` placeholder=${rawPlaceholder}` : ''}${jsonLdError ? ` JSON-LD=${jsonLdError}` : ''}`);
 
     if (edition.locale === 'en') continue;
     const twinPath = editionPath(edition.twin, path);
     const twin = readFileSync(twinPath ? `${twinPath}index.html` : 'index.html', 'utf8');
-    const mismatch = protectedParity(twin, html);
+    const mismatch = protectedParity(
+      stripParityExemptElements(twin),
+      stripParityExemptElements(html),
+    );
     checkBool(`${generated} never-translate parity`, !mismatch,
       mismatch || 'all protected tokens');
   }
@@ -384,7 +431,7 @@ for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
 const visibleTextNumbers = (file) => {
   const html = readFileSync(file, 'utf8');
   const body = html.match(/<body[\s\S]*?<\/body>/i)?.[0] || html;
-  const text = body
+  const text = stripParityExemptElements(body)
     .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
@@ -395,9 +442,9 @@ const visibleTextNumbers = (file) => {
 };
 for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   const englishPrefix = edition.country === 'ca' ? 'ca' : '';
-  for (const guidePath of GUIDE_PATHS) {
-    const translatedPath = editionPath(edition.prefix, guidePath);
-    const englishPath = editionPath(englishPrefix, guidePath);
+  for (const parityPath of TRANSLATION_PARITY_PATHS) {
+    const translatedPath = editionPath(edition.prefix, parityPath);
+    const englishPath = editionPath(englishPrefix, parityPath);
     const translatedNumbers = visibleTextNumbers(`${translatedPath}index.html`);
     const englishNumbers = visibleTextNumbers(`${englishPath}index.html`);
     checkBool(`static numeric parity /${translatedPath}`,
@@ -411,6 +458,44 @@ for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   checkBool(`static numeric parity /${translatedTermsPath}`,
     JSON.stringify(translatedTermsNumbers) === JSON.stringify(englishTermsNumbers),
     `${translatedTermsNumbers.length} visible numeric tokens`);
+}
+
+const flattenStrings = (source, prefix = '', output = []) => {
+  for (const [key, value] of Object.entries(source)) {
+    const path = prefix ? `${prefix}.${key}` : key;
+    if (typeof value === 'string') output.push([path, value]);
+    else if (value && typeof value === 'object' && !Array.isArray(value)) flattenStrings(value, path, output);
+  }
+  return output;
+};
+const visibleHtmlText = (file) => readFileSync(file, 'utf8')
+  .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&(?:nbsp|#160);/gi, ' ')
+  .replace(/&(?:amp|#38);/gi, '&')
+  .replace(/&#39;|&apos;/gi, "'")
+  .replace(/&quot;/gi, '"')
+  .replace(/\s+/g, ' ')
+  .trim();
+const englishPageCopy = {
+  'how-we-verify/': flattenStrings(CATALOGS.en.howVerify),
+  'ohms-law/': flattenStrings(CATALOGS.en.ohmsLaw),
+  'solar-wire-size-calculator/': flattenStrings(CATALOGS.en.solarWireSize),
+};
+for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
+  for (const path of NEW_PAGE_PATHS) {
+    const translatedPath = editionPath(edition.prefix, path);
+    const visible = visibleHtmlText(`${translatedPath}index.html`);
+    const leftovers = englishPageCopy[path]
+      .map(([key, value]) => [key, value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()])
+      .filter(([, value]) => value.length >= 12 && (value.match(/[A-Za-z]{2,}/g) || []).length >= 2)
+      .filter(([, value]) => visible.includes(value))
+      .map(([key, value]) => `${key}="${value}"`);
+    checkBool(`/${translatedPath} has no leftover English page copy`,
+      leftovers.length === 0,
+      leftovers.join(' | ') || 'page-specific copy translated');
+  }
 }
 
 // Sealed, browser-independent ampacity oracles. These run even when the
@@ -567,6 +652,146 @@ await installFileRoute(page);
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
 await page.goto(BASE);
+
+const collectPageProblems = (targetPage) => {
+  const problems = [];
+  targetPage.on('pageerror', (error) => problems.push(`pageerror: ${String(error)}`));
+  targetPage.on('console', (message) => {
+    if (message.type() === 'error') problems.push(`console: ${message.text()}`);
+  });
+  targetPage.on('requestfailed', (request) => {
+    problems.push(`requestfailed: ${request.url()} (${request.failure()?.errorText || 'unknown'})`);
+  });
+  targetPage.on('response', (response) => {
+    if (response.status() >= 400) problems.push(`response ${response.status()}: ${response.url()}`);
+  });
+  return problems;
+};
+
+// ---- The three new routes: the served page, not just its source file.
+// Every alternate is loaded in turn, which makes the hreflang check reciprocal.
+for (const edition of EDITIONS) {
+  for (const path of NEW_PAGE_PATHS) {
+    const generated = editionPath(edition.prefix, path);
+    const routePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await installFileRoute(routePage);
+    const loadProblems = collectPageProblems(routePage);
+    const response = await routePage.goto(BASE + generated);
+    await routePage.waitForLoadState('load');
+    const served = await routePage.evaluate(() => ({
+      bodyText: document.body.innerText.trim(),
+      h1Count: document.querySelectorAll('h1').length,
+      lang: document.documentElement.lang,
+      title: document.title,
+      h1: document.querySelector('h1')?.textContent?.trim() || '',
+      canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '',
+      alternates: [...document.querySelectorAll('link[rel="alternate"][hreflang]')]
+        .map((link) => [link.getAttribute('hreflang'), link.getAttribute('href')]),
+      rawPlaceholder: document.documentElement.outerHTML.match(/\{\{[^}]+\}\}/)?.[0] || '',
+    }));
+    const expectedCanonical = `https://voltdrop.app/${generated}`;
+    const expectedAlternates = [
+      ...EDITIONS.map((alternate) => [
+        alternate.hreflang,
+        `https://voltdrop.app/${editionPath(alternate.prefix, path)}`,
+      ]),
+      ['x-default', `https://voltdrop.app/${path}`],
+    ];
+    checkBool(`/${generated} exists and returns visible content`,
+      response?.status() === 200 && served.bodyText.length > 40,
+      `status=${response?.status() ?? 'none'} chars=${served.bodyText.length}`);
+    checkBool(`/${generated} has exactly one h1 and no raw catalog placeholder`,
+      served.h1Count === 1 && !served.rawPlaceholder,
+      `h1=${served.h1Count}${served.rawPlaceholder ? ` placeholder=${served.rawPlaceholder}` : ''}`);
+    checkBool(`/${generated} has self-canonical language metadata and reciprocal hreflang`,
+      served.lang === edition.lang
+        && served.canonical === expectedCanonical
+        && JSON.stringify(served.alternates) === JSON.stringify(expectedAlternates),
+      `${served.lang} | ${served.canonical} | ${JSON.stringify(served.alternates)}`);
+    checkBool(`/${generated} load has zero page errors and failed assets`,
+      loadProblems.length === 0,
+      loadProblems.join(' | '));
+
+    const frame = FRAMED_PAGE_CASES.find((candidate) => candidate.path === path);
+    if (frame) {
+      const parentPath = editionPath(edition.prefix, frame.parent);
+      const parentHtml = readFileSync(`${parentPath}index.html`, 'utf8');
+      const parentTitle = parentHtml.match(/<title>([^<]*)<\/title>/)?.[1] || '';
+      const parentH1 = parentHtml.match(/<h1\b[^>]*>([^<]*)<\/h1>/)?.[1]?.trim() || '';
+      const frameState = await routePage.evaluate(({ script, tool }) => {
+        const faqs = [...document.querySelectorAll('script[type="application/ld+json"]')]
+          .map((scriptElement) => JSON.parse(scriptElement.textContent))
+          .filter((entry) => entry?.['@type'] === 'FAQPage');
+        return {
+          scriptSrc: document.querySelector(`script[src*="${script}"]`)?.getAttribute('src') || '',
+          activeParent: Boolean(document.querySelector(`.sidebar .tool-link.active[data-tool="${tool}"]`)),
+          faqCount: faqs.length,
+          faqVisible: faqs.every((faq) => faq.mainEntity.every((entry) =>
+            document.body.innerText.includes(entry.name)
+              && document.body.innerText.includes(entry.acceptedAnswer.text))),
+        };
+      }, frame);
+      const assetPrefix = runtimeEditionId(edition) === 'us-en'
+        ? `/${frame.script}?v=`
+        : `/assets/${runtimeEditionId(edition)}/${frame.script}?v=`;
+      checkBool(`/${generated} is a distinct frame of its parent`,
+        served.title !== parentTitle
+          && served.h1 !== parentH1
+          && frameState.scriptSrc.startsWith(assetPrefix)
+          && /^[^?]+\?v=[a-f0-9]{10}$/.test(frameState.scriptSrc)
+          && frameState.activeParent,
+        `${served.title} | ${served.h1} | ${frameState.scriptSrc} | active=${frameState.activeParent}`);
+      checkBool(`/${generated} FAQ structured data is visible`,
+        frameState.faqCount === 1 && frameState.faqVisible,
+        `count=${frameState.faqCount} visible=${frameState.faqVisible}`);
+    }
+    await routePage.close();
+  }
+}
+
+// Root-relative links are rewritten only when common.js knows the route.
+// Exercise the two non-English editions most likely to expose a silent fallback.
+for (const prefix of ['ca-fr', 'zh']) {
+  const edition = EDITIONS.find((candidate) => candidate.prefix === prefix);
+  const expectedPrefix = `/${prefix}`;
+  const targets = [
+    ...NEW_PAGE_PATHS.map((path) => `/${path}`),
+    '/power-calculator/',
+    '/solar-battery-wire-size/',
+  ];
+  const linkResults = [];
+  const linkPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(linkPage);
+  for (const sourcePath of SCOPED_PATHS) {
+    await linkPage.goto(BASE + editionPath(prefix, sourcePath));
+    linkResults.push(...await linkPage.evaluate(({ targetPaths, source }) => {
+      const prefixes = ['/ca-fr', '/ca-zh', '/ca', '/es', '/zh'];
+      const baseRoute = (href) => {
+        const pathname = new URL(href, location.href).pathname;
+        const matched = prefixes.find((candidate) =>
+          pathname === candidate || pathname.startsWith(`${candidate}/`));
+        return matched ? pathname.slice(matched.length) || '/' : pathname;
+      };
+      return [...document.querySelectorAll('a[href]')]
+        .filter((link) => link.getAttribute('href')?.startsWith('/'))
+        .map((link) => ({ source, href: link.getAttribute('href'), base: baseRoute(link.getAttribute('href')) }))
+        .filter((link) => targetPaths.includes(link.base));
+    }, { targetPaths: targets, source: sourcePath || '/' }));
+  }
+  await linkPage.goto(BASE + editionPath(prefix, 'ohms-law/'));
+  const helperResults = await linkPage.evaluate(({ country, locale, paths }) =>
+    paths.map((path) => VDEdition.pathFor(country, locale, path)),
+  { country: edition.country, locale: edition.locale, paths: NEW_PAGE_PATHS.map((path) => `/${path}`) });
+  const allLinksLocal = linkResults.every(({ href, base }) => href === `${expectedPrefix}${base}`);
+  const requiredLinksSeen = ['/how-we-verify/', '/power-calculator/', '/solar-battery-wire-size/']
+    .every((target) => linkResults.some(({ base }) => base === target));
+  const helpersLocal = helperResults.every((href, index) =>
+    href === `${expectedPrefix}/${NEW_PAGE_PATHS[index]}`);
+  checkBool(`${prefix} common.js keeps new-page and framed-parent links in the edition`,
+    allLinksLocal && requiredLinksSeen && helpersLocal,
+    JSON.stringify({ linkResults, helperResults }));
+  await linkPage.close();
+}
 
 // ---- Every calculator in every edition ----
 // Each case installs its error listeners before navigation, so both script
@@ -912,6 +1137,12 @@ for (const edition of EDITIONS) {
   editionPage.on('console', (message) => {
     if (message.type() === 'error') interactionErrors.push(`console: ${message.text()}`);
   });
+  editionPage.on('requestfailed', (request) => {
+    interactionErrors.push(`requestfailed: ${request.url()} (${request.failure()?.errorText || 'unknown'})`);
+  });
+  editionPage.on('response', (response) => {
+    if (response.status() >= 400) interactionErrors.push(`response ${response.status()}: ${response.url()}`);
+  });
 
   for (const calculator of calculatorCases) {
     interactionErrors = [];
@@ -945,7 +1176,7 @@ for (const edition of EDITIONS) {
         render.label === expectedLabel,
         render.label);
     }
-    checkBool(`${label} interaction has zero page errors`,
+    checkBool(`${label} interaction has zero page errors and failed assets`,
       interactionErrors.length === 0,
       interactionErrors.join(' | '));
     if (calculator.expectsBreakdown) {
@@ -956,6 +1187,107 @@ for (const edition of EDITIONS) {
   }
 
   await editionPage.close();
+}
+
+// ---- Ohm's law honesty matrix: every case in every edition.
+// These are independent hand-worked values, not values copied from power.js.
+for (const edition of EDITIONS) {
+  const label = edition.prefix || 'us-en';
+  const ohmsPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(ohmsPage);
+  const interactionProblems = collectPageProblems(ohmsPage);
+  const openOhms = async () => {
+    await ohmsPage.goto(BASE + editionPath(edition.prefix, 'ohms-law/'));
+    await ohmsPage.waitForLoadState('load');
+  };
+  const resultState = () => ohmsPage.evaluate(() => ({
+    value: document.getElementById('big-number')?.textContent?.trim() || '',
+    label: document.getElementById('big-label')?.textContent?.trim() || '',
+    grid: document.getElementById('result-grid')?.innerText?.replace(/\s+/g, ' ').trim() || '',
+    results: document.getElementById('results')?.innerText?.replace(/\s+/g, ' ').trim() || '',
+  }));
+  const localeLower = (value) => value.toLocaleLowerCase(edition.locale);
+
+  await openOhms();
+  await ohmsPage.click('[data-find="ohms"]');
+  await ohmsPage.fill('#pw-volts', '120');
+  await ohmsPage.fill('#pw-amps', '10');
+  await ohmsPage.click('#pw-form .calc-btn');
+  let state = await resultState();
+  check(`${label} Ohm's law DC resistance 120 V / 10 A`, parseFloat(state.value), 12, 0);
+  checkBool(`${label} DC ohms result is labelled resistance`,
+    localeLower(state.label).includes(localeLower(catalogText(edition.locale, 'runtime.power.resistance')))
+      && localeLower(state.grid).includes(localeLower(catalogText(edition.locale, 'runtime.power.resistanceR'))),
+    `${state.label} | ${state.grid}`);
+
+  await openOhms();
+  await ohmsPage.click('[data-system="ac1"]');
+  await ohmsPage.click('[data-find="ohms"]');
+  await ohmsPage.fill('#pw-volts', '120');
+  await ohmsPage.fill('#pw-amps', '10');
+  await ohmsPage.fill('#pw-pf', '0.8');
+  await ohmsPage.click('#pw-form .calc-btn');
+  state = await resultState();
+  check(`${label} Ohm's law 1φ impedance 120 V / 10 A`, parseFloat(state.value), 12, 0);
+  checkBool(`${label} AC ohms result is impedance with 9.6 Ω resistive part`,
+    localeLower(state.label).includes(localeLower(catalogText(edition.locale, 'runtime.power.impedance')))
+      && localeLower(state.grid).includes(localeLower(catalogText(edition.locale, 'runtime.power.impedanceZ')))
+      && localeLower(state.grid).includes(localeLower(catalogText(edition.locale, 'runtime.power.resistivePartResistance')))
+      && state.grid.includes('9.6 Ω'),
+    `${state.label} | ${state.grid}`);
+
+  await openOhms();
+  await ohmsPage.click('[data-find="ohms"]');
+  await ohmsPage.click('[data-system="ac3"]');
+  const refusal = await ohmsPage.evaluate(() => ({
+    disabled: document.querySelector('[data-find="ohms"]').disabled,
+    hintVisible: !document.getElementById('pw-ohms-unavailable').hidden,
+    hint: document.getElementById('pw-ohms-unavailable').textContent.trim(),
+    resultVisible: !document.getElementById('results').hidden,
+    result: document.getElementById('big-label').textContent.trim(),
+  }));
+  const refusalText = catalogText(edition.locale, 'power.ohmsUnavailableForThreePhaseTheAnswerChanges');
+  checkBool(`${label} three-phase ohms visibly refuses with the wye/delta reason`,
+    refusal.disabled
+      && refusal.hintVisible
+      && refusal.resultVisible
+      && refusal.hint === refusalText
+      && refusal.result === refusalText,
+    JSON.stringify(refusal));
+
+  await openOhms();
+  await ohmsPage.click('[data-known="ohms"]');
+  await ohmsPage.fill('#pw-volts', '120');
+  await ohmsPage.fill('#pw-ohms', '10');
+  await ohmsPage.click('#pw-form .calc-btn');
+  state = await resultState();
+  check(`${label} Ohm's law amps from 120 V / 10 Ω`, parseFloat(state.value), 12, 0);
+
+  await openOhms();
+  await ohmsPage.click('[data-find="ohms"]');
+  await ohmsPage.fill('#pw-volts', '120');
+  await ohmsPage.fill('#pw-amps', '0');
+  await ohmsPage.click('#pw-form .calc-btn');
+  state = await resultState();
+  checkBool(`${label} zero amps gives a readable resistance error`,
+    state.results.includes(catalogText(edition.locale, 'runtime.power.currentMustBeGreaterThanZero'))
+      && !/Infinity|NaN/.test(state.results),
+    state.results);
+
+  await openOhms();
+  await ohmsPage.click('[data-known="ohms"]');
+  await ohmsPage.fill('#pw-volts', '120');
+  await ohmsPage.fill('#pw-ohms', '0');
+  await ohmsPage.click('#pw-form .calc-btn');
+  state = await resultState();
+  checkBool(`${label} zero ohms gives a readable current error`,
+    state.results.includes(catalogText(edition.locale, 'runtime.power.ohmsMustBeGreaterThanZero'))
+      && !/Infinity|NaN/.test(state.results),
+    state.results);
+  checkBool(`${label} full Ohm's law interaction has zero page errors and failed assets`,
+    interactionProblems.length === 0,
+    interactionProblems.join(' | '));
+  await ohmsPage.close();
 }
 
 // ---- Header fit: every mobile control stays within its one-line height.
@@ -1624,15 +1956,16 @@ for (const g of GENERATED_PATHS.filter((path) => path.includes('guides/'))) {
 const renderedNumberMultiset = async (path) => {
   await page.goto(BASE + path);
   return page.evaluate((numericTokenPattern) => {
+    document.querySelectorAll('[data-parity-exempt]').forEach((element) => element.remove());
     const tokens = document.body.innerText.match(new RegExp(numericTokenPattern, 'gu')) || [];
     return tokens.sort();
   }, NUMERIC_TOKEN_PATTERN);
 };
 for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   const englishPrefix = edition.country === 'ca' ? 'ca' : '';
-  for (const guidePath of GUIDE_PATHS) {
-    const translatedPath = editionPath(edition.prefix, guidePath);
-    const englishPath = editionPath(englishPrefix, guidePath);
+  for (const parityPath of TRANSLATION_PARITY_PATHS) {
+    const translatedPath = editionPath(edition.prefix, parityPath);
+    const englishPath = editionPath(englishPrefix, parityPath);
     const [translatedNumbers, englishNumbers] = [
       await renderedNumberMultiset(translatedPath),
       await renderedNumberMultiset(englishPath),
@@ -1836,7 +2169,54 @@ for (const edition of EDITIONS) {
   ok ? pass++ : fail++;
 }
 
-// Desktop screenshot too
+// ---- Human-review screenshots for the three new pages.
+for (const viewport of SCREENSHOT_VIEWPORTS) {
+  await page.setViewportSize({ width: viewport.width, height: viewport.height });
+  for (const edition of EDITIONS) {
+    const editionName = runtimeEditionId(edition);
+    for (const path of NEW_PAGE_PATHS) {
+      await page.goto(BASE + editionPath(edition.prefix, path));
+      const slug = path.replace(/\/$/, '');
+      await page.screenshot({
+        path: `${shots}/new-page-${viewport.name}-${editionName}-${slug}.png`,
+        fullPage: true,
+      });
+    }
+  }
+}
+
+// The grey-box regression is visual: capture every result panel with real
+// output at phone and desktop widths. Box fill is captured in both US (five
+// cells) and Canada (four cells), the one tool that can exercise both parity
+// shapes in the same result design.
+const visualCalculatorCases = [
+  { slug: 'voltage-drop', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === '') },
+  { slug: 'wire-size', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'wire-size-calculator/') },
+  { slug: 'max-length', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'max-wire-length/') },
+  { slug: 'ampacity', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'ampacity-check/') },
+  { slug: 'conduit-fill', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'conduit-fill/') },
+  { slug: 'box-fill-us-odd', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'box-fill/') },
+  { slug: 'box-fill-ca-even', edition: EDITIONS[3], calculator: calculatorCases.find(({ path }) => path === 'box-fill/') },
+  { slug: 'power', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'power-calculator/') },
+  { slug: 'landscape', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'landscape-lighting-calculator/') },
+  { slug: 'solar', edition: EDITIONS[0], calculator: calculatorCases.find(({ path }) => path === 'solar-battery-wire-size/') },
+];
+for (const viewport of SCREENSHOT_VIEWPORTS) {
+  const visualPage = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } });
+  await installFileRoute(visualPage);
+  for (const { slug, edition, calculator } of visualCalculatorCases) {
+    await visualPage.goto(BASE + editionPath(edition.prefix, calculator.path));
+    await calculator.interact(visualPage, edition);
+    await visualPage.waitForSelector('#results:not([hidden])');
+    const cells = await visualPage.locator('#result-grid .result-cell').count();
+    const suffix = cells ? `${cells}-cells` : 'result-panel';
+    await visualPage.locator('#results').screenshot({
+      path: `${shots}/result-${viewport.name}-${slug}-${suffix}.png`,
+    });
+  }
+  await visualPage.close();
+}
+
 await page.goto(BASE);
 await page.screenshot({ path: `${shots}/5-desktop.png`, fullPage: true });
 

@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from 'fs';
-import { join, relative, resolve } from 'path';
+import { dirname, join, relative, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
@@ -79,6 +79,7 @@ const isGuide = (page) =>
 const routeFor = (dir) => `/${dir ? `${dir}/` : ''}`;
 const normalizedGuideDir = (dir) => dir.replace(/^ca\//, '');
 const sorted = (values) => [...values].sort();
+const rootRelative = (file) => relative(ROOT, resolve(ROOT, file)).replaceAll('\\', '/');
 
 const duplicatesIn = (values) => {
   const seen = new Set();
@@ -129,6 +130,7 @@ export const checkRegistries = () => {
   const commonGuides = readArrayDeclaration('common.js', 'GUIDE_PATHS');
   const verifyTools = readArrayDeclaration('verify.mjs', 'SCOPED_PATHS');
   const verifyGuides = readArrayDeclaration('verify.mjs', 'GUIDE_PATHS');
+  const localeTemplates = readArrayDeclaration('tools/generate-locales.mjs', 'templateFiles');
   const errors = [];
 
   for (const dir of duplicatesIn(pages.map((page) => page.dir))) {
@@ -149,6 +151,34 @@ export const checkRegistries = () => {
   compareRegistry(errors, 'common.js GUIDE_PATHS', commonGuides, expectedCommonGuides);
   compareRegistry(errors, 'verify.mjs SCOPED_PATHS', verifyTools, expectedVerifyTools);
   compareRegistry(errors, 'verify.mjs GUIDE_PATHS', verifyGuides, expectedVerifyGuides);
+
+  const llms = readSource('llms.txt');
+  for (const page of pages) {
+    const pathname = routeFor(page.dir);
+    if (!llms.includes(pathname)) {
+      errors.push(`llms.txt is missing ${pathname} from build.mjs PAGES`);
+    }
+  }
+
+  const requiredLocaleTemplates = new Set();
+  const collectLocaleTemplate = (file) => {
+    const normalized = rootRelative(file);
+    if (requiredLocaleTemplates.has(normalized)) return;
+    requiredLocaleTemplates.add(normalized);
+    const source = readSource(normalized);
+    for (const match of source.matchAll(/\{\{>\s*([^{}\s]+)\s*\}\}/g)) {
+      collectLocaleTemplate(join(dirname(normalized), match[1]));
+    }
+  };
+  for (const page of pages) {
+    if (page.main) collectLocaleTemplate(page.main);
+  }
+  const localeTemplateSet = new Set(localeTemplates.map(rootRelative));
+  for (const file of sorted(requiredLocaleTemplates)) {
+    if (!localeTemplateSet.has(file)) {
+      errors.push(`tools/generate-locales.mjs templateFiles is missing ${file} required by build.mjs PAGES`);
+    }
+  }
 
   const expectedUrls = [];
   const expectedOutput = [];

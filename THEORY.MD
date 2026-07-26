@@ -63,7 +63,11 @@ Trust is the product. Six commitments make it concrete.
 
 6. **Verification must reach the rendered product.** Every calculator is driven
    in all six editions against a hand-worked value. Translated numbers must
-   match their English twins. Protected code names, wire types, and units must
+   match their English twins unless a specific element owns a legitimate
+   locale-dependent representation, such as a month rendered as a Chinese
+   numeral instead of an English month name. Those exceptions are marked at
+   the element and removed in both static and rendered checks; they are never
+   global number denylists. Protected code names, wire types, and units must
    survive. Safety copy passes target-only back-translation before comparison
    with the sealed English meaning. English output has its own byte-identity
    gate, separate from the electrical-data seals.
@@ -140,8 +144,17 @@ confirms country copy, localization, and fragment composition.
 - **Rendered context matters.** A localized string can exist without being
   loaded, a root-relative link can silently route a Canadian reader to US
   English, and a static hint can describe three-phase input while DC is active.
-  Source correctness is not enough; the release unit is the behavior a worker
-  sees.
+  CSS can also uppercase a result label after the catalog supplies mixed case,
+  so assertions against rendered text compare with the edition's own casing
+  rules. Source correctness is not enough; the release unit is the behavior a
+  worker sees.
+
+- **Dividers belong to occupied cells, not empty grid space.** Using a grid
+  container's background to draw one-pixel gaps turns an incomplete final row
+  into a solid grey rectangle. Cell borders draw the same divisions at any
+  column count without creating a visual object where no result exists. This
+  class of defect still requires screenshots; counting result cells cannot
+  prove that empty space looks empty.
 
 - **Engine reuse and page duplication are different questions.** Byte-identical
   form markup and script URLs are desirable because they prevent calculator
