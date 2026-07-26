@@ -60,7 +60,7 @@ const DROP_TEXT = {
   maxRunLabel: '{size} {material}线在{percent}%电压降下的最大单程线路长度',
   mathIntroRoundTrip: '<p>我们使用电工常用的标准K系数公式：</p>\n<div class="formula">电压降 = {mult} × K × 安培 × 单程英尺 ÷ circular mils</div>\n<p><strong>{mult}</strong>计入往返距离：电流流出后还要返回，因此导线路径是单程距离（仅去程）的两倍。<strong>K = {factor}</strong>是{material}在75°C时的电阻常数（ohm·cmil/ft）。<strong>Circular mils</strong>是导线横截面积。</p>',
   mathIntroThreePhase: '<p>我们使用电工常用的标准K系数公式：</p>\n<div class="formula">电压降 = {mult} × K × 安培 × 单程英尺 ÷ circular mils</div>\n<p><strong>{mult}</strong>计入三相几何关系。<strong>K = {factor}</strong>是{material}在75°C时的电阻常数（ohm·cmil/ft）。<strong>Circular mils</strong>是导线横截面积。</p>',
-  dropMath: '\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class="formula">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped} V\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>',
+  dropMath: '\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class="formula">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>',
   noFitMath: '<p>我们从最小规格到最大规格逐一检查；没有任何规格的电压降≤{maxDrop} V（{source} V的{percent}%）。</p>',
   sizeMath: '\n<p>我们从最小规格开始逐一检查，直到找到可将电压降控制在{percent}%限值（{maxDrop} V）以下的规格：</p>\n<div class="formula">{size}（{cm} cmil）：\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ 低于您的限值</div>',
   maxRunMath: '\n<p>根据您的{percent}%限值（{maxDrop} V），我们将公式变形以求解距离：</p>\n<div class="formula">最大单程英尺 = {maxDrop} V × {cm} cmil\n             ÷（{mult} × {factor} × {amps} A）\n             = {feet} ft</div>',

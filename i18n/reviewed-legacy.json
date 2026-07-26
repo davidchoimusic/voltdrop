@@ -299,7 +299,8 @@
     "terms.statesProvincesAndMunicipalitiesAdoptCodes": "各州、各省和各市采用规范的时间表不同，并可能加入当地修订。按照VoltDrop所实施版本得出的正确结果，在适用较早版本或当地修订的地区可能是错误的。您必须确认您所在地区的主管机构所采用的版本。",
     "terms.translationsAreProvidedForConvenienceIf": "翻译版本仅为方便阅读而提供。如果翻译版本与英文版本不一致，以英文版本为准。",
     "terms.voltDropSometimesUsesASimplifiedOr": "VoltDrop有时采用简化或保守的方法。例如，CEC Rule 4-006将端接温度要求限制在导体起始的前1.2 m，并允许在其后进行符合规范的转换。VoltDrop不对这一分段建模，而是在全长范围内采用导体与端接温度额定值中的较低者。这种方法较为保守，但并不是规范的完整程序。",
-    "terms.whereACodeDoesNotExpresslyAnswer": "如果规范没有明确规定某项实施细节，VoltDrop可能会作出保守选择，而您的当地检查员或主管机构可能持不同意见。例如，CEC Rule 4-004没有明确说明已安装的备用功率或照明导体；VoltDrop会将其计入Table 5C。"
+    "terms.whereACodeDoesNotExpresslyAnswer": "如果规范没有明确规定某项实施细节，VoltDrop可能会作出保守选择，而您的当地检查员或主管机构可能持不同意见。例如，CEC Rule 4-004没有明确说明已安装的备用功率或照明导体；VoltDrop会将其计入Table 5C。",
+    "runtimePatterns.drop.dropMath": "\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>"
   },
   "packs": {
     "us": {

@@ -1795,7 +1795,7 @@
   "runtimePatterns.drop.ampacityWarning": "注意：此结果只计算电压降。导线还必须能够安全承载{amps} A（载流量）；购买前请另行核验。",
   "runtimePatterns.drop.amps": "{amps} A",
   "runtimePatterns.drop.dropLabel": "{size} {material}线的电压降",
-  "runtimePatterns.drop.dropMath": "\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped} V\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>",
+  "runtimePatterns.drop.dropMath": "\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>",
   "runtimePatterns.drop.feet": "{feet} ft",
   "runtimePatterns.drop.limit": "{percent}% = {volts} V",
   "runtimePatterns.drop.mathIntroRoundTrip": "<p>我们使用电工常用的标准K系数公式：</p>\n<div class=\"formula\">电压降 = {mult} × K × 安培 × 单程英尺 ÷ circular mils</div>\n<p><strong>{mult}</strong>计入往返距离：电流流出后还要返回，因此导线路径是单程距离（仅去程）的两倍。<strong>K = {factor}</strong>是{material}在75°C时的电阻常数（ohm·cmil/ft）。<strong>Circular mils</strong>是导线横截面积。</p>",
