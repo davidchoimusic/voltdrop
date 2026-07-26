@@ -1661,6 +1661,7 @@
     },
     "landscape": {
       "assumption": "This comparison assumes your fixtures run along one path and every distance is measured along it — a bed, walkway or driveway. Fixtures scattered in different directions have their own geometry, which this tool cannot know.",
+      "badInput": "Those numbers do not describe a run we can solve. Check the distances and loads.",
       "badgeCheck": "CHECK",
       "badgeOk": "OK",
       "badgeStop": "WILL NOT WORK",

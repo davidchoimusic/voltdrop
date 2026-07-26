@@ -9,6 +9,11 @@ const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const glossary = JSON.parse(readFileSync('i18n/glossary.json', 'utf8')).terms;
 const guideTranslations = JSON.parse(readFileSync('i18n/guide-translations.json', 'utf8'));
+// Reviewed by hand, applied surgically by tools/apply-landscape-translations.mjs.
+// Listed here so a FUTURE fixed generator run reproduces the same values rather
+// than mechanically re-translating them. See PROJECT_CONTEXT.md: this generator
+// is currently stale and must not be run.
+const landscapeTranslations = JSON.parse(readFileSync('i18n/landscape-translations.json', 'utf8'));
 const existingSafetyRegistry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
 const packs = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -66,6 +71,11 @@ for (const [job, translations] of Object.entries(guideTranslations)) {
   if (job.startsWith('us-zh-Hans-') || job.startsWith('ca-zh-Hans-')) {
     Object.assign(guideExact['zh-Hans'], translations);
   }
+}
+
+const landscapeExact = { es: {}, 'fr-CA': {}, 'zh-Hans': {} };
+for (const locale of Object.keys(landscapeExact)) {
+  Object.assign(landscapeExact[locale], landscapeTranslations[locale] ?? {});
 }
 
 const valueAt = (source, key) => key.split('.').reduce((cursor, part) => cursor?.[part], source);
@@ -2102,6 +2112,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       ?? reviewedLegal[locale]?.[key]
       ?? reviewedCore[locale]?.[key]
       ?? keyedExact[locale]?.[key]
+      ?? landscapeExact[locale]?.[key]
       ?? guideExact[locale]?.[key]
       ?? words[locale]?.[key]
       ?? translate(valueAt(english, key), locale);

@@ -5,6 +5,37 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { createHash } from 'crypto';
 import { localizeRuntimeSource } from './tools/runtime-code-boundary.mjs';
 
+/* Sealed electrical data that exists in more than one file must stay IDENTICAL.
+   landscape.js carries its own copy of WIRE_TABLE and K_FACTOR because each page
+   loads only its own script; the data tripwire fingerprints tables per
+   [file, NAME], so a copy does not inherit the original's protection.
+
+   This check lives in the BUILD, not only in verify.mjs, on purpose: a deploy
+   that never runs the test suite could otherwise ship two tables that had
+   drifted apart. You cannot generate a page without it passing.
+
+   The comparison is deep AND positional — row order matters, because the wire
+   selector picks by index, so a reordered table silently changes what "12 AWG"
+   means. */
+const readLiteral = (file, name) => {
+  const source = readFileSync(file, 'utf8');
+  const match = source.match(new RegExp(`const ${name} = ([\\s\\S]*?);\\n`));
+  if (!match) throw new Error(`Cannot read sealed constant ${name} from ${file}`);
+  return Function(`"use strict"; return (${match[1]});`)();
+};
+for (const name of ['WIRE_TABLE', 'K_FACTOR']) {
+  const canonical = JSON.stringify(readLiteral('app.js', name));
+  const copy = JSON.stringify(readLiteral('landscape.js', name));
+  if (canonical !== copy) {
+    console.error(`\nSEALED DATA DIVERGED: ${name} in landscape.js no longer matches app.js.`);
+    console.error(`  app.js       ${canonical}`);
+    console.error(`  landscape.js ${copy}`);
+    console.error(`  These are electrical constants. Fix the copy to match, or if the change is`);
+    console.error(`  intended, change BOTH deliberately and re-verify against an independent source.`);
+    process.exit(1);
+  }
+}
+
 const englishCatalog = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const runtimeMap = JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8'));
 const runtimePatternGroups = {

@@ -64,6 +64,7 @@ const TOOL_PATHS = [
   '/conduit-fill/',
   '/box-fill/',
   '/power-calculator/',
+  '/landscape-lighting-calculator/',
   '/privacy/',
   '/terms/',
 ];
