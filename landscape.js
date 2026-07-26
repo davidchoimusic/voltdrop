@@ -264,21 +264,41 @@ function buildStar(fixtures, cm) {
   return { nodes, edges };
 }
 
-// A shared trunk out to a hub, then an individual spoke to each fixture.
-// Distance = spoke length from the hub. A hub is NOT a star: a star has no
-// shared trunk, so the two give different drops and different cable totals.
-// A zero-length trunk is electrically identical to a star (the hub carries no
-// load of its own and every spoke keeps its length and size) — safe, and the
-// page says so rather than pretending the two layouts are different.
-function buildHub(fixtures, cm, trunkFt) {
+/* A shared trunk out to a hub somewhere along the path, then an individual spoke
+   from the hub to each fixture. hubFt is the hub's distance along the SAME path
+   the fixture distances are measured on, so a spoke is |fixture − hub|.
+
+   A hub is NOT a star: a star has no shared trunk, so the two give different
+   drops and different cable totals. A hub at 0 ft is electrically identical to a
+   star (the hub carries no load of its own and every spoke keeps its length and
+   size) — safe, and the page says so rather than pretending otherwise. */
+function buildHub(fixtures, cm, hubFt) {
+  const hub = Number(hubFt) || 0;
   const taps = groupByDistance(fixtures);
   const nodes = [{ id: SOURCE_ID, loads: [] }, { id: 'hub', loads: [] }];
-  const edges = [{ from: SOURCE_ID, to: 'hub', lengthFt: Number(trunkFt) || 0, cm }];
+  const edges = [{ from: SOURCE_ID, to: 'hub', lengthFt: hub, cm }];
   for (const tap of taps) {
     nodes.push({ id: tap.id, label: `${tap.ft} ft`, loads: tap.loads });
-    edges.push({ from: 'hub', to: tap.id, lengthFt: tap.ft, cm });
+    edges.push({ from: 'hub', to: tap.id, lengthFt: Math.abs(tap.ft - hub), cm });
   }
   return { nodes, edges };
+}
+
+/* All three layouts from one fixture table.
+
+   THE ASSUMPTION, stated because the comparison depends on it: the fixtures run
+   along ONE path and each distance is measured along that path. That is the
+   straight bed / walkway / driveway case, which is both the common one and the
+   only one where these three layouts are genuinely comparable from a single
+   column of numbers. Fixtures scattered in different directions need their own
+   real geometry, and this tool does not pretend to know it. */
+function compareLayouts(fixtures, cm, hubFt, sourceVolts, k) {
+  const solve = (tree) => solveTree({ sourceVolts, k, ...tree });
+  return {
+    daisy: solve(buildDaisy(fixtures, cm)),
+    hub: solve(buildHub(fixtures, cm, hubFt)),
+    star: solve(buildStar(fixtures, cm)),
+  };
 }
 
 /* This engine is a NAMEPLATE-CURRENT calculation: each fixture's current is

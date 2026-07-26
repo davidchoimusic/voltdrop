@@ -9,11 +9,11 @@ const src = readFileSync(`${WT}/landscape.js`, 'utf8');
 const api = Function(`"use strict";
 ${src}
 return { WIRE_TABLE, K_FACTOR, SOURCE_ID, fixtureAmps, solveTree, groupByDistance,
-         buildDaisy, buildStar, buildHub, nameplateCaution };`)();
+         buildDaisy, buildStar, buildHub, compareLayouts, nameplateCaution };`)();
 
 const {
   WIRE_TABLE, K_FACTOR, fixtureAmps, solveTree,
-  buildDaisy, buildStar, buildHub, nameplateCaution,
+  buildDaisy, buildStar, buildHub, compareLayouts, nameplateCaution,
 } = api;
 
 let pass = 0, fail = 0;
@@ -126,8 +126,37 @@ ok('star uses more cable than daisy', s.cableFt > d.cableFt, `${s.cableFt} vs ${
 ok('star spread is tighter than daisy', s.spreadVolts < d.spreadVolts);
 ok('hub with a trunk differs from star', !near(h.lowestVolts, s.lowestVolts));
 const hub0 = solve(buildHub(layoutRows, CM, 0));
-ok('hub with zero trunk collapses to star', near(hub0.lowestVolts, s.lowestVolts));
+ok('hub at 0 ft collapses to star', near(hub0.lowestVolts, s.lowestVolts));
 ok('hub trunk carries the whole load', near(h.edgeDrops[0].amps, 4 * (7 / 12)));
+// hub at 50 ft on a 20/40/60/80 path: spokes are 30/10/10/30, trunk 50.
+ok('hub spokes are |fixture - hub|',
+  [30, 10, 10, 30].every((want, i) => near(h.edgeDrops[i + 1].lengthFt, want)),
+  h.edgeDrops.slice(1).map((e) => e.lengthFt).join(','));
+ok('hub uses less cable than star', h.cableFt < s.cableFt, `${h.cableFt} vs ${s.cableFt}`);
+ok('hub cable == trunk + spokes', near(h.cableFt, 50 + 30 + 10 + 10 + 30));
+
+console.log('\n--- compareLayouts returns all three from one table ---');
+const cmp = compareLayouts(layoutRows, CM, 50, V, K);
+ok('all three layouts present', !!(cmp.daisy && cmp.hub && cmp.star));
+ok('comparison matches the individual solves',
+  near(cmp.daisy.lowestVolts, d.lowestVolts)
+  && near(cmp.hub.lowestVolts, h.lowestVolts)
+  && near(cmp.star.lowestVolts, s.lowestVolts));
+ok('daisy has the widest spread of the three',
+  cmp.daisy.spreadVolts > cmp.star.spreadVolts && cmp.daisy.spreadVolts > cmp.hub.spreadVolts);
+/* Locked in deliberately, because it is the counter-intuitive finding this tool
+   exists to surface: a hub placed part-way along the path beats a star on BOTH
+   evenness and cable used. The trunk drop is common to every fixture, so it
+   shifts all of them together instead of spreading them apart, and the spokes
+   are short. "Star is the most even layout" is simply false. */
+ok('a mid-path hub beats a star on evenness AND cable',
+  cmp.hub.spreadVolts < cmp.star.spreadVolts && cmp.hub.cableFt < cmp.star.cableFt,
+  `spread ${cmp.hub.spreadVolts} vs ${cmp.star.spreadVolts}, cable ${cmp.hub.cableFt} vs ${cmp.star.cableFt}`);
+ok('but the star still delivers the highest worst-case voltage',
+  cmp.star.lowestVolts > cmp.hub.lowestVolts,
+  `${cmp.star.lowestVolts} vs ${cmp.hub.lowestVolts}`);
+ok('daisy uses the least cable',
+  cmp.daisy.cableFt <= cmp.hub.cableFt && cmp.daisy.cableFt <= cmp.star.cableFt);
 
 console.log('\n--- highest voltage is reported, not just lowest (overvoltage matters) ---');
 ok('spread == highest - lowest', near(d.spreadVolts, d.highestVolts - d.lowestVolts));
