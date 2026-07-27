@@ -64,32 +64,6 @@ entire subject is whether our numbers can be trusted.
   wording until David approves a push. He gave `YES PUSH`/`YES DEPLOY` for the earlier trust-page
   work; that approval was deliberately NOT reused for this different change.
 
-### 2026-07-27, later still — Wire Size answers heat AND distance (LIVE)
-`/wire-size-calculator/` no longer answers voltage drop alone. It returns the **ampacity
-minimum**, the **voltage-drop minimum**, and the **governing conductor**, saying which constraint
-set it. Deployed and verified on production (14/14 checks across US/CA/FR/ZH, 0 JS errors,
-**0 analytics requests** — GA4 stayed gated).
-- Suite **1047 → 1137**, 0 failed. `data-golden.json` unchanged — no new electrical data.
-- New inputs in `size` mode only: **termination temperature** (frequently the binding limit),
-  ambient, conductors in raceway, continuous load. `drop` and `length` modes untouched.
-- **Continuous load is now SHOWN, not just applied.** US: `125% of the load`, with before/after
-  amps. Canada: `Rule 8-104 rated-equipment case — conductor limited to 80% of its permitted
-  ampacity`. **Genuinely different mechanisms, not translations of each other** — the US scales
-  the LOAD, Canada limits the CONDUCTOR.
-- **Refuses rather than guessing**: OUT OF RANGE when no listed conductor passes both, and it
-  discloses the search bound (500 kcmil). It never returns the largest conductor as a
-  recommendation.
-- **Domain floor stated honestly**: voltage drop reaches 18 AWG where the ampacity table starts at
-  14 AWG Cu / 12 AWG Al. The page says so rather than pretending ampacity has an opinion there.
-- Heading wording: **"Multiple sources, before it ships"** (owner's call, 2026-07-27) — body keeps
-  the precise mechanism, "at least two independently produced reproductions … they all have to
-  agree, on every cell". Do NOT loosen to "several"/"many"; the precision is the point.
-
-### Superseded plan note (kept per append-only convention)
-The "next build" block below was written before the work above shipped. Its content is now
-history, except the parts still true: **breaker sizing stays out until NEC 240.6 passes the
-verification gate**, and conduit stays out of this page for the counting reason given.
-
 ### Next build, planned and Codex-reviewed but NOT started
 **Repair `/wire-size-calculator/` to answer ampacity AND voltage drop together**, rather than
 adding a tenth tool. Codex's plan review reshaped the original idea substantially:
@@ -566,49 +540,6 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
-
-- **"COMPOSE THE EXISTING ENGINES" HID NEW SAFETY LOGIC (2026-07-27, the combined Wire Size build).**
-  The plan claimed the combined tool merely *composed* verified engines and therefore needed no new
-  verification. A plan review found three places that was false, and each would have shipped:
-  1. **The ampacity engine CHECKS one conductor; it does not SEARCH for the smallest passing one.**
-     A search is new logic and needs its own proof — the chosen size passes **and the next smaller
-     supported size fails**. Assert both directions; asserting only "it passes" would accept any
-     oversized answer.
-  2. **The two engines have different domains.** Voltage drop covers 18 and 16 AWG; ampacity starts
-     at 14 AWG Cu / 12 AWG Al. Silently treating a voltage-drop-only 18 AWG as "passing ampacity"
-     would be a wrong answer with no failing check anywhere.
-  3. **Conduit fill needs a DIFFERENT conductor count from ampacity.** Ampacity counts
-     *current-carrying* conductors; conduit fill counts **every** conductor physically in the
-     raceway, including the neutral and bond — and the bond size depends on the breaker, which we
-     cannot size. Reusing the ampacity count for conduit is the textbook example of a defect that
-     passes every existing check and every cross-tool equality test. **Conduit was cut from v1 for
-     this reason. Do not add it back without solving the count.**
-  General rule: **"it just composes existing verified parts" is a claim to be tested, not assumed.**
-  Ask what the composition must decide that neither part decided.
-
-- **CROSS-TOOL AGREEMENT IS NOT PROOF OF CORRECTNESS (2026-07-27).** Once pages share an engine,
-  "the combined tool agrees with the standalone tool" mostly proves both forms passed the same
-  inputs to the same code. **One shared mistake makes every page agree.** Keep the independent,
-  hand-worked oracles in `verify.mjs` — they are the only checks that can catch a wrong table, and
-  an expectation *derived from the sealed tables inside the test* cannot. (This is also why
-  `/how-we-verify/` now says "hand-worked for the core voltage-drop cases, and derived from the
-  sealed tables for the rest" instead of claiming everything is hand-worked.)
-
-- **A CORRECT CALCULATION THAT IS NEVER SHOWN IS STILL A DEFECT (2026-07-27).** The combined tool
-  applied the continuous-load rule correctly — NEC 125%, CEC Rule 8-104's 80% — and **never told
-  the user it had**. Six checks failed; the checks were right and the product was wrong. The shown
-  "How we calculated this" maths could not reconcile, because a factor was applied that never
-  appeared. **Any factor that changes the answer must appear in the shown arithmetic.** Silently
-  applying a 25% uplift is precisely the unexplained-calculator behaviour this product exists to fix.
-
-- **BYTE-IDENTICAL OUTPUT IS AN IMPOSSIBLE TEST FOR A SOURCE REFACTOR (2026-07-27).** I demanded a
-  byte-identical generated tree after restructuring `app.js`/`ampacity.js`. It cannot hold by
-  construction: `assets/<edition>/*.js` are localized copies **of those very files**, so changing
-  them changes the copies, changes their content hashes, and restamps `?v=` into 24 pages. Codex
-  correctly refused the criterion rather than fudging it. **The right equivalence proof for a
-  refactor is behavioural** — old vs new outputs compared across an exhaustive input sweep (840
-  voltage-drop and 567,000 ampacity results here) — **plus** a check that every changed page
-  differs *only* in the `?v=` stamp.
 
 - **⚠️⚠️ I SHIPPED FOUR FALSE CLAIMS ON THE TRUST PAGE, HOURS AFTER PUBLISHING IT (2026-07-27).**
   `/how-we-verify/` went live and then a review of an unrelated plan exposed that several of its
