@@ -15,6 +15,7 @@ const patternGroups = {
   'power.js': 'power',
   'landscape.js': 'landscape',
   'solar.js': 'solar',
+  'wire-colour.js': 'wireColour',
 };
 const toolFiles = readdirSync('.')
   .filter((file) => file.endsWith('.js') && file !== 'common.js')

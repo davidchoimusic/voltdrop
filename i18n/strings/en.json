@@ -1116,7 +1116,8 @@
     "voltageDrop": "Voltage Drop",
     "wireSize": "Wire Size",
     "landscapeLighting": "Landscape Lighting",
-    "solarBattery": "Solar & Battery"
+    "solarBattery": "Solar & Battery",
+    "wireColour": "Wire Colour"
   },
   "power": {
     "aCSinglePhaseButton": "AC single-phase",
@@ -1373,11 +1374,16 @@
       "title": "Solar & Battery Wire Size Calculator — PV, controller and inverter circuits | VoltDrop",
       "description": "Free solar and battery DC wire size calculator. Tighter drop targets than house wiring, the right current for each circuit, and an honest out-of-range answer instead of the biggest size in the table. No signup."
     },
-    "solarWireSize": {
-      "ldName": "VoltDrop Solar Wire Size Calculator",
-      "title": "Solar Wire Size Calculator — panel to charge controller | VoltDrop",
-      "description": "Free solar wire size calculator for the panel-to-controller run. Uses array Imp at Vmp, explains low-voltage drop, and labels solar targets as conventions, not code."
-    }
+      "solarWireSize": {
+        "ldName": "VoltDrop Solar Wire Size Calculator",
+        "title": "Solar Wire Size Calculator — panel to charge controller | VoltDrop",
+        "description": "Free solar wire size calculator for the panel-to-controller run. Uses array Imp at Vmp, explains low-voltage drop, and labels solar targets as conventions, not code."
+      },
+      "wireColour": {
+        "ldName": "VoltDrop Wire Colour Tool",
+        "title": "Wire Colour Tool — phase, neutral and ground colours | VoltDrop",
+        "description": "Choose a system and conductor role, or enter a panel circuit number, to get the expected wire colour under U.S. rules and trade convention."
+      }
     },
     "ca": {
       "guides": {
@@ -1409,6 +1415,7 @@
     }
   },
   "runtimePatterns": {
+    "wireColour": {},
     "drop": {
       "volts": "{volts} V",
       "amps": "{amps} A",
@@ -2108,5 +2115,61 @@
     "whatSizeAnswer": "It depends on the array's current at maximum power, the one-way distance to the controller, and how much voltage drop you are willing to lose. Enter those and this tool sizes it. There is no single answer that fits every array.",
     "whatSizeQuestion": "What size wire do I need for my solar panels?",
     "whySolarIsntHouseWiringHeading": "Why solar wiring isn't house wiring"
+  },
+  "wireColour": {
+    "answerLabel": "Install this colour",
+    "bare": "Bare",
+    "black": "Black",
+    "blue": "Blue",
+    "bondingRole": "Bonding / grounding",
+    "bondQuestion": "What colour is a bonding or grounding conductor?",
+    "brown": "Brown",
+    "byCircuit": "By circuit number",
+    "byCircuitSub": "Get A, B or C from the panel position",
+    "byRole": "By conductor role",
+    "byRoleSub": "Neutral, bond or ungrounded phase",
+    "circuitAnswer": "On a standard three-phase panelboard, circuits 1 and 2 are phase A, 3 and 4 are B, 5 and 6 are C, then the pattern repeats.",
+    "circuitHint": "Standard panelboard arrangement: 1 & 2 = A, 3 & 4 = B, 5 & 6 = C, then repeat. Odd numbers are left; even numbers are right.",
+    "circuitMeterLine": "Use this for new work; the actual bus is a meter question. Verify with a meter before touching anything.",
+    "circuitNumberLabel": "Panel circuit number",
+    "circuitPhasePattern": "Circuit {circuit} → Phase {phase} · {system}",
+    "circuitQuestion": "How does a circuit number map to a phase?",
+    "conductorLabel": "Conductor position",
+    "crossBorderKicker": "Canada / U.S. difference",
+    "delta": "120/240 V, 3-phase, 4-wire delta",
+    "existingAnswer": "No. Colour tells you what should be installed; it does not prove what an existing conductor is.",
+    "existingQuestion": "Can colour identify an existing conductor?",
+    "faqHeading": "Frequently asked questions",
+    "green": "Green",
+    "greenYellow": "Green with yellow stripes",
+    "grey": "Grey",
+    "highLegQuestion": "Which phase carries the high leg in a 4-wire delta system?",
+    "installBody": "This tool answers what to install on new work. Legacy wiring, faded insulation and earlier mistakes make colour unreliable as an identification method.",
+    "installHeading": "Install by colour; identify by measurement",
+    "invalidCircuit": "Enter a whole circuit number of 1 or higher.",
+    "line1": "Line 1",
+    "line2": "Line 2",
+    "lookupMethodLabel": "How to look up the conductor colour",
+    "neutralQuestion": "What colour is a neutral conductor?",
+    "neutralRole": "Neutral",
+    "orange": "Orange",
+    "panelArrangementHeading": "What the circuit number tells you",
+    "phaseA": "Phase A",
+    "phaseB": "Phase B",
+    "phaseC": "Phase C",
+    "phaseRole": "Ungrounded phase",
+    "red": "Red",
+    "roleContextPattern": "{role} · {system}",
+    "roleLabel": "Conductor role",
+    "roleMeterLine": "This tells you what to install on new work. What is already in the wall is a meter question—verify with a meter before touching anything.",
+    "single2": "1-phase, 2-wire",
+    "single3": "120/240 V, 1-phase, 3-wire",
+    "sub": "Choose the system and conductor role, or enter a panel circuit number. The answer comes first; the rule behind it stays visible.",
+    "systemLabel": "Electrical system",
+    "title": "Wire Colour",
+    "white": "White",
+    "wye208": "120/208 V, 3-phase wye",
+    "wye480": "277/480 V, 3-phase wye",
+    "yellow": "Yellow"
   }
 }

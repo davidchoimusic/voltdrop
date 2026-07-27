@@ -25,7 +25,7 @@ of them proves.
 
 ## Operating Theory
 
-Trust is the product. Six commitments make it concrete.
+Trust is the product. Seven commitments make it concrete.
 
 1. **Electrical tables enter through multi-source checking.** Each built-in
    table is compared cell by cell against at least two independently produced
@@ -78,7 +78,7 @@ Trust is the product. Six commitments make it concrete.
 
 6. **Verification must reach the rendered product.** Every calculator route is
    driven in all six editions against an independently derived expectation.
-   The numeric-parity gate currently covers translated guides, Terms, and three
+   The numeric-parity gate currently covers translated guides, Terms, and four
    newer pages rather than the whole translated site. On those paths, visible
    numbers must match their English twins unless a specific element owns a
    legitimate locale-dependent representation, such as a month rendered as a
@@ -96,6 +96,14 @@ Trust is the product. Six commitments make it concrete.
    page receives its own named result. An aggregate summary cannot substitute
    for those results because it hides both coverage growth and the failing
    artifact.
+
+7. **Installation rules must not masquerade as identification.** Conductor
+   colour can answer what new work should use, but it cannot establish what an
+   existing wire is. Legacy work, faded insulation, and incorrect installation
+   all break that inference. The useful boundary is short and operational:
+   lead with the prescribed or conventional colour, state the country-specific
+   status once, and keep one meter reminder visible. Repeating warnings at
+   every result would make the real boundary easier to ignore.
 
 ## Strategy
 
@@ -122,6 +130,17 @@ Continuous-load checks remain visibly separate from heat derating. Contextual
 hints follow the selected system; a three-phase line-to-line instruction is
 hidden for DC and single-phase because even harmless-looking static help can
 misstate the task in front of the user.
+
+The wire-colour tool is a rule lookup rather than an electrical table. Country
+selection happens before the result: Canadian three-phase phase colours are
+code requirements where colour-coded circuits are required, while US
+black/red/blue and brown/orange/yellow phase sets are trade conventions that
+yield to the job specification. Panel circuit numbers map through the physical
+bus sequence—paired circuit positions advance A, B, C, then repeat. Colour
+swatches support recognition but never carry meaning alone; the full colour
+name remains the primary answer. Selecting four-wire delta elevates the
+cross-border high-leg difference into the main interface because Canada places
+it on phase A and the NEC panel arrangement places it on phase B.
 
 Country-specific conduit fill is a real data fork, not translated decoration.
 The US edition keeps THHN areas and NEC trade sizes in square inches. Canadian
@@ -192,6 +211,19 @@ confirms country copy, localization, and fragment composition.
 - **The largest country divergence can occur after a shared value.** At ten
   countable conductors, CEC Table 5C uses 0.70 while NEC Table 310.15(C)(1)
   uses 0.50. Country selection must happen before factors are displayed.
+
+- **A familiar visual convention can conceal a phase change at the border.**
+  Four-wire delta is not just a palette difference: Canada assigns the
+  higher-voltage-to-ground conductor to phase A, while the NEC panel
+  arrangement puts the high leg on phase B. Showing only “orange high leg” or
+  only a colour sequence would hide the more important fact.
+
+- **Colour confidence depends on naming the authority correctly.** Canadian
+  phase colours can be presented as code within their stated conditional
+  scope. US phase palettes must be presented as trade practice because the NEC
+  reserves neutral and grounding colours but does not mandate the other phase
+  colours. Confidence comes from making that distinction actionable, not from
+  adding generic caution language.
 
 - **Order is safety data.** Applying a termination cap before heat factors
   answers a different question from derating the insulation-column value and

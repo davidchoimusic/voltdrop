@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color del conductor — reglas NEC y práctica de fases en US | VoltDrop</title>
+<meta name="description" content="Consulta estadounidense de color para neutro, tierra de equipos, práctica de fases, números de circuito y pata alta en fase B de un sistema delta de 4 conductores.">
+<link rel="canonical" href="https://voltdrop.app/es/wire-colour/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/wire-colour/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/wire-colour/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/wire-colour/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/wire-colour/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/wire-colour/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/wire-colour/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/wire-colour/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Color del conductor — reglas NEC y práctica de fases en US | VoltDrop">
+<meta property="og:description" content="Consulta estadounidense de color para neutro, tierra de equipos, práctica de fases, números de circuito y pata alta en fase B de un sistema delta de 4 conductores.">
+<meta property="og:url" content="https://voltdrop.app/es/wire-colour/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Color del conductor — reglas NEC y práctica de fases en US | VoltDrop">
+<meta name="twitter:description" content="Consulta estadounidense de color para neutro, tierra de equipos, práctica de fases, números de circuito y pata alta en fase B de un sistema delta de 4 conductores.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Herramienta estadounidense de color de conductores VoltDrop","url":"https://voltdrop.app/es/wire-colour/","description":"Consulta estadounidense de color para neutro, tierra de equipos, práctica de fases, números de circuito y pata alta en fase B de un sistema delta de 4 conductores.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=e4a11e2c8f">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Iluminación exterior</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar y baterías</a>
+    <a href="/wire-colour/" class="tool-link active" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Color del conductor</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">Color del conductor</h1>
+    <p class="tool-sub">Elija el sistema y la función del conductor, o ingrese un número de circuito. La respuesta aparece primero y la regla queda visible.</p>
+  </div>
+
+  <div class="wire-mode-tabs mode-tabs" role="group" aria-label="Cómo buscar el color del conductor">
+    <button type="button" class="mode-tab active" data-wire-mode="role" aria-pressed="true">
+      <span class="mode-title">Por función del conductor</span>
+      <span class="mode-sub">Neutro, tierra o fase no puesta a tierra</span>
+    </button>
+    <button type="button" class="mode-tab" data-wire-mode="circuit" aria-pressed="false">
+      <span class="mode-title">Por número de circuito</span>
+      <span class="mode-sub">Obtenga A, B o C según la posición del tablero</span>
+    </button>
+  </div>
+
+  <form id="wire-colour-form" class="card" autocomplete="off">
+    <div class="field">
+      <label class="field-label" for="wire-system">Sistema eléctrico</label>
+      <select id="wire-system">
+        <option value="wye208">120/208 V, 3 fases en estrella</option>
+        <option value="wye480">277/480 V, 3 fases en estrella</option>
+        <option value="delta">120/240 V, 3 fases, delta de 4 conductores</option>
+        <option value="single3">120/240 V, 1 fase, 3 conductores</option>
+        <option value="single2">1 fase, 2 conductores</option>
+      </select>
+      <p class="hint wire-country-scope">El NEC reserva blanco, gris y verde, pero no asigna colores a las fases no puestas a tierra ordinarias. Los colores de fase mostrados son práctica del oficio; prevalecen la especificación del trabajo o la práctica local.</p>
+    </div>
+
+    <div id="wire-role-fields">
+      <div class="field">
+        <span class="field-label">Función del conductor</span>
+        <div class="seg" role="group" aria-label="Función del conductor">
+          <button type="button" class="seg-btn active" data-wire-role="neutral" aria-pressed="true">Neutro</button>
+          <button type="button" class="seg-btn" data-wire-role="bond" aria-pressed="false">Puesta a tierra / unión</button>
+          <button type="button" class="seg-btn" data-wire-role="phase" aria-pressed="false">Fase no puesta a tierra</button>
+        </div>
+      </div>
+
+      <div class="field" id="wire-position-field" hidden>
+        <label class="field-label" for="wire-position-three">Posición del conductor</label>
+        <select id="wire-position-three">
+          <option value="A">Fase A</option>
+          <option value="B">Fase B</option>
+          <option value="C">Fase C</option>
+        </select>
+        <select id="wire-position-single" hidden disabled>
+          <option value="L1">Línea 1</option>
+          <option value="L2">Línea 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="wire-circuit-fields" hidden>
+      <div class="field">
+        <label class="field-label" for="wire-circuit">Número de circuito del tablero</label>
+        <input class="input-plain" type="number" id="wire-circuit" inputmode="numeric" min="1" step="1" value="7">
+        <p class="hint">Disposición estándar del tablero: 1 y 2 = A, 3 y 4 = B, 5 y 6 = C; después se repite. Los impares están a la izquierda y los pares a la derecha.</p>
+        <p class="hint wire-input-error" id="wire-circuit-error" role="alert" hidden>Ingrese un número de circuito entero de 1 o mayor.</p>
+      </div>
+    </div>
+  </form>
+
+  <aside
+    class="card wire-delta-callout"
+    id="wire-delta-callout"
+    data-high-leg-phase="B"
+    hidden
+  >
+    <span class="wire-delta-kicker">Diferencia Canadá / US</span>
+    <h2>Pata alta en la fase B</h2>
+    <p>En un tablero delta estadounidense de 4 conductores, la pata alta termina en la fase B y es naranja, o se identifica por otro medio eficaz. Canadá coloca la pata alta en la fase A.</p>
+  </aside>
+
+  <section class="card results wire-results" id="wire-results" aria-live="polite">
+    <div class="wire-answer">
+      <div class="wire-swatch-group" id="wire-result-swatch" aria-hidden="true"></div>
+      <div class="wire-answer-copy">
+        <div class="wire-answer-eyebrow">Instale este color</div>
+        <div class="big-number" id="wire-colour-name"></div>
+        <div class="big-label" id="wire-result-context"></div>
+      </div>
+    </div>
+    <div class="wire-result-rule">
+      <span class="verdict-badge" id="wire-result-status"></span>
+      <p id="wire-result-note"></p>
+    </div>
+    <p class="wire-meter-line" id="wire-role-meter-line">Esto indica qué instalar en trabajo nuevo. Lo que ya está en la pared se determina con un medidor: verifique con un medidor antes de tocar cualquier conductor.</p>
+    <p class="wire-meter-line" id="wire-circuit-meter-line" hidden>Use esto para trabajo nuevo; la barra real se determina con un medidor. Verifique con un medidor antes de tocar cualquier conductor.</p>
+  </section>
+
+  <div id="wire-colour-copy" hidden>
+    <span data-colour-name="black">Negro</span>
+    <span data-colour-name="red">Rojo</span>
+    <span data-colour-name="blue">Azul</span>
+    <span data-colour-name="white">Blanco</span>
+    <span data-colour-name="grey">Gris</span>
+    <span data-colour-name="green">Verde</span>
+    <span data-colour-name="green-yellow">Verde con franjas amarillas</span>
+    <span data-colour-name="brown">Marrón</span>
+    <span data-colour-name="orange">Naranja</span>
+    <span data-colour-name="yellow">Amarillo</span>
+    <span data-colour-name="bare">Desnudo</span>
+
+    <span id="wire-copy-neutral-status">NEC 200.6</span>
+    <span id="wire-copy-neutral-note">Se exige blanco o gris; tres franjas continuas blancas o grises son otra identificación permitida.</span>
+    <span id="wire-copy-bond-status">NEC 250.119</span>
+    <span id="wire-copy-bond-note">Use verde, verde con franjas amarillas o conductor desnudo. Los conductores 4 AWG y mayores pueden volver a identificarse permanentemente en los puntos accesibles.</span>
+    <span id="wire-copy-phase-status">Práctica del oficio</span>
+    <span id="wire-copy-phase-note">El NEC no asigna un color de fase. Siga la especificación del trabajo o la práctica local establecida.</span>
+    <span id="wire-copy-high-leg-status">NEC 110.15 / 408.3(E)</span>
+    <span id="wire-copy-high-leg-note">La pata alta está en la fase B y usa naranja u otro medio eficaz de identificación.</span>
+    <span id="wire-copy-role-pattern">{role} · {system}</span>
+    <span id="wire-copy-circuit-pattern">Circuito {circuit} → Fase {phase} · {system}</span>
+  </div>
+
+  <section class="card explainer framed-explainer">
+    <h2>Lo que exige el NEC y lo que aporta el oficio</h2>
+    <p>NEC 200.6 controla la identificación del neutro y 250.119 la puesta a tierra de equipos. Para las fases no puestas a tierra ordinarias, el NEC prohíbe los colores reservados, pero no exige negro/rojo/azul ni marrón/naranja/amarillo; son decisiones de práctica y especificación.</p>
+
+    <h2>Qué indica el número de circuito</h2>
+    <p>Un tablero trifásico estándar sigue A, B, C de izquierda a derecha o de arriba hacia abajo. Las filas de circuitos siguen ese orden de barras. En un tablero delta de 4 conductores, NEC 408.3(E) coloca la pata alta en B, la barra central.</p>
+
+    <h2>Instale por color; identifique midiendo</h2>
+    <p>Esta herramienta responde qué instalar en trabajo nuevo. El cableado antiguo, el aislamiento desteñido y los errores anteriores hacen que el color no sea fiable para identificar.</p>
+    <p>¿Quiere saber por qué debería confiar en este resultado? <a class="inline-link" href="/how-we-verify/">Lea cómo verifica VoltDrop sus cifras</a>.</p>
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="wire-colour-faq-heading">
+    <h2 id="wire-colour-faq-heading">Preguntas frecuentes</h2>
+    <dl>
+      <div>
+        <dt>¿De qué color es un conductor neutro?</dt>
+        <dd>Blanco o gris, o tres franjas continuas blancas o grises, según NEC 200.6.</dd>
+      </div>
+      <div>
+        <dt>¿De qué color es un conductor de puesta a tierra o unión?</dt>
+        <dd>Verde, verde con franjas amarillas o desnudo, según NEC 250.119.</dd>
+      </div>
+      <div>
+        <dt>¿Cómo se relaciona el número de circuito con la fase?</dt>
+        <dd>En un tablero trifásico estándar, los circuitos 1 y 2 son fase A, 3 y 4 son B, 5 y 6 son C, y después se repite el patrón.</dd>
+      </div>
+      <div>
+        <dt>¿Qué fase lleva la pata alta en un sistema delta de 4 conductores?</dt>
+        <dd>El NEC coloca la pata alta en la fase B, la barra central. Es naranja o se identifica por otro medio eficaz. Canadá la coloca en la fase A.</dd>
+      </div>
+      <div>
+        <dt>¿Puedo identificar un conductor existente por su color?</dt>
+        <dd>No. El color indica qué se debería instalar; no demuestra qué es un conductor existente.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿De qué color es un conductor neutro?","acceptedAnswer":{"@type":"Answer","text":"Blanco o gris, o tres franjas continuas blancas o grises, según NEC 200.6."}},{"@type":"Question","name":"¿De qué color es un conductor de puesta a tierra o unión?","acceptedAnswer":{"@type":"Answer","text":"Verde, verde con franjas amarillas o desnudo, según NEC 250.119."}},{"@type":"Question","name":"¿Cómo se relaciona el número de circuito con la fase?","acceptedAnswer":{"@type":"Answer","text":"En un tablero trifásico estándar, los circuitos 1 y 2 son fase A, 3 y 4 son B, 5 y 6 son C, y después se repite el patrón."}},{"@type":"Question","name":"¿Qué fase lleva la pata alta en un sistema delta de 4 conductores?","acceptedAnswer":{"@type":"Answer","text":"El NEC coloca la pata alta en la fase B, la barra central. Es naranja o se identifica por otro medio eficaz. Canadá la coloca en la fase A."}},{"@type":"Question","name":"¿Puedo identificar un conductor existente por su color?","acceptedAnswer":{"@type":"Answer","text":"No. El color indica qué se debería instalar; no demuestra qué es un conductor existente."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/how-we-verify/">Cómo verificamos</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=53d888d2ea"></script>
+<script src="/assets/us-es/wire-colour.js?v=9fa1aeba4c"></script>
+</body>
+</html>
