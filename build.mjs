@@ -583,6 +583,7 @@ for (const edition of EDITIONS) {
     if (p.main) {
       const main = renderTemplate(readFileSync(p.main, 'utf8'), p.main, edition);
       html = html.replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim());
+      html = html.replace(/<script data-wire-size-engine[^>]*><\/script>\n?/, '');
       if (p.script) {
         html = html.replace(
           /<script src="[^"]*\/app\.js[^"]*"><\/script>/,
@@ -616,6 +617,7 @@ for (const edition of EDITIONS) {
     const main = renderTemplate(readFileSync(page.main, 'utf8'), page.main, edition);
     html = html
       .replace(/<main class="main-col">[\s\S]*<\/main>/, main.trim())
+      .replace(/<script data-wire-size-engine[^>]*><\/script>\n?/, '')
       .replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '')
       .replace(`class="tool-link" data-tool="${page.tool}"`, `class="tool-link active" data-tool="${page.tool}"`);
     writeEditionPage(edition, dir, html);

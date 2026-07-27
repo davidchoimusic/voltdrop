@@ -54,7 +54,6 @@ const DROP_TEXT = {
   noFitLabel: '没有任何所列规格可将电压降控制在{percent}%以下',
   noFitNote: '即使使用{size} {material}线，在{feet}英尺单程距离（仅去程）和{amps} A条件下，电压降仍超过{percent}%。',
   smallestWireLabel: '可将电压降控制在{percent}%以下的最小{material}线规格',
-  ampacityWarning: '注意：此结果只计算电压降。导线还必须能够安全承载{amps} A（载流量）；购买前请另行核验。',
   maxDistanceNote: '在此距离下，电压降正好达到{percent}%。请缩短线路以保留余量。还要注意：无论距离多短，导线都必须具有承载{amps} A的额定载流量。',
   feet: '{feet} ft',
   maxRunLabel: '{size} {material}线在{percent}%电压降下的最大单程线路长度',
@@ -63,7 +62,47 @@ const DROP_TEXT = {
   dropMath: '\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class="formula">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>',
   noFitMath: '<p>我们从最小规格到最大规格逐一检查；没有任何规格的电压降≤{maxDrop} V（{source} V的{percent}%）。</p>',
   sizeMath: '\n<p>我们从最小规格开始逐一检查，直到找到可将电压降控制在{percent}%限值（{maxDrop} V）以下的规格：</p>\n<div class="formula">{size}（{cm} cmil）：\n{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= {dropped} V = {actualPercent}%  ✓ 低于您的限值</div>',
+  governingLabel: '最终导线 — 由{constraint}决定',
+  notPermittedNote: '已发布的环境温度表将 {ambient}°C 环境温度与 {insulation}°C 绝缘组合标为“—”，或该组合超出支持的表格行。本工具不会替代校正系数，也不会返回导线规格。',
+  outOfRangeNote: '没有任何列出的导线能同时通过两项检查。电压降搜索得到：{dropStatus}；载流量搜索得到：{ampacityStatus}。请更改设计，或由合格电工评估本工具范围以外的导线或布置。',
+  distanceRaisedOne: '距离使导线从 {ampacitySize} 增大到 {finalSize} — 增大一个列出规格。',
+  distanceRaisedMany: '距离使导线从 {ampacitySize} 增大到 {finalSize} — 增大 {count} 个列出规格。',
+  ampacityRaised: '距离没有提高导线规格：移动零个已列规格。载流量要求把仅按距离可用的 {dropSize} 增大到 {finalSize}。',
+  constraintsTie: '距离没有把导线提高到载流量要求以上：移动零个已列规格。两项约束都选择 {finalSize}；这是正常的相同结果。',
+  ampacityHeadroom: '{amps} A',
+  voltageHeadroom: '{percent} 个百分点',
+  degrees: '{degrees}°C',
+  atMostDegrees: '≤{max}°C',
+  degreeRange: '{min}–{max}°C',
+  ampacityChain: '<h3>载流量决定的最小规格：{size}</h3>\n<div class="formula">基础载流量（{insulation}°C 绝缘）：{base} A\n→ 环境温度校正（{ambient}°C；采用 {ambientRow} 行）：× {ambientFactor} = {ambientAdjusted} A\n→ {conductors} 根载流导体：× {adjustmentFactor} = {adjusted} A\n→ 端子限值（{termination}°C）：{terminationLimit} A\n→ 小导体上限：{smallCap}\n= 最终允许载流量：{permitted} A</div>\n<p><strong>起决定作用的限值：</strong>{binding}。</p>\n{continuousRule}',
+  continuousRuleNote: '<strong>NEC 连续负载：按负载的 125% 计算。</strong>调整前：输入负载为 {load} A。调整后：{load} A × {factor}% = {after} A 所需载流量。此开关将全部输入负载视为连续负载；不计算混合负载。',
+  continuousRuleMath: '<h3>连续负载步骤</h3>\n<div class="formula">输入负载：{load} A\n× {factor}%\n= {after} A 所需载流量\n{after} A ≤ {permitted} A 允许载流量 → 通过</div>\n<p>此开关将全部输入负载视为连续负载；不计算混合负载。</p>',
+  ampacitySearchProof: '<p><strong>最小规格证明：</strong>{size} 通过。下一个更小的受支持规格 {smallerSize} 在所应用的负载规则下不能通过输入的 {load} A。</p>',
+  ampacityFloorProof: '<p><strong>最小规格证明：</strong>{size} 通过，并且是此载流量表支持的最小{material}规格。计算引擎不会对更小规格作出判断。</p>',
+  ampacityDomainNote: '<p><strong>表格范围不同：</strong>仅按电压降可使用 {dropSize}，但{material}载流量表从 {floorSize} 开始。因此不会把 {dropSize} 视为通过载流量检查。</p>',
+  outOfRangeMath: '<p><strong>拒绝给出规格：</strong>{constraint}未找到合格的列出规格。本工具不会把最大的列出导线作为建议返回。</p>',
   maxRunMath: '\n<p>根据您的{percent}%限值（{maxDrop} V），我们将公式变形以求解距离：</p>\n<div class="formula">最大单程英尺 = {maxDrop} V × {cm} cmil\n             ÷（{mult} × {factor} × {amps} A）\n             = {feet} ft</div>',
+};
+const SIZE_TEXT = {
+  governingBadge: '决定规格',
+  notPermittedBadge: '不允许',
+  outOfRangeBadge: '超出范围',
+  ampacityUnavailable: '载流量表不允许此温度组合',
+  noListedConductor: '列出的导线均不能同时满足两项限制',
+  ampacityMinimum: '载流量最小规格',
+  voltageDropMinimum: '电压降最小规格',
+  ampacityHeadroom: '最终规格的载流量余量',
+  voltageHeadroom: '最终规格的电压降余量',
+  largestSizeChecked: '最大规格检查',
+  notAvailable: '不可用',
+  noPassingSize: '没有合格规格',
+  distanceConstraint: '电压降（距离）',
+  ampacityConstraint: '载流量（热量）',
+  tieConstraint: '载流量与电压降相同',
+  bindingDerating: '环境温度与导体数量降容',
+  bindingTermination: '端子温度限值',
+  bindingCap: '小导体上限',
+  noncontinuousRuleApplied: '未应用连续负载调整。',
 };
 
 // Country editions live in common.js (window.VDCountry) — shared with the
@@ -75,6 +114,8 @@ let mode = 'drop';        // drop | size | length
 let system = 'dc';
 let material = 'cu';
 let targetChoice = '3';   // '3' | '5' | 'custom'
+let sizeInsulationTemp = 90;
+let sizeContinuous = false;
 
 // ---- element handles ----
 const $ = (id) => document.getElementById(id);
@@ -96,7 +137,9 @@ function wireSeg(container, attr, onChange) {
   container.querySelectorAll('.seg-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       container.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
+      container.querySelectorAll('.seg-btn[aria-pressed]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
       btn.classList.add('active');
+      if (btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'true');
       onChange(btn.dataset[attr]);
     });
   });
@@ -108,6 +151,11 @@ document.querySelectorAll('.seg').forEach((seg) => {
   if ('system' in first.dataset) wireSeg(seg, 'system', setSystem);
   else if ('material' in first.dataset) wireSeg(seg, 'material', (v) => { material = v; recalcIfVisible(); });
   else if ('target' in first.dataset) wireSeg(seg, 'target', setTarget);
+  else if ('sizeInsulation' in first.dataset) {
+    wireSeg(seg, 'sizeInsulation', (v) => { sizeInsulationTemp = Number(v); recalcIfVisible(); });
+  } else if ('sizeContinuous' in first.dataset) {
+    wireSeg(seg, 'sizeContinuous', (v) => { sizeContinuous = v === 'yes'; recalcIfVisible(); });
+  }
 });
 
 function setSystem(v) {
@@ -174,9 +222,15 @@ document.querySelectorAll('.mode-tab').forEach((tab) => {
 });
 
 function applyMode() {
+  const isSizeMode = mode === 'size';
   $('field-size').hidden = mode === 'size';
   $('field-distance').hidden = mode === 'length';
   $('field-target').hidden = mode === 'drop';
+  $('size-ampacity-fields').hidden = !isSizeMode;
+  $('size-safety-boundary').hidden = !isSizeMode;
+  for (const id of ['size-termination', 'size-ambient', 'size-conductors']) {
+    $(id).disabled = !isSizeMode;
+  }
   $('distance').required = mode !== 'length';
   results.hidden = true;
   $('calc-btn').textContent = {
@@ -288,9 +342,199 @@ function calculateVoltageDrop(
   };
 }
 
+// Search the verified ampacity domain smallest-first, then combine that answer
+// with the unchanged voltage-drop size. Every table remains an explicit input
+// so the search can be tested without the page or hidden global assumptions.
+function calculateCombinedWireSize(
+  country,
+  selectedSystem,
+  selectedMaterial,
+  volts,
+  amps,
+  feet,
+  maxPct,
+  insulationTemp,
+  terminationTemp,
+  isContinuous,
+  ambient,
+  conductorCount,
+  wireTable,
+  kFactors,
+  systems,
+  ampacityTable,
+  smallCapTable,
+  ambientCorrectionTable,
+  conductorAdjustmentTable,
+  cecAmbientCorrectionTable,
+  cecConductorAdjustmentTable,
+  tempIndex,
+  ampacityCalculator,
+) {
+  const voltageDrop = calculateVoltageDrop(
+    'size',
+    selectedSystem,
+    selectedMaterial,
+    volts,
+    amps,
+    feet,
+    0,
+    maxPct,
+    wireTable,
+    kFactors,
+    systems,
+  );
+  const supported = wireTable
+    .map(([label], wireIndex) => ({ label, wireIndex }))
+    .filter(({ label }) => ampacityTable[selectedMaterial][label]);
+  let previousSupported = null;
+  let ampacityMinimum = null;
+
+  for (const candidate of supported) {
+    const result = ampacityCalculator(
+      country,
+      selectedMaterial,
+      insulationTemp,
+      terminationTemp,
+      isContinuous,
+      amps,
+      ambient,
+      conductorCount,
+      candidate.label,
+      ampacityTable,
+      smallCapTable,
+      ambientCorrectionTable,
+      conductorAdjustmentTable,
+      cecAmbientCorrectionTable,
+      cecConductorAdjustmentTable,
+      tempIndex,
+    );
+    const checked = { ...candidate, result };
+    if (result.status === 'not-permitted') {
+      return {
+        status: 'not-permitted',
+        voltageDrop,
+        ampacityMinimum: null,
+        ampacityRefusal: checked,
+        supportedFloor: supported[0],
+      };
+    }
+    if (result.passes) {
+      ampacityMinimum = {
+        ...checked,
+        nextSmallerSupported: previousSupported,
+        domainFloor: previousSupported === null,
+      };
+      break;
+    }
+    previousSupported = checked;
+  }
+
+  if (ampacityMinimum?.nextSmallerSupported?.result.passes) {
+    throw new Error('Ampacity search invariant failed: next smaller supported size also passes.');
+  }
+  if (ampacityMinimum && !ampacityMinimum.result.passes) {
+    throw new Error('Ampacity search invariant failed: chosen size does not pass.');
+  }
+
+  if (!voltageDrop.found || !ampacityMinimum) {
+    return {
+      status: 'out-of-range',
+      voltageDrop,
+      ampacityMinimum,
+      lastAmpacityCheck: previousSupported,
+      supportedFloor: supported[0],
+      reason: !voltageDrop.found && !ampacityMinimum
+        ? 'both'
+        : !voltageDrop.found
+          ? 'voltage-drop'
+          : 'ampacity',
+    };
+  }
+
+  const governingIndex = Math.max(voltageDrop.found.wireIndex, ampacityMinimum.wireIndex);
+  const governing = voltageDrop.found.wireIndex === ampacityMinimum.wireIndex
+    ? 'tie'
+    : governingIndex === voltageDrop.found.wireIndex
+      ? 'distance'
+      : 'ampacity';
+  const finalDrop = calculateVoltageDrop(
+    'drop',
+    selectedSystem,
+    selectedMaterial,
+    volts,
+    amps,
+    feet,
+    governingIndex,
+    null,
+    wireTable,
+    kFactors,
+    systems,
+  );
+  const finalLabel = wireTable[governingIndex][0];
+  const finalAmpacity = ampacityCalculator(
+    country,
+    selectedMaterial,
+    insulationTemp,
+    terminationTemp,
+    isContinuous,
+    amps,
+    ambient,
+    conductorCount,
+    finalLabel,
+    ampacityTable,
+    smallCapTable,
+    ambientCorrectionTable,
+    conductorAdjustmentTable,
+    cecAmbientCorrectionTable,
+    cecConductorAdjustmentTable,
+    tempIndex,
+  );
+  if (finalAmpacity.status !== 'ok' || !finalAmpacity.passes || finalDrop.pct > maxPct) {
+    throw new Error('Combined sizing invariant failed: governing conductor does not pass both checks.');
+  }
+
+  // Express headroom as additional entered-load amps in both countries.
+  // NEC raises the load side to 125%; CEC lowers the permitted side to 80%.
+  const maximumEnteredLoad = !isContinuous
+    ? finalAmpacity.permitted
+    : country === 'ca'
+      ? finalAmpacity.loadCheckValue
+      : finalAmpacity.permitted / finalAmpacity.continuousFactor;
+  const ampacityHeadroom = maximumEnteredLoad - amps;
+
+  return {
+    status: 'ok',
+    country,
+    voltageDrop,
+    ampacityMinimum,
+    supportedFloor: supported[0],
+    governing,
+    governingIndex,
+    finalLabel,
+    finalDrop,
+    finalAmpacity,
+    distanceSizeSteps: governingIndex - ampacityMinimum.wireIndex,
+    ampacityHeadroom,
+    voltageHeadroom: maxPct - finalDrop.pct,
+  };
+}
+
+window.VDVoltageDrop = Object.freeze({
+  calculateVoltageDrop,
+  calculateCombinedWireSize,
+  WIRE_TABLE,
+  K_FACTOR,
+  SYSTEMS,
+});
+
 function targetPercent() {
   if (targetChoice === 'custom') return Number($('target').value) || 3;
   return Number(targetChoice);
+}
+
+for (const id of ['size-termination', 'size-ambient', 'size-conductors']) {
+  $(id).addEventListener('input', recalcIfVisible);
+  $(id).addEventListener('change', recalcIfVisible);
 }
 
 // ---- calculate ----
@@ -311,6 +555,59 @@ function calculate() {
   const feet = mode === 'length' ? null : Number($('distance').value);
   if (mode !== 'length' && !feet) return;
 
+  if (mode === 'size') {
+    const terminationTemp = Number($('size-termination').value);
+    const ambient = Number($('size-ambient').value);
+    const conductorCount = Number($('size-conductors').value);
+    if (!terminationTemp
+        || !Number.isFinite(ambient)
+        || !Number.isInteger(conductorCount)
+        || conductorCount < 1) return;
+    if (!window.VDAmpacity) throw new Error('Ampacity engine is unavailable.');
+    const amp = window.VDAmpacity;
+    const combined = calculateCombinedWireSize(
+      document.body.dataset.country === 'ca' ? 'ca' : 'us',
+      system,
+      material,
+      volts,
+      amps,
+      feet,
+      targetPercent(),
+      sizeInsulationTemp,
+      terminationTemp,
+      sizeContinuous,
+      ambient,
+      conductorCount,
+      WIRE_TABLE,
+      K_FACTOR,
+      SYSTEMS,
+      amp.AMPACITY,
+      amp.SMALL_CAP,
+      amp.AMBIENT_CORRECTION,
+      amp.CONDUCTOR_ADJUSTMENT,
+      amp.CEC_AMBIENT_CORRECTION,
+      amp.CEC_CONDUCTOR_ADJUSTMENT,
+      amp.TEMP_INDEX,
+      amp.calculateAmpacity,
+    );
+    window.VDLastWireSizeResult = combined;
+    renderCombinedSize(combined, {
+      system,
+      material,
+      factor: K_FACTOR[material],
+      volts,
+      amps,
+      feet,
+      maxPct: targetPercent(),
+      insulationTemp: sizeInsulationTemp,
+      terminationTemp,
+      continuous: sizeContinuous,
+      ambient,
+      conductorCount,
+    });
+    return;
+  }
+
   const result = calculateVoltageDrop(
     mode,
     system,
@@ -326,7 +623,6 @@ function calculate() {
   );
 
   if (result.mode === 'drop') renderDrop(result);
-  else if (result.mode === 'size') renderSize(result);
   else renderLength(result);
 }
 
@@ -343,7 +639,7 @@ const fmt = (n, d = 2) => {
 };
 
 // ---- renderers ----
-function showResults(v, bigNumber, bigLabel, cells, note, math) {
+function showResults(v, bigNumber, bigLabel, cells, note, math, continuousRuleNote = '') {
   const verdict = $('verdict');
   verdict.className = 'verdict ' + v.cls;
   $('verdict-badge').textContent = v.badge;
@@ -354,6 +650,8 @@ function showResults(v, bigNumber, bigLabel, cells, note, math) {
     .join('');
   $('verdict-note').textContent = note;
   $('math-body').innerHTML = math;
+  $('continuous-rule-note').innerHTML = continuousRuleNote;
+  $('continuous-rule-note').hidden = !continuousRuleNote;
   results.hidden = false;
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -400,61 +698,205 @@ function renderDrop({
   );
 }
 
-function renderSize({
-  system, material, factor,
-  found, largestWire, volts, amps, feet, maxPct, maxVd,
-}) {
-  if (!found) {
+function ambientRowText(row) {
+  if (row.kind === 'at-most') {
+    return vdFormat(DROP_TEXT.atMostDegrees, { max: row.max });
+  }
+  if (row.kind === 'point') {
+    return vdFormat(DROP_TEXT.degrees, { degrees: row.value });
+  }
+  if (row.kind === 'range') {
+    return vdFormat(DROP_TEXT.degreeRange, { min: row.min, max: row.max });
+  }
+  return '—';
+}
+
+function ampacityChain(result, context) {
+  const binding = {
+    derating: SIZE_TEXT.bindingDerating,
+    termination: SIZE_TEXT.bindingTermination,
+    cap: SIZE_TEXT.bindingCap,
+  }[result.binding];
+  return vdFormat(DROP_TEXT.ampacityChain, {
+    size: result.label,
+    insulation: result.insulationTemp,
+    base: fmt(result.baseAmpacity),
+    ambient: fmt(result.ambient),
+    ambientRow: ambientRowText(result.ambientRow),
+    ambientFactor: result.ambientFactor.toFixed(2),
+    ambientAdjusted: fmt(result.ambientAdjusted),
+    conductors: result.conductorCount,
+    adjustmentFactor: result.adjustmentFactor.toFixed(2),
+    adjusted: fmt(result.adjustedAmpacity),
+    termination: result.terminationTemp,
+    terminationLimit: fmt(result.terminationLimit),
+    smallCap: result.smallCap === null
+      ? '—'
+      : vdFormat(DROP_TEXT.amps, { amps: fmt(result.smallCap) }),
+    permitted: fmt(result.permitted),
+    binding,
+    continuousRule: context.continuous
+      ? vdFormat(DROP_TEXT.continuousRuleMath, {
+        load: fmt(context.amps),
+        factor: fmt(result.continuousFactor * 100),
+        after: fmt(result.loadCheckValue),
+        permitted: fmt(result.permitted),
+      })
+      : SIZE_TEXT.noncontinuousRuleApplied,
+  });
+}
+
+function voltageSizeMath(found, context) {
+  return vdFormat(DROP_TEXT.sizeMath, {
+    percent: fmt(context.maxPct),
+    maxDrop: fmt(context.volts * context.maxPct / 100, 3),
+    size: found.label,
+    cm: found.cm.toLocaleString('en-US'),
+    mult: SYSTEMS[context.system].multLabel,
+    factor: context.factor,
+    amps: fmt(context.amps),
+    feet: fmt(context.feet, 1),
+    dropped: fmt(found.vd, 3),
+    actualPercent: fmt(found.pct),
+  });
+}
+
+function renderCombinedSize(result, context) {
+  const voltageFound = result.voltageDrop.found;
+  if (result.status === 'not-permitted') {
     showResults(
-      { cls: 'bad', badge: '无合适规格', note: '表中没有任何单根导线能将电压降保持在您的限值内。可以缩短线路、提高电压、允许更大的电压降，或并联导线；请咨询电工。' },
+      { cls: 'bad', badge: SIZE_TEXT.notPermittedBadge },
       '—',
-      vdFormat(DROP_TEXT.noFitLabel, { percent: maxPct }),
+      SIZE_TEXT.ampacityUnavailable,
       [
-        ['您的限值', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
-        ['最大规格检查', largestWire.label],
+        [SIZE_TEXT.voltageDropMinimum, voltageFound?.label ?? SIZE_TEXT.notAvailable],
+        [SIZE_TEXT.ampacityMinimum, SIZE_TEXT.notAvailable],
       ],
-      vdFormat(DROP_TEXT.noFitNote, {
-        size: largestWire.label,
-        material: MATERIAL_NAME[material],
-        percent: fmt(maxPct),
-        feet: fmt(feet, 1),
-        amps: fmt(amps),
+      vdFormat(DROP_TEXT.notPermittedNote, {
+        ambient: fmt(context.ambient),
+        insulation: context.insulationTemp,
       }),
-      [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.noFitMath, {
-        maxDrop: fmt(maxVd, 3),
-        percent: fmt(maxPct),
-        source: fmt(volts),
-      })].join('')
+      [
+        mathIntro(context),
+        voltageFound ? voltageSizeMath(voltageFound, context) : '',
+        vdFormat(DROP_TEXT.outOfRangeMath, { constraint: SIZE_TEXT.ampacityConstraint }),
+      ].join(''),
     );
     return;
   }
-  const v = verdictFor(found.verdict);
+
+  if (result.status === 'out-of-range') {
+    const ampacityStatus = result.ampacityMinimum
+      ? result.ampacityMinimum.label
+      : SIZE_TEXT.noPassingSize;
+    const dropStatus = voltageFound ? voltageFound.label : SIZE_TEXT.noPassingSize;
+    showResults(
+      { cls: 'bad', badge: SIZE_TEXT.outOfRangeBadge },
+      '—',
+      SIZE_TEXT.noListedConductor,
+      [
+        [SIZE_TEXT.voltageDropMinimum, dropStatus],
+        [SIZE_TEXT.ampacityMinimum, ampacityStatus],
+        [SIZE_TEXT.largestSizeChecked, result.voltageDrop.largestWire.label],
+      ],
+      vdFormat(DROP_TEXT.outOfRangeNote, {
+        dropStatus,
+        ampacityStatus,
+      }),
+      [
+        mathIntro(context),
+        voltageFound
+          ? voltageSizeMath(voltageFound, context)
+          : vdFormat(DROP_TEXT.noFitMath, {
+            maxDrop: fmt(result.voltageDrop.maxVd, 3),
+            percent: fmt(result.voltageDrop.maxPct),
+            source: fmt(result.voltageDrop.volts),
+          }),
+        vdFormat(DROP_TEXT.outOfRangeMath, {
+          constraint: result.reason === 'ampacity'
+            ? SIZE_TEXT.ampacityConstraint
+            : result.reason === 'voltage-drop'
+              ? SIZE_TEXT.distanceConstraint
+              : SIZE_TEXT.tieConstraint,
+        }),
+      ].join(''),
+    );
+    return;
+  }
+
+  const constraint = {
+    distance: SIZE_TEXT.distanceConstraint,
+    ampacity: SIZE_TEXT.ampacityConstraint,
+    tie: SIZE_TEXT.tieConstraint,
+  }[result.governing];
+  const movement = result.governing === 'distance'
+    ? vdFormat(
+      result.distanceSizeSteps === 1
+        ? DROP_TEXT.distanceRaisedOne
+        : DROP_TEXT.distanceRaisedMany,
+      {
+        ampacitySize: result.ampacityMinimum.label,
+        finalSize: result.finalLabel,
+        count: result.distanceSizeSteps,
+      },
+    )
+    : result.governing === 'ampacity'
+      ? vdFormat(DROP_TEXT.ampacityRaised, {
+        dropSize: voltageFound.label,
+        finalSize: result.finalLabel,
+      })
+      : vdFormat(DROP_TEXT.constraintsTie, { finalSize: result.finalLabel });
+  const smallerProof = result.ampacityMinimum.nextSmallerSupported
+    ? vdFormat(DROP_TEXT.ampacitySearchProof, {
+      size: result.ampacityMinimum.label,
+      smallerSize: result.ampacityMinimum.nextSmallerSupported.label,
+      load: fmt(context.amps),
+    })
+    : vdFormat(DROP_TEXT.ampacityFloorProof, {
+      size: result.ampacityMinimum.label,
+      material: MATERIAL_NAME[context.material],
+    });
+  const domainNote = voltageFound.wireIndex < result.supportedFloor.wireIndex
+    ? vdFormat(DROP_TEXT.ampacityDomainNote, {
+      dropSize: voltageFound.label,
+      floorSize: result.supportedFloor.label,
+      material: MATERIAL_NAME[context.material],
+    })
+    : '';
+  const continuousRuleNote = context.continuous
+    ? vdFormat(DROP_TEXT.continuousRuleNote, {
+      load: fmt(context.amps),
+      factor: fmt(result.finalAmpacity.continuousFactor * 100),
+      after: fmt(result.finalAmpacity.loadCheckValue),
+      permitted: fmt(result.finalAmpacity.permitted),
+    })
+    : '';
+
   showResults(
-    v,
-    found.label,
-    vdFormat(DROP_TEXT.smallestWireLabel, {
-      material: MATERIAL_NAME[material],
-      percent: fmt(maxPct),
-    }),
+    { cls: 'good', badge: SIZE_TEXT.governingBadge },
+    result.finalLabel,
+    vdFormat(DROP_TEXT.governingLabel, { constraint }),
     [
-      ['该规格的实际电压降', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(found.pct), volts: fmt(found.vd) })],
-      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(found.endVolts) })],
-      ['您的限值', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
-      ['参考限值', '3%良好· 5%最大'],
+      [SIZE_TEXT.ampacityMinimum, result.ampacityMinimum.label],
+      [SIZE_TEXT.voltageDropMinimum, voltageFound.label],
+      [
+        SIZE_TEXT.ampacityHeadroom,
+        vdFormat(DROP_TEXT.ampacityHeadroom, { amps: fmt(result.ampacityHeadroom) }),
+      ],
+      [
+        SIZE_TEXT.voltageHeadroom,
+        vdFormat(DROP_TEXT.voltageHeadroom, { percent: fmt(result.voltageHeadroom) }),
+      ],
     ],
-    vdFormat(DROP_TEXT.ampacityWarning, { amps: fmt(amps) }),
-    [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.sizeMath, {
-      percent: fmt(maxPct),
-      maxDrop: fmt(maxVd, 3),
-      size: found.label,
-      cm: found.cm.toLocaleString('en-US'),
-      mult: SYSTEMS[system].multLabel,
-      factor,
-      amps: fmt(amps),
-      feet: fmt(feet, 1),
-      dropped: fmt(found.vd, 3),
-      actualPercent: fmt(found.pct),
-    })].join('')
+    movement,
+    [
+      mathIntro(context),
+      voltageSizeMath(voltageFound, context),
+      ampacityChain(result.ampacityMinimum.result, context),
+      smallerProof,
+      domainNote,
+    ].join(''),
+    continuousRuleNote,
   );
 }
 

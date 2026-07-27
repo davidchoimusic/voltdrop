@@ -595,6 +595,40 @@ input, select, .big-number, .result-cell .v {
 
 .highlight-hint strong { color: var(--color-hazard); }
 
+.size-ampacity-fields {
+  margin: var(--space-6) 0 var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 4px solid var(--color-hazard);
+}
+
+.field-section-heading {
+  margin-bottom: var(--space-5);
+}
+
+.field-section-heading h2,
+.safety-boundary h2 {
+  margin: 0 0 var(--space-2);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.safety-boundary {
+  border-left: 4px solid var(--color-hazard);
+}
+
+.safety-boundary p {
+  margin: 0 0 var(--space-3);
+}
+
+.safety-boundary ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.safety-boundary li + li {
+  margin-top: var(--space-2);
+}
+
 /* Segmented controls — chunky tool switches */
 .seg {
   display: flex;
@@ -771,6 +805,12 @@ select:focus {
   box-shadow: inset 0 0 0 1px var(--color-accent);
 }
 
+input:disabled,
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Voltage presets */
 .preset-row {
   display: flex;
@@ -895,6 +935,22 @@ select:focus {
   font-size: 14px;
   color: var(--color-ink-soft);
   border-top: 1px solid var(--color-line);
+}
+
+.continuous-rule-note {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-ink);
+  background: var(--color-surface-2);
+  border-left: 4px solid var(--color-hazard);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.continuous-rule-note strong {
+  display: block;
+  margin-bottom: var(--space-1);
 }
 
 /* "How we calculated this" */

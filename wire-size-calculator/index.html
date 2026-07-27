@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wire Size Calculator — NEC voltage drop sizing | VoltDrop</title>
-<meta name="description" content="Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.">
+<title>Wire Size Calculator — NEC ampacity and voltage drop | VoltDrop</title>
+<meta name="description" content="Free NEC conductor size calculator for ampacity and voltage drop. See the heat-driven minimum, distance-driven minimum, governing AWG, and separate margins.">
 <link rel="canonical" href="https://voltdrop.app/wire-size-calculator/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/wire-size-calculator/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/wire-size-calculator/">
@@ -17,19 +17,19 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Wire Size Calculator — NEC voltage drop sizing | VoltDrop">
-<meta property="og:description" content="Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.">
+<meta property="og:title" content="Wire Size Calculator — NEC ampacity and voltage drop | VoltDrop">
+<meta property="og:description" content="Free NEC conductor size calculator for ampacity and voltage drop. See the heat-driven minimum, distance-driven minimum, governing AWG, and separate margins.">
 <meta property="og:url" content="https://voltdrop.app/wire-size-calculator/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wire Size Calculator — NEC voltage drop sizing | VoltDrop">
-<meta name="twitter:description" content="Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.">
+<meta name="twitter:title" content="Wire Size Calculator — NEC ampacity and voltage drop | VoltDrop">
+<meta name="twitter:description" content="Free NEC conductor size calculator for ampacity and voltage drop. See the heat-driven minimum, distance-driven minimum, governing AWG, and separate margins.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Wire Size Calculator","url":"https://voltdrop.app/wire-size-calculator/","description":"Free wire size calculator: enter amps, voltage, and one-way distance to get the smallest copper or aluminum AWG that keeps voltage drop under 3%. Plain English, full math shown, no signup.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Wire Size Calculator","url":"https://voltdrop.app/wire-size-calculator/","description":"Free NEC conductor size calculator for ampacity and voltage drop. See the heat-driven minimum, distance-driven minimum, governing AWG, and separate margins.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -111,7 +111,7 @@
 
   <div class="tool-intro card">
     <h1 class="tool-title" id="page-h1">🔌 Wire Size Calculator</h1>
-    <p class="tool-sub" id="page-sub">What gauge wire do you need? Enter amps, voltage, and one-way distance — get the smallest size that keeps voltage drop in check, with the math shown.</p>
+    <p class="tool-sub" id="page-sub">Size the conductor for both heat and distance. See the ampacity minimum, the voltage-drop minimum, and which one governs.</p>
   </div>
 
   <!-- Mode tabs -->
@@ -204,8 +204,75 @@
       <p class="hint">3% is the common guideline for a single circuit. 5% is the usual outer limit for the whole path.</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>Heat and installation conditions</h2>
+        <p class="hint">Voltage drop answers distance. These inputs answer heat. The final conductor must pass both checks.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Insulation temperature rating</label>
+        <div class="seg" role="group" aria-label="Insulation temperature rating">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">60°C</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">75°C</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">90°C</button>
+        </div>
+        <p class="hint">Use the conductor insulation rating for the starting column. THHN is normally 90°C. This is not the termination temperature rating.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">Termination temperature rating</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>Choose the actual termination rating</option>
+          <option value="60">60°C</option>
+          <option value="75">75°C</option>
+          <option value="90">90°C</option>
+        </select>
+        <p class="hint">Use 60°C for NM-B or unmarked equipment. Use 75°C or 90°C only when the equipment is marked and listed for that temperature. The termination limit is applied after both derating factors.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">Ambient temperature</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">Enter the surrounding air temperature at the conductors. NEC Table 310.15(B)(1) publishes bands through 85°C; a “—” cell is not permitted and this calculator will not substitute a value.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">Number of current-carrying conductors</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">conductors</span>
+        </div>
+        <p class="hint">Count ungrounded conductors and any neutral carrying current under normal conditions, including neutrals carrying harmonics from non-linear loads. Do not count equipment grounding or grounding electrode conductors. Count spare conductors. Do not count conductors that cannot be energized at the same time.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Load duration</label>
+        <div class="seg" role="group" aria-label="Load duration">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">Under 3 hours</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">3+ hours — continuous</button>
+        </div>
+        <p class="hint">A load expected to run for 3 hours or more is sized at 125%. This is a separate load-side check, not a derating multiplier.</p>
+        <p class="hint highlight-hint">The yes/no choice treats the entire entered load as continuous or noncontinuous. It does not model a mix of the two.</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">Calculate</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>What this conductor size does not cover</h2>
+    <p><strong>This result sizes the conductor for ampacity (heat) and voltage drop (distance). It does not size the whole circuit.</strong></p>
+    <ul>
+      <li>Breaker and other overcurrent-protection sizing uses separate rules and tables that have not passed VoltDrop's verification gate. No breaker size is produced here.</li>
+      <li>No Article 220 load calculation is performed. The current entered above is the load this tool checks.</li>
+      <li>Conduit fill counts every conductor in the raceway, including the neutral and bond, and also needs the conduit type. That is a different count from current-carrying conductors. <a class="inline-link" href="/conduit-fill/">Open the conduit fill tool.</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -217,6 +284,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -260,6 +328,7 @@
 </footer>
 
 <script src="/common.js?v=5235937ab1"></script>
-<script src="/app.js?v=bc1557e15d"></script>
+<script data-wire-size-engine src="/ampacity.js?v=aaf4417e7c"></script>
+<script src="/app.js?v=952c673d53"></script>
 </body>
 </html>

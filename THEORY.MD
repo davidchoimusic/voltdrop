@@ -55,9 +55,14 @@ Trust is the product. Six commitments make it concrete.
 4. **Show calculations in the order the rule operates.** Ampacity starts in
    the insulation column, applies heat factors, then applies termination,
    small-conductor, and continuous-load limits as distinct checks. Conduit and
-   box fill are sums of conductor rows, not one-size shortcuts. Visible order
-   lets a worker see which rule controls and prevents independent safety
-   questions from disappearing into one unexplained multiplier.
+   box fill are sums of conductor rows, not one-size shortcuts. Conductor
+   sizing searches ampacity and voltage drop independently, proves the smallest
+   supported ampacity pass by also checking the next smaller size, and then
+   takes the larger result. Visible order lets a worker see which rule controls
+   and prevents independent safety questions from disappearing into one
+   unexplained multiplier. A rule that changes the selected conductor must
+   appear in the result before the expandable maths, with its factor,
+   before-and-after values, and scope assumption.
 
 5. **Country and language are independent dimensions.** Country selects the
    rulebook; language selects the explanation. Six explicit URL editions place
@@ -65,7 +70,9 @@ Trust is the product. Six commitments make it concrete.
    English, Quebec French, and Simplified Chinese over the CEC pack. Country
    packs own institutional names, authority language, and data-edition facts.
    Locale catalogs own complete translated thoughts. No valid US fallback is
-   allowed to become a quiet Canadian claim.
+   allowed to become a quiet Canadian claim. Runtime parity compares a
+   translation with its own country's English twin; comparing Canadian French
+   with US English would force one rulebook's protected terms into another.
 
 6. **Verification must reach the rendered product.** Every calculator route is
    driven in all six editions against an independently derived expectation.
@@ -113,6 +120,28 @@ Continuous-load checks remain visibly separate from heat derating. Contextual
 hints follow the selected system; a three-phase line-to-line instruction is
 hidden for DC and single-phase because even harmless-looking static help can
 misstate the task in front of the user.
+
+The wire-size page answers one bounded question: conductor size for heat and
+distance. It reports the ampacity minimum, voltage-drop minimum, governing
+conductor, listed-size movement, amp headroom, and percentage-point voltage
+headroom as separate facts. The two engines have different supported floors:
+voltage drop can calculate 18 and 16 AWG, while ampacity begins at 14 AWG
+copper and 12 AWG aluminum. A smaller voltage-drop answer therefore remains
+visible but never becomes an implied ampacity opinion. A published ambient
+dash refuses the calculation, an exhausted search returns out of range instead
+of the largest conductor, and equal minima are reported as a normal tie.
+
+That answer deliberately stops short of circuit design. It does not size the
+breaker, perform Article 220 or CEC Section 8 load calculation, or size conduit.
+Conduit fill requires conduit type and counts every conductor, which is not the
+same input as ampacity's current-carrying-conductor count. Continuous-load
+wording is country-owned: the NEC edition applies the 125% whole-load method;
+the CEC edition applies Rule 8-104's 80%-rated-equipment case. Neither switch
+models mixed continuous and noncontinuous loads. When the switch is on, the
+result states the rule before the collapsed explanation. The NEC path shows
+entered load multiplied by 125%; the CEC path shows permitted ampacity limited
+to 80%. The calculation section repeats the same arithmetic so the visible
+conductor choice reconciles with the shown maths.
 
 Limitations appear at the point of use and on the public verification page.
 That page is an explanation, not a trust badge. It names the multi-source check,
@@ -193,6 +222,23 @@ confirms country copy, localization, and fragment composition.
   smaller if it reports one aggregate pass. The check counter and failure name
   must preserve every multiplied output dimension or the reported total stops
   describing the tested surface.
+
+- **A search is new safety logic even when each check is already verified.**
+  Reusing the pure voltage-drop and ampacity engines prevents formula drift,
+  but selecting the minimum conductor adds its own failure modes. The search
+  therefore proves both sides of the boundary: the chosen supported size
+  passes and the next smaller supported size fails.
+
+- **One combined margin would erase meaning.** Moving two listed wire sizes,
+  having 25 A of ampacity headroom, and having 0.54 percentage points of
+  voltage-drop headroom describe different constraints. Keeping their units
+  visible makes the governing result auditable.
+
+- **Applied silently is still unexplained.** The continuous-load engine,
+  country factor, basis, and headroom can all be correct while the product is
+  wrong if the visible result omits the factor. A collapsed explanation does
+  not repair that gap. The result must expose the rule and its numerical
+  effect, and the maths must account for the same step.
 
 ## Open Questions
 

@@ -57,9 +57,9 @@ Does not answer: It does not establish that the wire can safely carry the load. 
 ### Wire Size Calculator
 
 URL: https://voltdrop.app/wire-size-calculator/
-Question: What is the smallest copper or aluminum AWG that stays inside a selected voltage-drop limit?
+Question: What is the smallest copper or aluminum conductor that passes both ampacity and a selected voltage-drop limit?
 Answer: {{us:pages.us.wireSize.description}}
-Does not answer: It sizes for voltage drop only. It does not confirm ampacity, breaker protection, conduit fill, or box fill.
+Does not answer: It does not size the breaker or grounding, perform a load calculation, or size conduit or a box. Conduit fill needs every conductor and the conduit type, not just the current-carrying conductor count used for ampacity.
 
 ### Max Wire Length Calculator
 

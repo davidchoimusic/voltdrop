@@ -47,7 +47,8 @@ that limitation whenever citing a Canadian conduit-fill result.
   wire run, verdict vs the 3%/5% guidelines. K-factor method (K=12.9 copper,
   21.2 aluminum, ohm·cmil/ft), DC / single-phase / three-phase.
 - [Wire Size Calculator](https://voltdrop.app/wire-size-calculator/): smallest
-  AWG that keeps voltage drop under a chosen limit.
+  conductor that passes both ampacity (heat) and voltage drop (distance), with
+  the governing constraint and separate margins.
 - [Max Wire Length Calculator](https://voltdrop.app/max-wire-length/): longest
   one-way run for a given wire, load, and drop limit.
 - [Ampacity Check](https://voltdrop.app/ampacity-check/): max safe current per

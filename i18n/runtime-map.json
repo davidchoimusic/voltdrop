@@ -198,6 +198,96 @@
       "quote": "'"
     },
     {
+      "key": "runtime.drop.governingBadge",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.notPermittedBadge",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.outOfRangeBadge",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.ampacityUnavailable",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.noListedConductor",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.ampacityMinimum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.voltageDropMinimum",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.ampacityHeadroomLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.voltageHeadroomLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.notAvailable",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.noPassingSize",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.distanceConstraint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.ampacityConstraint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.tieConstraint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.bindingDerating",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.bindingTermination",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.bindingCap",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.drop.noncontinuousRuleApplied",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.drop.gOOD",
       "kind": "quoted",
       "quote": "'"
@@ -323,22 +413,7 @@
       "trailing": " "
     },
     {
-      "key": "runtime.drop.nOFIT",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.noSingleWireInOurTableKeepsThe",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
       "key": "runtime.drop.noListedSizeKeepsYouUnder",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.yourLimit",
       "kind": "quoted",
       "quote": "'"
     },
@@ -376,21 +451,6 @@
     },
     {
       "key": "runtime.drop.wireThatStaysUnder",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.actualDropAtThisSize",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.headsUpThisAnswersVoltageDropOnlyThe",
-      "kind": "quoted",
-      "quote": "'"
-    },
-    {
-      "key": "runtime.drop.aSafelyAmpacityCheckThatSeparatelyBeforeBuying",
       "kind": "quoted",
       "quote": "'"
     },

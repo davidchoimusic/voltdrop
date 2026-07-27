@@ -9,6 +9,8 @@
    Order matters: insulation-column ampacity × ambient correction × conductor
    adjustment, then the termination limit, then the small-conductor cap. */
 
+(function () {
+
 const AMPACITY = {
   cu: {
     '14 AWG': [15, 20, 25], '12 AWG': [20, 25, 30], '10 AWG': [30, 35, 40],
@@ -108,6 +110,21 @@ const AMP_RESULT_TEXT = {
   degreeRange: '{min}–{max}°C',
   combined: '{base} A × {ambientFactor} × {adjustmentFactor} = {derated} A',
 };
+
+window.VDAmpacity = Object.freeze({
+  calculateAmpacity,
+  AMPACITY,
+  SMALL_CAP,
+  AMBIENT_CORRECTION,
+  CONDUCTOR_ADJUSTMENT,
+  CEC_AMBIENT_CORRECTION,
+  CEC_CONDUCTOR_ADJUSTMENT,
+  TEMP_INDEX,
+});
+
+// /wire-size-calculator/ loads this file for its pure engine only. The
+// standalone ampacity page also has the form below and continues into the UI.
+if (!document.getElementById('amp-form')) return;
 
 let material = 'cu';
 let insulationTemp = 90;
@@ -422,6 +439,7 @@ function check() {
     CEC_CONDUCTOR_ADJUSTMENT,
     TEMP_INDEX,
   );
+  window.VDLastAmpacityResult = result;
   renderAmpacity(result);
 }
 
@@ -430,3 +448,5 @@ $('amp-form').addEventListener('submit', (event) => {
   event.preventDefault();
   check();
 });
+
+})();

@@ -924,6 +924,7 @@ const calculatorCases = [
       await targetPage.fill('#voltage', String(input.volts));
       await targetPage.fill('#current', String(input.amps));
       await targetPage.fill('#distance', String(input.feet));
+      await targetPage.selectOption('#size-termination', '75');
       await targetPage.click('#calc-btn');
     },
   },
@@ -1155,6 +1156,245 @@ for (const edition of EDITIONS) {
   }
 
   await editionPage.close();
+}
+
+// ---- Combined conductor sizing: every safety state in every edition.
+// The fixed 240 V / 40 A oracles below are hand-worked independently:
+//   150 ft: 8 AWG permits 50 A, while voltage drop needs 6 AWG
+//           (5.899 V / 240 V = 2.458%, leaving 0.542 percentage points).
+//   10 ft:  voltage drop permits 18 AWG, while ampacity needs 8 AWG.
+//   100 ft: both searches select 8 AWG.
+for (const edition of EDITIONS) {
+  const label = edition.prefix || 'us-en';
+  const wirePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(wirePage);
+  const interactionProblems = collectPageProblems(wirePage);
+  const openCombined = async ({
+    volts = 240,
+    amps = 40,
+    feet = 150,
+    insulation = 90,
+    termination = 75,
+    ambient = 30,
+    conductorCount = 3,
+    continuous = false,
+  } = {}) => {
+    await wirePage.goto(BASE + editionPath(edition.prefix, 'wire-size-calculator/'));
+    await wirePage.click('[data-system="ac1"]');
+    await wirePage.fill('#voltage', String(volts));
+    await wirePage.fill('#current', String(amps));
+    await wirePage.fill('#distance', String(feet));
+    await wirePage.click(`[data-size-insulation="${insulation}"]`);
+    await wirePage.selectOption('#size-termination', String(termination));
+    await wirePage.fill('#size-ambient', String(ambient));
+    await wirePage.fill('#size-conductors', String(conductorCount));
+    if (continuous) await wirePage.click('[data-size-continuous="yes"]');
+    await wirePage.click('#calc-btn');
+    await wirePage.waitForSelector('#results:not([hidden])');
+    return wirePage.evaluate(() => ({
+      result: window.VDLastWireSizeResult,
+      resultText: document.getElementById('results').innerText.replace(/\s+/g, ' ').trim(),
+    }));
+  };
+  const runStandaloneAmpacity = async (size, {
+    amps = 40,
+    insulation = 90,
+    termination = 75,
+    ambient = 30,
+    conductorCount = 3,
+    continuous = false,
+  } = {}) => {
+    await wirePage.goto(BASE + editionPath(edition.prefix, 'ampacity-check/'));
+    await wirePage.selectOption('#amp-size', size);
+    await wirePage.click(`[data-insulation="${insulation}"]`);
+    await wirePage.click(`[data-termination="${termination}"]`);
+    await wirePage.fill('#amp-ambient', String(ambient));
+    await wirePage.fill('#amp-conductors', String(conductorCount));
+    await wirePage.fill('#amp-load', String(amps));
+    if (continuous) await wirePage.click('[data-continuous="yes"]');
+    await wirePage.click('#amp-form .calc-btn');
+    await wirePage.waitForSelector('#results:not([hidden])');
+    return wirePage.evaluate(() => window.VDLastAmpacityResult);
+  };
+
+  await wirePage.goto(BASE + editionPath(edition.prefix, 'wire-size-calculator/'));
+  const sizeOnlyState = await wirePage.evaluate(() => ({
+    sizeVisible: !document.getElementById('size-ampacity-fields').hidden,
+    safetyVisible: !document.getElementById('size-safety-boundary').hidden,
+    terminationRequired: document.getElementById('size-termination').required,
+    terminationValid: document.getElementById('size-termination').checkValidity(),
+  }));
+  checkBool(`${label} combined inputs and safety boundary are size-only with required termination`,
+    sizeOnlyState.sizeVisible
+      && sizeOnlyState.safetyVisible
+      && sizeOnlyState.terminationRequired
+      && !sizeOnlyState.terminationValid,
+    JSON.stringify(sizeOnlyState));
+  await wirePage.click('#tab-drop');
+  const dropModeState = await wirePage.evaluate(() => ({
+    sizeHidden: document.getElementById('size-ampacity-fields').hidden,
+    safetyHidden: document.getElementById('size-safety-boundary').hidden,
+    terminationDisabled: document.getElementById('size-termination').disabled,
+  }));
+  await wirePage.click('#tab-length');
+  const lengthModeState = await wirePage.evaluate(() => ({
+    sizeHidden: document.getElementById('size-ampacity-fields').hidden,
+    safetyHidden: document.getElementById('size-safety-boundary').hidden,
+    terminationDisabled: document.getElementById('size-termination').disabled,
+  }));
+  checkBool(`${label} drop and length modes hide and disable every ampacity-only input`,
+    Object.values(dropModeState).every(Boolean) && Object.values(lengthModeState).every(Boolean),
+    `${JSON.stringify(dropModeState)} | ${JSON.stringify(lengthModeState)}`);
+
+  const distanceCase = await openCombined();
+  const distance = distanceCase.result;
+  checkBool(`${label} hand-worked distance-governing case`,
+    distance.status === 'ok'
+      && distance.governing === 'distance'
+      && distance.voltageDrop.found.label === '6 AWG'
+      && distance.ampacityMinimum.label === '8 AWG'
+      && distance.finalLabel === '6 AWG'
+      && distance.distanceSizeSteps === 1
+      && Math.abs(distance.ampacityHeadroom - 25) < 1e-9
+      && Math.abs(distance.voltageHeadroom - 0.5419207317073171) < 1e-9,
+    JSON.stringify({
+      status: distance.status,
+      governing: distance.governing,
+      voltage: distance.voltageDrop.found?.label,
+      ampacity: distance.ampacityMinimum?.label,
+      final: distance.finalLabel,
+      ampacityHeadroom: distance.ampacityHeadroom,
+      voltageHeadroom: distance.voltageHeadroom,
+    }));
+  const standaloneDropSize = await wirePage.evaluate(() => {
+    const api = window.VDVoltageDrop;
+    return api.calculateVoltageDrop(
+      'size', 'ac1', 'cu', 240, 40, 150, 0, 3,
+      api.WIRE_TABLE, api.K_FACTOR, api.SYSTEMS,
+    ).found.label;
+  });
+  checkBool(`${label} combined voltage-drop size equals standalone voltage-drop engine`,
+    distance.voltageDrop.found.label === standaloneDropSize,
+    `${distance.voltageDrop.found.label} / ${standaloneDropSize}`);
+
+  const standaloneChosen = await runStandaloneAmpacity(distance.ampacityMinimum.label);
+  const standaloneSmaller = await runStandaloneAmpacity(
+    distance.ampacityMinimum.nextSmallerSupported.label,
+  );
+  checkBool(`${label} combined ampacity minimum passes and next smaller supported size fails`,
+    standaloneChosen.passes === true
+      && standaloneSmaller.passes === false
+      && distance.ampacityMinimum.result.passes === true
+      && distance.ampacityMinimum.nextSmallerSupported.result.passes === false,
+    `${distance.ampacityMinimum.label}=${standaloneChosen.passes}; `
+      + `${distance.ampacityMinimum.nextSmallerSupported.label}=${standaloneSmaller.passes}`);
+  const rawChainKeys = [
+    'baseAmpacity', 'ambientFactor', 'ambientAdjusted', 'adjustmentFactor',
+    'adjustedAmpacity', 'terminationLimit', 'smallCap', 'binding',
+    'exactPermitted', 'permitted',
+  ];
+  checkBool(`${label} combined derating chain equals standalone raw numbers before rounding`,
+    rawChainKeys.every((key) =>
+      Object.is(distance.ampacityMinimum.result[key], standaloneChosen[key])),
+    rawChainKeys.map((key) =>
+      `${key}:${distance.ampacityMinimum.result[key]}/${standaloneChosen[key]}`).join(' '));
+
+  const ampacityCase = (await openCombined({ feet: 10 })).result;
+  checkBool(`${label} hand-worked ampacity-governing case`,
+    ampacityCase.status === 'ok'
+      && ampacityCase.governing === 'ampacity'
+      && ampacityCase.voltageDrop.found.label === '18 AWG'
+      && ampacityCase.ampacityMinimum.label === '8 AWG'
+      && ampacityCase.finalLabel === '8 AWG'
+      && ampacityCase.distanceSizeSteps === 0,
+    JSON.stringify({
+      status: ampacityCase.status,
+      governing: ampacityCase.governing,
+      voltage: ampacityCase.voltageDrop.found?.label,
+      ampacity: ampacityCase.ampacityMinimum?.label,
+      final: ampacityCase.finalLabel,
+    }));
+  const tieCase = (await openCombined({ feet: 100 })).result;
+  checkBool(`${label} hand-worked equal-constraint case is a normal tie`,
+    tieCase.status === 'ok'
+      && tieCase.governing === 'tie'
+      && tieCase.voltageDrop.found.label === '8 AWG'
+      && tieCase.ampacityMinimum.label === '8 AWG'
+      && tieCase.finalLabel === '8 AWG'
+      && tieCase.distanceSizeSteps === 0);
+
+  const dashCase = (await openCombined({
+    insulation: 60,
+    termination: 60,
+    ambient: 60,
+  })).result;
+  checkBool(`${label} published ambient dash refuses every conductor size`,
+    dashCase.status === 'not-permitted'
+      && dashCase.ampacityRefusal.result.status === 'not-permitted',
+    dashCase.status);
+  const rangeCase = (await openCombined({
+    volts: 480,
+    amps: 600,
+    feet: 10,
+  })).result;
+  checkBool(`${label} no conductor satisfying both returns OUT OF RANGE, never 500 kcmil`,
+    rangeCase.status === 'out-of-range'
+      && rangeCase.reason === 'ampacity'
+      && rangeCase.ampacityMinimum === null
+      && rangeCase.finalLabel !== '500 kcmil',
+    JSON.stringify({
+      status: rangeCase.status,
+      reason: rangeCase.reason,
+      ampacityMinimum: rangeCase.ampacityMinimum,
+    }));
+
+  const floorCase = (await openCombined({
+    volts: 120,
+    amps: 5,
+    feet: 1,
+  })).result;
+  checkBool(`${label} voltage-drop 18 AWG is not treated as an ampacity opinion`,
+    floorCase.status === 'ok'
+      && floorCase.voltageDrop.found.label === '18 AWG'
+      && floorCase.supportedFloor.label === '14 AWG'
+      && floorCase.ampacityMinimum.label === '14 AWG'
+      && floorCase.ampacityMinimum.domainFloor,
+    JSON.stringify({
+      voltage: floorCase.voltageDrop.found?.label,
+      floor: floorCase.supportedFloor?.label,
+      ampacity: floorCase.ampacityMinimum?.label,
+    }));
+
+  const continuousCase = await openCombined({
+    amps: 30,
+    feet: 10,
+    continuous: true,
+  });
+  const expectedContinuousFactor = edition.country === 'ca' ? 0.80 : 1.25;
+  const expectedContinuousBasis = edition.country === 'ca' ? 'permitted-amps' : 'load-amps';
+  checkBool(`${label} continuous load uses the country rule and labels the whole-load assumption`,
+    continuousCase.result.finalAmpacity.continuousFactor === expectedContinuousFactor
+      && continuousCase.result.finalAmpacity.continuousBasis === expectedContinuousBasis
+      && Math.abs(continuousCase.result.ampacityHeadroom - 10) < 1e-9
+      && (edition.country === 'ca'
+        ? /80\s*%/.test(continuousCase.resultText)
+        : /125\s*%/.test(continuousCase.resultText)),
+    `${continuousCase.result.finalAmpacity.continuousFactor} `
+      + `${continuousCase.result.finalAmpacity.continuousBasis}`);
+  checkBool(`${label} continuous result shows the before-and-after arithmetic`,
+    edition.country === 'ca'
+      ? /50\s*A\s*×\s*80\s*%\s*=\s*40\s*A/.test(continuousCase.resultText)
+      : /30\s*A\s*×\s*125\s*%\s*=\s*37\.5\s*A/.test(continuousCase.resultText),
+    continuousCase.resultText);
+  checkBool(`${label} continuous result contains only its country's rule`,
+    edition.country === 'ca'
+      ? !/125\s*%/.test(continuousCase.resultText)
+      : !/Rule\s*8-104/i.test(continuousCase.resultText),
+    continuousCase.resultText);
+  checkBool(`${label} full combined sizing interaction has zero page errors and failed assets`,
+    interactionProblems.length === 0,
+    interactionProblems.join(' | '));
+  await wirePage.close();
 }
 
 // ---- Ohm's law honesty matrix: every case in every edition.
@@ -1526,6 +1766,7 @@ await page.click('[data-material="cu"]');
 await page.fill('#voltage', '240');
 await page.fill('#current', '40');
 await page.fill('#distance', '150');
+await page.selectOption('#size-termination', '75');
 await page.click('#calc-btn');
 await page.waitForSelector('#results:not([hidden])');
 big = await page.textContent('#big-number');
@@ -2183,6 +2424,21 @@ for (const viewport of SCREENSHOT_VIEWPORTS) {
     });
   }
   await visualPage.close();
+}
+
+// Required phone-width human review of the combined result in English,
+// Quebec French, and Canadian Simplified Chinese.
+for (const edition of [EDITIONS[0], EDITIONS[4], EDITIONS[5]]) {
+  const shotPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(shotPage);
+  await shotPage.goto(BASE + editionPath(edition.prefix, 'wire-size-calculator/'));
+  await calculatorCases.find(({ path }) => path === 'wire-size-calculator/')
+    .interact(shotPage, edition);
+  await shotPage.waitForSelector('#results:not([hidden])');
+  await shotPage.locator('#results').screenshot({
+    path: `${shots}/wire-size-phone-${runtimeEditionId(edition)}.png`,
+  });
+  await shotPage.close();
 }
 
 await page.goto(BASE);
