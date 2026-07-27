@@ -145,7 +145,7 @@ const SOL_TEXT = {
   colCurrentUsed: '所用电流',
   colAllowance: '允许电压降',
   colActualDrop: '实际电压降',
-  colActualPercent: '实际百分比',
+  colActualPercent: '实际 %',
   colRequiredCm: '所需面积',
   colSize: '线径',
   colLargestListed: '表中最大',

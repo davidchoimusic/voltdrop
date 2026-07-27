@@ -33,18 +33,23 @@ Trust is the product. Six commitments make it concrete.
    source value before software automation is allowed to protect it.
 
 2. **A seal protects checked data from drift.** Thirteen live electrical tables
-   are fingerprinted. A one-digit change stops the build until the table is
-   deliberately re-verified and re-sealed. The seal proves that a value did not
-   change unnoticed; it does not prove that the original value was correct.
-   The two-source check and the seal are separate because they answer separate
+   are fingerprinted. A one-digit change stops the verification suite before
+   its browser checks and reports the mismatch. Re-verification and updating
+   the stored fingerprint remain deliberate human steps; the seal cannot
+   enforce them by itself. The seal proves that a value did not change
+   unnoticed; it does not prove that the original value was correct. The
+   two-source check and the seal are separate because they answer separate
    questions.
 
-3. **A refusal is a valid result.** Missing evidence must not become a
-   plausible-looking number. Canadian conduit sizing remains planning-only
-   because its full Canadian table set has not passed the gate. Null ambient
-   cells remain “not permitted.” Three-phase resistance refuses the missing
-   wye/delta assumption. An honest blank carries more product value than a
-   confident guess.
+3. **A boundary can be a label or a refusal.** Missing evidence must not become
+   a plausible-looking result presented under the wrong authority. Canadian
+   conduit fill computes with sealed US conductor areas and US trade sizes,
+   but a prominent planning note refuses to present that output as a Canadian
+   code answer and requires confirmation against CEC Tables 6A–6K and 9. Null
+   ambient cells remain “not permitted.” Three-phase resistance refuses the
+   missing wye/delta assumption. The response should match the boundary the
+   product actually implements: label borrowed data plainly, and refuse where
+   a missing assumption prevents a defensible calculation.
 
 4. **Show calculations in the order the rule operates.** Ampacity starts in
    the insulation column, applies heat factors, then applies termination,
@@ -61,16 +66,26 @@ Trust is the product. Six commitments make it concrete.
    Locale catalogs own complete translated thoughts. No valid US fallback is
    allowed to become a quiet Canadian claim.
 
-6. **Verification must reach the rendered product.** Every calculator is driven
-   in all six editions against a hand-worked value. Translated numbers must
-   match their English twins unless a specific element owns a legitimate
-   locale-dependent representation, such as a month rendered as a Chinese
-   numeral instead of an English month name. Those exceptions are marked at
-   the element and removed in both static and rendered checks; they are never
-   global number denylists. Protected code names, wire types, and units must
-   survive. Safety copy passes target-only back-translation before comparison
-   with the sealed English meaning. English output has its own byte-identity
-   gate, separate from the electrical-data seals.
+6. **Verification must reach the rendered product.** Every calculator route is
+   driven in all six editions against an independently derived expectation.
+   The numeric-parity gate currently covers translated guides, Terms, and three
+   newer pages rather than the whole translated site. On those paths, visible
+   numbers must match their English twins unless a specific element owns a
+   legitimate locale-dependent representation, such as a month rendered as a
+   Chinese numeral instead of an English month name. Those exceptions are
+   marked at the element and removed in both static and rendered checks; they
+   are never global number denylists. Protected values do not all carry the
+   same risk: brands, standards, citations, and matched numeric values require
+   exact agreement, because an addition can fabricate a claim; wire
+   designations and unit symbols use a no-loss rule, because a translator may
+   correctly use `cmil` where English used prose. Safety copy passes target-only
+   back-translation before comparison with the sealed English meaning. English
+   output has its own byte-identity gate, separate from the electrical-data
+   seals. Verification reporting follows the same product dimensions as the
+   generated output: each localized edition × runtime bundle and each localized
+   page receives its own named result. An aggregate summary cannot substitute
+   for those results because it hides both coverage growth and the failing
+   artifact.
 
 ## Strategy
 
@@ -100,9 +115,9 @@ misstate the task in front of the user.
 
 Limitations appear at the point of use and on the public verification page.
 That page is an explanation, not a trust badge. It names the two-source check,
-seal, refusal behavior, translation screen, automatic checks, code editions,
-local-adoption boundary, and absence of a licensed reviewer. A footer link
-makes it globally available; one shared fragment puts it beside every
+seal, label and refusal behavior, translation screen, automatic checks, code
+editions, local-adoption boundary, and absence of a licensed reviewer. A footer
+link makes it globally available; one shared fragment puts it beside every
 calculator's explanation, where the trust question actually arises.
 
 Structured data follows the same visibility rule. FAQ schema is generated from
@@ -137,9 +152,10 @@ confirms country copy, localization, and fragment composition.
   answers a different question from derating the insulation-column value and
   applying caps afterward.
 
-- **Independent oracles matter.** Hand-worked results protect rule selection
-  and arithmetic. Back-translation without the English source protects meaning.
-  A seal protects later drift. None can stand in for the others.
+- **Independent oracles matter.** Independently derived result expectations
+  protect rule selection and arithmetic. Back-translation without the English
+  source protects meaning. A seal protects later drift. None can stand in for
+  the others.
 
 - **Rendered context matters.** A localized string can exist without being
   loaded, a root-relative link can silently route a Canadian reader to US
@@ -171,13 +187,19 @@ confirms country copy, localization, and fragment composition.
   CSA C22.1:24 states what VoltDrop computes. The local authority still decides
   which edition and amendments apply at the jobsite.
 
+- **Coverage cardinality is product cardinality.** A registry-derived check can
+  expand from 24 to 32 edition × bundle comparisons while making the suite look
+  smaller if it reports one aggregate pass. The check counter and failure name
+  must preserve every multiplied output dimension or the reported total stops
+  describing the tested surface.
+
 ## Open Questions
 
 - **Jurisdiction adoption:** future edition-sensitive tools may need code-year
   or jurisdiction selection rather than one country-wide implemented edition.
 
 - **Canada conduit fidelity:** Tables 6A–6K and 9 still need full two-source
-  verification before the planning-only state can be removed.
+  verification before the US-data planning label can be removed.
 
 - **External language review:** mechanical gates are strong, but a native
   electrician in each language remains the best check of trade idiom.

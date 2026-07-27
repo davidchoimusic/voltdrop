@@ -1,7 +1,7 @@
 {
   "policy": {
     "comparison": "case-sensitive",
-    "rule": "For each page, every token or pattern match present in the English source must appear verbatim in the localized output."
+    "rule": "brand, standards, citations, and protectedPatterns require exact counts in English and localized text: adding a brand, standard, citation, or number can fabricate a claim just as losing one can erase it. wireAndCableDesignations, unitSymbols, and contextualUnitSymbols use no-loss counts: localized text must contain at least the English count, but may use an extra standard designation or unit symbol where English used prose."
   },
   "brand": [
     "VoltDrop",

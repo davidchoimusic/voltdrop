@@ -1,7 +1,7 @@
 {
   "policy": "Pass B row-specific meaning judgments after originals were introduced.",
-  "targetDigest": "41844f5ff6ccc4a39673ace5a2edffc770c288bb706059d0612911def010d3db",
-  "backtranslationDigest": "3ad6a7bc55740a2cfbc6e489f2a3c91b2a8ed8879a1566b04df345937df291a5",
+  "targetDigest": "d287c80953cb4a5a51a476e1eb1f28e11a95a57ff7e464735af4b5d276b7fe64",
+  "backtranslationDigest": "073665d06ad14e878bdbb1b1d04b3fdb7562297ebb813aa6bd287f2152a0f5d2",
   "entries": [
     {
       "id": "bt-0001",
@@ -536,7 +536,7 @@
     {
       "id": "bt-0107",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.afterATablePassesWeTakeAFingerprint: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-es, howVerify.afterATablePassesWeTakeAFingerprint: the corrected scope survives: the SEAL stops the verification suite, and re-verifying plus updating the fingerprint are named as separate human steps rather than something the seal enforces."
     },
     {
       "id": "bt-0108",
@@ -561,17 +561,17 @@
     {
       "id": "bt-0112",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.everyCalculatorIsDrivenInAllSixEditions: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-es, howVerify.everyCalculatorIsDrivenInAllSixEditions: the six-edition claim survives, and so does the corrected distinction between hand-worked expectations and ones derived from the sealed tables."
     },
     {
       "id": "bt-0113",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.everyNumberShownOnATranslatedPage: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-es, howVerify.everyNumberShownOnATranslatedPage: the corrected, narrower scope survives — named page groups rather than every translated page — including the explicit locale-difference exemption."
     },
     {
       "id": "bt-0114",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.ifAPageHereShowsYouAResult: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-es, howVerify.ifAPageHereShowsYouAResult: the corrected instruction survives: read the label, because an unpassed result is disclosed rather than presented as verified. The former false guarantee is gone."
     },
     {
       "id": "bt-0115",
@@ -591,7 +591,7 @@
     {
       "id": "bt-0118",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the reason for withholding results survives, as does the judgment that a blank is safer than a confident wrong number."
+      "verdict": "For us-es, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the corrected description survives: the page declines to present itself as a Canadian code answer, states it uses US areas and trade sizes, and directs the reader to confirm before installing."
     },
     {
       "id": "bt-0119",
@@ -606,7 +606,7 @@
     {
       "id": "bt-0121",
       "status": "PASS",
-      "verdict": "For us-es, howVerify.theEasiestThingWouldBeToFillEveryGap: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-es, howVerify.theEasiestThingWouldBeToFillEveryGap: the corrected admission survives — borrowed data is disclosed on the page rather than the gap being silently filled."
     },
     {
       "id": "bt-0122",
@@ -1826,7 +1826,7 @@
     {
       "id": "bt-0365",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.afterATablePassesWeTakeAFingerprint: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-zh, howVerify.afterATablePassesWeTakeAFingerprint: the corrected scope survives: the SEAL stops the verification suite, and re-verifying plus updating the fingerprint are named as separate human steps rather than something the seal enforces."
     },
     {
       "id": "bt-0366",
@@ -1851,17 +1851,17 @@
     {
       "id": "bt-0370",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.everyCalculatorIsDrivenInAllSixEditions: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-zh, howVerify.everyCalculatorIsDrivenInAllSixEditions: the six-edition claim survives, and so does the corrected distinction between hand-worked expectations and ones derived from the sealed tables."
     },
     {
       "id": "bt-0371",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.everyNumberShownOnATranslatedPage: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-zh, howVerify.everyNumberShownOnATranslatedPage: the corrected, narrower scope survives — named page groups rather than every translated page — including the explicit locale-difference exemption."
     },
     {
       "id": "bt-0372",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.ifAPageHereShowsYouAResult: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-zh, howVerify.ifAPageHereShowsYouAResult: the corrected instruction survives: read the label, because an unpassed result is disclosed rather than presented as verified. The former false guarantee is gone."
     },
     {
       "id": "bt-0373",
@@ -1881,7 +1881,7 @@
     {
       "id": "bt-0376",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the reason for withholding results survives, as does the judgment that a blank is safer than a confident wrong number."
+      "verdict": "For us-zh, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the corrected description survives: the page declines to present itself as a Canadian code answer, states it uses US areas and trade sizes, and directs the reader to confirm before installing."
     },
     {
       "id": "bt-0377",
@@ -1896,7 +1896,7 @@
     {
       "id": "bt-0379",
       "status": "PASS",
-      "verdict": "For us-zh, howVerify.theEasiestThingWouldBeToFillEveryGap: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For us-zh, howVerify.theEasiestThingWouldBeToFillEveryGap: the corrected admission survives — borrowed data is disclosed on the page rather than the gap being silently filled."
     },
     {
       "id": "bt-0380",
@@ -3136,7 +3136,7 @@
     {
       "id": "bt-0627",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.afterATablePassesWeTakeAFingerprint: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-fr, howVerify.afterATablePassesWeTakeAFingerprint: the corrected scope survives: the SEAL stops the verification suite, and re-verifying plus updating the fingerprint are named as separate human steps rather than something the seal enforces."
     },
     {
       "id": "bt-0628",
@@ -3161,17 +3161,17 @@
     {
       "id": "bt-0632",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.everyCalculatorIsDrivenInAllSixEditions: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-fr, howVerify.everyCalculatorIsDrivenInAllSixEditions: the six-edition claim survives, and so does the corrected distinction between hand-worked expectations and ones derived from the sealed tables."
     },
     {
       "id": "bt-0633",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.everyNumberShownOnATranslatedPage: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-fr, howVerify.everyNumberShownOnATranslatedPage: the corrected, narrower scope survives — named page groups rather than every translated page — including the explicit locale-difference exemption."
     },
     {
       "id": "bt-0634",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.ifAPageHereShowsYouAResult: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-fr, howVerify.ifAPageHereShowsYouAResult: the corrected instruction survives: read the label, because an unpassed result is disclosed rather than presented as verified. The former false guarantee is gone."
     },
     {
       "id": "bt-0635",
@@ -3191,7 +3191,7 @@
     {
       "id": "bt-0638",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the reason for withholding results survives, as does the judgment that a blank is safer than a confident wrong number."
+      "verdict": "For ca-fr, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the corrected description survives: the page declines to present itself as a Canadian code answer, states it uses US areas and trade sizes, and directs the reader to confirm before installing."
     },
     {
       "id": "bt-0639",
@@ -3206,7 +3206,7 @@
     {
       "id": "bt-0641",
       "status": "PASS",
-      "verdict": "For ca-fr, howVerify.theEasiestThingWouldBeToFillEveryGap: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-fr, howVerify.theEasiestThingWouldBeToFillEveryGap: the corrected admission survives — borrowed data is disclosed on the page rather than the gap being silently filled."
     },
     {
       "id": "bt-0642",
@@ -4591,7 +4591,7 @@
     {
       "id": "bt-0918",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.afterATablePassesWeTakeAFingerprint: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-zh, howVerify.afterATablePassesWeTakeAFingerprint: the corrected scope survives: the SEAL stops the verification suite, and re-verifying plus updating the fingerprint are named as separate human steps rather than something the seal enforces."
     },
     {
       "id": "bt-0919",
@@ -4616,17 +4616,17 @@
     {
       "id": "bt-0923",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.everyCalculatorIsDrivenInAllSixEditions: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-zh, howVerify.everyCalculatorIsDrivenInAllSixEditions: the six-edition claim survives, and so does the corrected distinction between hand-worked expectations and ones derived from the sealed tables."
     },
     {
       "id": "bt-0924",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.everyNumberShownOnATranslatedPage: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-zh, howVerify.everyNumberShownOnATranslatedPage: the corrected, narrower scope survives — named page groups rather than every translated page — including the explicit locale-difference exemption."
     },
     {
       "id": "bt-0925",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.ifAPageHereShowsYouAResult: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-zh, howVerify.ifAPageHereShowsYouAResult: the corrected instruction survives: read the label, because an unpassed result is disclosed rather than presented as verified. The former false guarantee is gone."
     },
     {
       "id": "bt-0926",
@@ -4646,7 +4646,7 @@
     {
       "id": "bt-0929",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the reason for withholding results survives, as does the judgment that a blank is safer than a confident wrong number."
+      "verdict": "For ca-zh, howVerify.ourCanadianConduitFillPageCarriesAPlanningNote: the corrected description survives: the page declines to present itself as a Canadian code answer, states it uses US areas and trade sizes, and directs the reader to confirm before installing."
     },
     {
       "id": "bt-0930",
@@ -4661,7 +4661,7 @@
     {
       "id": "bt-0932",
       "status": "PASS",
-      "verdict": "For ca-zh, howVerify.theEasiestThingWouldBeToFillEveryGap: the stated meaning and its force are preserved in the independent back-translation."
+      "verdict": "For ca-zh, howVerify.theEasiestThingWouldBeToFillEveryGap: the corrected admission survives — borrowed data is disclosed on the page rather than the gap being silently filled."
     },
     {
       "id": "bt-0933",

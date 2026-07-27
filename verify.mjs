@@ -9,6 +9,11 @@ import { createHash } from 'crypto';
 import { spawnSync } from 'node:child_process';
 import { extname, join } from 'node:path';
 import { checkRegistries } from './tools/check-registries.mjs';
+import { checkRuntimeNeverTranslate } from './tools/check-runtime-never-translate.mjs';
+import {
+  findNeverTranslateMismatch,
+  formatNeverTranslateMismatch,
+} from './tools/never-translate-check.mjs';
 
 const BASE = process.env.BASE || 'http://localhost:8642/';
 const shots = 'verify-shots';
@@ -123,6 +128,15 @@ const checkBool = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${name}${detail ? `: ${detail}` : ''}`);
   ok ? pass++ : fail++;
 };
+
+// ---- Runtime never-translate gate ----
+// The checker reads its bundle list from i18n/runtime-map.json, the same
+// registry the build uses to generate localized runtime assets. Keep each
+// edition × bundle result in this suite's own count so coverage cardinality
+// grows with the generated output.
+for (const result of checkRuntimeNeverTranslate().results) {
+  checkBool(result.name, result.ok, result.detail);
+}
 
 // Digits next to Latin letters are usually part of an identifier (COVID19,
 // a1), but digits next to CJK text are normal prose because Chinese does not
@@ -294,53 +308,6 @@ const stripParityExemptElements = (html) => html.replace(
 
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
-const protectedLiterals = [
-  ...neverTranslate.brand,
-  ...neverTranslate.standards,
-  ...neverTranslate.citations,
-  ...neverTranslate.wireAndCableDesignations,
-  ...neverTranslate.unitSymbols,
-];
-const countLiteral = (source, token) => {
-  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return (source.match(new RegExp(`(?<![\\p{Script=Latin}\\p{N}])${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
-};
-const countContextualUnit = (source, token) => {
-  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return (source.match(new RegExp(`(?:\\d+(?:\\.\\d+)?|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
-};
-const patternChecks = neverTranslate.protectedPatterns.map((pattern) => ({
-  name: pattern.name,
-  re: new RegExp(pattern.source, pattern.flags),
-}));
-const protectedParity = (source, target) => {
-  const literalMismatch = protectedLiterals.find((token) =>
-    countLiteral(source, token) !== countLiteral(target, token));
-  const contextualMismatch = (neverTranslate.contextualUnitSymbols ?? []).find((token) =>
-    countContextualUnit(source, token) !== countContextualUnit(target, token));
-  const patternMismatch = patternChecks.find(({ re }) => {
-    re.lastIndex = 0;
-    const sourceMatches = source.match(re) || [];
-    re.lastIndex = 0;
-    const targetMatches = target.match(re) || [];
-    return sourceMatches.length !== targetMatches.length;
-  });
-  return literalMismatch || contextualMismatch || patternMismatch?.name || null;
-};
-
-// Runtime strings are shipped in per-edition JavaScript assets. Check those
-// assets as well as HTML so a translated warning cannot alter a citation,
-// designation, number, or unit after the user clicks Calculate.
-for (const edition of EDITIONS.filter((item) => item.locale !== 'en')) {
-  const assetEdition = runtimeEditionId(edition);
-  for (const file of ['common.js', 'app.js', 'ampacity.js', 'conduit.js', 'boxfill.js', 'power.js']) {
-    const source = readFileSync(file, 'utf8');
-    const localized = readFileSync(`assets/${assetEdition}/${file}`, 'utf8');
-    const mismatch = protectedParity(source, localized);
-    checkBool(`${assetEdition}/${file} runtime never-translate parity`, !mismatch,
-      mismatch || 'all protected tokens');
-  }
-}
 
 for (const edition of EDITIONS) {
   for (const path of [...SCOPED_PATHS, ...GUIDE_PATHS]) {
@@ -382,12 +349,13 @@ for (const edition of EDITIONS) {
     if (edition.locale === 'en') continue;
     const twinPath = editionPath(edition.twin, path);
     const twin = readFileSync(twinPath ? `${twinPath}index.html` : 'index.html', 'utf8');
-    const mismatch = protectedParity(
+    const mismatch = findNeverTranslateMismatch(
       stripParityExemptElements(twin),
       stripParityExemptElements(html),
+      neverTranslate,
     );
     checkBool(`${generated} never-translate parity`, !mismatch,
-      mismatch || 'all protected tokens');
+      formatNeverTranslateMismatch(mismatch));
   }
 }
 

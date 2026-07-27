@@ -122,14 +122,14 @@
     <p>Ce n’est pas du théâtre. Dans une première version, une valeur provisoire de courant admissible différait entre les deux sources. La vérification l’a repérée, la valeur a été corrigée avant la publication, et c’est exactement pourquoi cette étape existe.</p>
 
     <h2>Scellés pour empêcher toute dérive</h2>
-    <p>Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la génération s’arrête. Ce n’est pas un avertissement : le site ne peut plus être généré tant qu’une personne n’a pas volontairement revérifié les données et créé un nouveau sceau.</p>
+    <p>Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la suite de vérification s’arrête avant les essais dans le navigateur et signale l’écart. Revérifier les données et mettre volontairement à jour l’empreinte sont deux interventions humaines distinctes que le sceau ne peut pas imposer à lui seul.</p>
     <p>Nous avons confirmé que le sceau réagit à la modification d’un seul chiffre.</p>
     <p>Le sceau prouve qu’un nombre n’a pas changé sans que quelqu’un le remarque. Il ne prouve pas que le nombre d’origine était juste. C’est le rôle de la vérification à deux sources. Ces protections sont distinctes et remplissent des fonctions distinctes.</p>
 
     <h2>Quand nous ne savons pas, nous le disons</h2>
-    <p>Le plus facile serait de remplir chaque vide par un nombre qui semble plausible. Nous ne le faisons pas.</p>
-    <p>Notre page canadienne de remplissage de conduit affiche une note réservée à la planification plutôt que des résultats, car les tableaux canadiens nécessaires n’ont pas encore franchi la vérification à deux sources. Elle reste ainsi depuis des semaines. Un espace vide est honnête. Un nombre faux présenté avec assurance est dangereux.</p>
-    <p>Si une page affiche un résultat, les données qui le soutiennent ont franchi la vérification. Sinon, la note s’affiche à la place.</p>
+    <p>Le plus facile au monde serait de remplir chaque vide avec un nombre qui semble plausible et de ne rien en dire. Lorsque nous avons dû emprunter des données aux tableaux d’un autre pays, nous le disons sur la page elle-même, à l’endroit même où vous seriez sur le point de vous y fier.</p>
+    <p>Notre page canadienne de remplissage de conduits en est l’exemple le plus clair. Les CEC Tables 6A–6K et Table 9 n’ont pas franchi la vérification à deux sources; cette page refuse donc de se présenter comme une réponse fondée sur le code canadien. Elle indique clairement qu’elle utilise encore des aires de conducteurs et des grosseurs commerciales américaines, et elle vous demande de confirmer le résultat dans les tableaux canadiens avant toute installation. C’est ainsi depuis des semaines. Nous préférons publier un avertissement embarrassant plutôt qu’un chiffre canadien affirmé avec assurance que nous ne pouvons pas défendre.</p>
+    <p>Lisez donc les indications au lieu de tenir quoi que ce soit pour acquis. Lorsque les données derrière un résultat n’ont pas franchi la vérification pour votre pays, la page le dit en langage clair au lieu de présenter discrètement ce résultat comme une réponse vérifiée.</p>
 
     <h2>Les traductions sont relues à rebours</h2>
     <p>VoltDrop existe en six éditions et quatre langues. Un avertissement de sécurité qui perd discrètement son sens pendant la traduction constitue un vrai danger. Nous le vérifions donc ainsi : le texte traduit est reconverti en anglais de façon autonome, sans que l’original soit visible, puis le résultat est comparé au sens voulu.</p>
@@ -138,9 +138,9 @@
 
     <h2>Ce qui s’exécute automatiquement</h2>
     <ul>
-      <li>Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, puis sa réponse est comparée à un calcul fait à la main. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions.</li>
+      <li>Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, et sa réponse est comparée à une valeur attendue — calculée à la main pour les principaux cas de chute de tension et dérivée des tableaux scellés pour les autres. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions.</li>
       <li>Les pages anglaises sont comparées octet par octet à la génération précédente afin que rien ne change par accident.</li>
-      <li>Chaque nombre affiché sur une page traduite doit correspondre au même nombre sur sa jumelle anglaise.</li>
+      <li>Le contrôle de parité numérique couvre les guides traduits, la page Conditions d’utilisation et trois pages plus récentes, dont celle-ci. Sur ces pages, chaque nombre visible est comparé à celui de la page anglaise correspondante, sauf si une valeur est expressément marquée comme une différence locale légitime.</li>
       <li>Dans chaque langue, nous vérifions que les termes qui ne doivent jamais être traduits demeurent intacts : noms de codes, types de conducteurs et unités.</li>
     </ul>
 
