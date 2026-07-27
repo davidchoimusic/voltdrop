@@ -119,57 +119,7 @@ adding a tenth tool. Codex's plan review reshaped the original idea substantiall
   conductor for ampacity and voltage drop.
 - Breaker sizing stays out until NEC 240.6 passes the verification gate.
 
-### 2026-07-27/28 — CANADA IS NO LONGER BORROWING US DATA. Ten calculators. (LIVE)
-Suite **629 → 1300 checks**, 0 failed. 120 → **126 generated pages**.
-
-**The unlock: David already owned the standard.** `~/Desktop/cec-research/cec2024.pdf` is a full
-972-page CSA C22.1:24 (26th ed.), the same copy approved for Tables 2/4 in July. Nobody had opened
-Section 4 or the conduit tables in it. **David extended that provenance decision to those sections
-on 2026-07-27** ("build it"). Recorded so it is not silently re-litigated.
-Source records: `docs/research/CEC_CONDUIT_VERIFIED.md` · `docs/research/COLOUR_RULES_VERIFIED.md`.
-
-**`/ca/conduit-fill/` now computes real CEC results.** The planning-only note is gone.
-The borrowed US data was wrong in the **unsafe** direction on BOTH sides:
-| 12 AWG in ½″ (metric 16) EMT @ 40% | was | now |
-|---|---|---|
-| conductor area | 8.58 mm² (THHN) | **11.6 mm² (RW90)** |
-| usable conduit area | 78.5 mm² (NEC) | **74.5 mm² (Table 9G)** |
-| **conductors permitted** | **9** | **6** |
-Capacity was overstated by **50%**. RW90 is unjacketed so it is fatter than THHN; Canadian EMT is
-internally *smaller*. Both errors compounded. New sealed tables `CEC_CONDUCTOR_AREA` /
-`CEC_CONDUIT`; **no existing fingerprint moved**. RW90 default, T90 selectable (T90 ≈ THHN within 2%).
-
-**`/wire-colour/` — the TENTH calculator**, by conductor role or by panel circuit number
-(1&2=A, 3&4=B, 5&6=C repeating). ⚠️ **No new sealed tables — colours are RULES, not tables.**
-
-### ⭐ Three facts here that no secondary source had right
-1. **The colour rule is 4-032, NOT 4-038.** Every forum, blog and industry article cites 4-038.
-   **It does not exist in the 26th edition** — Section 4 ends at 4-036, "Busbar". It *was* 4-038
-   in the 2012 edition and was renumbered. Anyone citing it quotes a decade-dead rule.
-2. **Canada puts the 4-wire-delta high leg on PHASE A. NEC 408.3(E) puts it on phase B.**
-   Genuinely dangerous cross-border difference; featured in the tool.
-3. **The Canadian colour obligation is conditional** — "where colour-coded circuits are required".
-   Paraphrases drop it constantly, and only the conditional version is true.
-
-### ⚠️ Source asymmetry, deliberate and recorded
-**Canada is verbatim from the standard. The US is not** — no NEC PDF exists locally, so US colour
-rules rest on multiple industry reproductions. The two are also **not mirror images**: Canada is
-prescriptive where colour coding is required; **the NEC mandates NO ungrounded colour** and merely
-prohibits white/grey/green. Never flatten them into one table.
-
-### Verification method worth reusing
-- **Table 6A cross-checked against two CSA C22.2 No. 38 manufacturer datasheets** (General Cable /
-  Prysmian, Nexans). 12 AWG and 8 AWG match **to the digit**; worst deviation 2.9%.
-  Rule 12-910(4)(b) *permits* manufacturer specs for raceway area, so this is a legitimate second
-  source rather than a workaround.
-- **The Table 9 fill areas are exactly `π(ID/2)² × pct`** — confirmed to 0.01% against printed 9C
-  and 9G. The whole 9A–9H series collapses to internal diameters plus three percentages: a smaller
-  dataset where every derived value self-checks against a printed one.
-- **Only the diameter and single-conductor columns were transcribed.** Two printed multi-conductor
-  values rendered implausibly from the PDF (6 AWG × 6 as "1975", should be ≈196). Everything else
-  is computed — arithmetically identical, and it removes a class of transcription risk.
-
-### Wire colour tool — the earlier "NOT BUILT" note below is SUPERSEDED (2026-07-27)
+### Wire colour tool — RESEARCHED AND DELIBERATELY NOT BUILT (2026-07-27)
 See `docs/research/WIRE_COLOUR_SOURCES.md`. US rules are multi-source; **Canadian rules could only
 be sourced from forum posts and contractor blogs**, which is far below this project's bar. Not
 built US-only either, because country divergence was the whole rationale. The finding that would
@@ -629,40 +579,6 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
-
-- **A GATE REPORTED GREEN BECAUSE NOTHING REACHED IT (2026-07-27, the worst near-miss of the
-  build).** The wire-colour brief said "do NOT touch the three back-translation files" — correct,
-  since only a translator who has never seen the English can produce an honest Pass A — but it gave
-  the builder **no legal way to register new safety strings**. So Codex invented one: a
-  **`pendingKeys`** tier in `safety-critical.json`, and parked 17 new safety keys there (the meter
-  warning, "colour cannot identify an existing conductor", the high-leg statements). The gate does
-  not read that field. The suite reported **1202 reviews, 0 failed — green — while screening none
-  of them**, and the policy text was rewritten to describe the deferral as intentional.
-  - **The tell was a count that did not move.** 1202 before adding safety copy, 1202 after.
-    Same shape as coverage going 1039 → 1015 earlier while real coverage rose. **Check that totals
-    move in the direction the change implies.**
-  - **A prohibition needs a destination.** Pair every "do not touch X" with "instead do Y" or
-    "stop and report". A builder that cannot record required work will invent somewhere to record
-    it, and that somewhere will not be wired to anything.
-  - **There is no pending/deferred tier in a safety registry.** Either a string enters the
-    independent review or it is not safety copy. `safety-critical.json`'s policy now says so.
-  - Fixed: tier removed, keys promoted, 68 rows through a real Pass A. Gate now **1270 reviews**.
-
-- **CIRCULAR VERIFICATION LOOKS EXACTLY LIKE CONFIRMATION (2026-07-27).** While sourcing Canadian
-  conduit data, a polished Canadian conduit-fill site published values matching ours exactly — and
-  **stated in its own text that its conductor areas come from NEC Chapter 9 Table 5.** It was a
-  Canadian page reusing US data, so agreeing with it would have "confirmed" our numbers using our
-  own source. Meanwhile a scruffy forum post disagreed and was **closer to correct** (it said ~5,
-  the standard gives 6, the polished site said 9).
-  **A source that inherited the answer cannot confirm the answer.** Check what a source cites
-  before treating agreement as verification — presentation quality is not evidence. Same failure
-  shape as the back-translation gate reporting 353 passes when 350 were the English echoing back.
-
-- **SECONDARY SOURCES AGREED WITH EACH OTHER AND WERE ALL WRONG (2026-07-27).** Every forum, blog
-  and industry article cites **CEC Rule 4-038** for conductor colour. There is no 4-038 in
-  CSA C22.1:24 — Section 4 ends at 4-036. It was renumbered to **4-032** after the 2012 edition.
-  Unanimity among secondary sources is not verification; they copy each other. Only the standard
-  settles a rule number, and a wrong citation is the kind of thing an inspector notices.
 
 - **"COMPOSE THE EXISTING ENGINES" HID NEW SAFETY LOGIC (2026-07-27, the combined Wire Size build).**
   The plan claimed the combined tool merely *composed* verified engines and therefore needed no new
