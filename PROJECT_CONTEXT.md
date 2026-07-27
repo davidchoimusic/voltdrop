@@ -85,6 +85,20 @@ set it. Deployed and verified on production (14/14 checks across US/CA/FR/ZH, 0 
   the precise mechanism, "at least two independently produced reproductions … they all have to
   agree, on every cell". Do NOT loosen to "several"/"many"; the precision is the point.
 
+### 2026-07-27 — Canadian conduit fill now uses verified CEC data (CURRENT WORKTREE)
+`/ca/conduit-fill/`, `/ca-fr/conduit-fill/`, and `/ca-zh/conduit-fill/` no longer calculate from
+the sealed US THHN and NEC raceway tables. The Canadian path now uses sealed CSA C22.1:24
+Tables 6A/6K conductor areas and Table 9-series internal diameters, with Rule 12-910/Table 8 fill
+percentages. RW90 is the default and T90 is selectable. Metric designators display beside their
+imperial equivalents.
+- Safety boundary: 12 AWG RW90 in metric 16 EMT permits **6**, while the unchanged US 12 AWG
+  THHN path permits **9** in 1/2-inch EMT.
+- The two new CEC tables are added to `data-golden.json`; every pre-existing fingerprint remains
+  unchanged.
+- The Canadian planning note and the stale `/how-we-verify/` example have been replaced with the
+  verified-source record. The independent target-only back-translation pass must be rerun before
+  release because safety copy changed; its sealed output files are deliberately untouched here.
+
 ### Superseded plan note (kept per append-only convention)
 The "next build" block below was written before the work above shipped. Its content is now
 history, except the parts still true: **breaker sizing stays out until NEC 240.6 passes the
@@ -157,15 +171,15 @@ in every edition.
 3. **`verify.mjs` is now ~542 checks, not 7.** Run: `python3 -m http.server 8643` then
    `BASE=http://localhost:8643/ node verify.mjs`. Start the server, run verify, READ the
    output — never chain them into one command whose exit code you can't see.
-4. **13 sealed electrical tables** fingerprinted in `data-golden.json`. The build hard-fails on
-   any change. Changing one legitimately = independent source verification FIRST, then
+4. **15 sealed electrical tables** fingerprinted in `data-golden.json`. The verification suite
+   hard-fails on any change. Changing one legitimately = independent source verification FIRST, then
    regenerate the golden file deliberately. Never regenerate to make a failure go away.
 5. **Base ampacity is deliberately SHARED between the US and Canada** — CEC Tables 2/4 were
    verified identical to NEC 310.16 in the 60/75/90 columns. Do not "fix" this by duplicating.
    See the country-expansion section below for what genuinely differs.
 
 ### Verification machinery that exists (do not weaken it)
-- **Data tripwire** — 13 sealed tables, proven to fire on a single-digit edit
+- **Data tripwire** — 15 sealed tables, proven to fire on a single-digit edit
 - **Byte-identical gate** — English output must not change unintentionally
 - **Two-pass back-translation** — safety strings re-rendered into English from the target
   language alone, with a contamination alarm that fails if results look copied
@@ -173,7 +187,6 @@ in every edition.
 - **Per-edition interaction checks** — all 42 edition×calculator combinations actually driven
 
 ### Still open
-- `/ca/conduit-fill/` carries a planning-only note — CEC Tables 6A–6K and 9 unverified
 - Roadmap items awaiting placement: ground wire size · wire colour · offline/PWA ·
   "Build this circuit"
   (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.

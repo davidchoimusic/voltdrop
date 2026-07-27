@@ -65,6 +65,7 @@ const DATA_TABLES = [
   ['ampacity.js', 'AMBIENT_CORRECTION'], ['ampacity.js', 'CONDUCTOR_ADJUSTMENT'],
   ['ampacity.js', 'CEC_AMBIENT_CORRECTION'], ['ampacity.js', 'CEC_CONDUCTOR_ADJUSTMENT'],
   ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
+  ['conduit.js', 'CEC_CONDUCTOR_AREA'], ['conduit.js', 'CEC_CONDUIT'],
   ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
   ['boxfill.js', 'CEC_VOL_ML'],
   ['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
@@ -114,6 +115,8 @@ const TEST_CEC_AMBIENT_CORRECTION = readSealedConstant('ampacity.js', 'CEC_AMBIE
 const TEST_CEC_CONDUCTOR_ADJUSTMENT = readSealedConstant('ampacity.js', 'CEC_CONDUCTOR_ADJUSTMENT');
 const TEST_THHN_AREA = readSealedConstant('conduit.js', 'THHN_AREA');
 const TEST_CONDUIT = readSealedConstant('conduit.js', 'CONDUIT');
+const TEST_CEC_CONDUCTOR_AREA = readSealedConstant('conduit.js', 'CEC_CONDUCTOR_AREA');
+const TEST_CEC_CONDUIT = readSealedConstant('conduit.js', 'CEC_CONDUIT');
 const TEST_VOL_PER_CONDUCTOR = readSealedConstant('boxfill.js', 'VOL_PER_CONDUCTOR');
 const TEST_CEC_VOL_ML = readSealedConstant('boxfill.js', 'CEC_VOL_ML');
 
@@ -578,11 +581,66 @@ for (const edition of EDITIONS) {
   }
 }
 
-const canadianConduitPage = readFileSync('ca/conduit-fill/index.html', 'utf8');
-checkBool('Canada conduit-fill planning note remains present',
-  canadianConduitPage.includes('Canada / CEC planning note:')
-    && canadianConduitPage.includes('Tables 6A–6K and 9')
-    && canadianConduitPage.includes('Do not use its conduit-size result as the final basis'));
+const staleCanadianConduitClaims = [
+  'planning note',
+  'planning check',
+  'still uses THHN/THWN',
+  'NEC-specific',
+  'note de planification',
+  'vérification préliminaire',
+  'demeurent propres au NEC',
+  '规划说明',
+  '规划检查',
+  '仍使用THHN/THWN',
+  'NEC专用',
+];
+for (const edition of EDITIONS.filter(({ country }) => country === 'ca')) {
+  const path = editionPath(edition.prefix, 'conduit-fill/');
+  const html = readFileSync(`${path}index.html`, 'utf8');
+  const stale = staleCanadianConduitClaims.filter((claim) =>
+    html.toLowerCase().includes(claim.toLowerCase()));
+  checkBool(`${edition.prefix} conduit fill names verified CSA C22.1:24 sources with no planning-only claim`,
+    html.includes('CSA C22.1:24')
+      && html.includes('Tables 6A/6K')
+      && html.includes('Tables 9A–9H')
+      && html.includes('Rule 12-910')
+      && html.includes('RW90')
+      && html.includes('T90')
+      && stale.length === 0,
+    stale.length ? stale.join(', ') : 'verified Canadian source statement present');
+}
+
+const staleTrustExampleByLocale = {
+  en: 'still working from US conductor areas',
+  es: 'todavía se trabaja con áreas de conductores',
+  'fr-CA': 'utilise encore des aires de conducteurs',
+  'zh-Hans': '仍采用美国的导线',
+};
+for (const edition of EDITIONS) {
+  const path = editionPath(edition.prefix, 'how-we-verify/');
+  const html = readFileSync(`${path}index.html`, 'utf8');
+  checkBool(`${edition.prefix || 'us-en'} trust page no longer cites Canadian conduit as withheld`,
+    !html.includes(staleTrustExampleByLocale[edition.locale])
+      && html.includes('Tables 6A/6K')
+      && html.includes('9A–9H'));
+}
+
+const cecConduitFillArea = (family, designator, percent) => {
+  const idMm = TEST_CEC_CONDUIT[family][designator];
+  return Math.PI * (idMm / 2) ** 2 * percent;
+};
+check('sealed CEC EMT 16 fill area at 40%',
+  cecConduitFillArea('emt', 16, 0.40), 74.51, 0.0005);
+check('sealed CEC EMT 16 fill area at 53%',
+  cecConduitFillArea('emt', 16, 0.53), 98.72, 0.0005);
+check('sealed CEC rigid PVC 16 fill area at 40%',
+  cecConduitFillArea('pvc40', 16, 0.40), 66.69, 0.0005);
+check('sealed CEC rigid PVC 16 fill area at 53%',
+  cecConduitFillArea('pvc40', 16, 0.53), 88.37, 0.0005);
+checkBool('sealed headline capacities are 6 Canadian RW90 versus 9 US THHN',
+  Math.floor(cecConduitFillArea('emt', 16, 0.40)
+    / TEST_CEC_CONDUCTOR_AREA.RW90['12 AWG'].area_mm2) === 6
+    && Math.floor(TEST_CONDUIT.emt.sizes[0][1] * 0.40 / TEST_THHN_AREA['12 AWG']) === 9);
 
 if (process.env.STATIC_ONLY === '1') {
   console.log(`\n${pass + dataPass} static checks passed (${dataPass} data-integrity), ${fail} failed.`);
@@ -850,13 +908,16 @@ const expectedAmpacity = (edition) => {
   const cap = TEST_SMALL_CAP[input.material]?.[input.wire] ?? Infinity;
   return Math.floor(Math.min(adjusted, termination, cap) + 1e-9);
 };
-// Canada intentionally gets the current planning-only result from these
-// sealed NEC conductor/trade-size tables. Do not invent a Canadian size until
-// CEC Tables 6A-6K and 9 pass the project's verification gate.
 const CONDUIT_DATA_BY_COUNTRY = {
   us: { areas: TEST_THHN_AREA, families: TEST_CONDUIT, planningOnly: false },
-  ca: { areas: TEST_THHN_AREA, families: TEST_CONDUIT, planningOnly: true },
+  ca: {
+    areas: TEST_CEC_CONDUCTOR_AREA.RW90,
+    families: TEST_CEC_CONDUIT,
+    planningOnly: false,
+  },
 };
+checkBool('Canadian conduit verification path is no longer planning-only',
+  CONDUIT_DATA_BY_COUNTRY.ca.planningOnly === false);
 const tradeSizeInches = (label) => {
   const text = label.replace('"', '');
   const [whole, fraction = ''] = text.includes('-') ? text.split('-') : ['', text];
@@ -869,11 +930,19 @@ const expectedConduitSize = (country) => {
   const source = CONDUIT_DATA_BY_COUNTRY[country];
   const count = input.rows.reduce((sum, row) => sum + row.count, 0);
   const needed = input.rows.reduce((sum, row) =>
-    sum + source.areas[row.wire] * row.count, 0);
+    sum + (country === 'ca'
+      ? source.areas[row.wire].area_mm2
+      : source.areas[row.wire]) * row.count, 0);
   const fillLimit = count === 1 ? 0.53 : count === 2 ? 0.31 : 0.40;
-  const row = source.families[input.family].sizes.find(([, area]) => needed <= area * fillLimit);
+  const sizes = country === 'ca'
+    ? Object.entries(source.families[input.family]).map(([designator, idMm]) => [
+      designator,
+      Math.PI * (idMm / 2) ** 2,
+    ])
+    : source.families[input.family].sizes;
+  const row = sizes.find(([, area]) => needed <= area * fillLimit);
   if (!row) throw new Error('Conduit-fill matrix input exceeds the sealed conduit table');
-  return tradeSizeInches(row[0]);
+  return country === 'ca' ? Number(row[0]) : tradeSizeInches(row[0]);
 };
 const expectedMixedBoxFill = (country) => {
   const input = MATRIX_INPUTS.boxFill;
@@ -970,7 +1039,9 @@ const calculatorCases = [
     path: 'conduit-fill/',
     expectsBreakdown: true,
     expected: (edition) => expectedConduitSize(edition.country),
-    readNumber: (value) => tradeSizeInches(value.trim()),
+    readNumber: (value, edition) => edition.country === 'ca'
+      ? parseFloat(value)
+      : tradeSizeInches(value.trim()),
     interact: async (targetPage) => {
       const input = MATRIX_INPUTS.conduit;
       await targetPage.selectOption('#fill-size', input.rows[0].wire);
@@ -1136,7 +1207,7 @@ for (const edition of EDITIONS) {
       render.visible && render.value.length > 0,
       render.value || 'no result');
     check(`${label} numeric result`,
-      calculator.readNumber(render.value),
+      calculator.readNumber(render.value, edition),
       calculator.expected(edition),
       calculator.tolerance);
     if (calculator.expectedLabel) {
@@ -1157,6 +1228,70 @@ for (const edition of EDITIONS) {
 
   await editionPage.close();
 }
+
+// ---- Headline conduit safety case.
+// The calculator returns the smallest conduit, so the capacity boundary is
+// proved on both sides: six 12 AWG RW90 conductors remain in metric 16 EMT,
+// while the seventh requires metric 21. The US THHN boundary remains 9/10.
+for (const edition of EDITIONS.filter(({ country }) => country === 'ca')) {
+  const headlinePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(headlinePage);
+  await headlinePage.goto(BASE + editionPath(edition.prefix, 'conduit-fill/'));
+  const selectorCount = await headlinePage.locator('[data-conductor-type]').count();
+  const defaultType = await headlinePage.locator('[data-conductor-type].active').textContent();
+  await headlinePage.fill('#fill-count', '6');
+  await headlinePage.click('#fill-form .calc-btn');
+  await headlinePage.waitForSelector('#results:not([hidden])');
+  // Chinese typography omits the space before a parenthesis, so ca-zh renders "16(½″)"
+  // where the Latin editions render "16 (½″)". Both are correct; compare without spacing
+  // so the check tests the trade size rather than the locale's punctuation habits.
+  const normalizeTradeSize = (value) => value
+    .trim().replaceAll('（', '(').replaceAll('）', ')').replace(/\s+/g, '');
+  const sixSize = normalizeTradeSize(await headlinePage.textContent('#big-number'));
+  const sixBreakdown = (await headlinePage.textContent('#itemized-breakdown')).replace(/\s+/g, ' ');
+  if (edition.id === 'ca-en' || edition.id === 'ca-fr') {
+    await headlinePage.screenshot({
+      path: `${shots}/conduit-phone-${edition.id}.png`,
+      fullPage: true,
+    });
+  }
+  await headlinePage.fill('#fill-count', '7');
+  await headlinePage.click('#fill-form .calc-btn');
+  const sevenSize = normalizeTradeSize(await headlinePage.textContent('#big-number'));
+  await headlinePage.click('[data-conductor-type="T90"]');
+  await headlinePage.fill('#fill-count', '8');
+  await headlinePage.click('#fill-form .calc-btn');
+  const t90Size = normalizeTradeSize(await headlinePage.textContent('#big-number'));
+  const t90Breakdown = (await headlinePage.textContent('#itemized-breakdown')).replace(/\s+/g, ' ');
+  checkBool(`${edition.prefix} 12 AWG RW90 capacity in metric 16 EMT is exactly 6`,
+    selectorCount === 2
+      && defaultType === 'RW90'
+      && sixSize === normalizeTradeSize('16 (½″)')
+      && sevenSize === normalizeTradeSize('21 (¾″)')
+      && sixBreakdown.includes('6 × 12 AWG RW90')
+      && sixBreakdown.includes('69.60 mm²'),
+    JSON.stringify({ selectorCount, defaultType, sixSize, sevenSize, sixBreakdown }));
+  checkBool(`${edition.prefix} Canadian conductor selector switches the calculation to T90`,
+    t90Size === normalizeTradeSize('16 (½″)') && t90Breakdown.includes('8 × 12 AWG T90'),
+    JSON.stringify({ t90Size, t90Breakdown }));
+  await headlinePage.close();
+}
+
+const usHeadlinePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await installFileRoute(usHeadlinePage);
+await usHeadlinePage.goto(BASE + 'conduit-fill/');
+const usSelectorCount = await usHeadlinePage.locator('[data-conductor-type]').count();
+await usHeadlinePage.fill('#fill-count', '9');
+await usHeadlinePage.click('#fill-form .calc-btn');
+await usHeadlinePage.waitForSelector('#results:not([hidden])');
+const usNineSize = (await usHeadlinePage.textContent('#big-number')).trim();
+await usHeadlinePage.fill('#fill-count', '10');
+await usHeadlinePage.click('#fill-form .calc-btn');
+const usTenSize = (await usHeadlinePage.textContent('#big-number')).trim();
+checkBool('US 12 AWG THHN capacity in 1/2-inch EMT remains exactly 9',
+  usSelectorCount === 0 && usNineSize === '1/2"' && usTenSize === '3/4"',
+  JSON.stringify({ usSelectorCount, usNineSize, usTenSize }));
+await usHeadlinePage.close();
 
 // ---- Combined conductor sizing: every safety state in every edition.
 // The fixed 240 V / 40 A oracles below are hand-worked independently:
