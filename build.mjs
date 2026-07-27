@@ -49,6 +49,7 @@ const runtimePatternGroups = {
   'power.js': 'power',
   'landscape.js': 'landscape',
   'solar.js': 'solar',
+  'wire-colour.js': 'wireColour',
 };
 const countryPacks = {
   us: JSON.parse(readFileSync('i18n/country-packs/us.json', 'utf8')),
@@ -306,6 +307,16 @@ const PAGES = [
     visibleFaq: true,
     titleKey: 'pages.us.solarWireSize.title',
     descriptionKey: 'pages.us.solarWireSize.description',
+  },
+  {
+    dir: 'wire-colour',
+    ldNameKey: 'pages.us.wireColour.ldName',
+    tool: 'wire-colour',
+    script: 'wire-colour.js',
+    main: 'partials/wire-colour-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.wireColour.title',
+    descriptionKey: 'pages.us.wireColour.description',
   },
   {
     dir: 'landscape-lighting-calculator',

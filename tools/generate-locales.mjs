@@ -35,6 +35,7 @@ const templateFiles = [
   'partials/power-main.html',
   'partials/ohms-law-main.html',
   'partials/solar-wire-size-main.html',
+  'partials/wire-colour-main.html',
   'partials/fragments/power-form.html',
   'partials/fragments/solar-form.html',
   'partials/fragments/verify-link.html',
@@ -66,7 +67,7 @@ keys.add('header.theVoltageDropCalculatorThatExplainsItself');
 for (const [group, patterns] of Object.entries(english.runtimePatterns)) {
   for (const name of Object.keys(patterns)) keys.add(`runtimePatterns.${group}.${name}`);
 }
-for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'ohmsLaw', 'boxFill', 'landscape', 'solar', 'solarWireSize', 'terms']) {
+for (const page of ['wireSize', 'maxLength', 'ampacity', 'conduit', 'privacy', 'howWeVerify', 'power', 'ohmsLaw', 'boxFill', 'landscape', 'solar', 'solarWireSize', 'wireColour', 'terms']) {
   for (const field of Object.keys(english.pages.us[page])) keys.add(`pages.us.${page}.${field}`);
 }
 for (const country of ['us', 'ca']) {
@@ -2300,7 +2301,8 @@ for (const [locale, catalog] of Object.entries(pendingCatalogs)) {
    scan silently changed 296 -> 315 and broke the report. */
 const existingSafetyKeys = existingSafetyRegistry.keys ?? safetyKeys;
 writeFileSync('i18n/safety-critical.json', `${JSON.stringify({
-  policy: 'Every instruction, warning, and stated limit in the page, runtime, and guide catalogs is marked here for back-translation review. Selected high-exposure non-safety copy is listed separately for the same sealed review.',
+  policy: existingSafetyRegistry.policy,
+  pendingKeys: existingSafetyRegistry.pendingKeys,
   keys: existingSafetyKeys,
   extraReviewKeys: existingSafetyRegistry.extraReviewKeys,
 }, null, 2)}\n`);

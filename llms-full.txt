@@ -31,7 +31,7 @@ After a table passes, we take a fingerprint of it and store that fingerprint in 
 
 The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the multi-source check is for. They're separate protections and they do separate jobs.
 
-If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
+If data has not passed, the page refuses to invent a result. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
 
 US data basis: US ampacity data reflects NEC Table 310.16 and the 310.15(B)(1) correction factors as published in the 2023 edition (NFPA 70). Small-conductor caps come from 240.4(D), conduit fill from Chapter 9 Tables 4 and 5, and box fill from 314.16. These particular tables have been stable across editions. That is why a slightly different adopted edition usually does not change the answer. State and municipal adoption varies; confirm the edition adopted locally.
 
@@ -131,6 +131,15 @@ Method: Uses the array operating current Imp at Vmp and the same per-circuit sol
 Targets: Common solar-practice starting points, not code requirements. The target is visible and editable.
 Does not answer: Battery-to-inverter and controller-to-battery runs belong in the full Solar & Battery calculator. This is voltage-drop sizing only, not ampacity, and it does not handle inverter AC output.
 
+### Wire Colour Tool
+
+URL: https://voltdrop.app/wire-colour/
+Question: What colour should this conductor be for new work, by conductor role or standard panel circuit number?
+US answer: U.S. conductor colour lookup for neutral, equipment ground, phase convention, panel circuit numbers, and the phase-B high leg in a 4-wire delta system.
+Canadian answer: Canadian conductor colour lookup under CEC Rule 4-032 for neutral, bonding, phase colours, panel circuit numbers, and the phase-A high leg in 4-wire delta.
+Country rule: NEC 200.6, 250.119, 110.15, and 408.3(E) set neutral, equipment-grounding, and high-leg identification. The NEC does not assign colours to ordinary ungrounded phases. CSA C22.1:24 Rule 4-032 prescribes bonding and grounding identification and, where colour-coded circuits are required, the single-phase and three-phase colour sequence. In a 4-wire delta system the higher-voltage-to-ground conductor is phase A.
+Does not answer: Colour never identifies an existing conductor. Legacy work, errors, and faded insulation make the installed conductor a measurement question.
+
 ## Concepts that control the answer
 
 Ampacity and voltage drop answer different questions. Ampacity limits conductor heating. Voltage drop limits lost voltage and poor equipment performance. Passing one never proves the other.
@@ -154,6 +163,8 @@ At ten current-carrying conductors, the NEC adjustment factor is 0.50 and the CE
 Canada ambient correction: CEC Table 5A lists single ambient points only above 30°C. At or below 30°C the factor is 1.00, with no cool-ambient credit. Between listed points, this calculator uses the next higher row; it never interpolates or rounds down.
 
 Box fill is a real country fork. The US calculation uses NEC cubic-inch allowances for conductors, devices, grounds, and clamps. The Canadian calculation uses CEC millilitre allowances and different counting for insulated conductors, bonding conductors, clamps, devices, and marrettes.
+
+The 4-wire-delta high leg changes phase at the border: Canada places the higher-voltage-to-ground conductor on phase A, while the NEC places the high leg on phase B.
 
 ## Guides
 

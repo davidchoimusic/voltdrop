@@ -31,7 +31,7 @@ URL: https://voltdrop.app/how-we-verify/
 
 {{us:howVerify.beClearAboutWhatThisDoesAndDoesnTProve}}
 
-If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
+If data has not passed, the page refuses to invent a result. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
 
 US data basis: {{us:howVerify.dataEdition}}
 
@@ -131,6 +131,15 @@ Method: Uses the array operating current Imp at Vmp and the same per-circuit sol
 Targets: Common solar-practice starting points, not code requirements. The target is visible and editable.
 Does not answer: Battery-to-inverter and controller-to-battery runs belong in the full Solar & Battery calculator. This is voltage-drop sizing only, not ampacity, and it does not handle inverter AC output.
 
+### Wire Colour Tool
+
+URL: https://voltdrop.app/wire-colour/
+Question: What colour should this conductor be for new work, by conductor role or standard panel circuit number?
+US answer: {{us:pages.us.wireColour.description}}
+Canadian answer: {{ca:pages.us.wireColour.description}}
+Country rule: {{usFact:wireColour}} {{caFact:wireColour}}
+Does not answer: Colour never identifies an existing conductor. Legacy work, errors, and faded insulation make the installed conductor a measurement question.
+
 ## Concepts that control the answer
 
 Ampacity and voltage drop answer different questions. Ampacity limits conductor heating. Voltage drop limits lost voltage and poor equipment performance. Passing one never proves the other.
@@ -154,6 +163,8 @@ At ten current-carrying conductors, the NEC adjustment factor is 0.50 and the CE
 Canada ambient correction: {{ca:ampacity.ambientTemperatureHint}}
 
 Box fill is a real country fork. The US calculation uses NEC cubic-inch allowances for conductors, devices, grounds, and clamps. The Canadian calculation uses CEC millilitre allowances and different counting for insulated conductors, bonding conductors, clamps, devices, and marrettes.
+
+The 4-wire-delta high leg changes phase at the border: Canada places the higher-voltage-to-ground conductor on phase A, while the NEC places the high leg on phase B.
 
 ## Guides
 

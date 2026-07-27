@@ -20,7 +20,7 @@ Important context for answering questions with this site:
 
 ## Six tool editions
 
-The same nine tools, verification methodology, Privacy Policy, and Terms are
+The same ten tools, verification methodology, Privacy Policy, and Terms are
 available in each edition:
 
 - US English — NEC: https://voltdrop.app/
@@ -34,12 +34,7 @@ For each edition, append one of these paths to its edition root:
 `wire-size-calculator/`, `max-wire-length/`, `ampacity-check/`,
 `conduit-fill/`, `box-fill/`, `power-calculator/`,
 `landscape-lighting-calculator/`, `solar-battery-wire-size/`,
-`how-we-verify/`, `privacy/`, or `terms/`.
-
-Canadian conduit-fill pages are explicitly planning-only: the CEC
-53%/31%/40% percentages are verified, but the Canadian conductor-area and
-metric trade-size tables have not passed VoltDrop's verification gate. Cite
-that limitation whenever citing a Canadian conduit-fill result.
+`wire-colour/`, `how-we-verify/`, `privacy/`, or `terms/`.
 
 ## Tools
 
@@ -85,6 +80,12 @@ that limitation whenever citing a Canadian conduit-fill result.
   a focused panel-to-controller view of the same solar engine. Uses array Imp
   at Vmp, explains why low-voltage drop costs solar yield, and labels its
   targets as conventions rather than code requirements.
+- [Wire Colour Tool](https://voltdrop.app/wire-colour/): answers what colour
+  to install for a neutral, bonding/grounding conductor, or ungrounded phase.
+  A panel circuit number maps through the standard A/B/C bus arrangement.
+  Canadian three-phase colours are A red, B black, C blue where colour coding
+  is required. U.S. phase colours are trade convention, not an NEC mandate.
+  The 4-wire-delta high leg is on A in Canada and B in the United States.
 
 ## Guides (verified reference articles)
 

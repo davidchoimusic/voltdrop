@@ -189,6 +189,7 @@ const SCOPED_PATHS = [
   'landscape-lighting-calculator/',
   'solar-battery-wire-size/',
   'solar-wire-size-calculator/',
+  'wire-colour/',
   'terms/',
 ];
 const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
@@ -205,6 +206,7 @@ const NEW_PAGE_PATHS = [
   'how-we-verify/',
   'ohms-law/',
   'solar-wire-size-calculator/',
+  'wire-colour/',
 ];
 const FRAMED_PAGE_CASES = [
   { path: 'ohms-law/', parent: 'power-calculator/', script: 'power.js', tool: 'power' },
@@ -453,6 +455,8 @@ const englishPageCopy = {
   'how-we-verify/': flattenStrings(CATALOGS.en.howVerify),
   'ohms-law/': flattenStrings(CATALOGS.en.ohmsLaw),
   'solar-wire-size-calculator/': flattenStrings(CATALOGS.en.solarWireSize),
+  'wire-colour/': flattenStrings(CATALOGS.en.wireColour)
+    .filter(([key]) => !['roleContextPattern', 'circuitPhasePattern'].includes(key)),
 };
 for (const edition of EDITIONS.filter(({ locale }) => locale !== 'en')) {
   for (const path of NEW_PAGE_PATHS) {
@@ -694,7 +698,7 @@ const collectPageProblems = (targetPage) => {
   return problems;
 };
 
-// ---- The three new routes: the served page, not just its source file.
+// ---- New routes: the served page, not just its source file.
 // Every alternate is loaded in turn, which makes the hreflang check reciprocal.
 for (const edition of EDITIONS) {
   for (const path of NEW_PAGE_PATHS) {
@@ -773,6 +777,111 @@ for (const edition of EDITIONS) {
     }
     await routePage.close();
   }
+}
+
+// ---- Wire Colour: every edition gets the same panel geometry and its own
+// country rules. Stable data attributes carry the semantic result so these
+// checks do not depend on English words surviving translation.
+const CIRCUIT_PHASE_CASES = [
+  [1, 'A'], [3, 'B'], [5, 'C'], [7, 'A'], [2, 'A'], [8, 'A'],
+];
+const THREE_PHASE_COLOURS = {
+  us: { A: 'black', B: 'red', C: 'blue' },
+  ca: { A: 'red', B: 'black', C: 'blue' },
+};
+for (const edition of EDITIONS) {
+  const label = edition.prefix || 'us-en';
+  const wireColourPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await installFileRoute(wireColourPage);
+  const wireColourProblems = collectPageProblems(wireColourPage);
+  await wireColourPage.goto(BASE + editionPath(edition.prefix, 'wire-colour/'));
+
+  const sidebarActive = await wireColourPage.locator(
+    '.sidebar .tool-link.active[data-tool="wire-colour"]',
+  ).count();
+  checkBool(`${label} wire colour is the tenth active sidebar tool`,
+    sidebarActive === 1,
+    `active=${sidebarActive}`);
+
+  const faqState = await wireColourPage.evaluate(() => {
+    const faqs = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((element) => JSON.parse(element.textContent))
+      .filter((entry) => entry?.['@type'] === 'FAQPage');
+    return {
+      count: faqs.length,
+      visible: faqs.length === 1 && faqs[0].mainEntity.every((entry) =>
+        document.body.innerText.includes(entry.name)
+          && document.body.innerText.includes(entry.acceptedAnswer.text)),
+    };
+  });
+  checkBool(`${label} wire colour FAQ is visible and shares its JSON-LD copy`,
+    faqState.count === 1 && faqState.visible,
+    JSON.stringify(faqState));
+
+  await wireColourPage.click('[data-wire-mode="circuit"]');
+  for (const [circuit, expectedPhase] of CIRCUIT_PHASE_CASES) {
+    await wireColourPage.fill('#wire-circuit', String(circuit));
+    const result = await wireColourPage.locator('#wire-results').evaluate((element) => ({
+      phase: element.dataset.phase,
+      colours: element.dataset.colours,
+    }));
+    checkBool(`${label} circuit ${circuit} maps to phase ${expectedPhase}`,
+      result.phase === expectedPhase
+        && result.colours === THREE_PHASE_COLOURS[edition.country][expectedPhase],
+      JSON.stringify(result));
+  }
+
+  await wireColourPage.click('[data-wire-mode="role"]');
+  await wireColourPage.click('[data-wire-role="neutral"]');
+  const neutralColours = await wireColourPage.getAttribute('#wire-results', 'data-colours');
+  checkBool(`${label} neutral result names the country-approved light colour`,
+    neutralColours === (edition.country === 'us' ? 'white,grey' : 'white'),
+    neutralColours);
+
+  await wireColourPage.click('[data-wire-role="bond"]');
+  const bondColours = await wireColourPage.getAttribute('#wire-results', 'data-colours');
+  checkBool(`${label} bonding result includes green`,
+    bondColours.split(',').includes('green'),
+    bondColours);
+
+  await wireColourPage.click('[data-wire-role="phase"]');
+  const phaseRule = await wireColourPage.getAttribute('#wire-results', 'data-rule-kind');
+  const phaseStatus = (await wireColourPage.textContent('#wire-result-status')).trim();
+  const expectedPhaseStatus = (await wireColourPage.textContent('#wire-copy-phase-status')).trim();
+  checkBool(`${label} three-phase result uses the correct rule posture`,
+    phaseRule === 'phase'
+      && phaseStatus === expectedPhaseStatus
+      && phaseStatus.length > 0,
+    `${phaseRule} | ${phaseStatus}`);
+
+  await wireColourPage.selectOption('#wire-system', 'delta');
+  const expectedHighLeg = edition.country === 'ca' ? 'A' : 'B';
+  await wireColourPage.selectOption('#wire-position-three', expectedHighLeg);
+  const deltaState = await wireColourPage.evaluate(() => ({
+    calloutVisible: !document.getElementById('wire-delta-callout').hidden,
+    declaredHighLeg: document.getElementById('wire-delta-callout').dataset.highLegPhase,
+    resultPhase: document.getElementById('wire-results').dataset.phase,
+    colours: document.getElementById('wire-results').dataset.colours,
+    ruleKind: document.getElementById('wire-results').dataset.ruleKind,
+  }));
+  checkBool(`${label} 4-wire delta puts the high leg on phase ${expectedHighLeg}`,
+    deltaState.calloutVisible
+      && deltaState.declaredHighLeg === expectedHighLeg
+      && deltaState.resultPhase === expectedHighLeg
+      && deltaState.colours === (edition.country === 'ca' ? 'red' : 'orange')
+      && deltaState.ruleKind === 'high-leg',
+    JSON.stringify(deltaState));
+
+  const visibleMeterLines = wireColourPage.locator('.wire-meter-line:visible');
+  const meterText = await visibleMeterLines.first().textContent();
+  checkBool(`${label} wire colour shows exactly one meter line`,
+    await visibleMeterLines.count() === 1
+      && meterText.trim().length > 20,
+    meterText.trim());
+  checkBool(`${label} wire colour interaction has zero page errors and failed assets`,
+    wireColourProblems.length === 0,
+    wireColourProblems.join(' | '));
+  await wireColourPage.close();
 }
 
 // Root-relative links are rewritten only when common.js knows the route.
@@ -2513,7 +2622,7 @@ for (const edition of EDITIONS) {
   ok ? pass++ : fail++;
 }
 
-// ---- Human-review screenshots for the three new pages.
+// ---- Human-review screenshots for new pages.
 for (const viewport of SCREENSHOT_VIEWPORTS) {
   await page.setViewportSize({ width: viewport.width, height: viewport.height });
   for (const edition of EDITIONS) {

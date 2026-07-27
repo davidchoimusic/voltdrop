@@ -68,6 +68,7 @@ const TOOL_PATHS = [
   '/landscape-lighting-calculator/',
   '/solar-battery-wire-size/',
   '/solar-wire-size-calculator/',
+  '/wire-colour/',
   '/privacy/',
   '/how-we-verify/',
   '/terms/',

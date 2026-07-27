@@ -1,0 +1,159 @@
+<main class="main-col">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">{{wireColour.title}}</h1>
+    <p class="tool-sub">{{wireColour.sub}}</p>
+  </div>
+
+  <div class="wire-mode-tabs mode-tabs" role="group" aria-label="{{attr:wireColour.lookupMethodLabel}}">
+    <button type="button" class="mode-tab active" data-wire-mode="role" aria-pressed="true">
+      <span class="mode-title">{{wireColour.byRole}}</span>
+      <span class="mode-sub">{{wireColour.byRoleSub}}</span>
+    </button>
+    <button type="button" class="mode-tab" data-wire-mode="circuit" aria-pressed="false">
+      <span class="mode-title">{{wireColour.byCircuit}}</span>
+      <span class="mode-sub">{{wireColour.byCircuitSub}}</span>
+    </button>
+  </div>
+
+  <form id="wire-colour-form" class="card" autocomplete="off">
+    <div class="field">
+      <label class="field-label" for="wire-system">{{wireColour.systemLabel}}</label>
+      <select id="wire-system">
+        <option value="wye208">{{wireColour.wye208}}</option>
+        <option value="wye480">{{wireColour.wye480}}</option>
+        <option value="delta">{{wireColour.delta}}</option>
+        <option value="single3">{{wireColour.single3}}</option>
+        <option value="single2">{{wireColour.single2}}</option>
+      </select>
+      <p class="hint wire-country-scope">{{wireColour.countryScope}}</p>
+    </div>
+
+    <div id="wire-role-fields">
+      <div class="field">
+        <span class="field-label">{{wireColour.roleLabel}}</span>
+        <div class="seg" role="group" aria-label="{{attr:wireColour.roleLabel}}">
+          <button type="button" class="seg-btn active" data-wire-role="neutral" aria-pressed="true">{{wireColour.neutralRole}}</button>
+          <button type="button" class="seg-btn" data-wire-role="bond" aria-pressed="false">{{wireColour.bondingRole}}</button>
+          <button type="button" class="seg-btn" data-wire-role="phase" aria-pressed="false">{{wireColour.phaseRole}}</button>
+        </div>
+      </div>
+
+      <div class="field" id="wire-position-field" hidden>
+        <label class="field-label" for="wire-position-three">{{wireColour.conductorLabel}}</label>
+        <select id="wire-position-three">
+          <option value="A">{{wireColour.phaseA}}</option>
+          <option value="B">{{wireColour.phaseB}}</option>
+          <option value="C">{{wireColour.phaseC}}</option>
+        </select>
+        <select id="wire-position-single" hidden disabled>
+          <option value="L1">{{wireColour.line1}}</option>
+          <option value="L2">{{wireColour.line2}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="wire-circuit-fields" hidden>
+      <div class="field">
+        <label class="field-label" for="wire-circuit">{{wireColour.circuitNumberLabel}}</label>
+        <input class="input-plain" type="number" id="wire-circuit" inputmode="numeric" min="1" step="1" value="7">
+        <p class="hint">{{wireColour.circuitHint}}</p>
+        <p class="hint wire-input-error" id="wire-circuit-error" role="alert" hidden>{{wireColour.invalidCircuit}}</p>
+      </div>
+    </div>
+  </form>
+
+  <aside
+    class="card wire-delta-callout"
+    id="wire-delta-callout"
+    data-high-leg-phase="{{attr:wireColour.highLegPhase}}"
+    hidden
+  >
+    <span class="wire-delta-kicker">{{wireColour.crossBorderKicker}}</span>
+    <h2>{{wireColour.highLegHeading}}</h2>
+    <p>{{wireColour.highLegBody}}</p>
+  </aside>
+
+  <section class="card results wire-results" id="wire-results" aria-live="polite">
+    <div class="wire-answer">
+      <div class="wire-swatch-group" id="wire-result-swatch" aria-hidden="true"></div>
+      <div class="wire-answer-copy">
+        <div class="wire-answer-eyebrow">{{wireColour.answerLabel}}</div>
+        <div class="big-number" id="wire-colour-name"></div>
+        <div class="big-label" id="wire-result-context"></div>
+      </div>
+    </div>
+    <div class="wire-result-rule">
+      <span class="verdict-badge" id="wire-result-status"></span>
+      <p id="wire-result-note"></p>
+    </div>
+    <p class="wire-meter-line" id="wire-role-meter-line">{{wireColour.roleMeterLine}}</p>
+    <p class="wire-meter-line" id="wire-circuit-meter-line" hidden>{{wireColour.circuitMeterLine}}</p>
+  </section>
+
+  <div id="wire-colour-copy" hidden>
+    <span data-colour-name="black">{{wireColour.black}}</span>
+    <span data-colour-name="red">{{wireColour.red}}</span>
+    <span data-colour-name="blue">{{wireColour.blue}}</span>
+    <span data-colour-name="white">{{wireColour.white}}</span>
+    <span data-colour-name="grey">{{wireColour.grey}}</span>
+    <span data-colour-name="green">{{wireColour.green}}</span>
+    <span data-colour-name="green-yellow">{{wireColour.greenYellow}}</span>
+    <span data-colour-name="brown">{{wireColour.brown}}</span>
+    <span data-colour-name="orange">{{wireColour.orange}}</span>
+    <span data-colour-name="yellow">{{wireColour.yellow}}</span>
+    <span data-colour-name="bare">{{wireColour.bare}}</span>
+
+    <span id="wire-copy-neutral-status">{{wireColour.neutralStatus}}</span>
+    <span id="wire-copy-neutral-note">{{wireColour.neutralNote}}</span>
+    <span id="wire-copy-bond-status">{{wireColour.bondStatus}}</span>
+    <span id="wire-copy-bond-note">{{wireColour.bondNote}}</span>
+    <span id="wire-copy-phase-status">{{wireColour.phaseStatus}}</span>
+    <span id="wire-copy-phase-note">{{wireColour.phaseNote}}</span>
+    <span id="wire-copy-high-leg-status">{{wireColour.highLegStatus}}</span>
+    <span id="wire-copy-high-leg-note">{{wireColour.highLegNote}}</span>
+    <span id="wire-copy-role-pattern">{{wireColour.roleContextPattern}}</span>
+    <span id="wire-copy-circuit-pattern">{{wireColour.circuitPhasePattern}}</span>
+  </div>
+
+  <section class="card explainer framed-explainer">
+    <h2>{{wireColour.countryRuleHeading}}</h2>
+    <p>{{wireColour.countryRuleBody}}</p>
+
+    <h2>{{wireColour.panelArrangementHeading}}</h2>
+    <p>{{wireColour.panelArrangementBody}}</p>
+
+    <h2>{{wireColour.installHeading}}</h2>
+    <p>{{wireColour.installBody}}</p>
+    {{> fragments/verify-link.html }}
+  </section>
+
+  <section class="card visible-faq" aria-labelledby="wire-colour-faq-heading">
+    <h2 id="wire-colour-faq-heading">{{wireColour.faqHeading}}</h2>
+    <dl>
+      <div>
+        <dt>{{wireColour.neutralQuestion}}</dt>
+        <dd>{{wireColour.neutralAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{wireColour.bondQuestion}}</dt>
+        <dd>{{wireColour.bondAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{wireColour.circuitQuestion}}</dt>
+        <dd>{{wireColour.circuitAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{wireColour.highLegQuestion}}</dt>
+        <dd>{{wireColour.highLegAnswer}}</dd>
+      </div>
+      <div>
+        <dt>{{wireColour.existingQuestion}}</dt>
+        <dd>{{wireColour.existingAnswer}}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:wireColour.neutralQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:wireColour.neutralAnswer}}"}},{"@type":"Question","name":"{{json:wireColour.bondQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:wireColour.bondAnswer}}"}},{"@type":"Question","name":"{{json:wireColour.circuitQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:wireColour.circuitAnswer}}"}},{"@type":"Question","name":"{{json:wireColour.highLegQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:wireColour.highLegAnswer}}"}},{"@type":"Question","name":"{{json:wireColour.existingQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:wireColour.existingAnswer}}"}}]}</script>
+
+</main>

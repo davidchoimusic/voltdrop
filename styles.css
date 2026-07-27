@@ -19,6 +19,19 @@
   --color-accent-ink: #1c1002; /* near-black on orange: 9.6:1 */
   --color-hazard: #ffc814;     /* hazard yellow */
 
+  /* Conductor swatches are the subject of the wire-colour tool. They sit
+     beside text labels and never carry text themselves. */
+  --wire-black: #121212;
+  --wire-red: #d83b44;
+  --wire-blue: #2e75c7;
+  --wire-white: #f4f5f6;
+  --wire-grey: #9299a1;
+  --wire-green: #198754;
+  --wire-yellow: #f2c94c;
+  --wire-brown: #855437;
+  --wire-orange: #e86f1c;
+  --wire-bare: #b87333;
+
   --verdict-good-bg: #16311f;
   --verdict-good-ink: #9fe0b3;   /* 8.9:1 on its bg */
   --verdict-good-bar: #3dbb68;
@@ -1062,6 +1075,174 @@ select:disabled {
   color: var(--color-ink-soft);
   font-size: 14.5px;
   line-height: 1.6;
+}
+
+/* ========================================================================
+   Wire Colour — named swatches and high-leg border crossing
+   ======================================================================== */
+.wire-mode-tabs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.wire-country-scope {
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--color-hazard);
+}
+
+.wire-input-error {
+  color: var(--verdict-bad-ink);
+  font-weight: 700;
+}
+
+.wire-delta-callout {
+  border: 2px solid var(--color-hazard);
+  background: var(--verdict-warn-bg);
+  color: var(--verdict-warn-ink);
+}
+
+.wire-delta-callout h2 {
+  margin: var(--space-1) 0 var(--space-2);
+  color: var(--color-ink);
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.wire-delta-callout p {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.wire-delta-kicker {
+  display: block;
+  color: var(--color-hazard);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wire-results {
+  border-color: var(--color-line-strong);
+}
+
+.wire-answer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: 150px;
+  padding: var(--space-5);
+  background: var(--color-surface-2);
+  border-left: 8px solid var(--color-accent);
+}
+
+.wire-answer-copy {
+  min-width: 0;
+}
+
+.wire-answer-eyebrow {
+  margin-bottom: var(--space-1);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wire-answer .big-number {
+  font-size: clamp(34px, 9vw, 52px);
+}
+
+.wire-swatch-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.wire-swatch {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border: 4px solid var(--color-ink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--color-bg);
+}
+
+.wire-swatch + .wire-swatch {
+  margin-left: -30px;
+}
+
+.wire-swatch--black { background: var(--wire-black); }
+.wire-swatch--red { background: var(--wire-red); }
+.wire-swatch--blue { background: var(--wire-blue); }
+.wire-swatch--white { background: var(--wire-white); }
+.wire-swatch--grey { background: var(--wire-grey); }
+.wire-swatch--green { background: var(--wire-green); }
+.wire-swatch--brown { background: var(--wire-brown); }
+.wire-swatch--orange { background: var(--wire-orange); }
+.wire-swatch--yellow { background: var(--wire-yellow); }
+.wire-swatch--bare { background: var(--wire-bare); }
+.wire-swatch--green-yellow {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--wire-green) 0 14px,
+    var(--wire-yellow) 14px 24px
+  );
+}
+
+.wire-result-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-line);
+}
+
+.wire-result-rule .verdict-badge {
+  flex: 0 0 auto;
+  color: var(--color-hazard);
+}
+
+.wire-result-rule p {
+  margin: 1px 0 0;
+  color: var(--color-ink);
+  font-size: 14px;
+}
+
+.wire-meter-line {
+  margin: 0;
+  padding: var(--space-3) var(--space-5);
+  color: var(--color-ink);
+  background: var(--verdict-warn-bg);
+  border-top: 1px solid var(--color-line);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .wire-answer {
+    align-items: flex-start;
+    gap: var(--space-4);
+    min-height: 132px;
+    padding: var(--space-4);
+  }
+
+  .wire-swatch {
+    width: 58px;
+    height: 58px;
+  }
+
+  .wire-swatch + .wire-swatch {
+    margin-left: -28px;
+  }
+
+  .wire-result-rule {
+    flex-direction: column;
+    padding: var(--space-4);
+  }
+
+  .wire-meter-line {
+    padding: var(--space-3) var(--space-4);
+  }
 }
 
 /* Guides */
