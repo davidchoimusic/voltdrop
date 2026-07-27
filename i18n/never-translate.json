@@ -38,6 +38,7 @@
     "Chapter 9 Table 5",
     "NEC Chapter 9",
     "Rule 12-3034",
+    "Rule 12-910",
     "Rule 14-104",
     "Rule 4-006",
     "Rule 8-102",
@@ -48,9 +49,13 @@
     "Table 5",
     "Table 5A",
     "Table 5C",
+    "Table 6A",
+    "Table 6K",
     "Table 68",
+    "Table 8",
     "Table D3",
-    "Tables 6A–6K"
+    "Tables 6A–6K",
+    "Tables 9A–9H"
   ],
   "wireAndCableDesignations": [
     "AA-8000",

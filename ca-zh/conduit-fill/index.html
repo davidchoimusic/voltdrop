@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>导管填充 — CEC 规划检查 | VoltDrop</title>
-<meta name="description" content="加拿大导管填充规划检查。显示CEC的53/31/40%限值，并明确警告封存的导线面积和公称尺寸数据仍为NEC专用数据。">
+<title>导管填充计算器 — CEC Rule 12-910 | VoltDrop</title>
+<meta name="description" content="加拿大导管填充计算器，采用CSA C22.1:24 Tables 6A/6K和9A–9H以及Rule 12-910填充限值，适用于EMT或硬质PVC内的RW90和T90导线。">
 <link rel="canonical" href="https://voltdrop.app/ca-zh/conduit-fill/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/conduit-fill/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/conduit-fill/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="导管填充 — CEC 规划检查 | VoltDrop">
-<meta property="og:description" content="加拿大导管填充规划检查。显示CEC的53/31/40%限值，并明确警告封存的导线面积和公称尺寸数据仍为NEC专用数据。">
+<meta property="og:title" content="导管填充计算器 — CEC Rule 12-910 | VoltDrop">
+<meta property="og:description" content="加拿大导管填充计算器，采用CSA C22.1:24 Tables 6A/6K和9A–9H以及Rule 12-910填充限值，适用于EMT或硬质PVC内的RW90和T90导线。">
 <meta property="og:url" content="https://voltdrop.app/ca-zh/conduit-fill/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="导管填充 — CEC 规划检查 | VoltDrop">
-<meta name="twitter:description" content="加拿大导管填充规划检查。显示CEC的53/31/40%限值，并明确警告封存的导线面积和公称尺寸数据仍为NEC专用数据。">
+<meta name="twitter:title" content="导管填充计算器 — CEC Rule 12-910 | VoltDrop">
+<meta name="twitter:description" content="加拿大导管填充计算器，采用CSA C22.1:24 Tables 6A/6K和9A–9H以及Rule 12-910填充限值，适用于EMT或硬质PVC内的RW90和T90导线。">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop导管填充计算器","url":"https://voltdrop.app/ca-zh/conduit-fill/","description":"加拿大导管填充规划检查。显示CEC的53/31/40%限值，并明确警告封存的导线面积和公称尺寸数据仍为NEC专用数据。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop导管填充计算器","url":"https://voltdrop.app/ca-zh/conduit-fill/","description":"加拿大导管填充计算器，采用CSA C22.1:24 Tables 6A/6K和9A–9H以及Rule 12-910填充限值，适用于EMT或硬质PVC内的RW90和T90导线。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
@@ -166,7 +166,7 @@
     <h1 class="tool-title">🚇 导管填充</h1>
     <p class="tool-sub">您的导线需要多大的导管？请输入要穿入的导线，即可获得最小合规规格。</p>
   </div>
-<div class="ca-note"><strong>加拿大 / CEC 规划说明：</strong>CEC Rule 12-910 和 Table 8 使用相同的53/31/40%填充比例。但是，本工具仍使用THHN/THWN导体面积和NEC公称尺寸数据，因为加拿大Tables 6A–6K和9的数据尚未通过我们的验证。请勿将导管尺寸结果作为加拿大安装的最终依据；应对照CEC或向当地检查机构确认。</div>
+  <div class="ca-note" id="conduit-country-note" hidden>加拿大数据来源：CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024)。本计算器采用Tables 6A/6K中的导线面积、Tables 9A–9H中的EMT和硬质PVC内径，以及Rule 12-910和Table 8中的填充限值。各省采用时间和修订内容不同；请确认当地采用的版本。</div>
 
   <form id="fill-form" class="card" autocomplete="off">
 
@@ -174,14 +174,14 @@
       <label class="field-label">导管类型</label>
       <div class="seg" role="group" aria-label="导管类型">
         <button type="button" class="seg-btn active" data-conduit="emt">EMT（金属）</button>
-        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">硬质PVC</button>
       </div>
-      <p class="hint">EMT是常用的薄壁金属管。PVC Sch 40是灰色塑料导管。</p>
+      <p class="hint">EMT是常用的薄壁金属管。硬质PVC是塑料导管选项。</p>
     </div>
 
     <div class="field">
       <div class="mixed-wire-head">
-        <span class="field-label" id="fill-size-heading">导线规格（线规）（THHN / THWN）</span>
+        <span class="field-label" id="fill-size-heading">导线规格（线规）</span>
         <span class="field-label" id="fill-count-heading">数量</span>
       </div>
       <div class="mixed-wire-rows" id="fill-rows">
@@ -193,13 +193,13 @@
       </div>
       <template id="fill-row-template">
         <div class="mixed-wire-row">
-          <select class="mixed-wire-size" aria-label="导线规格（线规）（THHN / THWN）"></select>
+          <select class="mixed-wire-size" aria-label="导线规格（线规）"></select>
           <input type="number" class="mixed-wire-count" aria-label="导线数量" inputmode="numeric" min="1" max="60" step="1" placeholder="例如3" required>
           <button type="button" class="remove-size-btn" aria-label="删除此规格" title="删除此规格">×</button>
         </div>
       </template>
       <button type="button" class="add-size-btn" id="fill-add-row">+ 添加另一种规格</button>
-      <p class="hint">规格适用于标准THHN/THWN绝缘建筑导线，也就是导管内最常见的单芯导线。</p>
+      <p class="hint">RW90导线面积来自CSA C22.1:24 Table 6A；T90导线面积来自Table 6K。请在上方选择导线类型。</p>
       <p class="hint">请计算导管内的每根绝缘导线，包括中性线和绝缘接地导线。每种规格单独使用一行。</p>
     </div>
 
@@ -223,11 +223,11 @@
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "导管最多可以填充多少？", "acceptedAnswer": {"@type": "Answer", "text": "根据CEC Rule 12-910和Table 8，一根导线最多可占线槽内部面积的53%，两根导线为31%，三根或更多导线为40%。本规划工具使用这些比例，但导线面积和公称尺寸表仍为NEC专用数据，加拿大工程必须另行确认。"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "导管最多可以填充多少？", "acceptedAnswer": {"@type": "Answer", "text": "根据CEC Rule 12-910和Table 8，一根导线最多可占线槽内部面积的53%，两根导线为31%，三根或更多导线为40%。本计算器采用CSA C22.1:24中经过核验的加拿大导线面积和导管内径。"}}]}</script>
   <section class="card explainer">
     <h2>导管填充规则</h2>
     <p>导管内必须留有空间。CEC Rule 12-910和Table 8的限值是：一根导线最多可占 <strong>53%</strong> 的导管内部面积；两根导线可占 <strong>31%</strong>，三根或更多导线 <strong>40%</strong>。我们使用官方导线和导管尺寸为您完成面积计算。</p>
-    <p><strong>提示：</strong> 线路较长或弯头较多时，使用比计算最小值大一档的导管更容易穿线。加拿大工程在安装前必须对照CEC Tables 6A–6K和9确认导线面积及公制公称尺寸。</p>
+    <p><strong>提示：</strong> 线路较长或弯头较多时，使用比合规最小值大一档的导管更容易穿线；许多电工会主动增大规格。</p>
     <p>想知道为什么可以信任这个结果吗？ <a class="inline-link" href="/how-we-verify/">了解 VoltDrop 如何核查计算数据</a>.</p>
   </section>
 
@@ -255,6 +255,6 @@
 </footer>
 
 <script src="/assets/ca-zh/common.js?v=a9a7b11990"></script>
-<script src="/assets/ca-zh/conduit.js?v=8860988e93"></script>
+<script src="/assets/ca-zh/conduit.js?v=37e337f9a1"></script>
 </body>
 </html>

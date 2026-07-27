@@ -9,6 +9,8 @@
   "ampacity.js:CEC_CONDUCTOR_ADJUSTMENT": "1ac6c154b58edf4bda6649e147d72ded",
   "conduit.js:THHN_AREA": "f4c637777099a09c3a5ecd843fd4b6ed",
   "conduit.js:CONDUIT": "59ffae62a59c83646bdd6a9a75db25bf",
+  "conduit.js:CEC_CONDUCTOR_AREA": "ddb17f107411dfe009cd4a3b8b3fba65",
+  "conduit.js:CEC_CONDUIT": "89eb9c2dd7484aae35c3880d9fe33f95",
   "boxfill.js:VOL_PER_CONDUCTOR": "94fde8ccf746df6275d4f58534b0b08a",
   "boxfill.js:BOXES": "4340e7749fc1870da820f1b6272dba41",
   "boxfill.js:CEC_VOL_ML": "baecdebad442afce4763350c0fc84678",

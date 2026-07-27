@@ -35,7 +35,7 @@ If data has not passed, the page refuses to invent a result. The Canadian condui
 
 US data basis: US ampacity data reflects NEC Table 310.16 and the 310.15(B)(1) correction factors as published in the 2023 edition (NFPA 70). Small-conductor caps come from 240.4(D), conduit fill from Chapter 9 Tables 4 and 5, and box fill from 314.16. These particular tables have been stable across editions. That is why a slightly different adopted edition usually does not change the answer. State and municipal adoption varies; confirm the edition adopted locally.
 
-Canadian data basis: Canadian data reflects CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A, and 5C, with Rules 4-004, 4-006, 8-104, and 14-104. Provincial and municipal adoption varies; confirm the edition adopted locally.
+Canadian data basis: Canadian data reflects CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024): Tables 2/4, 5A, 5C, 6A/6K, and 9A–9H, with Rules 4-004, 4-006, 8-104, 12-910, and 14-104. Provincial and municipal adoption varies; confirm the edition adopted locally.
 
 No licensed electrician reviews or approves VoltDrop. Nobody here is holding a licence over this work. If a page ever claims otherwise, it's wrong — tell us.
 
@@ -80,7 +80,7 @@ Does not answer: It does not calculate voltage drop. A conductor must pass both 
 URL: https://voltdrop.app/conduit-fill/
 Question: What is the smallest conduit that has legal physical space for the entered conductor mix?
 Answer: Free conduit fill calculator: THHN wire count and size in, smallest legal EMT or PVC Schedule 40 conduit out — using the official NEC Chapter 9 tables and 53/31/40% fill limits.
-Does not answer: It does not check ampacity, voltage drop, box fill, pulling difficulty, or every installation condition. Canadian conduit-fill planning check. CEC 53/31/40% limits are shown, with a clear warning that the sealed conductor and trade-size data is still NEC-specific.
+Does not answer: It does not check ampacity, voltage drop, box fill, pulling difficulty, or every installation condition. Canadian conduit fill calculator using CSA C22.1:24 Tables 6A/6K and 9A–9H with Rule 12-910 fill limits for RW90 and T90 in EMT or rigid PVC.
 
 ### Box Fill Calculator
 

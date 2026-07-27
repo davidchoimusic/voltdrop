@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conduit Fill Calculator — CEC planning check | VoltDrop</title>
-<meta name="description" content="Canadian conduit-fill planning check. CEC 53/31/40% limits are shown, with a clear warning that the sealed conductor and trade-size data is still NEC-specific.">
+<title>Conduit Fill Calculator — CEC Rule 12-910 | VoltDrop</title>
+<meta name="description" content="Canadian conduit fill calculator using CSA C22.1:24 Tables 6A/6K and 9A–9H with Rule 12-910 fill limits for RW90 and T90 in EMT or rigid PVC.">
 <link rel="canonical" href="https://voltdrop.app/ca/conduit-fill/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/conduit-fill/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/conduit-fill/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Conduit Fill Calculator — CEC planning check | VoltDrop">
-<meta property="og:description" content="Canadian conduit-fill planning check. CEC 53/31/40% limits are shown, with a clear warning that the sealed conductor and trade-size data is still NEC-specific.">
+<meta property="og:title" content="Conduit Fill Calculator — CEC Rule 12-910 | VoltDrop">
+<meta property="og:description" content="Canadian conduit fill calculator using CSA C22.1:24 Tables 6A/6K and 9A–9H with Rule 12-910 fill limits for RW90 and T90 in EMT or rigid PVC.">
 <meta property="og:url" content="https://voltdrop.app/ca/conduit-fill/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Conduit Fill Calculator — CEC planning check | VoltDrop">
-<meta name="twitter:description" content="Canadian conduit-fill planning check. CEC 53/31/40% limits are shown, with a clear warning that the sealed conductor and trade-size data is still NEC-specific.">
+<meta name="twitter:title" content="Conduit Fill Calculator — CEC Rule 12-910 | VoltDrop">
+<meta name="twitter:description" content="Canadian conduit fill calculator using CSA C22.1:24 Tables 6A/6K and 9A–9H with Rule 12-910 fill limits for RW90 and T90 in EMT or rigid PVC.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Conduit Fill Calculator","url":"https://voltdrop.app/ca/conduit-fill/","description":"Canadian conduit-fill planning check. CEC 53/31/40% limits are shown, with a clear warning that the sealed conductor and trade-size data is still NEC-specific.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Conduit Fill Calculator","url":"https://voltdrop.app/ca/conduit-fill/","description":"Canadian conduit fill calculator using CSA C22.1:24 Tables 6A/6K and 9A–9H with Rule 12-910 fill limits for RW90 and T90 in EMT or rigid PVC.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
@@ -166,7 +166,7 @@
     <h1 class="tool-title">🚇 Conduit Fill</h1>
     <p class="tool-sub">How big a conduit do you need for your wires? Enter what you're pulling, get the smallest legal size.</p>
   </div>
-<div class="ca-note"><strong>Canada / CEC planning note:</strong> CEC Rule 12-910 and Table 8 use the same 53/31/40% fill percentages shown here. However, this tool still uses THHN/THWN conductor areas and NEC trade-size data because the Canadian Tables 6A–6K and 9 values have not passed our verification gate. Do not use its conduit-size result as the final basis for a Canadian installation; confirm it against the CEC or your inspection authority.</div>
+  <div class="ca-note" id="conduit-country-note" hidden>Canadian source: CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024). This calculator uses conductor areas from Tables 6A/6K, EMT and rigid PVC internal diameters from Tables 9A–9H, and the fill limits in Rule 12-910 and Table 8. Provincial adoption and amendments vary; confirm the edition adopted locally.</div>
 
   <form id="fill-form" class="card" autocomplete="off">
 
@@ -174,14 +174,14 @@
       <label class="field-label">Conduit type</label>
       <div class="seg" role="group" aria-label="Conduit type">
         <button type="button" class="seg-btn active" data-conduit="emt">EMT (metal)</button>
-        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">Rigid PVC</button>
       </div>
-      <p class="hint">EMT is the common thin-wall metal tubing. PVC Sch 40 is the gray plastic conduit.</p>
+      <p class="hint">EMT is the common thin-wall metal tubing. Rigid PVC is the plastic conduit option.</p>
     </div>
 
     <div class="field">
       <div class="mixed-wire-head">
-        <span class="field-label" id="fill-size-heading">Wire size (THHN / THWN)</span>
+        <span class="field-label" id="fill-size-heading">Wire size</span>
         <span class="field-label" id="fill-count-heading">Quantity</span>
       </div>
       <div class="mixed-wire-rows" id="fill-rows">
@@ -193,13 +193,13 @@
       </div>
       <template id="fill-row-template">
         <div class="mixed-wire-row">
-          <select class="mixed-wire-size" aria-label="Wire size (THHN / THWN)"></select>
+          <select class="mixed-wire-size" aria-label="Wire size"></select>
           <input type="number" class="mixed-wire-count" aria-label="How many wires" inputmode="numeric" min="1" max="60" step="1" placeholder="e.g. 3" required>
           <button type="button" class="remove-size-btn" aria-label="Remove this size" title="Remove this size">×</button>
         </div>
       </template>
       <button type="button" class="add-size-btn" id="fill-add-row">+ Add another size</button>
-      <p class="hint">Sizes are for standard THHN/THWN insulated building wire — the most common single-conductor wire pulled in conduit.</p>
+      <p class="hint">RW90 conductor areas come from CSA C22.1:24 Table 6A; T90 conductor areas come from Table 6K. Select the conductor type above.</p>
       <p class="hint">Count every insulated wire in the pipe, including the neutral and an insulated ground. Use a separate row for each size.</p>
     </div>
 
@@ -223,11 +223,11 @@
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How full can a conduit be?", "acceptedAnswer": {"@type": "Answer", "text": "Under CEC Rule 12-910 and Table 8, one conductor may fill 53% of a raceway's internal area, two conductors 31%, and three or more 40%. This planning tool applies those percentages, but its conductor-area and trade-size tables remain NEC-specific and must be confirmed for Canadian work."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How full can a conduit be?", "acceptedAnswer": {"@type": "Answer", "text": "Under CEC Rule 12-910 and Table 8, one conductor may fill 53% of a raceway's internal area, two conductors 31%, and three or more 40%. This calculator uses verified Canadian conductor areas and conduit internal diameters from CSA C22.1:24."}}]}</script>
   <section class="card explainer">
     <h2>The fill rules, in plain English</h2>
     <p>Conductors need free space in a conduit. The CEC Rule 12-910 / Table 8 limits are: one conductor may fill <strong>53%</strong> of the pipe's inside area, two wires <strong>31%</strong>, and three or more <strong>40%</strong>. We do that area math for you using the official wire and conduit dimensions.</p>
-    <p><strong>Good to know:</strong> long runs with many bends are easier with a size larger than the calculated minimum. For Canadian work, confirm conductor areas and metric trade sizes against CEC Tables 6A–6K and 9 before installation.</p>
+    <p><strong>Good to know:</strong> long runs with many bends are easier with a size larger than the legal minimum — many electricians upsize on purpose.</p>
     <p>Want to know why you should trust this result? <a class="inline-link" href="/how-we-verify/">Read how VoltDrop checks its numbers</a>.</p>
   </section>
 
@@ -255,6 +255,6 @@
 </footer>
 
 <script src="/assets/ca-en/common.js?v=5235937ab1"></script>
-<script src="/assets/ca-en/conduit.js?v=887da20d88"></script>
+<script src="/assets/ca-en/conduit.js?v=0a473064d3"></script>
 </body>
 </html>

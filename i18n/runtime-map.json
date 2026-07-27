@@ -634,7 +634,37 @@
       "quote": "'"
     },
     {
+      "key": "runtime.conduit.n450Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
       "key": "runtime.conduit.n500Kcmil",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.conductorTypeLabel",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.conductorTypeHint",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.rigidPvc",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.tableN6A",
+      "kind": "quoted",
+      "quote": "'"
+    },
+    {
+      "key": "runtime.conduit.tableN6K",
       "kind": "quoted",
       "quote": "'"
     },

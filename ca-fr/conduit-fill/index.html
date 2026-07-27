@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remplissage de conduit — vérification préliminaire CEC | VoltDrop</title>
-<meta name="description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<title>Remplissage de conduit — CEC Rule 12-910 | VoltDrop</title>
+<meta name="description" content="Calculateur canadien de remplissage de conduit utilisant CSA C22.1:24 Tables 6A/6K et 9A–9H avec les limites de Rule 12-910 pour RW90 et T90 dans un conduit EMT ou en PVC rigide.">
 <link rel="canonical" href="https://voltdrop.app/ca-fr/conduit-fill/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/conduit-fill/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/conduit-fill/">
@@ -17,18 +17,18 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Remplissage de conduit — vérification préliminaire CEC | VoltDrop">
-<meta property="og:description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<meta property="og:title" content="Remplissage de conduit — CEC Rule 12-910 | VoltDrop">
+<meta property="og:description" content="Calculateur canadien de remplissage de conduit utilisant CSA C22.1:24 Tables 6A/6K et 9A–9H avec les limites de Rule 12-910 pour RW90 et T90 dans un conduit EMT ou en PVC rigide.">
 <meta property="og:url" content="https://voltdrop.app/ca-fr/conduit-fill/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Remplissage de conduit — vérification préliminaire CEC | VoltDrop">
-<meta name="twitter:description" content="Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.">
+<meta name="twitter:title" content="Remplissage de conduit — CEC Rule 12-910 | VoltDrop">
+<meta name="twitter:description" content="Calculateur canadien de remplissage de conduit utilisant CSA C22.1:24 Tables 6A/6K et 9A–9H avec les limites de Rule 12-910 pour RW90 et T90 dans un conduit EMT ou en PVC rigide.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de remplissage de conduit VoltDrop","url":"https://voltdrop.app/ca-fr/conduit-fill/","description":"Vérification canadienne préliminaire du remplissage de conduit. Les limites CEC de 53/31/40% sont indiquées, avec un avertissement clair que les données scellées sur les aires de conducteurs et les diamètres commerciaux demeurent propres au NEC.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de remplissage de conduit VoltDrop","url":"https://voltdrop.app/ca-fr/conduit-fill/","description":"Calculateur canadien de remplissage de conduit utilisant CSA C22.1:24 Tables 6A/6K et 9A–9H avec les limites de Rule 12-910 pour RW90 et T90 dans un conduit EMT ou en PVC rigide.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
 <link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
@@ -166,7 +166,7 @@
     <h1 class="tool-title">🚇 Remplissage de conduit</h1>
     <p class="tool-sub">Quel diamètre de conduit faut-il pour vos conducteurs? Entrez ce que vous tirez pour obtenir le plus petit diamètre permis.</p>
   </div>
-<div class="ca-note"><strong>Note de planification Canada / CEC :</strong> la CEC Rule 12-910 et la Table 8 utilisent les mêmes pourcentages de remplissage de 53/31/40%. Toutefois, cet outil utilise encore les aires de conducteurs THHN/THWN et les dimensions commerciales NEC, car les valeurs canadiennes des Tables 6A–6K et 9 n’ont pas franchi notre vérification. N’utilisez pas le résultat de diamètre comme base finale d’une installation canadienne; confirmez-le dans le CEC ou auprès de l’autorité d’inspection.</div>
+  <div class="ca-note" id="conduit-country-note" hidden>Source canadienne : CSA C22.1:24 — Canadian Electrical Code, Part I, 26th edition (2024). Ce calculateur utilise les aires de conducteurs de Tables 6A/6K, les diamètres intérieurs des conduits EMT et en PVC rigide de Tables 9A–9H, ainsi que les limites de remplissage de Rule 12-910 et Table 8. L’adoption provinciale et les modifications varient; confirmez l’édition adoptée localement.</div>
 
   <form id="fill-form" class="card" autocomplete="off">
 
@@ -174,14 +174,14 @@
       <label class="field-label">Type de conduit</label>
       <div class="seg" role="group" aria-label="Type de conduit">
         <button type="button" class="seg-btn active" data-conduit="emt">EMT (métal)</button>
-        <button type="button" class="seg-btn" data-conduit="pvc40">PVC Schedule 40</button>
+        <button type="button" class="seg-btn" data-conduit="pvc40">PVC rigide</button>
       </div>
-      <p class="hint">EMT est le conduit métallique à paroi mince courant. PVC Sch 40 est le conduit de plastique gris.</p>
+      <p class="hint">EMT est le conduit métallique à paroi mince courant. Le PVC rigide est l’option de conduit en plastique.</p>
     </div>
 
     <div class="field">
       <div class="mixed-wire-head">
-        <span class="field-label" id="fill-size-heading">Calibre du conducteur (THHN / THWN)</span>
+        <span class="field-label" id="fill-size-heading">Calibre du conducteur</span>
         <span class="field-label" id="fill-count-heading">Quantité</span>
       </div>
       <div class="mixed-wire-rows" id="fill-rows">
@@ -193,13 +193,13 @@
       </div>
       <template id="fill-row-template">
         <div class="mixed-wire-row">
-          <select class="mixed-wire-size" aria-label="Calibre du conducteur (THHN / THWN)"></select>
+          <select class="mixed-wire-size" aria-label="Calibre du conducteur"></select>
           <input type="number" class="mixed-wire-count" aria-label="Nombre de conducteurs" inputmode="numeric" min="1" max="60" step="1" placeholder="p. ex. 3" required>
           <button type="button" class="remove-size-btn" aria-label="Retirer ce calibre" title="Retirer ce calibre">×</button>
         </div>
       </template>
       <button type="button" class="add-size-btn" id="fill-add-row">+ Ajouter un autre calibre</button>
-      <p class="hint">Les dimensions correspondent aux conducteurs de bâtiment standards isolés THHN/THWN, le type de conducteur simple le plus souvent tiré dans un conduit.</p>
+      <p class="hint">Les aires des conducteurs RW90 proviennent de CSA C22.1:24 Table 6A; celles des conducteurs T90 proviennent de Table 6K. Sélectionnez le type de conducteur ci-dessus.</p>
       <p class="hint">Comptez chaque conducteur isolé dans le conduit, y compris le neutre et tout conducteur de mise à la terre isolé. Utilisez une ligne distincte pour chaque calibre.</p>
     </div>
 
@@ -223,11 +223,11 @@
     </details>
   </section>
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel taux de remplissage un conduit peut-il avoir?", "acceptedAnswer": {"@type": "Answer", "text": "Selon CEC Rule 12-910 et Table 8, un conducteur peut occuper 53% de l’aire intérieure d’une canalisation; deux conducteurs, 31%; et trois conducteurs ou plus, 40%. Cet outil de planification applique ces pourcentages, mais les tableaux d’aires de conducteurs et de diamètres commerciaux demeurent propres au NEC et doivent être confirmés pour les travaux canadiens."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel taux de remplissage un conduit peut-il avoir?", "acceptedAnswer": {"@type": "Answer", "text": "Selon CEC Rule 12-910 et Table 8, un conducteur peut occuper 53% de l’aire intérieure d’une canalisation; deux conducteurs, 31%; et trois conducteurs ou plus, 40%. Ce calculateur utilise les aires de conducteurs et les diamètres intérieurs de conduits canadiens vérifiés de CSA C22.1:24."}}]}</script>
   <section class="card explainer">
     <h2>Règles de remplissage en langage clair</h2>
     <p>Les conducteurs ont besoin d’espace libre dans le conduit. Les limites de CEC Rule 12-910 et Table 8 sont les suivantes : un conducteur peut occuper <strong>53%</strong> de l’aire intérieure du conduit; deux conducteurs <strong>31%</strong>, et trois conducteurs ou plus <strong>40%</strong>. Nous faisons ce calcul d’aire avec les dimensions officielles du conducteur et du conduit.</p>
-    <p><strong>Bon à savoir :</strong> les longs parcours avec plusieurs coudes se tirent plus facilement dans un diamètre supérieur au minimum calculé. Pour les travaux canadiens, confirmez les aires de conducteurs et les diamètres commerciaux métriques dans CEC Tables 6A–6K et 9 avant l’installation.</p>
+    <p><strong>Bon à savoir :</strong> les longs parcours avec plusieurs coudes se tirent plus facilement dans un diamètre supérieur au minimum permis; plusieurs électriciens augmentent volontairement le diamètre.</p>
     <p>Vous voulez savoir pourquoi faire confiance à ce résultat? <a class="inline-link" href="/how-we-verify/">Voyez comment VoltDrop vérifie ses chiffres</a>.</p>
   </section>
 
@@ -255,6 +255,6 @@
 </footer>
 
 <script src="/assets/ca-fr/common.js?v=e1f07ce4f0"></script>
-<script src="/assets/ca-fr/conduit.js?v=c05ab651ec"></script>
+<script src="/assets/ca-fr/conduit.js?v=07603a5e0d"></script>
 </body>
 </html>

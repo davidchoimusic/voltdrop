@@ -33,7 +33,7 @@ Trust is the product. Six commitments make it concrete.
    Disagreement stops publication. This establishes the source value before
    software automation is allowed to protect it.
 
-2. **A seal protects checked data from drift.** Thirteen live electrical tables
+2. **A seal protects checked data from drift.** Fifteen live electrical tables
    are fingerprinted. A one-digit change stops the verification suite before
    its browser checks and reports the mismatch. Re-verification and updating
    the stored fingerprint remain deliberate human steps; the seal cannot
@@ -42,15 +42,17 @@ Trust is the product. Six commitments make it concrete.
    multi-source check and the seal are separate because they answer separate
    questions.
 
-3. **A boundary can be a label or a refusal.** Missing evidence must not become
-   a plausible-looking result presented under the wrong authority. Canadian
-   conduit fill computes with sealed US conductor areas and US trade sizes,
-   but a prominent planning note refuses to present that output as a Canadian
-   code answer and requires confirmation against CEC Tables 6A–6K and 9. Null
-   ambient cells remain “not permitted.” Three-phase resistance refuses the
-   missing wye/delta assumption. The response should match the boundary the
-   product actually implements: label borrowed data plainly, and refuse where
-   a missing assumption prevents a defensible calculation.
+3. **A boundary can be a label, a refusal, or a verified country fork.** Missing
+   evidence must not become a plausible-looking result presented under the
+   wrong authority. Canadian conduit fill used to label its borrowed US
+   conductor areas and trade sizes. Once CSA C22.1:24 Tables 6A/6K and 9A–9H
+   passed the verification gate, that label was removed and the engine gained
+   a separate sealed Canadian path. Null ambient cells remain “not permitted.”
+   Three-phase resistance refuses the missing wye/delta assumption. The
+   response should match the boundary the product actually implements: label
+   borrowed data plainly, refuse where a missing assumption prevents a
+   defensible calculation, and remove a warning only when verified data
+   replaces the gap.
 
 4. **Show calculations in the order the rule operates.** Ampacity starts in
    the insulation column, applies heat factors, then applies termination,
@@ -121,6 +123,13 @@ hints follow the selected system; a three-phase line-to-line instruction is
 hidden for DC and single-phase because even harmless-looking static help can
 misstate the task in front of the user.
 
+Country-specific conduit fill is a real data fork, not translated decoration.
+The US edition keeps THHN areas and NEC trade sizes in square inches. Canadian
+editions default to RW90, offer T90, derive raceway area from CEC internal
+diameters in square millimetres, and display each metric designator beside its
+imperial equivalent. The shared 53/31/40% fill percentages do not justify
+sharing the conductor or raceway tables.
+
 The wire-size page answers one bounded question: conductor size for heat and
 distance. It reports the ampacity minimum, voltage-drop minimum, governing
 conductor, listed-size movement, amp headroom, and percentage-point voltage
@@ -173,6 +182,12 @@ confirms country copy, localization, and fragment composition.
   4 match NEC Table 310.16 in the supported 60/75/90°C cells, so one base
   dataset is honest. The harmonization does not extend to free-air tables or
   the rules applied after lookup.
+
+- **Matching percentages can hide unsafe input divergence.** CEC and NEC both
+  use 53/31/40% conduit-fill limits, but 12 AWG RW90 occupies 11.6 mm² and
+  metric 16 EMT provides only 74.51 mm² at 40%. Reusing the smaller THHN area
+  and larger NEC raceway area overstated the capacity from six conductors to
+  nine. Country selection must happen before either input table is chosen.
 
 - **The largest country divergence can occur after a shared value.** At ten
   countable conductors, CEC Table 5C uses 0.70 while NEC Table 310.15(C)(1)
@@ -244,9 +259,6 @@ confirms country copy, localization, and fragment composition.
 
 - **Jurisdiction adoption:** future edition-sensitive tools may need code-year
   or jurisdiction selection rather than one country-wide implemented edition.
-
-- **Canada conduit fidelity:** Tables 6A–6K and 9 still need full multi-source
-  verification before the US-data planning label can be removed.
 
 - **External language review:** mechanical gates are strong, but a native
   electrician in each language remains the best check of trade idiom.
