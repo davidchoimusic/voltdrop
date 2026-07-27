@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop电压降计算器","url":"https://voltdrop.app/ca-zh/","description":"免费CEC铜导线和铝导线电压降计算器。明确输入单程距离（仅去程），按照Rule 8-102给出强制限值结果并显示完整计算。","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -204,8 +204,75 @@
       <p class="hint">分支电路或馈线的强制最大值为3%。组合路径的强制最大值为5%。</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>热量与安装条件</h2>
+        <p class="hint">电压降回答距离问题，以下输入回答热量问题。最终导线必须同时通过两项检查。</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">绝缘温度额定值</label>
+        <div class="seg" role="group" aria-label="绝缘温度额定值">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">60°C</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">75°C</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">90°C</button>
+        </div>
+        <p class="hint">起始栏应采用导体的绝缘温度额定值。THHN通常为90°C。这不是端子温度额定值。</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">端子温度额定值</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>请选择端子的实际额定温度</option>
+          <option value="60">60°C</option>
+          <option value="75">75°C</option>
+          <option value="90">90°C</option>
+        </select>
+        <p class="hint">有标记设备：采用其标明的端子温度。无标记设备：若额定不超过100 A或标明适用于#1 AWG及更小导体，则采用60°C；超过该范围采用75°C。Rule 4-006适用于前1.2 m，并允许在其后转换。VoltDrop采用保守的简化方法，在全长范围应用较低上限。</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">环境温度</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">CEC Table 5A仅列出30°C以上的单点环境温度。30°C或以下采用1.00，不给予低温增容。输入位于两个列出温度之间时，本计算器采用下一个更高温度行；绝不插值或向下取整。</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">Rule 4-004规定的应计功率及照明导体</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">根导体</span>
+        </div>
+        <p class="hint">计算绝缘功率及照明导体。接地跨接导体永远不计。控制和信号导体不计；正常平衡电路中仅承载不平衡电流的中性线也不计。承载与相导体相当电流的中性线，或承载非线性负载显著谐波电流的中性线应计。Code未说明备用导体；VoltDrop默认计入已安装的功率或照明备用导体，作为保守解释而非Code原文。当地主管机构可能有不同意见。</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">负载持续时间</label>
+        <div class="seg" role="group" aria-label="负载持续时间">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">非连续负载</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">连续负载 — 标准80%额定设备</button>
+        </div>
+        <p class="hint">对于标准80%额定设备，CEC Rule 8-104将连续负载限制为校正载流量的80%。这是独立检查，不是降容系数。</p>
+        <p class="hint highlight-hint">此是/否选项会把全部输入负载视为连续或非连续负载，不会计算两者混合的情况。</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">计算</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>此导线规格未涵盖的内容</h2>
+    <p><strong>本结果仅按载流量（热量）和电压降（距离）确定导线规格，并不确定整个电路的规格。</strong></p>
+    <ul>
+      <li>断路器及其他过电流保护的规格需要使用尚未通过 VoltDrop 验证门槛的独立规则和表格。本工具不会给出断路器规格。</li>
+      <li>本工具不执行 CEC Section 8 负载计算。上方输入的电流就是本工具检查的负载。</li>
+      <li>导管填充必须计算管道中的每一根导体，包括中性线和接地跨接导体，并且还需要导管类型。这与载流导体数量是不同的计数。 <a class="inline-link" href="/conduit-fill/">打开导管填充工具。</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -217,6 +284,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -260,6 +328,7 @@
 </footer>
 
 <script src="/assets/ca-zh/common.js?v=a9a7b11990"></script>
-<script src="/assets/ca-zh/app.js?v=8a4527121e"></script>
+<script data-wire-size-engine src="/assets/ca-zh/ampacity.js?v=aaf4417e7c"></script>
+<script src="/assets/ca-zh/app.js?v=adf9bd6fa6"></script>
 </body>
 </html>

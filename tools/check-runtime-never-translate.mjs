@@ -9,11 +9,17 @@ export const checkRuntimeNeverTranslate = () => {
   const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
   const runtimeFiles = Object.keys(JSON.parse(readFileSync('i18n/runtime-map.json', 'utf8')));
   const localizedEditions = ['us-es', 'us-zh', 'ca-fr', 'ca-zh'];
+  const englishTwin = {
+    'us-es': '',
+    'us-zh': '',
+    'ca-fr': 'assets/ca-en/',
+    'ca-zh': 'assets/ca-en/',
+  };
   const results = [];
 
   for (const edition of localizedEditions) {
     for (const file of runtimeFiles) {
-      const source = readFileSync(file, 'utf8');
+      const source = readFileSync(`${englishTwin[edition]}${file}`, 'utf8');
       const localized = readFileSync(`assets/${edition}/${file}`, 'utf8');
       const mismatch = findNeverTranslateMismatch(source, localized, neverTranslate);
       results.push({

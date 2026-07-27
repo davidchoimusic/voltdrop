@@ -10,7 +10,8 @@
   },
   "strings": {
     "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC Voltage Drop Calculator — full math shown | VoltDrop",
-    "pages.us.wireSize.title": "Wire Size Calculator — NEC voltage drop sizing | VoltDrop",
+    "pages.us.wireSize.title": "Wire Size Calculator — NEC ampacity and voltage drop | VoltDrop",
+    "pages.us.wireSize.description": "Free NEC conductor size calculator for ampacity and voltage drop. See the heat-driven minimum, distance-driven minimum, governing AWG, and separate margins.",
     "pages.us.maxLength.title": "Max Wire Length Calculator — NEC 3%/5% guidance | VoltDrop",
     "pages.us.ampacity.title": "Ampacity Derating Calculator — NEC 310.15 | VoltDrop",
     "pages.us.conduit.title": "Conduit Fill Calculator — NEC Chapter 9 | VoltDrop",
@@ -21,12 +22,15 @@
     "howVerify.reviewedDate": "Last reviewed: July 27, 2026",
     "howVerify.notAffiliatedOrCertified": "VoltDrop is not affiliated with, endorsed by, or approved by NFPA. No calculator is “NEC certified,” including this one. That isn't a thing.",
     "howVerify.localAuthorityDecides": "Your local inspector (AHJ) decides, not us. Confirm the result against the rules actually adopted in your area before you install anything.",
-    "howVerify.dataEdition": "US ampacity data reflects NEC Table 310.16 and the 310.15(B)(1) correction factors as published in the 2023 edition (NFPA 70). Small-conductor caps come from 240.4(D), conduit fill from Chapter 9 Tables 4 and 5, and box fill from 314.16. These particular tables have been stable across editions. That is why a slightly different adopted edition usually does not change the answer. State and municipal adoption varies; confirm the edition adopted locally."
+    "howVerify.dataEdition": "US ampacity data reflects NEC Table 310.16 and the 310.15(B)(1) correction factors as published in the 2023 edition (NFPA 70). Small-conductor caps come from 240.4(D), conduit fill from Chapter 9 Tables 4 and 5, and box fill from 314.16. These particular tables have been stable across editions. That is why a slightly different adopted edition usually does not change the answer. State and municipal adoption varies; confirm the edition adopted locally.",
+    "runtimePatterns.drop.continuousRuleNote": "<strong>NEC continuous load: 125% of the load.</strong> Before: {load} A entered load. After: {load} A × {factor}% = {after} A required ampacity. The switch treats the entire entered load as continuous; it does not model a mixed load.",
+    "runtimePatterns.drop.continuousRuleMath": "<h3>Continuous-load step</h3>\n<div class=\"formula\">Entered load: {load} A\n× {factor}%\n= {after} A required ampacity\n{after} A ≤ {permitted} A permitted ampacity → passes</div>\n<p>The switch treats the entire entered load as continuous; it does not model a mixed load.</p>"
   },
   "localizedStrings": {
     "es": {
       "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "Calculadora de caída de tensión NEC — cálculo completo | VoltDrop",
-      "pages.us.wireSize.title": "Calculadora de calibre del conductor — caída de tensión NEC | VoltDrop",
+      "pages.us.wireSize.title": "Calculadora de calibre del conductor — ampacidad y caída de tensión NEC | VoltDrop",
+      "pages.us.wireSize.description": "Calculadora gratuita NEC de calibre del conductor por ampacidad y caída de tensión. Muestra el mínimo por calor, el mínimo por distancia, el AWG gobernante y márgenes separados.",
       "pages.us.maxLength.title": "Longitud máxima del conductor — recomendación NEC 3%/5% | VoltDrop",
       "pages.us.ampacity.title": "Calculadora de reducción de ampacidad — NEC 310.15 | VoltDrop",
       "pages.us.conduit.title": "Llenado de tubo conduit — NEC Chapter 9 | VoltDrop",
@@ -37,11 +41,14 @@
       "howVerify.reviewedDate": "Última revisión: 27 de julio de 2026",
       "howVerify.notAffiliatedOrCertified": "VoltDrop no está afiliado, respaldado ni aprobado por NFPA. Ninguna calculadora tiene una “certificación NEC”, incluida esta. Esa certificación no existe.",
       "howVerify.localAuthorityDecides": "La decisión corresponde a su inspector local (AHJ), no a nosotros. Antes de instalar, confirme el resultado con las reglas realmente adoptadas en su zona.",
-      "howVerify.dataEdition": "Los datos de ampacidad de US reflejan NEC Table 310.16 y los factores de corrección de 310.15(B)(1) publicados en la edición de 2023 (NFPA 70). Los límites para conductores pequeños provienen de 240.4(D), el llenado de tubo conduit de Chapter 9 Tables 4 y 5, y el llenado de caja de 314.16. Estas tablas en particular se han mantenido estables entre ediciones. Por eso, una edición adoptada un poco distinta normalmente no cambia la respuesta. La adopción estatal y municipal varía; confirme la edición adoptada localmente."
+      "howVerify.dataEdition": "Los datos de ampacidad de US reflejan NEC Table 310.16 y los factores de corrección de 310.15(B)(1) publicados en la edición de 2023 (NFPA 70). Los límites para conductores pequeños provienen de 240.4(D), el llenado de tubo conduit de Chapter 9 Tables 4 y 5, y el llenado de caja de 314.16. Estas tablas en particular se han mantenido estables entre ediciones. Por eso, una edición adoptada un poco distinta normalmente no cambia la respuesta. La adopción estatal y municipal varía; confirme la edición adoptada localmente.",
+      "runtimePatterns.drop.continuousRuleNote": "<strong>Carga continua NEC: 125% de la carga.</strong> Antes: carga ingresada de {load} A. Después: {load} A × {factor}% = {after} A de ampacidad requerida. El interruptor trata toda la carga ingresada como continua; no modela una carga mixta.",
+      "runtimePatterns.drop.continuousRuleMath": "<h3>Paso de carga continua</h3>\n<div class=\"formula\">Carga ingresada: {load} A\n× {factor}%\n= {after} A de ampacidad requerida\n{after} A ≤ {permitted} A de ampacidad permitida → aprueba</div>\n<p>El interruptor trata toda la carga ingresada como continua; no modela una carga mixta.</p>"
     },
     "zh-Hans": {
       "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC 电压降计算器 — 显示完整计算 | VoltDrop",
-      "pages.us.wireSize.title": "导线规格（线规）计算器 — NEC 电压降 | VoltDrop",
+      "pages.us.wireSize.title": "导线规格（线规）计算器 — NEC 载流量与电压降 | VoltDrop",
+      "pages.us.wireSize.description": "免费的 NEC 导线规格计算器，同时检查载流量与电压降，并显示热量最小规格、距离最小规格、最终 AWG 及各自余量。",
       "pages.us.maxLength.title": "导线最大长度计算器 — NEC 3%/5% 建议 | VoltDrop",
       "pages.us.ampacity.title": "载流量降容计算器 — NEC 310.15 | VoltDrop",
       "pages.us.conduit.title": "导管填充计算器 — NEC Chapter 9 | VoltDrop",
@@ -52,7 +59,9 @@
       "howVerify.reviewedDate": "最后审查：2026年7月27日",
       "howVerify.notAffiliatedOrCertified": "VoltDrop 与 NFPA 没有隶属关系，也未获得其背书或认可。任何计算器都不存在“NEC 认证”，本页面也不例外。根本没有这种认证。",
       "howVerify.localAuthorityDecides": "最终决定权在您当地的检查人员（AHJ），不在我们。安装前，请按您所在地区实际采用的规则核对结果。",
-      "howVerify.dataEdition": "美国版载流量数据采用 2023 edition (NFPA 70) 发布的 NEC Table 310.16 和 310.15(B)(1) 修正系数。小导线限制来自 240.4(D)，导管填充来自 Chapter 9 Tables 4 and 5，接线盒填充来自 314.16。这些特定表格在各版之间一直保持稳定，因此当地采用的版本即使略有不同，通常也不会改变答案。各州和市政地区的采用情况不同；请确认当地采用的版本。"
+      "howVerify.dataEdition": "美国版载流量数据采用 2023 edition (NFPA 70) 发布的 NEC Table 310.16 和 310.15(B)(1) 修正系数。小导线限制来自 240.4(D)，导管填充来自 Chapter 9 Tables 4 and 5，接线盒填充来自 314.16。这些特定表格在各版之间一直保持稳定，因此当地采用的版本即使略有不同，通常也不会改变答案。各州和市政地区的采用情况不同；请确认当地采用的版本。",
+      "runtimePatterns.drop.continuousRuleNote": "<strong>NEC 连续负载：按负载的 125% 计算。</strong>调整前：输入负载为 {load} A。调整后：{load} A × {factor}% = {after} A 所需载流量。此开关将全部输入负载视为连续负载；不计算混合负载。",
+      "runtimePatterns.drop.continuousRuleMath": "<h3>连续负载步骤</h3>\n<div class=\"formula\">输入负载：{load} A\n× {factor}%\n= {after} A 所需载流量\n{after} A ≤ {permitted} A 允许载流量 → 通过</div>\n<p>此开关将全部输入负载视为连续负载；不计算混合负载。</p>"
     },
     "fr-CA": {
       "meta.home.voltDropVoltageDropCalculatorThatExplainsItselfTitle": "NEC chute de tension calculateur — calcul complet affiché | VoltDrop",
@@ -65,7 +74,9 @@
       "howVerify.reviewedDate": "Dernière révision : 27 juillet 2026",
       "howVerify.notAffiliatedOrCertified": "VoltDrop n’est ni affilié à NFPA, ni appuyé ou approuvé par cet organisme. Aucun calculateur n’est « certifié NEC », y compris celui-ci. Une telle certification n’existe pas.",
       "howVerify.localAuthorityDecides": "Votre inspecteur local (AHJ) décide, pas nous. Avant toute installation, confirmez le résultat selon les règles réellement adoptées dans votre secteur.",
-      "howVerify.dataEdition": "Les données américaines de courant admissible reflètent NEC Table 310.16 et les facteurs de correction de 310.15(B)(1), tels qu’ils ont été publiés dans la 2023 edition (NFPA 70). Les plafonds pour les petits conducteurs proviennent de 240.4(D), le remplissage de conduit de Chapter 9 Tables 4 and 5 et le remplissage de boîte de 314.16. Ces tableaux précis sont demeurés stables d’une édition à l’autre. C’est pourquoi une édition adoptée légèrement différente ne change habituellement pas la réponse. L’adoption varie selon l’État et la municipalité; confirmez l’édition adoptée localement."
+      "howVerify.dataEdition": "Les données américaines de courant admissible reflètent NEC Table 310.16 et les facteurs de correction de 310.15(B)(1), tels qu’ils ont été publiés dans la 2023 edition (NFPA 70). Les plafonds pour les petits conducteurs proviennent de 240.4(D), le remplissage de conduit de Chapter 9 Tables 4 and 5 et le remplissage de boîte de 314.16. Ces tableaux précis sont demeurés stables d’une édition à l’autre. C’est pourquoi une édition adoptée légèrement différente ne change habituellement pas la réponse. L’adoption varie selon l’État et la municipalité; confirmez l’édition adoptée localement.",
+      "runtimePatterns.drop.continuousRuleNote": "<strong>Charge continue selon le NEC : 125 % de la charge.</strong> Avant : charge saisie de {load} A. Après : {load} A × {factor} % = {after} A de courant admissible requis. Le sélecteur traite toute la charge saisie comme continue; il ne modélise pas une charge mixte.",
+      "runtimePatterns.drop.continuousRuleMath": "<h3>Étape de charge continue</h3>\n<div class=\"formula\">Charge saisie : {load} A\n× {factor} %\n= {after} A de courant admissible requis\n{after} A ≤ {permitted} A de courant admissible permis → réussite</div>\n<p>Le sélecteur traite toute la charge saisie comme continue; il ne modélise pas une charge mixte.</p>"
     }
   }
 }

@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de longueur maximale VoltDrop","url":"https://voltdrop.app/ca-fr/max-wire-length/","description":"Calculateur canadien gratuit de longueur maximale : obtenez la plus grande distance à l’aller (un seul trajet) dans la limite obligatoire de chute de tension de 3% ou 5% du CEC. Cuivre et aluminium, DC et AC.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -204,8 +204,75 @@
       <p class="hint">3% est le maximum obligatoire pour un circuit de dérivation ou une artère. 5% est le maximum obligatoire pour le trajet combiné.</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>Chaleur et conditions d’installation</h2>
+        <p class="hint">La chute de tension répond à la distance. Ces entrées répondent à la chaleur. Le conducteur final doit réussir les deux vérifications.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Température nominale de l’isolant</label>
+        <div class="seg" role="group" aria-label="Température nominale de l’isolant">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">60°C</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">75°C</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">90°C</button>
+        </div>
+        <p class="hint">Utilisez la température nominale de l’isolant du conducteur pour la colonne de départ. THHN est normalement à 90°C. Ce n’est pas la température nominale de la borne.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">Température nominale des bornes</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>Choisissez la température nominale réelle des terminaisons</option>
+          <option value="60">60°C</option>
+          <option value="75">75°C</option>
+          <option value="90">90°C</option>
+        </select>
+        <p class="hint">Équipement marqué : utilisez la température de borne indiquée. Équipement non marqué : utilisez 60°C s’il est d’au plus 100 A ou marqué pour #1 AWG et plus petit; utilisez 75°C au-dessus. Rule 4-006 vise les premiers 1.2 m et permet une transition au-delà. Par prudence, VoltDrop applique la limite inférieure sur toute la longueur comme méthode simplifiée.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">Température ambiante</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">CEC Table 5A ne donne que des points de température au-dessus de 30°C. À 30°C ou moins, le facteur est 1.00, sans crédit pour une température plus fraîche. Entre deux points, ce calculateur prend la ligne supérieure suivante; il n’interpole jamais et n’arrondit jamais vers le bas.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">Conducteurs de puissance et d’éclairage à compter — Rule 4-004</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">conducteurs</span>
+        </div>
+        <p class="hint">Comptez les conducteurs isolés de puissance et d’éclairage. Un conducteur de continuité des masses ne compte jamais. Ne comptez pas les conducteurs de commande ou de signal, ni un neutre qui ne transporte que le courant déséquilibré d’un circuit normalement équilibré. Comptez un neutre qui transporte un courant comparable à celui des phases ou un courant harmonique important provenant de charges non linéaires. Le Code ne précise rien sur les réserves; VoltDrop compte par défaut les réserves de puissance ou d’éclairage installées par prudence, et non comme citation du Code. L’autorité locale peut décider autrement.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Durée de la charge</label>
+        <div class="seg" role="group" aria-label="Durée de la charge">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">Charge non continue</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">Continue — équipement standard coté à 80%</button>
+        </div>
+        <p class="hint">CEC Rule 8-104 limite une charge continue à 80% du courant admissible corrigé avec un équipement standard coté à 80%. Il s’agit d’une vérification distincte, et non d’un facteur de réduction.</p>
+        <p class="hint highlight-hint">Le choix oui/non traite toute la charge saisie comme continue ou non continue. Il ne modélise pas un mélange des deux.</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">Calculer</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>Ce que ce calibre de conducteur ne couvre pas</h2>
+    <p><strong>Ce résultat dimensionne le conducteur selon le courant admissible (chaleur) et la chute de tension (distance). Il ne dimensionne pas le circuit complet.</strong></p>
+    <ul>
+      <li>Le dimensionnement du disjoncteur et des autres protections contre les surintensités utilise des règles et tableaux distincts qui n’ont pas franchi le seuil de vérification de VoltDrop. Aucun calibre de disjoncteur n’est produit ici.</li>
+      <li>Aucun calcul de charge selon la Section 8 du CEC n’est effectué. Le courant saisi ci-dessus est la charge vérifiée par cet outil.</li>
+      <li>Le remplissage de conduit compte chaque conducteur dans la canalisation, y compris le neutre et le conducteur de continuité des masses, et exige aussi le type de conduit. Ce compte diffère de celui des conducteurs porteurs de courant. <a class="inline-link" href="/conduit-fill/">Ouvrez l’outil de remplissage de conduit.</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -217,6 +284,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -260,6 +328,7 @@
 </footer>
 
 <script src="/assets/ca-fr/common.js?v=e1f07ce4f0"></script>
-<script src="/assets/ca-fr/app.js?v=4b5fa8ae18"></script>
+<script data-wire-size-engine src="/assets/ca-fr/ampacity.js?v=aaf4417e7c"></script>
+<script src="/assets/ca-fr/app.js?v=3e06bee78a"></script>
 </body>
 </html>

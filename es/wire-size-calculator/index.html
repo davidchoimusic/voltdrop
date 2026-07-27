@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de calibre del conductor — caída de tensión NEC | VoltDrop</title>
-<meta name="description" content="Calculadora gratuita de calibre del conductor: ingrese amperios, tensión y distancia en un solo sentido para encontrar el menor AWG de cobre o aluminio que mantiene la caída de tensión por debajo de 3%.">
+<title>Calculadora de calibre del conductor — ampacidad y caída de tensión NEC | VoltDrop</title>
+<meta name="description" content="Calculadora gratuita NEC de calibre del conductor por ampacidad y caída de tensión. Muestra el mínimo por calor, el mínimo por distancia, el AWG gobernante y márgenes separados.">
 <link rel="canonical" href="https://voltdrop.app/es/wire-size-calculator/">
 <link rel="alternate" hreflang="en-US" href="https://voltdrop.app/wire-size-calculator/">
 <link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/wire-size-calculator/">
@@ -17,19 +17,19 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VoltDrop">
-<meta property="og:title" content="Calculadora de calibre del conductor — caída de tensión NEC | VoltDrop">
-<meta property="og:description" content="Calculadora gratuita de calibre del conductor: ingrese amperios, tensión y distancia en un solo sentido para encontrar el menor AWG de cobre o aluminio que mantiene la caída de tensión por debajo de 3%.">
+<meta property="og:title" content="Calculadora de calibre del conductor — ampacidad y caída de tensión NEC | VoltDrop">
+<meta property="og:description" content="Calculadora gratuita NEC de calibre del conductor por ampacidad y caída de tensión. Muestra el mínimo por calor, el mínimo por distancia, el AWG gobernante y márgenes separados.">
 <meta property="og:url" content="https://voltdrop.app/es/wire-size-calculator/">
 <meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Calculadora de calibre del conductor — caída de tensión NEC | VoltDrop">
-<meta name="twitter:description" content="Calculadora gratuita de calibre del conductor: ingrese amperios, tensión y distancia en un solo sentido para encontrar el menor AWG de cobre o aluminio que mantiene la caída de tensión por debajo de 3%.">
+<meta name="twitter:title" content="Calculadora de calibre del conductor — ampacidad y caída de tensión NEC | VoltDrop">
+<meta name="twitter:description" content="Calculadora gratuita NEC de calibre del conductor por ampacidad y caída de tensión. Muestra el mínimo por calor, el mínimo por distancia, el AWG gobernante y márgenes separados.">
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
-<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de calibre del conductor VoltDrop","url":"https://voltdrop.app/es/wire-size-calculator/","description":"Calculadora gratuita de calibre del conductor: ingrese amperios, tensión y distancia en un solo sentido para encontrar el menor AWG de cobre o aluminio que mantiene la caída de tensión por debajo de 3%.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de calibre del conductor VoltDrop","url":"https://voltdrop.app/es/wire-size-calculator/","description":"Calculadora gratuita NEC de calibre del conductor por ampacidad y caída de tensión. Muestra el mínimo por calor, el mínimo por distancia, el AWG gobernante y márgenes separados.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -111,7 +111,7 @@
 
   <div class="tool-intro card">
     <h1 class="tool-title" id="page-h1">🔌 Calculadora de calibre del conductor</h1>
-    <p class="tool-sub" id="page-sub">¿Qué calibre del conductor necesita? Ingrese amperios, tensión y distancia en un solo sentido para obtener el menor calibre que mantiene la caída de tensión dentro del límite.</p>
+    <p class="tool-sub" id="page-sub">Dimensione el conductor tanto por calor como por distancia. Vea el mínimo por ampacidad, el mínimo por caída de tensión y cuál gobierna.</p>
   </div>
 
   <!-- Mode tabs -->
@@ -204,8 +204,75 @@
       <p class="hint">3% es la recomendación habitual para un circuito. 5% es el límite exterior habitual para todo el recorrido.</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>Calor y condiciones de instalación</h2>
+        <p class="hint">La caída de tensión responde a la distancia. Estos datos responden al calor. El conductor final debe aprobar ambas verificaciones.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Temperatura nominal del aislamiento</label>
+        <div class="seg" role="group" aria-label="Temperatura nominal del aislamiento">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">60°C</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">75°C</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">90°C</button>
+        </div>
+        <p class="hint">Use la temperatura nominal del aislamiento del conductor para la columna inicial. THHN normalmente es 90°C. Esta no es la temperatura nominal de la terminación.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">Temperatura nominal de la terminación</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>Elija la temperatura nominal real de las terminales</option>
+          <option value="60">60°C</option>
+          <option value="75">75°C</option>
+          <option value="90">90°C</option>
+        </select>
+        <p class="hint">Use 60°C para NM-B o equipos sin marcar. Use 75°C o 90°C solo cuando el equipo esté marcado y aprobado para esa temperatura. El límite de terminación se aplica después de ambos factores de reducción.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">Temperatura ambiente</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">Ingrese la temperatura del aire alrededor de los conductores. NEC Table 310.15(B)(1) publica intervalos hasta 85°C; una celda “—” no está permitida y esta calculadora no sustituirá ningún valor.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">Número de conductores portadores de corriente</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">conductores</span>
+        </div>
+        <p class="hint">Cuente los conductores no puestos a tierra y cualquier neutro que transporte corriente en condiciones normales, incluidos los neutros que transportan armónicos de cargas no lineales. No cuente los conductores de puesta a tierra de equipos ni los conductores del electrodo de puesta a tierra. Cuente los conductores de reserva. No cuente conductores que no puedan energizarse al mismo tiempo.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Duración de la carga</label>
+        <div class="seg" role="group" aria-label="Duración de la carga">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">Menos de 3 horas</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">3+ horas — continua</button>
+        </div>
+        <p class="hint">Una carga prevista para funcionar 3 horas o más se dimensiona al 125%. Esta es una verificación separada del lado de la carga, no un multiplicador de reducción.</p>
+        <p class="hint highlight-hint">La opción sí/no trata toda la carga ingresada como continua o no continua. No modela una combinación de ambas.</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">Calcular</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>Lo que este calibre de conductor no cubre</h2>
+    <p><strong>Este resultado dimensiona el conductor por ampacidad (calor) y caída de tensión (distancia). No dimensiona el circuito completo.</strong></p>
+    <ul>
+      <li>El dimensionamiento del interruptor automático y de otras protecciones contra sobrecorriente usa reglas y tablas separadas que no han pasado la verificación de VoltDrop. Aquí no se produce ningún tamaño de interruptor.</li>
+      <li>No se realiza ningún cálculo de carga de Article 220. La corriente ingresada arriba es la carga que esta herramienta verifica.</li>
+      <li>El llenado de tubo conduit cuenta todos los conductores dentro de la canalización, incluidos el neutro y el conductor de unión, y también necesita el tipo de tubo. Es un conteo distinto del de conductores portadores de corriente. <a class="inline-link" href="/conduit-fill/">Abra la herramienta de llenado de tubo conduit.</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -217,6 +284,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -260,6 +328,7 @@
 </footer>
 
 <script src="/assets/us-es/common.js?v=a3005b945e"></script>
-<script src="/assets/us-es/app.js?v=bc6328b896"></script>
+<script data-wire-size-engine src="/assets/us-es/ampacity.js?v=aaf4417e7c"></script>
+<script src="/assets/us-es/app.js?v=9e7b818e22"></script>
 </body>
 </html>

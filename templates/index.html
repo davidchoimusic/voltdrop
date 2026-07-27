@@ -197,8 +197,75 @@
       <p class="hint">{{drop.n3%IsTheCommonGuidelineForA}}</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>{{drop.heatCheckHeading}}</h2>
+        <p class="hint">{{drop.heatCheckIntro}}</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">{{ampacity.insulationTemperatureRatingLabel}}</label>
+        <div class="seg" role="group" aria-label="{{attr:ampacity.insulationTemperatureRatingLabel}}">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">{{ampacity.n60CButton}}</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">{{ampacity.n75CButton}}</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">{{ampacity.n90CButton}}</button>
+        </div>
+        <p class="hint">{{ampacity.insulationColumnHint}}</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">{{ampacity.terminationTemperatureRatingLabel}}</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>{{drop.chooseTerminationRating}}</option>
+          <option value="60">{{ampacity.n60CButton}}</option>
+          <option value="75">{{ampacity.n75CButton}}</option>
+          <option value="90">{{ampacity.n90CButton}}</option>
+        </select>
+        <p class="hint">{{ampacity.terminationRatingHint}}</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">{{ampacity.ambientTemperatureLabel}}</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">{{ampacity.ambientTemperatureHint}}</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">{{ampacity.currentCarryingConductorsLabel}}</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">{{ampacity.conductorsUnit}}</span>
+        </div>
+        <p class="hint">{{ampacity.currentCarryingConductorsHint}}</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">{{ampacity.loadDurationLabel}}</label>
+        <div class="seg" role="group" aria-label="{{attr:ampacity.loadDurationLabel}}">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">{{ampacity.underThreeHoursButton}}</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">{{ampacity.threeHoursOrMoreButton}}</button>
+        </div>
+        <p class="hint">{{ampacity.continuousLoadHint}}</p>
+        <p class="hint highlight-hint">{{drop.continuousWholeLoadOnly}}</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">{{drop.calculateButton}}</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>{{drop.conductorSizingBoundaryHeading}}</h2>
+    <p><strong>{{drop.conductorSizingBoundaryWarning}}</strong></p>
+    <ul>
+      <li>{{drop.noBreakerSizing}}</li>
+      <li>{{drop.noLoadCalculation}}</li>
+      <li>{{drop.noConduitSizing}} <a class="inline-link" href="/conduit-fill/">{{drop.conduitToolLink}}</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -210,6 +277,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -253,6 +321,7 @@
 </footer>
 
 <script src="/common.js?v=8bb689634a"></script>
+<script data-wire-size-engine src="/ampacity.js?v=557ec3e98e"></script>
 <script src="/app.js?v=b5f5222909"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@
 <meta name="theme-color" content="#141518">
 <script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
 <script type="application/ld+json" data-ld="app">{"@context":"https://schema.org","@type":"WebApplication","name":"VoltDrop Max Wire Length Calculator","url":"https://voltdrop.app/ca/max-wire-length/","description":"Free Canadian max wire run calculator: get the longest one-way distance within the mandatory CEC 3% or 5% voltage-drop limit. Copper and aluminum, DC and AC.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"}}</script>
-<link rel="stylesheet" href="/styles.css?v=9e79c80005">
+<link rel="stylesheet" href="/styles.css?v=db4a3a8902">
 <!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
      Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
      real production host AND the session is not webdriver-driven. A tag that
@@ -204,8 +204,75 @@
       <p class="hint">3% is the mandatory maximum for a branch circuit or feeder. 5% is the mandatory maximum for the combined path.</p>
     </div>
 
+    <!-- Ampacity inputs (only in "size" mode) -->
+    <div id="size-ampacity-fields" class="size-ampacity-fields" hidden>
+      <div class="field-section-heading">
+        <h2>Heat and installation conditions</h2>
+        <p class="hint">Voltage drop answers distance. These inputs answer heat. The final conductor must pass both checks.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Insulation temperature rating</label>
+        <div class="seg" role="group" aria-label="Insulation temperature rating">
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="60">60°C</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-insulation="75">75°C</button>
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-insulation="90">90°C</button>
+        </div>
+        <p class="hint">Use the conductor insulation rating for the starting column. THHN is normally 90°C. This is not the termination temperature rating.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-termination">Termination temperature rating</label>
+        <select id="size-termination" required disabled>
+          <option value="" selected disabled>Choose the actual termination rating</option>
+          <option value="60">60°C</option>
+          <option value="75">75°C</option>
+          <option value="90">90°C</option>
+        </select>
+        <p class="hint">Marked equipment: use its marked termination temperature. Unmarked equipment: use 60°C when rated not more than 100 A or marked for #1 AWG and smaller; use 75°C above that. Rule 4-006 applies to the first 1.2 m and permits a transition beyond it. VoltDrop conservatively applies the lower limit throughout as a simplified method.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-ambient">Ambient temperature</label>
+        <div class="input-unit">
+          <input type="number" id="size-ambient" inputmode="decimal" step="any" value="30" required disabled>
+          <span class="unit">°C</span>
+        </div>
+        <p class="hint">CEC Table 5A lists single ambient points only above 30°C. At or below 30°C the factor is 1.00, with no cool-ambient credit. Between listed points, this calculator uses the next higher row; it never interpolates or rounds down.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="size-conductors">Countable power and lighting conductors — Rule 4-004</label>
+        <div class="input-unit">
+          <input type="number" id="size-conductors" inputmode="numeric" min="1" step="1" value="3" required disabled>
+          <span class="unit">conductors</span>
+        </div>
+        <p class="hint">Count insulated power and lighting conductors. A bonding conductor never counts. Do not count control or signal conductors, or a neutral carrying only unbalanced current in a normally balanced circuit. Count a neutral carrying current comparable to the phase conductors or significant harmonic current from non-linear loads. The Code is silent on spares; VoltDrop counts installed power or lighting spares by default as a conservative reading, not a Code quotation. Your local authority may differ.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Load duration</label>
+        <div class="seg" role="group" aria-label="Load duration">
+          <button type="button" class="seg-btn active" aria-pressed="true" data-size-continuous="no">Not continuous</button>
+          <button type="button" class="seg-btn" aria-pressed="false" data-size-continuous="yes">Continuous — standard 80%-rated equipment</button>
+        </div>
+        <p class="hint">CEC Rule 8-104 limits a continuous load to 80% of corrected ampacity for standard 80%-rated equipment. This is a separate check, not a derating multiplier.</p>
+        <p class="hint highlight-hint">The yes/no choice treats the entire entered load as continuous or noncontinuous. It does not model a mix of the two.</p>
+      </div>
+    </div>
+
     <button type="submit" class="calc-btn" id="calc-btn">Calculate</button>
   </form>
+
+  <aside id="size-safety-boundary" class="card safety-boundary" hidden role="note">
+    <h2>What this conductor size does not cover</h2>
+    <p><strong>This result sizes the conductor for ampacity (heat) and voltage drop (distance). It does not size the whole circuit.</strong></p>
+    <ul>
+      <li>Breaker and other overcurrent-protection sizing uses separate rules and tables that have not passed VoltDrop's verification gate. No breaker size is produced here.</li>
+      <li>No CEC Section 8 load calculation is performed. The current entered above is the load this tool checks.</li>
+      <li>Conduit fill counts every conductor in the raceway, including the neutral and bond, and also needs the conduit type. That is a different count from current-carrying conductors. <a class="inline-link" href="/conduit-fill/">Open the conduit fill tool.</a></li>
+    </ul>
+  </aside>
 
   <!-- Results -->
   <section id="results" class="card results" hidden aria-live="polite">
@@ -217,6 +284,7 @@
       </div>
     </div>
     <div class="result-grid" id="result-grid"></div>
+    <div class="continuous-rule-note" id="continuous-rule-note" hidden></div>
     <p class="verdict-note" id="verdict-note"></p>
 
     <details class="math-details" id="math-details">
@@ -260,6 +328,7 @@
 </footer>
 
 <script src="/assets/ca-en/common.js?v=5235937ab1"></script>
-<script src="/assets/ca-en/app.js?v=16e905e600"></script>
+<script data-wire-size-engine src="/assets/ca-en/ampacity.js?v=aaf4417e7c"></script>
+<script src="/assets/ca-en/app.js?v=035c2e716d"></script>
 </body>
 </html>
