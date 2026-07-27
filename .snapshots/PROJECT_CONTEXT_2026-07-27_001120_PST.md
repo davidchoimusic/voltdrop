@@ -47,46 +47,6 @@ Suite went **629 → 1039 checks, 0 failed, 0 JS errors**. 102 → **120 generat
 - **English byte-baseline 27 → 40 pages.** Seven Canadian English pages had NO byte-protection
   before this session; that hole is closed.
 
-### 2026-07-27, later — the trust page was WRONG and has been corrected (NOT YET PUSHED)
-⚠️ **`/how-we-verify/` shipped with four false claims and was corrected the same day.** Full
-detail in REGRESSION RISKS below; read it, because the failure mode generalises. Summary: the
-claims described the repo's *intent* rather than the *running product*, on the one page whose
-entire subject is whether our numbers can be trusted.
-- Corrected: the Canadian conduit page **labels rather than withholds**; there is **no** general
-  "if you see a result the data passed" guarantee; the seal stops the **verification suite**, not
-  the build (proved by experiment); numeric parity covers **named page groups**, not every page.
-- Two more overstatements reworded; a third fixed **in the product** — never-translate checking
-  had silently omitted `landscape.js` and `solar.js`, and now derives from the runtime registry.
-- Never-translate parity is now **category-aware** (no-loss vs exact-both-ways) — see below.
-- Suite **1039 → 1047**, 0 failed. Back-translation re-run honestly: 1098 rows, 0 failed, 19.5%
-  identical.
-- **Merged to main locally, NOT pushed and NOT deployed** — the live site still serves the wrong
-  wording until David approves a push. He gave `YES PUSH`/`YES DEPLOY` for the earlier trust-page
-  work; that approval was deliberately NOT reused for this different change.
-
-### Next build, planned and Codex-reviewed but NOT started
-**Repair `/wire-size-calculator/` to answer ampacity AND voltage drop together**, rather than
-adding a tenth tool. Codex's plan review reshaped the original idea substantially:
-- **Drop conduit from v1** — conduit fill needs *every* conductor in the raceway (neutral, bond),
-  not the ampacity "current-carrying" count, plus conduit type; and the bond size needs the
-  breaker size. Reusing the ampacity count for conduit is the defect that would pass every check.
-- **Termination temperature is a required input** — the ampacity engine takes insulation and
-  termination ratings separately and termination is often binding.
-- **"Smallest passing size" is NEW logic** — the ampacity tool *checks* one conductor, it does not
-  *search*. Needs explicit refusal states and must reconcile domains (voltage drop covers 18/16
-  AWG; ampacity starts at 14 Cu / 12 Al).
-- **Do not call it "size a circuit"** — that implies overcurrent and grounding. It sizes the
-  conductor for ampacity and voltage drop.
-- Breaker sizing stays out until NEC 240.6 passes the verification gate.
-
-### Wire colour tool — RESEARCHED AND DELIBERATELY NOT BUILT (2026-07-27)
-See `docs/research/WIRE_COLOUR_SOURCES.md`. US rules are multi-source; **Canadian rules could only
-be sourced from forum posts and contractor blogs**, which is far below this project's bar. Not
-built US-only either, because country divergence was the whole rationale. The finding that would
-justify it: **Canada's A and B phases appear SWAPPED against US habit** (US convention A=black,
-B=red; CEC 4-038(3) reported as A=red, B=black). Needs a real source, and needs David's own
-provenance decision — the Tables 2/4 decision was about those tables, not all of Section 4.
-
 ### The two new tools (2026-07-26) — what makes them different
 They close the gap recorded below as "THE LOW-VOLTAGE / MULTI-POINT GAP": every other
 calculator here assumes ONE LOAD AT THE FAR END OF ONE RUN.
@@ -540,66 +500,6 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
-
-- **⚠️⚠️ I SHIPPED FOUR FALSE CLAIMS ON THE TRUST PAGE, HOURS AFTER PUBLISHING IT (2026-07-27).**
-  `/how-we-verify/` went live and then a review of an unrelated plan exposed that several of its
-  statements described **the repo's intent, not the running product**. On the one page whose
-  subject is trustworthiness. **Overstating our own strictness is not a lesser sin than
-  understating it.**
-  1. *"Our Canadian conduit-fill page carries a planning-only note **instead of results**"* —
-     FALSE. It returns a full answer (`FITS · 1/2" · 13.1%`). It computes from the sealed **US**
-     tables and carries a prominent note saying so. **It labels; it does not withhold.**
-  2. *"If a page here shows you a result, the data behind it passed"* — FALSE, and the worst of
-     the four because it is a **general guarantee** covering the whole site, which `/ca/conduit-fill/`
-     breaks.
-  3. *"If a single digit changes, the build stops — the site cannot be generated at all"* —
-     FALSE. **Proved by experiment**: edited a sealed value 0.80 → 0.81, `node build.mjs` exited
-     **0**. `build.mjs` never reads `data-golden.json` — the fingerprint gate lives in
-     `verify.mjs`. The seal is a **test** gate, not a **build** gate. (`build.mjs` does hold a
-     separate check that `landscape.js`/`solar.js` copies of `WIRE_TABLE`/`K_FACTOR` match
-     `app.js` — that is a different mechanism, and confusing the two caused this claim.)
-  4. *"Every number on a translated page must match its English twin"* — FALSE; parity runs over
-     a path list, not every page.
-  **Rule: a claim about the product must be verified by RUNNING the product, not by reading the
-  code that is supposed to implement it.** Before publishing any statement about what a check
-  does, execute the failure it claims to prevent and watch it fire. This project already had that
-  rule for features; it now applies to prose about features.
-
-- **WHEN A CLAIM IS OVERSTATED, ASK WHICH SIDE SHOULD MOVE (2026-07-27).** Of three overstatements
-  found in the same audit, two had their wording corrected — but *"never-translate terms are
-  checked in every language"* had the **product** fixed instead, because that claim is the one we
-  want to be true. The runtime check had been a **hand-maintained list of six bundles** and
-  silently omitted `landscape.js` and `solar.js`. It now derives from the runtime registry so a
-  tenth calculator cannot be forgotten. Closing that gap immediately found a real defect: Chinese
-  `Actual %` had become `实际百分比`, dropping a protected symbol.
-
-- **NEVER-TRANSLATE PARITY WAS THE WRONG SHAPE — LOSS ≠ ADDITION (2026-07-27).** The check
-  compared protected-token counts **exactly, both directions**, so translations using `cmil` where
-  the English spells out "circular mils" FAILED. That is a translator being more precise, not a
-  defect. The categories now differ, and the distinction is the point:
-  - `unitSymbols`, `contextualUnitSymbols`, `wireAndCableDesignations` → **no-loss** (translation
-    must have **at least** the English count; extra is fine)
-  - `brand`, `standards`, `citations`, `protectedPatterns` (numbers, electrical values) →
-    **exact, both directions** — because a translation that **invents** a code citation the
-    English never made is a *fabricated reference*, which is worse than a missing one.
-  All four behaviours are proved by deliberate corruption in the suite. Do not "simplify" this
-  back into one uniform comparison.
-
-- **COVERAGE WENT UP WHILE THE CHECK COUNT WENT DOWN (2026-07-27).** The rewritten never-translate
-  checker covered **more** (32 edition × bundle pairs, up from 24) but reported a single aggregate
-  `PASS`, dropping the suite 1039 → 1015. That is backwards, and it buries which of 32
-  combinations failed. Restored to one result per (edition, bundle) → 1047. **Reassert the
-  existing rule: whenever a build multiplies output, the reported coverage must multiply with it,
-  or the pass count becomes theatre.** A refactor that shrinks the check count deserves the same
-  suspicion as one that shrinks coverage.
-
-- **OPEN PRODUCT QUESTION FOR DAVID (raised 2026-07-27, not decided):** should `/ca/conduit-fill/`
-  **withhold** its result rather than compute from US tables and label it? Making the page match
-  the original (false) sentence is the other way to have fixed this, but it removes a working
-  answer from users, so it was NOT done unilaterally. The page currently: computes with sealed
-  NEC THHN areas + NEC trade sizes, carries a "Canada / CEC planning note" naming CEC Tables
-  6A–6K and 9 as unverified, and tells the reader to confirm before installing. `verify.mjs`
-  asserts this deliberately (`planningOnly: true`).
 - **A CHECK THAT RUNS ON ONE EDITION CANNOT PROTECT SIX (2026-07-25, the expensive one).**
   During the i18n build, `verify.mjs` reported **178 passed / 0 failed** while the primary
   voltage-drop calculator was **completely dead in four of the six editions** — click
