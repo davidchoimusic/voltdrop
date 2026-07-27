@@ -12,40 +12,12 @@ results that don't match other calculators, clutter, forced signups. VoltDrop's 
 Domain purchased: **voltdrop.app**. Primary users: working electricians, contractors, apprentices,
 plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 
-## Current state (2026-07-27) — READ THIS FIRST
+## Current state (2026-07-26, evening) — READ THIS FIRST
 
 **LIVE at voltdrop.app in SIX EDITIONS.** Static site with a build step.
-**NINE calculators**: the seven below plus **Landscape Lighting**
+**NINE calculators** as of this session: the seven below plus **Landscape Lighting**
 (`/landscape-lighting-calculator/`) and **Solar & Battery** (`/solar-battery-wire-size/`).
-Superseded (2026-07-27): the earlier "NOT YET PUSHED OR DEPLOYED — awaiting `YES PUSH`" line is
-no longer true; both shipped, and everything below is live and verified on production.
-
-### 2026-07-27 session — three new pages, an engine addition, and a registry gate
-**Deployed and verified live** (Coolify deploy `ivwd1yglbwd6grh76x3j45ns`, commit `486d448`).
-Suite went **629 → 1039 checks, 0 failed, 0 JS errors**. 102 → **120 generated pages**.
-- **`/how-we-verify/`** — the trust page, all six editions. Written as the honest answer to
-  "why should I trust this number", explicitly NOT as a badge. Claims are deliberately narrow:
-  the seal proves a number has not changed unnoticed, NOT that the original was right; sources
-  are described as "two independently produced reproductions of the published table" because
-  VoltDrop does not hold the standards; back-translation is called a screen, not proof. No
-  author byline (owner rejected the "add a credentialed reviewer" advice — there is no licensed
-  electrician reviewing this site). Footer link on every page + a shared one-line link in each
-  tool's explainer via `partials/fragments/verify-link.html`.
-- **`/ohms-law/`** — framed over `power.js`. **This required real engine work**, see below.
-- **`/solar-wire-size-calculator/`** — framed over `solar.js`; panel-to-controller focus,
-  routes battery/inverter runs to the parent tool.
-- **Power Calculator gained resistance/impedance.** DC → resistance. AC → **impedance**, with
-  the resistive part (`R ≈ Z × PF`) shown as a separate labelled figure. **Three-phase refuses**
-  (wye vs delta changes the answer and the form does not ask) — same posture as solar's
-  OUT OF RANGE. Watts/Ohms toggle in amps and volts modes so a conflict is impossible.
-- **`tools/check-registries.mjs`** — cross-checks `build.mjs PAGES` against `common.js`
-  TOOL_PATHS/GUIDE_PATHS, `verify.mjs` SCOPED_PATHS, `sitemap.xml`, `llms.txt`,
-  `generate-locales.mjs templateFiles`, and the files on disk. Runs in BOTH `build.mjs` and
-  `verify.mjs`. This kills the "a new page touches eleven places, two fail silently" trap.
-- **Partial composition** — `{{> fragments/x.html }}` in `build.mjs`. Framed pages wrap ONE
-  copy of the form fragment instead of forking the markup or regex-rewriting rendered HTML.
-- **English byte-baseline 27 → 40 pages.** Seven Canadian English pages had NO byte-protection
-  before this session; that hole is closed.
+Both are built and merged to main but **NOT YET PUSHED OR DEPLOYED** — awaiting `YES PUSH`.
 
 ### The two new tools (2026-07-26) — what makes them different
 They close the gap recorded below as "THE LOW-VOLTAGE / MULTI-POINT GAP": every other
@@ -108,10 +80,9 @@ in every edition.
 
 ### Still open
 - `/ca/conduit-fill/` carries a planning-only note — CEC Tables 6A–6K and 9 unverified
-- Roadmap items awaiting placement: ground wire size · wire colour · offline/PWA ·
-  "Build this circuit"
-  (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.
-  **"how we verify" page and `/ohms-law/` are DONE and LIVE as of 2026-07-27.**)
+- Roadmap items awaiting placement: "how we verify" page · ground wire size · wire colour ·
+  `/ohms-law/` · offline/PWA · "Build this circuit"
+  (**"low-voltage multi-point" is DONE as of 2026-07-26** — see the two new tools above.)
 - **T/split layout SHIPPED 2026-07-27** (was deferred). The landscape tool now compares FOUR
   layouts. The T needed the one thing the others did not: per-fixture branch assignment, because
   "40 ft from the transformer" says nothing about direction. A branch column appears only for that
@@ -125,9 +96,8 @@ in every edition.
   Finding: a T pays the ENTIRE load over its trunk, so for an evenly spaced line a plain daisy
   chain can beat it on worst-case voltage. What a T reliably buys is evenness. Same shape as the
   hub-vs-star surprise — there is no single winner, which is the product.
-- ~~**`/solar-wire-size-calculator/` as a framed page is now HONEST to mint**~~ — DONE and LIVE
-  2026-07-27. Kept here because the reasoning is the precedent: the framed-page rule said build
-  the engine first, the engine was built, and only then was the page honest.
+- **`/solar-wire-size-calculator/` as a framed page is now HONEST to mint** — the framed-page
+  rule below said to build the engine first, and it is built. Point it at the solar tool.
 - GSC: watch Sitemaps "Discovered pages" move 16 → 91, then leave it a few weeks
 
 ---
@@ -451,33 +421,6 @@ shared country/chip logic in common.js.
 
 ## EDGE CASES & GOTCHAS
 
-- **BACK-TRANSLATION ROW IDs ARE REASSIGNED ON EVERY REGENERATION (2026-07-27).** Adding new
-  safety-critical strings regenerates `i18n/backtranslation-input.json`, and because entries are
-  emitted in edition × key order, **inserting a key shifts every id after it**. `bt-0001` before
-  and after are NOT the same string — only 106 of 978 shared ids still held identical text.
-  Carrying old Pass A results forward **by id silently mismatches translations to the wrong
-  back-translations**, which would produce a clean-looking, completely meaningless gate run.
-  **Map by `(locale, targetText)` instead**, then reseal both digests.
-  The full sequence when new strings are added: `generate-backtranslation-input.mjs` → Pass A by
-  a translator with English SEALED OUT → `generate-backtranslation-comparison.mjs` → Pass B
-  judgments → `generate-backtranslation-report.mjs`. 2026-07-27 run: 1098 rows, 0 failed,
-  **19.5% byte-identical** (voids above 60%).
-- **WHOEVER WROTE THE ENGLISH CANNOT PERFORM PASS A.** The gate's integrity is that the
-  back-translator has never seen the source. The session author always has. Pass A must be run
-  by a separate agent whose entire input is the target-language text — and grep the prompt for
-  distinctive English source phrases before sending it. (2026-07-27: done via an isolated
-  `codex exec` in an empty directory.)
-- **A LOCALIZED DATE LEGITIMATELY BREAKS NUMERIC PARITY (2026-07-27).** English "July 27, 2026"
-  has no numeral month; Simplified Chinese 2026年7月27日 does. Numeric parity flagged the extra
-  `7` on `/zh/` and `/ca-zh/`. That is correct Chinese and a naive check. Fixed with an opt-in
-  `data-parity-exempt` attribute honoured by BOTH parity paths in `verify.mjs` (static ~line 425
-  and rendered ~line 1950). **Never fix this class with a numeric denylist** — that check is what
-  stops a translated page disagreeing with English about an ampacity.
-- **`innerText` IS CSS-UPPERCASED; CATALOG STRINGS ARE NOT (2026-07-27).** Result-cell labels use
-  `text-transform`, so `innerText` returns `RESISTANCE (R)` while the catalog holds
-  `Resistance (R)`. Ten assertions failed against a page that was completely correct — the
-  failure message itself printed the right answer. Compare case-insensitively with
-  `toLocaleLowerCase()` whenever asserting a catalog string against rendered text.
 - **GA4 IS GATED — DO NOT UNGATE IT (2026-07-27).** `templates/index.html` loads
   `gtag/js` only when `location.hostname` is `voltdrop.app`/`www.voltdrop.app` AND
   `navigator.webdriver` is false. Gated at the LOADER, not at the config call.
@@ -612,36 +555,3 @@ shared country/chip logic in common.js.
   distance defaulted to 0 and a hub at 0 ft IS a star. Assertions confirm the numbers are
   right; they do not notice that two identical rows explain nothing to a reader. Screenshot
   the result panel at phone width and LOOK at it before calling a tool finished.
-
-- **THE ELEVEN-PLACE CHECKLIST IS NOW A MECHANISM, NOT PROSE (2026-07-27).** The list above sat
-  as documentation for a session and was still easy to miss. `tools/check-registries.mjs` now
-  cross-checks `build.mjs PAGES` against `common.js` TOOL_PATHS/GUIDE_PATHS, `verify.mjs`
-  SCOPED_PATHS, `sitemap.xml`, `llms.txt`, `generate-locales.mjs templateFiles`, and the files
-  on disk — **bidirectionally**, so an orphaned registry entry fails too. It runs inside BOTH
-  `build.mjs` and `verify.mjs`. Do not remove it, and when adding a registration point, add it
-  to the checker in the same commit. *Prose reminds; mechanisms enforce.*
-  ⚠️ `common.js TOOL_PATHS` is **load-bearing beyond the switcher**: `common.js` rewrites every
-  root-relative `<a href="/…">` into the reader's edition at runtime by looking the path up
-  there. A page missing from it still builds and still returns HTTP 200 — but a `/ca-fr/`
-  reader clicking the link lands on the **US English** page. Assert links stay in-edition;
-  a status-code test cannot see this.
-
-- **A GREY BOX SHIPPED IN EVERY RESULT PANEL FOR WEEKS (2026-07-27).** `.result-grid` drew its
-  dividing lines with `gap: 1px` over `background: var(--color-line)`, so any unfilled slot in
-  the last row rendered as a solid grey rectangle. The Power Calculator produces 5 cells in
-  **every** mode, so production showed it constantly, and nobody noticed because nothing was
-  numerically wrong. Found only by screenshotting a result panel; 24 passing browser checks in
-  the same session walked past it. Dividers are **cell borders** now, which removes the failure
-  mode instead of patching one case — a fix keyed to `:nth-child(odd)` would have broken at the
-  3- and 4-column desktop layouts that `repeat(auto-fit, minmax(150px, 1fr))` produces.
-  Verify grid changes visually at BOTH phone and desktop width; the column count differs.
-
-- **A FRAMED PAGE IS A LIE UNTIL THE ENGINE ANSWERS THE QUESTION (2026-07-27, the /ohms-law/
-  case).** `/ohms-law/` was approved as a near-free framed page over the Power Calculator. It
-  was not free: `grep -i resist power.js` returned **nothing**. The engine had no concept of
-  resistance, so a page titled "Ohm's Law Calculator" would have been exactly what the
-  framed-page honesty rule exists to prevent. The fix was to build resistance/impedance
-  properly, not to soften the title. **Before minting any framed URL, grep the engine for the
-  quantity the URL promises.** Related trap now handled in-product: on AC, `V ÷ I` is
-  **impedance, not resistance** (resistive part ≈ Z × PF), and a single ohms figure for
-  three-phase depends on wye vs delta — the tool refuses rather than guessing.
