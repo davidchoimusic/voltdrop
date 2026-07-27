@@ -189,9 +189,103 @@ function applyMode() {
 // Each tool page (built by build.mjs) stamps its mode on <body data-mode>.
 setMode(document.body.dataset.mode || 'drop');
 
-// ---- core math ----
-function dropVolts(cm, amps, feet) {
-  return (SYSTEMS[system].mult * K_FACTOR[material] * amps * feet) / cm;
+// Keeping this independent of page state lets later tools reuse the electrical
+// result without inheriting this page's controls or translated rendering.
+function calculateVoltageDrop(
+  calculationMode,
+  selectedSystem,
+  selectedMaterial,
+  volts,
+  amps,
+  feet,
+  wireIndex,
+  maxPct,
+  wireTable,
+  kFactors,
+  systems,
+) {
+  const systemData = systems[selectedSystem];
+  const factor = kFactors[selectedMaterial];
+  const calculationContext = {
+    system: selectedSystem,
+    material: selectedMaterial,
+    mult: systemData.mult,
+    factor,
+  };
+  const voltageDropFor = (cm) =>
+    (systemData.mult * factor * amps * feet) / cm;
+
+  if (calculationMode === 'drop') {
+    const [label, cm] = wireTable[wireIndex];
+    const vd = voltageDropFor(cm);
+    const pct = (vd / volts) * 100;
+    return {
+      ...calculationContext,
+      mode: calculationMode,
+      label,
+      cm,
+      volts,
+      amps,
+      feet,
+      vd,
+      pct,
+      endVolts: volts - vd,
+      verdict: pct <= 3 ? 'good' : pct <= 5 ? 'warn' : 'bad',
+    };
+  }
+
+  const maxVd = (maxPct / 100) * volts;
+  if (calculationMode === 'size') {
+    let found = null;
+    for (let i = 0; i < wireTable.length; i++) {
+      const [label, cm] = wireTable[i];
+      const vd = voltageDropFor(cm);
+      if (vd <= maxVd) {
+        const pct = (vd / volts) * 100;
+        found = {
+          label,
+          cm,
+          vd,
+          wireIndex: i,
+          pct,
+          endVolts: volts - vd,
+          verdict: pct <= 3 ? 'good' : pct <= 5 ? 'warn' : 'bad',
+        };
+        break;
+      }
+    }
+    return {
+      ...calculationContext,
+      mode: calculationMode,
+      found,
+      largestWire: {
+        label: wireTable[wireTable.length - 1][0],
+        cm: wireTable[wireTable.length - 1][1],
+      },
+      volts,
+      amps,
+      feet,
+      maxPct,
+      maxVd,
+    };
+  }
+
+  const [label, cm] = wireTable[wireIndex];
+  const maxFeet =
+    (maxVd * cm) / (systemData.mult * factor * amps);
+  return {
+    ...calculationContext,
+    mode: calculationMode,
+    label,
+    cm,
+    volts,
+    amps,
+    maxPct,
+    maxVd,
+    feet: maxFeet,
+    endVolts: volts - maxVd,
+    verdict: maxPct <= 3 ? 'good' : maxPct <= 5 ? 'warn' : 'bad',
+  };
 }
 
 function targetPercent() {
@@ -214,41 +308,32 @@ function calculate() {
   const amps = Number($('current').value);
   if (!volts || !amps) return;
 
-  if (mode === 'drop') {
-    const feet = Number($('distance').value);
-    if (!feet) return;
-    const idx = Number(awgSelect.value);
-    const [label, cm] = WIRE_TABLE[idx];
-    const vd = dropVolts(cm, amps, feet);
-    const pct = (vd / volts) * 100;
-    renderDrop({ label, cm, volts, amps, feet, vd, pct });
-  } else if (mode === 'size') {
-    const feet = Number($('distance').value);
-    if (!feet) return;
-    const maxPct = targetPercent();
-    const maxVd = (maxPct / 100) * volts;
-    let found = null;
-    for (let i = 0; i < WIRE_TABLE.length; i++) {
-      const [label, cm] = WIRE_TABLE[i];
-      const vd = dropVolts(cm, amps, feet);
-      if (vd <= maxVd) { found = { label, cm, vd, i }; break; }
-    }
-    renderSize({ found, volts, amps, feet, maxPct, maxVd });
-  } else {
-    const idx = Number(awgSelect.value);
-    const [label, cm] = WIRE_TABLE[idx];
-    const maxPct = targetPercent();
-    const maxVd = (maxPct / 100) * volts;
-    // Solve Vd = mult·K·I·L/CM for L
-    const feet = (maxVd * cm) / (SYSTEMS[system].mult * K_FACTOR[material] * amps);
-    renderLength({ label, cm, volts, amps, maxPct, maxVd, feet });
-  }
+  const feet = mode === 'length' ? null : Number($('distance').value);
+  if (mode !== 'length' && !feet) return;
+
+  const result = calculateVoltageDrop(
+    mode,
+    system,
+    material,
+    volts,
+    amps,
+    feet,
+    Number(awgSelect.value),
+    mode === 'drop' ? null : targetPercent(),
+    WIRE_TABLE,
+    K_FACTOR,
+    SYSTEMS,
+  );
+
+  if (result.mode === 'drop') renderDrop(result);
+  else if (result.mode === 'size') renderSize(result);
+  else renderLength(result);
 }
 
 // ---- verdict helpers ----
-function verdictFor(pct) {
-  if (pct <= 3) return { cls: 'good', badge: '良好', note: '在3%的建议值内。此线路应能正常工作。' };
-  if (pct <= 5) return { cls: 'warn', badge: '注意', note: '高于3%的建议值，但仍在5%的外部限值内。某些负载可能适用；对于电动机、充电器或长时间运行的电路，请考虑增大导线规格（线规）。' };
+function verdictFor(verdict) {
+  if (verdict === 'good') return { cls: 'good', badge: '良好', note: '在3%的建议值内。此线路应能正常工作。' };
+  if (verdict === 'warn') return { cls: 'warn', badge: '注意', note: '高于3%的建议值，但仍在5%的外部限值内。某些负载可能适用；对于电动机、充电器或长时间运行的电路，请考虑增大导线规格（线规）。' };
   return { cls: 'bad', badge: '过于很多', note: '超出5%的外部限值。可能出现明显性能问题：请增大导线规格（线规）、缩短线路或提高电压。' };
 }
 
@@ -273,47 +358,52 @@ function showResults(v, bigNumber, bigLabel, cells, note, math) {
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function mathIntro() {
+function mathIntro({ system, material, factor }) {
   return vdFormat(
     system === 'ac3' ? DROP_TEXT.mathIntroThreePhase : DROP_TEXT.mathIntroRoundTrip,
     {
       mult: SYSTEMS[system].multLabel,
-      factor: K_FACTOR[material],
+      factor,
       material: MATERIAL_NAME[material],
     },
   );
 }
 
-function renderDrop({ label, cm, volts, amps, feet, vd, pct }) {
-  const v = verdictFor(pct);
-  const endV = volts - vd;
+function renderDrop({
+  system, material, factor,
+  label, cm, volts, amps, feet, vd, pct, endVolts, verdict,
+}) {
+  const v = verdictFor(verdict);
   showResults(
     v,
     vdFormat(DROP_TEXT.percent, { percent: fmt(pct) }),
     vdFormat(DROP_TEXT.dropLabel, { size: label, material: MATERIAL_NAME[material] }),
     [
       ['伏特损失在导线', vdFormat(DROP_TEXT.volts, { volts: fmt(vd) })],
-      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(endV) })],
+      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(endVolts) })],
       ['起始使用', vdFormat(DROP_TEXT.volts, { volts: fmt(volts) })],
       ['参考限值', '3%良好· 5%最大'],
     ],
     v.note,
-    [mathIntro(), vdFormat(DROP_TEXT.dropMath, {
+    [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.dropMath, {
       size: label,
       cm: cm.toLocaleString('en-US'),
       mult: SYSTEMS[system].multLabel,
-      factor: K_FACTOR[material],
+      factor,
       amps: fmt(amps),
       feet: fmt(feet, 1),
       dropped: fmt(vd, 3),
       source: fmt(volts),
       percent: fmt(pct),
-      endVolts: fmt(endV),
+      endVolts: fmt(endVolts),
     })].join('')
   );
 }
 
-function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
+function renderSize({
+  system, material, factor,
+  found, largestWire, volts, amps, feet, maxPct, maxVd,
+}) {
   if (!found) {
     showResults(
       { cls: 'bad', badge: '无合适规格', note: '表中没有任何单根导线能将电压降保持在您的限值内。可以缩短线路、提高电压、允许更大的电压降，或并联导线；请咨询电工。' },
@@ -321,16 +411,16 @@ function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
       vdFormat(DROP_TEXT.noFitLabel, { percent: maxPct }),
       [
         ['您的限值', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
-        ['最大规格检查', WIRE_TABLE[WIRE_TABLE.length - 1][0]],
+        ['最大规格检查', largestWire.label],
       ],
       vdFormat(DROP_TEXT.noFitNote, {
-        size: WIRE_TABLE[WIRE_TABLE.length - 1][0],
+        size: largestWire.label,
         material: MATERIAL_NAME[material],
         percent: fmt(maxPct),
         feet: fmt(feet, 1),
         amps: fmt(amps),
       }),
-      [mathIntro(), vdFormat(DROP_TEXT.noFitMath, {
+      [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.noFitMath, {
         maxDrop: fmt(maxVd, 3),
         percent: fmt(maxPct),
         source: fmt(volts),
@@ -338,8 +428,7 @@ function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
     );
     return;
   }
-  const pct = (found.vd / volts) * 100;
-  const v = verdictFor(pct);
+  const v = verdictFor(found.verdict);
   showResults(
     v,
     found.label,
@@ -348,31 +437,34 @@ function renderSize({ found, volts, amps, feet, maxPct, maxVd }) {
       percent: fmt(maxPct),
     }),
     [
-      ['该规格的实际电压降', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(pct), volts: fmt(found.vd) })],
-      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(volts - found.vd) })],
+      ['该规格的实际电压降', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(found.pct), volts: fmt(found.vd) })],
+      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(found.endVolts) })],
       ['您的限值', vdFormat(DROP_TEXT.limit, { percent: fmt(maxPct), volts: fmt(maxVd) })],
       ['参考限值', '3%良好· 5%最大'],
     ],
     vdFormat(DROP_TEXT.ampacityWarning, { amps: fmt(amps) }),
-    [mathIntro(), vdFormat(DROP_TEXT.sizeMath, {
+    [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.sizeMath, {
       percent: fmt(maxPct),
       maxDrop: fmt(maxVd, 3),
       size: found.label,
       cm: found.cm.toLocaleString('en-US'),
       mult: SYSTEMS[system].multLabel,
-      factor: K_FACTOR[material],
+      factor,
       amps: fmt(amps),
       feet: fmt(feet, 1),
       dropped: fmt(found.vd, 3),
-      actualPercent: fmt(pct),
+      actualPercent: fmt(found.pct),
     })].join('')
   );
 }
 
-function renderLength({ label, cm, volts, amps, maxPct, maxVd, feet }) {
-  const v = maxPct <= 3
+function renderLength({
+  system, material, factor,
+  label, cm, volts, amps, maxPct, maxVd, feet, endVolts, verdict,
+}) {
+  const v = verdict === 'good'
     ? { cls: 'good', badge: '最大线路', note: '' }
-    : maxPct <= 5
+    : verdict === 'warn'
       ? { cls: 'warn', badge: '最大线路', note: '' }
       : { cls: 'bad', badge: '最大线路', note: '' };
   v.note = vdFormat(DROP_TEXT.maxDistanceNote, {
@@ -389,17 +481,17 @@ function renderLength({ label, cm, volts, amps, maxPct, maxVd, feet }) {
     }),
     [
       ['压降在该距离', vdFormat(DROP_TEXT.actualDrop, { percent: fmt(maxPct), volts: fmt(maxVd) })],
-      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(volts - maxVd) })],
+      ['电压在负载', vdFormat(DROP_TEXT.volts, { volts: fmt(endVolts) })],
       ['电流', vdFormat(DROP_TEXT.amps, { amps: fmt(amps) })],
       ['参考限值', '3%良好· 5%最大'],
     ],
     v.note,
-    [mathIntro(), vdFormat(DROP_TEXT.maxRunMath, {
+    [mathIntro({ system, material, factor }), vdFormat(DROP_TEXT.maxRunMath, {
       percent: fmt(maxPct),
       maxDrop: fmt(maxVd, 3),
       cm: cm.toLocaleString('en-US'),
       mult: SYSTEMS[system].multLabel,
-      factor: K_FACTOR[material],
+      factor,
       amps: fmt(amps),
       feet: fmt(feet, 1),
     })].join('')

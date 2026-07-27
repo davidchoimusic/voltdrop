@@ -162,45 +162,169 @@ document.querySelectorAll('.seg-btn').forEach((button) => {
   });
 });
 
-function ambientSelectionFor(ambient) {
-  if (isCanada()) {
-    // Table 5A starts above 30°C and grants no cool-ambient credit.
-    if (ambient <= 30) {
-      return {
-        factor: 1,
-        rowDisplay: vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: 30 }),
-      };
-    }
+// The standards decision stays testable without a browser when every table and
+// country choice enters through this boundary.
+function calculateAmpacity(
+  country,
+  selectedMaterial,
+  selectedInsulationTemp,
+  selectedTerminationTemp,
+  isContinuous,
+  load,
+  ambient,
+  conductorCount,
+  label,
+  ampacityTable,
+  smallCapTable,
+  ambientCorrectionTable,
+  conductorAdjustmentTable,
+  cecAmbientCorrectionTable,
+  cecConductorAdjustmentTable,
+  tempIndex,
+) {
+  let ambientFactor;
+  let ambientRow;
 
-    // CEC rows are points, not bands. Always select the next higher listed
-    // point so an in-between input can never overstate permitted ampacity.
-    const row = CEC_AMBIENT_CORRECTION.find((item) => ambient <= item.ambient);
+  if (country === 'ca') {
+    if (ambient <= 30) {
+      ambientFactor = 1;
+      ambientRow = { kind: 'at-most', max: 30 };
+    } else {
+      // CEC rows are points, so the next listed point prevents an in-between
+      // temperature from overstating permitted ampacity.
+      const row = cecAmbientCorrectionTable.find((item) => ambient <= item.ambient);
+      ambientFactor = row?.factors[selectedInsulationTemp];
+      ambientRow = row
+        ? { kind: 'point', value: row.ambient }
+        : { kind: 'none' };
+    }
+  } else {
+    const row = ambientCorrectionTable.find((item) =>
+      (item.min === null || ambient >= item.min) && ambient <= item.max);
+    ambientFactor = row?.factors[selectedInsulationTemp];
+    ambientRow = row
+      ? row.min === null
+        ? { kind: 'at-most', max: row.max }
+        : { kind: 'range', min: row.min, max: row.max }
+      : { kind: 'none' };
+  }
+
+  const adjustmentTable = country === 'ca'
+    ? cecConductorAdjustmentTable
+    : conductorAdjustmentTable;
+  const adjustmentFactor = country !== 'ca' && conductorCount <= 3
+    ? 1
+    : adjustmentTable.find((row) =>
+      conductorCount >= row.min
+      && (row.max === null || conductorCount <= row.max))?.factor;
+  const baseAmpacity =
+    ampacityTable[selectedMaterial][label][tempIndex[selectedInsulationTemp]];
+  const terminationLimit =
+    ampacityTable[selectedMaterial][label][tempIndex[selectedTerminationTemp]];
+  const smallCap = (smallCapTable[selectedMaterial] || {})[label] ?? null;
+  const continuousFactor = isContinuous
+    ? (country === 'ca' ? 0.80 : 1.25)
+    : 1;
+  const continuousBasis = !isContinuous
+    ? 'none'
+    : country === 'ca'
+      ? 'permitted-amps'
+      : 'load-amps';
+
+  if (ambientFactor === null || ambientFactor === undefined) {
     return {
-      factor: row?.factors[insulationTemp],
-      rowDisplay: row
-        ? vdFormat(AMP_RESULT_TEXT.degrees, { degrees: row.ambient })
-        : '',
+      status: 'not-permitted',
+      country,
+      material: selectedMaterial,
+      insulationTemp: selectedInsulationTemp,
+      terminationTemp: selectedTerminationTemp,
+      continuous: isContinuous,
+      continuousFactor,
+      continuousBasis,
+      load,
+      ambient,
+      conductorCount,
+      label,
+      baseAmpacity,
+      ambientRow,
+      ambientFactor,
+      ambientAdjusted: null,
+      adjustmentFactor,
+      adjustedAmpacity: null,
+      terminationLimit,
+      smallCap,
+      binding: null,
+      exactPermitted: null,
+      permitted: null,
+      loadCheckValue: null,
+      passes: null,
     };
   }
 
-  const row = AMBIENT_CORRECTION.find((item) =>
-    (item.min === null || ambient >= item.min) && ambient <= item.max);
-  const rowDisplay = row
-    ? row.min === null
-      ? vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: row.max })
-      : vdFormat(AMP_RESULT_TEXT.degreeRange, { min: row.min, max: row.max })
-    : '';
+  const ambientAdjusted = baseAmpacity * ambientFactor;
+  const adjustedAmpacity = ambientAdjusted * adjustmentFactor;
+  const exactPermitted = Math.min(
+    adjustedAmpacity,
+    terminationLimit,
+    smallCap === null ? Infinity : smallCap,
+  );
+  const permitted = Math.floor(exactPermitted + 1e-9);
+  const loadCheckValue = isContinuous
+    ? (country === 'ca' ? permitted * continuousFactor : load * continuousFactor)
+    : load;
+  const passes = isContinuous && country === 'ca'
+    ? load <= loadCheckValue
+    : loadCheckValue <= permitted;
+
+  let binding = 'derating';
+  if (smallCap !== null
+      && smallCap <= terminationLimit
+      && smallCap <= adjustedAmpacity) {
+    binding = 'cap';
+  } else if (terminationLimit <= adjustedAmpacity) {
+    binding = 'termination';
+  }
+
   return {
-    factor: row?.factors[insulationTemp],
-    rowDisplay,
+    status: 'ok',
+    country,
+    material: selectedMaterial,
+    insulationTemp: selectedInsulationTemp,
+    terminationTemp: selectedTerminationTemp,
+    continuous: isContinuous,
+    continuousFactor,
+    continuousBasis,
+    load,
+    ambient,
+    conductorCount,
+    label,
+    baseAmpacity,
+    ambientRow,
+    ambientFactor,
+    ambientAdjusted,
+    adjustmentFactor,
+    adjustedAmpacity,
+    terminationLimit,
+    smallCap,
+    binding,
+    exactPermitted,
+    permitted,
+    loadCheckValue,
+    passes,
   };
 }
 
-function adjustmentFor(count) {
-  const table = isCanada() ? CEC_CONDUCTOR_ADJUSTMENT : CONDUCTOR_ADJUSTMENT;
-  if (!isCanada() && count <= 3) return 1;
-  return table.find((row) =>
-    count >= row.min && (row.max === null || count <= row.max))?.factor;
+function formatAmbientRow(row) {
+  if (row.kind === 'at-most') {
+    return vdFormat(AMP_RESULT_TEXT.atMostDegrees, { max: row.max });
+  }
+  if (row.kind === 'point') {
+    return vdFormat(AMP_RESULT_TEXT.degrees, { degrees: row.value });
+  }
+  if (row.kind === 'range') {
+    return vdFormat(AMP_RESULT_TEXT.degreeRange, { min: row.min, max: row.max });
+  }
+  return '';
 }
 
 function showOnly(selector, id) {
@@ -230,84 +354,75 @@ function setBinding(binding) {
   setText('amp-binding-value', $(BINDING_LABEL_IDS[binding]).textContent);
 }
 
+function renderAmpacity(result) {
+  if (result.status === 'not-permitted') {
+    showUnavailable();
+    return;
+  }
+
+  $('results').hidden = false;
+  $('amp-result-calculation').hidden = false;
+  $('amp-result-unavailable').hidden = true;
+  $('verdict').className = result.passes ? 'verdict good' : 'verdict bad';
+  showOnly('.amp-verdict-badge', result.passes ? 'amp-badge-pass' : 'amp-badge-too-small');
+  showOnly('.amp-big-label', 'amp-label-final');
+  setText('big-number', formatAmps(result.permitted));
+
+  setText('amp-base-value', formatAmps(result.baseAmpacity));
+  setText('amp-ambient-input', vdFormat(AMP_RESULT_TEXT.degrees, { degrees: formatNumber(result.ambient) }));
+  setText('amp-ambient-row-value', formatAmbientRow(result.ambientRow));
+  setText('amp-ambient-factor', formatFactor(result.ambientFactor));
+  setText('amp-ambient-value', formatWholeAmps(result.ambientAdjusted));
+  setText('amp-conductor-input', String(result.conductorCount));
+  setText('amp-adjustment-factor', formatFactor(result.adjustmentFactor));
+  setText('amp-adjusted-value', formatWholeAmps(result.adjustedAmpacity));
+  setText('amp-termination-value', formatAmps(result.terminationLimit));
+  setText('amp-cap-value', result.smallCap === null ? '—' : formatAmps(result.smallCap));
+  setText('amp-final-value', formatAmps(result.permitted));
+  setText('amp-combined-formula', vdFormat(AMP_RESULT_TEXT.combined, {
+    base: formatNumber(result.baseAmpacity),
+    ambientFactor: result.ambientFactor.toFixed(2),
+    adjustmentFactor: result.adjustmentFactor.toFixed(2),
+    derated: formatNumber(Math.floor(result.adjustedAmpacity + 1e-9)),
+  }));
+  setBinding(result.binding);
+
+  setText('amp-load-entered', formatAmps(result.load));
+  setText('amp-load-required', formatAmps(result.loadCheckValue));
+  $('amp-continuous-row').hidden = !result.continuous;
+  $('amp-noncontinuous-row').hidden = result.continuous;
+  showOnly('.amp-load-note', result.passes
+    ? (result.continuous ? 'amp-note-continuous-pass' : 'amp-note-load-pass')
+    : (result.continuous ? 'amp-note-continuous-fail' : 'amp-note-load-fail'));
+
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 function check() {
   const load = Number($('amp-load').value);
   const ambient = Number($('amp-ambient').value);
   const conductorCount = Number($('amp-conductors').value);
   if (!load || !Number.isFinite(ambient) || !Number.isInteger(conductorCount) || conductorCount < 1) return;
 
-  const ambientSelection = ambientSelectionFor(ambient);
-  const ambientFactor = ambientSelection.factor;
-  if (ambientFactor === null || ambientFactor === undefined) {
-    showUnavailable();
-    return;
-  }
-
-  const adjustmentFactor = adjustmentFor(conductorCount);
-  const label = $('amp-size').value;
-  const baseAmpacity = AMPACITY[material][label][TEMP_INDEX[insulationTemp]];
-  const ambientAdjusted = baseAmpacity * ambientFactor;
-  const adjustedAmpacity = ambientAdjusted * adjustmentFactor;
-  const terminationLimit = AMPACITY[material][label][TEMP_INDEX[terminationTemp]];
-  const smallCap = (SMALL_CAP[material] || {})[label];
-  const exactPermitted = Math.min(
-    adjustedAmpacity,
-    terminationLimit,
-    smallCap === undefined ? Infinity : smallCap,
+  const result = calculateAmpacity(
+    isCanada() ? 'ca' : 'us',
+    material,
+    insulationTemp,
+    terminationTemp,
+    continuous,
+    load,
+    ambient,
+    conductorCount,
+    $('amp-size').value,
+    AMPACITY,
+    SMALL_CAP,
+    AMBIENT_CORRECTION,
+    CONDUCTOR_ADJUSTMENT,
+    CEC_AMBIENT_CORRECTION,
+    CEC_CONDUCTOR_ADJUSTMENT,
+    TEMP_INDEX,
   );
-  const permitted = Math.floor(exactPermitted + 1e-9);
-  const loadCheckValue = continuous
-    ? (isCanada() ? permitted * 0.80 : load * 1.25)
-    : load;
-  const passes = continuous && isCanada()
-    ? load <= loadCheckValue
-    : loadCheckValue <= permitted;
-
-  let binding = 'derating';
-  if (smallCap !== undefined
-      && smallCap <= terminationLimit
-      && smallCap <= adjustedAmpacity) {
-    binding = 'cap';
-  } else if (terminationLimit <= adjustedAmpacity) {
-    binding = 'termination';
-  }
-
-  $('results').hidden = false;
-  $('amp-result-calculation').hidden = false;
-  $('amp-result-unavailable').hidden = true;
-  $('verdict').className = passes ? 'verdict good' : 'verdict bad';
-  showOnly('.amp-verdict-badge', passes ? 'amp-badge-pass' : 'amp-badge-too-small');
-  showOnly('.amp-big-label', 'amp-label-final');
-  setText('big-number', formatAmps(permitted));
-
-  setText('amp-base-value', formatAmps(baseAmpacity));
-  setText('amp-ambient-input', vdFormat(AMP_RESULT_TEXT.degrees, { degrees: formatNumber(ambient) }));
-  setText('amp-ambient-row-value', ambientSelection.rowDisplay);
-  setText('amp-ambient-factor', formatFactor(ambientFactor));
-  setText('amp-ambient-value', formatWholeAmps(ambientAdjusted));
-  setText('amp-conductor-input', String(conductorCount));
-  setText('amp-adjustment-factor', formatFactor(adjustmentFactor));
-  setText('amp-adjusted-value', formatWholeAmps(adjustedAmpacity));
-  setText('amp-termination-value', formatAmps(terminationLimit));
-  setText('amp-cap-value', smallCap === undefined ? '—' : formatAmps(smallCap));
-  setText('amp-final-value', formatAmps(permitted));
-  setText('amp-combined-formula', vdFormat(AMP_RESULT_TEXT.combined, {
-    base: formatNumber(baseAmpacity),
-    ambientFactor: ambientFactor.toFixed(2),
-    adjustmentFactor: adjustmentFactor.toFixed(2),
-    derated: formatNumber(Math.floor(adjustedAmpacity + 1e-9)),
-  }));
-  setBinding(binding);
-
-  setText('amp-load-entered', formatAmps(load));
-  setText('amp-load-required', formatAmps(loadCheckValue));
-  $('amp-continuous-row').hidden = !continuous;
-  $('amp-noncontinuous-row').hidden = continuous;
-  showOnly('.amp-load-note', passes
-    ? (continuous ? 'amp-note-continuous-pass' : 'amp-note-load-pass')
-    : (continuous ? 'amp-note-continuous-fail' : 'amp-note-load-fail'));
-
-  $('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  renderAmpacity(result);
 }
 
 fillSizes();
