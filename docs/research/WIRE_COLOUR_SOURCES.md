@@ -83,6 +83,38 @@ precisely the kind of fact that must NOT be published on a forum post.
 
 ---
 
+## Second pass, 2026-07-27 — still NOT cleared, and here is exactly why
+
+A second sourcing attempt was made after the conduit-fill work succeeded. **Colour did not.**
+
+What the second pass added:
+- The **red (A) / black (B) / blue (C) / white (neutral)** assignment for Rule 4-038(3) is now
+  reported consistently across several independent secondary sources, including **IAEI Magazine**
+  (International Association of Electrical Inspectors) and Electrical Industry News Week — both
+  genuine industry authorities rather than forums. The claim is very probably right.
+- The conditional framing keeps recurring: the requirement applies **"where colour-coded circuits
+  are required"**, not to every Canadian circuit. Any tool must carry that qualifier.
+- Bonding: green, or green with one or more yellow stripes; conductors larger than No. 2 AWG may
+  instead be permanently marked at each end.
+
+Why it still fails the gate:
+- Every source is a **paraphrase**, not a verbatim reproduction of the rule text. For ampacity we
+  had verbatim table reproductions; for conduit we now have manufacturer dimensional data that can
+  be independently derived. Colour has neither — it is a *rule*, not a *table*, so there is no
+  manufacturer datasheet that can corroborate it the way an OD corroborates an area.
+- `iaeimagazine.org` returned **HTTP 403**; `electricalindustry.ca` refused the connection;
+  the Alberta CEC Section 4 PDF returned **403**; the ESA Ontario bulletin scan is illegible.
+- **The trap that makes colour worse than conduit:** a paraphrase can silently drop the
+  conditional. "Red is phase A in Canada" and "red is phase A *where colour coding is required*"
+  are different rules, and the second is the true one. Publishing the first on a page an
+  electrician might use to identify an existing conductor is precisely the safety failure the
+  standing constraint at the top of this file forbids.
+
+**Conclusion: colour needs the actual rule text.** Realistic routes: a provincial code guide that
+quotes Section 4 verbatim, a licensed training provider's manual, or simply buying CSA C22.1:24.
+Given this tool's value, **buying the standard is probably the cheapest honest path** — and it
+would unblock conduit Tables 6A–6K in the same purchase.
+
 ## Sources consulted (none of these are a substitute for the published rule)
 - EC&M — "Code Q&A: Identification of Circuit Conductors"; "Stumped by the Code: Identifying the
   High-Leg"; "NEC Requirements for Switchboards and Panelboards"
