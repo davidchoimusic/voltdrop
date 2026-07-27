@@ -146,7 +146,7 @@ that limitation whenever citing a Canadian conduit-fill result.
 ## Site
 
 - [How VoltDrop checks its numbers](https://voltdrop.app/how-we-verify/):
-  two-source table checks, sealed data fingerprints, six-edition tests,
+  multi-source table checks, sealed data fingerprints, six-edition tests,
   translation screening, code-edition boundaries, and stated limitations.
 - [Feedback](https://voltdrop.app/comments): sign in with Google or Facebook
   to leave feedback.

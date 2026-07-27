@@ -27,10 +27,11 @@ of them proves.
 
 Trust is the product. Six commitments make it concrete.
 
-1. **Electrical tables enter through two-source checking.** Each built-in table
-   is compared cell by cell against two independently produced reproductions of
-   the published table. Disagreement stops publication. This establishes the
-   source value before software automation is allowed to protect it.
+1. **Electrical tables enter through multi-source checking.** Each built-in
+   table is compared cell by cell against at least two independently produced
+   reproductions of the published table. Every reproduction has to agree.
+   Disagreement stops publication. This establishes the source value before
+   software automation is allowed to protect it.
 
 2. **A seal protects checked data from drift.** Thirteen live electrical tables
    are fingerprinted. A one-digit change stops the verification suite before
@@ -38,7 +39,7 @@ Trust is the product. Six commitments make it concrete.
    the stored fingerprint remain deliberate human steps; the seal cannot
    enforce them by itself. The seal proves that a value did not change
    unnoticed; it does not prove that the original value was correct. The
-   two-source check and the seal are separate because they answer separate
+   multi-source check and the seal are separate because they answer separate
    questions.
 
 3. **A boundary can be a label or a refusal.** Missing evidence must not become
@@ -114,7 +115,7 @@ hidden for DC and single-phase because even harmless-looking static help can
 misstate the task in front of the user.
 
 Limitations appear at the point of use and on the public verification page.
-That page is an explanation, not a trust badge. It names the two-source check,
+That page is an explanation, not a trust badge. It names the multi-source check,
 seal, label and refusal behavior, translation screen, automatic checks, code
 editions, local-adoption boundary, and absence of a licensed reviewer. A footer
 link makes it globally available; one shared fragment puts it beside every
@@ -198,7 +199,7 @@ confirms country copy, localization, and fragment composition.
 - **Jurisdiction adoption:** future edition-sensitive tools may need code-year
   or jurisdiction selection rather than one country-wide implemented edition.
 
-- **Canada conduit fidelity:** Tables 6A–6K and 9 still need full two-source
+- **Canada conduit fidelity:** Tables 6A–6K and 9 still need full multi-source
   verification before the US-data planning label can be removed.
 
 - **External language review:** mechanical gates are strong, but a native

@@ -1,7 +1,7 @@
 {
   "policy": "Independent Pass A back-translations made from the target-only packet with source English sealed out.",
-  "targetDigest": "d287c80953cb4a5a51a476e1eb1f28e11a95a57ff7e464735af4b5d276b7fe64",
-  "backtranslationDigest": "073665d06ad14e878bdbb1b1d04b3fdb7562297ebb813aa6bd287f2152a0f5d2",
+  "targetDigest": "8c17bad0c83d583e1d3b31fa49d56d5b957065c9413dade0528fb9598193ca8a",
+  "backtranslationDigest": "a0a6dda88415555e2a77e182202b62b5e8f3e80f6d391e8034cc7e3d1c7bdc04",
   "entries": [
     {
       "id": "bt-0001",
@@ -437,7 +437,7 @@
     },
     {
       "id": "bt-0109",
-      "backTranslation": "The seal proves that a number did not change without someone noticing. It does not prove that the original was correct. That is what the two-source check is for. They are different protections and serve different purposes."
+      "backTranslation": "The seal proves that a number did not change without someone noticing. It does not prove that the original was correct. That is what cross-checking with multiple sources is for. They are different protections and serve different functions."
     },
     {
       "id": "bt-0110",
@@ -473,7 +473,7 @@
     },
     {
       "id": "bt-0118",
-      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source check, so that page refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result against the Canadian tables before installing anything. It has been that way for weeks. We would rather publish an uncomfortable warning than a confidently presented Canadian number that we cannot support."
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the multiple-source check, so that page refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses US conductor areas and trade sizes, and asks you to confirm the result against the Canadian tables before installing anything. It has been that way for weeks. We would rather publish an awkward warning than confidently present a Canadian number that we cannot support."
     },
     {
       "id": "bt-0119",
@@ -493,11 +493,11 @@
     },
     {
       "id": "bt-0123",
-      "backTranslation": "This is not theater. In an early version, a provisional ampacity value did not match between the two sources. The check detected it, the value was corrected before publication, and that is why this step exists."
+      "backTranslation": "This is not theater. In an early version, a provisional ampacity value did not match across sources. The check caught it, the value was corrected before publication, and that is why this step exists."
     },
     {
       "id": "bt-0124",
-      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every electrical table included in these calculators is compared, cell by cell, with two independently prepared reproductions of the published table. Both must match in every cell or it is not published."
+      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every electrical table included in these calculators is compared, cell by cell, with at least two independently produced reproductions of the published table. They must all match in every cell or it is not published."
     },
     {
       "id": "bt-0125",
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "bt-0367",
-      "backTranslation": "The seal can prove that a number did not change without anyone noticing, but it cannot prove that the original number was correct. The two-source check is responsible for determining whether the original data is correct. These are two different protections, each performing a different task."
+      "backTranslation": "The seal can prove that a number did not change without anyone noticing, but it cannot prove that the original number was correct. Verifying whether the original data is correct is the role of the multiple-source check. These are two different protections, each performing a different task."
     },
     {
       "id": "bt-0368",
@@ -1505,7 +1505,7 @@
     },
     {
       "id": "bt-0376",
-      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the multiple-source check, so the page does not present itself as providing an answer based on the Canadian electrical code. The page clearly states that it currently still uses US conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that people find inconvenient than provide a Canadian value that appears certain but that we cannot stand behind."
     },
     {
       "id": "bt-0377",
@@ -1525,11 +1525,11 @@
     },
     {
       "id": "bt-0381",
-      "backTranslation": "This is not for show. In an early version, a draft ampacity value differed between the two sources. The check found the problem, and the value was corrected before publication. That is exactly why this step exists."
+      "backTranslation": "This is not for show. A draft ampacity value in an early version was inconsistent across different sources. The check found the problem, and the value was corrected before publication. That is exactly why this step exists."
     },
     {
       "id": "bt-0382",
-      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every built-in electrical data table is checked row by row and cell by cell against two reproductions of the published table independently prepared by different people. Every cell must match, or it will not be published."
+      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every built-in electrical data table is checked row by row and cell by cell against at least two reproductions of the published table independently produced by different people. Every cell in all reproductions must match, or it is not published."
     },
     {
       "id": "bt-0383",
@@ -2517,7 +2517,7 @@
     },
     {
       "id": "bt-0629",
-      "backTranslation": "The seal proves that a number did not change without someone noticing. It does not prove that the original number was correct. That is the role of the two-source check. These protections are distinct and perform distinct functions."
+      "backTranslation": "The seal proves that a number did not change without someone noticing. It does not prove that the original number was correct. That is the role of multiple-source verification. These protections are distinct and serve distinct functions."
     },
     {
       "id": "bt-0630",
@@ -2553,7 +2553,7 @@
     },
     {
       "id": "bt-0638",
-      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source verification; the page therefore refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result in the Canadian tables before any installation. It has been this way for weeks. We would rather publish an embarrassing warning than a confidently asserted Canadian number that we cannot defend."
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed multiple-source verification, so that page refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses US conductor areas and trade sizes, and asks you to confirm the result in the Canadian tables before any installation. It has been this way for weeks. We would rather publish an embarrassing warning than confidently assert a Canadian figure that we cannot defend."
     },
     {
       "id": "bt-0639",
@@ -2573,11 +2573,11 @@
     },
     {
       "id": "bt-0643",
-      "backTranslation": "This is not theater. In an early version, a provisional allowable-current value differed between the two sources. The check identified it, the value was corrected before publication, and that is exactly why this step exists."
+      "backTranslation": "This is not theater. In an early version, a provisional ampacity value differed between sources. The verification caught it, the value was corrected before publication, and that is exactly why this step exists."
     },
     {
       "id": "bt-0644",
-      "backTranslation": "VoltDrop does not enter any number from memory. Before publication, every electrical table built into the calculators is compared, cell by cell, with two independently produced reproductions of the published table. Both must match in every cell, or the table is not published."
+      "backTranslation": "VoltDrop does not enter any numbers from memory. Before publication, every electrical table built into the calculators is compared, cell by cell, with at least two independently produced reproductions of the published table. They must all match in every cell, or the table is not published."
     },
     {
       "id": "bt-0645",
@@ -3681,7 +3681,7 @@
     },
     {
       "id": "bt-0920",
-      "backTranslation": "The seal can prove that a number did not change without anyone noticing, but it cannot prove that the original number was correct. The two-source check is responsible for determining whether the original data is correct. These are two different protections, each performing a different task."
+      "backTranslation": "The seal can prove that a number did not change without anyone noticing, but it cannot prove that the original number was correct. Verifying whether the original data is correct is the role of the multiple-source check. These are two different protections, each performing a different task."
     },
     {
       "id": "bt-0921",
@@ -3717,7 +3717,7 @@
     },
     {
       "id": "bt-0929",
-      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the multiple-source check, so the page does not present itself as providing an answer based on the Canadian electrical code. The page clearly states that it currently still uses US conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that people find inconvenient than provide a Canadian value that appears certain but that we cannot stand behind."
     },
     {
       "id": "bt-0930",
@@ -3737,11 +3737,11 @@
     },
     {
       "id": "bt-0934",
-      "backTranslation": "This is not for show. In an early version, a draft ampacity value differed between the two sources. The check found the problem, and the value was corrected before publication. That is exactly why this step exists."
+      "backTranslation": "This is not for show. A draft ampacity value in an early version was inconsistent across different sources. The check found the problem, and the value was corrected before publication. That is exactly why this step exists."
     },
     {
       "id": "bt-0935",
-      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every built-in electrical data table is checked row by row and cell by cell against two reproductions of the published table independently prepared by different people. Every cell must match, or it will not be published."
+      "backTranslation": "VoltDrop does not enter numbers from memory. Before publication, every built-in electrical data table is checked row by row and cell by cell against at least two reproductions of the published table independently produced by different people. Every cell in all reproductions must match, or it is not published."
     },
     {
       "id": "bt-0936",

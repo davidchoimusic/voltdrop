@@ -117,18 +117,18 @@
   </div>
 
   <section class="card explainer">
-    <h2>Two sources, before it ships</h2>
-    <p>VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against two independently produced reproductions of the published table before it goes live, row by row. Both have to agree, on every cell, or it doesn't ship.</p>
-    <p>This is not theatre. One draft ampacity value in an early build disagreed between the two sources. The check caught it, the value was corrected before it shipped, and that is the whole reason the step exists.</p>
+    <h2>Multiple sources, before it ships</h2>
+    <p>VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against at least two independently produced reproductions of the published table before it goes live, row by row. They all have to agree, on every cell, or it doesn't ship.</p>
+    <p>This is not theatre. One draft ampacity value in an early build disagreed between sources. The check caught it, the value was corrected before it shipped, and that is the whole reason the step exists.</p>
 
     <h2>Sealed, so they can't drift</h2>
     <p>After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.</p>
     <p>We've tested that the seal fires on a one-digit edit.</p>
-    <p>The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the two-source check is for. They're separate protections and they do separate jobs.</p>
+    <p>The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the multi-source check is for. They're separate protections and they do separate jobs.</p>
 
     <h2>When we don't know, we say so</h2>
     <p>The easiest thing in the world would be to fill every gap with a plausible-looking number and say nothing about it. Where we have had to borrow data from another country's tables, we say so on the page itself, in the place you would be about to rely on it.</p>
-    <p>Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the two-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.</p>
+    <p>Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the multi-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.</p>
     <p>So read the labels rather than assuming. Where the data behind a result hasn't passed for your country, the page tells you so in plain language instead of quietly presenting it as a verified answer.</p>
 
     <h2>Translations get read back</h2>

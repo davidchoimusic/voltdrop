@@ -25,11 +25,11 @@ The non-English editions contain localized versions of the same tools and guides
 
 URL: https://voltdrop.app/how-we-verify/
 
-VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against two independently produced reproductions of the published table before it goes live, row by row. Both have to agree, on every cell, or it doesn't ship.
+VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against at least two independently produced reproductions of the published table before it goes live, row by row. They all have to agree, on every cell, or it doesn't ship.
 
 After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.
 
-The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the two-source check is for. They're separate protections and they do separate jobs.
+The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the multi-source check is for. They're separate protections and they do separate jobs.
 
 If data has not passed, the page refuses to invent a result. The Canadian conduit-fill page remains planning-only for that reason. Translated warnings are screened by independent back-translation, every calculator is driven in all six editions, translated numbers are checked against their English twins, and protected code names, wire types, and units must survive translation.
 
