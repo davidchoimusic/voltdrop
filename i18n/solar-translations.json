@@ -289,7 +289,7 @@
     "runtime.solar.colCurrentUsed": "所用电流",
     "runtime.solar.colAllowance": "允许电压降",
     "runtime.solar.colActualDrop": "实际电压降",
-    "runtime.solar.colActualPercent": "实际百分比",
+    "runtime.solar.colActualPercent": "实际 %",
     "runtime.solar.colRequiredCm": "所需面积",
     "runtime.solar.colSize": "线径",
     "runtime.solar.voltsLabelPv": "阵列工作电压（Vmp）",

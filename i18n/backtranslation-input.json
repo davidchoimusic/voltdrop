@@ -1,6 +1,6 @@
 {
   "policy": "Target-language-only input for back-translation Pass A. It intentionally contains no source English and uses opaque row IDs.",
-  "targetDigest": "41844f5ff6ccc4a39673ace5a2edffc770c288bb706059d0612911def010d3db",
+  "targetDigest": "d287c80953cb4a5a51a476e1eb1f28e11a95a57ff7e464735af4b5d276b7fe64",
   "entries": [
     {
       "id": "bt-0001",
@@ -535,7 +535,7 @@
     {
       "id": "bt-0107",
       "locale": "es",
-      "targetText": "Cuando una tabla pasa la revisión, calculamos su huella digital y la guardamos en el repositorio. A partir de ese momento, si cambia un solo dígito de la tabla, el proceso de generación se detiene. No es una advertencia: el sitio no puede generarse hasta que alguien vuelva a verificar los datos deliberadamente y cree un sello nuevo."
+      "targetText": "Después de que una tabla pasa la revisión, calculamos su huella digital y la guardamos en el repositorio. A partir de entonces, si cambia un solo dígito de esa tabla, el conjunto de verificaciones se detiene antes de las pruebas en el navegador e informa la discrepancia. Volver a verificar los datos y actualizar deliberadamente la huella son pasos humanos separados; el sello no puede imponerlos por sí solo."
     },
     {
       "id": "bt-0108",
@@ -560,17 +560,17 @@
     {
       "id": "bt-0112",
       "locale": "es",
-      "targetText": "Cada calculadora se prueba en las seis ediciones, no solo en inglés, y la respuesta se compara con un cálculo hecho a mano. Lo aprendimos por las malas: una ejecución que solo probó la edición en inglés dio un resultado limpio mientras la calculadora principal no funcionaba en otras cuatro ediciones."
+      "targetText": "Cada calculadora se prueba en las seis ediciones, no solo en inglés, y la respuesta se compara con un valor esperado: calculado a mano para los casos principales de caída de tensión y derivado de las tablas selladas para los demás. Lo aprendimos por las malas: una ejecución que solo probó la edición en inglés dio un resultado limpio mientras la calculadora principal no funcionaba en otras cuatro ediciones."
     },
     {
       "id": "bt-0113",
       "locale": "es",
-      "targetText": "Cada número que aparece en una página traducida debe coincidir con el mismo número de su página equivalente en inglés."
+      "targetText": "La comprobación de paridad numérica cubre las guías traducidas, la página de Términos y tres páginas más recientes, incluida esta. En esas páginas, cada número visible se compara con su equivalente en inglés, salvo los valores marcados expresamente como diferencias legítimas propias del idioma o la región."
     },
     {
       "id": "bt-0114",
       "locale": "es",
-      "targetText": "Si una página muestra un resultado, los datos que lo sustentan pasaron la revisión. Si no la pasaron, verá la nota en su lugar."
+      "targetText": "Así que lea las etiquetas en lugar de dar nada por sentado. Cuando los datos que sustentan un resultado no han pasado la revisión para su país, la página se lo dice con claridad en vez de presentarlo discretamente como una respuesta verificada."
     },
     {
       "id": "bt-0115",
@@ -590,7 +590,7 @@
     {
       "id": "bt-0118",
       "locale": "es",
-      "targetText": "Nuestra página canadiense de llenado de tubo conduit muestra una nota solo para planificación en vez de resultados, porque las tablas canadienses que necesita todavía no han pasado la comprobación con dos fuentes. Lleva semanas así. Un espacio en blanco es honesto. Un número incorrecto presentado con seguridad es peligroso."
+      "targetText": "Nuestra página canadiense de llenado de conduit es el ejemplo más claro. CEC Tables 6A–6K y Table 9 no han pasado la comprobación con dos fuentes, por lo que esa página se niega a presentarse como una respuesta basada en el código canadiense. Allí se indica claramente que todavía se trabaja con áreas de conductores y tamaños comerciales de EE. UU., y se le pide que confirme el resultado con las tablas canadienses antes de instalar nada. Lleva semanas así. Preferimos publicar una advertencia incómoda antes que un número canadiense presentado con seguridad que no podamos respaldar."
     },
     {
       "id": "bt-0119",
@@ -605,7 +605,7 @@
     {
       "id": "bt-0121",
       "locale": "es",
-      "targetText": "Lo más fácil sería llenar cada vacío con un número que pareciera razonable. No lo hacemos."
+      "targetText": "Lo más fácil del mundo sería llenar cada vacío con un número que pareciera plausible y no decir nada al respecto. Cuando hemos tenido que tomar prestados datos de las tablas de otro país, lo indicamos en la propia página, justo donde usted estaría a punto de basarse en ellos."
     },
     {
       "id": "bt-0122",
@@ -1825,7 +1825,7 @@
     {
       "id": "bt-0365",
       "locale": "zh-Hans",
-      "targetText": "数据表通过核查后，我们会计算其数字指纹，并把该指纹保存在代码仓库中。此后，只要表内有一个数字发生变化，网站生成过程就会停止。这不是普通警告：在有人有意重新核查数据并生成新封印之前，整个网站都无法生成。"
+      "targetText": "数据表通过核查后，我们会计算其数字指纹，并把指纹保存在代码仓库中。此后，只要表中有一个数字发生变化，验证套件就会在浏览器测试开始前停止，并报告不一致。重新核查数据和有意更新所存指纹是两个独立的人工步骤，封印本身无法强制执行。"
     },
     {
       "id": "bt-0366",
@@ -1850,17 +1850,17 @@
     {
       "id": "bt-0370",
       "locale": "zh-Hans",
-      "targetText": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与手工计算值核对。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。"
+      "targetText": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与预期值核对——核心电压降案例的预期值由手工计算得出，其余案例则从封印数据表中推导。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。"
     },
     {
       "id": "bt-0371",
       "locale": "zh-Hans",
-      "targetText": "翻译页面显示的每个数字，都必须与对应英文页面上的同一数字完全一致。"
+      "targetText": "数值一致性检查覆盖已翻译的指南、条款页面以及包括本页在内的三个较新页面。在这些页面上，每个可见数字都会与对应英文页面核对；只有明确标记为合理本地差异的数值例外。"
     },
     {
       "id": "bt-0372",
       "locale": "zh-Hans",
-      "targetText": "如果页面显示了结果，说明背后的数据已经通过核查；如果没有通过，页面只会显示说明，而不会给出结果。"
+      "targetText": "所以，请先看页面标签，不要想当然。若某个结果背后的数据尚未通过您所在国家的核查，页面会用直白的文字说明，而不会悄悄把它当作已经验证的答案呈现。"
     },
     {
       "id": "bt-0373",
@@ -1880,7 +1880,7 @@
     {
       "id": "bt-0376",
       "locale": "zh-Hans",
-      "targetText": "加拿大版导管填充页面只显示规划说明，不给出结果，因为所需的加拿大数据表尚未通过双来源核查。该页面已经这样保留了数周。留空是诚实的；自信地给出错误数字则很危险。"
+      "targetText": "加拿大导管填充页面是最清楚的例子。CEC Tables 6A–6K 和 Table 9 尚未通过双来源核查，因此该页面不会把自己说成是在提供加拿大电气规范答案。页面明确说明，它目前仍采用美国的导线截面积和标准尺寸数据，并要求您在安装任何设备前对照加拿大表格确认。数周以来一直如此。我们宁可发布一条让人觉得麻烦的警告，也不愿给出一个我们无法负责却显得笃定的加拿大数值。"
     },
     {
       "id": "bt-0377",
@@ -1895,7 +1895,7 @@
     {
       "id": "bt-0379",
       "locale": "zh-Hans",
-      "targetText": "最容易的做法，是用看起来合理的数字填满所有空缺。我们不会这样做。"
+      "targetText": "世界上最容易的做法，是用一个看似合理的数字填满每个空缺，却对此只字不提。当我们不得不借用另一个国家表格中的数据时，我们会在页面本身说明，而且就在您即将依赖这些数据的位置。"
     },
     {
       "id": "bt-0380",
@@ -3135,7 +3135,7 @@
     {
       "id": "bt-0627",
       "locale": "fr-CA",
-      "targetText": "Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la génération s’arrête. Ce n’est pas un avertissement : le site ne peut plus être généré tant qu’une personne n’a pas volontairement revérifié les données et créé un nouveau sceau."
+      "targetText": "Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la suite de vérification s’arrête avant les essais dans le navigateur et signale l’écart. Revérifier les données et mettre volontairement à jour l’empreinte sont deux interventions humaines distinctes que le sceau ne peut pas imposer à lui seul."
     },
     {
       "id": "bt-0628",
@@ -3160,17 +3160,17 @@
     {
       "id": "bt-0632",
       "locale": "fr-CA",
-      "targetText": "Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, puis sa réponse est comparée à un calcul fait à la main. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions."
+      "targetText": "Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, et sa réponse est comparée à une valeur attendue — calculée à la main pour les principaux cas de chute de tension et dérivée des tableaux scellés pour les autres. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions."
     },
     {
       "id": "bt-0633",
       "locale": "fr-CA",
-      "targetText": "Chaque nombre affiché sur une page traduite doit correspondre au même nombre sur sa jumelle anglaise."
+      "targetText": "Le contrôle de parité numérique couvre les guides traduits, la page Conditions d’utilisation et trois pages plus récentes, dont celle-ci. Sur ces pages, chaque nombre visible est comparé à celui de la page anglaise correspondante, sauf si une valeur est expressément marquée comme une différence locale légitime."
     },
     {
       "id": "bt-0634",
       "locale": "fr-CA",
-      "targetText": "Si une page affiche un résultat, les données qui le soutiennent ont franchi la vérification. Sinon, la note s’affiche à la place."
+      "targetText": "Lisez donc les indications au lieu de tenir quoi que ce soit pour acquis. Lorsque les données derrière un résultat n’ont pas franchi la vérification pour votre pays, la page le dit en langage clair au lieu de présenter discrètement ce résultat comme une réponse vérifiée."
     },
     {
       "id": "bt-0635",
@@ -3190,7 +3190,7 @@
     {
       "id": "bt-0638",
       "locale": "fr-CA",
-      "targetText": "Notre page canadienne de remplissage de conduit affiche une note réservée à la planification plutôt que des résultats, car les tableaux canadiens nécessaires n’ont pas encore franchi la vérification à deux sources. Elle reste ainsi depuis des semaines. Un espace vide est honnête. Un nombre faux présenté avec assurance est dangereux."
+      "targetText": "Notre page canadienne de remplissage de conduits en est l’exemple le plus clair. Les CEC Tables 6A–6K et Table 9 n’ont pas franchi la vérification à deux sources; cette page refuse donc de se présenter comme une réponse fondée sur le code canadien. Elle indique clairement qu’elle utilise encore des aires de conducteurs et des grosseurs commerciales américaines, et elle vous demande de confirmer le résultat dans les tableaux canadiens avant toute installation. C’est ainsi depuis des semaines. Nous préférons publier un avertissement embarrassant plutôt qu’un chiffre canadien affirmé avec assurance que nous ne pouvons pas défendre."
     },
     {
       "id": "bt-0639",
@@ -3205,7 +3205,7 @@
     {
       "id": "bt-0641",
       "locale": "fr-CA",
-      "targetText": "Le plus facile serait de remplir chaque vide par un nombre qui semble plausible. Nous ne le faisons pas."
+      "targetText": "Le plus facile au monde serait de remplir chaque vide avec un nombre qui semble plausible et de ne rien en dire. Lorsque nous avons dû emprunter des données aux tableaux d’un autre pays, nous le disons sur la page elle-même, à l’endroit même où vous seriez sur le point de vous y fier."
     },
     {
       "id": "bt-0642",
@@ -4590,7 +4590,7 @@
     {
       "id": "bt-0918",
       "locale": "zh-Hans",
-      "targetText": "数据表通过核查后，我们会计算其数字指纹，并把该指纹保存在代码仓库中。此后，只要表内有一个数字发生变化，网站生成过程就会停止。这不是普通警告：在有人有意重新核查数据并生成新封印之前，整个网站都无法生成。"
+      "targetText": "数据表通过核查后，我们会计算其数字指纹，并把指纹保存在代码仓库中。此后，只要表中有一个数字发生变化，验证套件就会在浏览器测试开始前停止，并报告不一致。重新核查数据和有意更新所存指纹是两个独立的人工步骤，封印本身无法强制执行。"
     },
     {
       "id": "bt-0919",
@@ -4615,17 +4615,17 @@
     {
       "id": "bt-0923",
       "locale": "zh-Hans",
-      "targetText": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与手工计算值核对。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。"
+      "targetText": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与预期值核对——核心电压降案例的预期值由手工计算得出，其余案例则从封印数据表中推导。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。"
     },
     {
       "id": "bt-0924",
       "locale": "zh-Hans",
-      "targetText": "翻译页面显示的每个数字，都必须与对应英文页面上的同一数字完全一致。"
+      "targetText": "数值一致性检查覆盖已翻译的指南、条款页面以及包括本页在内的三个较新页面。在这些页面上，每个可见数字都会与对应英文页面核对；只有明确标记为合理本地差异的数值例外。"
     },
     {
       "id": "bt-0925",
       "locale": "zh-Hans",
-      "targetText": "如果页面显示了结果，说明背后的数据已经通过核查；如果没有通过，页面只会显示说明，而不会给出结果。"
+      "targetText": "所以，请先看页面标签，不要想当然。若某个结果背后的数据尚未通过您所在国家的核查，页面会用直白的文字说明，而不会悄悄把它当作已经验证的答案呈现。"
     },
     {
       "id": "bt-0926",
@@ -4645,7 +4645,7 @@
     {
       "id": "bt-0929",
       "locale": "zh-Hans",
-      "targetText": "加拿大版导管填充页面只显示规划说明，不给出结果，因为所需的加拿大数据表尚未通过双来源核查。该页面已经这样保留了数周。留空是诚实的；自信地给出错误数字则很危险。"
+      "targetText": "加拿大导管填充页面是最清楚的例子。CEC Tables 6A–6K 和 Table 9 尚未通过双来源核查，因此该页面不会把自己说成是在提供加拿大电气规范答案。页面明确说明，它目前仍采用美国的导线截面积和标准尺寸数据，并要求您在安装任何设备前对照加拿大表格确认。数周以来一直如此。我们宁可发布一条让人觉得麻烦的警告，也不愿给出一个我们无法负责却显得笃定的加拿大数值。"
     },
     {
       "id": "bt-0930",
@@ -4660,7 +4660,7 @@
     {
       "id": "bt-0932",
       "locale": "zh-Hans",
-      "targetText": "最容易的做法，是用看起来合理的数字填满所有空缺。我们不会这样做。"
+      "targetText": "世界上最容易的做法，是用一个看似合理的数字填满每个空缺，却对此只字不提。当我们不得不借用另一个国家表格中的数据时，我们会在页面本身说明，而且就在您即将依赖这些数据的位置。"
     },
     {
       "id": "bt-0933",

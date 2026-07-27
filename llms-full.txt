@@ -27,7 +27,7 @@ URL: https://voltdrop.app/how-we-verify/
 
 VoltDrop doesn't type numbers in from memory. Every electrical table built into these calculators is compared against two independently produced reproductions of the published table before it goes live, row by row. Both have to agree, on every cell, or it doesn't ship.
 
-After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.
+After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.
 
 The seal proves a number hasn't changed without somebody noticing. It doesn't prove the original was right. That's what the two-source check is for. They're separate protections and they do separate jobs.
 

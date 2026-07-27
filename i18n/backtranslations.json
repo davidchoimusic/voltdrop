@@ -1,7 +1,7 @@
 {
   "policy": "Independent Pass A back-translations made from the target-only packet with source English sealed out.",
-  "targetDigest": "41844f5ff6ccc4a39673ace5a2edffc770c288bb706059d0612911def010d3db",
-  "backtranslationDigest": "3ad6a7bc55740a2cfbc6e489f2a3c91b2a8ed8879a1566b04df345937df291a5",
+  "targetDigest": "d287c80953cb4a5a51a476e1eb1f28e11a95a57ff7e464735af4b5d276b7fe64",
+  "backtranslationDigest": "073665d06ad14e878bdbb1b1d04b3fdb7562297ebb813aa6bd287f2152a0f5d2",
   "entries": [
     {
       "id": "bt-0001",
@@ -429,7 +429,7 @@
     },
     {
       "id": "bt-0107",
-      "backTranslation": "When a table passes review, we calculate its digital fingerprint and save it in the repository. From that moment on, if a single digit in the table changes, the generation process stops. This is not a warning: the site cannot be generated until someone deliberately verifies the data again and creates a new seal."
+      "backTranslation": "After a table passes review, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser tests and reports the discrepancy. Rechecking the data and deliberately updating the fingerprint are separate human steps; the seal cannot enforce them on its own."
     },
     {
       "id": "bt-0108",
@@ -449,15 +449,15 @@
     },
     {
       "id": "bt-0112",
-      "backTranslation": "Each calculator is tested in all six editions, not only in English, and the answer is compared with a calculation done by hand. We learned the hard way: a run that tested only the English edition produced a clean result while the main calculator did not work in four other editions."
+      "backTranslation": "Each calculator is tested in all six editions, not just in English, and the answer is compared with an expected value: calculated by hand for the main voltage drop cases and derived from the sealed tables for the others. We learned this the hard way: a run that tested only the English edition produced a clean result while the main calculator did not work in four other editions."
     },
     {
       "id": "bt-0113",
-      "backTranslation": "Every number that appears on a translated page must match the same number on its equivalent English page."
+      "backTranslation": "The numerical parity check covers the translated guides, the Terms page, and three more recent pages, including this one. On those pages, every visible number is compared with its English equivalent, except for values expressly marked as legitimate language-specific or regional differences."
     },
     {
       "id": "bt-0114",
-      "backTranslation": "If a page shows a result, the data supporting it passed review. If it did not, you will see the note instead."
+      "backTranslation": "So read the labels instead of taking anything for granted. When the data supporting a result has not passed review for your country, the page tells you clearly instead of quietly presenting it as a verified answer."
     },
     {
       "id": "bt-0115",
@@ -473,7 +473,7 @@
     },
     {
       "id": "bt-0118",
-      "backTranslation": "Our Canadian conduit fill page shows a planning-only note instead of results because the Canadian tables it needs have not yet passed the two-source check. It has been that way for weeks. A blank space is honest. An incorrect number presented confidently is dangerous."
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source check, so that page refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result against the Canadian tables before installing anything. It has been that way for weeks. We would rather publish an uncomfortable warning than a confidently presented Canadian number that we cannot support."
     },
     {
       "id": "bt-0119",
@@ -485,7 +485,7 @@
     },
     {
       "id": "bt-0121",
-      "backTranslation": "The easiest thing would be to fill every gap with a number that seemed reasonable. We do not do that."
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a number that seemed plausible and say nothing about it. When we have had to borrow data from another country's tables, we state that on the page itself, right where you would be about to rely on it."
     },
     {
       "id": "bt-0122",
@@ -1461,7 +1461,7 @@
     },
     {
       "id": "bt-0365",
-      "backTranslation": "After a data table passes verification, we calculate its digital fingerprint and save that fingerprint in the code repository. After that, if even one number in the table changes, the website generation process stops. This is not an ordinary warning: the entire site cannot be generated until someone deliberately verifies the data again and generates a new seal."
+      "backTranslation": "After a data table passes review, we calculate its digital fingerprint and store the fingerprint in the code repository. From then on, if a single number in the table changes, the verification suite stops before the browser tests begin and reports the discrepancy. Rechecking the data and deliberately updating the stored fingerprint are two separate human steps; the seal itself cannot enforce them."
     },
     {
       "id": "bt-0366",
@@ -1481,15 +1481,15 @@
     },
     {
       "id": "bt-0370",
-      "backTranslation": "Each calculator is actually run in all six editions, not only tested in the English edition, and its answer is checked against a calculation done by hand. We learned this the hard way: a test that ran only the English edition showed that everything passed, while the main calculator could not be used at all in four other editions."
+      "backTranslation": "Each calculator is actually run in all six editions, not just tested in English, and its answer is checked against an expected value—the expected values for the core voltage drop cases are calculated by hand, while those for the remaining cases are derived from the sealed data tables. We learned this the hard way: one test run that covered only the English edition showed that everything passed, but the main calculator was completely unusable in four other editions."
     },
     {
       "id": "bt-0371",
-      "backTranslation": "Every number displayed on a translated page must exactly match the same number on the corresponding English page."
+      "backTranslation": "The numerical consistency check covers the translated guides, the Terms page, and three newer pages, including this one. On these pages, every visible number is checked against the corresponding English page; the only exceptions are values explicitly marked as legitimate local differences."
     },
     {
       "id": "bt-0372",
-      "backTranslation": "If a page displays a result, the data behind it has passed verification; if it has not passed, the page will display only a note and will not provide a result."
+      "backTranslation": "So please read the page labels first and do not take anything for granted. If the data behind a result has not yet passed review for your country, the page explains this in plain language instead of quietly presenting it as an already verified answer."
     },
     {
       "id": "bt-0373",
@@ -1505,7 +1505,7 @@
     },
     {
       "id": "bt-0376",
-      "backTranslation": "The Canadian conduit fill page displays only a planning note and provides no results because the required Canadian data tables have not yet passed the two-source check. The page has remained this way for several weeks. Leaving it blank is honest; confidently providing an incorrect number is dangerous."
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
     },
     {
       "id": "bt-0377",
@@ -1517,7 +1517,7 @@
     },
     {
       "id": "bt-0379",
-      "backTranslation": "The easiest approach would be to fill every gap with a number that looks reasonable. We will not do that."
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a seemingly plausible number and say nothing about it. When we have to borrow data from another country's tables, we state this on the page itself, right where you are about to rely on that data."
     },
     {
       "id": "bt-0380",
@@ -2509,7 +2509,7 @@
     },
     {
       "id": "bt-0627",
-      "backTranslation": "When a table passes verification, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in the table changes, generation stops. This is not a warning: the site can no longer be generated until someone deliberately verifies the data again and creates a new seal."
+      "backTranslation": "When a table passes verification, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in the table changes, the verification suite stops before the browser tests and reports the discrepancy. Rechecking the data and deliberately updating the fingerprint are two separate human actions that the seal cannot enforce on its own."
     },
     {
       "id": "bt-0628",
@@ -2529,15 +2529,15 @@
     },
     {
       "id": "bt-0632",
-      "backTranslation": "Each calculator is run in all six editions, not only in English, and then its answer is compared with a calculation done by hand. We learned this the hard way: a test limited to the English edition produced an error-free result while the main calculator no longer worked in four other editions."
+      "backTranslation": "Each calculator is run in all six editions, not just in English, and its answer is compared with an expected value—calculated by hand for the main voltage drop cases and derived from the sealed tables for the others. We learned this the hard way: a test limited to the English edition produced an error-free result while the main calculator no longer worked in four other editions."
     },
     {
       "id": "bt-0633",
-      "backTranslation": "Every number displayed on a translated page must match the same number on its English counterpart."
+      "backTranslation": "The numerical parity check covers the translated guides, the Terms of Use page, and three more recent pages, including this one. On these pages, every visible number is compared with the one on the corresponding English page, unless a value is expressly marked as a legitimate local difference."
     },
     {
       "id": "bt-0634",
-      "backTranslation": "If a page displays a result, the data supporting it has passed verification. Otherwise, the note is displayed instead."
+      "backTranslation": "So read the notices instead of taking anything for granted. When the data behind a result has not passed verification for your country, the page says so in plain language instead of quietly presenting that result as a verified answer."
     },
     {
       "id": "bt-0635",
@@ -2553,7 +2553,7 @@
     },
     {
       "id": "bt-0638",
-      "backTranslation": "Our Canadian conduit fill page displays a planning-only note rather than results because the necessary Canadian tables have not yet passed the two-source check. It has remained that way for weeks. A blank space is honest. A false number presented confidently is dangerous."
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source verification; the page therefore refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result in the Canadian tables before any installation. It has been this way for weeks. We would rather publish an embarrassing warning than a confidently asserted Canadian number that we cannot defend."
     },
     {
       "id": "bt-0639",
@@ -2565,7 +2565,7 @@
     },
     {
       "id": "bt-0641",
-      "backTranslation": "The easiest thing would be to fill every blank with a number that seems plausible. We do not do that."
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a number that seems plausible and say nothing about it. When we have had to borrow data from another country's tables, we say so on the page itself, at the very place where you would be about to rely on it."
     },
     {
       "id": "bt-0642",
@@ -3673,7 +3673,7 @@
     },
     {
       "id": "bt-0918",
-      "backTranslation": "After a data table passes verification, we calculate its digital fingerprint and save that fingerprint in the code repository. After that, if even one number in the table changes, the website generation process stops. This is not an ordinary warning: the entire site cannot be generated until someone deliberately verifies the data again and generates a new seal."
+      "backTranslation": "After a data table passes review, we calculate its digital fingerprint and store the fingerprint in the code repository. From then on, if a single number in the table changes, the verification suite stops before the browser tests begin and reports the discrepancy. Rechecking the data and deliberately updating the stored fingerprint are two separate human steps; the seal itself cannot enforce them."
     },
     {
       "id": "bt-0919",
@@ -3693,15 +3693,15 @@
     },
     {
       "id": "bt-0923",
-      "backTranslation": "Each calculator is actually run in all six editions, not only tested in the English edition, and its answer is checked against a calculation done by hand. We learned this the hard way: a test that ran only the English edition showed that everything passed, while the main calculator could not be used at all in four other editions."
+      "backTranslation": "Each calculator is actually run in all six editions, not just tested in English, and its answer is checked against an expected value—the expected values for the core voltage drop cases are calculated by hand, while those for the remaining cases are derived from the sealed data tables. We learned this the hard way: one test run that covered only the English edition showed that everything passed, but the main calculator was completely unusable in four other editions."
     },
     {
       "id": "bt-0924",
-      "backTranslation": "Every number displayed on a translated page must exactly match the same number on the corresponding English page."
+      "backTranslation": "The numerical consistency check covers the translated guides, the Terms page, and three newer pages, including this one. On these pages, every visible number is checked against the corresponding English page; the only exceptions are values explicitly marked as legitimate local differences."
     },
     {
       "id": "bt-0925",
-      "backTranslation": "If a page displays a result, the data behind it has passed verification; if it has not passed, the page will display only a note and will not provide a result."
+      "backTranslation": "So please read the page labels first and do not take anything for granted. If the data behind a result has not yet passed review for your country, the page explains this in plain language instead of quietly presenting it as an already verified answer."
     },
     {
       "id": "bt-0926",
@@ -3717,7 +3717,7 @@
     },
     {
       "id": "bt-0929",
-      "backTranslation": "The Canadian conduit fill page displays only a planning note and provides no results because the required Canadian data tables have not yet passed the two-source check. The page has remained this way for several weeks. Leaving it blank is honest; confidently providing an incorrect number is dangerous."
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
     },
     {
       "id": "bt-0930",
@@ -3729,7 +3729,7 @@
     },
     {
       "id": "bt-0932",
-      "backTranslation": "The easiest approach would be to fill every gap with a number that looks reasonable. We will not do that."
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a seemingly plausible number and say nothing about it. When we have to borrow data from another country's tables, we state this on the page itself, right where you are about to rely on that data."
     },
     {
       "id": "bt-0933",

@@ -1,7 +1,7 @@
 {
   "policy": "Pass B comparison packet. Originals are introduced only after Pass A has been saved and sealed.",
-  "targetDigest": "41844f5ff6ccc4a39673ace5a2edffc770c288bb706059d0612911def010d3db",
-  "backtranslationDigest": "3ad6a7bc55740a2cfbc6e489f2a3c91b2a8ed8879a1566b04df345937df291a5",
+  "targetDigest": "d287c80953cb4a5a51a476e1eb1f28e11a95a57ff7e464735af4b5d276b7fe64",
+  "backtranslationDigest": "073665d06ad14e878bdbb1b1d04b3fdb7562297ebb813aa6bd287f2152a0f5d2",
   "entries": [
     {
       "id": "bt-0001",
@@ -962,9 +962,9 @@
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.afterATablePassesWeTakeAFingerprint",
-      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.",
-      "translation": "Cuando una tabla pasa la revisión, calculamos su huella digital y la guardamos en el repositorio. A partir de ese momento, si cambia un solo dígito de la tabla, el proceso de generación se detiene. No es una advertencia: el sitio no puede generarse hasta que alguien vuelva a verificar los datos deliberadamente y cree un sello nuevo.",
-      "backTranslation": "When a table passes review, we calculate its digital fingerprint and save it in the repository. From that moment on, if a single digit in the table changes, the generation process stops. This is not a warning: the site cannot be generated until someone deliberately verifies the data again and creates a new seal."
+      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.",
+      "translation": "Después de que una tabla pasa la revisión, calculamos su huella digital y la guardamos en el repositorio. A partir de entonces, si cambia un solo dígito de esa tabla, el conjunto de verificaciones se detiene antes de las pruebas en el navegador e informa la discrepancia. Volver a verificar los datos y actualizar deliberadamente la huella son pasos humanos separados; el sello no puede imponerlos por sí solo.",
+      "backTranslation": "After a table passes review, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser tests and reports the discrepancy. Rechecking the data and deliberately updating the fingerprint are separate human steps; the seal cannot enforce them on its own."
     },
     {
       "id": "bt-0108",
@@ -1007,27 +1007,27 @@
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.everyCalculatorIsDrivenInAllSixEditions",
-      "original": "Every calculator is driven in all six editions, not just English, with the answer checked against a hand-worked value. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
-      "translation": "Cada calculadora se prueba en las seis ediciones, no solo en inglés, y la respuesta se compara con un cálculo hecho a mano. Lo aprendimos por las malas: una ejecución que solo probó la edición en inglés dio un resultado limpio mientras la calculadora principal no funcionaba en otras cuatro ediciones.",
-      "backTranslation": "Each calculator is tested in all six editions, not only in English, and the answer is compared with a calculation done by hand. We learned the hard way: a run that tested only the English edition produced a clean result while the main calculator did not work in four other editions."
+      "original": "Every calculator is driven in all six editions, not just English, and the answer is checked against an expected value — hand-worked for the core voltage-drop cases, and derived from the sealed tables for the rest. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
+      "translation": "Cada calculadora se prueba en las seis ediciones, no solo en inglés, y la respuesta se compara con un valor esperado: calculado a mano para los casos principales de caída de tensión y derivado de las tablas selladas para los demás. Lo aprendimos por las malas: una ejecución que solo probó la edición en inglés dio un resultado limpio mientras la calculadora principal no funcionaba en otras cuatro ediciones.",
+      "backTranslation": "Each calculator is tested in all six editions, not just in English, and the answer is compared with an expected value: calculated by hand for the main voltage drop cases and derived from the sealed tables for the others. We learned this the hard way: a run that tested only the English edition produced a clean result while the main calculator did not work in four other editions."
     },
     {
       "id": "bt-0113",
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.everyNumberShownOnATranslatedPage",
-      "original": "Every number shown on a translated page must match the same number on its English twin.",
-      "translation": "Cada número que aparece en una página traducida debe coincidir con el mismo número de su página equivalente en inglés.",
-      "backTranslation": "Every number that appears on a translated page must match the same number on its equivalent English page."
+      "original": "The numeric-parity check covers the translated guides, the Terms page, and three newer pages, including this one. On those pages, every visible number is compared with its English twin, except for a value explicitly marked as a legitimate locale-specific difference.",
+      "translation": "La comprobación de paridad numérica cubre las guías traducidas, la página de Términos y tres páginas más recientes, incluida esta. En esas páginas, cada número visible se compara con su equivalente en inglés, salvo los valores marcados expresamente como diferencias legítimas propias del idioma o la región.",
+      "backTranslation": "The numerical parity check covers the translated guides, the Terms page, and three more recent pages, including this one. On those pages, every visible number is compared with its English equivalent, except for values expressly marked as legitimate language-specific or regional differences."
     },
     {
       "id": "bt-0114",
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.ifAPageHereShowsYouAResult",
-      "original": "If a page here shows you a result, the data behind it passed. If it didn't pass, you get the note instead.",
-      "translation": "Si una página muestra un resultado, los datos que lo sustentan pasaron la revisión. Si no la pasaron, verá la nota en su lugar.",
-      "backTranslation": "If a page shows a result, the data supporting it passed review. If it did not, you will see the note instead."
+      "original": "So read the labels rather than assuming. Where the data behind a result hasn't passed for your country, the page tells you so in plain language instead of quietly presenting it as a verified answer.",
+      "translation": "Así que lea las etiquetas en lugar de dar nada por sentado. Cuando los datos que sustentan un resultado no han pasado la revisión para su país, la página se lo dice con claridad en vez de presentarlo discretamente como una respuesta verificada.",
+      "backTranslation": "So read the labels instead of taking anything for granted. When the data supporting a result has not passed review for your country, the page tells you clearly instead of quietly presenting it as a verified answer."
     },
     {
       "id": "bt-0115",
@@ -1061,9 +1061,9 @@
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.ourCanadianConduitFillPageCarriesAPlanningNote",
-      "original": "Our Canadian conduit-fill page carries a planning-only note instead of results, because the Canadian tables behind it haven't passed the two-source check yet. It has sat like that for weeks. A blank is honest. A confident wrong number is dangerous.",
-      "translation": "Nuestra página canadiense de llenado de tubo conduit muestra una nota solo para planificación en vez de resultados, porque las tablas canadienses que necesita todavía no han pasado la comprobación con dos fuentes. Lleva semanas así. Un espacio en blanco es honesto. Un número incorrecto presentado con seguridad es peligroso.",
-      "backTranslation": "Our Canadian conduit fill page shows a planning-only note instead of results because the Canadian tables it needs have not yet passed the two-source check. It has been that way for weeks. A blank space is honest. An incorrect number presented confidently is dangerous."
+      "original": "Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the two-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.",
+      "translation": "Nuestra página canadiense de llenado de conduit es el ejemplo más claro. CEC Tables 6A–6K y Table 9 no han pasado la comprobación con dos fuentes, por lo que esa página se niega a presentarse como una respuesta basada en el código canadiense. Allí se indica claramente que todavía se trabaja con áreas de conductores y tamaños comerciales de EE. UU., y se le pide que confirme el resultado con las tablas canadienses antes de instalar nada. Lleva semanas así. Preferimos publicar una advertencia incómoda antes que un número canadiense presentado con seguridad que no podamos respaldar.",
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source check, so that page refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result against the Canadian tables before installing anything. It has been that way for weeks. We would rather publish an uncomfortable warning than a confidently presented Canadian number that we cannot support."
     },
     {
       "id": "bt-0119",
@@ -1088,9 +1088,9 @@
       "edition": "us-es",
       "locale": "es",
       "key": "howVerify.theEasiestThingWouldBeToFillEveryGap",
-      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number. We don't.",
-      "translation": "Lo más fácil sería llenar cada vacío con un número que pareciera razonable. No lo hacemos.",
-      "backTranslation": "The easiest thing would be to fill every gap with a number that seemed reasonable. We do not do that."
+      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number and say nothing about it. Where we have had to borrow data from another country's tables, we say so on the page itself, in the place you would be about to rely on it.",
+      "translation": "Lo más fácil del mundo sería llenar cada vacío con un número que pareciera plausible y no decir nada al respecto. Cuando hemos tenido que tomar prestados datos de las tablas de otro país, lo indicamos en la propia página, justo donde usted estaría a punto de basarse en ellos.",
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a number that seemed plausible and say nothing about it. When we have had to borrow data from another country's tables, we state that on the page itself, right where you would be about to rely on it."
     },
     {
       "id": "bt-0122",
@@ -3284,9 +3284,9 @@
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.afterATablePassesWeTakeAFingerprint",
-      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.",
-      "translation": "数据表通过核查后，我们会计算其数字指纹，并把该指纹保存在代码仓库中。此后，只要表内有一个数字发生变化，网站生成过程就会停止。这不是普通警告：在有人有意重新核查数据并生成新封印之前，整个网站都无法生成。",
-      "backTranslation": "After a data table passes verification, we calculate its digital fingerprint and save that fingerprint in the code repository. After that, if even one number in the table changes, the website generation process stops. This is not an ordinary warning: the entire site cannot be generated until someone deliberately verifies the data again and generates a new seal."
+      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.",
+      "translation": "数据表通过核查后，我们会计算其数字指纹，并把指纹保存在代码仓库中。此后，只要表中有一个数字发生变化，验证套件就会在浏览器测试开始前停止，并报告不一致。重新核查数据和有意更新所存指纹是两个独立的人工步骤，封印本身无法强制执行。",
+      "backTranslation": "After a data table passes review, we calculate its digital fingerprint and store the fingerprint in the code repository. From then on, if a single number in the table changes, the verification suite stops before the browser tests begin and reports the discrepancy. Rechecking the data and deliberately updating the stored fingerprint are two separate human steps; the seal itself cannot enforce them."
     },
     {
       "id": "bt-0366",
@@ -3329,27 +3329,27 @@
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.everyCalculatorIsDrivenInAllSixEditions",
-      "original": "Every calculator is driven in all six editions, not just English, with the answer checked against a hand-worked value. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
-      "translation": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与手工计算值核对。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。",
-      "backTranslation": "Each calculator is actually run in all six editions, not only tested in the English edition, and its answer is checked against a calculation done by hand. We learned this the hard way: a test that ran only the English edition showed that everything passed, while the main calculator could not be used at all in four other editions."
+      "original": "Every calculator is driven in all six editions, not just English, and the answer is checked against an expected value — hand-worked for the core voltage-drop cases, and derived from the sealed tables for the rest. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
+      "translation": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与预期值核对——核心电压降案例的预期值由手工计算得出，其余案例则从封印数据表中推导。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。",
+      "backTranslation": "Each calculator is actually run in all six editions, not just tested in English, and its answer is checked against an expected value—the expected values for the core voltage drop cases are calculated by hand, while those for the remaining cases are derived from the sealed data tables. We learned this the hard way: one test run that covered only the English edition showed that everything passed, but the main calculator was completely unusable in four other editions."
     },
     {
       "id": "bt-0371",
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.everyNumberShownOnATranslatedPage",
-      "original": "Every number shown on a translated page must match the same number on its English twin.",
-      "translation": "翻译页面显示的每个数字，都必须与对应英文页面上的同一数字完全一致。",
-      "backTranslation": "Every number displayed on a translated page must exactly match the same number on the corresponding English page."
+      "original": "The numeric-parity check covers the translated guides, the Terms page, and three newer pages, including this one. On those pages, every visible number is compared with its English twin, except for a value explicitly marked as a legitimate locale-specific difference.",
+      "translation": "数值一致性检查覆盖已翻译的指南、条款页面以及包括本页在内的三个较新页面。在这些页面上，每个可见数字都会与对应英文页面核对；只有明确标记为合理本地差异的数值例外。",
+      "backTranslation": "The numerical consistency check covers the translated guides, the Terms page, and three newer pages, including this one. On these pages, every visible number is checked against the corresponding English page; the only exceptions are values explicitly marked as legitimate local differences."
     },
     {
       "id": "bt-0372",
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.ifAPageHereShowsYouAResult",
-      "original": "If a page here shows you a result, the data behind it passed. If it didn't pass, you get the note instead.",
-      "translation": "如果页面显示了结果，说明背后的数据已经通过核查；如果没有通过，页面只会显示说明，而不会给出结果。",
-      "backTranslation": "If a page displays a result, the data behind it has passed verification; if it has not passed, the page will display only a note and will not provide a result."
+      "original": "So read the labels rather than assuming. Where the data behind a result hasn't passed for your country, the page tells you so in plain language instead of quietly presenting it as a verified answer.",
+      "translation": "所以，请先看页面标签，不要想当然。若某个结果背后的数据尚未通过您所在国家的核查，页面会用直白的文字说明，而不会悄悄把它当作已经验证的答案呈现。",
+      "backTranslation": "So please read the page labels first and do not take anything for granted. If the data behind a result has not yet passed review for your country, the page explains this in plain language instead of quietly presenting it as an already verified answer."
     },
     {
       "id": "bt-0373",
@@ -3383,9 +3383,9 @@
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.ourCanadianConduitFillPageCarriesAPlanningNote",
-      "original": "Our Canadian conduit-fill page carries a planning-only note instead of results, because the Canadian tables behind it haven't passed the two-source check yet. It has sat like that for weeks. A blank is honest. A confident wrong number is dangerous.",
-      "translation": "加拿大版导管填充页面只显示规划说明，不给出结果，因为所需的加拿大数据表尚未通过双来源核查。该页面已经这样保留了数周。留空是诚实的；自信地给出错误数字则很危险。",
-      "backTranslation": "The Canadian conduit fill page displays only a planning note and provides no results because the required Canadian data tables have not yet passed the two-source check. The page has remained this way for several weeks. Leaving it blank is honest; confidently providing an incorrect number is dangerous."
+      "original": "Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the two-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.",
+      "translation": "加拿大导管填充页面是最清楚的例子。CEC Tables 6A–6K 和 Table 9 尚未通过双来源核查，因此该页面不会把自己说成是在提供加拿大电气规范答案。页面明确说明，它目前仍采用美国的导线截面积和标准尺寸数据，并要求您在安装任何设备前对照加拿大表格确认。数周以来一直如此。我们宁可发布一条让人觉得麻烦的警告，也不愿给出一个我们无法负责却显得笃定的加拿大数值。",
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
     },
     {
       "id": "bt-0377",
@@ -3410,9 +3410,9 @@
       "edition": "us-zh",
       "locale": "zh-Hans",
       "key": "howVerify.theEasiestThingWouldBeToFillEveryGap",
-      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number. We don't.",
-      "translation": "最容易的做法，是用看起来合理的数字填满所有空缺。我们不会这样做。",
-      "backTranslation": "The easiest approach would be to fill every gap with a number that looks reasonable. We will not do that."
+      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number and say nothing about it. Where we have had to borrow data from another country's tables, we say so on the page itself, in the place you would be about to rely on it.",
+      "translation": "世界上最容易的做法，是用一个看似合理的数字填满每个空缺，却对此只字不提。当我们不得不借用另一个国家表格中的数据时，我们会在页面本身说明，而且就在您即将依赖这些数据的位置。",
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a seemingly plausible number and say nothing about it. When we have to borrow data from another country's tables, we state this on the page itself, right where you are about to rely on that data."
     },
     {
       "id": "bt-0380",
@@ -5642,9 +5642,9 @@
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.afterATablePassesWeTakeAFingerprint",
-      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.",
-      "translation": "Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la génération s’arrête. Ce n’est pas un avertissement : le site ne peut plus être généré tant qu’une personne n’a pas volontairement revérifié les données et créé un nouveau sceau.",
-      "backTranslation": "When a table passes verification, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in the table changes, generation stops. This is not a warning: the site can no longer be generated until someone deliberately verifies the data again and creates a new seal."
+      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.",
+      "translation": "Lorsqu’un tableau franchit la vérification, nous en calculons l’empreinte numérique et la conservons dans le dépôt. Dès lors, si un seul chiffre du tableau change, la suite de vérification s’arrête avant les essais dans le navigateur et signale l’écart. Revérifier les données et mettre volontairement à jour l’empreinte sont deux interventions humaines distinctes que le sceau ne peut pas imposer à lui seul.",
+      "backTranslation": "When a table passes verification, we calculate its digital fingerprint and store it in the repository. From then on, if a single digit in the table changes, the verification suite stops before the browser tests and reports the discrepancy. Rechecking the data and deliberately updating the fingerprint are two separate human actions that the seal cannot enforce on its own."
     },
     {
       "id": "bt-0628",
@@ -5687,27 +5687,27 @@
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.everyCalculatorIsDrivenInAllSixEditions",
-      "original": "Every calculator is driven in all six editions, not just English, with the answer checked against a hand-worked value. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
-      "translation": "Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, puis sa réponse est comparée à un calcul fait à la main. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions.",
-      "backTranslation": "Each calculator is run in all six editions, not only in English, and then its answer is compared with a calculation done by hand. We learned this the hard way: a test limited to the English edition produced an error-free result while the main calculator no longer worked in four other editions."
+      "original": "Every calculator is driven in all six editions, not just English, and the answer is checked against an expected value — hand-worked for the core voltage-drop cases, and derived from the sealed tables for the rest. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
+      "translation": "Chaque calculateur est exécuté dans les six éditions, pas seulement en anglais, et sa réponse est comparée à une valeur attendue — calculée à la main pour les principaux cas de chute de tension et dérivée des tableaux scellés pour les autres. Nous l’avons appris à nos dépens : un essai limité à l’édition anglaise avait donné un résultat sans erreur alors que le calculateur principal ne fonctionnait plus dans quatre autres éditions.",
+      "backTranslation": "Each calculator is run in all six editions, not just in English, and its answer is compared with an expected value—calculated by hand for the main voltage drop cases and derived from the sealed tables for the others. We learned this the hard way: a test limited to the English edition produced an error-free result while the main calculator no longer worked in four other editions."
     },
     {
       "id": "bt-0633",
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.everyNumberShownOnATranslatedPage",
-      "original": "Every number shown on a translated page must match the same number on its English twin.",
-      "translation": "Chaque nombre affiché sur une page traduite doit correspondre au même nombre sur sa jumelle anglaise.",
-      "backTranslation": "Every number displayed on a translated page must match the same number on its English counterpart."
+      "original": "The numeric-parity check covers the translated guides, the Terms page, and three newer pages, including this one. On those pages, every visible number is compared with its English twin, except for a value explicitly marked as a legitimate locale-specific difference.",
+      "translation": "Le contrôle de parité numérique couvre les guides traduits, la page Conditions d’utilisation et trois pages plus récentes, dont celle-ci. Sur ces pages, chaque nombre visible est comparé à celui de la page anglaise correspondante, sauf si une valeur est expressément marquée comme une différence locale légitime.",
+      "backTranslation": "The numerical parity check covers the translated guides, the Terms of Use page, and three more recent pages, including this one. On these pages, every visible number is compared with the one on the corresponding English page, unless a value is expressly marked as a legitimate local difference."
     },
     {
       "id": "bt-0634",
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.ifAPageHereShowsYouAResult",
-      "original": "If a page here shows you a result, the data behind it passed. If it didn't pass, you get the note instead.",
-      "translation": "Si une page affiche un résultat, les données qui le soutiennent ont franchi la vérification. Sinon, la note s’affiche à la place.",
-      "backTranslation": "If a page displays a result, the data supporting it has passed verification. Otherwise, the note is displayed instead."
+      "original": "So read the labels rather than assuming. Where the data behind a result hasn't passed for your country, the page tells you so in plain language instead of quietly presenting it as a verified answer.",
+      "translation": "Lisez donc les indications au lieu de tenir quoi que ce soit pour acquis. Lorsque les données derrière un résultat n’ont pas franchi la vérification pour votre pays, la page le dit en langage clair au lieu de présenter discrètement ce résultat comme une réponse vérifiée.",
+      "backTranslation": "So read the notices instead of taking anything for granted. When the data behind a result has not passed verification for your country, the page says so in plain language instead of quietly presenting that result as a verified answer."
     },
     {
       "id": "bt-0635",
@@ -5741,9 +5741,9 @@
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.ourCanadianConduitFillPageCarriesAPlanningNote",
-      "original": "Our Canadian conduit-fill page carries a planning-only note instead of results, because the Canadian tables behind it haven't passed the two-source check yet. It has sat like that for weeks. A blank is honest. A confident wrong number is dangerous.",
-      "translation": "Notre page canadienne de remplissage de conduit affiche une note réservée à la planification plutôt que des résultats, car les tableaux canadiens nécessaires n’ont pas encore franchi la vérification à deux sources. Elle reste ainsi depuis des semaines. Un espace vide est honnête. Un nombre faux présenté avec assurance est dangereux.",
-      "backTranslation": "Our Canadian conduit fill page displays a planning-only note rather than results because the necessary Canadian tables have not yet passed the two-source check. It has remained that way for weeks. A blank space is honest. A false number presented confidently is dangerous."
+      "original": "Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the two-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.",
+      "translation": "Notre page canadienne de remplissage de conduits en est l’exemple le plus clair. Les CEC Tables 6A–6K et Table 9 n’ont pas franchi la vérification à deux sources; cette page refuse donc de se présenter comme une réponse fondée sur le code canadien. Elle indique clairement qu’elle utilise encore des aires de conducteurs et des grosseurs commerciales américaines, et elle vous demande de confirmer le résultat dans les tableaux canadiens avant toute installation. C’est ainsi depuis des semaines. Nous préférons publier un avertissement embarrassant plutôt qu’un chiffre canadien affirmé avec assurance que nous ne pouvons pas défendre.",
+      "backTranslation": "Our Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not passed the two-source verification; the page therefore refuses to present itself as an answer based on the Canadian code. It clearly states that it still uses U.S. conductor areas and trade sizes, and asks you to confirm the result in the Canadian tables before any installation. It has been this way for weeks. We would rather publish an embarrassing warning than a confidently asserted Canadian number that we cannot defend."
     },
     {
       "id": "bt-0639",
@@ -5768,9 +5768,9 @@
       "edition": "ca-fr",
       "locale": "fr-CA",
       "key": "howVerify.theEasiestThingWouldBeToFillEveryGap",
-      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number. We don't.",
-      "translation": "Le plus facile serait de remplir chaque vide par un nombre qui semble plausible. Nous ne le faisons pas.",
-      "backTranslation": "The easiest thing would be to fill every blank with a number that seems plausible. We do not do that."
+      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number and say nothing about it. Where we have had to borrow data from another country's tables, we say so on the page itself, in the place you would be about to rely on it.",
+      "translation": "Le plus facile au monde serait de remplir chaque vide avec un nombre qui semble plausible et de ne rien en dire. Lorsque nous avons dû emprunter des données aux tableaux d’un autre pays, nous le disons sur la page elle-même, à l’endroit même où vous seriez sur le point de vous y fier.",
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a number that seems plausible and say nothing about it. When we have had to borrow data from another country's tables, we say so on the page itself, at the very place where you would be about to rely on it."
     },
     {
       "id": "bt-0642",
@@ -8261,9 +8261,9 @@
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.afterATablePassesWeTakeAFingerprint",
-      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the build stops. Not a warning — the site cannot be generated at all until someone deliberately re-verifies the data and re-seals it.",
-      "translation": "数据表通过核查后，我们会计算其数字指纹，并把该指纹保存在代码仓库中。此后，只要表内有一个数字发生变化，网站生成过程就会停止。这不是普通警告：在有人有意重新核查数据并生成新封印之前，整个网站都无法生成。",
-      "backTranslation": "After a data table passes verification, we calculate its digital fingerprint and save that fingerprint in the code repository. After that, if even one number in the table changes, the website generation process stops. This is not an ordinary warning: the entire site cannot be generated until someone deliberately verifies the data again and generates a new seal."
+      "original": "After a table passes, we take a fingerprint of it and store that fingerprint in the repository. From then on, if a single digit in that table changes, the verification suite stops before the browser checks and reports the mismatch. Re-verifying the data and deliberately updating the fingerprint are separate human steps, not something the seal can enforce by itself.",
+      "translation": "数据表通过核查后，我们会计算其数字指纹，并把指纹保存在代码仓库中。此后，只要表中有一个数字发生变化，验证套件就会在浏览器测试开始前停止，并报告不一致。重新核查数据和有意更新所存指纹是两个独立的人工步骤，封印本身无法强制执行。",
+      "backTranslation": "After a data table passes review, we calculate its digital fingerprint and store the fingerprint in the code repository. From then on, if a single number in the table changes, the verification suite stops before the browser tests begin and reports the discrepancy. Rechecking the data and deliberately updating the stored fingerprint are two separate human steps; the seal itself cannot enforce them."
     },
     {
       "id": "bt-0919",
@@ -8306,27 +8306,27 @@
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.everyCalculatorIsDrivenInAllSixEditions",
-      "original": "Every calculator is driven in all six editions, not just English, with the answer checked against a hand-worked value. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
-      "translation": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与手工计算值核对。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。",
-      "backTranslation": "Each calculator is actually run in all six editions, not only tested in the English edition, and its answer is checked against a calculation done by hand. We learned this the hard way: a test that ran only the English edition showed that everything passed, while the main calculator could not be used at all in four other editions."
+      "original": "Every calculator is driven in all six editions, not just English, and the answer is checked against an expected value — hand-worked for the core voltage-drop cases, and derived from the sealed tables for the rest. We learned this one the hard way: a test run that drove only English once reported a clean pass while the main calculator was dead in four other editions.",
+      "translation": "每个计算器都会在全部六个版本中实际运行，而不只测试英文版，并将答案与预期值核对——核心电压降案例的预期值由手工计算得出，其余案例则从封印数据表中推导。我们曾吃过这个亏：一次只运行英文版的测试显示全部通过，但主计算器在另外四个版本中根本无法使用。",
+      "backTranslation": "Each calculator is actually run in all six editions, not just tested in English, and its answer is checked against an expected value—the expected values for the core voltage drop cases are calculated by hand, while those for the remaining cases are derived from the sealed data tables. We learned this the hard way: one test run that covered only the English edition showed that everything passed, but the main calculator was completely unusable in four other editions."
     },
     {
       "id": "bt-0924",
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.everyNumberShownOnATranslatedPage",
-      "original": "Every number shown on a translated page must match the same number on its English twin.",
-      "translation": "翻译页面显示的每个数字，都必须与对应英文页面上的同一数字完全一致。",
-      "backTranslation": "Every number displayed on a translated page must exactly match the same number on the corresponding English page."
+      "original": "The numeric-parity check covers the translated guides, the Terms page, and three newer pages, including this one. On those pages, every visible number is compared with its English twin, except for a value explicitly marked as a legitimate locale-specific difference.",
+      "translation": "数值一致性检查覆盖已翻译的指南、条款页面以及包括本页在内的三个较新页面。在这些页面上，每个可见数字都会与对应英文页面核对；只有明确标记为合理本地差异的数值例外。",
+      "backTranslation": "The numerical consistency check covers the translated guides, the Terms page, and three newer pages, including this one. On these pages, every visible number is checked against the corresponding English page; the only exceptions are values explicitly marked as legitimate local differences."
     },
     {
       "id": "bt-0925",
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.ifAPageHereShowsYouAResult",
-      "original": "If a page here shows you a result, the data behind it passed. If it didn't pass, you get the note instead.",
-      "translation": "如果页面显示了结果，说明背后的数据已经通过核查；如果没有通过，页面只会显示说明，而不会给出结果。",
-      "backTranslation": "If a page displays a result, the data behind it has passed verification; if it has not passed, the page will display only a note and will not provide a result."
+      "original": "So read the labels rather than assuming. Where the data behind a result hasn't passed for your country, the page tells you so in plain language instead of quietly presenting it as a verified answer.",
+      "translation": "所以，请先看页面标签，不要想当然。若某个结果背后的数据尚未通过您所在国家的核查，页面会用直白的文字说明，而不会悄悄把它当作已经验证的答案呈现。",
+      "backTranslation": "So please read the page labels first and do not take anything for granted. If the data behind a result has not yet passed review for your country, the page explains this in plain language instead of quietly presenting it as an already verified answer."
     },
     {
       "id": "bt-0926",
@@ -8360,9 +8360,9 @@
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.ourCanadianConduitFillPageCarriesAPlanningNote",
-      "original": "Our Canadian conduit-fill page carries a planning-only note instead of results, because the Canadian tables behind it haven't passed the two-source check yet. It has sat like that for weeks. A blank is honest. A confident wrong number is dangerous.",
-      "translation": "加拿大版导管填充页面只显示规划说明，不给出结果，因为所需的加拿大数据表尚未通过双来源核查。该页面已经这样保留了数周。留空是诚实的；自信地给出错误数字则很危险。",
-      "backTranslation": "The Canadian conduit fill page displays only a planning note and provides no results because the required Canadian data tables have not yet passed the two-source check. The page has remained this way for several weeks. Leaving it blank is honest; confidently providing an incorrect number is dangerous."
+      "original": "Our Canadian conduit-fill page is the clearest example. CEC Tables 6A–6K and Table 9 haven't passed the two-source check, so that page refuses to present itself as a Canadian code answer. It says plainly, on the page, that it is still working from US conductor areas and US trade sizes, and it tells you to confirm against the Canadian tables before you install anything. It has been that way for weeks. We would rather ship an awkward warning than a confident Canadian number we can't stand behind.",
+      "translation": "加拿大导管填充页面是最清楚的例子。CEC Tables 6A–6K 和 Table 9 尚未通过双来源核查，因此该页面不会把自己说成是在提供加拿大电气规范答案。页面明确说明，它目前仍采用美国的导线截面积和标准尺寸数据，并要求您在安装任何设备前对照加拿大表格确认。数周以来一直如此。我们宁可发布一条让人觉得麻烦的警告，也不愿给出一个我们无法负责却显得笃定的加拿大数值。",
+      "backTranslation": "The Canadian conduit fill page is the clearest example. CEC Tables 6A–6K and Table 9 have not yet passed the two-source check, so the page does not claim to provide an answer based on the Canadian electrical code. The page clearly states that it currently still uses U.S. conductor cross-sectional areas and standard size data, and asks you to confirm the result against the Canadian tables before installing any equipment. It has been this way for weeks. We would rather publish a warning that feels inconvenient than provide a Canadian number that appears confident but that we cannot stand behind."
     },
     {
       "id": "bt-0930",
@@ -8387,9 +8387,9 @@
       "edition": "ca-zh",
       "locale": "zh-Hans",
       "key": "howVerify.theEasiestThingWouldBeToFillEveryGap",
-      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number. We don't.",
-      "translation": "最容易的做法，是用看起来合理的数字填满所有空缺。我们不会这样做。",
-      "backTranslation": "The easiest approach would be to fill every gap with a number that looks reasonable. We will not do that."
+      "original": "The easiest thing in the world would be to fill every gap with a plausible-looking number and say nothing about it. Where we have had to borrow data from another country's tables, we say so on the page itself, in the place you would be about to rely on it.",
+      "translation": "世界上最容易的做法，是用一个看似合理的数字填满每个空缺，却对此只字不提。当我们不得不借用另一个国家表格中的数据时，我们会在页面本身说明，而且就在您即将依赖这些数据的位置。",
+      "backTranslation": "The easiest thing in the world would be to fill every gap with a seemingly plausible number and say nothing about it. When we have to borrow data from another country's tables, we state this on the page itself, right where you are about to rely on that data."
     },
     {
       "id": "bt-0933",
