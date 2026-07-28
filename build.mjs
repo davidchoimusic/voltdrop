@@ -381,6 +381,15 @@ const PAGES = [
     descriptionKey: 'pages.us.guides.voltageDrop.description',
   },
   {
+    dir: 'guides/nec-vs-cec',
+    tool: 'guides',
+    script: null,
+    main: 'partials/guide-nec-vs-cec-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.necVsCec.title',
+    descriptionKey: 'pages.us.guides.necVsCec.description',
+  },
+  {
     dir: 'ca/guides',
     tool: 'guides',
     script: null,
@@ -432,6 +441,15 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/voltage-drop-formula/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/voltage-drop-formula/'}],
     titleKey: 'pages.ca.guides.voltageDrop.title',
     descriptionKey: 'pages.ca.guides.voltageDrop.description',
+  },
+  {
+    dir: 'ca/guides/nec-vs-cec',
+    tool: 'guides',
+    script: null,
+    main: 'partials/guide-nec-vs-cec-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.ca.guides.necVsCec.title',
+    descriptionKey: 'pages.ca.guides.necVsCec.description',
   },
   {
     dir: 'terms',
@@ -631,6 +649,7 @@ for (const edition of EDITIONS) {
       .replace(/<script data-wire-size-engine[^>]*><\/script>\n?/, '')
       .replace(/<script src="[^"]*\/app\.js[^"]*"><\/script>\n?/, '')
       .replace(`class="tool-link" data-tool="${page.tool}"`, `class="tool-link active" data-tool="${page.tool}"`);
+    if (page.visibleFaq) assertVisibleFaq(html, `${edition.id}/${dir}`);
     writeEditionPage(edition, dir, html);
   }
   console.log(`edition ${edition.id}:`, Object.entries(assets.hashes).map(([k, v]) => `${k}?v=${v}`).join(' '));

@@ -48,6 +48,7 @@ const templateFiles = [
   'partials/guide-ampacity-main.html',
   'partials/guide-12gauge-main.html',
   'partials/guide-vdformula-main.html',
+  'partials/guide-nec-vs-cec-main.html',
   'partials/ca-guides-index-main.html',
   'partials/ca-guide-subpanel-main.html',
   'partials/ca-guide-50amp-main.html',

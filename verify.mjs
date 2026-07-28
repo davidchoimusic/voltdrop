@@ -200,6 +200,7 @@ const GUIDE_PATHS = [
   'guides/wire-ampacity-chart/',
   'guides/how-far-12-gauge-wire/',
   'guides/voltage-drop-formula/',
+  'guides/nec-vs-cec/',
 ];
 const GUIDE_ROUTES = GUIDE_PATHS.map((path) => `/${path}`);
 const NEW_PAGE_PATHS = [

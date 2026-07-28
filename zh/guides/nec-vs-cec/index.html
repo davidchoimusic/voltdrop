@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEC 与 CEC — 会改变答案的 10 项电气规范差异 | VoltDrop</title>
+<meta name="description" content="十项经核实的 NEC 与 Canadian Electrical Code 差异：载流量、降额、连续负载、电压降、导管填充、导线颜色和高脚。">
+<link rel="canonical" href="https://voltdrop.app/zh/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/nec-vs-cec/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="NEC 与 CEC — 会改变答案的 10 项电气规范差异 | VoltDrop">
+<meta property="og:description" content="十项经核实的 NEC 与 Canadian Electrical Code 差异：载流量、降额、连续负载、电压降、导管填充、导线颜色和高脚。">
+<meta property="og:url" content="https://voltdrop.app/zh/guides/nec-vs-cec/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NEC 与 CEC — 会改变答案的 10 项电气规范差异 | VoltDrop">
+<meta name="twitter:description" content="十项经核实的 NEC 与 Canadian Electrical Code 差异：载流量、降额、连续负载、电压降、导管填充、导线颜色和高脚。">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"免费电气计算器：电压降、导线规格（线规）、载流量、导管填充、接线盒填充和功率换算。"},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="zh-Hans">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="电气工具菜单" aria-expanded="false" aria-controls="mobile-tools">☰ 工具</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="更改国家或语言" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ZH</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">反馈</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">适用哪部规范？</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">美国的语言</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="电气工具菜单"></nav>
+    <p class="tagline">电气计算器，展示每项结果的计算过程。无需注册，无需猜测。</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="电气工具">
+    <span class="tool-nav-head">电气工具</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>电压降</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>导线规格（线规）</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>导线最大长度</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>载流量检查</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>导管填充</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>接线盒填充</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>功率计算器</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>景观照明</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>光伏与电池</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>导线颜色</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>指南</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>反馈</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">NEC 与 CEC：会改变答案的 10 项差异</h1>
+    <p class="tool-sub">一份经过核实的 NEC 与 Canadian Electrical Code 差异图，列出会改变实际答案的项目。</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>这个错误我们自己也犯过</h2>
+    <p>我们曾发布一款加拿大导管填充计算器，却使用了美国导线尺寸，给出的答案宽松了约 50%。我们发现并修复了问题，随后继续查找其他差异。以下就是我们的发现。</p>
+
+    <h2>1. 载流量：大部分已经协调</h2>
+    <p>CEC Tables 2 and 4 在所有共有线规的 60/75/90°C 栏中，与 NEC 310.16 的数值完全相同。过去“加拿大 14 AWG 铜线是 20 A”的差异在 2012 年版中确实存在，但约在 2015–2018 年间已完成协调。今天仍重复这一说法，已经落后十年。不过，自由空气表仍然不同，协调并不全面。</p>
+
+    <h2>2. 按导线数量降额：仍然存在的差异</h2>
+    <p>当有十根载流导线时，NEC 降到 0.50，CEC 允许 0.70。同一组导线，答案不同。这项差异仍然有效，也很容易漏掉。</p>
+
+    <h2>3. 加拿大不给凉爽房间增加载流量</h2>
+    <p>环境温度低于 30°C 时，NEC 允许提高载流量。CEC 不允许。它的单点行在 30°C 以下不提供低温增益。把美国习惯带到加拿大，会在不知不觉中允许超过 CEC 规定的电流。</p>
+
+    <h2>4. 连续负载的处理方向相反</h2>
+    <p><strong>NEC：</strong> 将负载乘以 125%。 <strong>CEC：</strong> 在 Rule 8-104 的额定设备情形下，将导线限制为其允许载流量的 80%。</p>
+    <p>两种结果接近，但运算并不相同。应展示当地规范所采用的运算。</p>
+
+    <h2>5. 电压降：一个国家是建议，另一个国家是规则</h2>
+    <p>3% 和 5% 出现在 NEC 信息性说明中，并非要求。在加拿大，Rule 8-102 规定电压降为强制要求。物理原理相同，法律地位却完全不同。这是本清单中最重要的差异。</p>
+
+    <h2>6. 导管填充：让我们栽跟头的差异</h2>
+    <p>加拿大 RW90 是无护套交联聚乙烯导线。美国 THHN 带尼龙护套，在铜导体相同的情况下更细。RW90 的截面积视线规不同大约增加 14–43%。加拿大 EMT 的内部空间也比美国对应产品略小。这两项差异会叠加。</p>
+    <p>在一个常见案例中，允许数量相差三分之一。加拿大表格给出六根，而我们曾报告九根。</p>
+    <p>相比之下，尼龙 T90 与 THHN 的差距约在 2% 以内。它是加拿大对应的 THHN。导线类型比国家更重要。</p>
+
+    <h2>7. 导线颜色：相序并不相同</h2>
+    <p>加拿大，在要求颜色编码的三相系统中：红色 = A，黑色 = B，蓝色 = C。</p>
+    <p>美国常见惯例是黑色 = A，红色 = B，蓝色 = C。NEC 并未规定非接地导线的颜色，只禁止使用白色、灰色和绿色。美国的配色是行业惯例和工程规范。</p>
+    <p><strong>跨过边境后，A 相和 B 相实际上对调了。</strong></p>
+
+    <h2>8. 高脚位于不同的相</h2>
+    <p>在 4 线三角形系统中，根据 Rule 4-032，加拿大把对地电压较高的导线放在 A 相。NEC 408.3(E) 把高脚放在 B 相，也就是中间母线。电工若按本国规范教的位置寻找，就会找到错误的导线。</p>
+
+    <h2>9. 一条失效超过十年的引用</h2>
+    <p>我们找到的几乎所有网络资料都把加拿大导线颜色规则写成“Rule 4-038”。现行 26th 版中并不存在 Rule 4-038。Section 4 到 Rule 4-036“Busbar”即结束。2012 年版的颜色规则确实是 Rule 4-038，现在则是 Rule 4-032。多个来源说法一致，并不代表经过核实，因为它们可能只是在互相抄写。</p>
+
+    <h2>10. 我们无法核实的内容</h2>
+    <p>加拿大表格尚未通过检查时，页面会明确说明。我们不会借用美国数字再隐藏其来源。 <a class="inline-link" href="/how-we-verify/">了解 VoltDrop 如何核查数据。</a></p>
+
+    <h2>核实的版本</h2>
+    <p>这些发现依据 CSA C22.1:24、Canadian Electrical Code, Part I 26th 版（2024）以及 NEC 2023 (NFPA 70) 核实。各地采用时间不同，当地修订也可能改变结果。</p>
+    <p>请向当地检查主管机构确认现行版本，并在接触任何导线前使用仪表测量。</p>
+  </section>
+
+  <section class="card visible-faq">
+    <h2>快速答案</h2>
+    <dl>
+      <div>
+        <dt>加拿大与美国的载流量表相同吗？</dt>
+        <dd>是，但仅限共有线规以及导管内 60/75/90°C 栏。现行 CEC Tables 2 and 4 与 NEC 310.16 相同。自由空气表仍然不同。</dd>
+      </div>
+      <div>
+        <dt>3% 电压降是强制要求吗？</dt>
+        <dd>3% 和 5% 在 NEC 信息性说明中是建议值。CEC Rule 8-102 在加拿大把电压降规定为强制要求。</dd>
+      </div>
+      <div>
+        <dt>加拿大和美国的导管填充相同吗？</dt>
+        <dd>不同。RW90 的截面积比 THHN 大约增加 14–43%，加拿大 EMT 的内部空间也略小。T90 与 THHN 的差距约在 2% 以内。</dd>
+      </div>
+      <div>
+        <dt>哪一相是高脚？</dt>
+        <dd>根据 Rule 4-032，加拿大把对地电压较高的导线放在 A 相。NEC 408.3(E) 把高脚放在 B 相。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"加拿大与美国的载流量表相同吗？","acceptedAnswer":{"@type":"Answer","text":"是，但仅限共有线规以及导管内 60/75/90°C 栏。现行 CEC Tables 2 and 4 与 NEC 310.16 相同。自由空气表仍然不同。"}},{"@type":"Question","name":"3% 电压降是强制要求吗？","acceptedAnswer":{"@type":"Answer","text":"3% 和 5% 在 NEC 信息性说明中是建议值。CEC Rule 8-102 在加拿大把电压降规定为强制要求。"}},{"@type":"Question","name":"加拿大和美国的导管填充相同吗？","acceptedAnswer":{"@type":"Answer","text":"不同。RW90 的截面积比 THHN 大约增加 14–43%，加拿大 EMT 的内部空间也略小。T90 与 THHN 的差距约在 2% 以内。"}},{"@type":"Question","name":"哪一相是高脚？","acceptedAnswer":{"@type":"Answer","text":"根据 Rule 4-032，加拿大把对地电压较高的导线放在 A 相。NEC 408.3(E) 把高脚放在 B 相。"}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">国家：</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 美国</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 加拿大</button>
+      <span class="country-note">我们会在此设备上记住您的选择。</span>
+    </div>
+    <nav class="footer-links" aria-label="页脚">
+      <a class="footer-link" href="/comments">💬 提交反馈</a>
+      <a class="footer-link" href="/how-we-verify/">我们的核查方法</a>
+      <a class="footer-link" href="/privacy/">隐私</a>
+      <a class="footer-link" href="/terms/">条款</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · 免费电气计算器 · 无需注册</p>
+    <p class="fine">所有结果均为依据公开公式和表格得出的规划估算，不构成专业建议。请始终遵守当地电气规范；如有疑问，请咨询持证电工。 <a class="inline-link" href="/terms/">条款</a>；每个工具的“计算方法”都会显示完整计算过程。</p>
+  </div>
+</footer>
+
+<script src="/assets/us-zh/common.js?v=97a365b12e"></script>
+</body>
+</html>

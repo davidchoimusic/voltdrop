@@ -166,6 +166,8 @@ Box fill is a real country fork. The US calculation uses NEC cubic-inch allowanc
 
 The 4-wire-delta high leg changes phase at the border: Canada places the higher-voltage-to-ground conductor on phase A, while the NEC places the high leg on phase B.
 
+The full difference map is at https://voltdrop.app/guides/nec-vs-cec/. It describes ten verified differences without reproducing either code's tables. It also records VoltDrop's own Canadian conduit-fill error: the page once used American conductor dimensions and reported nine conductors where the Canadian tables permit six.
+
 ## Guides
 
 ### Wire size for a sub-panel
@@ -197,6 +199,12 @@ Summary: {{us:guides.index.distanceLimitsForEveryCommonGaugeAt}} {{us:guides.twe
 URL: https://voltdrop.app/guides/voltage-drop-formula/
 Question: How is voltage drop calculated, why do calculators disagree, and what is the status of the 3% and 5% figures?
 Summary: {{us:guides.index.theFormulaThreeWorkedExamplesAndThe}} {{us:guides.voltageDrop.itSAnOfficialRecommendationInNECAnswer}}
+
+### NEC vs CEC difference map
+
+URL: https://voltdrop.app/guides/nec-vs-cec/
+Question: Which current NEC and CEC differences change a real calculation or installation?
+Summary: {{us:guides.necVsCec.subtitle}} It covers shared in-raceway ampacity values, different conductor-count and cool-ambient corrections, continuous-load operations, voltage-drop legal status, conduit dimensions, conductor colours, high-leg phase placement, and the current Canadian colour-rule citation.
 
 Canadian English versions use the same guide paths after `/ca/` and apply the Canadian rules. Spanish, Simplified Chinese, Quebec French, and Canadian Simplified Chinese versions use their edition prefixes listed above.
 
