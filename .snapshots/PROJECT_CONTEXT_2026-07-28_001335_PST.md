@@ -607,34 +607,6 @@ shared country/chip logic in common.js.
   `Resistance (R)`. Ten assertions failed against a page that was completely correct — the
   failure message itself printed the right answer. Compare case-insensitively with
   `toLocaleLowerCase()` whenever asserting a catalog string against rendered text.
-- **`/comments` IS DELIBERATELY UNTAGGED — DO NOT "FIX" THE GA4 WARNING (decided 2026-07-28).**
-  GA4 Tag Diagnostics reports **Tag quality: Needs Attention — 2 of 117 pages not tagged**. Those
-  two rows are `voltdrop.app/comments` and `www.voltdrop.app/comments`: the **same page counted
-  twice** (apex + www). It is the separate Next.js comments app, which has **no analytics code at
-  all** — verified, not assumed.
-  **This is intentional and David approved leaving it (2026-07-28).** `/comments` is where users
-  sign in with Google or Facebook. It is an authenticated area holding names, photos and written
-  comments. Behavioural analytics there is a materially different privacy decision from measuring
-  which calculator gets used. **Google flags anything under 100% because that is what the tool
-  does; 100% coverage is not the right target here.**
-  ⚠️ **The real risk is someone later seeing "Needs Attention" and tagging the page to make the
-  badge green** — quietly starting to track a sign-in page. That is why this is written down.
-  If comment analytics are ever genuinely wanted, **the gate must be replicated inside the
-  comments app** (production hostname AND `!navigator.webdriver`). It is a separate codebase and
-  inherits nothing from `templates/index.html`; without the gate we reintroduce the exact
-  fake-traffic bug fixed on 2026-07-27.
-  Also: **do not enable the "Add domain for cross-domain measurement" prompt.** The "new domain"
-  is `www.voltdrop.app`, which already 301s to the apex — it would change how tracking is joined
-  across domains to solve a problem that does not exist.
-  Note on the "115 tagged" figure: GA4's crawler reads the HTML and sees the measurement ID inside
-  the **gated** script block. "Tagged" there means *the ID is present in the source*, not *this
-  page reports data*. The gate still decides at runtime.
-
-- **⚠️ GA4 DATA BEFORE 2026-07-27 IS CONTAMINATED — do not analyse it.** The tag was ungated until
-  then, and `verify.mjs` drives ~102 pages per run against production with a fresh browser context
-  each time, so every run manufactured a crowd of fake "users". **Start any real traffic analysis
-  from 2026-07-28.** Expect a spike around 24–27 July that is not real.
-
 - **GA4 IS GATED — DO NOT UNGATE IT (2026-07-27).** `templates/index.html` loads
   `gtag/js` only when `location.hostname` is `voltdrop.app`/`www.voltdrop.app` AND
   `navigator.webdriver` is false. Gated at the LOADER, not at the config call.
