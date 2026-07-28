@@ -547,6 +547,8 @@
         "howTheseGuidesAreMadeHeading": "How these guides are made",
         "metresAndFeetPlusTheCECS": "Metres and feet, plus the CEC's official answer to the breaker-vs-load question.",
         "n50N60N100AFeederTablesIn": "50/60/100 A feeder tables in metres and feet — under the mandatory Rule 8-102 limit.",
+        "necVsCecDescription": "Ten verified differences that change real answers — ampacity, derating, voltage drop, conduit fill, colours, and the high leg.",
+        "necVsCecTitle": "🗺️ NEC vs CEC: what actually differs",
         "theFormulaWorkedExamplesTableN68And": "The formula, worked examples, Table 68 — and why here the limit is the law.",
         "theNMD90AnswerAndWhyTheAmerican": "The NMD90 answer — and why the American #6-vs-#8 debate plays out differently here.",
         "uSGuides": "🇺🇸 US guides",
@@ -838,16 +840,65 @@
       "guidesTitle": "📚 Guides",
       "howFarCanYouRunN12Gauge": "📏 How far can you run 12 gauge wire?",
       "howTheseGuidesAreMadeHeading": "How these guides are made",
+      "necVsCecDescription": "Ten verified differences that change real answers — ampacity, derating, voltage drop, conduit fill, colours, and the high leg.",
+      "necVsCecTitle": "🗺️ NEC vs CEC: what actually differs",
       "plainEnglishAnswersToTheWiringQuestions": "Plain-English answers to the wiring questions everyone asks — with verified numbers, the math shown, and a calculator one click away.",
       "theCompleteAnswerWithDistanceTablesN50": "The complete answer with distance tables — 50, 60, and 100 amp feeders from 50 to 300 feet.",
       "theFormulaThreeWorkedExamplesAndThe": "The formula, three worked examples, and the truth about the 3% \"rule.\"",
       "theFullCopperAndAluminumTableCurrent": "The full copper and aluminum table, current code — and how to pick the 60/75/90°C column.",
-      "theSameFiveGuidesWrittenToThe": "The same five guides, written to the Canadian Electrical Code — mandatory Rule 8-102, NMD90, metres.",
+      "theSameGuidesWrittenToThe": "The same guides, written to the Canadian Electrical Code — mandatory Rule 8-102, NMD90, metres.",
       "voltageDropExplained": "⚡ Voltage drop, explained",
       "whatSizeWireForN50Amps": "🔌 What size wire for 50 amps?",
       "whyTheInternetDisagreesN6VsN8": "Why the internet disagrees (6 vs 8 gauge), and the right answer for breakers, hot tubs, EV chargers, and RV hookups.",
       "wireAmpacityChartNECN310N16": "🔥 Wire ampacity chart (NEC 310.16)",
       "wireSizeForASubPanelShed": "🏠 Wire size for a sub-panel (shed or detached garage)"
+    },
+    "necVsCec": {
+      "ampacityBody": "CEC Tables 2 and 4 are numerically identical to NEC 310.16 in the 60/75/90°C columns at every shared size. The old “14 AWG copper is 20 A in Canada” difference was real in the 2012 edition. It was harmonized away around 2015–2018. Anyone repeating it is a decade out of date. But the free-air tables still differ. The harmonization is not total.",
+      "ampacityHeading": "1. Ampacity: mostly harmonized",
+      "cecLabel": "CEC:",
+      "colourCanada": "Canada, three-phase where colour coding is required: red = A, black = B, blue = C.",
+      "colourClose": "A and B are effectively swapped across the border.",
+      "colourHeading": "7. Conductor colour: the phases are not in the same order",
+      "colourUs": "The common US convention is black = A, red = B, blue = C. The NEC does not mandate ungrounded conductor colours; it prohibits white, grey, and green. The US pattern is convention and job specification.",
+      "conduitBody": "Canadian RW90 is unjacketed cross-linked polyethylene. American THHN has a nylon jacket and is thinner for the same copper. RW90 is roughly 14–43% larger in cross-section, depending on size. Canadian EMT is also slightly smaller inside than its US counterpart. The two differences compound.",
+      "conduitExample": "In one common case, the permitted count differs by a third. We reported nine conductors where the Canadian tables give six.",
+      "conduitHeading": "6. Conduit fill: the one that caught us",
+      "continuousCecBody": "In the Rule 8-104 rated-equipment case, limit the conductor to 80% of its permitted ampacity.",
+      "continuousClose": "The results land close, but these are not the same operation. Show the operation the local code uses.",
+      "continuousHeading": "4. Continuous loads work in opposite directions",
+      "continuousNecBody": "Multiply the load by 125%.",
+      "coolRoomBody": "The NEC lets you increase ampacity below 30°C ambient. The CEC does not. Its single-point rows give no cool-ambient credit below 30°C. Bringing the US habit north silently allows more current than the CEC does.",
+      "coolRoomHeading": "3. Canada gives no credit for a cool room",
+      "deadCitationBody": "Nearly every online source we found cites Canadian colour rules as “Rule 4-038.” In the current 26th edition there is no Rule 4-038. Section 4 ends at Rule 4-036, “Busbar.” The colour rule was Rule 4-038 in the 2012 edition. It is Rule 4-032 now. Sources agreeing with each other is not verification when they are copying each other.",
+      "deadCitationHeading": "9. A citation that has been dead for over a decade",
+      "deratingBody": "At ten current-carrying conductors, the NEC drops to 0.50. The CEC allows 0.70. Same bundle, different answer. This difference is current and easy to miss.",
+      "deratingHeading": "2. Conductor-count derating: a live difference",
+      "editionBody": "Findings checked against CSA C22.1:24, Canadian Electrical Code, Part I, 26th edition (2024), and NEC 2023 (NFPA 70). Adoption is local and local amendments can change the result.",
+      "editionHeading": "Edition checked",
+      "faqAmpacityAnswer": "Yes, for the shared sizes and the 60/75/90°C in-raceway columns. The current CEC Tables 2 and 4 match NEC 310.16. Free-air tables still differ.",
+      "faqAmpacityQuestion": "Are Canadian and US ampacity tables the same?",
+      "faqConduitAnswer": "No. RW90 is roughly 14–43% larger in cross-section than THHN, and Canadian EMT is slightly smaller inside. T90 lands within about 2% of THHN.",
+      "faqConduitQuestion": "Is conduit fill the same in Canada and the US?",
+      "faqHeading": "Quick answers",
+      "faqHighLegAnswer": "Canada puts the higher-voltage-to-ground conductor on phase A under Rule 4-032. NEC 408.3(E) puts the high leg on phase B.",
+      "faqHighLegQuestion": "Which phase carries the high leg?",
+      "faqVoltageAnswer": "The 3% and 5% figures are recommendations in NEC Informational Notes. CEC Rule 8-102 makes voltage drop mandatory in Canada.",
+      "faqVoltageQuestion": "Is the 3% voltage-drop figure a requirement?",
+      "highLegBody": "On a 4-wire delta, Canada puts the higher-voltage-to-ground conductor on phase A under Rule 4-032. NEC 408.3(E) puts the high leg on phase B, the centre bus. An electrician looking where their home code taught them finds the wrong conductor.",
+      "highLegHeading": "8. The high leg is on a different phase",
+      "howWeVerifyLink": "Read how VoltDrop checks its numbers.",
+      "meterInspectorLine": "Confirm the edition in force with the local inspection authority, and use a meter before touching any conductor.",
+      "necLabel": "NEC:",
+      "openingBody": "We shipped a Canadian conduit-fill calculator that used American conductor dimensions. It gave answers about 50% too permissive. We found it, fixed it, and went looking for what else differs. This is what we found.",
+      "openingHeading": "We got this wrong ourselves",
+      "subtitle": "A verified map of the NEC and Canadian Electrical Code differences that change real answers.",
+      "t90Body": "T90 nylon, by contrast, lands within about 2% of THHN. It is the Canadian THHN-equivalent. The conductor type matters more than the country.",
+      "title": "NEC vs CEC: 10 differences that change the answer",
+      "unverifiedBody": "Where a Canadian table has not passed our checks, the page says so. We do not borrow an American number and hide the source.",
+      "unverifiedHeading": "10. What we could not verify",
+      "voltageDropBody": "The 3% and 5% figures live in NEC Informational Notes. They are not requirements. In Canada, Rule 8-102 makes voltage drop mandatory. The physics is the same. The legal status is completely different. This is the marquee difference on this list.",
+      "voltageDropHeading": "5. Voltage drop: a suggestion in one country, a rule in the other"
     },
     "subPanel": {
       "ampacity": "ampacity",
@@ -1358,6 +1409,10 @@
         "voltageDrop": {
           "title": "Voltage Drop Formula & the NEC 3% Recommendation, Explained | VoltDrop",
           "description": "The K-factor voltage drop formula with three worked examples (including 12 V DC), whether the 3% rule is actually code, and how to fix excessive drop."
+        },
+        "necVsCec": {
+          "title": "NEC vs CEC — 10 Electrical Code Differences That Change the Answer | VoltDrop",
+          "description": "Ten verified NEC and Canadian Electrical Code differences: ampacity, derating, continuous loads, voltage drop, conduit fill, conductor colours, and the high leg."
         }
       },
       "terms": {
@@ -1410,6 +1465,10 @@
         "voltageDrop": {
           "title": "Voltage Drop in Canada — CEC Rule 8-102 Explained | VoltDrop",
           "description": "CEC Rule 8-102 in plain English: the mandatory 3%/3%/5% limits, the 80%-of-breaker calculation basis, Table 68 dwelling lengths, the formula, and worked examples."
+        },
+        "necVsCec": {
+          "title": "NEC vs CEC — 10 Electrical Code Differences That Change the Answer | VoltDrop",
+          "description": "Ten verified NEC and Canadian Electrical Code differences: ampacity, derating, continuous loads, voltage drop, conduit fill, conductor colours, and the high leg."
         }
       }
     }

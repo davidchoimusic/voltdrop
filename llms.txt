@@ -99,6 +99,9 @@ For each edition, append one of these paths to its edition root:
   distance limits by gauge at 120/240 V, 3% target.
 - [Voltage drop explained](https://voltdrop.app/guides/voltage-drop-formula/):
   the K-factor formula, worked examples incl. 12 V DC, 3%/5% rule status.
+- [NEC vs CEC: what actually differs](https://voltdrop.app/guides/nec-vs-cec/):
+  ten verified differences in ampacity, derating, continuous loads, voltage
+  drop, conduit fill, conductor colours, and high-leg phase placement.
 
 ## Canadian guides (CEC — Canada uses AWG like the US; drop limit is MANDATORY there)
 
@@ -108,6 +111,7 @@ For each edition, append one of these paths to its edition root:
 - CEC ampacity chart: https://voltdrop.app/ca/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/ca/guides/how-far-12-gauge-wire/
 - Rule 8-102 explained: https://voltdrop.app/ca/guides/voltage-drop-formula/
+- NEC vs CEC: https://voltdrop.app/ca/guides/nec-vs-cec/
 
 ## US Spanish guides (NEC)
 
@@ -117,6 +121,7 @@ For each edition, append one of these paths to its edition root:
 - NEC 310.16 ampacity chart: https://voltdrop.app/es/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/es/guides/how-far-12-gauge-wire/
 - Voltage-drop formula: https://voltdrop.app/es/guides/voltage-drop-formula/
+- NEC vs CEC: https://voltdrop.app/es/guides/nec-vs-cec/
 
 ## US Simplified Chinese guides (NEC)
 
@@ -126,6 +131,7 @@ For each edition, append one of these paths to its edition root:
 - NEC 310.16 ampacity chart: https://voltdrop.app/zh/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/zh/guides/how-far-12-gauge-wire/
 - Voltage-drop formula: https://voltdrop.app/zh/guides/voltage-drop-formula/
+- NEC vs CEC: https://voltdrop.app/zh/guides/nec-vs-cec/
 
 ## Canadian French guides (CEC)
 
@@ -135,6 +141,7 @@ For each edition, append one of these paths to its edition root:
 - CEC ampacity chart: https://voltdrop.app/ca-fr/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/ca-fr/guides/how-far-12-gauge-wire/
 - Rule 8-102 explained: https://voltdrop.app/ca-fr/guides/voltage-drop-formula/
+- NEC vs CEC: https://voltdrop.app/ca-fr/guides/nec-vs-cec/
 
 ## Canadian Simplified Chinese guides (CEC)
 
@@ -144,6 +151,7 @@ For each edition, append one of these paths to its edition root:
 - CEC ampacity chart: https://voltdrop.app/ca-zh/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/ca-zh/guides/how-far-12-gauge-wire/
 - Rule 8-102 explained: https://voltdrop.app/ca-zh/guides/voltage-drop-formula/
+- NEC vs CEC: https://voltdrop.app/ca-zh/guides/nec-vs-cec/
 
 ## Site
 

@@ -1012,6 +1012,7 @@ select:disabled {
 .inline-link { color: var(--color-accent); font-weight: 650; }
 .inline-link:hover { color: var(--color-accent-hot); }
 .inline-link:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.inline-link:active { color: var(--color-hazard); }
 
 /* Shared solar form controls are used by the parent and its focused frame. */
 .scenario-list { display: flex; flex-direction: column; gap: var(--space-2); }
@@ -1260,6 +1261,7 @@ select:disabled {
 }
 .guide-item:hover { border-color: var(--color-accent); }
 .guide-item:focus-visible { outline: 3px solid var(--color-hazard); outline-offset: 2px; }
+.guide-item:active { transform: translateY(1px); }
 .guide-item-title { font-weight: 750; font-size: 15.5px; }
 .guide-item-sub { font-size: 13.5px; color: var(--color-ink-soft); line-height: 1.45; }
 

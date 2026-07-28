@@ -166,6 +166,8 @@ Box fill is a real country fork. The US calculation uses NEC cubic-inch allowanc
 
 The 4-wire-delta high leg changes phase at the border: Canada places the higher-voltage-to-ground conductor on phase A, while the NEC places the high leg on phase B.
 
+The full difference map is at https://voltdrop.app/guides/nec-vs-cec/. It describes ten verified differences without reproducing either code's tables. It also records VoltDrop's own Canadian conduit-fill error: the page once used American conductor dimensions and reported nine conductors where the Canadian tables permit six.
+
 ## Guides
 
 ### Wire size for a sub-panel
@@ -197,6 +199,12 @@ Summary: Distance limits for every common gauge at 120 V and 240 V — and why a
 URL: https://voltdrop.app/guides/voltage-drop-formula/
 Question: How is voltage drop calculated, why do calculators disagree, and what is the status of the 3% and 5% figures?
 Summary: The formula, three worked examples, and the truth about the 3% "rule." It's an official recommendation in NEC Informational Notes (3% branch, 5% total), not a generally enforceable requirement — with exceptions like fire pumps, certain energy codes, and local jurisdictions that adopt stricter rules. Treat it as the threshold for good performance.
+
+### NEC vs CEC difference map
+
+URL: https://voltdrop.app/guides/nec-vs-cec/
+Question: Which current NEC and CEC differences change a real calculation or installation?
+Summary: A verified map of the NEC and Canadian Electrical Code differences that change real answers. It covers shared in-raceway ampacity values, different conductor-count and cool-ambient corrections, continuous-load operations, voltage-drop legal status, conduit dimensions, conductor colours, high-leg phase placement, and the current Canadian colour-rule citation.
 
 Canadian English versions use the same guide paths after `/ca/` and apply the Canadian rules. Spanish, Simplified Chinese, Quebec French, and Canadian Simplified Chinese versions use their edition prefixes listed above.
 

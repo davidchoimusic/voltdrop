@@ -178,6 +178,14 @@ editions, local-adoption boundary, and absence of a licensed reviewer. A footer
 link makes it globally available; one shared fragment puts it beside every
 calculator's explanation, where the trust question actually arises.
 
+Authority-building content follows the same honesty model. The NEC-versus-CEC
+difference map leads with VoltDrop's own conduit-fill mistake because a
+correction exposes both the real consequence and the mechanism that found it.
+The page describes differences rather than reproducing copyrighted tables, and
+it makes the cross-border comparison itself the subject in all six editions.
+Original findings earn attention only when their evidence boundary remains as
+visible as the finding.
+
 Structured data follows the same visibility rule. FAQ schema is generated from
 the same catalog keys as the questions and answers a visitor can read. The
 build parses each framed FAQ block and stops if an entry is absent from visible
@@ -207,6 +215,11 @@ confirms country copy, localization, and fragment composition.
   metric 16 EMT provides only 74.51 mm² at 40%. Reusing the smaller THHN area
   and larger NEC raceway area overstated the capacity from six conductors to
   nine. Country selection must happen before either input table is chosen.
+
+- **Publishing a correction can strengthen authority.** The nine-versus-six
+  conduit result is more useful than a generic warning because it names the
+  wrong assumption, the size of the error, and the verified replacement
+  without turning the page into a claim about anyone else's product.
 
 - **The largest country divergence can occur after a shared value.** At ten
   countable conductors, CEC Table 5C uses 0.70 while NEC Table 310.15(C)(1)

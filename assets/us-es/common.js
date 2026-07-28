@@ -80,6 +80,7 @@ const GUIDE_PATHS = [
   '/guides/wire-ampacity-chart/',
   '/guides/how-far-12-gauge-wire/',
   '/guides/voltage-drop-formula/',
+  '/guides/nec-vs-cec/',
 ];
 const EDITION_PATHS = {
   'us|en': new Set([...TOOL_PATHS, ...GUIDE_PATHS]),

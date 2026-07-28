@@ -24,6 +24,7 @@ const editions = [
   { id: 'ca-zh', label: 'Canada Simplified Chinese', country: 'ca', locale: 'zh-Hans' },
 ];
 const keyApplies = (key, country) => {
+  if (key.startsWith('guides.necVsCec.')) return true;
   if (key.startsWith('guides.ca.') || key.startsWith('pages.ca.guides.')) return country === 'ca';
   if (key.startsWith('guides.') || key.startsWith('pages.us.guides.')) return country === 'us';
   return true;

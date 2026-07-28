@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEC vs CEC — 10 différences du code électrique qui changent la réponse | VoltDrop</title>
+<meta name="description" content="Dix différences vérifiées entre le NEC et le Canadian Electrical Code : intensité admissible, correction, charges continues, chute de tension, conduits, couleurs et conducteur à tension élevée.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/nec-vs-cec/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/nec-vs-cec/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="NEC vs CEC — 10 différences du code électrique qui changent la réponse | VoltDrop">
+<meta property="og:description" content="Dix différences vérifiées entre le NEC et le Canadian Electrical Code : intensité admissible, correction, charges continues, chute de tension, conduits, couleurs et conducteur à tension élevée.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/guides/nec-vs-cec/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NEC vs CEC — 10 différences du code électrique qui changent la réponse | VoltDrop">
+<meta name="twitter:description" content="Dix différences vérifiées entre le NEC et le Canadian Electrical Code : intensité admissible, correction, charges continues, chute de tension, conduits, couleurs et conducteur à tension élevée.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Des calculateurs électriques qui montrent comment chaque résultat est obtenu. Sans inscription, sans deviner.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Éclairage paysager</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solaire et batteries</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Couleur des conducteurs</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">NEC vs CEC : 10 différences qui changent la réponse</h1>
+    <p class="tool-sub">Une carte vérifiée des différences entre le NEC et le Canadian Electrical Code qui changent les réponses réelles.</p>
+  </div>
+
+  <section class="card explainer">
+    <h2>Nous nous sommes trompés nous-mêmes</h2>
+    <p>Nous avons publié une calculatrice canadienne de remplissage des conduits qui utilisait des dimensions de conducteurs américaines. Ses réponses étaient environ 50% trop permissives. Nous avons trouvé l’erreur, nous l’avons corrigée, puis nous avons cherché les autres différences. Voici ce que nous avons trouvé.</p>
+
+    <h2>1. Intensité admissible : surtout harmonisée</h2>
+    <p>Les CEC Tables 2 and 4 sont numériquement identiques à NEC 310.16 dans les colonnes 60/75/90°C pour chaque calibre commun. L’ancienne différence voulant que « le cuivre 14 AWG soit à 20 A au Canada » était réelle dans l’édition de 2012. Elle a été harmonisée vers 2015–2018. La répéter aujourd’hui accuse dix ans de retard. Les tableaux à l’air libre diffèrent toutefois encore. L’harmonisation n’est pas totale.</p>
+
+    <h2>2. Correction selon le nombre de conducteurs : une différence bien réelle</h2>
+    <p>À dix conducteurs porteurs de courant, le NEC descend à 0.50. Le CEC permet 0.70. Même groupement, réponse différente. Cette différence est actuelle et facile à manquer.</p>
+
+    <h2>3. Le Canada n’accorde aucun crédit pour une pièce fraîche</h2>
+    <p>Le NEC permet d’augmenter l’intensité admissible sous une température ambiante de 30°C. Le CEC ne le permet pas. Ses lignes à valeur unique n’accordent aucun crédit pour une ambiance fraîche sous 30°C. Importer l’habitude américaine au Canada permet discrètement plus de courant que le CEC.</p>
+
+    <h2>4. Les charges continues fonctionnent en sens opposés</h2>
+    <p><strong>NEC :</strong> Multipliez la charge par 125%. <strong>CEC :</strong> Dans le cas d’équipement nominal visé par Rule 8-104, limitez le conducteur à 80% de son intensité admissible permise.</p>
+    <p>Les résultats sont proches, mais ce ne sont pas les mêmes opérations. Montrez l’opération utilisée par le code local.</p>
+
+    <h2>5. Chute de tension : une suggestion dans un pays, une règle dans l’autre</h2>
+    <p>Les valeurs de 3% et 5% se trouvent dans les notes d’information du NEC. Ce ne sont pas des exigences. Au Canada, Rule 8-102 rend la chute de tension obligatoire. La physique est la même. Le statut juridique est complètement différent. C’est la différence principale de cette liste.</p>
+
+    <h2>6. Remplissage des conduits : l’erreur qui nous a rattrapés</h2>
+    <p>Le RW90 canadien est en polyéthylène réticulé sans gaine. Le THHN américain a une gaine de nylon et est plus mince pour la même quantité de cuivre. La section du RW90 est environ 14–43% plus grande selon le calibre. L’intérieur de l’EMT canadien est aussi légèrement plus petit que celui de son équivalent américain. Les deux différences s’additionnent.</p>
+    <p>Dans un cas courant, le nombre permis diffère d’un tiers. Nous indiquions neuf conducteurs là où les tableaux canadiens en donnent six.</p>
+    <p>Le nylon T90, par contre, se situe à environ 2% du THHN. C’est l’équivalent canadien du THHN. Le type de conducteur compte plus que le pays.</p>
+
+    <h2>7. Couleur des conducteurs : les phases ne suivent pas le même ordre</h2>
+    <p>Canada, triphasé lorsque le code de couleurs est exigé : rouge = A, noir = B, bleu = C.</p>
+    <p>La convention américaine courante est noir = A, rouge = B, bleu = C. Le NEC n’impose pas de couleurs aux conducteurs non mis à la terre; il interdit le blanc, le gris et le vert. Le modèle américain relève de la convention et du devis du chantier.</p>
+    <p><strong>A et B sont effectivement inversées de part et d’autre de la frontière.</strong></p>
+
+    <h2>8. Le conducteur à tension élevée se trouve sur une phase différente</h2>
+    <p>Dans un delta à 4 fils, le Canada place le conducteur ayant la tension à la terre la plus élevée sur la phase A selon Rule 4-032. NEC 408.3(E) place le conducteur à tension élevée sur la phase B, la barre centrale. Un électricien qui regarde à l’endroit appris dans son code d’origine trouve le mauvais conducteur.</p>
+
+    <h2>9. Une référence morte depuis plus de dix ans</h2>
+    <p>Presque toutes les sources en ligne que nous avons trouvées citent les règles canadiennes de couleur sous « Rule 4-038 ». Dans la 26e édition actuelle, Rule 4-038 n’existe pas. Section 4 se termine à Rule 4-036, « Busbar ». La règle de couleur était Rule 4-038 dans l’édition de 2012. C’est maintenant Rule 4-032. Des sources qui s’accordent ne constituent pas une vérification lorsqu’elles se copient.</p>
+
+    <h2>10. Ce que nous n’avons pas pu vérifier</h2>
+    <p>Lorsqu’un tableau canadien n’a pas réussi nos vérifications, la page le dit. Nous n’empruntons pas un nombre américain en cachant sa source. <a class="inline-link" href="/how-we-verify/">Voyez comment VoltDrop vérifie ses données.</a></p>
+
+    <h2>Édition vérifiée</h2>
+    <p>Constats vérifiés avec CSA C22.1:24, Canadian Electrical Code, Part I, 26e édition (2024), et NEC 2023 (NFPA 70). L’adoption est locale et les modifications locales peuvent changer le résultat.</p>
+    <p>Confirmez l’édition en vigueur auprès de l’autorité d’inspection locale et utilisez un appareil de mesure avant de toucher un conducteur.</p>
+  </section>
+
+  <section class="card visible-faq">
+    <h2>Réponses rapides</h2>
+    <dl>
+      <div>
+        <dt>Les tableaux d’intensité admissible du Canada et des États-Unis sont-ils identiques?</dt>
+        <dd>Oui, pour les calibres communs et les colonnes 60/75/90°C en canalisation. Les CEC Tables 2 and 4 actuelles correspondent à NEC 310.16. Les tableaux à l’air libre diffèrent encore.</dd>
+      </div>
+      <div>
+        <dt>La valeur de chute de tension de 3% est-elle obligatoire?</dt>
+        <dd>Les valeurs de 3% et 5% sont des recommandations dans les notes d’information du NEC. CEC Rule 8-102 rend la chute de tension obligatoire au Canada.</dd>
+      </div>
+      <div>
+        <dt>Le remplissage des conduits est-il identique au Canada et aux États-Unis?</dt>
+        <dd>Non. La section du RW90 est environ 14–43% plus grande que celle du THHN, et l’EMT canadien est légèrement plus petit à l’intérieur. Le T90 se situe à environ 2% du THHN.</dd>
+      </div>
+      <div>
+        <dt>Quelle phase porte le conducteur à tension élevée?</dt>
+        <dd>Le Canada place le conducteur ayant la tension à la terre la plus élevée sur la phase A selon Rule 4-032. NEC 408.3(E) place le conducteur à tension élevée sur la phase B.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Les tableaux d’intensité admissible du Canada et des États-Unis sont-ils identiques?","acceptedAnswer":{"@type":"Answer","text":"Oui, pour les calibres communs et les colonnes 60/75/90°C en canalisation. Les CEC Tables 2 and 4 actuelles correspondent à NEC 310.16. Les tableaux à l’air libre diffèrent encore."}},{"@type":"Question","name":"La valeur de chute de tension de 3% est-elle obligatoire?","acceptedAnswer":{"@type":"Answer","text":"Les valeurs de 3% et 5% sont des recommandations dans les notes d’information du NEC. CEC Rule 8-102 rend la chute de tension obligatoire au Canada."}},{"@type":"Question","name":"Le remplissage des conduits est-il identique au Canada et aux États-Unis?","acceptedAnswer":{"@type":"Answer","text":"Non. La section du RW90 est environ 14–43% plus grande que celle du THHN, et l’EMT canadien est légèrement plus petit à l’intérieur. Le T90 se situe à environ 2% du THHN."}},{"@type":"Question","name":"Quelle phase porte le conducteur à tension élevée?","acceptedAnswer":{"@type":"Answer","text":"Le Canada place le conducteur ayant la tension à la terre la plus élevée sur la phase A selon Rule 4-032. NEC 408.3(E) place le conducteur à tension élevée sur la phase B."}}]}</script>
+
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/how-we-verify/">Notre méthode de vérification</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=7eab065b53"></script>
+</body>
+</html>
