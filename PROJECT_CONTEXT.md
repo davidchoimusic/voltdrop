@@ -20,6 +20,26 @@ plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 Superseded (2026-07-27): the earlier "NOT YET PUSHED OR DEPLOYED — awaiting `YES PUSH`" line is
 no longer true; both shipped, and everything below is live and verified on production.
 
+### 2026-07-31 session — GEO/SEO audit + Bing Webmaster Tools activated
+Audit verdict: on-page SEO and GEO plumbing are in good shape (titles/canonicals/hreflang suite-
+enforced; sitemap 133 URLs live; llms.txt + llms-full.txt live; robots.txt welcomes 11 AI
+crawlers; 27 FAQ Q&A pairs in structured data; homepage TTFB ~0.14s). The real gaps were age +
+index coverage:
+- **Google: indexed** — `site:voltdrop.app` shows ~90 pages (matches the GSC 16→91 watch note).
+- **Bing: had ZERO pages** — confirmed via DuckDuckGo (Bing index proxy; Bing itself threw a
+  robot-check, left unsolved). This mattered more than anything on-page: Perplexity and ChatGPT
+  lean on Bing's index, so zero Bing = uncitable by AI assistants regardless of content.
+- **Perplexity test** ("how far can I run 12 gauge wire at 20 amps"): VoltDrop not cited; the 10
+  citations were small blogs + Reddit — not Southwire/calculator.net. The field is winnable and
+  `/guides/how-far-12-gauge-wire/` targets that exact query.
+- **Fix applied (David, in Bing Webmaster Tools, 2026-07-31)**: voltdrop.app verified,
+  `sitemap.xml` submitted, top-100 priority URLs submitted (quota: 100/day; ordered US-EN → CA →
+  ES → FR → ZH, legal pages last).
+- Follow-ups: (1) submit the remaining 33 URLs (ca-zh edition + privacy/terms) next day;
+  (2) build the IndexNow key file into the site (instant Bing pings on publish, ~5 min);
+  (3) Bing's "AI Performance (BETA)" report = the GEO scoreboard — check it in a few weeks;
+  (4) re-run the Perplexity 12-gauge test once `site:voltdrop.app` returns results on DuckDuckGo.
+
 ### 2026-07-30 session — tool-usage analytics: the `calculate` event (MERGED TO MAIN, NOT PUSHED)
 GA4 could say who VISITED a tool page but not who USED the tool (77 uniques on the voltage-drop
 pages 2026-07-23→29, actual usage unknown). Every calculator now sends one GA4 `calculate` event
@@ -35,6 +55,8 @@ reports its own slug, not power-calculator's), prefixed editions, and the no-sub
 fails on ANY request to an analytics host. Suite 1330 passed / 0 failed / 0 JS errors. English
 byte-baseline refreshed (every page got new asset stamps). Branch `ga4-tool-events` pushed;
 merge commit `8730695` on local main — **awaiting `YES PUSH` + `YES DEPLOY`**.
+Update (2026-07-31): `YES PUSH` given and pushed (`7d78ed4..ad69eea`); worktree + branch cleaned
+up. **Deploy still pending — the live site does not send `calculate` events until `YES DEPLOY`.**
 GA4 side once live: compare users on the `calculate` event vs page users; registering `tool` and
 `edition` as event-scoped custom dimensions lets standard reports slice by them (Realtime shows
 the event without any setup).
