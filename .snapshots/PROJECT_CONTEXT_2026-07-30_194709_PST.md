@@ -12,32 +12,13 @@ results that don't match other calculators, clutter, forced signups. VoltDrop's 
 Domain purchased: **voltdrop.app**. Primary users: working electricians, contractors, apprentices,
 plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 
-## Current state (2026-07-30) — READ THIS FIRST
+## Current state (2026-07-27) — READ THIS FIRST
 
 **LIVE at voltdrop.app in SIX EDITIONS.** Static site with a build step.
 **NINE calculators**: the seven below plus **Landscape Lighting**
 (`/landscape-lighting-calculator/`) and **Solar & Battery** (`/solar-battery-wire-size/`).
 Superseded (2026-07-27): the earlier "NOT YET PUSHED OR DEPLOYED — awaiting `YES PUSH`" line is
 no longer true; both shipped, and everything below is live and verified on production.
-
-### 2026-07-30 session — tool-usage analytics: the `calculate` event (MERGED TO MAIN, NOT PUSHED)
-GA4 could say who VISITED a tool page but not who USED the tool (77 uniques on the voltage-drop
-pages 2026-07-23→29, actual usage unknown). Every calculator now sends one GA4 `calculate` event
-per run, with parameters `tool` (slug, e.g. `conduit-fill`) and `edition` (`us`/`es`/`zh`/`ca`/
-`ca-fr`/`ca-zh`) — NEVER anything the user typed. Wiring: a document-level capture listener in
-`common.js` over an explicit form-id allowlist (`CALC_FORM_IDS`); wire-colour has no submit, so
-it reports the first real interaction once per page load (the initial render does not count).
-The tracker only runs when the gated loader defined `window.gtag`, so the production-host +
-not-webdriver gate carries over untouched — under Playwright it is a no-op.
-Enforced, not just written: `tools/check-calculate-event.mjs` (invoked inside `verify.mjs`)
-stubs `gtag` the way the loader would, drives a submit tool, a framed page (`/zh/ohms-law/`
-reports its own slug, not power-calculator's), prefixed editions, and the no-submit page, and
-fails on ANY request to an analytics host. Suite 1330 passed / 0 failed / 0 JS errors. English
-byte-baseline refreshed (every page got new asset stamps). Branch `ga4-tool-events` pushed;
-merge commit `8730695` on local main — **awaiting `YES PUSH` + `YES DEPLOY`**.
-GA4 side once live: compare users on the `calculate` event vs page users; registering `tool` and
-`edition` as event-scoped custom dimensions lets standard reports slice by them (Realtime shows
-the event without any setup).
 
 ### 2026-07-27 session — three new pages, an engine addition, and a registry gate
 **Deployed and verified live** (Coolify deploy `ivwd1yglbwd6grh76x3j45ns`, commit `486d448`).
@@ -82,10 +63,6 @@ entire subject is whether our numbers can be trusted.
 - **Merged to main locally, NOT pushed and NOT deployed** — the live site still serves the wrong
   wording until David approves a push. He gave `YES PUSH`/`YES DEPLOY` for the earlier trust-page
   work; that approval was deliberately NOT reused for this different change.
-  - Update (2026-07-30): since pushed — before this session's merge, local main had zero
-    unpushed commits, so this correction reached origin under a later approved push. It would
-    have shipped with the subsequent full-site deploy; the live wording was not separately
-    re-checked today.
 
 ### 2026-07-27, later still — Wire Size answers heat AND distance (LIVE)
 `/wire-size-calculator/` no longer answers voltage drop alone. It returns the **ampacity
@@ -121,9 +98,6 @@ imperial equivalents.
 - The Canadian planning note and the stale `/how-we-verify/` example have been replaced with the
   verified-source record. The independent target-only back-translation pass must be rerun before
   release because safety copy changed; its sealed output files are deliberately untouched here.
-  - Update (2026-07-30): the "(CURRENT WORKTREE)" label above is stale — this work is merged
-    into main: `conduit.js` on main carries the CEC tables and the data tripwire covers them
-    (all 19 data-integrity checks green in today's 1330-check run). No conduit worktree remains.
 
 ### Superseded plan note (kept per append-only convention)
 The "next build" block below was written before the work above shipped. Its content is now
@@ -606,14 +580,6 @@ shared country/chip logic in common.js.
 
 ## EDGE CASES & GOTCHAS
 
-- **MODE TABS ARE `display:none` ON DESKTOP — THE SIDEBAR TAKES OVER (found 2026-07-30).** At
-  desktop widths a media-query rule (`styles.css` ~line 473, with `!important`) hides
-  `.mode-tabs` entirely; the tab row only exists on mobile. Any Playwright interaction with
-  `[data-wire-mode]` (or any mode tab) needs a mobile viewport (e.g. 390×844) or the click times
-  out with "element is not visible". `tools/check-calculate-event.mjs` does this. Related:
-  every calculator form except `pw-form` (which has `novalidate`) blocks submit while required
-  fields are empty — browser-driven tests must fill them like a real user or the submit event
-  never fires.
 - **BACK-TRANSLATION ROW IDs ARE REASSIGNED ON EVERY REGENERATION (2026-07-27).** Adding new
   safety-critical strings regenerates `i18n/backtranslation-input.json`, and because entries are
   emitted in edition × key order, **inserting a key shifts every id after it**. `bt-0001` before
@@ -692,16 +658,6 @@ shared country/chip logic in common.js.
 
 ## REGRESSION RISKS
 
-- **[common.js CALC_FORM_IDS] A NEW CALCULATOR IS SILENTLY UNCOUNTED UNLESS REGISTERED
-  (2026-07-30).** The `calculate` usage event only fires for form ids on the explicit
-  `CALC_FORM_IDS` allowlist in `common.js` — deliberate, so a future non-calculator form (e.g.
-  a signup) can never pollute usage data. The cost: a new tool whose form id is missing fires
-  nothing, and its GA4 numbers read "visitors never use this" — a lie in the direction that gets
-  a tool killed. When adding a calculator: add its form id to `CALC_FORM_IDS` AND a case to
-  `tools/check-calculate-event.mjs`. Also: ANY `common.js` edit re-stamps every page, so the
-  English byte-baseline (`i18n/english-build-baseline.sha256`) must be deliberately regenerated
-  (hash the same 44 files, same order) or verify fails all 44 — that failure is the tripwire
-  working, not a bug.
 - **A GATE REPORTED GREEN BECAUSE NOTHING REACHED IT (2026-07-27, the worst near-miss of the
   build).** The wire-colour brief said "do NOT touch the three back-translation files" — correct,
   since only a translator who has never seen the English can produce an honest Pass A — but it gave
