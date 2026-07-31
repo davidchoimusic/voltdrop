@@ -57,6 +57,12 @@ byte-baseline refreshed (every page got new asset stamps). Branch `ga4-tool-even
 merge commit `8730695` on local main — **awaiting `YES PUSH` + `YES DEPLOY`**.
 Update (2026-07-31): `YES PUSH` given and pushed (`7d78ed4..ad69eea`); worktree + branch cleaned
 up. **Deploy still pending — the live site does not send `calculate` events until `YES DEPLOY`.**
+Update (2026-07-31, later): `YES DEPLOY` given — Coolify deploy `db3vuyg2o4wsjten6anqeuc9`
+finished. Verified on production: live pages serve `common.js?v=087960d773`, and
+`BASE=https://voltdrop.app/ node tools/check-calculate-event.mjs` passed 10/10 — events fire for
+users, **zero requests to analytics hosts under automation** (the FIRM gate check, run against
+the live site). Server disk 41% after deploy (static pack, no prune needed). Note: VoltDrop does
+NOT auto-deploy on push (`is_webhook=f` on all its deploys) — every deploy is a manual trigger.
 GA4 side once live: compare users on the `calculate` event vs page users; registering `tool` and
 `edition` as event-scoped custom dimensions lets standard reports slice by them (Realtime shows
 the event without any setup).
