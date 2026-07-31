@@ -182,16 +182,34 @@ const wirePhaseForCircuit = (value) => {
     results.dataset.ruleKind = kind;
   }
 
+  /* This page has no Calculate button — it re-renders on every change — so
+     "used the tool" is the first real interaction, reported once per page
+     load. The initial update() below is a page load, not a use. */
+  let usedOnce = false;
+  function markUsed() {
+    if (usedOnce) return;
+    usedOnce = true;
+    if (window.VDTrack) window.VDTrack.toolUse();
+  }
+
   modeButtons.forEach((button) => {
-    button.addEventListener('click', () => setMode(button.dataset.wireMode));
+    button.addEventListener('click', () => {
+      markUsed();
+      setMode(button.dataset.wireMode);
+    });
   });
   roleButtons.forEach((button) => {
     button.addEventListener('click', () => {
+      markUsed();
       role = button.dataset.wireRole;
       setPressed(roleButtons, role, 'wireRole');
       update();
     });
   });
+  system.addEventListener('change', markUsed);
+  positionThree.addEventListener('change', markUsed);
+  positionSingle.addEventListener('change', markUsed);
+  circuitInput.addEventListener('input', markUsed);
   system.addEventListener('change', update);
   positionThree.addEventListener('change', update);
   positionSingle.addEventListener('change', update);

@@ -56,6 +56,17 @@ const runtimeCodeIdentity = spawnSync(process.execPath, ['tools/check-runtime-co
 });
 if (runtimeCodeIdentity.status !== 0) process.exit(runtimeCodeIdentity.status ?? 1);
 
+// ---- Tool-usage event gate ----
+// The GA4 'calculate' event must fire when a person runs a calculator and
+// must stay silent for page loads and automation. Uses BASE, so the local
+// server must already be up (same requirement as the browser checks below).
+const calculateEvent = spawnSync(process.execPath, ['tools/check-calculate-event.mjs'], {
+  cwd: process.cwd(),
+  stdio: 'inherit',
+  env: { ...process.env, BASE },
+});
+if (calculateEvent.status !== 0) process.exit(calculateEvent.status ?? 1);
+
 // ---- Electrical data tripwire (runs before browser checks) ----
 // Each entry: [file, constant name]. Golden hashes = the state that passed
 // independent source verification (NEC page reproductions, 2026-07-24).
