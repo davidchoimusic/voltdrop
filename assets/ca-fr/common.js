@@ -352,3 +352,31 @@ function vdCaNote() {
 }
 window.addEventListener('vd:country', vdCaNote);
 vdCaNote();
+
+/* Tool-usage event: one GA4 'calculate' event per calculator run, so page
+   traffic can be compared against real tool use. window.gtag only exists when
+   the gated loader in the page head ran (production host, not automation), so
+   this inherits that gate — locally and under Playwright it is a no-op.
+   Deliberately never sends anything the user typed: only which tool and which
+   edition. Submit-driven calculators are caught by the document listener
+   below; the instant-update wire-colour page has no submit and calls
+   window.VDTrack.toolUse() on its first real interaction instead. */
+const CALC_FORM_IDS = ['calc-form', 'amp-form', 'fill-form', 'bf-form', 'pw-form', 'sol-form', 'ls-form'];
+
+function vdTrackToolUse() {
+  if (typeof window.gtag !== 'function') return;
+  const prefix = EDITION_PREFIXES[`${_country}|${_lang}`] || '';
+  let path = location.pathname;
+  if (prefix && path.indexOf(`${prefix}/`) === 0) path = path.slice(prefix.length);
+  const tool = path.replace(/^\/+|\/+$/g, '') || 'voltage-drop';
+  window.gtag('event', 'calculate', {
+    tool,
+    edition: prefix ? prefix.slice(1) : 'us',
+  });
+}
+
+document.addEventListener('submit', (event) => {
+  if (event.target && CALC_FORM_IDS.includes(event.target.id)) vdTrackToolUse();
+}, true);
+
+window.VDTrack = { toolUse: vdTrackToolUse };
