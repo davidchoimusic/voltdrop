@@ -102,7 +102,9 @@
     "terms.statesProvincesAndMunicipalitiesAdoptCodes": "Los estados, las provincias y los municipios adoptan los códigos en fechas distintas y pueden añadir modificaciones locales. Un resultado correcto conforme a la edición que implementa VoltDrop puede ser incorrecto donde se aplique una edición anterior o una modificación local. Debe confirmar la edición adoptada por su propia autoridad competente.",
     "terms.translationsAreProvidedForConvenienceIf": "Las traducciones se proporcionan por comodidad. Si una versión traducida no coincide con la versión en inglés, prevalece la versión en inglés.",
     "terms.voltDropSometimesUsesASimplifiedOr": "VoltDrop a veces emplea un método simplificado o conservador. Por ejemplo, CEC Rule 4-006 limita el requisito de temperatura de las terminaciones a los primeros 1.2 m del conductor y permite una transición conforme al código después de ese tramo. VoltDrop no modela esa división; aplica la menor de las temperaturas nominales del conductor y de la terminación a todo el recorrido. Este método es conservador, pero no es el procedimiento completo del código.",
-    "terms.whereACodeDoesNotExpresslyAnswer": "Cuando un código no resuelve expresamente un detalle de implementación, VoltDrop puede tomar una decisión conservadora que su inspector o autoridad local quizá no comparta. Por ejemplo, CEC Rule 4-004 no aborda expresamente los conductores de reserva instalados para potencia o iluminación; VoltDrop los cuenta para Table 5C."
+    "terms.whereACodeDoesNotExpresslyAnswer": "Cuando un código no resuelve expresamente un detalle de implementación, VoltDrop puede tomar una decisión conservadora que su inspector o autoridad local quizá no comparta. Por ejemplo, CEC Rule 4-004 no aborda expresamente los conductores de reserva instalados para potencia o iluminación; VoltDrop los cuenta para Table 5C.",
+    "pages.us.wireSize.sub": "Dimensione el conductor tanto por calor como por distancia. Vea el mínimo por ampacidad, el mínimo por caída de tensión y cuál gobierna.",
+    "pages.us.wireSize.description": "Calculadora gratuita de calibre del conductor por ampacidad y caída de tensión. Ingrese carga, temperatura, conductores portadores de corriente y distancia en un solo sentido para ver ambos mínimos y el AWG gobernante."
   },
   "fr-CA": {
     "ampacity.aWGAmericanWireGaugeItSPrinted": "AWG = American Wire Gauge. Il est imprimé sur la gaine du conducteur.",
@@ -201,7 +203,9 @@
     "terms.statesProvincesAndMunicipalitiesAdoptCodes": "Les États, les provinces et les municipalités adoptent les codes selon des calendriers différents et peuvent y ajouter des modifications locales. Un résultat exact selon l’édition mise en œuvre par VoltDrop peut être erroné là où une édition antérieure ou une modification locale s’applique. Vous devez confirmer l’édition adoptée par votre propre autorité compétente.",
     "terms.translationsAreProvidedForConvenienceIf": "Les traductions sont fournies par souci de commodité. En cas d’incompatibilité entre une version traduite et la version anglaise, la version anglaise prévaut.",
     "terms.voltDropSometimesUsesASimplifiedOr": "VoltDrop emploie parfois une méthode simplifiée ou prudente. Par exemple, CEC Rule 4-006 limite l’exigence de température aux terminaisons aux premiers 1.2 m du conducteur et permet ensuite une transition conforme au Code. VoltDrop ne modélise pas cette division; il applique la plus basse des températures nominales du conducteur et de la terminaison à toute la longueur. Cette méthode est prudente, mais elle ne constitue pas la procédure complète du Code.",
-    "terms.whereACodeDoesNotExpresslyAnswer": "Lorsqu’un Code ne règle pas expressément un détail de mise en œuvre, VoltDrop peut faire un choix prudent que votre inspecteur ou votre autorité locale peut ne pas partager. Par exemple, CEC Rule 4-004 ne traite pas expressément des conducteurs de réserve installés pour la puissance ou l’éclairage; VoltDrop les compte aux fins de Table 5C."
+    "terms.whereACodeDoesNotExpresslyAnswer": "Lorsqu’un Code ne règle pas expressément un détail de mise en œuvre, VoltDrop peut faire un choix prudent que votre inspecteur ou votre autorité locale peut ne pas partager. Par exemple, CEC Rule 4-004 ne traite pas expressément des conducteurs de réserve installés pour la puissance ou l’éclairage; VoltDrop les compte aux fins de Table 5C.",
+    "pages.us.wireSize.sub": "Dimensionnez le conducteur selon la chaleur et la distance. Voyez le minimum de courant admissible, le minimum de chute de tension et celui qui gouverne.",
+    "pages.us.wireSize.description": "Calculateur gratuit de calibre selon le courant admissible et la chute de tension. Entrez la charge, la température, les conducteurs porteurs de courant et la distance aller simple pour voir les deux minimums et le calibre AWG gouvernant."
   },
   "zh-Hans": {
     "ampacity.aWGAmericanWireGaugeItSPrinted": "AWG = American Wire Gauge。该标识印在导线护套上。",
@@ -300,7 +304,9 @@
     "terms.translationsAreProvidedForConvenienceIf": "翻译版本仅为方便阅读而提供。如果翻译版本与英文版本不一致，以英文版本为准。",
     "terms.voltDropSometimesUsesASimplifiedOr": "VoltDrop有时采用简化或保守的方法。例如，CEC Rule 4-006将端接温度要求限制在导体起始的前1.2 m，并允许在其后进行符合规范的转换。VoltDrop不对这一分段建模，而是在全长范围内采用导体与端接温度额定值中的较低者。这种方法较为保守，但并不是规范的完整程序。",
     "terms.whereACodeDoesNotExpresslyAnswer": "如果规范没有明确规定某项实施细节，VoltDrop可能会作出保守选择，而您的当地检查员或主管机构可能持不同意见。例如，CEC Rule 4-004没有明确说明已安装的备用功率或照明导体；VoltDrop会将其计入Table 5C。",
-    "runtimePatterns.drop.dropMath": "\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>"
+    "runtimePatterns.drop.dropMath": "\n<p>代入您的数值（{size} = {cm} circular mils）：</p>\n<div class=\"formula\">{mult} × {factor} × {amps} A × {feet} ft ÷ {cm}\n= 电压降{dropped}伏\n÷ {source} V电源电压 = {percent}%</div>\n<p>负载端电压：{source} − {dropped} = <strong>{endVolts} V</strong>。</p>",
+    "pages.us.wireSize.sub": "同时按热量和距离确定导线规格。查看载流量最小规格、电压降最小规格，以及哪一项起决定作用。",
+    "pages.us.wireSize.description": "免费的导线规格计算器，同时检查载流量与电压降。输入负载、温度、载流导体数量和单程距离，即可查看两项最小规格及最终起决定作用的 AWG。"
   },
   "packs": {
     "us": {

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>200 Amp Service Wire Size — 2/0 vs 3/0 explained | VoltDrop</title>
+<meta name="description" content="Reconcile 2/0 and 3/0 copper plus 4/0 aluminum for a 200 amp service with the NEC 310.12 arithmetic, conditions, and a verified distance table.">
+<link rel="canonical" href="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="200 Amp Service Wire Size — 2/0 vs 3/0 explained | VoltDrop">
+<meta property="og:description" content="Reconcile 2/0 and 3/0 copper plus 4/0 aluminum for a 200 amp service with the NEC 310.12 arithmetic, conditions, and a verified distance table.">
+<meta property="og:url" content="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="200 Amp Service Wire Size — 2/0 vs 3/0 explained | VoltDrop">
+<meta name="twitter:description" content="Reconcile 2/0 and 3/0 copper plus 4/0 aluminum for a 200 amp service with the NEC 310.12 arithmetic, conditions, and a verified distance table.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="en">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Electrical tools menu" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country or language" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · EN</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Feedback</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Which code applies?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Language in United States</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">Electrical calculators that explain themselves. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Landscape Lighting</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar & Battery</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Wire Colour</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+  <div class="tool-intro card"><h1 class="tool-title">🏠 What Size Wire for a 200 Amp Service?</h1><p class="tool-sub">2/0 copper, 3/0 copper, and 4/0 aluminum can all be correct — but under different sizing methods. <a class="inline-link" href="/ca/guides/200-amp-service-wire-size/" data-edition-country="ca">🇨🇦 Canadian version</a></p></div>
+  <section class="card explainer">
+    <h2>Why the internet gives three answers</h2><p>2/0 AWG copper is the NEC 310.12 dwelling-service answer. 3/0 AWG copper is the plain 310.16 answer at 75 °C when that allowance does not apply. 4/0 AWG aluminum is the dwelling-service aluminum answer; the plain 75 °C table instead selects 250 kcmil aluminum.</p>
+    <p data-service-arithmetic="dwelling">200 A × 83% = 166 A → 2/0 AWG copper (175 A at 75 °C); 4/0 AWG aluminum (180 A at 75 °C).</p>
+    <p data-service-arithmetic="standard">Plain 75 °C table: 200 A → 3/0 AWG copper (200 A) or 250 kcmil aluminum (205 A).</p>
+    <h2>When the 83% answer is allowed</h2>
+    <ul>
+      <li data-service-condition="whole-dwelling">Dwelling service or a feeder carrying the entire dwelling load only — never a branch circuit or a non-dwelling installation.</li>
+      <li data-service-condition="rating-range">The service or feeder rating must be from 100 A through 400 A.</li>
+      <li data-service-condition="no-derating">No ampacity adjustment or correction factors can be required.</li>
+      <li data-service-condition="temperature-method">Conductors must be rated 75 °C or better. NM/Romex is a 60 °C assembly, so it is out.</li>
+    </ul>
+    <h2>Distance can move the answer again</h2><p>This table begins with the NEC 310.12 dwelling-service minimum, then raises the conductor when the calculated drop would exceed the 3% planning target. It uses 240 V, the full 200 A rating, and one-way distance.</p><h3>200 A dwelling service at 240 V</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="240v"><thead><tr data-table-row="head"><th data-column="material">Material</th><th data-distance-ft="50">50 ft</th><th data-distance-ft="100">100 ft</th><th data-distance-ft="150">150 ft</th><th data-distance-ft="200">200 ft</th><th data-distance-ft="250">250 ft</th><th data-distance-ft="300">300 ft</th></tr></thead><tbody>
+      <tr data-material="cu"><td data-column="material">Copper</td><td data-distance-ft="50">2/0</td><td data-distance-ft="100">2/0</td><td data-distance-ft="150">2/0</td><td data-distance-ft="200">3/0</td><td data-distance-ft="250">4/0</td><td data-distance-ft="300">250 kcmil</td></tr>
+      <tr data-material="al"><td data-column="material">Aluminum</td><td data-distance-ft="50">4/0</td><td data-distance-ft="100">4/0</td><td data-distance-ft="150">4/0</td><td data-distance-ft="200">250 kcmil</td><td data-distance-ft="250">300 kcmil</td><td data-distance-ft="300">400 kcmil</td></tr>
+    </tbody></table></div><p class="gnote"><a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> · <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a></p>
+    <h2>Why aluminum is common in service work</h2><p>Aluminum is widely used for service conductors because its lower weight and material cost matter at large sizes. Use listed conductors and terminals, follow the equipment instructions, and have the complete service design checked locally.</p>
+    <h2>Related</h2><p><a class="inline-link" href="/guides/100-amp-service-wire-size/">100-amp service wire size guide</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">Sub-panel wire size guide</a> · <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a></p>
+  </section>
+  <section class="card visible-faq"><h2>200-amp service wire size FAQ</h2><dl>
+    <div><dt>Do I need 2/0 or 3/0 copper for 200 amps?</dt><dd>Use 2/0 copper for a dwelling service or whole-dwelling feeder that meets every NEC 310.12 condition. Use 3/0 copper for the plain 75 °C Table 310.16 method when the allowance does not apply.</dd></div>
+    <div><dt>What is the aluminum service wire size for 200 amps?</dt><dd>For a qualifying dwelling service, use 4/0 aluminum. Without the allowance, the verified 75 °C table requires 250 kcmil aluminum for 200 A.</dd></div>
+    <div><dt>Can I use 4/0 aluminum for a 200 amp service?</dt><dd>Yes, when the 200 A installation qualifies for NEC 310.12 and the conductors and equipment are suitable for aluminum. The 83% requirement is 166 A, and 4/0 aluminum is rated 180 A at 75 °C.</dd></div>
+    <div><dt>Does Romex qualify for the 83% dwelling-service rule?</dt><dd>No. NM/Romex is a 60 °C assembly, and the dwelling-service allowance requires conductors rated 75 °C or better.</dd></div>
+  </dl></section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need 2/0 or 3/0 copper for 200 amps?","acceptedAnswer":{"@type":"Answer","text":"Use 2/0 copper for a dwelling service or whole-dwelling feeder that meets every NEC 310.12 condition. Use 3/0 copper for the plain 75 °C Table 310.16 method when the allowance does not apply."}},{"@type":"Question","name":"What is the aluminum service wire size for 200 amps?","acceptedAnswer":{"@type":"Answer","text":"For a qualifying dwelling service, use 4/0 aluminum. Without the allowance, the verified 75 °C table requires 250 kcmil aluminum for 200 A."}},{"@type":"Question","name":"Can I use 4/0 aluminum for a 200 amp service?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the 200 A installation qualifies for NEC 310.12 and the conductors and equipment are suitable for aluminum. The 83% requirement is 166 A, and 4/0 aluminum is rated 180 A at 75 °C."}},{"@type":"Question","name":"Does Romex qualify for the 83% dwelling-service rule?","acceptedAnswer":{"@type":"Answer","text":"No. NM/Romex is a 60 °C assembly, and the dwelling-service allowance requires conductors rated 75 °C or better."}}]}</script>
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/how-we-verify/">How we verify</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/common.js?v=13530bbdbd"></script>
+</body>
+</html>

@@ -76,7 +76,13 @@ const TOOL_PATHS = [
 const GUIDE_PATHS = [
   '/guides/',
   '/guides/sub-panel-wire-size/',
+  '/guides/20-amp-wire-size/',
+  '/guides/30-amp-wire-size/',
+  '/guides/40-amp-wire-size/',
   '/guides/50-amp-wire-size/',
+  '/guides/60-amp-wire-size/',
+  '/guides/100-amp-service-wire-size/',
+  '/guides/200-amp-service-wire-size/',
   '/guides/wire-ampacity-chart/',
   '/guides/how-far-12-gauge-wire/',
   '/guides/voltage-drop-formula/',

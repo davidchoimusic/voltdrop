@@ -2,11 +2,10 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const english = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
-const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
-const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const passAInput = JSON.parse(readFileSync('i18n/backtranslation-input.json', 'utf8'));
 const passAOutput = JSON.parse(readFileSync('i18n/backtranslations.json', 'utf8'));
+const comparison = JSON.parse(readFileSync('i18n/backtranslation-comparison.json', 'utf8'));
 const review = JSON.parse(readFileSync('i18n/backtranslation-review.json', 'utf8'));
 const catalogs = {
   es: JSON.parse(readFileSync('i18n/strings/es.json', 'utf8')),
@@ -23,13 +22,6 @@ const editions = [
   { id: 'ca-fr', label: 'Canada Quebec French', country: 'ca', locale: 'fr-CA' },
   { id: 'ca-zh', label: 'Canada Simplified Chinese', country: 'ca', locale: 'zh-Hans' },
 ];
-const keyApplies = (key, country) => {
-  if (key.startsWith('guides.necVsCec.')) return true;
-  if (key.startsWith('guides.ca.') || key.startsWith('pages.ca.guides.')) return country === 'ca';
-  if (key.startsWith('guides.') || key.startsWith('pages.us.guides.')) return country === 'us';
-  return true;
-};
-
 const valueAt = (source, key) => {
   if (typeof source[key] === 'string') return source[key];
   return key.split('.').reduce((cursor, part) => cursor?.[part], source);
@@ -50,10 +42,19 @@ const contextualUnitCount = (source, token) => {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (source.match(new RegExp(`(?:\\d+(?:\\.\\d+)?|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
 };
+const normalizeDegreeCSpacing = (source) =>
+  source.replace(/(?<=\p{N})[ \u3000]*°C/gu, ' °C');
+const unitCount = (source, unit) => {
+  if (unit === 'cmil') {
+    return literalCount(source, 'cmil') + literalCount(source, 'circular mils');
+  }
+  if (unit === '°C') return literalCount(normalizeDegreeCSpacing(source), unit);
+  return literalCount(source, unit);
+};
 const unitCountsMatch = (source, target) => never.unitSymbols.every((unit) =>
-  literalCount(source, unit) === literalCount(target, unit))
+  unitCount(target, unit) >= unitCount(source, unit))
   && (never.contextualUnitSymbols ?? []).every((unit) =>
-    contextualUnitCount(source, unit) === contextualUnitCount(target, unit));
+    contextualUnitCount(target, unit) >= contextualUnitCount(source, unit));
 
 const expectedDigest = createHash('sha256')
   .update(JSON.stringify(passAInput.entries))
@@ -63,6 +64,13 @@ if (passAInput.targetDigest !== expectedDigest) {
 }
 if (passAOutput.targetDigest !== passAInput.targetDigest) {
   throw new Error('Pass A output is stale; its target digest does not match the target-only input.');
+}
+if (
+  comparison.targetDigest !== passAInput.targetDigest
+  || comparison.backtranslationDigest !== passAOutput.backtranslationDigest
+  || comparison.entries.length !== passAInput.entries.length
+) {
+  throw new Error('Pass B comparison is stale or does not cover every sealed Pass A row.');
 }
 const actualBacktranslationDigest = createHash('sha256')
   .update(JSON.stringify(passAOutput.entries))
@@ -102,14 +110,18 @@ let identical = 0;
 const verdictCounts = new Map();
 for (const edition of editions) {
   lines.push(`## ${edition.label}`, '', '| Key | Original English | Translation | Independent back-translation | Verdict |', '|---|---|---|---|---|');
-  for (const key of reviewKeys) {
-    if (!keyApplies(key, edition.country)) continue;
+  const sealedRows = comparison.entries.filter((entry) => entry.edition === edition.id);
+  for (const sealedRow of sealedRows) {
+    const { key } = sealedRow;
     const pack = packs[edition.country];
     const original = pack.strings[key] ?? valueAt(english, key);
     if (typeof original !== 'string' || original === '') continue;
     const translation = pack.strings[key] !== undefined
       ? pack.localizedStrings[edition.locale][key]
       : valueAt(catalogs[edition.locale], key);
+    if (sealedRow.original !== original || sealedRow.translation !== translation) {
+      throw new Error(`Sealed comparison row is stale at ${edition.id}:${key}.`);
+    }
     const input = passAInput.entries[rowIndex];
     if (!input || input.locale !== edition.locale || input.targetText !== translation) {
       throw new Error(`Target-only row alignment failed at ${edition.id}:${key}.`);

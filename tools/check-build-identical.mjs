@@ -12,8 +12,8 @@ const entries = lines.map((line) => {
   return { expected: match[1], file: match[2] };
 });
 
-if (entries.length !== 44) {
-  throw new Error(`Expected 44 generated English pages in the baseline, found ${entries.length}`);
+if (entries.length !== 56) {
+  throw new Error(`Expected 56 generated English pages in the baseline, found ${entries.length}`);
 }
 
 let failures = 0;

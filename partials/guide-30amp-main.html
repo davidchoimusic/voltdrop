@@ -1,0 +1,45 @@
+<main class="main-col guide">
+
+  <div class="tool-intro card">
+    <h1 class="tool-title">{{guides.thirtyAmp.whatSizeWireForN30AmpBreakerTitle}}</h1>
+    <p class="tool-sub"><a class="inline-link" href="/ca/guides/30-amp-wire-size/" data-edition-country="ca">{{guides.thirtyAmp.canadianAnswerLink}}</a></p>
+  </div>
+
+  <section class="card explainer">
+    <h2>{{guides.thirtyAmp.shortAnswerHeading}}</h2>
+    <p>{{guides.thirtyAmp.theStartingAnswerIsN10AWG}}</p>
+    <p>{{guides.thirtyAmp.aluminumDecisionBody}} <a class="inline-link" href="/ampacity-check/">{{guides.thirtyAmp.ampacityCheckTool}}</a>.</p>
+
+    <h2>{{guides.thirtyAmp.distanceChangesTheAnswerHeading}}</h2>
+    <p>{{guides.thirtyAmp.minimumSizeBody}}</p>
+    <h3>{{guides.thirtyAmp.tableN240VHeading}}</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="240v">
+      <thead><tr data-table-row="head"><th data-column="material">{{guides.thirtyAmp.material}}</th><th data-distance-ft="50">{{guides.thirtyAmp.n50Ft}}</th><th data-distance-ft="100">{{guides.thirtyAmp.n100Ft}}</th><th data-distance-ft="150">{{guides.thirtyAmp.n150Ft}}</th><th data-distance-ft="200">{{guides.thirtyAmp.n200Ft}}</th><th data-distance-ft="250">{{guides.thirtyAmp.n250Ft}}</th></tr></thead>
+      <tbody>
+        <tr data-material="cu"><td data-column="material">{{guides.thirtyAmp.copper}}</td><td data-distance-ft="50">{{guides.thirtyAmp.tdN10}}</td><td data-distance-ft="100">{{guides.thirtyAmp.tdN8}}</td><td data-distance-ft="150">{{guides.thirtyAmp.tdN8}}</td><td data-distance-ft="200">{{guides.thirtyAmp.tdN6}}</td><td data-distance-ft="250">{{guides.thirtyAmp.tdN4}}</td></tr>
+        <tr data-material="al"><td data-column="material">{{guides.thirtyAmp.aluminum}}</td><td data-distance-ft="50">{{guides.thirtyAmp.tdN8}}</td><td data-distance-ft="100">{{guides.thirtyAmp.tdN6}}</td><td data-distance-ft="150">{{guides.thirtyAmp.tdN4}}</td><td data-distance-ft="200">{{guides.thirtyAmp.tdN4}}</td><td data-distance-ft="250">{{guides.thirtyAmp.tdN3}}</td></tr>
+      </tbody>
+    </table></div>
+    <h3>{{guides.thirtyAmp.tableN120VHeading}}</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="120v">
+      <thead><tr data-table-row="head"><th data-column="material">{{guides.thirtyAmp.material}}</th><th data-distance-ft="50">{{guides.thirtyAmp.n50Ft}}</th><th data-distance-ft="100">{{guides.thirtyAmp.n100Ft}}</th><th data-distance-ft="150">{{guides.thirtyAmp.n150Ft}}</th><th data-distance-ft="200">{{guides.thirtyAmp.n200Ft}}</th><th data-distance-ft="250">{{guides.thirtyAmp.n250Ft}}</th></tr></thead>
+      <tbody>
+        <tr data-material="cu"><td data-column="material">{{guides.thirtyAmp.copper}}</td><td data-distance-ft="50">{{guides.thirtyAmp.tdN8}}</td><td data-distance-ft="100">{{guides.thirtyAmp.tdN6}}</td><td data-distance-ft="150">{{guides.thirtyAmp.tdN4}}</td><td data-distance-ft="200">{{guides.thirtyAmp.tdN3}}</td><td data-distance-ft="250">{{guides.thirtyAmp.tdN2}}</td></tr>
+        <tr data-material="al"><td data-column="material">{{guides.thirtyAmp.aluminum}}</td><td data-distance-ft="50">{{guides.thirtyAmp.tdN6}}</td><td data-distance-ft="100">{{guides.thirtyAmp.tdN4}}</td><td data-distance-ft="150">{{guides.thirtyAmp.tdN2}}</td><td data-distance-ft="200">{{guides.thirtyAmp.tdN1}}</td><td data-distance-ft="250">{{guides.thirtyAmp.tdN1N0}}</td></tr>
+      </tbody>
+    </table></div>
+    <p class="gnote"><a class="inline-link" href="/wire-size-calculator/">{{guides.thirtyAmp.wireSizeCalculator}}</a></p>
+
+    <h2>{{guides.thirtyAmp.jobsHeading}}</h2><p>{{guides.thirtyAmp.jobsBody}}</p>
+    <h2>{{guides.thirtyAmp.workedExampleHeading}}</h2><p>{{guides.thirtyAmp.workedExampleBody}}</p>
+    <h2>{{guides.thirtyAmp.relatedHeading}}</h2><p><a class="inline-link" href="/wire-size-calculator/">{{guides.thirtyAmp.wireSizeCalculator}}</a> · <a class="inline-link" href="/ampacity-check/">{{guides.thirtyAmp.ampacityCheckTool}}</a></p>
+  </section>
+
+  <section class="card visible-faq"><h2>{{guides.thirtyAmp.faqHeading}}</h2><dl>
+    <div><dt>{{guides.thirtyAmp.whatSizeWireForAN30AmpRVPlugQuestion}}</dt><dd>{{guides.thirtyAmp.aTTN30IsAN120VAnswer}}</dd></div>
+    <div><dt>{{guides.thirtyAmp.canN12GaugeHandleN30AmpsQuestion}}</dt><dd>{{guides.thirtyAmp.noN12AWGCopperIsCappedAnswer}}</dd></div>
+    <div><dt>{{guides.thirtyAmp.dryerWireSizeQuestion}}</dt><dd>{{guides.thirtyAmp.whatSizeWireForAN30AmpDryerAnswer}}</dd></div>
+  </dl></section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{json:guides.thirtyAmp.whatSizeWireForAN30AmpRVPlugQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.thirtyAmp.aTTN30IsAN120VAnswer}}"}},{"@type":"Question","name":"{{json:guides.thirtyAmp.canN12GaugeHandleN30AmpsQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.thirtyAmp.noN12AWGCopperIsCappedAnswer}}"}},{"@type":"Question","name":"{{json:guides.thirtyAmp.dryerWireSizeQuestion}}","acceptedAnswer":{"@type":"Answer","text":"{{json:guides.thirtyAmp.whatSizeWireForAN30AmpDryerAnswer}}"}}]}</script>
+</main>

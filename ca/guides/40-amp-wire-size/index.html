@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Size Wire for 40 Amps in Canada? CEC range and EV guide | VoltDrop</title>
+<meta name="description" content="The Canadian 40-amp answer: 8 AWG copper NMD90 under the conservative 60°C method, with a verified distance table and range and EV examples.">
+<link rel="canonical" href="https://voltdrop.app/ca/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/40-amp-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/40-amp-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="What Size Wire for 40 Amps in Canada? CEC range and EV guide | VoltDrop">
+<meta property="og:description" content="The Canadian 40-amp answer: 8 AWG copper NMD90 under the conservative 60°C method, with a verified distance table and range and EV examples.">
+<meta property="og:url" content="https://voltdrop.app/ca/guides/40-amp-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Size Wire for 40 Amps in Canada? CEC range and EV guide | VoltDrop">
+<meta name="twitter:description" content="The Canadian 40-amp answer: 8 AWG copper NMD90 under the conservative 60°C method, with a verified distance table and range and EV examples.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Free electrical calculators for electricians: voltage drop, wire size, ampacity, conduit fill, box fill, and power conversions."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="ca" data-locale="en">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Electrical tools menu" aria-expanded="false" aria-controls="mobile-tools">☰ Tools</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Change country or language" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · EN</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Feedback</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Which code applies?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Language in Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Electrical tools menu"></nav>
+    <p class="tagline">Electrical calculators that explain themselves. No signup, no guessing.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Electrical tools">
+    <span class="tool-nav-head">Electrical Tools</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Voltage Drop</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Wire Size</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Max Wire Length</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Ampacity Check</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Conduit Fill</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Box Fill</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Power Calculator</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Landscape Lighting</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar & Battery</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Wire Colour</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Feedback</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+  <div class="tool-intro card"><h1 class="tool-title">🔌 What Size Wire for a 40 Amp Breaker in Canada?</h1><p class="tool-sub"><a class="inline-link" href="/guides/40-amp-wire-size/" data-edition-country="us">🇺🇸 US version</a></p></div>
+  <section class="card explainer">
+    <h2>The short answer</h2><p>Use 8 AWG copper NMD90 for an ordinary 40 A circuit under the conservative 60°C termination method our Canadian tables use. Check the equipment markings in the Canadian Ampacity Check tool before relying on another column.</p><p>NMD90 has 90°C insulation, but CEC Rule 4-006 still makes the termination rating part of the answer. The verified 60°C column gives #8 copper exactly 40 A under ordinary conditions. <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a>.</p>
+    <h2>NMD90 and the termination rule</h2><p>NMD90 insulation does not by itself choose the termination column. The verified 60°C column rates #8 copper at exactly 40 A, so the conservative method our Canadian tables use has no extra ampacity headroom; check the equipment markings in the Canadian Ampacity Check tool.</p>
+    <h2>Distance changes the answer — and Rule 8-102 is mandatory</h2><p>Minimum size at 240 V, sized at the full 40 A with 60°C terminations and kept at or under the mandatory 3% voltage-drop limit (one-way distance):</p><h3>40 A at 240 V</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="240v"><thead><tr data-table-row="head"><th data-column="material">Material</th><th data-distance-ft="50">15 m (50′)</th><th data-distance-ft="100">30 m (100′)</th><th data-distance-ft="150">46 m (150′)</th><th data-distance-ft="200">61 m (200′)</th><th data-distance-ft="250">76 m (250′)</th><th data-distance-ft="300">91 m (300′)</th></tr></thead><tbody>
+      <tr data-material="cu"><td data-column="material">Copper</td><td data-distance-ft="50">8</td><td data-distance-ft="100">8</td><td data-distance-ft="150">6</td><td data-distance-ft="200">4</td><td data-distance-ft="250">4</td><td data-distance-ft="300">3</td></tr>
+      <tr data-material="al"><td data-column="material">Aluminum</td><td data-distance-ft="50">6</td><td data-distance-ft="100">6</td><td data-distance-ft="150">4</td><td data-distance-ft="200">3</td><td data-distance-ft="250">2</td><td data-distance-ft="300">1</td></tr>
+    </tbody></table></div><p class="gnote"><a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a></p>
+    <h2>Common Canadian 40-amp jobs</h2><p>A range is the classic 40 A circuit. In the CEC Rule 8-104 rated-equipment case, a 40 A conductor limit supports 32 A continuous because 40 A × 80% = 32 A; confirm the EV charger's setting and instructions.</p><h2>Worked example: 40 A at 240 V over 46 m (150 ft)</h2><p>Our verified calculator selects #6 copper (26,240 circular mils): 2 × 12.9 × 40 × 150 ÷ 26,240 = 5.90 V, or 2.46% of 240 V. #8 passes ampacity but does not meet the mandatory 3% drop limit at this distance.</p><h2>Related</h2><p><a class="inline-link" href="/wire-size-calculator/">Wire Size calculator</a> · <a class="inline-link" href="/ampacity-check/">Ampacity Check tool</a></p>
+  </section>
+  <section class="card visible-faq"><h2>40-amp wire size FAQ</h2><dl><div><dt>What size wire for a 40 amp range in Canada?</dt><dd>Start with 8 AWG copper NMD90 for an ordinary 40 A range circuit, then follow the appliance instructions and check Rule 8-102 voltage drop for a long run.</dd></div><div><dt>Can I run an EV charger on a 40 amp circuit in Canada?</dt><dd>In the CEC Rule 8-104 rated-equipment case, a 40 A conductor limit supports 32 A continuous: 40 A × 80% = 32 A. Confirm the charger's permitted setting and the installation's ampacity checks.</dd></div><div><dt>Is 8 gauge wire enough for 40 amps in Canada?</dt><dd>Yes. The verified 60°C column gives #8 copper 40 A under ordinary conditions. Heat, countable conductors, equipment markings, and long distance can require a larger conductor.</dd></div></dl></section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire for a 40 amp range in Canada?","acceptedAnswer":{"@type":"Answer","text":"Start with 8 AWG copper NMD90 for an ordinary 40 A range circuit, then follow the appliance instructions and check Rule 8-102 voltage drop for a long run."}},{"@type":"Question","name":"Can I run an EV charger on a 40 amp circuit in Canada?","acceptedAnswer":{"@type":"Answer","text":"In the CEC Rule 8-104 rated-equipment case, a 40 A conductor limit supports 32 A continuous: 40 A × 80% = 32 A. Confirm the charger's permitted setting and the installation's ampacity checks."}},{"@type":"Question","name":"Is 8 gauge wire enough for 40 amps in Canada?","acceptedAnswer":{"@type":"Answer","text":"Yes. The verified 60°C column gives #8 copper 40 A under ordinary conditions. Heat, countable conductors, equipment markings, and long distance can require a larger conductor."}}]}</script>
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Country:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 United States</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">We'll remember your choice on this device. More countries coming.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a class="footer-link" href="/comments">💬 Leave feedback</a>
+      <a class="footer-link" href="/how-we-verify/">How we verify</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
+      <a class="footer-link" href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · free electrical calculators · no signup, forever</p>
+    <p class="fine">All results are planning estimates from standard published formulas and tables — not professional advice. Always follow your local electrical code, and when in doubt, ask a licensed electrician. Details in the <a class="inline-link" href="/terms/">Terms</a>; each tool's "How we calculated this" shows its exact math.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-en/common.js?v=13530bbdbd"></script>
+</body>
+</html>

@@ -5,11 +5,14 @@
 // hash deliberately updated. See PROJECT_CONTEXT.md "REGRESSION RISKS".
 import { chromium } from 'playwright';
 import { existsSync, readFileSync, statSync } from 'fs';
-import { createHash } from 'crypto';
 import { spawnSync } from 'node:child_process';
 import { extname, join } from 'node:path';
 import { checkRegistries } from './tools/check-registries.mjs';
 import { checkRuntimeNeverTranslate } from './tools/check-runtime-never-translate.mjs';
+import {
+  inspectGoldenFingerprints,
+  readSealedConstant,
+} from './tools/lib/sealed-data.mjs';
 import {
   findNeverTranslateMismatch,
   formatNeverTranslateMismatch,
@@ -60,61 +63,31 @@ if (runtimeCodeIdentity.status !== 0) process.exit(runtimeCodeIdentity.status ??
 // The GA4 'calculate' event must fire when a person runs a calculator and
 // must stay silent for page loads and automation. Uses BASE, so the local
 // server must already be up (same requirement as the browser checks below).
-const calculateEvent = spawnSync(process.execPath, ['tools/check-calculate-event.mjs'], {
-  cwd: process.cwd(),
-  stdio: 'inherit',
-  env: { ...process.env, BASE },
-});
-if (calculateEvent.status !== 0) process.exit(calculateEvent.status ?? 1);
+if (process.env.STATIC_ONLY !== '1') {
+  const calculateEvent = spawnSync(process.execPath, ['tools/check-calculate-event.mjs'], {
+    cwd: process.cwd(),
+    stdio: 'inherit',
+    env: { ...process.env, BASE },
+  });
+  if (calculateEvent.status !== 0) process.exit(calculateEvent.status ?? 1);
+}
 
 // ---- Electrical data tripwire (runs before browser checks) ----
-// Each entry: [file, constant name]. Golden hashes = the state that passed
-// independent source verification (NEC page reproductions, 2026-07-24).
-const DATA_TABLES = [
-  ['app.js', 'WIRE_TABLE'], ['app.js', 'K_FACTOR'],
-  ['ampacity.js', 'AMPACITY'], ['ampacity.js', 'SMALL_CAP'],
-  ['ampacity.js', 'AMBIENT_CORRECTION'], ['ampacity.js', 'CONDUCTOR_ADJUSTMENT'],
-  ['ampacity.js', 'CEC_AMBIENT_CORRECTION'], ['ampacity.js', 'CEC_CONDUCTOR_ADJUSTMENT'],
-  ['conduit.js', 'THHN_AREA'], ['conduit.js', 'CONDUIT'],
-  ['conduit.js', 'CEC_CONDUCTOR_AREA'], ['conduit.js', 'CEC_CONDUIT'],
-  ['boxfill.js', 'VOL_PER_CONDUCTOR'], ['boxfill.js', 'BOXES'],
-  ['boxfill.js', 'CEC_VOL_ML'],
-  ['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
-  ['solar.js', 'WIRE_TABLE'], ['solar.js', 'K_FACTOR'],
-];
-const GOLDEN = JSON.parse(readFileSync('data-golden.json', 'utf8'));
-let dataPass = 0, dataFail = 0;
-for (const [file, name] of DATA_TABLES) {
-  const src = readFileSync(file, 'utf8');
-  const m = src.match(new RegExp(`const ${name} = [\\s\\S]*?\\n[}\\]];`));
-  if (!m) { console.log(`FAIL data tripwire: ${name} not found in ${file}`); dataFail++; continue; }
-  const h = createHash('md5').update(m[0]).digest('hex');
-  const key = `${file}:${name}`;
-  if (GOLDEN[key] === h) { console.log(`PASS data intact: ${key}`); dataPass++; }
-  else {
-    console.log(`FAIL DATA CHANGED: ${key} — hash ${h} != golden ${GOLDEN[key]}`);
-    console.log(`  >> Electrical safety data was modified. Re-run independent source`);
-    console.log(`  >> verification, then update data-golden.json ON PURPOSE.`);
-    dataFail++;
-  }
+// The shared sealed-data reader uses the same literal declaration boundary and
+// MD5 fingerprint method as this suite's former duplicate block.
+const fingerprintInspection = inspectGoldenFingerprints();
+let dataPass = fingerprintInspection.checked.length;
+let dataFail = fingerprintInspection.failures.length;
+for (const key of fingerprintInspection.checked) console.log(`PASS data intact: ${key}`);
+for (const failure of fingerprintInspection.failures) {
+  console.log(`FAIL DATA CHANGED: ${failure.key} — hash ${failure.actual ?? 'declaration missing'} != golden ${failure.expected ?? 'missing golden'}`);
+  console.log(`  >> Electrical safety data was modified. Re-run independent source`);
+  console.log(`  >> verification, then update data-golden.json ON PURPOSE.`);
 }
 if (dataFail > 0) {
   console.log(`\nDATA TRIPWIRE FAILED (${dataFail}) — refusing to continue.`);
   process.exit(1);
 }
-
-// Read test expectations from the exact constants whose hashes just passed the
-// electrical-data tripwire. The calculator files are browser scripts rather
-// than importable modules, so evaluate only the named literal declarations.
-const readSealedConstant = (file, name) => {
-  const isSealed = DATA_TABLES.some(([sealedFile, sealedName]) =>
-    sealedFile === file && sealedName === name);
-  if (!isSealed) throw new Error(`Test expectation requested unsealed data: ${file}:${name}`);
-  const source = readFileSync(file, 'utf8');
-  const match = source.match(new RegExp(`const ${name} = ([\\s\\S]*?);\\n`));
-  if (!match) throw new Error(`Cannot read sealed constant ${name} from ${file}`);
-  return Function(`"use strict"; return (${match[1]});`)();
-};
 
 const TEST_WIRE_TABLE = readSealedConstant('app.js', 'WIRE_TABLE');
 const TEST_K_FACTOR = readSealedConstant('app.js', 'K_FACTOR');
@@ -130,6 +103,10 @@ const TEST_CEC_CONDUCTOR_AREA = readSealedConstant('conduit.js', 'CEC_CONDUCTOR_
 const TEST_CEC_CONDUIT = readSealedConstant('conduit.js', 'CEC_CONDUIT');
 const TEST_VOL_PER_CONDUCTOR = readSealedConstant('boxfill.js', 'VOL_PER_CONDUCTOR');
 const TEST_CEC_VOL_ML = readSealedConstant('boxfill.js', 'CEC_VOL_ML');
+const TEST_NEC_310_12_DWELLING_SERVICE = readSealedConstant(
+  'tools/derive-guide-tables.mjs',
+  'NEC_310_12_DWELLING_SERVICE',
+);
 
 const errors = [];
 let pass = 0, fail = 0;
@@ -166,6 +143,15 @@ const numericExtractorActual = extractNumericTokens(numericExtractorFixture);
 checkBool('numeric extractor handles CJK adjacency without matching Latin identifiers',
   JSON.stringify(numericExtractorActual) === JSON.stringify(numericExtractorExpected),
   JSON.stringify(numericExtractorActual));
+checkBool('sealed NEC 310.12 factor carries all four verified conditions',
+  TEST_NEC_310_12_DWELLING_SERVICE.factor === 0.83
+    && JSON.stringify(TEST_NEC_310_12_DWELLING_SERVICE.conditions) === JSON.stringify([
+      'dwelling service or feeder carrying the entire dwelling load only',
+      'service or feeder rating from 100 A through 400 A only',
+      'no ampacity adjustment or correction factors are required',
+      'conductors rated 75 C or better; NM/Romex is excluded',
+    ]),
+  `${TEST_NEC_310_12_DWELLING_SERVICE.factor} / ${TEST_NEC_310_12_DWELLING_SERVICE.conditions.length} conditions`);
 
 const EDITIONS = [
   { prefix: '', country: 'us', locale: 'en', lang: 'en', hreflang: 'en-US', twin: '', chip: '🇺🇸 NEC · EN' },
@@ -207,13 +193,28 @@ const editionPath = (prefix, path) => `${prefix ? `${prefix}/` : ''}${path}`;
 const GUIDE_PATHS = [
   'guides/',
   'guides/sub-panel-wire-size/',
+  'guides/20-amp-wire-size/',
+  'guides/30-amp-wire-size/',
+  'guides/40-amp-wire-size/',
   'guides/50-amp-wire-size/',
+  'guides/60-amp-wire-size/',
+  'guides/100-amp-service-wire-size/',
+  'guides/200-amp-service-wire-size/',
   'guides/wire-ampacity-chart/',
   'guides/how-far-12-gauge-wire/',
   'guides/voltage-drop-formula/',
   'guides/nec-vs-cec/',
 ];
 const GUIDE_ROUTES = GUIDE_PATHS.map((path) => `/${path}`);
+const NEW_GUIDE_CASES = [
+  { path: 'guides/20-amp-wire-size/', guide: 'twentyAmp' },
+  { path: 'guides/30-amp-wire-size/', guide: 'thirtyAmp' },
+  { path: 'guides/40-amp-wire-size/', guide: 'fortyAmp' },
+  { path: 'guides/60-amp-wire-size/', guide: 'sixtyAmp' },
+  { path: 'guides/100-amp-service-wire-size/', guide: 'hundredAmpService' },
+  { path: 'guides/200-amp-service-wire-size/', guide: 'twoHundredAmpService' },
+];
+const GUIDE_TABLE_DERIVATIONS = JSON.parse(readFileSync('tools/guide-table-derivations.json', 'utf8'));
 const NEW_PAGE_PATHS = [
   'how-we-verify/',
   'ohms-law/',
@@ -284,9 +285,10 @@ const sitemap = readFileSync('sitemap.xml', 'utf8');
 const missingGuideSitemapUrls = GENERATED_PATHS
   .filter((path) => path.includes('guides/'))
   .filter((path) => !sitemap.includes(`<loc>https://voltdrop.app/${path}</loc>`));
-checkBool('sitemap lists all 36 guide pages',
+const expectedGuidePageCount = GUIDE_PATHS.length * EDITIONS.length;
+checkBool(`sitemap lists all ${expectedGuidePageCount} guide pages`,
   missingGuideSitemapUrls.length === 0,
-  missingGuideSitemapUrls.length ? missingGuideSitemapUrls.join(', ') : '36 guide URLs');
+  missingGuideSitemapUrls.length ? missingGuideSitemapUrls.join(', ') : `${expectedGuidePageCount} guide URLs`);
 
 // ---- Answer-engine companion: generated context, never a raw table dump.
 const llmsFullPath = 'llms-full.txt';
@@ -325,6 +327,12 @@ const stripParityExemptElements = (html) => html.replace(
 
 // ---- Edition pages: lang/canonical/hreflang and protected-token parity.
 const neverTranslate = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
+const spelledUnits = '100 amp; 101 amps; 102 ampere; 103 amperes; 60 degree C; 75 degrees C; 120 volt; 240 volts';
+const symbolUnits = '100 A; 101 A; 102 A; 103 A; 60°C; 75 °C; 120 V; 240 V';
+checkBool('spelled electrical units equal their symbols in protected-value parity',
+  !findNeverTranslateMismatch(spelledUnits, symbolUnits, neverTranslate));
+checkBool('electrical unit symbol equivalence works in the reverse direction',
+  !findNeverTranslateMismatch(symbolUnits, spelledUnits, neverTranslate));
 
 for (const edition of EDITIONS) {
   for (const path of [...SCOPED_PATHS, ...GUIDE_PATHS]) {
@@ -336,7 +344,9 @@ for (const edition of EDITIONS) {
     const toolsAriaOk = /<button[^>]+id="tools-btn"[^>]+aria-label="[^"]+"/.test(html);
     const canonicalOk = html.includes(`<link rel="canonical" href="${expectedCanonical}">`);
     const localStandard = edition.country === 'ca' ? 'CEC' : 'NEC';
+    const guideUsesApprovedTitle = NEW_GUIDE_CASES.some((guide) => guide.path === path);
     const guideStandardOk = !GUIDE_PATHS.includes(path)
+      || guideUsesApprovedTitle
       || new RegExp(`<title>[^<]*\\b${localStandard}\\b[^<]*</title>`).test(html);
     const runtimeAssetOk = runtimeEditionId(edition) === 'us-en'
       ? html.includes('<script src="/common.js?v=')
@@ -1937,7 +1947,7 @@ await page.waitForURL('**/ca/wire-size-calculator/');
 checkBool('country click navigates to equivalent Canadian tool',
   new URL(page.url()).pathname === '/ca/wire-size-calculator/');
 
-// ---- Edition path helper: computed twins match every old US↔CA guide pair.
+// ---- Edition path helper: computed twins match every US↔CA guide pair.
 const editionPaths = await page.evaluate((paths) => paths.map((usPath) => ({
   usPath,
   caPath: VDEdition.pathFor('ca', 'en', usPath),
@@ -1945,7 +1955,7 @@ const editionPaths = await page.evaluate((paths) => paths.map((usPath) => ({
 })), GUIDE_ROUTES);
 const twinsMatch = editionPaths.every(({ usPath, caPath, roundTrip }) =>
   caPath === `/ca${usPath}` && roundTrip === usPath);
-checkBool('edition helper matches all six US/CA guide twins', twinsMatch,
+checkBool(`edition helper matches all ${GUIDE_ROUTES.length} US/CA guide twins`, twinsMatch,
   `${editionPaths.length} paths checked both ways`);
 const guideEditionMatrix = await page.evaluate(({ editions, paths }) =>
   editions.flatMap((edition) => paths.map((path) => ({
@@ -2414,6 +2424,105 @@ for (const g of GENERATED_PATHS.filter((path) => path.includes('guides/'))) {
         && entry.acceptedAnswer.text.length > 3);
   const ok = h1 && h1.trim().length > 3 && active && faqOk;
   console.log(ok ? `PASS guide /${g} (${h1.trim().slice(0, 30)}…)` : `FAIL guide /${g}: h1=${h1} active=${active} faq=${faqOk}`); ok ? pass++ : fail++;
+}
+
+// ---- Newly registered amp-ladder guides: one named result per page for each
+// registration boundary. Table cells are locale-invariant rendered tokens.
+for (const edition of EDITIONS) {
+  for (const guideCase of NEW_GUIDE_CASES) {
+    const generated = editionPath(edition.prefix, guideCase.path);
+    await page.goto(BASE + generated);
+
+    const renderedTables = await page.evaluate(() => {
+      const tables = {};
+      let duplicates = 0;
+      for (const table of document.querySelectorAll('table[data-guide-table]')) {
+        const tableId = table.dataset.guideTable;
+        if (Object.prototype.hasOwnProperty.call(tables, tableId)) duplicates++;
+        tables[tableId] = Object.fromEntries(
+          [...table.querySelectorAll('tr[data-material]')].map((row) => [
+            row.dataset.material,
+            Object.fromEntries(
+              [...row.querySelectorAll('td[data-distance-ft]')].map((cell) => [
+                cell.dataset.distanceFt,
+                cell.textContent.trim(),
+              ]),
+            ),
+          ]),
+        );
+      }
+      return { tables, count: document.querySelectorAll('table[data-guide-table]').length, duplicates };
+    });
+    const expectedTables = GUIDE_TABLE_DERIVATIONS.guides[guideCase.guide]?.[edition.country] || {};
+    const tableParity = renderedTables.duplicates === 0
+      && renderedTables.count === Object.keys(expectedTables).length
+      && JSON.stringify(renderedTables.tables) === JSON.stringify(expectedTables);
+    checkBool(`/${generated} rendered guide-table parity`, tableParity,
+      tableParity
+        ? `${renderedTables.count} table(s)`
+        : `rendered=${JSON.stringify(renderedTables.tables)} expected=${JSON.stringify(expectedTables)}`);
+
+    const faqParity = await page.evaluate(() => {
+      const visibleSections = [...document.querySelectorAll('section.visible-faq')]
+        .filter((section) => !section.hidden && getComputedStyle(section).display !== 'none');
+      const faqPages = [...document.querySelectorAll('script[type="application/ld+json"]')]
+        .map((script) => {
+          try { return JSON.parse(script.textContent); } catch { return null; }
+        })
+        .filter((entry) => entry?.['@type'] === 'FAQPage');
+      const visibleQuestions = visibleSections.length === 1
+        ? [...visibleSections[0].querySelectorAll('dt')].map((node) => node.textContent.trim())
+        : [];
+      const structuredQuestions = faqPages.length === 1
+        ? (faqPages[0].mainEntity || []).map((entry) => entry?.name)
+        : [];
+      return {
+        sectionCount: visibleSections.length,
+        jsonLdCount: faqPages.length,
+        visibleQuestions,
+        structuredQuestions,
+      };
+    });
+    const faqOk = faqParity.sectionCount === 1
+      && faqParity.jsonLdCount === 1
+      && faqParity.visibleQuestions.length > 0
+      && JSON.stringify(faqParity.visibleQuestions) === JSON.stringify(faqParity.structuredQuestions);
+    checkBool(`/${generated} visible FAQ matches its JSON-LD`, faqOk,
+      `sections=${faqParity.sectionCount} JSON-LD=${faqParity.jsonLdCount} questions=${faqParity.visibleQuestions.length}`);
+
+    const linkMatrix = await page.evaluate(({ country, locale, basePath }) => {
+      const ordinary = [];
+      const countryLinks = [];
+      for (const link of document.querySelectorAll('main a[href^="/"]')) {
+        const pathname = new URL(link.href).pathname;
+        if (link.dataset.editionCountry) {
+          const targetCountry = link.dataset.editionCountry;
+          const targetLanguage = (targetCountry === 'ca' && locale === 'es')
+            || (targetCountry === 'us' && locale === 'fr-CA')
+            ? 'en'
+            : locale;
+          countryLinks.push({
+            pathname,
+            expected: VDEdition.pathFor(targetCountry, targetLanguage, basePath),
+          });
+        } else {
+          ordinary.push({
+            pathname,
+            inEdition: VDEdition.AVAILABLE_PATHS[`${country}|${locale}`].has(pathname),
+          });
+        }
+      }
+      return { ordinary, countryLinks };
+    }, { country: edition.country, locale: edition.locale, basePath: `/${guideCase.path}` });
+    const linksOk = linkMatrix.ordinary.length > 0
+      && linkMatrix.ordinary.every((link) => link.inEdition)
+      && linkMatrix.countryLinks.length > 0
+      && linkMatrix.countryLinks.every((link) => link.pathname === link.expected);
+    checkBool(`/${generated} internal and country-twin link matrix`, linksOk,
+      linksOk
+        ? `${linkMatrix.ordinary.length} ordinary / ${linkMatrix.countryLinks.length} country`
+        : JSON.stringify(linkMatrix));
+  }
 }
 
 // Every number visible in a translated guide must have the exact source

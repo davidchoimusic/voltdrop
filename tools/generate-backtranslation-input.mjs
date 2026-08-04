@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 
 const registry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
 const reviewKeys = [...registry.keys, ...(registry.extraReviewKeys ?? [])];
@@ -57,5 +58,11 @@ const output = {
   entries,
 };
 
-writeFileSync('i18n/backtranslation-input.json', `${JSON.stringify(output, null, 2)}\n`);
-console.log(`back-translation Pass A input: ${entries.length} target-only rows (${targetDigest})`);
+const outputFlag = process.argv.indexOf('--output');
+const outputFile = outputFlag >= 0
+  ? process.argv[outputFlag + 1]
+  : 'i18n/backtranslation-input.json';
+if (!outputFile) throw new Error('--output requires a file path.');
+mkdirSync(dirname(outputFile), { recursive: true });
+writeFileSync(outputFile, `${JSON.stringify(output, null, 2)}\n`);
+console.log(`back-translation Pass A input: ${entries.length} target-only rows (${targetDigest}) -> ${outputFile}`);

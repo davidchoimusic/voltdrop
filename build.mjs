@@ -131,7 +131,20 @@ const expandFragments = (template, label) => {
 
 const renderTemplate = (template, label, edition, options) => {
   const composed = expandFragments(template, label);
-  const rendered = composed.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
+  const linked = composed.replace(/\{\{link:([A-Za-z0-9.%]+)\|([A-Za-z0-9.%]+)\|(\/[^|{}\s]+)\}\}/g,
+    (_, answerKey, linkTextKey, href) => {
+      const answer = text(answerKey, edition, options);
+      const linkText = text(linkTextKey, edition, options);
+      const answerFolded = answer.toLocaleLowerCase();
+      const linkTextFolded = linkText.toLocaleLowerCase();
+      const start = answerFolded.indexOf(linkTextFolded);
+      if (start < 0 || answerFolded.indexOf(linkTextFolded, start + linkTextFolded.length) >= 0) {
+        throw new Error(`${label}: ${linkTextKey} must occur exactly once inside ${answerKey}`);
+      }
+      const end = start + linkText.length;
+      return `${answer.slice(0, start)}<a class="inline-link" href="${href}">${answer.slice(start, end)}</a>${answer.slice(end)}`;
+    });
+  const rendered = linked.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
     const value = text(key, edition, options);
     if (format === 'json') return JSON.stringify(value).slice(1, -1);
     return value;
@@ -345,6 +358,36 @@ const PAGES = [
     descriptionKey: 'pages.us.guides.subPanel.description',
   },
   {
+    dir: 'guides/20-amp-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/20-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/20-amp-wire-size/'}],
+    script: null,
+    main: 'partials/guide-20amp-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.twentyAmp.title',
+    descriptionKey: 'pages.us.guides.twentyAmp.description',
+  },
+  {
+    dir: 'guides/30-amp-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/30-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/30-amp-wire-size/'}],
+    script: null,
+    main: 'partials/guide-30amp-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.thirtyAmp.title',
+    descriptionKey: 'pages.us.guides.thirtyAmp.description',
+  },
+  {
+    dir: 'guides/40-amp-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/40-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/40-amp-wire-size/'}],
+    script: null,
+    main: 'partials/guide-40amp-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.fortyAmp.title',
+    descriptionKey: 'pages.us.guides.fortyAmp.description',
+  },
+  {
     dir: 'guides/50-amp-wire-size',
     tool: 'guides',
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
@@ -352,6 +395,36 @@ const PAGES = [
     main: 'partials/guide-50amp-main.html',
     titleKey: 'pages.us.guides.fiftyAmp.title',
     descriptionKey: 'pages.us.guides.fiftyAmp.description',
+  },
+  {
+    dir: 'guides/60-amp-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/60-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/60-amp-wire-size/'}],
+    script: null,
+    main: 'partials/guide-60amp-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.sixtyAmp.title',
+    descriptionKey: 'pages.us.guides.sixtyAmp.description',
+  },
+  {
+    dir: 'guides/100-amp-service-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/100-amp-service-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/100-amp-service-wire-size/'}],
+    script: null,
+    main: 'partials/guide-100amp-service-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.hundredAmpService.title',
+    descriptionKey: 'pages.us.guides.hundredAmpService.description',
+  },
+  {
+    dir: 'guides/200-amp-service-wire-size',
+    tool: 'guides',
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/200-amp-service-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/200-amp-service-wire-size/'}],
+    script: null,
+    main: 'partials/guide-200amp-service-main.html',
+    visibleFaq: true,
+    titleKey: 'pages.us.guides.twoHundredAmpService.title',
+    descriptionKey: 'pages.us.guides.twoHundredAmpService.description',
   },
   {
     dir: 'guides/wire-ampacity-chart',
@@ -407,6 +480,36 @@ const PAGES = [
     descriptionKey: 'pages.ca.guides.subPanel.description',
   },
   {
+    dir: 'ca/guides/20-amp-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-20amp-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/20-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/20-amp-wire-size/'}],
+    titleKey: 'pages.ca.guides.twentyAmp.title',
+    descriptionKey: 'pages.ca.guides.twentyAmp.description',
+  },
+  {
+    dir: 'ca/guides/30-amp-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-30amp-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/30-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/30-amp-wire-size/'}],
+    titleKey: 'pages.ca.guides.thirtyAmp.title',
+    descriptionKey: 'pages.ca.guides.thirtyAmp.description',
+  },
+  {
+    dir: 'ca/guides/40-amp-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-40amp-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/40-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/40-amp-wire-size/'}],
+    titleKey: 'pages.ca.guides.fortyAmp.title',
+    descriptionKey: 'pages.ca.guides.fortyAmp.description',
+  },
+  {
     dir: 'ca/guides/50-amp-wire-size',
     tool: 'guides',
     script: null,
@@ -414,6 +517,36 @@ const PAGES = [
     hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/50-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/50-amp-wire-size/'}],
     titleKey: 'pages.ca.guides.fiftyAmp.title',
     descriptionKey: 'pages.ca.guides.fiftyAmp.description',
+  },
+  {
+    dir: 'ca/guides/60-amp-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-60amp-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/60-amp-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/60-amp-wire-size/'}],
+    titleKey: 'pages.ca.guides.sixtyAmp.title',
+    descriptionKey: 'pages.ca.guides.sixtyAmp.description',
+  },
+  {
+    dir: 'ca/guides/100-amp-service-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-100amp-service-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/100-amp-service-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/100-amp-service-wire-size/'}],
+    titleKey: 'pages.ca.guides.hundredAmpService.title',
+    descriptionKey: 'pages.ca.guides.hundredAmpService.description',
+  },
+  {
+    dir: 'ca/guides/200-amp-service-wire-size',
+    tool: 'guides',
+    script: null,
+    main: 'partials/ca-guide-200amp-service-main.html',
+    visibleFaq: true,
+    hreflang: [{lang: 'en-us', href: 'https://voltdrop.app/guides/200-amp-service-wire-size/'}, {lang: 'en-ca', href: 'https://voltdrop.app/ca/guides/200-amp-service-wire-size/'}],
+    titleKey: 'pages.ca.guides.twoHundredAmpService.title',
+    descriptionKey: 'pages.ca.guides.twoHundredAmpService.description',
   },
   {
     dir: 'ca/guides/wire-ampacity-chart',
@@ -521,6 +654,7 @@ const assertVisibleFaq = (html, label) => {
   const visibleText = html
     .replace(/<script[\s\S]*?<\/script>/g, ' ')
     .replace(/<style[\s\S]*?<\/style>/g, ' ')
+    .replace(/<\/?a\b[^>]*>/g, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ');
   for (const entry of faqScripts[0].mainEntity ?? []) {

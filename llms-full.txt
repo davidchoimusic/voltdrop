@@ -176,11 +176,47 @@ URL: https://voltdrop.app/guides/sub-panel-wire-size/
 Question: What wire size does a shed or detached-garage sub-panel need after both ampacity and distance are considered?
 Summary: The complete answer with distance tables — 50, 60, and 100 amp feeders from 50 to 300 feet. Ampacity sets the safe current limit, while voltage drop can require a larger conductor on a long feeder; both checks apply.
 
+### What size wire for 20 amps
+
+URL: https://voltdrop.app/guides/20-amp-wire-size/
+Question: What is the ordinary 20-amp branch-circuit starting size, and when does distance require more copper?
+Summary: The everyday answer is 12 AWG copper. Do not put 14 AWG copper on a 20 A breaker for an ordinary branch circuit. The table keeps the full load and one-way distance visible.
+
+### What size wire for 30 amps
+
+URL: https://voltdrop.app/guides/30-amp-wire-size/
+Question: Why do a dryer circuit and a TT-30 RV receptacle need separate distance tables?
+Summary: Start with 10 AWG copper for an ordinary 30 A circuit. A TT-30 RV receptacle is 120 V, while a typical dryer or water-heater circuit is 240 V; that voltage difference changes long-run sizing. The 120 V and 240 V cases are separated so voltage is never implicit.
+
+### What size wire for 40 amps
+
+URL: https://voltdrop.app/guides/40-amp-wire-size/
+Question: When is 8 AWG copper the ordinary 40-amp answer, and what can make it larger?
+Summary: Use 8 AWG copper for an ordinary 40 A circuit. Unlike the smaller branch-circuit sizes, the answer now depends directly on the allowed temperature column and the wiring method. Temperature limits, installation conditions, and distance remain part of the answer.
+
 ### What size wire for 50 amps
 
 URL: https://voltdrop.app/guides/50-amp-wire-size/
 Question: Why do correct 50-amp answers differ by wire type and installation?
 Summary: Why the internet disagrees (6 vs 8 gauge), and the right answer for breakers, hot tubs, EV chargers, and RV hookups. The correct choice depends on the wire type, its permitted temperature column, the terminations, and the run length.
+
+### What size wire for 60 amps
+
+URL: https://voltdrop.app/guides/60-amp-wire-size/
+Question: Why do correct 60-amp copper answers split between 6 and 4 gauge?
+Summary: The copper answer splits by temperature column: #6 at 75°C, but #4 at 60°C. Check the cable type and terminal markings before choosing between them. The page also checks long-run voltage drop and continuous EV charging.
+
+### 100 amp service wire size
+
+URL: https://voltdrop.app/guides/100-amp-service-wire-size/
+Question: When does the NEC dwelling-service allowance permit a smaller conductor than the ordinary ampacity table?
+Summary: Wire size for a 100 amp dwelling service: see the NEC 310.12 math, the ordinary 310.16 contrast, all four conditions, and a verified 240 V distance table.
+
+### 200 amp service wire size
+
+URL: https://voltdrop.app/guides/200-amp-service-wire-size/
+Question: Why do 2/0 copper, 3/0 copper, and 4/0 aluminum all appear in 200-amp service answers?
+Summary: Reconcile 2/0 and 3/0 copper plus 4/0 aluminum for a 200 amp service with the NEC 310.12 arithmetic, conditions, and a verified distance table.
 
 ### Wire ampacity chart
 
@@ -207,6 +243,15 @@ Question: Which current NEC and CEC differences change a real calculation or ins
 Summary: A verified map of the NEC and Canadian Electrical Code differences that change real answers. It covers shared in-raceway ampacity values, different conductor-count and cool-ambient corrections, continuous-load operations, voltage-drop legal status, conduit dimensions, conductor colours, high-leg phase placement, and the current Canadian colour-rule citation.
 
 Canadian English versions use the same guide paths after `/ca/` and apply the Canadian rules. Spanish, Simplified Chinese, Quebec French, and Canadian Simplified Chinese versions use their edition prefixes listed above.
+
+### New Canadian guide paths
+
+- https://voltdrop.app/ca/guides/20-amp-wire-size/ — Use 12 AWG copper NMD90 for an ordinary 20 A circuit. Do not put 14 AWG copper on a 20 A overcurrent device for this ordinary use.
+- https://voltdrop.app/ca/guides/30-amp-wire-size/ — Start with 10 AWG copper NMD90 for an ordinary 30 A circuit. A TT-30 RV receptacle is 120 V, while a typical dryer or water-heater circuit is 240 V; that voltage difference changes long-run sizing.
+- https://voltdrop.app/ca/guides/40-amp-wire-size/ — Use 8 AWG copper NMD90 for an ordinary 40 A circuit under the conservative 60°C termination method our Canadian tables use. Check the equipment markings in the Canadian Ampacity Check tool before relying on another column.
+- https://voltdrop.app/ca/guides/60-amp-wire-size/ — Under the conservative 60°C termination method our Canadian tables use, start with #4 copper NMD90 for 60 A; check the exact installation in the Ampacity Check tool before relying on a marked 75°C termination and #6 copper at 65 A.
+- https://voltdrop.app/ca/guides/100-amp-service-wire-size/ — Canada has its own service-sizing process, and this site has not verified it.
+- https://voltdrop.app/ca/guides/200-amp-service-wire-size/ — The U.S. percentage allowance is not a Canadian service-sizing shortcut.
 
 ## Code editions implemented
 
