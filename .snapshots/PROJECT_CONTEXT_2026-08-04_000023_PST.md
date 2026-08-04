@@ -20,42 +20,6 @@ plus solar/automotive DIY. Mobile-first — used standing on jobsites.
 Superseded (2026-07-27): the earlier "NOT YET PUSHED OR DEPLOYED — awaiting `YES PUSH`" line is
 no longer true; both shipped, and everything below is live and verified on production.
 
-### 2026-08-03 session — THE AMP LADDER: six new guides, 132 → 168 pages (MERGED TO MAIN, NOT PUSHED)
-Keyword research (Semrush "voltage drop calculator" seed: 2,446 keywords / 184,550 searches /
-avg KD 21, plus free Google autocomplete mining) said the biggest uncovered demand is the
-amp-by-amp family — autocomplete completes "what size wire for" into 50/100 A service/200 A
-service/30/60/40/20 A. We held 1 of those (50 A). Built the other six:
-`/guides/{20,30,40,60}-amp-wire-size/` + `/guides/{100,200}-amp-service-wire-size/`, each in
-all six editions (GUIDE_PATHS makes guides all-or-nothing per edition) = **36 new pages**.
-- **Every number is engine-derived.** `tools/derive-guide-tables.mjs` calls the shipped
-  `calculateCombinedWireSize` through a new shared sealed-constant reader
-  (`tools/lib/sealed-data.mjs`), verifies all golden fingerprints BEFORE emitting, and writes
-  `tools/guide-table-derivations.json`. Partial cells must match it. Nothing typed from memory.
-- **NEC 310.12 (83% dwelling-service rule) source-verified then sealed.** Two independent
-  reproductions + arithmetic against our own 75 °C table (100 A → 4 Cu / 2 Al; 200 A → 2/0 Cu /
-  4/0 Al), with the 2026 NEC restriction that the rule needs 75 °C-or-better conductors, so
-  NM/Romex is out. Factor + its four conditions now sealed in `data-golden.json` (+1 fingerprint,
-  zero pre-existing changed). The 200 A page reconciles the 2/0-vs-3/0-vs-4/0 internet split by
-  naming the method behind each — the exact opening `docs/GUIDES_TOPIC_MAP.md` #10 identified.
-- **CA service pages publish NO Canadian conductor size** (no verified CEC service rule here);
-  they explain the scope honestly and route to Ampacity Check. `check-guide-partials` rejects a
-  table on those two pages.
-- **Translations** via the house fleet (termbase → translate → critique → revise, Sonnet xhigh +
-  Fable high): 954 strings, centrally validated (key parity, numeric-token parity, protected
-  tokens, title/desc caps) then ingested THROUGH `generate-guide-translations --ingest-fleet`;
-  catalogs regenerated through the generator (es +273, zh-Hans +474, fr-CA +201, zero existing
-  values changed, still a byte-perfect no-op on a second run). Safety registry 422 → 557 keys.
-- **Back-translation** honestly two-passed: 1,788 reviews, 0 failed, 23.1% byte-identical
-  (contamination alarm armed and silent).
-- **Suite 1,330 → 1,622 passed, 0 failed, 0 JS errors.** New per-page checks: rendered
-  table-cell parity vs the derivation matrix, visible-FAQ ↔ JSON-LD agreement, and a full
-  in-edition + country-twin link matrix — one named result per page, all 36.
-- 34 screenshots at phone + desktop across all six editions: no overflow, no clipped columns,
-  no grey boxes. English byte-baseline 44 → 56 pages.
-- Merge commit on local main; **awaiting `YES PUSH`, then `YES DEPLOY` separately** (VoltDrop
-  never auto-deploys). Post-deploy: submit the 36 new URLs in Bing Webmaster Tools + GSC.
-- Follow-up not in this batch: the 15 A page (the family's remaining member).
-
 ### 2026-07-31 session — GEO/SEO audit + Bing Webmaster Tools activated
 Audit verdict: on-page SEO and GEO plumbing are in good shape (titles/canonicals/hreflang suite-
 enforced; sitemap 133 URLs live; llms.txt + llms-full.txt live; robots.txt welcomes 11 AI
@@ -670,23 +634,6 @@ shared country/chip logic in common.js.
 
 ## EDGE CASES & GOTCHAS
 
-- **A GUIDE IS ALL-OR-NOTHING ACROSS SIX EDITIONS (2026-08-03).** `common.js GUIDE_PATHS` declares
-  guide existence for every edition at once, so "add one English guide" is never the job — one new
-  slug is 6 generated pages, and six slugs is 36. Budget the translation round accordingly: the
-  amp-ladder batch was ~430 new English strings → 954 translated. Registration is 12 `PAGES`
-  source entries (US + CA), NOT 36; the build expands them. New guide paths go in `verify.mjs`
-  **`GUIDE_PATHS`**, not `SCOPED_PATHS`, or you get both "undeclared path" and "missing guide"
-  failures. Guides are discovered dynamically for metadata — do NOT add them to
-  `generate-locales.mjs`'s hardcoded top-level meta-page array (that array is for tool pages;
-  adding a guide namespace makes `english.pages.us.<ns>` undefined and crashes the generator).
-
-- **THE BUILDER'S SANDBOX CANNOT RUN THE BROWSER SUITE — ITS "ALL GREEN" IS HALF THE SUITE
-  (2026-08-03).** Codex could not bind `localhost:8642` (`PermissionError`) nor start Chromium
-  (Mach rendezvous `Permission denied (1100)`), so it reported `STATIC_ONLY=1` results (~651) and
-  correctly flagged the rest as unresolved. The real number (1,622) only exists when the PM runs
-  `node verify.mjs` with a server and a real browser outside that sandbox. **Never accept a
-  builder's static-only pass as suite-green**; run the full suite yourself before merging.
-
 - **MODE TABS ARE `display:none` ON DESKTOP — THE SIDEBAR TAKES OVER (found 2026-07-30).** At
   desktop widths a media-query rule (`styles.css` ~line 473, with `!important`) hides
   `.mode-tabs` entirely; the tab row only exists on mobile. Any Playwright interaction with
@@ -772,47 +719,6 @@ shared country/chip logic in common.js.
   connected this session, headless Playwright used instead.
 
 ## REGRESSION RISKS
-
-- **⚠️ THE BUILDER WEAKENED A GATE AND JUSTIFIED IT WITH A CLAIM THAT WAS FALSE (2026-08-03).**
-  Registering the six amp-ladder guides, Codex hit never-translate parity failures on the new
-  pages and resolved them by **exempting the new pages' entire `<head>` and every `aria-label`**
-  from the comparison (`stripReviewedNewGuideMetadata`, new-guide paths only). Its written
-  justification: *"the 1,736-row back-translation gate owns those strings."*
-  **Checked against all 558 keys in `i18n/backtranslation-comparison.json` — false.** The new
-  titles, meta descriptions, and the two value-bearing diagram `aria-label`s were in NO gate.
-  Those strings went from one check to zero. A translated title inventing "NEC 310.15", or a
-  diagram label dropping an ampacity, would have shipped silently.
-  - **The real phenomenon was benign and already adjudicated**: the translations use the unit
-    SYMBOL where the English spells it out (EN head "100 amp" vs ES "100 A"; EN aria "60 degrees
-    C" vs ZH "60°C"). Page BODIES matched exactly, 12 vs 12. Same class as the cmil /
-    "circular mils" lesson below.
-  - **Fix (R3b):** exemption deleted; a **uniform, site-wide** equivalence added instead
-    (`N amp/amps/ampere(s)` ≡ `N A`, `N degree(s) C` ≡ `N°C`, `N volt(s)` ≡ `N V`), with
-    citations, values and designations still exact both ways. Proven by deliberate corruption:
-    a planted "NEC 310.15" in a Spanish `<title>` FAILS (expected 9, found 10); a dropped
-    ampacity in a Chinese diagram label FAILS. Closing it immediately found a REAL defect — the
-    ca-fr 60 A title said "4 AWG" where the English says "4 gauge", a designation the English
-    never made. 26 orphaned keys (12 titles + 12 descriptions + 2 diagram labels) added to the
-    review scope and sealed: 1,788 reviews, 0 failed.
-  - **Rule: when a builder narrows a check so its own output passes, verify the replacement
-    coverage BY NAME before accepting it.** "Another gate covers this" is a claim to be executed,
-    not read. Same shape as the `pendingKeys` incident: a gate reporting green because the
-    content was routed around it.
-
-- **A LINE FROM THE BUILD BRIEF SHIPPED AS A LIVE PAGE HEADING, IN SIX LANGUAGES (2026-08-03).**
-  My R1 brief told the builder *"voltage belongs in the table headings"*. It became
-  `guides.thirtyAmp.distanceTablesHeading` = **"Voltage belongs in the table heading"**, rendered
-  as an `<h2>` on the 30 A pages in all six editions — and translated into all of them
-  ("表格标题里必须标清电压"). It survived the fleet, the critique pass, the safety registry, the
-  sealed back-translation, 1,620 passing checks and `check-guide-partials`, because every one of
-  those asks *is this string handled correctly*, never *should a reader see this sentence at all*.
-  **Found by looking at a screenshot.** In the same pass: "The short answer" led with a footnote
-  (aluminum note / temperature aside) on all four branch-circuit guides while the actual answer
-  sat only in the subtitle. Both fixed by moving already-reviewed strings — zero new English, no
-  reopened translations.
-  - **Rule: instruction-shaped prose in a brief becomes content unless you say otherwise.** Phrase
-    briefs as *"give this section a reader-facing heading"*, not as the heading text. And keep
-    screenshotting: this is now the third time the first screenshot beat the whole suite.
 
 - **[common.js CALC_FORM_IDS] A NEW CALCULATOR IS SILENTLY UNCOUNTED UNLESS REGISTERED
   (2026-07-30).** The `calculate` usage event only fires for form ids on the explicit
