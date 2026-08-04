@@ -1,6 +1,6 @@
 # VoltDrop — voltdrop.app
 
-Architecture map: see [CODEBASE_MAP.md](CODEBASE_MAP.md) — 31 files, static calculators + Next.js comments app.
+Architecture map: see [CODEBASE_MAP.md](CODEBASE_MAP.md) — 52 source files → 168 generated pages; static calculators + i18n pipeline + Next.js comments app.
 
 ## Mission
 A free voltage drop calculator for electricians that wins on CLARITY, not brand or SEO muscle.
