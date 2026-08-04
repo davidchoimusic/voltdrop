@@ -2,312 +2,205 @@
 
 ## Problem
 
-VoltDrop exists because electrical calculators often present a precise number
-without making its assumptions, source boundary, or failure modes visible. A
-table lookup can be right for ordinary conditions and still be unsafe in a hot
-space, a crowded raceway, or at a lower-rated termination. A universal formula
-can become misleading when applied outside its physical domain. A fluent
-translation can preserve every number and still lose the warning that gives
-those numbers meaning.
+Electrical calculators present a precise number without making its assumptions,
+source boundary, or failure modes visible. A table lookup can be right for
+ordinary conditions and unsafe in a hot space, a crowded raceway, or at a
+lower-rated termination. A fluent translation can preserve every number and lose
+the warning that gives those numbers meaning.
 
-Electrical rules are territorial. Physics crosses borders, but the NEC, CEC,
-wire names, limits, counting rules, and adoption schedules do not. Some present
-NEC and CEC base values are deliberately harmonized while the rules applied
-after that lookup remain different. A result can therefore match VoltDrop's
-implemented edition and still be wrong under an earlier locally adopted
-edition or a municipal amendment.
+Electrical rules are territorial. Physics crosses borders; the NEC, CEC, wire
+names, counting rules, and adoption schedules do not. Some present NEC and CEC
+base values are deliberately harmonized while the rules applied after that lookup
+differ. A result can match VoltDrop's implemented edition and still be wrong
+under an earlier locally adopted edition or a municipal amendment.
 
-The harder product problem is not merely producing a correct result. It is
-giving a worker a truthful answer to “why should I trust this number?” A badge,
-invented reviewer, or unexplained claim would repeat the problem. The answer
-has to expose the real protections, what each protection proves, and what none
-of them proves.
+The harder product problem is not producing a correct result. It is answering
+"why should I trust this number?" truthfully. A badge or invented reviewer would
+repeat the problem. The answer has to expose the real protections, what each
+proves, and what none of them proves.
 
 ## Operating Theory
 
 Trust is the product. Seven commitments make it concrete.
 
-1. **Electrical tables enter through multi-source checking.** Each built-in
-   table is compared cell by cell against at least two independently produced
-   reproductions of the published table. Every reproduction has to agree.
-   Disagreement stops publication. This establishes the source value before
-   software automation is allowed to protect it.
+1. **Electrical data enters through multi-source checking.** Each built-in table
+   is compared cell by cell against at least two independently produced
+   reproductions of the published table. Disagreement stops publication. This
+   establishes the value before automation is allowed to protect it. Rules enter
+   the same way as tables: the NEC 310.12 dwelling-service allowance was admitted
+   only after two reproductions and an arithmetic cross-check against our own
+   sealed 75 °C column agreed on every headline size.
 
-2. **A seal protects checked data from drift.** Fifteen live electrical tables
-   are fingerprinted. A one-digit change stops the verification suite before
-   its browser checks and reports the mismatch. Re-verification and updating
-   the stored fingerprint remain deliberate human steps; the seal cannot
-   enforce them by itself. The seal proves that a value did not change
-   unnoticed; it does not prove that the original value was correct. The
-   multi-source check and the seal are separate because they answer separate
-   questions.
+2. **A seal protects checked data from drift.** Every live electrical table — and
+   now that 310.12 factor with its four conditions — is fingerprinted. A one-digit
+   change stops the verification suite. Re-verification and updating the stored
+   fingerprint remain deliberate human steps. The seal proves a value did not
+   change unnoticed; it does not prove the original was correct. The multi-source
+   check and the seal answer separate questions and cannot substitute for each other.
 
 3. **A boundary can be a label, a refusal, or a verified country fork.** Missing
-   evidence must not become a plausible-looking result presented under the
-   wrong authority. Canadian conduit fill used to label its borrowed US
-   conductor areas and trade sizes. Once CSA C22.1:24 Tables 6A/6K and 9A–9H
-   passed the verification gate, that label was removed and the engine gained
-   a separate sealed Canadian path. Null ambient cells remain “not permitted.”
-   Three-phase resistance refuses the missing wye/delta assumption. The
-   response should match the boundary the product actually implements: label
-   borrowed data plainly, refuse where a missing assumption prevents a
-   defensible calculation, and remove a warning only when verified data
-   replaces the gap.
+   evidence must not become a plausible result under the wrong authority. Canadian
+   conduit fill labelled its borrowed US data until CSA C22.1:24 tables passed the
+   gate and earned a separate sealed path. Null ambient cells stay "not permitted."
+   Three-phase resistance refuses the missing wye/delta assumption. The Canadian
+   service guides publish no conductor size at all, because no verified CEC service
+   rule exists here — a refusal a checker enforces, not a wording choice.
 
-4. **Show calculations in the order the rule operates.** Ampacity starts in
-   the insulation column, applies heat factors, then applies termination,
-   small-conductor, and continuous-load limits as distinct checks. Conduit and
-   box fill are sums of conductor rows, not one-size shortcuts. Conductor
-   sizing searches ampacity and voltage drop independently, proves the smallest
-   supported ampacity pass by also checking the next smaller size, and then
-   takes the larger result. Visible order lets a worker see which rule controls
-   and prevents independent safety questions from disappearing into one
-   unexplained multiplier. A rule that changes the selected conductor must
-   appear in the result before the expandable maths, with its factor,
-   before-and-after values, and scope assumption.
+4. **Show calculations in the order the rule operates.** Ampacity starts in the
+   insulation column, applies heat factors, then termination, small-conductor, and
+   continuous-load limits as distinct checks. Conductor sizing searches ampacity
+   and voltage drop independently, proves the smallest supported ampacity pass by
+   also checking the next smaller size, then takes the larger result. A rule that
+   changes the selected conductor must appear in the visible arithmetic with its
+   factor and before/after values. Applied silently is still unexplained.
 
 5. **Country and language are independent dimensions.** Country selects the
-   rulebook; language selects the explanation. Six explicit URL editions place
-   US English, Spanish, and Simplified Chinese over the NEC pack and Canada
-   English, Quebec French, and Simplified Chinese over the CEC pack. Country
-   packs own institutional names, authority language, and data-edition facts.
-   Locale catalogs own complete translated thoughts. No valid US fallback is
-   allowed to become a quiet Canadian claim. Runtime parity compares a
-   translation with its own country's English twin; comparing Canadian French
-   with US English would force one rulebook's protected terms into another.
+   rulebook; language selects the explanation. Six URL editions place US English,
+   Spanish, and Simplified Chinese over the NEC pack, and Canada English, Quebec
+   French, and Simplified Chinese over the CEC pack. Country packs own
+   institutional names and authority language; locale catalogs own complete
+   translated thoughts. Parity compares a translation with its own country's
+   English twin — comparing Canadian French with US English would force one
+   rulebook's protected terms into another.
 
 6. **Verification must reach the rendered product.** Every calculator route is
-   driven in all six editions against an independently derived expectation.
-   The numeric-parity gate currently covers translated guides, Terms, and four
-   newer pages rather than the whole translated site. On those paths, visible
-   numbers must match their English twins unless a specific element owns a
-   legitimate locale-dependent representation, such as a month rendered as a
-   Chinese numeral instead of an English month name. Those exceptions are
-   marked at the element and removed in both static and rendered checks; they
-   are never global number denylists. Protected values do not all carry the
-   same risk: brands, standards, citations, and matched numeric values require
-   exact agreement, because an addition can fabricate a claim; wire
+   driven in all six editions against independently derived expectations, with one
+   named result per localized page and per edition × bundle. Protected values carry
+   different risk: brands, standards, citations, and numeric values require exact
+   agreement in both directions, because an addition fabricates a claim; wire
    designations and unit symbols use a no-loss rule, because a translator may
-   correctly use `cmil` where English used prose. Safety copy passes target-only
-   back-translation before comparison with the sealed English meaning. English
-   output has its own byte-identity gate, separate from the electrical-data
-   seals. Verification reporting follows the same product dimensions as the
-   generated output: each localized edition × runtime bundle and each localized
-   page receives its own named result. An aggregate summary cannot substitute
-   for those results because it hides both coverage growth and the failing
-   artifact.
+   correctly write `cmil` where English wrote prose — or `100 A` where English
+   wrote `100 amp`. Safety copy passes target-only back-translation before its
+   meaning is compared with the sealed English. English output has its own
+   byte-identity gate, separate from the electrical seals.
 
-7. **Installation rules must not masquerade as identification.** Conductor
-   colour can answer what new work should use, but it cannot establish what an
-   existing wire is. Legacy work, faded insulation, and incorrect installation
-   all break that inference. The useful boundary is short and operational:
-   lead with the prescribed or conventional colour, state the country-specific
-   status once, and keep one meter reminder visible. Repeating warnings at
-   every result would make the real boundary easier to ignore.
+7. **Installation rules must not masquerade as identification.** Conductor colour
+   answers what new work should use; it cannot establish what an existing wire is.
+   Legacy work, faded insulation, and incorrect installation break that inference.
 
 ## Strategy
 
-Depth comes before breadth. Tools progress from bounded formulas and verified
-tables toward riskier code logic. Search pages follow the engine rather than
-promising capabilities the engine does not own. The Power Calculator earns an
-Ohm's law frame only because it now distinguishes DC resistance, single-phase
-impedance, and the three-phase refusal state. The solar engine earns a focused
-panel-to-controller frame because it derives the array current from Imp at Vmp
-and keeps controller, battery, and inverter current bases separate.
+Depth before breadth. Tools progress from bounded formulas and verified tables
+toward riskier logic. Pages follow the engine rather than promising capabilities
+the engine does not own: the Ohm's law frame exists only because the Power
+Calculator learned to distinguish DC resistance, single-phase impedance, and the
+three-phase refusal state. Before minting a URL, grep the engine for the quantity
+the URL promises.
 
-An honest framed page shares behavior but not purpose. Its form is composed
-from the parent's exact fragment and loads the parent's exact content-hashed
-script, so there is no second implementation to drift. Its surrounding copy
-must still solve a distinct reader problem. The Ohm's law frame explains the
-resistance-versus-impedance boundary and three-phase refusal. The solar-wire
-frame explains why low-voltage panel runs use a tighter loss budget and the
-array operating current rather than a house-wiring rule of thumb. A new title,
-heading, and search phrase alone do not create a new page.
+**Editorial content is a derived artifact, not a second body of data.** This is
+the newest and most load-bearing extension of the theory. A guide's distance
+tables are views of the shipped engines: a derivation tool reads the sealed
+constants through one shared reader, verifies every fingerprint *before* emitting
+anything, calls the same governing-constraint function the calculator calls, and
+writes a matrix that the rendered `data-*` cells are asserted against on all
+thirty-six pages. Prose that quotes a number carries a provenance classification
+— distance derivation, ampacity derivation, visible arithmetic, or approved
+constant — and an unclassified numeric fails the build. The alternative, hand-
+entered editorial tables, drifts silently from a calculator that stays correct,
+and drift on this subject is the one failure the product cannot survive.
 
-The interface mirrors the electrical model. Ampacity keeps insulation and
-termination temperatures separate. Fill tools itemize mixed conductor sizes.
-Continuous-load checks remain visibly separate from heat derating. Contextual
-hints follow the selected system; a three-phase line-to-line instruction is
-hidden for DC and single-phase because even harmless-looking static help can
-misstate the task in front of the user.
+The interface mirrors the electrical model: insulation and termination
+temperatures stay separate, fill tools itemize mixed conductor sizes, and
+contextual hints follow the selected system so static help cannot misstate the
+task in front of the user. Country-specific conduit fill is a real data fork —
+shared 53/31/40% limits do not justify sharing conductor or raceway tables.
 
-The wire-colour tool is a rule lookup rather than an electrical table. Country
-selection happens before the result: Canadian three-phase phase colours are
-code requirements where colour-coded circuits are required, while US
-black/red/blue and brown/orange/yellow phase sets are trade conventions that
-yield to the job specification. Panel circuit numbers map through the physical
-bus sequence—paired circuit positions advance A, B, C, then repeat. Colour
-swatches support recognition but never carry meaning alone; the full colour
-name remains the primary answer. Selecting four-wire delta elevates the
-cross-border high-leg difference into the main interface because Canada places
-it on phase A and the NEC panel arrangement places it on phase B.
+The wire-size page answers one bounded question — conductor size for heat and
+distance — and deliberately stops short of circuit design. It does not size the
+breaker, perform Article 220 or CEC Section 8 load calculation, or size conduit,
+because conduit counts every conductor while ampacity counts only current-carrying
+ones. Continuous-load wording is country-owned: NEC's 125% whole-load method, CEC
+Rule 8-104's 80% rated-equipment case, neither modelling mixed loads.
 
-Country-specific conduit fill is a real data fork, not translated decoration.
-The US edition keeps THHN areas and NEC trade sizes in square inches. Canadian
-editions default to RW90, offer T90, derive raceway area from CEC internal
-diameters in square millimetres, and display each metric designator beside its
-imperial equivalent. The shared 53/31/40% fill percentages do not justify
-sharing the conductor or raceway tables.
+Guides earn attention the same way tools do. The amp-ladder family (20/30/40/60 A
+and the 100/200 A services) exists because demand research showed the amp-by-amp
+question is where readers actually are, and because the field is full of
+contradictory answers. The 200 A page reconciles the 2/0-versus-3/0-versus-4/0
+split by naming the method behind each answer rather than asserting one. A guide
+is all-or-nothing across six editions, so one slug is six pages and a full
+translation round — scope is a translation decision, not a writing decision.
 
-The wire-size page answers one bounded question: conductor size for heat and
-distance. It reports the ampacity minimum, voltage-drop minimum, governing
-conductor, listed-size movement, amp headroom, and percentage-point voltage
-headroom as separate facts. The two engines have different supported floors:
-voltage drop can calculate 18 and 16 AWG, while ampacity begins at 14 AWG
-copper and 12 AWG aluminum. A smaller voltage-drop answer therefore remains
-visible but never becomes an implied ampacity opinion. A published ambient
-dash refuses the calculation, an exhausted search returns out of range instead
-of the largest conductor, and equal minima are reported as a normal tie.
-
-That answer deliberately stops short of circuit design. It does not size the
-breaker, perform Article 220 or CEC Section 8 load calculation, or size conduit.
-Conduit fill requires conduit type and counts every conductor, which is not the
-same input as ampacity's current-carrying-conductor count. Continuous-load
-wording is country-owned: the NEC edition applies the 125% whole-load method;
-the CEC edition applies Rule 8-104's 80%-rated-equipment case. Neither switch
-models mixed continuous and noncontinuous loads. When the switch is on, the
-result states the rule before the collapsed explanation. The NEC path shows
-entered load multiplied by 125%; the CEC path shows permitted ampacity limited
-to 80%. The calculation section repeats the same arithmetic so the visible
-conductor choice reconciles with the shown maths.
-
-Limitations appear at the point of use and on the public verification page.
-That page is an explanation, not a trust badge. It names the multi-source check,
-seal, label and refusal behavior, translation screen, automatic checks, code
-editions, local-adoption boundary, and absence of a licensed reviewer. A footer
-link makes it globally available; one shared fragment puts it beside every
-calculator's explanation, where the trust question actually arises.
-
-Authority-building content follows the same honesty model. The NEC-versus-CEC
-difference map leads with VoltDrop's own conduit-fill mistake because a
-correction exposes both the real consequence and the mechanism that found it.
-The page describes differences rather than reproducing copyrighted tables, and
-it makes the cross-border comparison itself the subject in all six editions.
-Original findings earn attention only when their evidence boundary remains as
-visible as the finding.
-
-Structured data follows the same visibility rule. FAQ schema is generated from
-the same catalog keys as the questions and answers a visitor can read. The
-build parses each framed FAQ block and stops if an entry is absent from visible
-text. Search metadata therefore cannot become a second, hidden version of the
-page's claims.
-
-Localization uses stable template keys and locale-owned full thoughts.
-Program-facing IDs, selectors, events, URL pieces, data keys, and storage keys
-never enter translation. Country-specific statements live wholly in country
-packs instead of mixing replaceable code tokens into shared prose.
-
-The page registry is a distributed contract. `PAGES` declares the source, but
-edition-aware browser routing, verification scope, sitemap URLs, generated
-directories, locale discovery, and machine-readable context all have to agree.
-Registry checks protect most of that contract; built-page inspection still
-confirms country copy, localization, and fragment composition.
+Limitations appear at the point of use and on a public verification page that is
+an explanation, not a badge. Structured data is generated from the same catalog
+keys as the visible questions, so search metadata cannot become a hidden second
+version of the page's claims. The page registry is a distributed contract:
+`PAGES`, browser routing, verification scope, sitemap, generated directories,
+locale discovery, and machine-readable context must all agree, and a bidirectional
+registry check enforces it inside both build and verification.
 
 ## Key Discoveries
 
-- **Verified sharing differs from accidental reuse.** Current CEC Tables 2 and
-  4 match NEC Table 310.16 in the supported 60/75/90°C cells, so one base
-  dataset is honest. The harmonization does not extend to free-air tables or
-  the rules applied after lookup.
+- **Verified sharing differs from accidental reuse.** Current CEC Tables 2 and 4
+  match NEC 310.16 in the supported cells, so one base dataset is honest. The
+  harmonization does not extend to free-air tables or to post-lookup rules.
 
-- **Matching percentages can hide unsafe input divergence.** CEC and NEC both
-  use 53/31/40% conduit-fill limits, but 12 AWG RW90 occupies 11.6 mm² and
-  metric 16 EMT provides only 74.51 mm² at 40%. Reusing the smaller THHN area
-  and larger NEC raceway area overstated the capacity from six conductors to
-  nine. Country selection must happen before either input table is chosen.
+- **Matching percentages can hide unsafe input divergence.** Both codes use
+  53/31/40% fill limits, but reusing THHN areas and NEC raceway areas overstated
+  Canadian capacity from six conductors to nine. Country selection must precede
+  the input tables. Similarly, at ten countable conductors CEC uses 0.70 where
+  NEC uses 0.50 — the largest divergence can occur *after* a shared value.
 
-- **Publishing a correction can strengthen authority.** The nine-versus-six
-  conduit result is more useful than a generic warning because it names the
-  wrong assumption, the size of the error, and the verified replacement
-  without turning the page into a claim about anyone else's product.
+- **Order is safety data.** Applying a termination cap before heat factors answers
+  a different question from derating first and capping afterward.
 
-- **The largest country divergence can occur after a shared value.** At ten
-  countable conductors, CEC Table 5C uses 0.70 while NEC Table 310.15(C)(1)
-  uses 0.50. Country selection must happen before factors are displayed.
+- **Independent oracles matter and cannot substitute for each other.** Derived
+  expectations protect rule selection and arithmetic; source-blind back-translation
+  protects meaning; a seal protects later drift.
 
-- **A familiar visual convention can conceal a phase change at the border.**
-  Four-wire delta is not just a palette difference: Canada assigns the
-  higher-voltage-to-ground conductor to phase A, while the NEC panel
-  arrangement puts the high leg on phase B. Showing only “orange high leg” or
-  only a colour sequence would hide the more important fact.
+- **A search is new safety logic even when every check it calls is verified.**
+  Composing two verified engines still adds failure modes, so the search proves
+  both sides: the chosen size passes and the next smaller size fails.
 
-- **Colour confidence depends on naming the authority correctly.** Canadian
-  phase colours can be presented as code within their stated conditional
-  scope. US phase palettes must be presented as trade practice because the NEC
-  reserves neutral and grounding colours but does not mandate the other phase
-  colours. Confidence comes from making that distinction actionable, not from
-  adding generic caution language.
+- **Coverage cardinality is product cardinality.** A check that expands from 24 to
+  32 comparisons while reporting one aggregate pass makes the suite look smaller
+  and hides the failing artifact. Reported totals must multiply with output.
 
-- **Order is safety data.** Applying a termination cap before heat factors
-  answers a different question from derating the insulation-column value and
-  applying caps afterward.
+- **"Another gate covers this" is a claim to execute, not read.** Registering the
+  amp ladder, the builder hit parity failures on the new pages and resolved them by
+  exempting those pages' `<head>` and `aria-label`s, justified as "the
+  back-translation gate owns those strings." Checked by name against all 558 keys
+  in that gate: it did not. Twelve titles, twelve descriptions, and two diagram
+  labels stating real ampacity values had gone from one check to zero. The
+  underlying phenomenon was benign — translations using `100 A` where English wrote
+  `100 amp` — so the fix was a uniform, site-wide unit equivalence rather than a
+  page-shaped blind spot, proven by planting a fabricated `NEC 310.15` in a Spanish
+  title and watching parity fail. Closing the hole immediately surfaced a real
+  defect: a French title claiming `4 AWG` where the English said `4 gauge`. When a
+  builder narrows a check so its own output passes, verify the replacement coverage
+  by name before accepting the reasoning.
 
-- **Independent oracles matter.** Independently derived result expectations
-  protect rule selection and arithmetic. Back-translation without the English
-  source protects meaning. A seal protects later drift. None can stand in for
-  the others.
+- **Automated checks ask whether a string is handled correctly, never whether a
+  reader should see it.** A sentence written *to* the builder — "voltage belongs in
+  the table heading" — became a catalog key, was translated into four languages,
+  passed the critique pass, the safety registry, sealed back-translation, and 1,620
+  assertions, and shipped as a live `<h2>` in six editions. In the same pass, "The
+  short answer" led with a footnote on four guides while the real answer sat in the
+  subtitle. Both were found by looking at a screenshot. Every mechanical gate here
+  validates handling; none evaluates editorial intent. That is a permanent gap, not
+  a missing check — which is why the first screenshot keeps beating the whole suite,
+  and why briefs must describe the *kind* of heading wanted, never its text.
 
-- **Rendered context matters.** A localized string can exist without being
-  loaded, a root-relative link can silently route a Canadian reader to US
-  English, and a static hint can describe three-phase input while DC is active.
-  CSS can also uppercase a result label after the catalog supplies mixed case,
-  so assertions against rendered text compare with the edition's own casing
-  rules. Source correctness is not enough; the release unit is the behavior a
-  worker sees.
+- **Rendered context matters.** A localized string can exist without loading, a
+  root-relative link can silently route a Canadian reader to US English, and grid
+  dividers drawn with background gaps turn an empty final cell into a grey box.
+  Source correctness is not enough; the release unit is what a worker sees.
 
-- **Dividers belong to occupied cells, not empty grid space.** Using a grid
-  container's background to draw one-pixel gaps turns an incomplete final row
-  into a solid grey rectangle. Cell borders draw the same divisions at any
-  column count without creating a visual object where no result exists. This
-  class of defect still requires screenshots; counting result cells cannot
-  prove that empty space looks empty.
-
-- **Engine reuse and page duplication are different questions.** Byte-identical
-  form markup and script URLs are desirable because they prevent calculator
-  drift. Byte-identical surrounding explanations are undesirable because they
-  create renamed copies that compete for the same reader job. Composition is
-  the lever that enforces both sides at once.
-
-- **Visible schema needs one source of truth.** Repeating FAQ prose once in
-  markup and again as independently written JSON-LD creates a quiet drift path.
-  Reusing the same locale keys and checking the rendered result turns visibility
-  into a build invariant.
-
-- **An edition citation is not an adoption claim.** Naming 2023 NEC or
-  CSA C22.1:24 states what VoltDrop computes. The local authority still decides
-  which edition and amendments apply at the jobsite.
-
-- **Coverage cardinality is product cardinality.** A registry-derived check can
-  expand from 24 to 32 edition × bundle comparisons while making the suite look
-  smaller if it reports one aggregate pass. The check counter and failure name
-  must preserve every multiplied output dimension or the reported total stops
-  describing the tested surface.
-
-- **A search is new safety logic even when each check is already verified.**
-  Reusing the pure voltage-drop and ampacity engines prevents formula drift,
-  but selecting the minimum conductor adds its own failure modes. The search
-  therefore proves both sides of the boundary: the chosen supported size
-  passes and the next smaller supported size fails.
-
-- **One combined margin would erase meaning.** Moving two listed wire sizes,
-  having 25 A of ampacity headroom, and having 0.54 percentage points of
-  voltage-drop headroom describe different constraints. Keeping their units
-  visible makes the governing result auditable.
-
-- **Applied silently is still unexplained.** The continuous-load engine,
-  country factor, basis, and headroom can all be correct while the product is
-  wrong if the visible result omits the factor. A collapsed explanation does
-  not repair that gap. The result must expose the rule and its numerical
-  effect, and the maths must account for the same step.
+- **The builder's sandbox is not the test environment.** It could not bind a port
+  or launch a browser, so its "all green" covered only the static half of the
+  suite. A static-only pass is never suite-green.
 
 ## Open Questions
 
-- **Jurisdiction adoption:** future edition-sensitive tools may need code-year
+- **Jurisdiction adoption:** edition-sensitive tools may eventually need code-year
   or jurisdiction selection rather than one country-wide implemented edition.
 
 - **External language review:** mechanical gates are strong, but a native
   electrician in each language remains the best check of trade idiom.
 
-- **Crawler adoption:** no major answer engine confirms that it consumes the
-  proposed `llms.txt` convention; it remains a compatibility surface, not a
-  traffic claim.
+- **Editorial review has no mechanism.** Provenance and parity now protect every
+  number and token, but nothing yet asks whether a heading earns its place. The
+  screenshot pass is a human habit, not a gate — and the two defects it caught
+  this cycle suggest that gap is where the next real failure comes from.
+
+- **Crawler adoption:** no major answer engine confirms it consumes `llms.txt`;
+  it remains a compatibility surface, not a traffic claim.
