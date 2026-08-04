@@ -249,6 +249,12 @@
         "30"
       ]
     },
+    "guides.ca.thirtyAmp.distanceChangesTheAnswerHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "8-102"
+      ]
+    },
     "guides.ca.thirtyAmp.dryerWireSizeQuestion": {
       "category": "approved-constant",
       "tokens": [

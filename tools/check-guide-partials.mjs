@@ -23,6 +23,11 @@ const GUIDES = [
 const INTERNAL_JARGON_PATTERN = /\b(?:repo|engine|sealed|partial|registry)\b/i;
 
 const catalog = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
+const safetyRegistry = JSON.parse(readFileSync('i18n/safety-critical.json', 'utf8'));
+const backtranslationKeys = new Set([
+  ...safetyRegistry.keys,
+  ...(safetyRegistry.extraReviewKeys ?? []),
+]);
 const storedDerivation = JSON.parse(readFileSync('tools/guide-table-derivations.json', 'utf8'));
 const freshDerivation = deriveGuideTables();
 if (JSON.stringify(storedDerivation) !== JSON.stringify(freshDerivation)) {
@@ -38,7 +43,25 @@ const valueAt = (source, key) => key.split('.').reduce((cursor, part) => cursor?
 const jsonEscape = (value) => JSON.stringify(value).slice(1, -1);
 const render = (source, file) => {
   const keys = new Set();
-  const rendered = source.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
+  const linked = source.replace(/\{\{link:([A-Za-z0-9.%]+)\|([A-Za-z0-9.%]+)\|(\/[^|{}\s]+)\}\}/g,
+    (_, answerKey, linkTextKey, href) => {
+      keys.add(answerKey);
+      keys.add(linkTextKey);
+      const answer = valueAt(catalog, answerKey);
+      const linkText = valueAt(catalog, linkTextKey);
+      if (typeof answer !== 'string' || typeof linkText !== 'string') {
+        throw new Error(`${file}: missing linked catalog string ${answerKey} or ${linkTextKey}`);
+      }
+      const answerFolded = answer.toLocaleLowerCase();
+      const linkTextFolded = linkText.toLocaleLowerCase();
+      const start = answerFolded.indexOf(linkTextFolded);
+      if (start < 0 || answerFolded.indexOf(linkTextFolded, start + linkTextFolded.length) >= 0) {
+        throw new Error(`${file}: ${linkTextKey} must occur exactly once inside ${answerKey}`);
+      }
+      const end = start + linkText.length;
+      return `${answer.slice(0, start)}<a class="inline-link" href="${href}">${answer.slice(start, end)}</a>${answer.slice(end)}`;
+    });
+  const rendered = linked.replace(/\{\{(?:(json|attr):)?([A-Za-z0-9.%]+)\}\}/g, (_, format, key) => {
     keys.add(key);
     const value = valueAt(catalog, key);
     if (typeof value !== 'string') throw new Error(`${file}: missing catalog string ${key}`);
@@ -208,11 +231,28 @@ function checkProvenance(keys, file, guide, edition) {
   }
 }
 
+function checkBacktranslationScope(source, file, guide, edition) {
+  for (const suffix of ['title', 'description']) {
+    const key = `pages.${edition}.guides.${guide}.${suffix}`;
+    if (!backtranslationKeys.has(key)) {
+      throw new Error(`${file}: ${key} is missing from the back-translation scope`);
+    }
+  }
+  for (const match of source.matchAll(/\{\{attr:([A-Za-z0-9.%]+AriaLabel)\}\}/g)) {
+    const key = match[1];
+    const value = valueAt(catalog, key);
+    if ((value?.match(NUMERIC_TOKEN_PATTERN) || []).length && !backtranslationKeys.has(key)) {
+      throw new Error(`${file}: value-bearing ${key} is missing from the back-translation scope`);
+    }
+  }
+}
+
 let passed = 0;
 checkCatalogBoundaries();
 for (const [file, guide, edition] of PARTIALS) {
   try {
     const source = readFileSync(file, 'utf8');
+    checkBacktranslationScope(source, file, guide, edition);
     checkReaderSentenceRoles(source, file);
     const { rendered, keys } = render(source, file);
     checkFaq(rendered, file);

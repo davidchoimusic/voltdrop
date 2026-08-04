@@ -91,8 +91,20 @@ For each edition, append one of these paths to its edition root:
 
 - [Wire size for a sub-panel](https://voltdrop.app/guides/sub-panel-wire-size/):
   50/60/100 A feeder tables, 50-300 ft, copper and aluminum.
+- [What size wire for 20 amps](https://voltdrop.app/guides/20-amp-wire-size/):
+  12 AWG copper starting point, the 14 AWG cap, and a 120 V distance table.
+- [What size wire for 30 amps](https://voltdrop.app/guides/30-amp-wire-size/):
+  10 AWG copper starting point with separate dryer and TT-30 RV tables.
+- [What size wire for 40 amps](https://voltdrop.app/guides/40-amp-wire-size/):
+  8 AWG copper, temperature-column limits, distance, range, and EV examples.
 - [What size wire for 50 amps](https://voltdrop.app/guides/50-amp-wire-size/):
   #6 NM-B vs #8 THHN explained, distance table, hot tub / EV / RV framings.
+- [What size wire for 60 amps](https://voltdrop.app/guides/60-amp-wire-size/):
+  #6 vs #4 copper explained by temperature column, with distance and EV math.
+- [100 amp service wire size](https://voltdrop.app/guides/100-amp-service-wire-size/):
+  NEC 310.12 dwelling-service math, all four conditions, and distance sizing.
+- [200 amp service wire size](https://voltdrop.app/guides/200-amp-service-wire-size/):
+  2/0 vs 3/0 copper and 4/0 aluminum reconciled by the sizing method.
 - [Wire ampacity chart, NEC 310.16](https://voltdrop.app/guides/wire-ampacity-chart/):
   full verified table + which temperature column applies.
 - [How far can you run 12 gauge wire](https://voltdrop.app/guides/how-far-12-gauge-wire/):
@@ -107,7 +119,13 @@ For each edition, append one of these paths to its edition root:
 
 - [Canadian guides index](https://voltdrop.app/ca/guides/)
 - Sub-panel: https://voltdrop.app/ca/guides/sub-panel-wire-size/
+- 20 amps: https://voltdrop.app/ca/guides/20-amp-wire-size/ — NMD90 starting size and mandatory drop limit.
+- 30 amps: https://voltdrop.app/ca/guides/30-amp-wire-size/ — dryer and TT-30 RV tables in metres and feet.
+- 40 amps: https://voltdrop.app/ca/guides/40-amp-wire-size/ — conservative termination method, range, and EV examples.
 - 50 amps: https://voltdrop.app/ca/guides/50-amp-wire-size/
+- 60 amps: https://voltdrop.app/ca/guides/60-amp-wire-size/ — #6 vs #4 copper and mandatory drop sizing.
+- 100 amp service: https://voltdrop.app/ca/guides/100-amp-service-wire-size/ — honest Section 8 boundary, no imported U.S. size.
+- 200 amp service: https://voltdrop.app/ca/guides/200-amp-service-wire-size/ — Canadian scope and verified checking routes.
 - CEC ampacity chart: https://voltdrop.app/ca/guides/wire-ampacity-chart/
 - Run length: https://voltdrop.app/ca/guides/how-far-12-gauge-wire/
 - Rule 8-102 explained: https://voltdrop.app/ca/guides/voltage-drop-formula/

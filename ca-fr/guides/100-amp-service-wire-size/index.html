@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branchement de 100 A au Canada ? Sans calibre fixe | VoltDrop</title>
+<meta name="description" content="Pourquoi la règle américaine des 83% pour le branchement ne s’applique pas au Canada, ce que change la Section 8, et où vérifier un conducteur.">
+<link rel="canonical" href="https://voltdrop.app/ca-fr/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/100-amp-service-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/100-amp-service-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Branchement de 100 A au Canada ? Sans calibre fixe | VoltDrop">
+<meta property="og:description" content="Pourquoi la règle américaine des 83% pour le branchement ne s’applique pas au Canada, ce que change la Section 8, et où vérifier un conducteur.">
+<meta property="og:url" content="https://voltdrop.app/ca-fr/guides/100-amp-service-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Branchement de 100 A au Canada ? Sans calibre fixe | VoltDrop">
+<meta name="twitter:description" content="Pourquoi la règle américaine des 83% pour le branchement ne s’applique pas au Canada, ce que change la Section 8, et où vérifier un conducteur.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculateurs électriques gratuits : chute de tension, calibre du conducteur, courant admissible, remplissage de conduit, remplissage de boîte et puissance."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="ca" data-locale="fr-CA">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menu des outils électriques" aria-expanded="false" aria-controls="mobile-tools">☰ Outils</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Changer de pays ou de langue" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇨🇦 CEC · FR</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Commentaires</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">Quel code s’applique?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Langue au Canada</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menu des outils électriques"></nav>
+    <p class="tagline">Des calculateurs électriques qui montrent comment chaque résultat est obtenu. Sans inscription, sans deviner.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Outils électriques">
+    <span class="tool-nav-head">Outils électriques</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Chute de tension</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre du conducteur</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longueur maximale</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Vérification du courant admissible</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Remplissage de conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Remplissage de boîte</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculateur de puissance</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Éclairage paysager</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solaire et batteries</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Couleur des conducteurs</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guides</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Commentaires</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+  <div class="tool-intro card"><h1 class="tool-title">🏠 Quel calibre de conducteur pour un branchement de 100 ampères au Canada ?</h1><p class="tool-sub">Le Canada a son propre processus de calcul du branchement, et ce site ne l’a pas vérifié. <a class="inline-link" href="/guides/100-amp-service-wire-size/" data-edition-country="us">🇺🇸 Version américaine</a></p></div>
+  <section class="card explainer">
+    <h2>La réponse courte et honnête</h2><p>Ne copiez pas la réponse américaine de cuivre 4 AWG ou d’aluminium 2 AWG dans une conception de branchement canadien. Faites vérifier ensemble la charge calculée, l’équipement de branchement, la méthode de calcul du conducteur et les exigences adoptées localement.</p>
+    <h2>Pourquoi il n’y a pas de calibre canadien affiché en réponse principale</h2><p>La version américaine explique le NEC 310.12 et sa méthode des 83% pour le branchement résidentiel. Le Canadian Electrical Code utilise ses propres règles de charge calculée à la Section 8. Ce site n’a pas vérifié ces règles de branchement assez rigoureusement pour publier un calibre de conducteur canadien.</p>
+    <h2>Ce que ce site peut vérifier</h2><p>L’outil canadien Vérification du courant admissible peut tester un conducteur proposé par rapport au tableau vérifié du courant admissible. Il ne remplace pas le calcul de branchement de la Section 8. Pour un panneau secondaire ou une autre artère qui n’alimente pas l’ensemble du logement, utilisez le guide canadien du panneau secondaire.</p>
+    <h2>Liens connexes</h2><p><a class="inline-link" href="/ampacity-check/">outil Vérification du courant admissible</a> · <a class="inline-link" href="/ca/guides/sub-panel-wire-size/">Guide canadien du panneau secondaire</a> · <a class="inline-link" href="/guides/100-amp-service-wire-size/" data-edition-country="us">🇺🇸 Version américaine</a></p>
+  </section>
+  <section class="card visible-faq"><h2>FAQ sur le calibre de conducteur du branchement de 100 ampères au Canada</h2><dl>
+    <div><dt>Pouvez-vous donner un calibre de conducteur pour un branchement de 100 ampères au Canada ?</dt><dd>Pas de façon responsable à partir du contenu vérifié disponible ici. Faites appel à un électricien ou concepteur canadien qualifié pour le calcul de branchement de la Section 8 et l’approbation locale.</dd></div>
+    <div><dt>La règle américaine des 83% pour le branchement résidentiel s’applique-t-elle au Canada ?</dt><dd>Aucun équivalent canadien vérifié n’est disponible sur ce site. L’allocation américaine ne devrait pas être transposée dans une conception canadienne.</dd></div>
+  </dl></section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pouvez-vous donner un calibre de conducteur pour un branchement de 100 ampères au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Pas de façon responsable à partir du contenu vérifié disponible ici. Faites appel à un électricien ou concepteur canadien qualifié pour le calcul de branchement de la Section 8 et l’approbation locale."}},{"@type":"Question","name":"La règle américaine des 83% pour le branchement résidentiel s’applique-t-elle au Canada ?","acceptedAnswer":{"@type":"Answer","text":"Aucun équivalent canadien vérifié n’est disponible sur ce site. L’allocation américaine ne devrait pas être transposée dans une conception canadienne."}}]}</script>
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">Pays :</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 États-Unis</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canada</button>
+      <span class="country-note">Nous mémoriserons votre choix sur cet appareil.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a class="footer-link" href="/comments">💬 Laisser un commentaire</a>
+      <a class="footer-link" href="/how-we-verify/">Notre méthode de vérification</a>
+      <a class="footer-link" href="/privacy/">Confidentialité</a>
+      <a class="footer-link" href="/terms/">Conditions</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculateurs électriques gratuits · sans inscription</p>
+    <p class="fine">Tous les résultats sont des estimations de planification fondées sur des formules et tableaux publiés; ils ne constituent pas un avis professionnel. Respectez toujours votre code de l’électricité local et consultez un électricien autorisé en cas de doute. <a class="inline-link" href="/terms/">Conditions</a>; la section « Comment nous avons calculé ceci » de chaque outil montre le calcul exact.</p>
+  </div>
+</footer>
+
+<script src="/assets/ca-fr/common.js?v=a67a3d9ee3"></script>
+</body>
+</html>

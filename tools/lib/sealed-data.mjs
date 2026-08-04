@@ -12,11 +12,24 @@ export const SEALED_DECLARATIONS = Object.freeze([
   ['boxfill.js', 'CEC_VOL_ML'],
   ['landscape.js', 'WIRE_TABLE'], ['landscape.js', 'K_FACTOR'],
   ['solar.js', 'WIRE_TABLE'], ['solar.js', 'K_FACTOR'],
+  ['tools/derive-guide-tables.mjs', 'NEC_310_12_DWELLING_SERVICE'],
 ]);
 
 const declarationKey = (file, name) => `${file}:${name}`;
 
 export function verifyGoldenFingerprints({
+  goldenFile = 'data-golden.json',
+  declarations = SEALED_DECLARATIONS,
+} = {}) {
+  const { checked, failures } = inspectGoldenFingerprints({ goldenFile, declarations });
+
+  if (failures.length) {
+    throw new Error(`SEALED DATA FINGERPRINT CHECK FAILED\n${failures.map((item) => `- ${item.detail}`).join('\n')}`);
+  }
+  return checked;
+}
+
+export function inspectGoldenFingerprints({
   goldenFile = 'data-golden.json',
   declarations = SEALED_DECLARATIONS,
 } = {}) {
@@ -29,21 +42,22 @@ export function verifyGoldenFingerprints({
     const match = source.match(new RegExp(`const ${name} = [\\s\\S]*?\\n[}\\]];`));
     const key = declarationKey(file, name);
     if (!match) {
-      failures.push(`${key}: declaration not found`);
+      failures.push({ key, detail: `${key}: declaration not found` });
       continue;
     }
     const actual = createHash('md5').update(match[0]).digest('hex');
     if (golden[key] !== actual) {
-      failures.push(`${key}: ${actual} != ${golden[key] ?? 'missing golden'}`);
+      failures.push({
+        key,
+        actual,
+        expected: golden[key],
+        detail: `${key}: ${actual} != ${golden[key] ?? 'missing golden'}`,
+      });
       continue;
     }
     checked.push(key);
   }
-
-  if (failures.length) {
-    throw new Error(`SEALED DATA FINGERPRINT CHECK FAILED\n${failures.map((item) => `- ${item}`).join('\n')}`);
-  }
-  return checked;
+  return { checked, failures };
 }
 
 export function readSealedConstant(file, name, declarations = SEALED_DECLARATIONS) {

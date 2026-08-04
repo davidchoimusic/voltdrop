@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calibre de cable para acometida de 200 A — 2/0 vs 3/0 | VoltDrop</title>
+<meta name="description" content="Concilia 2/0 y 3/0 de cobre más 4/0 de aluminio para una acometida de 200 A con la cuenta del NEC 310.12, las condiciones y una tabla de distancia verificada.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/200-amp-service-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/200-amp-service-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="Calibre de cable para acometida de 200 A — 2/0 vs 3/0 | VoltDrop">
+<meta property="og:description" content="Concilia 2/0 y 3/0 de cobre más 4/0 de aluminio para una acometida de 200 A con la cuenta del NEC 310.12, las condiciones y una tabla de distancia verificada.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/200-amp-service-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calibre de cable para acometida de 200 A — 2/0 vs 3/0 | VoltDrop">
+<meta name="twitter:description" content="Concilia 2/0 y 3/0 de cobre más 4/0 de aluminio para una acometida de 200 A con la cuenta del NEC 310.12, las condiciones y una tabla de distancia verificada.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Iluminación exterior</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar y baterías</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Color del conductor</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+  <div class="tool-intro card"><h1 class="tool-title">🏠 ¿Qué calibre de cable para una acometida de 200 amperios?</h1><p class="tool-sub">2/0 de cobre, 3/0 de cobre y 4/0 de aluminio pueden ser correctos — pero bajo distintos métodos de dimensionamiento. <a class="inline-link" href="/ca/guides/200-amp-service-wire-size/" data-edition-country="ca">🇨🇦 Versión canadiense</a></p></div>
+  <section class="card explainer">
+    <h2>Por qué internet da tres respuestas</h2><p>2/0 AWG de cobre es la respuesta de acometida residencial del NEC 310.12. 3/0 AWG de cobre es la respuesta simple del 310.16 a 75 °C cuando esa reducción no aplica. 4/0 AWG de aluminio es la respuesta de acometida residencial en aluminio; la tabla simple a 75 °C selecciona en cambio 250 kcmil de aluminio.</p>
+    <p data-service-arithmetic="dwelling">200 A × 83% = 166 A → 2/0 AWG de cobre (175 A a 75 °C); 4/0 AWG de aluminio (180 A a 75 °C).</p>
+    <p data-service-arithmetic="standard">Tabla simple a 75 °C: 200 A → 3/0 AWG de cobre (200 A) o 250 kcmil de aluminio (205 A).</p>
+    <h2>Cuándo se permite la respuesta del 83%</h2>
+    <ul>
+      <li data-service-condition="whole-dwelling">Solo una acometida residencial o un alimentador que lleve toda la carga de la vivienda — nunca un circuito derivado ni una instalación que no sea de vivienda.</li>
+      <li data-service-condition="rating-range">La capacidad de la acometida o el alimentador debe estar en el rango de 100 A a 400 A, inclusive.</li>
+      <li data-service-condition="no-derating">No se puede requerir ningún ajuste de ampacidad ni factor de corrección.</li>
+      <li data-service-condition="temperature-method">Los conductores deben estar clasificados a 75 °C o más. El NM/Romex es un conjunto de 60 °C, así que queda descartado.</li>
+    </ul>
+    <h2>La distancia puede volver a cambiar la respuesta</h2><p>Esta tabla parte del mínimo de acometida residencial del NEC 310.12, y luego sube el calibre del conductor cuando la caída calculada superaría el objetivo de planeación del 3%. Usa 240 V, la capacidad completa de 200 A y distancia en un solo sentido.</p><h3>Acometida residencial de 200 A a 240 V</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="240v"><thead><tr data-table-row="head"><th data-column="material">Material</th><th data-distance-ft="50">50 ft</th><th data-distance-ft="100">100 ft</th><th data-distance-ft="150">150 ft</th><th data-distance-ft="200">200 ft</th><th data-distance-ft="250">250 ft</th><th data-distance-ft="300">300 ft</th></tr></thead><tbody>
+      <tr data-material="cu"><td data-column="material">Cobre</td><td data-distance-ft="50">2/0</td><td data-distance-ft="100">2/0</td><td data-distance-ft="150">2/0</td><td data-distance-ft="200">3/0</td><td data-distance-ft="250">4/0</td><td data-distance-ft="300">250 kcmil</td></tr>
+      <tr data-material="al"><td data-column="material">Aluminio</td><td data-distance-ft="50">4/0</td><td data-distance-ft="100">4/0</td><td data-distance-ft="150">4/0</td><td data-distance-ft="200">250 kcmil</td><td data-distance-ft="250">300 kcmil</td><td data-distance-ft="300">400 kcmil</td></tr>
+    </tbody></table></div><p class="gnote"><a class="inline-link" href="/wire-size-calculator/">calculadora de calibre del conductor</a> · <a class="inline-link" href="/ampacity-check/">herramienta Verificación de ampacidad</a></p>
+    <h2>Por qué el aluminio es común en el trabajo de acometidas</h2><p>El aluminio se usa mucho en conductores de acometida porque su menor peso y costo de material importan en calibres grandes. Usa conductores y terminales certificados, sigue las instrucciones del equipo, y haz revisar localmente el diseño completo de la acometida.</p>
+    <h2>Relacionado</h2><p><a class="inline-link" href="/guides/100-amp-service-wire-size/">Guía de calibre del conductor para una acometida de 100 amperios</a> · <a class="inline-link" href="/guides/sub-panel-wire-size/">Guía de calibre del conductor para subtablero</a> · <a class="inline-link" href="/ampacity-check/">herramienta Verificación de ampacidad</a></p>
+  </section>
+  <section class="card visible-faq"><h2>Preguntas frecuentes sobre el calibre para una acometida de 200 amperios</h2><dl>
+    <div><dt>¿Necesito 2/0 o 3/0 de cobre para 200 amperios?</dt><dd>Usa 2/0 de cobre para una acometida residencial o un alimentador de toda la vivienda que cumpla todas las condiciones del NEC 310.12. Usa 3/0 de cobre para el método simple de la Tabla 310.16 a 75 °C cuando la reducción no aplica.</dd></div>
+    <div><dt>¿Cuál es el calibre del conductor de aluminio de acometida para 200 amperios?</dt><dd>Para una acometida residencial que califique, usa 4/0 de aluminio. Sin la reducción, la tabla verificada a 75 °C exige 250 kcmil de aluminio para 200 A.</dd></div>
+    <div><dt>¿Puedo usar 4/0 de aluminio para una acometida de 200 amperios?</dt><dd>Sí, cuando la instalación de 200 A califica para el NEC 310.12 y los conductores y el equipo son aptos para aluminio. El requisito del 83% es 166 A, y el 4/0 de aluminio está clasificado en 180 A a 75 °C.</dd></div>
+    <div><dt>¿El Romex califica para la regla del 83% de acometida residencial?</dt><dd>No. El NM/Romex es un conjunto de 60 °C, y la reducción de acometida residencial exige conductores clasificados a 75 °C o más.</dd></div>
+  </dl></section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Necesito 2/0 o 3/0 de cobre para 200 amperios?","acceptedAnswer":{"@type":"Answer","text":"Usa 2/0 de cobre para una acometida residencial o un alimentador de toda la vivienda que cumpla todas las condiciones del NEC 310.12. Usa 3/0 de cobre para el método simple de la Tabla 310.16 a 75 °C cuando la reducción no aplica."}},{"@type":"Question","name":"¿Cuál es el calibre del conductor de aluminio de acometida para 200 amperios?","acceptedAnswer":{"@type":"Answer","text":"Para una acometida residencial que califique, usa 4/0 de aluminio. Sin la reducción, la tabla verificada a 75 °C exige 250 kcmil de aluminio para 200 A."}},{"@type":"Question","name":"¿Puedo usar 4/0 de aluminio para una acometida de 200 amperios?","acceptedAnswer":{"@type":"Answer","text":"Sí, cuando la instalación de 200 A califica para el NEC 310.12 y los conductores y el equipo son aptos para aluminio. El requisito del 83% es 166 A, y el 4/0 de aluminio está clasificado en 180 A a 75 °C."}},{"@type":"Question","name":"¿El Romex califica para la regla del 83% de acometida residencial?","acceptedAnswer":{"@type":"Answer","text":"No. El NM/Romex es un conjunto de 60 °C, y la reducción de acometida residencial exige conductores clasificados a 75 °C o más."}}]}</script>
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/how-we-verify/">Cómo verificamos</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=5fd514915f"></script>
+</body>
+</html>

@@ -176,11 +176,47 @@ URL: https://voltdrop.app/guides/sub-panel-wire-size/
 Question: What wire size does a shed or detached-garage sub-panel need after both ampacity and distance are considered?
 Summary: {{us:guides.index.theCompleteAnswerWithDistanceTablesN50}} Ampacity sets the safe current limit, while voltage drop can require a larger conductor on a long feeder; both checks apply.
 
+### What size wire for 20 amps
+
+URL: https://voltdrop.app/guides/20-amp-wire-size/
+Question: What is the ordinary 20-amp branch-circuit starting size, and when does distance require more copper?
+Summary: {{us:guides.twentyAmp.theEverydayAnswerIsN12AWG}} The table keeps the full load and one-way distance visible.
+
+### What size wire for 30 amps
+
+URL: https://voltdrop.app/guides/30-amp-wire-size/
+Question: Why do a dryer circuit and a TT-30 RV receptacle need separate distance tables?
+Summary: {{us:guides.thirtyAmp.theStartingAnswerIsN10AWG}} The 120 V and 240 V cases are separated so voltage is never implicit.
+
+### What size wire for 40 amps
+
+URL: https://voltdrop.app/guides/40-amp-wire-size/
+Question: When is 8 AWG copper the ordinary 40-amp answer, and what can make it larger?
+Summary: {{us:guides.fortyAmp.theAnswerIsN8AWGCopper}} Temperature limits, installation conditions, and distance remain part of the answer.
+
 ### What size wire for 50 amps
 
 URL: https://voltdrop.app/guides/50-amp-wire-size/
 Question: Why do correct 50-amp answers differ by wire type and installation?
 Summary: {{us:guides.index.whyTheInternetDisagreesN6VsN8}} The correct choice depends on the wire type, its permitted temperature column, the terminations, and the run length.
+
+### What size wire for 60 amps
+
+URL: https://voltdrop.app/guides/60-amp-wire-size/
+Question: Why do correct 60-amp copper answers split between 6 and 4 gauge?
+Summary: {{us:guides.sixtyAmp.theAnswerSplitsAtTheTemperatureColumn}} The page also checks long-run voltage drop and continuous EV charging.
+
+### 100 amp service wire size
+
+URL: https://voltdrop.app/guides/100-amp-service-wire-size/
+Question: When does the NEC dwelling-service allowance permit a smaller conductor than the ordinary ampacity table?
+Summary: {{us:pages.us.guides.hundredAmpService.description}}
+
+### 200 amp service wire size
+
+URL: https://voltdrop.app/guides/200-amp-service-wire-size/
+Question: Why do 2/0 copper, 3/0 copper, and 4/0 aluminum all appear in 200-amp service answers?
+Summary: {{us:pages.us.guides.twoHundredAmpService.description}}
 
 ### Wire ampacity chart
 
@@ -207,6 +243,15 @@ Question: Which current NEC and CEC differences change a real calculation or ins
 Summary: {{us:guides.necVsCec.subtitle}} It covers shared in-raceway ampacity values, different conductor-count and cool-ambient corrections, continuous-load operations, voltage-drop legal status, conduit dimensions, conductor colours, high-leg phase placement, and the current Canadian colour-rule citation.
 
 Canadian English versions use the same guide paths after `/ca/` and apply the Canadian rules. Spanish, Simplified Chinese, Quebec French, and Canadian Simplified Chinese versions use their edition prefixes listed above.
+
+### New Canadian guide paths
+
+- https://voltdrop.app/ca/guides/20-amp-wire-size/ — {{ca:guides.ca.twentyAmp.theCanadianAnswerIsN12AWGCopper}}
+- https://voltdrop.app/ca/guides/30-amp-wire-size/ — {{ca:guides.ca.thirtyAmp.theCanadianStartingAnswerIsN10AWG}}
+- https://voltdrop.app/ca/guides/40-amp-wire-size/ — {{ca:guides.ca.fortyAmp.theCanadianAnswerIsN8AWGCopper}}
+- https://voltdrop.app/ca/guides/60-amp-wire-size/ — {{ca:guides.ca.sixtyAmp.theCanadianAnswerStartsAtN4AWG}}
+- https://voltdrop.app/ca/guides/100-amp-service-wire-size/ — {{ca:guides.ca.hundredAmpService.whyThisPageDoesNotGuess}}
+- https://voltdrop.app/ca/guides/200-amp-service-wire-size/ — {{ca:guides.ca.twoHundredAmpService.whyThisPageDoesNotGuess}}
 
 ## Code editions implemented
 

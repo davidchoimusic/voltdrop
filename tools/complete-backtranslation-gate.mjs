@@ -2,10 +2,12 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const input = JSON.parse(readFileSync('i18n/backtranslation-input.json', 'utf8'));
+const action = process.argv[2];
+const workDir = process.argv[3] || '.guide-i18n-tmp/backtranslation';
+const inputFile = process.argv[4] || 'i18n/backtranslation-input.json';
+const input = JSON.parse(readFileSync(inputFile, 'utf8'));
 const oldComparison = JSON.parse(readFileSync('i18n/backtranslation-comparison.json', 'utf8'));
 const oldReview = JSON.parse(readFileSync('i18n/backtranslation-review.json', 'utf8'));
-const workDir = process.argv[3] || '.guide-i18n-tmp/backtranslation';
 const BATCH_SIZE = 60;
 mkdirSync(workDir, { recursive: true });
 
@@ -84,7 +86,7 @@ for (const row of rows) {
   if (old?.translation === row.targetText && old.backTranslation) reused.set(row.id, old);
 }
 
-if (process.argv[2] === '--prepare-a') {
+if (action === '--prepare-a') {
   writeFileSync(join(workDir, 'reuse.json'), `${JSON.stringify(Object.fromEntries(reused), null, 2)}\n`);
   const missing = rows.filter((row) => !reused.has(row.id))
     .map(({ id, locale, targetText }) => ({ id, locale, targetText }));
@@ -101,7 +103,7 @@ ${JSON.stringify(batch)}`;
     writeFileSync(join(workDir, `pass-a-${String(index + 1).padStart(2, '0')}.prompt`), prompt);
   }
   console.log(`Pass A prepared: ${missing.length} new rows in ${chunks(missing).length} batches; ${reused.size} unchanged rows reused.`);
-} else if (process.argv[2] === '--ingest-a') {
+} else if (action === '--ingest-a') {
   const reuse = JSON.parse(readFileSync(join(workDir, 'reuse.json'), 'utf8'));
   const generated = new Map();
   for (let index = 1; ; index += 1) {
@@ -129,7 +131,7 @@ ${JSON.stringify(batch)}`;
     entries,
   }, null, 2)}\n`);
   console.log(`Pass A ingested: ${entries.length} sealed rows (${backtranslationDigest})`);
-} else if (process.argv[2] === '--prepare-b') {
+} else if (action === '--prepare-b') {
   const comparison = JSON.parse(readFileSync('i18n/backtranslation-comparison.json', 'utf8'));
   const reuse = JSON.parse(readFileSync(join(workDir, 'reuse.json'), 'utf8'));
   const missing = comparison.entries.filter((entry) => !reuse[entry.id]?.judgment);
@@ -146,7 +148,7 @@ ${JSON.stringify(batch)}`;
     writeFileSync(join(workDir, `pass-b-${String(index + 1).padStart(2, '0')}.prompt`), prompt);
   }
   console.log(`Pass B prepared: ${missing.length} new judgments in ${chunks(missing).length} batches; ${comparison.entries.length - missing.length} unchanged judgments reused.`);
-} else if (process.argv[2] === '--ingest-b') {
+} else if (action === '--ingest-b') {
   const passA = JSON.parse(readFileSync('i18n/backtranslations.json', 'utf8'));
   const reuse = JSON.parse(readFileSync(join(workDir, 'reuse.json'), 'utf8'));
   const generated = new Map();
@@ -176,5 +178,5 @@ ${JSON.stringify(batch)}`;
   }, null, 2)}\n`);
   console.log(`Pass B ingested: ${entries.length} substantive judgments.`);
 } else {
-  throw new Error('Use --prepare-a, --ingest-a, --prepare-b, or --ingest-b.');
+  throw new Error('Use ACTION [work-dir] [input-file], where ACTION is --prepare-a, --ingest-a, --prepare-b, or --ingest-b.');
 }

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué calibre de cable para 60 amperios? Calibre 6 vs 4 | VoltDrop</title>
+<meta name="description" content="Qué calibre de cable para 60 amperios: cuándo sirve 6 AWG de cobre y cuándo 60°C exige 4 AWG, con tabla de distancia verificada y cálculo para cargador EV.">
+<link rel="canonical" href="https://voltdrop.app/es/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="en-US" href="https://voltdrop.app/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="es-US" href="https://voltdrop.app/es/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-US" href="https://voltdrop.app/zh/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="en-CA" href="https://voltdrop.app/ca/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="fr-CA" href="https://voltdrop.app/ca-fr/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="zh-Hans-CA" href="https://voltdrop.app/ca-zh/guides/60-amp-wire-size/">
+<link rel="alternate" hreflang="x-default" href="https://voltdrop.app/guides/60-amp-wire-size/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VoltDrop">
+<meta property="og:title" content="¿Qué calibre de cable para 60 amperios? Calibre 6 vs 4 | VoltDrop">
+<meta property="og:description" content="Qué calibre de cable para 60 amperios: cuándo sirve 6 AWG de cobre y cuándo 60°C exige 4 AWG, con tabla de distancia verificada y cálculo para cargador EV.">
+<meta property="og:url" content="https://voltdrop.app/es/guides/60-amp-wire-size/">
+<meta property="og:image" content="https://voltdrop.app/img/og-wide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="¿Qué calibre de cable para 60 amperios? Calibre 6 vs 4 | VoltDrop">
+<meta name="twitter:description" content="Qué calibre de cable para 60 amperios: cuándo sirve 6 AWG de cobre y cuándo 60°C exige 4 AWG, con tabla de distancia verificada y cálculo para cargador EV.">
+<meta name="theme-color" content="#141518">
+<script type="application/ld+json" data-ld="site">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"VoltDrop","url":"https://voltdrop.app/","description":"Calculadoras eléctricas gratuitas para electricistas: caída de tensión, calibre del conductor, ampacidad, llenado de tubo conduit, llenado de caja y conversión de potencia."},{"@type":"Organization","name":"VoltDrop","url":"https://voltdrop.app/","logo":"https://voltdrop.app/img/og.png"}]}</script>
+<link rel="stylesheet" href="/styles.css?v=1238f0e080">
+<!-- Google Analytics (GA4) — PRODUCTION HOSTS ONLY, NEVER AUTOMATION.
+     Gated at the LOADER: gtag/js is not fetched at all unless the page is on a
+     real production host AND the session is not webdriver-driven. A tag that
+     loads and is blocked later has already announced itself.
+     Every Playwright context is a fresh client ID, so an ungated tag turns each
+     e2e run into a crowd of fake "users" — this site's own suite drives ~102
+     pages per run, and was pointed at production. See CLAUDE.md "Analytics &
+     Ad Tags — production hosts only". -->
+<script>
+  (function () {
+    var PRODUCTION_HOSTS = ['voltdrop.app', 'www.voltdrop.app'];
+    if (PRODUCTION_HOSTS.indexOf(location.hostname) === -1) return;
+    if (navigator.webdriver) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-NC7ETLY8Q1';
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-NC7ETLY8Q1');
+  })();
+</script>
+</head>
+<body data-country="us" data-locale="es">
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <button type="button" class="tools-btn" id="tools-btn" aria-label="Menú de herramientas eléctricas" aria-expanded="false" aria-controls="mobile-tools">☰ Herramientas</button>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/img/logo.png" alt="" width="30" height="30">
+        <span class="brand-name">VoltDrop<span class="brand-suffix">.app</span></span>
+      </a>
+      <button type="button" class="country-chip" id="country-chip" title="Cambiar país o idioma" aria-expanded="false" aria-controls="edition-panel">
+        <span id="country-chip-text">🇺🇸 NEC · ES</span>
+        <span class="country-caret" aria-hidden="true">▾</span>
+      </button>
+      <a class="header-feedback" href="/comments">Comentarios</a>
+    </div>
+    <div class="edition-panel" id="edition-panel" hidden>
+      <div class="edition-group">
+        <span class="edition-label" id="edition-country-label">¿Qué código se aplica?</span>
+        <div class="edition-options" id="edition-countries" role="radiogroup" aria-labelledby="edition-country-label"></div>
+      </div>
+      <div class="edition-divider" id="edition-language-divider" hidden></div>
+      <div class="edition-group edition-language-group" id="edition-language-group" hidden>
+        <span class="edition-label" id="edition-language-label">Idioma en Estados Unidos</span>
+        <div class="edition-language-options" id="edition-languages" role="radiogroup" aria-labelledby="edition-language-label"></div>
+      </div>
+      <p class="edition-fallback" id="edition-fallback" role="status" hidden></p>
+    </div>
+    <nav class="mobile-tools" id="mobile-tools" hidden aria-label="Menú de herramientas eléctricas"></nav>
+    <p class="tagline">Calculadoras eléctricas que muestran cómo se obtiene cada resultado. Sin registro y sin adivinanzas.</p>
+  </div>
+</header>
+
+<div class="layout wrap">
+
+<aside class="sidebar">
+  <nav class="tool-nav" aria-label="Herramientas eléctricas">
+    <span class="tool-nav-head">Herramientas eléctricas</span>
+    <a href="/" class="tool-link" data-tool="drop"><span aria-hidden="true">⚡</span>Caída de tensión</a>
+    <a href="/wire-size-calculator/" class="tool-link" data-tool="size"><span aria-hidden="true">🔌</span>Calibre del conductor</a>
+    <a href="/max-wire-length/" class="tool-link" data-tool="length"><span aria-hidden="true">📏</span>Longitud máxima</a>
+    <a href="/ampacity-check/" class="tool-link" data-tool="ampacity"><span aria-hidden="true">🔥</span>Verificación de ampacidad</a>
+    <a href="/conduit-fill/" class="tool-link" data-tool="conduit"><span aria-hidden="true">🚇</span>Llenado de tubo conduit</a>
+    <a href="/box-fill/" class="tool-link" data-tool="boxfill"><span aria-hidden="true">📦</span>Llenado de caja</a>
+    <a href="/power-calculator/" class="tool-link" data-tool="power"><span aria-hidden="true">🧮</span>Calculadora de potencia</a>
+    <a href="/landscape-lighting-calculator/" class="tool-link" data-tool="landscape"><span aria-hidden="true">🌿</span>Iluminación exterior</a>
+    <a href="/solar-battery-wire-size/" class="tool-link" data-tool="solar"><span aria-hidden="true">☀️</span>Solar y baterías</a>
+    <a href="/wire-colour/" class="tool-link" data-tool="wire-colour"><span aria-hidden="true">🎨</span>Color del conductor</a>
+    <hr class="tool-sep">
+    <a href="/guides/" class="tool-link active" data-tool="guides"><span aria-hidden="true">📚</span>Guías</a>
+    <a href="/comments" class="tool-link" data-tool="comments"><span aria-hidden="true">💬</span>Comentarios</a>
+  </nav>
+</aside>
+
+<main class="main-col guide">
+  <div class="tool-intro card"><h1 class="tool-title">🔌 ¿Qué calibre de cable para un interruptor automático de 60 amperios?</h1><p class="tool-sub"><a class="inline-link" href="/ca/guides/60-amp-wire-size/" data-edition-country="ca">🇨🇦 Versión canadiense</a></p></div>
+  <section class="card explainer">
+    <h2>La respuesta corta</h2><p>La respuesta en cobre se divide según la columna de temperatura: #6 a 75°C, pero #4 a 60°C. Revisa el tipo de cable y las marcas de las terminales antes de elegir entre ellos.</p><p>La columna verificada de 75°C le da al #6 de cobre 65 A, así que pasa los 60 A. La columna verificada de 60°C le da al #6 de cobre solo 55 A, así que ese método selecciona #4 de cobre a 70 A. Esta página no usa una excepción de subir un calibre para hacer que el #6 pase a 60°C. <a class="inline-link" href="/ampacity-check/">herramienta Verificación de ampacidad</a>.</p>
+    <h2>La división entre #6 y #4</h2>
+    <figure class="gfig" role="img" aria-label="Diagrama: el 6 AWG de cobre alcanza 65 amperios a 75 grados C, mientras que la consulta a 60 grados C exige 4 AWG de cobre a 70 amperios"><svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="15" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/><text x="25" y="38" font-size="13" font-weight="700" fill="var(--color-ink)">terminaciones marcadas a 75°C</text><text x="420" y="48" font-size="13" font-weight="800" fill="var(--verdict-good-bar)">#6 de cobre = 65 A</text>
+      <rect x="10" y="80" width="540" height="55" rx="8" fill="var(--color-surface-2)" stroke="var(--color-line-strong)" stroke-width="2"/><text x="25" y="103" font-size="13" font-weight="700" fill="var(--color-ink)">consulta de cable a 60°C</text><text x="420" y="113" font-size="13" font-weight="800" fill="var(--color-hazard)">#4 de cobre = 70 A</text>
+    </svg></figure>
+    <h2>La distancia cambia la respuesta</h2><p>Calibre mínimo a 240 V, dimensionado a los 60 A completos y manteniendo la caída de tensión en 3% o menos (distancia en un solo sentido):</p><h3>60 A a 240 V</h3>
+    <div class="gtable-wrap"><table class="gtable" data-guide-table="240v"><thead><tr data-table-row="head"><th data-column="material">Material</th><th data-distance-ft="50">50 ft</th><th data-distance-ft="100">100 ft</th><th data-distance-ft="150">150 ft</th><th data-distance-ft="200">200 ft</th><th data-distance-ft="250">250 ft</th><th data-distance-ft="300">300 ft</th></tr></thead><tbody>
+      <tr data-material="cu"><td data-column="material">Cobre</td><td data-distance-ft="50">6</td><td data-distance-ft="100">6</td><td data-distance-ft="150">4</td><td data-distance-ft="200">3</td><td data-distance-ft="250">2</td><td data-distance-ft="300">2</td></tr>
+      <tr data-material="al"><td data-column="material">Aluminio</td><td data-distance-ft="50">4</td><td data-distance-ft="100">4</td><td data-distance-ft="150">2</td><td data-distance-ft="200">1</td><td data-distance-ft="250">1/0</td><td data-distance-ft="300">2/0</td></tr>
+    </tbody></table></div><p class="gnote"><a class="inline-link" href="/wire-size-calculator/">calculadora de calibre del conductor</a></p>
+    <h2>Trabajos comunes de 60 amperios</h2><p>Un cargador continuo de vehículo eléctrico de 48 A produce una carga de dimensionamiento de 60 A: 48 A × 1.25 = 60 A. Otros trabajos comunes incluyen alimentadores de subtablero y circuitos más grandes de bomba de calor o minisplit; sigue la placa del equipo.</p>
+    <h2>Ejemplo resuelto: 60 A a 240 V en 150 pies</h2><p>Nuestra calculadora verificada selecciona #4 de cobre (41,740 cmil): 2 × 12.9 × 60 × 150 ÷ 41,740 = 5.56 V, o 2.32% de 240 V. Ahora la distancia manda por encima del piso de ampacidad del #6 de cobre a 75°C.</p>
+    <h2>Relacionado</h2><p><a class="inline-link" href="/guides/sub-panel-wire-size/">Guía de calibre del conductor para subtablero</a> · <a class="inline-link" href="/wire-size-calculator/">calculadora de calibre del conductor</a> · <a class="inline-link" href="/ampacity-check/">herramienta Verificación de ampacidad</a></p>
+  </section>
+  <section class="card visible-faq"><h2>Preguntas frecuentes sobre el calibre de 60 amperios</h2><dl>
+    <div><dt>¿Puedo conectar un cargador de vehículo eléctrico en un circuito de 60 amperios?</dt><dd>Un cargador continuo de 48 A produce una carga de dimensionamiento de 60 A: 48 A × 1.25 = 60 A. Confirma la configuración permitida del cargador, el método de cableado, la clasificación de las terminales y los requisitos locales.</dd></div>
+    <div><dt>¿Por qué la gente dice calibre 6 y calibre 4 para 60 amperios?</dt><dd>Porque ambas son respuestas reales de la tabla. El #6 de cobre pasa en la columna de 75°C con 65 A; la consulta a 60°C exige #4 de cobre porque ahí el #6 es solo 55 A.</dd></div>
+    <div><dt>¿Qué pasa con un subtablero de 60 amperios?</dt><dd>Usa la guía de subtablero para los detalles del alimentador y las tablas de distancia. Esta página solo responde la parte del interruptor automático y el conductor de 60 A.</dd></div>
+  </dl></section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Puedo conectar un cargador de vehículo eléctrico en un circuito de 60 amperios?","acceptedAnswer":{"@type":"Answer","text":"Un cargador continuo de 48 A produce una carga de dimensionamiento de 60 A: 48 A × 1.25 = 60 A. Confirma la configuración permitida del cargador, el método de cableado, la clasificación de las terminales y los requisitos locales."}},{"@type":"Question","name":"¿Por qué la gente dice calibre 6 y calibre 4 para 60 amperios?","acceptedAnswer":{"@type":"Answer","text":"Porque ambas son respuestas reales de la tabla. El #6 de cobre pasa en la columna de 75°C con 65 A; la consulta a 60°C exige #4 de cobre porque ahí el #6 es solo 55 A."}},{"@type":"Question","name":"¿Qué pasa con un subtablero de 60 amperios?","acceptedAnswer":{"@type":"Answer","text":"Usa la guía de subtablero para los detalles del alimentador y las tablas de distancia. Esta página solo responde la parte del interruptor automático y el conductor de 60 A."}}]}</script>
+</main>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="country-picker" id="country-picker">
+      <span class="country-label">País:</span>
+      <button type="button" class="country-btn" data-country="us">🇺🇸 Estados Unidos</button>
+      <button type="button" class="country-btn" data-country="ca">🇨🇦 Canadá</button>
+      <span class="country-note">Recordaremos su elección en este dispositivo.</span>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a class="footer-link" href="/comments">💬 Dejar comentarios</a>
+      <a class="footer-link" href="/how-we-verify/">Cómo verificamos</a>
+      <a class="footer-link" href="/privacy/">Privacidad</a>
+      <a class="footer-link" href="/terms/">Términos</a>
+    </nav>
+    <p class="footer-brand"><a class="footer-brand-link" href="#top"><strong>VoltDrop</strong></a> · calculadoras eléctricas gratuitas · sin registro</p>
+    <p class="fine">Todos los resultados son estimaciones de planificación basadas en fórmulas y tablas publicadas; no son asesoramiento profesional. Cumpla siempre su código eléctrico local y consulte a un electricista autorizado si tiene dudas. <a class="inline-link" href="/terms/">Términos</a>; la sección «Cómo calculamos esto» de cada herramienta muestra el cálculo exacto.</p>
+  </div>
+</footer>
+
+<script src="/assets/us-es/common.js?v=5fd514915f"></script>
+</body>
+</html>

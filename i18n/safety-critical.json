@@ -560,6 +560,32 @@
     "wireColour.roleMeterLine"
   ],
   "extraReviewKeys": [
-    "header.electricalCalculatorsThatExplainThemselves"
+    "header.electricalCalculatorsThatExplainThemselves",
+    "pages.us.guides.twentyAmp.title",
+    "pages.us.guides.twentyAmp.description",
+    "pages.ca.guides.twentyAmp.title",
+    "pages.ca.guides.twentyAmp.description",
+    "pages.us.guides.thirtyAmp.title",
+    "pages.us.guides.thirtyAmp.description",
+    "pages.ca.guides.thirtyAmp.title",
+    "pages.ca.guides.thirtyAmp.description",
+    "pages.us.guides.fortyAmp.title",
+    "pages.us.guides.fortyAmp.description",
+    "pages.ca.guides.fortyAmp.title",
+    "pages.ca.guides.fortyAmp.description",
+    "pages.us.guides.sixtyAmp.title",
+    "pages.us.guides.sixtyAmp.description",
+    "pages.ca.guides.sixtyAmp.title",
+    "pages.ca.guides.sixtyAmp.description",
+    "pages.us.guides.hundredAmpService.title",
+    "pages.us.guides.hundredAmpService.description",
+    "pages.ca.guides.hundredAmpService.title",
+    "pages.ca.guides.hundredAmpService.description",
+    "pages.us.guides.twoHundredAmpService.title",
+    "pages.us.guides.twoHundredAmpService.description",
+    "pages.ca.guides.twoHundredAmpService.title",
+    "pages.ca.guides.twoHundredAmpService.description",
+    "guides.fortyAmp.diagramN8CopperAtN60AndN75AriaLabel",
+    "guides.sixtyAmp.diagramN6VsN4CopperAriaLabel"
   ]
 }

@@ -11,12 +11,18 @@ import { pathToFileURL } from 'node:url';
 export const OUTPUT_FILE = 'tools/guide-table-derivations.json';
 
 // NEC 310.12 dwelling-service allowance, source-verified by the PM on 2026-08-03.
-// Conditions: (1) dwelling service or feeder carrying the entire dwelling load only;
-// (2) service/feeder ratings from 100 A through 400 A only;
-// (3) no ampacity adjustment or correction factors are required; and
-// (4) conductors must be rated 75 C or better, so NM/Romex is excluded.
-// This deliberately lives in the derivation layer until the later golden-data round.
-export const NEC_310_12_DWELLING_SERVICE_FACTOR = 0.83;
+// This literal is fingerprinted through data-golden.json. Keep the factor and
+// all four limits together so a change to any part trips the same seal.
+const NEC_310_12_DWELLING_SERVICE = {
+  factor: 0.83,
+  conditions: [
+    'dwelling service or feeder carrying the entire dwelling load only',
+    'service or feeder rating from 100 A through 400 A only',
+    'no ampacity adjustment or correction factors are required',
+    'conductors rated 75 C or better; NM/Romex is excluded',
+  ],
+};
+export const NEC_310_12_DWELLING_SERVICE_FACTOR = NEC_310_12_DWELLING_SERVICE.factor;
 
 const DWELLING_SERVICE_EXPECTATIONS = Object.freeze({
   hundredAmpService: {

@@ -17,5 +17,6 @@
   "landscape.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
   "landscape.js:K_FACTOR": "852a41e6d003b0da882761c141a67852",
   "solar.js:WIRE_TABLE": "f0cf103a13793d974be72123c6604830",
-  "solar.js:K_FACTOR": "852a41e6d003b0da882761c141a67852"
+  "solar.js:K_FACTOR": "852a41e6d003b0da882761c141a67852",
+  "tools/derive-guide-tables.mjs:NEC_310_12_DWELLING_SERVICE": "232538a634cf1ab041ce338083807449"
 }
