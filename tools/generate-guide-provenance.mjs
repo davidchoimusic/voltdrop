@@ -4,7 +4,10 @@ import { pathToFileURL } from 'node:url';
 
 export const PROVENANCE_FILE = 'tools/guide-provenance.json';
 export const NUMERIC_TOKEN_PATTERN = /#?\d+(?:[.,/-]\d+)*/g;
-const GUIDES = ['twentyAmp', 'thirtyAmp', 'fortyAmp', 'sixtyAmp'];
+const GUIDES = [
+  'twentyAmp', 'thirtyAmp', 'fortyAmp', 'sixtyAmp',
+  'hundredAmpService', 'twoHundredAmpService',
+];
 const CATEGORIES = new Set([
   'distance-derivation',
   'ampacity-derivation',
@@ -29,6 +32,11 @@ const isInScope = (key) => GUIDES.some((guide) =>
 
 const categoryFor = (key) => {
   if (/\.tdN/.test(key) || /\.workedExampleBody$/.test(key)) return 'distance-derivation';
+  if (/\.(?:dwellingArithmeticBody|standardArithmeticBody)$/.test(key)) return 'visible-arithmetic';
+  if (/AmpService\.(?:distance|minimumSizeAtN240V|tableN240V)/.test(key)) return 'distance-derivation';
+  if (/AmpService\.(?:shortAnswerBody|scopeBody|theServiceAnswerIsN4Copper|onlyQualifyingDwellingAnswer|bothMaterialsCanWorkAnswer|standardSizingBody|theThreeAnswersBody|twoN0OrThreeN0ForkAnswer|useN4N0WhenConditionsPassAnswer|n4N0DwellingAnswer)/.test(key)) {
+    return 'ampacity-derivation';
+  }
   if (/\.(?:aN32A|aN40A|aN48A|aN60A)/.test(key)
       || /guides(?:\.ca)?\.(?:fortyAmp|sixtyAmp)\.jobsBody$/.test(key)) return 'visible-arithmetic';
   if (/\.(?:aluminumDecisionBody|forOrdinary|nECN240|ruleN14|temperatureColumnBody|terminationMethodBody|theN6VsN4DivideBody|theN75CTable|theN60CTable|theCanadianAnswer|theAnswer|theEverydayAnswer|theStartingAnswer|noN12|yesN12|yesAtOrdinary|startWithN8|aTTN30|whatSizeWireForAN30AmpDryer|itDependsOnTheTemperature|theTerminationColumn|n[468]CopperN|diagram)/.test(key)) {

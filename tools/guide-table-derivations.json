@@ -10,6 +10,8 @@
       "us": 75,
       "ca": 60
     },
+    "dwellingServiceFactor": 0.83,
+    "dwellingServiceTemperatureC": 75,
     "sealedFingerprintsChecked": 19
   },
   "guides": {
@@ -192,6 +194,50 @@
           }
         }
       }
+    },
+    "hundredAmpService": {
+      "us": {
+        "240v": {
+          "cu": {
+            "50": "4",
+            "100": "4",
+            "150": "2",
+            "200": "1",
+            "250": "1/0",
+            "300": "2/0"
+          },
+          "al": {
+            "50": "2",
+            "100": "2",
+            "150": "1/0",
+            "200": "2/0",
+            "250": "3/0",
+            "300": "4/0"
+          }
+        }
+      }
+    },
+    "twoHundredAmpService": {
+      "us": {
+        "240v": {
+          "cu": {
+            "50": "2/0",
+            "100": "2/0",
+            "150": "2/0",
+            "200": "3/0",
+            "250": "4/0",
+            "300": "250 kcmil"
+          },
+          "al": {
+            "50": "4/0",
+            "100": "4/0",
+            "150": "4/0",
+            "200": "250 kcmil",
+            "250": "300 kcmil",
+            "300": "400 kcmil"
+          }
+        }
+      }
     }
   },
   "ampacity": {
@@ -234,7 +280,9 @@
         "copperMinimum": "4",
         "copperPermittedAmps": 70
       }
-    }
+    },
+    "hundredAmpService": {},
+    "twoHundredAmpService": {}
   },
   "workedExamples": {
     "twentyAmp": {
@@ -315,6 +363,92 @@
         "circularMils": 41740,
         "voltsDropped": 5.56,
         "percentDropped": 2.32
+      }
+    },
+    "hundredAmpService": {},
+    "twoHundredAmpService": {}
+  },
+  "dwellingServiceSizing": {
+    "hundredAmpService": {
+      "rating": 100,
+      "factor": 0.83,
+      "requiredAmpacity": 83,
+      "dwelling": {
+        "cu": {
+          "label": "4 AWG",
+          "ampacity75C": 85,
+          "nextSmaller": {
+            "label": "6 AWG",
+            "ampacity75C": 65
+          }
+        },
+        "al": {
+          "label": "2 AWG",
+          "ampacity75C": 90,
+          "nextSmaller": {
+            "label": "3 AWG",
+            "ampacity75C": 75
+          }
+        }
+      },
+      "standard": {
+        "cu": {
+          "label": "3 AWG",
+          "ampacity75C": 100,
+          "nextSmaller": {
+            "label": "4 AWG",
+            "ampacity75C": 85
+          }
+        },
+        "al": {
+          "label": "1 AWG",
+          "ampacity75C": 100,
+          "nextSmaller": {
+            "label": "2 AWG",
+            "ampacity75C": 90
+          }
+        }
+      }
+    },
+    "twoHundredAmpService": {
+      "rating": 200,
+      "factor": 0.83,
+      "requiredAmpacity": 166,
+      "dwelling": {
+        "cu": {
+          "label": "2/0 AWG",
+          "ampacity75C": 175,
+          "nextSmaller": {
+            "label": "1/0 AWG",
+            "ampacity75C": 150
+          }
+        },
+        "al": {
+          "label": "4/0 AWG",
+          "ampacity75C": 180,
+          "nextSmaller": {
+            "label": "3/0 AWG",
+            "ampacity75C": 155
+          }
+        }
+      },
+      "standard": {
+        "cu": {
+          "label": "3/0 AWG",
+          "ampacity75C": 200,
+          "nextSmaller": {
+            "label": "2/0 AWG",
+            "ampacity75C": 175
+          }
+        },
+        "al": {
+          "label": "250 kcmil",
+          "ampacity75C": 205,
+          "nextSmaller": {
+            "label": "4/0 AWG",
+            "ampacity75C": 180
+          }
+        }
       }
     }
   }

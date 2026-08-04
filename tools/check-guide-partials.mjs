@@ -11,9 +11,16 @@ const PARTIALS = [
   ['partials/ca-guide-40amp-main.html', 'fortyAmp', 'ca'],
   ['partials/guide-60amp-main.html', 'sixtyAmp', 'us'],
   ['partials/ca-guide-60amp-main.html', 'sixtyAmp', 'ca'],
+  ['partials/guide-100amp-service-main.html', 'hundredAmpService', 'us'],
+  ['partials/ca-guide-100amp-service-main.html', 'hundredAmpService', 'ca'],
+  ['partials/guide-200amp-service-main.html', 'twoHundredAmpService', 'us'],
+  ['partials/ca-guide-200amp-service-main.html', 'twoHundredAmpService', 'ca'],
 ];
-const GUIDES = ['twentyAmp', 'thirtyAmp', 'fortyAmp', 'sixtyAmp'];
-const INTERNAL_JARGON_PATTERN = /\b(?:repo|engine|sealed)\b/i;
+const GUIDES = [
+  'twentyAmp', 'thirtyAmp', 'fortyAmp', 'sixtyAmp',
+  'hundredAmpService', 'twoHundredAmpService',
+];
+const INTERNAL_JARGON_PATTERN = /\b(?:repo|engine|sealed|partial|registry)\b/i;
 
 const catalog = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const storedDerivation = JSON.parse(readFileSync('tools/guide-table-derivations.json', 'utf8'));
@@ -103,7 +110,7 @@ function checkFaq(html, file) {
 }
 
 function checkTables(html, file, guide, edition) {
-  const expected = freshDerivation.guides[guide][edition];
+  const expected = freshDerivation.guides[guide]?.[edition] || {};
   const allGuideTables = [...html.matchAll(/<table class="gtable"/g)];
   const tableMatches = [...html.matchAll(/<table class="gtable" data-guide-table="([^"]+)">([\s\S]*?)<\/table>/g)];
   if (allGuideTables.length !== tableMatches.length) {
@@ -136,6 +143,44 @@ function checkTables(html, file, guide, edition) {
         throw new Error(`${file}: ${tableId}/${material} differs from derivation: ${JSON.stringify(actual)} != ${JSON.stringify(expected[tableId][material])}`);
       }
     }
+  }
+}
+
+function checkServiceRule(html, file, guide, edition) {
+  if (!guide.endsWith('AmpService')) return;
+  if (edition === 'ca') {
+    if (/data-guide-table=/.test(html)) throw new Error(`${file}: Canadian service guide must not publish an unverified service table`);
+    return;
+  }
+
+  const sizing = freshDerivation.dwellingServiceSizing[guide];
+  const conditions = [...html.matchAll(/data-service-condition="([^"]+)"/g)].map((match) => match[1]);
+  const expectedConditions = ['whole-dwelling', 'rating-range', 'no-derating', 'temperature-method'];
+  if (JSON.stringify(conditions) !== JSON.stringify(expectedConditions)) {
+    throw new Error(`${file}: dwelling-service conditions are incomplete or out of order`);
+  }
+
+  const dwelling = html.match(/<p data-service-arithmetic="dwelling">([\s\S]*?)<\/p>/)?.[1] || '';
+  for (const token of [
+    `${sizing.rating} A`,
+    `${sizing.factor * 100}%`,
+    `${sizing.requiredAmpacity} A`,
+    stripTags(sizing.dwelling.cu.label),
+    `${sizing.dwelling.cu.ampacity75C} A`,
+    stripTags(sizing.dwelling.al.label),
+    `${sizing.dwelling.al.ampacity75C} A`,
+  ]) {
+    if (!stripTags(dwelling).includes(token)) throw new Error(`${file}: dwelling arithmetic omits ${token}`);
+  }
+
+  const standard = stripTags(html.match(/<p data-service-arithmetic="standard">([\s\S]*?)<\/p>/)?.[1] || '');
+  for (const token of [
+    sizing.standard.cu.label,
+    `${sizing.standard.cu.ampacity75C} A`,
+    sizing.standard.al.label,
+    `${sizing.standard.al.ampacity75C} A`,
+  ]) {
+    if (!standard.includes(token)) throw new Error(`${file}: standard-sizing contrast omits ${token}`);
   }
 }
 
@@ -172,6 +217,7 @@ for (const [file, guide, edition] of PARTIALS) {
     const { rendered, keys } = render(source, file);
     checkFaq(rendered, file);
     checkTables(rendered, file, guide, edition);
+    checkServiceRule(rendered, file, guide, edition);
     checkProvenance(keys, file, guide, edition);
     console.log(`PASS ${file}: placeholders, FAQ, tables, provenance`);
     passed++;

@@ -10,6 +10,25 @@ import { pathToFileURL } from 'node:url';
 
 export const OUTPUT_FILE = 'tools/guide-table-derivations.json';
 
+// NEC 310.12 dwelling-service allowance, source-verified by the PM on 2026-08-03.
+// Conditions: (1) dwelling service or feeder carrying the entire dwelling load only;
+// (2) service/feeder ratings from 100 A through 400 A only;
+// (3) no ampacity adjustment or correction factors are required; and
+// (4) conductors must be rated 75 C or better, so NM/Romex is excluded.
+// This deliberately lives in the derivation layer until the later golden-data round.
+export const NEC_310_12_DWELLING_SERVICE_FACTOR = 0.83;
+
+const DWELLING_SERVICE_EXPECTATIONS = Object.freeze({
+  hundredAmpService: {
+    rating: 100,
+    dwelling: { cu: '4 AWG', al: '2 AWG' },
+  },
+  twoHundredAmpService: {
+    rating: 200,
+    dwelling: { cu: '2/0 AWG', al: '4/0 AWG' },
+  },
+});
+
 export const GUIDE_TABLE_CONFIG = Object.freeze({
   twentyAmp: {
     amps: 20,
@@ -28,6 +47,18 @@ export const GUIDE_TABLE_CONFIG = Object.freeze({
   },
   sixtyAmp: {
     amps: 60,
+    tables: { '240v': { volts: 240, distances: [50, 100, 150, 200, 250, 300], materials: ['cu', 'al'] } },
+  },
+  hundredAmpService: {
+    amps: 100,
+    editions: ['us'],
+    dwellingService: true,
+    tables: { '240v': { volts: 240, distances: [50, 100, 150, 200, 250, 300], materials: ['cu', 'al'] } },
+  },
+  twoHundredAmpService: {
+    amps: 200,
+    editions: ['us'],
+    dwellingService: true,
     tables: { '240v': { volts: 240, distances: [50, 100, 150, 200, 250, 300], materials: ['cu', 'al'] } },
   },
 });
@@ -98,6 +129,75 @@ function deriveCell({ guide, edition, table, material, distance, sealed, functio
   return result;
 }
 
+const stripAwg = (label) => label.replace(/ AWG$/, '');
+
+function firstConductorAtOrAbove(ampacityTable, material, requiredAmps) {
+  let previous = null;
+  for (const [label, columns] of Object.entries(ampacityTable[material])) {
+    const ampacity75C = columns[1];
+    if (ampacity75C >= requiredAmps) {
+      if (previous && previous.ampacity75C >= requiredAmps) {
+        throw new Error(`75 C ampacity search invariant failed: ${previous.label} also passes ${requiredAmps} A`);
+      }
+      return { label, ampacity75C, nextSmaller: previous };
+    }
+    previous = { label, ampacity75C };
+  }
+  throw new Error(`No ${material} conductor in the verified ampacity table reaches ${requiredAmps} A`);
+}
+
+function deriveDwellingServiceSizing(guide, ampacityTable) {
+  const expectation = DWELLING_SERVICE_EXPECTATIONS[guide];
+  if (!expectation) throw new Error(`${guide}: missing dwelling-service expectation`);
+  const requiredAmpacity = expectation.rating * NEC_310_12_DWELLING_SERVICE_FACTOR;
+  const dwelling = {};
+  const standard = {};
+
+  for (const material of ['cu', 'al']) {
+    dwelling[material] = firstConductorAtOrAbove(ampacityTable, material, requiredAmpacity);
+    standard[material] = firstConductorAtOrAbove(ampacityTable, material, expectation.rating);
+    if (dwelling[material].label !== expectation.dwelling[material]) {
+      throw new Error(
+        `${guide}/${material}: NEC 310.12 derivation produced ${dwelling[material].label}; expected ${expectation.dwelling[material]}`,
+      );
+    }
+  }
+
+  return {
+    rating: expectation.rating,
+    factor: NEC_310_12_DWELLING_SERVICE_FACTOR,
+    requiredAmpacity,
+    dwelling,
+    standard,
+  };
+}
+
+function deriveDwellingServiceCell({ guide, table, material, distance, sealed, functions, serviceSizing }) {
+  const guideConfig = GUIDE_TABLE_CONFIG[guide];
+  const tableConfig = guideConfig.tables[table];
+  const voltageDrop = functions.calculateVoltageDrop(
+    'size',
+    'ac1',
+    material,
+    tableConfig.volts,
+    guideConfig.amps,
+    distance,
+    0,
+    3,
+    sealed.wireTable,
+    sealed.kFactors,
+    sealed.systems,
+  );
+  if (!voltageDrop.found) {
+    throw new Error(`${guide}/us/${table}/${material}/${distance}: voltage-drop search returned no size`);
+  }
+  const dwellingLabel = serviceSizing.dwelling[material].label;
+  const dwellingIndex = sealed.wireTable.findIndex(([label]) => label === dwellingLabel);
+  if (dwellingIndex < 0) throw new Error(`${guide}/${material}: ${dwellingLabel} is missing from the wire table`);
+  const finalIndex = Math.max(dwellingIndex, voltageDrop.found.wireIndex);
+  return stripAwg(sealed.wireTable[finalIndex][0]);
+}
+
 export function deriveGuideTables() {
   const fingerprints = verifyGoldenFingerprints();
   const sealed = constants();
@@ -105,24 +205,36 @@ export function deriveGuideTables() {
   const guides = {};
   const ampacity = {};
   const workedExamples = {};
+  const dwellingServiceSizing = {};
 
   for (const [guide, guideConfig] of Object.entries(GUIDE_TABLE_CONFIG)) {
     guides[guide] = {};
     ampacity[guide] = {};
     workedExamples[guide] = {};
-    for (const edition of Object.keys(EDITIONS)) {
+    const serviceSizing = guideConfig.dwellingService
+      ? deriveDwellingServiceSizing(guide, sealed.ampacityTable)
+      : null;
+    if (serviceSizing) dwellingServiceSizing[guide] = serviceSizing;
+    for (const edition of guideConfig.editions || Object.keys(EDITIONS)) {
       const tables = {};
       for (const [table, tableConfig] of Object.entries(guideConfig.tables)) {
         tables[table] = {};
         for (const material of tableConfig.materials) {
           tables[table][material] = {};
           for (const distance of tableConfig.distances) {
-            tables[table][material][distance] = deriveCell({
-              guide, edition, table, material, distance, sealed, functions,
-            }).finalLabel.replace(/ AWG$/, '');
+            tables[table][material][distance] = guideConfig.dwellingService
+              ? deriveDwellingServiceCell({
+                guide, table, material, distance, sealed, functions, serviceSizing,
+              })
+              : deriveCell({
+                guide, edition, table, material, distance, sealed, functions,
+              }).finalLabel.replace(/ AWG$/, '');
           }
         }
       }
+
+      guides[guide][edition] = tables;
+      if (guideConfig.dwellingService) continue;
 
       const exampleConfig = WORKED_EXAMPLES[guide];
       const example = deriveCell({
@@ -134,7 +246,6 @@ export function deriveGuideTables() {
         sealed,
         functions,
       });
-      guides[guide][edition] = tables;
       ampacity[guide][edition] = {
         copperMinimum: example.ampacityMinimum.label.replace(/ AWG$/, ''),
         copperPermittedAmps: example.ampacityMinimum.result.permitted,
@@ -160,11 +271,14 @@ export function deriveGuideTables() {
       currentCarryingConductors: 3,
       insulationC: 90,
       terminationC: { us: 75, ca: 60 },
+      dwellingServiceFactor: NEC_310_12_DWELLING_SERVICE_FACTOR,
+      dwellingServiceTemperatureC: 75,
       sealedFingerprintsChecked: fingerprints.length,
     },
     guides,
     ampacity,
     workedExamples,
+    dwellingServiceSizing,
   };
 }
 

@@ -11,7 +11,9 @@
       "twentyAmp",
       "thirtyAmp",
       "fortyAmp",
-      "sixtyAmp"
+      "sixtyAmp",
+      "hundredAmpService",
+      "twoHundredAmpService"
     ]
   },
   "entries": {
@@ -934,6 +936,108 @@
         "60"
       ]
     },
+    "guides.ca.hundredAmpService.canYouGiveANCanadianN100AmpServiceSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.ca.hundredAmpService.doesTheUSN83%RuleApplyInCanadaQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.ca.hundredAmpService.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.ca.hundredAmpService.scopeBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "310.12",
+        "83",
+        "8"
+      ]
+    },
+    "guides.ca.hundredAmpService.shortAnswerBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "4",
+        "2"
+      ]
+    },
+    "guides.ca.hundredAmpService.siteCanCheckBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.hundredAmpService.useLocalServiceDesignAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.hundredAmpService.whatSizeWireForN100AmpServiceInCanadaTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.canYouGiveANCanadianN200AmpServiceSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.doesTheUSN83%RuleApplyInCanadaQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.scopeBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "2/0",
+        "3/0",
+        "4/0",
+        "8"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.shortAnswerBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.siteCanCheckBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.useLocalServiceDesignAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.twoHundredAmpService.whatSizeWireForN200AmpServiceInCanadaTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
     "guides.twentyAmp.canIUseN14GaugeOnAN20AmpBreakerQuestion": {
       "category": "approved-constant",
       "tokens": [
@@ -1844,6 +1948,501 @@
         "60"
       ]
     },
+    "guides.hundredAmpService.doesTheN83%RuleApplyToRomexQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.hundredAmpService.distanceBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "310.12",
+        "3",
+        "240",
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.dwellingArithmeticBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "100",
+        "83",
+        "83",
+        "4",
+        "85",
+        "75",
+        "2",
+        "90",
+        "75"
+      ]
+    },
+    "guides.hundredAmpService.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.feederForkBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.isN4AWGEnoughForN100AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "4",
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.n100AmpSubPanelWireQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.hundredAmpService.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.hundredAmpService.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.hundredAmpService.n300Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.hundredAmpService.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.hundredAmpService.notForRomexAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "75"
+      ]
+    },
+    "guides.hundredAmpService.onlyQualifyingDwellingAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "100",
+        "83",
+        "83",
+        "4",
+        "85",
+        "75"
+      ]
+    },
+    "guides.hundredAmpService.rangeCondition": {
+      "category": "approved-constant",
+      "tokens": [
+        "100",
+        "400"
+      ]
+    },
+    "guides.hundredAmpService.serviceConditionsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.hundredAmpService.shortAnswerBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "100",
+        "310.12",
+        "4",
+        "2",
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.standardArithmeticBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "75",
+        "100",
+        "3",
+        "100",
+        "1",
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.standardSizingBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "75",
+        "3",
+        "1",
+        "60",
+        "75"
+      ]
+    },
+    "guides.hundredAmpService.standardSizingHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "310.16"
+      ]
+    },
+    "guides.hundredAmpService.subPanelGuide": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.subPanelGuideAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.tableN240VHeading": {
+      "category": "distance-derivation",
+      "tokens": [
+        "100",
+        "240"
+      ]
+    },
+    "guides.hundredAmpService.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.hundredAmpService.tdN1N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1/0"
+      ]
+    },
+    "guides.hundredAmpService.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.hundredAmpService.tdN2N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2/0"
+      ]
+    },
+    "guides.hundredAmpService.tdN3N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3/0"
+      ]
+    },
+    "guides.hundredAmpService.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.hundredAmpService.tdN4N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4/0"
+      ]
+    },
+    "guides.hundredAmpService.temperatureMethodCondition": {
+      "category": "approved-constant",
+      "tokens": [
+        "75",
+        "60"
+      ]
+    },
+    "guides.hundredAmpService.theServiceAnswerIsN4Copper": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "4",
+        "2"
+      ]
+    },
+    "guides.hundredAmpService.twoHundredAmpServiceGuide": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.hundredAmpService.whatSizeWireForN100AmpServiceTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.whyChooseCopperOrAluminumQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.hundredAmpService.bothMaterialsCanWorkAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "4",
+        "2"
+      ]
+    },
+    "guides.twoHundredAmpService.canIUseN4N0AluminumForN200AmpServiceQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "4/0",
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.distanceBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "310.12",
+        "3",
+        "240",
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.doesRomexQualifyQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.twoHundredAmpService.dwellingArithmeticBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "200",
+        "83",
+        "166",
+        "2/0",
+        "175",
+        "75",
+        "4/0",
+        "180",
+        "75"
+      ]
+    },
+    "guides.twoHundredAmpService.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.twoHundredAmpService.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.twoHundredAmpService.n200AmpAluminumServiceWireSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.twoHundredAmpService.n300Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.twoHundredAmpService.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.twoHundredAmpService.notForRomexAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "75"
+      ]
+    },
+    "guides.twoHundredAmpService.rangeCondition": {
+      "category": "approved-constant",
+      "tokens": [
+        "100",
+        "400"
+      ]
+    },
+    "guides.twoHundredAmpService.serviceConditionsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "83"
+      ]
+    },
+    "guides.twoHundredAmpService.standardArithmeticBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "75",
+        "200",
+        "3/0",
+        "200",
+        "250",
+        "205"
+      ]
+    },
+    "guides.twoHundredAmpService.tableN240VHeading": {
+      "category": "distance-derivation",
+      "tokens": [
+        "200",
+        "240"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN2N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2/0"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN3N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3/0"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN4N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4/0"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN250Kcmil": {
+      "category": "distance-derivation",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN300Kcmil": {
+      "category": "distance-derivation",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.twoHundredAmpService.tdN400Kcmil": {
+      "category": "distance-derivation",
+      "tokens": [
+        "400"
+      ]
+    },
+    "guides.twoHundredAmpService.temperatureMethodCondition": {
+      "category": "approved-constant",
+      "tokens": [
+        "75",
+        "60"
+      ]
+    },
+    "guides.twoHundredAmpService.theThreeAnswersBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "2/0",
+        "310.12",
+        "3/0",
+        "310.16",
+        "75",
+        "4/0",
+        "75",
+        "250"
+      ]
+    },
+    "guides.twoHundredAmpService.theThreeAnswersSubtitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "2/0",
+        "3/0",
+        "4/0"
+      ]
+    },
+    "guides.twoHundredAmpService.hundredAmpServiceGuide": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.twoHundredAmpService.twoN0OrThreeN0ForN200AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "2/0",
+        "3/0",
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.twoN0OrThreeN0ForkAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "2/0",
+        "310.12",
+        "3/0",
+        "75",
+        "310.16"
+      ]
+    },
+    "guides.twoHundredAmpService.useN4N0WhenConditionsPassAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "200",
+        "310.12",
+        "83",
+        "166",
+        "4/0",
+        "180",
+        "75"
+      ]
+    },
+    "guides.twoHundredAmpService.whatSizeWireForN200AmpServiceTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.twoHundredAmpService.n4N0DwellingAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "4/0",
+        "75",
+        "250",
+        "200"
+      ]
+    },
     "pages.us.guides.twentyAmp.title": {
       "category": "approved-constant",
       "tokens": [
@@ -1905,6 +2504,40 @@
         "6",
         "60",
         "4"
+      ]
+    },
+    "pages.us.guides.hundredAmpService.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "100",
+        "310.12"
+      ]
+    },
+    "pages.us.guides.hundredAmpService.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "100",
+        "310.12",
+        "310.16",
+        "240"
+      ]
+    },
+    "pages.us.guides.twoHundredAmpService.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "200",
+        "2/0",
+        "3/0"
+      ]
+    },
+    "pages.us.guides.twoHundredAmpService.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "2/0",
+        "3/0",
+        "4/0",
+        "200",
+        "310.12"
       ]
     },
     "pages.ca.guides.twentyAmp.title": {
@@ -1972,6 +2605,34 @@
         "60",
         "6",
         "75"
+      ]
+    },
+    "pages.ca.guides.hundredAmpService.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "pages.ca.guides.hundredAmpService.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "83",
+        "8"
+      ]
+    },
+    "pages.ca.guides.twoHundredAmpService.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "pages.ca.guides.twoHundredAmpService.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "2/0",
+        "3/0",
+        "4/0",
+        "8"
       ]
     }
   }
