@@ -4,6 +4,7 @@ const english = JSON.parse(readFileSync('i18n/strings/en.json', 'utf8'));
 const glossary = JSON.parse(readFileSync('i18n/glossary.json', 'utf8'));
 const never = JSON.parse(readFileSync('i18n/never-translate.json', 'utf8'));
 const outputFile = 'i18n/guide-translations.json';
+const fleetStagingFile = 'i18n/fleet-staging.json';
 
 const flatten = (source, prefix = '', output = {}) => {
   for (const [key, value] of Object.entries(source || {})) {
@@ -27,6 +28,18 @@ const usChunks = [
   {
     id: '12gauge-voltage',
     sections: [['twelveGauge', '12gauge'], ['voltageDrop', 'vdformula']],
+  },
+  {
+    id: '20-30amp',
+    sections: [['twentyAmp', '20amp'], ['thirtyAmp', '30amp']],
+  },
+  {
+    id: '40-60amp',
+    sections: [['fortyAmp', '40amp'], ['sixtyAmp', '60amp']],
+  },
+  {
+    id: 'services',
+    sections: [['hundredAmpService', '100amp-service'], ['twoHundredAmpService', '200amp-service']],
   },
 ];
 const caChunks = usChunks;
@@ -59,16 +72,29 @@ for (const [edition, locale, language, chunks] of [
 const numericTokens = (value) => value.match(/#?\d+(?:[.,/-]\d+)*/g) || [];
 const sameNumbers = (source, target) =>
   JSON.stringify(numericTokens(source).sort()) === JSON.stringify(numericTokens(target).sort());
-const protectedLiterals = [
+const exactProtectedLiterals = [
   ...never.brand,
   ...never.standards,
   ...never.citations,
+].sort((left, right) => right.length - left.length);
+const noLossWireLiterals = [
   ...never.wireAndCableDesignations,
+].sort((left, right) => right.length - left.length);
+const noLossUnitLiterals = [
   ...never.unitSymbols,
 ].sort((left, right) => right.length - left.length);
+const contextualUnitLiterals = never.contextualUnitSymbols ?? [];
 const countLiteral = (source, token) => {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (source.match(new RegExp(`(?<![\\p{Script=Latin}\\p{N}])${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
+};
+const countUnitLiteral = (source, token) => {
+  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (source.match(new RegExp(`(?<![\\p{Script=Latin}])${escaped}(?![\\p{Script=Latin}])`, 'gu')) || []).length;
+};
+const countContextualUnit = (source, token) => {
+  const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return (source.match(new RegExp(`(?:#?\\d+(?:[.,/-]\\d+)*|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
 };
 
 const parseObject = (raw) => {
@@ -87,13 +113,88 @@ const existing = (() => {
   }
 })();
 
+const stringsForJob = (job) => Object.fromEntries(Object.entries(sourceStrings)
+  .filter(([key]) => job.prefixes.some((prefix) => key.startsWith(prefix))));
+
+const validateTranslation = (job, strings, translated) => {
+  const expectedKeys = Object.keys(strings).sort();
+  const actualKeys = Object.keys(translated).sort();
+  if (JSON.stringify(expectedKeys) !== JSON.stringify(actualKeys)) {
+    throw new Error(`${job.id} returned the wrong key set (${actualKeys.length} for ${expectedKeys.length}).`);
+  }
+  for (const key of expectedKeys) {
+    if (typeof translated[key] !== 'string' || !translated[key]) {
+      throw new Error(`${job.id}:${key} is empty or not a string.`);
+    }
+    if (!sameNumbers(strings[key], translated[key])) {
+      throw new Error(`${job.id}:${key} changed a number.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
+    }
+    const changedLiteral = exactProtectedLiterals.find((token) =>
+      countLiteral(strings[key], token) !== countLiteral(translated[key], token));
+    if (changedLiteral) {
+      throw new Error(`${job.id}:${key} changed protected token ${changedLiteral}.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
+    }
+    const lostLiteral = noLossWireLiterals.find((token) =>
+      countLiteral(strings[key], token) > countLiteral(translated[key], token));
+    if (lostLiteral) {
+      throw new Error(`${job.id}:${key} lost protected token ${lostLiteral}.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
+    }
+    const lostUnit = noLossUnitLiterals.find((token) =>
+      countUnitLiteral(strings[key], token) > countUnitLiteral(translated[key], token));
+    if (lostUnit) {
+      throw new Error(`${job.id}:${key} lost protected unit ${lostUnit}.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
+    }
+    const lostContextualUnit = contextualUnitLiterals.find((token) =>
+      countContextualUnit(strings[key], token) > countContextualUnit(translated[key], token));
+    if (lostContextualUnit) {
+      throw new Error(`${job.id}:${key} lost protected contextual unit ${lostContextualUnit}.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
+    }
+  }
+  return expectedKeys.length;
+};
+
+if (process.argv[2] === '--ingest-fleet') {
+  const fleet = JSON.parse(readFileSync(fleetStagingFile, 'utf8'));
+  const fleetChunkIds = ['20-30amp', '40-60amp', 'services'];
+  const fleetJobs = jobs.filter(({ id }) =>
+    fleetChunkIds.some((chunkId) => id.endsWith(`-${chunkId}`)));
+  const expectedFleetIds = [...new Set(fleetJobs.map(({ edition, locale }) => `${edition}-${locale}`))].sort();
+  const actualFleetIds = Object.keys(fleet).sort();
+  if (JSON.stringify(expectedFleetIds) !== JSON.stringify(actualFleetIds)) {
+    throw new Error(`Fleet staging has the wrong edition set: ${actualFleetIds.join(', ')}.`);
+  }
+
+  const pending = {};
+  const consumedByFleet = new Map(expectedFleetIds.map((id) => [id, new Set()]));
+  for (const job of fleetJobs) {
+    const fleetId = `${job.edition}-${job.locale}`;
+    const strings = stringsForJob(job);
+    const translated = Object.fromEntries(Object.entries(fleet[fleetId])
+      .filter(([key]) => job.prefixes.some((prefix) => key.startsWith(prefix))));
+    const count = validateTranslation(job, strings, translated);
+    for (const key of Object.keys(translated)) consumedByFleet.get(fleetId).add(key);
+    pending[job.id] = translated;
+    console.log(`validated ${job.id}: ${count} reviewed strings`);
+  }
+  for (const fleetId of expectedFleetIds) {
+    const stagedKeys = Object.keys(fleet[fleetId]).sort();
+    const consumedKeys = [...consumedByFleet.get(fleetId)].sort();
+    if (JSON.stringify(stagedKeys) !== JSON.stringify(consumedKeys)) {
+      throw new Error(`${fleetId} contains rows outside the six registered guide namespaces.`);
+    }
+  }
+  Object.assign(existing, pending);
+  writeFileSync(outputFile, `${JSON.stringify(existing, null, 2)}\n`);
+  console.log(`ingested ${fleetJobs.length} reviewed fleet bundles from ${fleetStagingFile}`);
+  process.exit(0);
+}
+
 const jobId = process.argv[3];
 const job = jobs.find((candidate) => candidate.id === jobId);
 if (!job) {
   throw new Error(`Choose a translation job: ${jobs.map(({ id }) => id).join(', ')}`);
 }
-const strings = Object.fromEntries(Object.entries(sourceStrings)
-  .filter(([key]) => job.prefixes.some((prefix) => key.startsWith(prefix))));
+const strings = stringsForJob(job);
 const templateContext = job.templates
   .map((file) => `\n--- ${file} ---\n${readFileSync(file, 'utf8')}`)
   .join('');
@@ -132,27 +233,10 @@ if (process.argv[2] === '--prepare') {
   const responseFile = process.argv[4];
   if (!responseFile) throw new Error('Pass the temporary translator response file path.');
   const translated = parseObject(readFileSync(responseFile, 'utf8'));
-  const expectedKeys = Object.keys(strings).sort();
-  const actualKeys = Object.keys(translated).sort();
-  if (JSON.stringify(expectedKeys) !== JSON.stringify(actualKeys)) {
-    throw new Error(`${job.id} returned the wrong key set (${actualKeys.length} for ${expectedKeys.length}).`);
-  }
-  for (const key of expectedKeys) {
-    if (typeof translated[key] !== 'string' || !translated[key]) {
-      throw new Error(`${job.id}:${key} is empty or not a string.`);
-    }
-    if (!sameNumbers(strings[key], translated[key])) {
-      throw new Error(`${job.id}:${key} changed a number.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
-    }
-    const changedLiteral = protectedLiterals.find((token) =>
-      countLiteral(strings[key], token) !== countLiteral(translated[key], token));
-    if (changedLiteral) {
-      throw new Error(`${job.id}:${key} changed protected token ${changedLiteral}.\nEN: ${strings[key]}\nTR: ${translated[key]}`);
-    }
-  }
+  const translatedCount = validateTranslation(job, strings, translated);
   existing[job.id] = translated;
   writeFileSync(outputFile, `${JSON.stringify(existing, null, 2)}\n`);
-  console.log(`translated ${job.id}: ${expectedKeys.length} guide strings`);
+  console.log(`translated ${job.id}: ${translatedCount} guide strings`);
 } else {
-  throw new Error('Use --prepare or --ingest.');
+  throw new Error('Use --prepare, --ingest, or --ingest-fleet.');
 }

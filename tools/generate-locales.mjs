@@ -55,6 +55,18 @@ const templateFiles = [
   'partials/ca-guide-ampacity-main.html',
   'partials/ca-guide-12gauge-main.html',
   'partials/ca-guide-vdformula-main.html',
+  'partials/guide-20amp-main.html',
+  'partials/ca-guide-20amp-main.html',
+  'partials/guide-30amp-main.html',
+  'partials/ca-guide-30amp-main.html',
+  'partials/guide-40amp-main.html',
+  'partials/ca-guide-40amp-main.html',
+  'partials/guide-60amp-main.html',
+  'partials/ca-guide-60amp-main.html',
+  'partials/guide-100amp-service-main.html',
+  'partials/ca-guide-100amp-service-main.html',
+  'partials/guide-200amp-service-main.html',
+  'partials/ca-guide-200amp-service-main.html',
 ];
 const keys = new Set();
 for (const file of templateFiles) {
@@ -86,6 +98,24 @@ for (const [job, translations] of Object.entries(guideTranslations)) {
     Object.assign(guideExact['zh-Hans'], translations);
   }
 }
+
+const fleetGuideSections = new Set([
+  'twentyAmp',
+  'thirtyAmp',
+  'fortyAmp',
+  'sixtyAmp',
+  'hundredAmpService',
+  'twoHundredAmpService',
+]);
+const fleetGuideScope = (key) => {
+  const match = key.match(/^(?:guides(?:\.ca)?|pages\.(?:us|ca)\.guides)\.([^.]+)\./);
+  return match ? fleetGuideSections.has(match[1]) : false;
+};
+const localeOwnsGuideKey = (key, locale) => {
+  if (key.startsWith('guides.ca.') || key.startsWith('pages.ca.guides.')) return locale !== 'es';
+  if (key.startsWith('guides.') || key.startsWith('pages.us.guides.')) return locale !== 'fr-CA';
+  return true;
+};
 
 const legacyExact = { es: {}, 'fr-CA': {}, 'zh-Hans': {} };
 for (const locale of Object.keys(legacyExact)) {
@@ -2202,9 +2232,11 @@ function translate(source, locale) {
    Set VD_ALLOW_LOCALE_OVERWRITE=1 to override, which should essentially never
    happen and will print exactly what it is about to destroy. */
 const guardExisting = {};
+const guardCatalogRaw = {};
 for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
   const file = `i18n/strings/${locale}.json`;
-  guardExisting[locale] = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {};
+  guardCatalogRaw[locale] = existsSync(file) ? readFileSync(file, 'utf8') : '';
+  guardExisting[locale] = guardCatalogRaw[locale] ? JSON.parse(guardCatalogRaw[locale]) : {};
 }
 const guardPacks = {};
 for (const country of ['us', 'ca']) {
@@ -2239,6 +2271,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
     },
   };
   for (const key of [...keys].sort()) {
+    if (fleetGuideScope(key) && !localeOwnsGuideKey(key, locale)) continue;
     const englishValue = valueAt(english, key);
     const packOwned = Object.values(packs).some((pack) => typeof pack.strings?.[key] === 'string');
     if (englishValue === undefined && packOwned) continue;
@@ -2257,6 +2290,11 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
       ?? landscapeExact[locale]?.[key]
       ?? guideExact[locale]?.[key]
       ?? words[locale]?.[key]
+      // A reviewed value may predate discovery of the template that uses it.
+      // Keep it when no durable reviewed bank above claims the key; otherwise
+      // adding a template turns a formerly carried value back into rough
+      // mechanical text and the overwrite guard correctly stops the run.
+      ?? guardExisting[locale]?.[key]
       ?? translate(englishValue, locale);
   }
   /* Carry forward any key that exists in the committed catalog but that this
@@ -2268,6 +2306,7 @@ for (const locale of ['es', 'fr-CA', 'zh-Hans']) {
   const carried = [];
   for (const [key, value] of Object.entries(guardExisting[locale])) {
     if (key === '_meta') continue;
+    if (fleetGuideScope(key) && !localeOwnsGuideKey(key, locale)) continue;
     if (!(key in catalog)) { catalog[key] = value; carried.push(key); }
   }
   if (carried.length) console.log(`${locale}: carried forward ${carried.length} key(s) this generator cannot produce`);
@@ -2293,8 +2332,71 @@ if (guardViolations.length) {
   console.error(`\nVD_ALLOW_LOCALE_OVERWRITE=1 — proceeding anyway.`);
 }
 
+const insertMissingCatalogKeys = (locale, catalog) => {
+  const raw = guardCatalogRaw[locale];
+  if (!raw || process.env.VD_ALLOW_LOCALE_OVERWRITE === '1') {
+    return `${JSON.stringify(catalog, null, 2)}\n`;
+  }
+  // A stopped run may have added country-specific rows to a locale that does
+  // not serve that country. Remove only those six newly ingested namespaces;
+  // older carried rows retain the generator's no-delete protection.
+  const removable = Object.keys(guardExisting[locale]).filter((key) =>
+    fleetGuideScope(key)
+    && !localeOwnsGuideKey(key, locale)
+    && !(key in catalog));
+  let baseRaw = raw;
+  for (const key of removable) {
+    const escapedKey = JSON.stringify(key).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    baseRaw = baseRaw.replace(new RegExp(`^  ${escapedKey}: .*\\n`, 'm'), '');
+  }
+  const baseExisting = JSON.parse(baseRaw);
+  const missing = Object.entries(catalog).filter(([key]) => !(key in baseExisting));
+  if (!missing.length) return baseRaw;
+
+  // Keep every existing byte in place so a normal generator run can only add
+  // reviewed rows. Insert after _meta, whose trailing comma already exists;
+  // this avoids rewriting even the previous final property just to add a comma.
+  const metaKey = baseRaw.indexOf('"_meta"');
+  const valueStart = baseRaw.indexOf('{', baseRaw.indexOf(':', metaKey));
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  let valueEnd = -1;
+  for (let index = valueStart; index < baseRaw.length; index += 1) {
+    const char = baseRaw[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+    if (char === '"') inString = true;
+    else if (char === '{' || char === '[') depth += 1;
+    else if (char === '}' || char === ']') {
+      depth -= 1;
+      if (depth === 0) { valueEnd = index; break; }
+    }
+  }
+  const insertionPoint = baseRaw.indexOf('\n', valueEnd) + 1;
+  if (metaKey < 0 || valueStart < 0 || valueEnd < 0 || insertionPoint <= 0 || baseRaw[valueEnd + 1] !== ',') {
+    throw new Error(`${locale}: could not locate the end of _meta for add-only catalog generation.`);
+  }
+  const additions = missing
+    .map(([key, value]) => `  ${JSON.stringify(key)}: ${JSON.stringify(value)},\n`)
+    .join('');
+  const rendered = `${baseRaw.slice(0, insertionPoint)}${additions}${baseRaw.slice(insertionPoint)}`;
+  const reparsed = JSON.parse(rendered);
+  for (const [key, value] of Object.entries(catalog)) {
+    if (JSON.stringify(reparsed[key]) !== JSON.stringify(value)) {
+      throw new Error(`${locale}: add-only catalog render changed or lost ${key}.`);
+    }
+  }
+  return rendered;
+};
+
 for (const [locale, catalog] of Object.entries(pendingCatalogs)) {
-  writeFileSync(`i18n/strings/${locale}.json`, `${JSON.stringify(catalog, null, 2)}\n`);
+  const rendered = insertMissingCatalogKeys(locale, catalog);
+  if (rendered !== guardCatalogRaw[locale]) writeFileSync(`i18n/strings/${locale}.json`, rendered);
 }
 
 /* keys is PRESERVED for the same reason as _meta.safetyCriticalKeys: the
@@ -2303,7 +2405,6 @@ for (const [locale, catalog] of Object.entries(pendingCatalogs)) {
 const existingSafetyKeys = existingSafetyRegistry.keys ?? safetyKeys;
 writeFileSync('i18n/safety-critical.json', `${JSON.stringify({
   policy: existingSafetyRegistry.policy,
-  pendingKeys: existingSafetyRegistry.pendingKeys,
   keys: existingSafetyKeys,
   extraReviewKeys: existingSafetyRegistry.extraReviewKeys,
 }, null, 2)}\n`);
@@ -2322,7 +2423,8 @@ for (const [country, pack] of Object.entries(packs)) {
         key,
         // Reviewed pack values win over anything mechanical. Without this the
         // generator re-translated correct Canadian metadata into stale wording.
-        reviewedLegacy.packs?.[country]?.[locale]?.[key]
+        existingLocalized[locale]?.[key]
+          ?? reviewedLegacy.packs?.[country]?.[locale]?.[key]
           ?? packKeyedExact[locale]?.[`${country}.${key}`]
           ?? translate(value, locale),
       ]),

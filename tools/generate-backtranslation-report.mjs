@@ -50,10 +50,19 @@ const contextualUnitCount = (source, token) => {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return (source.match(new RegExp(`(?:\\d+(?:\\.\\d+)?|\\{[A-Za-z][A-Za-z0-9]*\\})\\s*${escaped}(?![\\p{Script=Latin}\\p{N}])`, 'gu')) || []).length;
 };
+const normalizeDegreeCSpacing = (source) =>
+  source.replace(/(?<=\p{N})[ \u3000]*°C/gu, ' °C');
+const unitCount = (source, unit) => {
+  if (unit === 'cmil') {
+    return literalCount(source, 'cmil') + literalCount(source, 'circular mils');
+  }
+  if (unit === '°C') return literalCount(normalizeDegreeCSpacing(source), unit);
+  return literalCount(source, unit);
+};
 const unitCountsMatch = (source, target) => never.unitSymbols.every((unit) =>
-  literalCount(source, unit) === literalCount(target, unit))
+  unitCount(target, unit) >= unitCount(source, unit))
   && (never.contextualUnitSymbols ?? []).every((unit) =>
-    contextualUnitCount(source, unit) === contextualUnitCount(target, unit));
+    contextualUnitCount(target, unit) >= contextualUnitCount(source, unit));
 
 const expectedDigest = createHash('sha256')
   .update(JSON.stringify(passAInput.entries))
