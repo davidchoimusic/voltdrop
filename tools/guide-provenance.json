@@ -1,0 +1,1978 @@
+{
+  "meta": {
+    "generatedBy": "tools/generate-guide-provenance.mjs",
+    "categories": [
+      "distance-derivation",
+      "ampacity-derivation",
+      "visible-arithmetic",
+      "approved-constant"
+    ],
+    "scope": [
+      "twentyAmp",
+      "thirtyAmp",
+      "fortyAmp",
+      "sixtyAmp"
+    ]
+  },
+  "entries": {
+    "guides.ca.twentyAmp.canIUseN14GaugeOnAN20AmpBreakerQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "14",
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.forOrdinaryN20AmpBranchCircuitsAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12",
+        "90",
+        "20",
+        "14-104",
+        "14",
+        "15",
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.howFarCanIRunN12GaugeOnN20AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.howFarN12GaugeGuide": {
+      "category": "approved-constant",
+      "tokens": [
+        "12"
+      ]
+    },
+    "guides.ca.twentyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.jobsBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.minimumCopperSizeAtN120VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "120",
+        "20",
+        "3"
+      ]
+    },
+    "guides.ca.twentyAmp.n15MN50": {
+      "category": "approved-constant",
+      "tokens": [
+        "15",
+        "50"
+      ]
+    },
+    "guides.ca.twentyAmp.n30MN100": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.twentyAmp.n46MN150": {
+      "category": "approved-constant",
+      "tokens": [
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.twentyAmp.n61MN200": {
+      "category": "approved-constant",
+      "tokens": [
+        "61",
+        "200"
+      ]
+    },
+    "guides.ca.twentyAmp.n76MN250": {
+      "category": "approved-constant",
+      "tokens": [
+        "76",
+        "250"
+      ]
+    },
+    "guides.ca.twentyAmp.n91MN300": {
+      "category": "approved-constant",
+      "tokens": [
+        "91",
+        "300"
+      ]
+    },
+    "guides.ca.twentyAmp.ruleN14N104CapsN14AWG": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "14-104",
+        "14",
+        "15",
+        "12",
+        "20",
+        "90"
+      ]
+    },
+    "guides.ca.twentyAmp.tableN120VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "120"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN10": {
+      "category": "distance-derivation",
+      "tokens": [
+        "10"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.ca.twentyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.twentyAmp.theCanadianAnswerIsN12AWGCopper": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12",
+        "90",
+        "20",
+        "14",
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.whatAboutN20AmpsAtN240VQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "240"
+      ]
+    },
+    "guides.ca.twentyAmp.whatSizeWireForN20AmpCircuitTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.ca.twentyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "120",
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.twentyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#8",
+        "16,510",
+        "2",
+        "12.9",
+        "20",
+        "100",
+        "16,510",
+        "3.13",
+        "2.6",
+        "120",
+        "3"
+      ]
+    },
+    "guides.ca.twentyAmp.yesN12AWGIsTheStartingAnswerAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12"
+      ]
+    },
+    "guides.ca.twentyAmp.atN240VTheAmpacityFloorStaysAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "20",
+        "240",
+        "120"
+      ]
+    },
+    "guides.ca.thirtyAmp.aluminumDecisionBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "60",
+        "#8",
+        "35"
+      ]
+    },
+    "guides.ca.thirtyAmp.canN12GaugeHandleN30AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.dryerWireSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.minimumSizeBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "3"
+      ]
+    },
+    "guides.ca.thirtyAmp.n15MN50": {
+      "category": "approved-constant",
+      "tokens": [
+        "15",
+        "50"
+      ]
+    },
+    "guides.ca.thirtyAmp.n30MN100": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.thirtyAmp.n46MN150": {
+      "category": "approved-constant",
+      "tokens": [
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.thirtyAmp.n61MN200": {
+      "category": "approved-constant",
+      "tokens": [
+        "61",
+        "200"
+      ]
+    },
+    "guides.ca.thirtyAmp.n76MN250": {
+      "category": "approved-constant",
+      "tokens": [
+        "76",
+        "250"
+      ]
+    },
+    "guides.ca.thirtyAmp.tableN120VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "120",
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "240"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN1N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1/0"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.thirtyAmp.tdN10": {
+      "category": "distance-derivation",
+      "tokens": [
+        "10"
+      ]
+    },
+    "guides.ca.thirtyAmp.theCanadianStartingAnswerIsN10AWG": {
+      "category": "approved-constant",
+      "tokens": [
+        "10",
+        "90",
+        "30",
+        "30",
+        "120",
+        "240"
+      ]
+    },
+    "guides.ca.thirtyAmp.whatSizeWireForAN30AmpDryerAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "10",
+        "90",
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.whatSizeWireForAN30AmpRVPlugQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.whatSizeWireForN30AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.thirtyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "120",
+        "#6",
+        "26,240",
+        "2",
+        "12.9",
+        "30",
+        "100",
+        "26,240",
+        "2.95",
+        "2.46",
+        "240"
+      ]
+    },
+    "guides.ca.thirtyAmp.noN12AWGCopperIsCappedAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "14-104",
+        "12",
+        "20",
+        "30"
+      ]
+    },
+    "guides.ca.thirtyAmp.aTTN30IsAN120VAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "30",
+        "120",
+        "10",
+        "90",
+        "120"
+      ]
+    },
+    "guides.ca.fortyAmp.canIRunAnEVChargerOnAN40AmpCircuitQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.distanceChangesTheAnswerHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "8-102"
+      ]
+    },
+    "guides.ca.fortyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.isN8GaugeEnoughForN40AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "8",
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.jobsBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "40",
+        "8-104",
+        "40",
+        "32",
+        "40",
+        "80",
+        "32"
+      ]
+    },
+    "guides.ca.fortyAmp.minimumSizeAtN240VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "240",
+        "40",
+        "60",
+        "3"
+      ]
+    },
+    "guides.ca.fortyAmp.n15MN50": {
+      "category": "approved-constant",
+      "tokens": [
+        "15",
+        "50"
+      ]
+    },
+    "guides.ca.fortyAmp.n30MN100": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.fortyAmp.n46MN150": {
+      "category": "approved-constant",
+      "tokens": [
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.fortyAmp.n61MN200": {
+      "category": "approved-constant",
+      "tokens": [
+        "61",
+        "200"
+      ]
+    },
+    "guides.ca.fortyAmp.n76MN250": {
+      "category": "approved-constant",
+      "tokens": [
+        "76",
+        "250"
+      ]
+    },
+    "guides.ca.fortyAmp.n91MN300": {
+      "category": "approved-constant",
+      "tokens": [
+        "91",
+        "300"
+      ]
+    },
+    "guides.ca.fortyAmp.rangeWireSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "240"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.ca.fortyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.ca.fortyAmp.theCanadianAnswerIsN8AWGCopper": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "8",
+        "90",
+        "40",
+        "60"
+      ]
+    },
+    "guides.ca.fortyAmp.terminationMethodBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "90",
+        "60",
+        "#8",
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.terminationRuleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "90"
+      ]
+    },
+    "guides.ca.fortyAmp.terminationRuleBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "90",
+        "90",
+        "4-006",
+        "60",
+        "#8",
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.whatSizeWireForN40AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "240",
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.fortyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#6",
+        "26,240",
+        "2",
+        "12.9",
+        "40",
+        "150",
+        "26,240",
+        "5.90",
+        "2.46",
+        "240",
+        "#8",
+        "3"
+      ]
+    },
+    "guides.ca.fortyAmp.yesAtOrdinaryConditionsAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "60",
+        "#8",
+        "40"
+      ]
+    },
+    "guides.ca.fortyAmp.startWithN8CopperNMD90Answer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "8",
+        "90",
+        "40",
+        "8-102"
+      ]
+    },
+    "guides.ca.fortyAmp.aN40AConductorLimitSupportsAnswer": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "8-104",
+        "40",
+        "32",
+        "40",
+        "80",
+        "32"
+      ]
+    },
+    "guides.ca.sixtyAmp.canIRunAnEVChargerOnAN60AmpCircuitQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.distanceChangesTheAnswerHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "8-102"
+      ]
+    },
+    "guides.ca.sixtyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.jobsBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "8-104",
+        "60",
+        "48",
+        "60",
+        "80",
+        "48"
+      ]
+    },
+    "guides.ca.sixtyAmp.minimumSizeAtN240VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "240",
+        "60",
+        "60",
+        "3"
+      ]
+    },
+    "guides.ca.sixtyAmp.n15MN50": {
+      "category": "approved-constant",
+      "tokens": [
+        "15",
+        "50"
+      ]
+    },
+    "guides.ca.sixtyAmp.n30MN100": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "100"
+      ]
+    },
+    "guides.ca.sixtyAmp.n46MN150": {
+      "category": "approved-constant",
+      "tokens": [
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.sixtyAmp.n61MN200": {
+      "category": "approved-constant",
+      "tokens": [
+        "61",
+        "200"
+      ]
+    },
+    "guides.ca.sixtyAmp.n76MN250": {
+      "category": "approved-constant",
+      "tokens": [
+        "76",
+        "250"
+      ]
+    },
+    "guides.ca.sixtyAmp.n91MN300": {
+      "category": "approved-constant",
+      "tokens": [
+        "91",
+        "300"
+      ]
+    },
+    "guides.ca.sixtyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "240"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN1N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1/0"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN2N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2/0"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.ca.sixtyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.ca.sixtyAmp.theCanadianAnswerStartsAtN4AWG": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "60",
+        "#4",
+        "90",
+        "60",
+        "75",
+        "#6",
+        "65"
+      ]
+    },
+    "guides.ca.sixtyAmp.theN6VsN4DivideHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "#6",
+        "#4"
+      ]
+    },
+    "guides.ca.sixtyAmp.theN6VsN4DivideBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#6",
+        "#4",
+        "#6",
+        "55",
+        "60",
+        "65",
+        "75",
+        "#4",
+        "60",
+        "75"
+      ]
+    },
+    "guides.ca.sixtyAmp.theN60CTableGivesN6OnlyBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "60",
+        "#6",
+        "55",
+        "#4",
+        "70",
+        "75",
+        "#6",
+        "65",
+        "4-006"
+      ]
+    },
+    "guides.ca.sixtyAmp.whatAboutAN60AmpSubPanelQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.whatSizeWireForN60AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.whyDoPeopleSayN6AndN4ForQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "6",
+        "4",
+        "60"
+      ]
+    },
+    "guides.ca.sixtyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "240",
+        "46",
+        "150"
+      ]
+    },
+    "guides.ca.sixtyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#4",
+        "41,740",
+        "2",
+        "12.9",
+        "60",
+        "150",
+        "41,740",
+        "5.56",
+        "2.32",
+        "240",
+        "3"
+      ]
+    },
+    "guides.ca.sixtyAmp.aN60AConductorLimitSupportsAnswer": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "8-104",
+        "60",
+        "48",
+        "60",
+        "80",
+        "48"
+      ]
+    },
+    "guides.ca.sixtyAmp.theTerminationColumnChangesTheAnswerAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#6",
+        "65",
+        "75",
+        "55",
+        "60",
+        "60",
+        "#4",
+        "70"
+      ]
+    },
+    "guides.ca.sixtyAmp.useTheSubPanelGuideAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.twentyAmp.canIUseN14GaugeOnAN20AmpBreakerQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "14",
+        "20"
+      ]
+    },
+    "guides.twentyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.twentyAmp.forOrdinaryN20AmpBranchCircuitsAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12",
+        "20",
+        "240.4",
+        "14",
+        "15",
+        "20"
+      ]
+    },
+    "guides.twentyAmp.howFarCanIRunN12GaugeOnN20AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "20"
+      ]
+    },
+    "guides.twentyAmp.howFarN12GaugeGuide": {
+      "category": "approved-constant",
+      "tokens": [
+        "12"
+      ]
+    },
+    "guides.twentyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.twentyAmp.jobsBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.twentyAmp.minimumCopperSizeAtN120VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "120",
+        "20",
+        "3"
+      ]
+    },
+    "guides.twentyAmp.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.twentyAmp.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.twentyAmp.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.twentyAmp.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.twentyAmp.n300Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.twentyAmp.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.twentyAmp.nECN240N4DCapsN14AWG": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "240.4",
+        "14",
+        "15",
+        "12",
+        "20"
+      ]
+    },
+    "guides.twentyAmp.tableN120VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "120"
+      ]
+    },
+    "guides.twentyAmp.tdN10": {
+      "category": "distance-derivation",
+      "tokens": [
+        "10"
+      ]
+    },
+    "guides.twentyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.twentyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.twentyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.twentyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.twentyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.twentyAmp.theEverydayAnswerIsN12AWG": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12",
+        "14",
+        "20"
+      ]
+    },
+    "guides.twentyAmp.whatAboutN20AmpsAtN240VQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "240"
+      ]
+    },
+    "guides.twentyAmp.whatSizeWireForN20AmpCircuitTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "guides.twentyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "120",
+        "100"
+      ]
+    },
+    "guides.twentyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#8",
+        "16,510",
+        "2",
+        "12.9",
+        "20",
+        "100",
+        "16,510",
+        "3.13",
+        "2.6",
+        "120",
+        "3"
+      ]
+    },
+    "guides.twentyAmp.yesN12AWGIsTheStartingAnswerAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "12"
+      ]
+    },
+    "guides.twentyAmp.atN240VTheAmpacityFloorStaysAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "20",
+        "240",
+        "120"
+      ]
+    },
+    "guides.thirtyAmp.aluminumDecisionBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#8",
+        "30",
+        "75"
+      ]
+    },
+    "guides.thirtyAmp.canN12GaugeHandleN30AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "12",
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.dryerWireSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.minimumSizeBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "3"
+      ]
+    },
+    "guides.thirtyAmp.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.thirtyAmp.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.thirtyAmp.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.thirtyAmp.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.thirtyAmp.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.thirtyAmp.tableN120VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "120",
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "240"
+      ]
+    },
+    "guides.thirtyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.thirtyAmp.tdN1N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1/0"
+      ]
+    },
+    "guides.thirtyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.thirtyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.thirtyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.thirtyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.thirtyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.thirtyAmp.tdN10": {
+      "category": "distance-derivation",
+      "tokens": [
+        "10"
+      ]
+    },
+    "guides.thirtyAmp.theStartingAnswerIsN10AWG": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "10",
+        "30",
+        "30",
+        "120",
+        "240"
+      ]
+    },
+    "guides.thirtyAmp.whatSizeWireForAN30AmpDryerAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "10",
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.whatSizeWireForAN30AmpRVPlugQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.whatSizeWireForN30AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "100"
+      ]
+    },
+    "guides.thirtyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "120",
+        "#6",
+        "26,240",
+        "2",
+        "12.9",
+        "30",
+        "100",
+        "26,240",
+        "2.95",
+        "2.46",
+        "240"
+      ]
+    },
+    "guides.thirtyAmp.noN12AWGCopperIsCappedAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "240.4",
+        "12",
+        "20",
+        "30"
+      ]
+    },
+    "guides.thirtyAmp.aTTN30IsAN120VAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "30",
+        "120",
+        "10",
+        "120"
+      ]
+    },
+    "guides.fortyAmp.canIRunAnEVChargerOnAN40AmpCircuitQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.fortyAmp.diagramN8CopperAtN60AndN75AriaLabel": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "8",
+        "40",
+        "60",
+        "50",
+        "75"
+      ]
+    },
+    "guides.fortyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.fortyAmp.isN8GaugeEnoughForN40AmpsQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "8",
+        "40"
+      ]
+    },
+    "guides.fortyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.fortyAmp.jobsBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "40",
+        "32",
+        "40",
+        "32",
+        "1.25",
+        "40"
+      ]
+    },
+    "guides.fortyAmp.minimumSizeAtN240VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "240",
+        "40",
+        "3"
+      ]
+    },
+    "guides.fortyAmp.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.fortyAmp.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.fortyAmp.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.fortyAmp.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.fortyAmp.n300Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.fortyAmp.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.fortyAmp.n60CCableMethod": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.fortyAmp.n75CMarkedTerminations": {
+      "category": "approved-constant",
+      "tokens": [
+        "75"
+      ]
+    },
+    "guides.fortyAmp.n8CopperN40A": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#8",
+        "40"
+      ]
+    },
+    "guides.fortyAmp.n8CopperN50A": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#8",
+        "50"
+      ]
+    },
+    "guides.fortyAmp.rangeWireSizeQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.fortyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "240"
+      ]
+    },
+    "guides.fortyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.fortyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.fortyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.fortyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.fortyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.fortyAmp.tdN8": {
+      "category": "distance-derivation",
+      "tokens": [
+        "8"
+      ]
+    },
+    "guides.fortyAmp.theAnswerIsN8AWGCopper": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "8",
+        "40"
+      ]
+    },
+    "guides.fortyAmp.temperatureColumnHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "75"
+      ]
+    },
+    "guides.fortyAmp.temperatureColumnBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#8",
+        "40",
+        "60",
+        "50",
+        "75",
+        "#8"
+      ]
+    },
+    "guides.fortyAmp.whatSizeWireForN40AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "guides.fortyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "240",
+        "150"
+      ]
+    },
+    "guides.fortyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#6",
+        "26,240",
+        "2",
+        "12.9",
+        "40",
+        "150",
+        "26,240",
+        "5.90",
+        "2.46",
+        "240",
+        "#8",
+        "3"
+      ]
+    },
+    "guides.fortyAmp.startWithN8CopperForARangeAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "8",
+        "40"
+      ]
+    },
+    "guides.fortyAmp.aN32AContinuousChargerMathAnswer": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "32",
+        "40",
+        "32",
+        "1.25",
+        "40"
+      ]
+    },
+    "guides.sixtyAmp.canIRunAnEVChargerOnAN60AmpCircuitQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.diagramN6VsN4CopperAriaLabel": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "6",
+        "65",
+        "75",
+        "60",
+        "4",
+        "70"
+      ]
+    },
+    "guides.sixtyAmp.faqHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.jobsHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.jobsBody": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "48",
+        "60",
+        "48",
+        "1.25",
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.minimumSizeAtN240VBody": {
+      "category": "approved-constant",
+      "tokens": [
+        "240",
+        "60",
+        "3"
+      ]
+    },
+    "guides.sixtyAmp.n100Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "100"
+      ]
+    },
+    "guides.sixtyAmp.n150Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "150"
+      ]
+    },
+    "guides.sixtyAmp.n200Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "200"
+      ]
+    },
+    "guides.sixtyAmp.n250Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "250"
+      ]
+    },
+    "guides.sixtyAmp.n300Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "300"
+      ]
+    },
+    "guides.sixtyAmp.n4CopperN70A": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#4",
+        "70"
+      ]
+    },
+    "guides.sixtyAmp.n50Ft": {
+      "category": "approved-constant",
+      "tokens": [
+        "50"
+      ]
+    },
+    "guides.sixtyAmp.n60CCableLookup": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.n6CopperN65A": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#6",
+        "65"
+      ]
+    },
+    "guides.sixtyAmp.n75CMarkedTerminations": {
+      "category": "approved-constant",
+      "tokens": [
+        "75"
+      ]
+    },
+    "guides.sixtyAmp.tableN240VHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "240"
+      ]
+    },
+    "guides.sixtyAmp.tdN1": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1"
+      ]
+    },
+    "guides.sixtyAmp.tdN1N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "1/0"
+      ]
+    },
+    "guides.sixtyAmp.tdN2": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2"
+      ]
+    },
+    "guides.sixtyAmp.tdN2N0": {
+      "category": "distance-derivation",
+      "tokens": [
+        "2/0"
+      ]
+    },
+    "guides.sixtyAmp.tdN3": {
+      "category": "distance-derivation",
+      "tokens": [
+        "3"
+      ]
+    },
+    "guides.sixtyAmp.tdN4": {
+      "category": "distance-derivation",
+      "tokens": [
+        "4"
+      ]
+    },
+    "guides.sixtyAmp.tdN6": {
+      "category": "distance-derivation",
+      "tokens": [
+        "6"
+      ]
+    },
+    "guides.sixtyAmp.theAnswerSplitsAtTheTemperatureColumn": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#6",
+        "75",
+        "#4",
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.theN6VsN4DivideHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "#6",
+        "#4"
+      ]
+    },
+    "guides.sixtyAmp.theN75CTableGivesN6CopperBody": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "75",
+        "#6",
+        "65",
+        "60",
+        "60",
+        "#6",
+        "55",
+        "#4",
+        "70",
+        "#6",
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.whatAboutAN60AmpSubPanelQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.whatSizeWireForN60AmpBreakerTitle": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.whyDoPeopleSayN6AndN4ForQuestion": {
+      "category": "approved-constant",
+      "tokens": [
+        "6",
+        "4",
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.workedExampleHeading": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "240",
+        "150"
+      ]
+    },
+    "guides.sixtyAmp.workedExampleBody": {
+      "category": "distance-derivation",
+      "tokens": [
+        "#4",
+        "41,740",
+        "2",
+        "12.9",
+        "60",
+        "150",
+        "41,740",
+        "5.56",
+        "2.32",
+        "240",
+        "#6",
+        "75"
+      ]
+    },
+    "guides.sixtyAmp.aN48AContinuousChargerMathAnswer": {
+      "category": "visible-arithmetic",
+      "tokens": [
+        "48",
+        "60",
+        "48",
+        "1.25",
+        "60"
+      ]
+    },
+    "guides.sixtyAmp.itDependsOnTheTemperatureColumnAnswer": {
+      "category": "ampacity-derivation",
+      "tokens": [
+        "#6",
+        "75",
+        "65",
+        "60",
+        "#4",
+        "#6",
+        "55"
+      ]
+    },
+    "guides.sixtyAmp.useTheSubPanelGuideAnswer": {
+      "category": "approved-constant",
+      "tokens": [
+        "60"
+      ]
+    },
+    "pages.us.guides.twentyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "20"
+      ]
+    },
+    "pages.us.guides.twentyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "12",
+        "14",
+        "15",
+        "120"
+      ]
+    },
+    "pages.us.guides.thirtyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "pages.us.guides.thirtyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "10",
+        "240",
+        "120"
+      ]
+    },
+    "pages.us.guides.fortyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "pages.us.guides.fortyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "8",
+        "60",
+        "75"
+      ]
+    },
+    "pages.us.guides.sixtyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "6",
+        "4"
+      ]
+    },
+    "pages.us.guides.sixtyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "6",
+        "60",
+        "4"
+      ]
+    },
+    "pages.ca.guides.twentyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "90"
+      ]
+    },
+    "pages.ca.guides.twentyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "20",
+        "12",
+        "90",
+        "14",
+        "15",
+        "120"
+      ]
+    },
+    "pages.ca.guides.thirtyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "30"
+      ]
+    },
+    "pages.ca.guides.thirtyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "30",
+        "10",
+        "90",
+        "240",
+        "120"
+      ]
+    },
+    "pages.ca.guides.fortyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "40"
+      ]
+    },
+    "pages.ca.guides.fortyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "40",
+        "8",
+        "90",
+        "60"
+      ]
+    },
+    "pages.ca.guides.sixtyAmp.title": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "6",
+        "4"
+      ]
+    },
+    "pages.ca.guides.sixtyAmp.description": {
+      "category": "approved-constant",
+      "tokens": [
+        "60",
+        "4",
+        "60",
+        "6",
+        "75"
+      ]
+    }
+  }
+}
