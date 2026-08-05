@@ -55,6 +55,12 @@ all six editions (GUIDE_PATHS makes guides all-or-nothing per edition) = **36 ne
 - Merge commit on local main; **awaiting `YES PUSH`, then `YES DEPLOY` separately** (VoltDrop
   never auto-deploys). Post-deploy: submit the 36 new URLs in Bing Webmaster Tools + GSC.
 - Follow-up not in this batch: the 15 A page (the family's remaining member).
+- **IndexNow built (2026-08-05):** key file `87850a2192c4418515a32800015e631a.txt` at root (public
+  by design — the hosted file IS the ownership proof, same as BingSiteAuth.xml) +
+  `tools/indexnow-ping.mjs`. **After every deploy that adds/changes pages, run
+  `node tools/indexnow-ping.mjs` from the repo root** (no args = all sitemap URLs; or pass
+  specific URLs). Bing/Yandex/Seznam/Naver share the endpoint; expect HTTP 200/202. Must run
+  AFTER the deploy is live — the endpoint validates the key file on the live site.
 
 ### 2026-07-31 session — GEO/SEO audit + Bing Webmaster Tools activated
 Audit verdict: on-page SEO and GEO plumbing are in good shape (titles/canonicals/hreflang suite-
@@ -72,7 +78,7 @@ index coverage:
   `sitemap.xml` submitted, top-100 priority URLs submitted (quota: 100/day; ordered US-EN → CA →
   ES → FR → ZH, legal pages last).
 - Follow-ups: (1) submit the remaining 33 URLs (ca-zh edition + privacy/terms) next day;
-  (2) build the IndexNow key file into the site (instant Bing pings on publish, ~5 min);
+  (2) build the IndexNow key file into the site (instant Bing pings on publish, ~5 min) — DONE 2026-08-05, see the 2026-08-03 session block;
   (3) Bing's "AI Performance (BETA)" report = the GEO scoreboard — check it in a few weeks;
   (4) re-run the Perplexity 12-gauge test once `site:voltdrop.app` returns results on DuckDuckGo.
 
